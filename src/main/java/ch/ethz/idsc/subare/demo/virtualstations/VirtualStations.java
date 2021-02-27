@@ -20,33 +20,36 @@ import ch.ethz.idsc.tensor.red.Total;
 import ch.ethz.idsc.tensor.sca.Chop;
 import ch.ethz.idsc.tensor.sca.Sign;
 
-/** Toy example for AMoD system. There are 3 virtual stations where taxis are travelling between those.
- * The goal is to have at least 1 taxi in each virtual station so that the availability is given. Customers arrive
- * at the virtual stations according to a given Poisson distribution and will be driven to another virtual station.
- * The actions control the rebalancing of the taxis among the virtual stations. The arrival time is approximated
- * by a fluidic assumption of the vehicles travelling in between (stochastic and linear to the amount of taxis
- * travelling from virtual station i to j) */
+/** Toy example for AMoD system. There are 3 virtual stations where taxis are traveling between those.
+ * The goal is to have at least 1 taxi in each virtual station so that the availability is given.
+ * Customers arrive at the virtual stations according to a given Poisson distribution and will be
+ * driven to another virtual station. The actions control the rebalancing of the taxis among the
+ * virtual stations. The arrival time is approximated by a fluidic assumption of the vehicles traveling
+ * in between (stochastic and linear to the amount of taxis traveling from virtual station i to j) */
 public class VirtualStations implements MonteCarloInterface {
   private static final int NVNODES = 3;
   private static final int VEHICLES = 30;
-  private static final int VEHICLESSENT = 3;
-  private static final int TIMEINTERVALS = 24;
-  private static final int TOTALTIME = 24;
-  private static final int INTERVALTIME = TOTALTIME / TIMEINTERVALS;
+  private static final int VEHICLES_SENT = 3;
+  private static final int TIME_INTERVALS = 24;
+  private static final int TOTAL_TIME = 24;
+  private static final int INTERVAL_TIME = TOTAL_TIME / TIME_INTERVALS;
   // ---
   private static final Scalar REBALANCE_COST = RealScalar.of(-1);
   private static final Scalar AVAILABILITY_COST = RealScalar.of(-10);
   private static final Scalar TAXI_ARRIVAL_PROB = RealScalar.of(0.5); // assuming a fluidic model
   private static final Scalar CUSTOMER_ARRIVAL_RATE = RealScalar.of(0.5);
   // ---
-  private final Distribution customer_distribution = PoissonDistribution.of(CUSTOMER_ARRIVAL_RATE.multiply(RealScalar.of(INTERVALTIME)));
-  private final Distribution arrival_distribution = BernoulliDistribution.of(TAXI_ARRIVAL_PROB);
+  private static final Distribution DISTRIBUTION_CUSTOMER = //
+      PoissonDistribution.of(CUSTOMER_ARRIVAL_RATE.multiply(RealScalar.of(INTERVAL_TIME)));
+  private static final Distribution DISTRIBUTION_ARRIVAL = //
+      BernoulliDistribution.of(TAXI_ARRIVAL_PROB);
   // ---
+  public static final MonteCarloInterface INSTANCE = new VirtualStations();
   private final Tensor states;
   private final Map<Integer, Map<Integer, Integer>> exactStateMap = new HashMap<>();
   private final Map<Integer, Map<Integer, Integer>> linkToIndex = new HashMap<>();
 
-  public VirtualStations() {
+  private VirtualStations() {
     states = generateStates().unmodifiable();
     generateExactState();
     generateLinkMap();
@@ -54,11 +57,10 @@ public class VirtualStations implements MonteCarloInterface {
 
   private static Tensor generateStates() {
     Tensor prefixes = Tensors.empty();
-    for (int t = 0; t <= TIMEINTERVALS; ++t) {
+    for (int t = 0; t <= TIME_INTERVALS; ++t) {
       prefixes.append(Tensors.vector(t));
     }
-    Tensor states = StaticHelper.binaryVectors(NVNODES, prefixes);
-    return states;
+    return StaticHelper.binaryVectors(NVNODES, prefixes);
   }
 
   private void generateExactState() {
@@ -132,7 +134,7 @@ public class VirtualStations implements MonteCarloInterface {
       for (int j = 0; j < NVNODES; ++j) {
         if (j == i)
           continue;
-        int arrivals = Scalars.intValueExact(Total.ofVector(RandomVariate.of(arrival_distribution, exactStateMap.get(i).get(j))));
+        int arrivals = Scalars.intValueExact(Total.ofVector(RandomVariate.of(DISTRIBUTION_ARRIVAL, exactStateMap.get(i).get(j))));
         exactStateMap.get(i).put(j, exactStateMap.get(i).get(j) - arrivals);
         exactStateMap.get(j).put(j, exactStateMap.get(j).get(j) + arrivals);
       }
@@ -143,7 +145,7 @@ public class VirtualStations implements MonteCarloInterface {
       for (int j = 0; j < NVNODES; ++j) {
         if (j == i)
           continue;
-        int customers = Scalars.intValueExact(RandomVariate.of(customer_distribution));
+        int customers = Scalars.intValueExact(RandomVariate.of(DISTRIBUTION_CUSTOMER));
         int served = Math.min(exactStateMap.get(i).get(i), customers);
         exactStateMap.get(i).put(i, exactStateMap.get(i).get(i) - served);
         exactStateMap.get(i).put(j, exactStateMap.get(i).get(j) + served);
@@ -155,7 +157,7 @@ public class VirtualStations implements MonteCarloInterface {
       for (int j = 0; j < NVNODES; ++j) {
         if (j == i)
           continue;
-        int rebalanced = Math.min(exactStateMap.get(i).get(i), getActionElement(action, i, j) * VEHICLESSENT);
+        int rebalanced = Math.min(exactStateMap.get(i).get(i), getActionElement(action, i, j) * VEHICLES_SENT);
         exactStateMap.get(i).put(i, exactStateMap.get(i).get(i) - rebalanced);
         exactStateMap.get(i).put(j, exactStateMap.get(i).get(j) + rebalanced);
       }
@@ -175,7 +177,7 @@ public class VirtualStations implements MonteCarloInterface {
 
   @Override
   public boolean isTerminal(Tensor state) {
-    return state.Get(0).equals(RealScalar.of(TIMEINTERVALS));
+    return state.Get(0).equals(RealScalar.of(TIME_INTERVALS));
   }
 
   @Override
@@ -184,7 +186,7 @@ public class VirtualStations implements MonteCarloInterface {
   }
 
   public int getTimeIntervals() {
-    return TIMEINTERVALS;
+    return TIME_INTERVALS;
   }
 
   public int getNVnodes() {

@@ -6,8 +6,8 @@ import ch.ethz.idsc.subare.util.FairArg;
 import ch.ethz.idsc.tensor.RationalScalar;
 import ch.ethz.idsc.tensor.Scalar;
 import ch.ethz.idsc.tensor.Tensor;
+import ch.ethz.idsc.tensor.nrm.Vector1Norm;
 import ch.ethz.idsc.tensor.red.Max;
-import ch.ethz.idsc.tensor.red.Norm;
 import ch.ethz.idsc.tensor.sca.Sign;
 
 /** measures to compare performance between optimal state-action value function and learned q-function
@@ -32,9 +32,9 @@ public enum Loss {
           .map(action -> ref.value(state, action)) //
           .reduce(Max::of).get();
       // ---
-      FairArg fairArgMax = FairArg.max(Tensor.of(actions.stream().map(action -> qsa.value(state, action))));
-      Scalar weight = RationalScalar.of(1, fairArgMax.optionsCount());
-      for (int index : fairArgMax.options()) {
+      FairArg fairArg = FairArg.max(Tensor.of(actions.stream().map(action -> qsa.value(state, action))));
+      Scalar weight = RationalScalar.of(1, fairArg.optionsCount());
+      for (int index : fairArg.options()) {
         Tensor action = actions.get(index);
         Scalar delta = max.subtract(ref.value(state, action));
         Sign.requirePositiveOrZero(delta);
@@ -58,6 +58,6 @@ public enum Loss {
    * @param qsa
    * @return non-negative number which should be subtracted from the optimal gains */
   public static Scalar accumulation(DiscreteModel discreteModel, DiscreteQsa ref, DiscreteQsa qsa) {
-    return Norm._1.ofVector(perState(discreteModel, ref, qsa).values());
+    return Vector1Norm.of(perState(discreteModel, ref, qsa).values());
   }
 }

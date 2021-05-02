@@ -1,9 +1,0 @@
-// code by jph
-package ch.ethz.idsc.subare.core;
-
-import ch.ethz.idsc.subare.core.util.DiscreteQsa;
-
-@FunctionalInterface
-public interface DiscreteQsaSupplier {
-  DiscreteQsa qsa();
-}

@@ -1,6 +1,7 @@
 // code by jph
 package ch.ethz.idsc.subare.core.td;
 
+import ch.alpine.tensor.RealScalar;
 import ch.ethz.idsc.subare.core.MonteCarloInterface;
 import ch.ethz.idsc.subare.core.StateActionCounter;
 import ch.ethz.idsc.subare.core.adapter.SimpleTestModel;
@@ -14,7 +15,6 @@ import ch.ethz.idsc.subare.core.util.LearningRate;
 import ch.ethz.idsc.subare.core.util.PolicyBase;
 import ch.ethz.idsc.subare.core.util.PolicyType;
 import ch.ethz.idsc.subare.core.util.StateAction;
-import ch.ethz.idsc.tensor.RealScalar;
 import junit.framework.TestCase;
 
 public class SarsaTest extends TestCase {

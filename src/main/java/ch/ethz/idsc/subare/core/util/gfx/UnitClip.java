@@ -1,12 +1,12 @@
 // code by jph
 package ch.ethz.idsc.subare.core.util.gfx;
 
-import ch.ethz.idsc.tensor.DoubleScalar;
-import ch.ethz.idsc.tensor.NumberQ;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.api.ScalarUnaryOperator;
-import ch.ethz.idsc.tensor.sca.Clips;
+import ch.alpine.tensor.DoubleScalar;
+import ch.alpine.tensor.NumberQ;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.api.ScalarUnaryOperator;
+import ch.alpine.tensor.sca.Clips;
 
 /** clips scalars to interval [0, 1] excluding scalars that do not satisfy {@link NumberQ}
  * such as {@link DoubleScalar#POSITIVE_INFINITY} and {@link DoubleScalar#INDETERMINATE} */

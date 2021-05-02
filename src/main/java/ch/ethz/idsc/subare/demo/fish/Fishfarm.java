@@ -2,19 +2,19 @@
 // code by jph
 package ch.ethz.idsc.subare.demo.fish;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Array;
+import ch.alpine.tensor.alg.Flatten;
+import ch.alpine.tensor.alg.Range;
+import ch.alpine.tensor.sca.Clip;
+import ch.alpine.tensor.sca.Clips;
+import ch.alpine.tensor.sca.Round;
 import ch.ethz.idsc.subare.core.MonteCarloInterface;
 import ch.ethz.idsc.subare.core.adapter.DeterministicStandardModel;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Scalars;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.alg.Array;
-import ch.ethz.idsc.tensor.alg.Flatten;
-import ch.ethz.idsc.tensor.alg.Range;
-import ch.ethz.idsc.tensor.sca.Clip;
-import ch.ethz.idsc.tensor.sca.Clips;
-import ch.ethz.idsc.tensor.sca.Round;
 
 class Fishfarm extends DeterministicStandardModel implements MonteCarloInterface {
   public final Scalar TERMINAL_LIMIT;

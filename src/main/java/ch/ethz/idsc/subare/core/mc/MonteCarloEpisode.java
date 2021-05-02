@@ -3,14 +3,14 @@ package ch.ethz.idsc.subare.core.mc;
 
 import java.util.Queue;
 
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.core.EpisodeInterface;
 import ch.ethz.idsc.subare.core.MonteCarloInterface;
 import ch.ethz.idsc.subare.core.Policy;
 import ch.ethz.idsc.subare.core.StepInterface;
 import ch.ethz.idsc.subare.core.adapter.StepAdapter;
 import ch.ethz.idsc.subare.core.util.PolicyWrap;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
 
 /** useful to generate a trajectory/episode that is result of taking
  * actions according to a given policy from a given start state */

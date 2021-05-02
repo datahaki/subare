@@ -3,6 +3,13 @@ package ch.ethz.idsc.subare.core.alg;
 
 import java.util.Objects;
 
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.ext.Timing;
+import ch.alpine.tensor.red.Max;
+import ch.alpine.tensor.sca.N;
+import ch.alpine.tensor.sca.Sign;
 import ch.ethz.idsc.subare.core.ActionValueInterface;
 import ch.ethz.idsc.subare.core.DiscreteModel;
 import ch.ethz.idsc.subare.core.DiscreteQsaSupplier;
@@ -10,13 +17,6 @@ import ch.ethz.idsc.subare.core.QsaInterface;
 import ch.ethz.idsc.subare.core.StandardModel;
 import ch.ethz.idsc.subare.core.util.DiscreteQsa;
 import ch.ethz.idsc.subare.core.util.DiscreteValueFunctions;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Scalars;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.ext.Timing;
-import ch.ethz.idsc.tensor.red.Max;
-import ch.ethz.idsc.tensor.sca.N;
-import ch.ethz.idsc.tensor.sca.Sign;
 
 /** action value iteration: "policy evaluation is stopped after just one sweep"
  * 

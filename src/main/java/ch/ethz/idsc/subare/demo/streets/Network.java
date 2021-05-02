@@ -3,9 +3,9 @@ package ch.ethz.idsc.subare.demo.streets;
 
 import java.util.List;
 
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.alg.Array;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.alg.Array;
 
 abstract class Network {
   abstract int actions();

@@ -5,9 +5,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.core.StepInterface;
 import ch.ethz.idsc.subare.core.util.StateAction;
-import ch.ethz.idsc.tensor.Tensor;
 
 /* package */ class StepSet {
   private final Map<Tensor, StepInterface> map = new HashMap<>();

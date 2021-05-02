@@ -1,8 +1,8 @@
 // code by jph
 package ch.ethz.idsc.subare.ch06.cliff;
 
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Tensors;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Tensors;
 import junit.framework.TestCase;
 
 public class CliffwalkTest extends TestCase {

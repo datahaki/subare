@@ -2,20 +2,20 @@
 // inspired by Shangtong Zhang
 package ch.ethz.idsc.subare.ch04.gambler;
 
+import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.TensorRuntimeException;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Last;
+import ch.alpine.tensor.alg.Range;
+import ch.alpine.tensor.red.KroneckerDelta;
+import ch.alpine.tensor.red.Min;
 import ch.ethz.idsc.subare.core.MonteCarloInterface;
 import ch.ethz.idsc.subare.core.StandardModel;
 import ch.ethz.idsc.subare.util.Coinflip;
-import ch.ethz.idsc.tensor.RationalScalar;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Scalars;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.TensorRuntimeException;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.alg.Last;
-import ch.ethz.idsc.tensor.alg.Range;
-import ch.ethz.idsc.tensor.red.KroneckerDelta;
-import ch.ethz.idsc.tensor.red.Min;
 
 /** Example 4.3 p.84: Gambler's problem
  * an action defines the amount of coins to bet

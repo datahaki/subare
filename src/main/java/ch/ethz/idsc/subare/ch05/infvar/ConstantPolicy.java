@@ -1,11 +1,11 @@
 // code by jph
 package ch.ethz.idsc.subare.ch05.infvar;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.pdf.Distribution;
 import ch.ethz.idsc.subare.core.Policy;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.pdf.Distribution;
 
 /* package */ class ConstantPolicy implements Policy {
   final Scalar backProb;

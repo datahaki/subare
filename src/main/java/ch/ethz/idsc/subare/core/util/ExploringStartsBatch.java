@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Queue;
 import java.util.stream.Collectors;
 
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.core.EpisodeInterface;
 import ch.ethz.idsc.subare.core.MonteCarloInterface;
 import ch.ethz.idsc.subare.core.Policy;
 import ch.ethz.idsc.subare.core.mc.MonteCarloEpisode;
 import ch.ethz.idsc.subare.util.Index;
-import ch.ethz.idsc.tensor.Tensor;
 
 /* package */ class ExploringStartsBatch {
   private final MonteCarloInterface monteCarloInterface;

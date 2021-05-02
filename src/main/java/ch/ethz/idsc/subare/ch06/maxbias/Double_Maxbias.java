@@ -1,6 +1,9 @@
 // code by jph
 package ch.ethz.idsc.subare.ch06.maxbias;
 
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.ext.HomeDirectory;
+import ch.alpine.tensor.io.Put;
 import ch.ethz.idsc.subare.core.EpisodeInterface;
 import ch.ethz.idsc.subare.core.Policy;
 import ch.ethz.idsc.subare.core.StateActionCounter;
@@ -18,9 +21,6 @@ import ch.ethz.idsc.subare.core.util.ExploringStarts;
 import ch.ethz.idsc.subare.core.util.Infoline;
 import ch.ethz.idsc.subare.core.util.LinearExplorationRate;
 import ch.ethz.idsc.subare.core.util.PolicyType;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.ext.HomeDirectory;
-import ch.ethz.idsc.tensor.io.Put;
 
 /** Double Sarsa for maximization bias */
 enum Double_Maxbias {

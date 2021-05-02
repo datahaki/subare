@@ -2,6 +2,7 @@
 // inspired by Shangtong Zhang
 package ch.ethz.idsc.subare.ch06.walk;
 
+import ch.alpine.tensor.sca.Round;
 import ch.ethz.idsc.subare.core.Policy;
 import ch.ethz.idsc.subare.core.StateActionCounter;
 import ch.ethz.idsc.subare.core.td.Sarsa;
@@ -15,7 +16,6 @@ import ch.ethz.idsc.subare.core.util.EquiprobablePolicy;
 import ch.ethz.idsc.subare.core.util.ExploringStarts;
 import ch.ethz.idsc.subare.core.util.LearningRate;
 import ch.ethz.idsc.subare.core.util.PolicyType;
-import ch.ethz.idsc.tensor.sca.Round;
 
 /** Example 7.1
  * 

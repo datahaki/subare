@@ -1,9 +1,9 @@
 // code by jph
 package ch.ethz.idsc.subare.ch02;
 
+import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.util.FairArg;
-import ch.ethz.idsc.tensor.Scalars;
-import ch.ethz.idsc.tensor.Tensor;
 
 public abstract class FairArgAgent extends Agent {
   protected abstract Tensor getQVector();

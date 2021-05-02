@@ -1,11 +1,11 @@
 // code by jph
 package ch.ethz.idsc.subare.ch04.gambler;
 
+import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.RealScalar;
 import ch.ethz.idsc.subare.core.td.SarsaType;
 import ch.ethz.idsc.subare.core.util.DefaultLearningRate;
 import ch.ethz.idsc.subare.core.util.LearningRate;
-import ch.ethz.idsc.tensor.RationalScalar;
-import ch.ethz.idsc.tensor.RealScalar;
 import junit.framework.TestCase;
 
 public class Sarsa_GamblerTest extends TestCase {

@@ -1,7 +1,7 @@
 // code by jph
 package ch.ethz.idsc.subare.core;
 
-import ch.ethz.idsc.tensor.Tensor;
+import ch.alpine.tensor.Tensor;
 
 public interface StateActionModel {
   /** @return all states */

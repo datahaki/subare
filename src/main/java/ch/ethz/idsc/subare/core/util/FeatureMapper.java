@@ -1,8 +1,8 @@
 // code by fluric
 package ch.ethz.idsc.subare.core.util;
 
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.core.StepInterface;
-import ch.ethz.idsc.tensor.Tensor;
 
 public interface FeatureMapper {
   /** @param key for instance {@link StateAction#key(Tensor, Tensor)}, or {@link StateAction#key(StepInterface)}

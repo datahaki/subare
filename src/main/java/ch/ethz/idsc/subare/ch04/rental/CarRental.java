@@ -2,26 +2,26 @@
 // inspired by Shangtong Zhang
 package ch.ethz.idsc.subare.ch04.rental;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Array;
+import ch.alpine.tensor.alg.Flatten;
+import ch.alpine.tensor.alg.Range;
+import ch.alpine.tensor.pdf.Distribution;
+import ch.alpine.tensor.pdf.PDF;
+import ch.alpine.tensor.pdf.PoissonDistribution;
+import ch.alpine.tensor.pdf.RandomVariate;
+import ch.alpine.tensor.red.Min;
+import ch.alpine.tensor.red.Times;
+import ch.alpine.tensor.sca.Abs;
+import ch.alpine.tensor.sca.Clip;
+import ch.alpine.tensor.sca.Clips;
+import ch.alpine.tensor.sca.Sign;
 import ch.ethz.idsc.subare.core.SampleModel;
 import ch.ethz.idsc.subare.core.StandardModel;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Scalars;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.alg.Array;
-import ch.ethz.idsc.tensor.alg.Flatten;
-import ch.ethz.idsc.tensor.alg.Range;
-import ch.ethz.idsc.tensor.pdf.Distribution;
-import ch.ethz.idsc.tensor.pdf.PDF;
-import ch.ethz.idsc.tensor.pdf.PoissonDistribution;
-import ch.ethz.idsc.tensor.pdf.RandomVariate;
-import ch.ethz.idsc.tensor.red.Min;
-import ch.ethz.idsc.tensor.red.Times;
-import ch.ethz.idsc.tensor.sca.Abs;
-import ch.ethz.idsc.tensor.sca.Clip;
-import ch.ethz.idsc.tensor.sca.Clips;
-import ch.ethz.idsc.tensor.sca.Sign;
 
 /** Example 4.2: Jack's Car Rental
  * Figure 4.2

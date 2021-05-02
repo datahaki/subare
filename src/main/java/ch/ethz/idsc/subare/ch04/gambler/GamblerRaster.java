@@ -4,12 +4,12 @@ package ch.ethz.idsc.subare.ch04.gambler;
 import java.awt.Dimension;
 import java.awt.Point;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.core.DiscreteModel;
 import ch.ethz.idsc.subare.core.util.gfx.StateActionRaster;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Scalars;
-import ch.ethz.idsc.tensor.Tensor;
 
 /* package */ class GamblerRaster implements StateActionRaster {
   private final GamblerModel gamblerModel;

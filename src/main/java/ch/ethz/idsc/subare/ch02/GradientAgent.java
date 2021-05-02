@@ -1,12 +1,12 @@
 // code by jph
 package ch.ethz.idsc.subare.ch02;
 
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.alg.Array;
-import ch.ethz.idsc.tensor.num.SoftmaxLayer;
-import ch.ethz.idsc.tensor.sca.Chop;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.alg.Array;
+import ch.alpine.tensor.num.SoftmaxLayer;
+import ch.alpine.tensor.sca.Chop;
 
 public class GradientAgent extends Agent {
   final int n;

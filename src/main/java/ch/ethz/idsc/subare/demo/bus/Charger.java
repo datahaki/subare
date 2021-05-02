@@ -3,19 +3,18 @@ package ch.ethz.idsc.subare.demo.bus;
 
 import java.awt.Dimension;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Array;
+import ch.alpine.tensor.alg.Flatten;
+import ch.alpine.tensor.alg.Range;
+import ch.alpine.tensor.sca.Clip;
+import ch.alpine.tensor.sca.Clips;
 import ch.ethz.idsc.subare.core.TerminalInterface;
 import ch.ethz.idsc.subare.core.adapter.DeterministicStandardModel;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Scalars;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.alg.Array;
-import ch.ethz.idsc.tensor.alg.Flatten;
-import ch.ethz.idsc.tensor.alg.Range;
-import ch.ethz.idsc.tensor.sca.Clip;
-import ch.ethz.idsc.tensor.sca.Clips;
-import ch.ethz.idsc.tensor.sca.Increment;
 
 /* package */ class Charger extends DeterministicStandardModel implements TerminalInterface {
   private final TripProfile tripProfile;
@@ -52,7 +51,7 @@ import ch.ethz.idsc.tensor.sca.Increment;
       return state;
     final int time = Scalars.intValueExact(state.Get(0));
     Tensor next = state.copy();
-    next.set(Increment.ONE, 0);
+    next.set(RealScalar.ONE::add, 0);
     Scalar drawn = tripProfile.unitsDrawn(time);
     next.set(capacity -> capacity.add(action).subtract(drawn), 1);
     next.set(clipCapacity, 1);

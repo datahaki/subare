@@ -1,14 +1,14 @@
 // code by jph
 package ch.ethz.idsc.subare.ch04.gambler;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.ext.HomeDirectory;
+import ch.alpine.tensor.io.Export;
+import ch.alpine.tensor.io.Put;
 import ch.ethz.idsc.subare.core.util.DiscreteQsa;
 import ch.ethz.idsc.subare.core.util.DiscreteUtils;
 import ch.ethz.idsc.subare.core.util.DiscreteVs;
 import ch.ethz.idsc.subare.core.util.gfx.StateActionRasters;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.ext.HomeDirectory;
-import ch.ethz.idsc.tensor.io.Export;
-import ch.ethz.idsc.tensor.io.Put;
 
 /** action value iteration for gambler's dilemma
  * 

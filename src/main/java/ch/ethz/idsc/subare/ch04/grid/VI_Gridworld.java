@@ -2,6 +2,9 @@
 // inspired by Shangtong Zhang
 package ch.ethz.idsc.subare.ch04.grid;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.ext.HomeDirectory;
+import ch.alpine.tensor.io.Export;
 import ch.ethz.idsc.subare.core.Policy;
 import ch.ethz.idsc.subare.core.alg.ValueIteration;
 import ch.ethz.idsc.subare.core.util.DiscreteUtils;
@@ -9,9 +12,6 @@ import ch.ethz.idsc.subare.core.util.DiscreteValueFunctions;
 import ch.ethz.idsc.subare.core.util.Policies;
 import ch.ethz.idsc.subare.core.util.PolicyType;
 import ch.ethz.idsc.subare.core.util.gfx.StateRasters;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.ext.HomeDirectory;
-import ch.ethz.idsc.tensor.io.Export;
 
 /** solving grid world
  * gives the value function for the optimal policy equivalent to

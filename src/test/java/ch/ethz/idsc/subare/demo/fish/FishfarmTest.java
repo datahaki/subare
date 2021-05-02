@@ -1,10 +1,10 @@
 // code by jph
 package ch.ethz.idsc.subare.demo.fish;
 
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.alg.Range;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Range;
 import junit.framework.TestCase;
 
 public class FishfarmTest extends TestCase {

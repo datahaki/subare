@@ -1,9 +1,9 @@
 // code by jph
 package ch.ethz.idsc.subare.ch06.windy;
 
+import ch.alpine.tensor.RealScalar;
 import ch.ethz.idsc.subare.core.alg.ActionValueIterations;
 import ch.ethz.idsc.subare.core.util.DiscreteQsa;
-import ch.ethz.idsc.tensor.RealScalar;
 
 enum WindygridHelper {
   ;

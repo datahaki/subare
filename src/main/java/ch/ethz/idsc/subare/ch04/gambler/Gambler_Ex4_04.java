@@ -4,15 +4,15 @@ package ch.ethz.idsc.subare.ch04.gambler;
 
 import java.io.IOException;
 
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Last;
+import ch.alpine.tensor.ext.HomeDirectory;
+import ch.alpine.tensor.io.Put;
 import ch.ethz.idsc.subare.core.alg.ValueIteration;
 import ch.ethz.idsc.subare.core.util.Policies;
 import ch.ethz.idsc.subare.core.util.PolicyBase;
 import ch.ethz.idsc.subare.core.util.PolicyType;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.alg.Last;
-import ch.ethz.idsc.tensor.ext.HomeDirectory;
-import ch.ethz.idsc.tensor.io.Put;
 
 /* package */ enum Gambler_Ex4_04 {
   ;

@@ -1,15 +1,15 @@
 // code by fluric
 package ch.ethz.idsc.subare.analysis;
 
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.nrm.Vector2Norm;
+import ch.alpine.tensor.nrm.Vector2NormSquared;
+import ch.alpine.tensor.red.Total;
+import ch.alpine.tensor.sca.Power;
 import ch.ethz.idsc.subare.core.DiscreteModel;
 import ch.ethz.idsc.subare.core.util.DiscreteQsa;
 import ch.ethz.idsc.subare.core.util.DiscreteValueFunctions;
 import ch.ethz.idsc.subare.core.util.Loss;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.nrm.Vector2Norm;
-import ch.ethz.idsc.tensor.nrm.Vector2NormSquared;
-import ch.ethz.idsc.tensor.red.Total;
-import ch.ethz.idsc.tensor.sca.Power;
 
 public enum DiscreteModelErrorAnalysis {
   LINEAR_QSA() {

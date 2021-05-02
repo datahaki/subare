@@ -1,6 +1,8 @@
-# ch.ethz.idsc.subare <a href="https://travis-ci.org/idsc-frazzoli/subare"><img src="https://travis-ci.org/idsc-frazzoli/subare.svg?branch=master" alt="Build Status"></a>
+![alpine_877](https://user-images.githubusercontent.com/4012178/116814864-1b1a1580-ab5b-11eb-97e6-1441af4ececa.png)
 
-Library for reinforcement learning in Java, version `0.3.9`
+# ch.alpine.subare <a href="https://travis-ci.com/datahaki/subare"><img src="https://travis-ci.com/datahaki/subare.svg?branch=master" alt="Build Status"></a>
+
+Library for reinforcement learning in Java, version `0.4.0`
 
 Repository includes algorithms, examples, and exercises from the 2nd edition of [*Reinforcement Learning: An Introduction*](http://incompleteideas.net/book/the-book-2nd.html) by Richard S. Sutton, and Andrew G. Barto.
 
@@ -322,16 +324,16 @@ Specify `dependency` and `repository` of the tensor library in the `pom.xml` fil
 ```xml
 <dependencies>
   <dependency>
-    <groupId>ch.ethz.idsc</groupId>
+    <groupId>ch.alpine</groupId>
     <artifactId>subare</artifactId>
-    <version>0.3.9</version>
+    <version>0.4.0</version>
   </dependency>
 </dependencies>
 
 <repositories>
   <repository>
     <id>subare-mvn-repo</id>
-    <url>https://raw.github.com/idsc-frazzoli/subare/mvn-repo/</url>
+    <url>https://raw.github.com/datahaki/subare/mvn-repo/</url>
     <snapshots>
       <enabled>true</enabled>
       <updatePolicy>always</updatePolicy>

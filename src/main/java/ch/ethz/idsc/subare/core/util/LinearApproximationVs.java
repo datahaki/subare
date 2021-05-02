@@ -3,10 +3,10 @@ package ch.ethz.idsc.subare.core.util;
 
 import java.io.Serializable;
 
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.api.TensorUnaryOperator;
 import ch.ethz.idsc.subare.core.VsInterface;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.api.TensorUnaryOperator;
 
 public class LinearApproximationVs implements VsInterface, Serializable {
   /** @param represent

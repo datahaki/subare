@@ -4,15 +4,15 @@ package ch.ethz.idsc.subare.ch06.cliff;
 import java.awt.Dimension;
 import java.awt.Point;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.core.DiscreteModel;
 import ch.ethz.idsc.subare.core.util.gfx.StateActionRaster;
 import ch.ethz.idsc.subare.core.util.gfx.StateRaster;
 import ch.ethz.idsc.subare.core.util.gfx.StateRasters;
 import ch.ethz.idsc.subare.util.Index;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Scalars;
-import ch.ethz.idsc.tensor.Tensor;
 
 class CliffwalkRaster implements StateRaster, StateActionRaster {
   private final Cliffwalk cliffwalk;

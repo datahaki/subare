@@ -1,9 +1,9 @@
 // code by jph
 package ch.ethz.idsc.subare.demo.prison;
 
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.sca.Round;
 import ch.ethz.idsc.subare.ch02.Agent;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.sca.Round;
 
 /* package */ enum SummaryString {
   ;

@@ -3,6 +3,12 @@ package ch.ethz.idsc.subare.ch05.blackjack;
 
 import java.util.concurrent.TimeUnit;
 
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.alg.Subdivide;
+import ch.alpine.tensor.ext.HomeDirectory;
+import ch.alpine.tensor.io.AnimationWriter;
+import ch.alpine.tensor.io.GifAnimationWriter;
+import ch.alpine.tensor.sca.Round;
 import ch.ethz.idsc.subare.core.StateActionCounter;
 import ch.ethz.idsc.subare.core.td.Sarsa;
 import ch.ethz.idsc.subare.core.td.SarsaType;
@@ -13,12 +19,6 @@ import ch.ethz.idsc.subare.core.util.EGreedyPolicy;
 import ch.ethz.idsc.subare.core.util.ExploringStarts;
 import ch.ethz.idsc.subare.core.util.LinearExplorationRate;
 import ch.ethz.idsc.subare.core.util.PolicyType;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.alg.Subdivide;
-import ch.ethz.idsc.tensor.ext.HomeDirectory;
-import ch.ethz.idsc.tensor.io.AnimationWriter;
-import ch.ethz.idsc.tensor.io.GifAnimationWriter;
-import ch.ethz.idsc.tensor.sca.Round;
 
 // TODO this demo throws an exception
 /* package */ enum Sarsa_Blackjack {

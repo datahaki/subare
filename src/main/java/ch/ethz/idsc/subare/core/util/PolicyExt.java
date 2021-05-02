@@ -1,10 +1,10 @@
 // code by jph
 package ch.ethz.idsc.subare.core.util;
 
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.core.Policy;
 import ch.ethz.idsc.subare.core.QsaInterfaceSupplier;
 import ch.ethz.idsc.subare.core.StateActionCounterSupplier;
-import ch.ethz.idsc.tensor.Tensor;
 
 public interface PolicyExt extends Policy, QsaInterfaceSupplier, StateActionCounterSupplier {
   /** @param state

@@ -1,9 +1,9 @@
 // code by jph
 package ch.ethz.idsc.subare.core.util;
 
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
 import ch.ethz.idsc.subare.core.StepInterface;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
 
 public enum StateAction {
   ;

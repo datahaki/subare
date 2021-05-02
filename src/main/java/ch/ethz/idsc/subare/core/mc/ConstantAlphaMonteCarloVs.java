@@ -3,6 +3,8 @@ package ch.ethz.idsc.subare.core.mc;
 
 import java.util.List;
 
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.core.DiscountFunction;
 import ch.ethz.idsc.subare.core.DiscreteModel;
 import ch.ethz.idsc.subare.core.EpisodeVsEstimator;
@@ -12,8 +14,6 @@ import ch.ethz.idsc.subare.core.VsInterface;
 import ch.ethz.idsc.subare.core.util.DiscreteStateActionCounter;
 import ch.ethz.idsc.subare.core.util.DiscreteVs;
 import ch.ethz.idsc.subare.core.util.LearningRate;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
 
 /** simple every-visit Monte Carlo method suitable for non-stationary environments
  * 

@@ -4,9 +4,9 @@ package ch.ethz.idsc.subare.util;
 import java.io.Serializable;
 import java.util.stream.IntStream;
 
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.red.Max;
-import ch.ethz.idsc.tensor.sca.Chop;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.red.Max;
+import ch.alpine.tensor.sca.Chop;
 
 /** RobustArgMax accounts for entries that are numerically close to the maximum and
  * returns the first such close match. */

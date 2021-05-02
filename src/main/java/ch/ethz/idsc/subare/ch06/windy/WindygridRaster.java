@@ -4,13 +4,13 @@ package ch.ethz.idsc.subare.ch06.windy;
 import java.awt.Dimension;
 import java.awt.Point;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.core.DiscreteModel;
 import ch.ethz.idsc.subare.core.util.gfx.StateActionRaster;
 import ch.ethz.idsc.subare.util.Index;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Scalars;
-import ch.ethz.idsc.tensor.Tensor;
 
 class WindygridRaster implements StateActionRaster {
   private final Windygrid windygrid;

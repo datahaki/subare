@@ -4,7 +4,7 @@ package ch.ethz.idsc.subare.ch01.tic;
 
 import java.util.Arrays;
 
-import ch.ethz.idsc.tensor.ext.Integers;
+import ch.alpine.tensor.ext.Integers;
 
 /* package */ class Statistics {
   double[] data;

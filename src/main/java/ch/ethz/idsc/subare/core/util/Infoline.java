@@ -1,10 +1,10 @@
 // code by jph
 package ch.ethz.idsc.subare.core.util;
 
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.sca.Chop;
+import ch.alpine.tensor.sca.Round;
 import ch.ethz.idsc.subare.core.DiscreteModel;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.sca.Chop;
-import ch.ethz.idsc.tensor.sca.Round;
 
 public class Infoline {
   public static Infoline print(DiscreteModel discreteModel, int index, DiscreteQsa ref, DiscreteQsa qsa) {

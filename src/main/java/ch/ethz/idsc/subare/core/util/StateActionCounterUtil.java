@@ -1,9 +1,9 @@
 // code by fluric
 package ch.ethz.idsc.subare.core.util;
 
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.core.DiscreteModel;
 import ch.ethz.idsc.subare.core.StateActionCounter;
-import ch.ethz.idsc.tensor.Tensor;
 
 public enum StateActionCounterUtil {
   ;

@@ -1,10 +1,10 @@
 // code by jph
 package ch.ethz.idsc.subare.core.util;
 
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.core.ActionValueInterface;
 import ch.ethz.idsc.subare.core.VsInterface;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
 
 public class ActionValueAdapter {
   private final ActionValueInterface actionValueInterface;

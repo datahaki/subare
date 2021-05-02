@@ -1,7 +1,7 @@
 // code by jph
 package ch.ethz.idsc.subare.core;
 
-import ch.ethz.idsc.tensor.red.Total;
+import ch.alpine.tensor.red.Total;
 
 enum StaticHelper {
   ;

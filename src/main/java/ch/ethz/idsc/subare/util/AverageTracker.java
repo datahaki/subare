@@ -1,10 +1,10 @@
 // code by jph
 package ch.ethz.idsc.subare.util;
 
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Scalars;
-import ch.ethz.idsc.tensor.Tensor;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.Tensor;
 
 /** consumes Tensor/Scalar and tracks average
  * without the overhead of storing all input. */

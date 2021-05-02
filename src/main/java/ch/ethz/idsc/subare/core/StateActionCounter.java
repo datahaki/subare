@@ -1,9 +1,9 @@
 // code by jph and fluric
 package ch.ethz.idsc.subare.core;
 
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.core.util.DiscreteQsa;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
 
 /** interface to indicate how often the state-action pair is visited during learning
  * 

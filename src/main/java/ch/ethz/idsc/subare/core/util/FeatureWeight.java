@@ -3,9 +3,9 @@ package ch.ethz.idsc.subare.core.util;
 
 import java.io.Serializable;
 
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.TensorRuntimeException;
-import ch.ethz.idsc.tensor.alg.Array;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.TensorRuntimeException;
+import ch.alpine.tensor.alg.Array;
 
 public class FeatureWeight implements Serializable {
   private final FeatureMapper featureMapper;

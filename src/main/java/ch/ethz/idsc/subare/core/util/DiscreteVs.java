@@ -4,12 +4,12 @@ package ch.ethz.idsc.subare.core.util;
 import java.io.Serializable;
 import java.util.stream.Stream;
 
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.TensorRuntimeException;
+import ch.alpine.tensor.alg.Array;
 import ch.ethz.idsc.subare.core.VsInterface;
 import ch.ethz.idsc.subare.util.Index;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.TensorRuntimeException;
-import ch.ethz.idsc.tensor.alg.Array;
 
 public class DiscreteVs implements VsInterface, DiscreteValueFunction, Serializable {
   /** initializes all state value to zero

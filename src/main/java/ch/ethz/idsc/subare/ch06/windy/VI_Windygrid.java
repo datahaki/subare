@@ -1,14 +1,14 @@
 // code by jph
 package ch.ethz.idsc.subare.ch06.windy;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.core.EpisodeInterface;
 import ch.ethz.idsc.subare.core.Policy;
 import ch.ethz.idsc.subare.core.StepInterface;
 import ch.ethz.idsc.subare.core.alg.ValueIteration;
 import ch.ethz.idsc.subare.core.util.EpisodeKickoff;
 import ch.ethz.idsc.subare.core.util.PolicyType;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Tensor;
 
 /** reproduces Figure 6.4 on p.139 */
 enum VI_Windygrid {

@@ -1,21 +1,21 @@
 // code by jph
 package ch.ethz.idsc.subare.ch02.bandits;
 
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.api.TensorUnaryOperator;
-import ch.ethz.idsc.tensor.nrm.Normalize;
-import ch.ethz.idsc.tensor.pdf.Distribution;
-import ch.ethz.idsc.tensor.pdf.NormalDistribution;
-import ch.ethz.idsc.tensor.pdf.RandomVariate;
-import ch.ethz.idsc.tensor.red.Mean;
-import ch.ethz.idsc.tensor.red.ScalarSummaryStatistics;
-import ch.ethz.idsc.tensor.red.StandardDeviation;
-import ch.ethz.idsc.tensor.red.Variance;
-import ch.ethz.idsc.tensor.sca.Chop;
-import ch.ethz.idsc.tensor.sca.Clip;
-import ch.ethz.idsc.tensor.sca.Clips;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.api.TensorUnaryOperator;
+import ch.alpine.tensor.nrm.Normalize;
+import ch.alpine.tensor.pdf.Distribution;
+import ch.alpine.tensor.pdf.NormalDistribution;
+import ch.alpine.tensor.pdf.RandomVariate;
+import ch.alpine.tensor.red.Mean;
+import ch.alpine.tensor.red.ScalarSummaryStatistics;
+import ch.alpine.tensor.red.StandardDeviation;
+import ch.alpine.tensor.red.Variance;
+import ch.alpine.tensor.sca.Chop;
+import ch.alpine.tensor.sca.Clip;
+import ch.alpine.tensor.sca.Clips;
 
 /** implementation corresponds to Figure 2.1, p. 30 */
 /* package */ class Bandits {

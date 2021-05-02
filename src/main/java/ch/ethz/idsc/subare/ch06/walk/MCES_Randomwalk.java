@@ -1,6 +1,7 @@
 // code by jph
 package ch.ethz.idsc.subare.ch06.walk;
 
+import ch.alpine.tensor.sca.Round;
 import ch.ethz.idsc.subare.core.StateActionCounter;
 import ch.ethz.idsc.subare.core.mc.MonteCarloExploringStarts;
 import ch.ethz.idsc.subare.core.util.DiscreteQsa;
@@ -11,7 +12,6 @@ import ch.ethz.idsc.subare.core.util.EquiprobablePolicy;
 import ch.ethz.idsc.subare.core.util.ExploringStarts;
 import ch.ethz.idsc.subare.core.util.Policies;
 import ch.ethz.idsc.subare.core.util.PolicyType;
-import ch.ethz.idsc.tensor.sca.Round;
 
 /** <pre>
  * {0, 0} 0

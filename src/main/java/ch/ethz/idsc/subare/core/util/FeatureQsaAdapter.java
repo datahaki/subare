@@ -1,9 +1,9 @@
 // code by fluric
 package ch.ethz.idsc.subare.core.util;
 
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.core.QsaInterface;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
 
 /** useful to get Qsa values without the need to create all the state-action pair values beforehand
  * 

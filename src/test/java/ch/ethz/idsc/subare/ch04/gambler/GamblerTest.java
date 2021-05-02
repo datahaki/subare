@@ -1,8 +1,8 @@
 // code by jph
 package ch.ethz.idsc.subare.ch04.gambler;
 
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Tensors;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Tensors;
 import junit.framework.TestCase;
 
 public class GamblerTest extends TestCase {

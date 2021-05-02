@@ -3,12 +3,12 @@ package ch.ethz.idsc.subare.demo.bus;
 
 import java.io.IOException;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.ext.HomeDirectory;
+import ch.alpine.tensor.io.Export;
 import ch.ethz.idsc.subare.core.alg.ActionValueIterations;
 import ch.ethz.idsc.subare.core.util.DiscreteQsa;
 import ch.ethz.idsc.subare.core.util.gfx.StateActionRasters;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.ext.HomeDirectory;
-import ch.ethz.idsc.tensor.io.Export;
 
 /* package */ enum AVI_Charger {
   ;

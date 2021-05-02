@@ -4,13 +4,13 @@ package ch.ethz.idsc.subare.ch05.racetrack;
 import java.io.File;
 import java.io.IOException;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.io.Import;
+import ch.alpine.tensor.sca.Round;
 import ch.ethz.idsc.subare.core.Policy;
 import ch.ethz.idsc.subare.core.alg.IterativePolicyEvaluation;
 import ch.ethz.idsc.subare.core.util.DiscreteUtils;
 import ch.ethz.idsc.subare.core.util.EquiprobablePolicy;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.io.Import;
-import ch.ethz.idsc.tensor.sca.Round;
 
 enum IPE_RaceTrack {
   ;

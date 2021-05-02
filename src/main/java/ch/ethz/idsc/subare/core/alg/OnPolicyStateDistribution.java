@@ -1,13 +1,13 @@
 // code by jph
 package ch.ethz.idsc.subare.core.alg;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.core.Policy;
 import ch.ethz.idsc.subare.core.StateActionModel;
 import ch.ethz.idsc.subare.core.TransitionInterface;
 import ch.ethz.idsc.subare.core.util.DiscreteVs;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
 
 /** box in 9.2, p.161
  * 

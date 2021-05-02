@@ -4,6 +4,7 @@ package ch.ethz.idsc.subare.analysis;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+import ch.alpine.tensor.RealScalar;
 import ch.ethz.idsc.subare.core.MonteCarloInterface;
 import ch.ethz.idsc.subare.core.Policy;
 import ch.ethz.idsc.subare.core.QsaInterface;
@@ -19,7 +20,6 @@ import ch.ethz.idsc.subare.core.util.LearningRate;
 import ch.ethz.idsc.subare.core.util.PolicyBase;
 import ch.ethz.idsc.subare.core.util.PolicyExt;
 import ch.ethz.idsc.subare.core.util.PolicyType;
-import ch.ethz.idsc.tensor.RealScalar;
 
 /* package */ class DoubleSarsaMonteCarloTrial implements MonteCarloTrial {
   public static DoubleSarsaMonteCarloTrial of(MonteCarloInterface monteCarloInterface, SarsaType sarsaType) {

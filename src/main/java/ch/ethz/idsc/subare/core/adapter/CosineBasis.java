@@ -1,13 +1,13 @@
 // code by jph
 package ch.ethz.idsc.subare.core.adapter;
 
-import ch.ethz.idsc.tensor.DoubleScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.api.TensorUnaryOperator;
-import ch.ethz.idsc.tensor.sca.Clip;
-import ch.ethz.idsc.tensor.sca.Cos;
+import ch.alpine.tensor.DoubleScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.api.TensorUnaryOperator;
+import ch.alpine.tensor.sca.Clip;
+import ch.alpine.tensor.sca.Cos;
 
 /** 9.5.2 Fourier Basis p.171
  * 

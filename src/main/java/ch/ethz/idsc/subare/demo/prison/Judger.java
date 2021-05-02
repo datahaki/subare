@@ -1,10 +1,10 @@
 // code by jph
 package ch.ethz.idsc.subare.demo.prison;
 
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.sca.Chop;
 import ch.ethz.idsc.subare.ch02.Agent;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.sca.Chop;
 
 /* package */ class Judger {
   private final Tensor reward;

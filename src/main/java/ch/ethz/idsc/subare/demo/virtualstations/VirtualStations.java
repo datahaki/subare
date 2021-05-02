@@ -4,21 +4,21 @@ package ch.ethz.idsc.subare.demo.virtualstations;
 import java.util.HashMap;
 import java.util.Map;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Join;
+import ch.alpine.tensor.num.Boole;
+import ch.alpine.tensor.pdf.BernoulliDistribution;
+import ch.alpine.tensor.pdf.Distribution;
+import ch.alpine.tensor.pdf.PoissonDistribution;
+import ch.alpine.tensor.pdf.RandomVariate;
+import ch.alpine.tensor.red.Total;
+import ch.alpine.tensor.sca.Chop;
+import ch.alpine.tensor.sca.Sign;
 import ch.ethz.idsc.subare.core.MonteCarloInterface;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Scalars;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.alg.Join;
-import ch.ethz.idsc.tensor.num.Boole;
-import ch.ethz.idsc.tensor.pdf.BernoulliDistribution;
-import ch.ethz.idsc.tensor.pdf.Distribution;
-import ch.ethz.idsc.tensor.pdf.PoissonDistribution;
-import ch.ethz.idsc.tensor.pdf.RandomVariate;
-import ch.ethz.idsc.tensor.red.Total;
-import ch.ethz.idsc.tensor.sca.Chop;
-import ch.ethz.idsc.tensor.sca.Sign;
 
 /** Toy example for AMoD system. There are 3 virtual stations where taxis are traveling between those.
  * The goal is to have at least 1 taxi in each virtual station so that the availability is given.

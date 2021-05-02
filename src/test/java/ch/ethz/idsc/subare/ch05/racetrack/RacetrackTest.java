@@ -3,13 +3,13 @@ package ch.ethz.idsc.subare.ch05.racetrack;
 
 import java.util.Arrays;
 
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.ArrayQ;
+import ch.alpine.tensor.alg.Dimensions;
+import ch.alpine.tensor.io.ResourceData;
 import ch.ethz.idsc.subare.util.AssertFail;
 import ch.ethz.idsc.subare.util.Index;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.alg.ArrayQ;
-import ch.ethz.idsc.tensor.alg.Dimensions;
-import ch.ethz.idsc.tensor.io.ResourceData;
 import junit.framework.TestCase;
 
 public class RacetrackTest extends TestCase {

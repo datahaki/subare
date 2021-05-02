@@ -1,11 +1,11 @@
 // code by jph
 package ch.ethz.idsc.subare.demo.bus;
 
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.api.ScalarUnaryOperator;
-import ch.ethz.idsc.tensor.sca.Abs;
-import ch.ethz.idsc.tensor.sca.Mod;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.api.ScalarUnaryOperator;
+import ch.alpine.tensor.sca.Abs;
+import ch.alpine.tensor.sca.Mod;
 
 /* package */ class Sawtooth implements ScalarUnaryOperator {
   private final Mod mod;

@@ -3,6 +3,9 @@ package ch.ethz.idsc.subare.ch04.grid;
 
 import java.util.concurrent.TimeUnit;
 
+import ch.alpine.tensor.ext.HomeDirectory;
+import ch.alpine.tensor.io.AnimationWriter;
+import ch.alpine.tensor.io.GifAnimationWriter;
 import ch.ethz.idsc.subare.core.EpisodeVsEstimator;
 import ch.ethz.idsc.subare.core.Policy;
 import ch.ethz.idsc.subare.core.mc.ConstantAlphaMonteCarloVs;
@@ -11,9 +14,6 @@ import ch.ethz.idsc.subare.core.util.DiscreteValueFunctions;
 import ch.ethz.idsc.subare.core.util.EquiprobablePolicy;
 import ch.ethz.idsc.subare.core.util.ExploringStarts;
 import ch.ethz.idsc.subare.core.util.gfx.StateRasters;
-import ch.ethz.idsc.tensor.ext.HomeDirectory;
-import ch.ethz.idsc.tensor.io.AnimationWriter;
-import ch.ethz.idsc.tensor.io.GifAnimationWriter;
 
 /* package */ enum CAMC_Gridworld { // LONGTERM work in progress?
   ;

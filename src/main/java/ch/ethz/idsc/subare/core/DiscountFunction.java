@@ -1,11 +1,11 @@
 // code by jph
 package ch.ethz.idsc.subare.core;
 
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.api.TensorScalarFunction;
-import ch.ethz.idsc.tensor.num.Series;
-import ch.ethz.idsc.tensor.sca.Clips;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.api.TensorScalarFunction;
+import ch.alpine.tensor.num.Series;
+import ch.alpine.tensor.sca.Clips;
 
 /** provides different implementation for adding the discounted rewards:
  * in case gamma == 1, the rewards are simply added, else the horner scheme is used */

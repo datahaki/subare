@@ -4,12 +4,12 @@ package ch.ethz.idsc.subare.ch04.rental;
 import java.util.HashSet;
 import java.util.Set;
 
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.alg.Range;
-import ch.ethz.idsc.tensor.sca.Chop;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Range;
+import ch.alpine.tensor.sca.Chop;
 import junit.framework.TestCase;
 
 public class CarRentalTest extends TestCase {

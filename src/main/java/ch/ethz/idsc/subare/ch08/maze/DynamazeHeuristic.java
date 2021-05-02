@@ -1,13 +1,13 @@
 // code by jph
 package ch.ethz.idsc.subare.ch08.maze;
 
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.nrm.Vector1Norm;
+import ch.alpine.tensor.sca.Power;
 import ch.ethz.idsc.subare.core.util.DiscreteQsa;
 import ch.ethz.idsc.subare.core.util.DiscreteValueFunctions;
 import ch.ethz.idsc.subare.util.Index;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.nrm.Vector1Norm;
-import ch.ethz.idsc.tensor.sca.Power;
 
 enum DynamazeHeuristic {
   ;

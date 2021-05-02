@@ -3,13 +3,13 @@ package ch.ethz.idsc.subare.core.util;
 
 import java.io.Serializable;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.red.Max;
+import ch.alpine.tensor.sca.Clips;
+import ch.alpine.tensor.sca.Sign;
 import ch.ethz.idsc.subare.core.StateActionCounter;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.red.Max;
-import ch.ethz.idsc.tensor.sca.Clips;
-import ch.ethz.idsc.tensor.sca.Sign;
 
 /** using formula: epsilon = Max(minimum, maximum-(maximum-minimum)*N/decayInterval) */
 public class LinearExplorationRate implements ExplorationRate, Serializable {

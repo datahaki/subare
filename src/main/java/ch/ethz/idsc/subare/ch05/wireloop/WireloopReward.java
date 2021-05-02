@@ -1,10 +1,10 @@
 // code by jph
 package ch.ethz.idsc.subare.ch05.wireloop;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.core.RewardInterface;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
 
 /** collection of different cost functions */
 public interface WireloopReward extends RewardInterface {

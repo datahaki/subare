@@ -1,8 +1,8 @@
 // code by jz and jph
 package ch.ethz.idsc.subare.core.util;
 
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
 
 /** adaptive learning rate for states but independent of the action taken
  * 

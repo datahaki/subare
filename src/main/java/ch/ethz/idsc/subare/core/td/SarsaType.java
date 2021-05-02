@@ -1,6 +1,7 @@
 // code by fluric, jph
 package ch.ethz.idsc.subare.core.td;
 
+import ch.alpine.tensor.Scalar;
 import ch.ethz.idsc.subare.core.DiscreteModel;
 import ch.ethz.idsc.subare.core.MonteCarloInterface;
 import ch.ethz.idsc.subare.core.QsaInterface;
@@ -9,7 +10,6 @@ import ch.ethz.idsc.subare.core.util.FeatureMapper;
 import ch.ethz.idsc.subare.core.util.FeatureWeight;
 import ch.ethz.idsc.subare.core.util.LearningRate;
 import ch.ethz.idsc.subare.core.util.PolicyExt;
-import ch.ethz.idsc.tensor.Scalar;
 
 public enum SarsaType {
   ORIGINAL() {

@@ -1,9 +1,11 @@
 // code by jph
 package ch.ethz.idsc.subare.demo.virtualstations;
 
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.alg.Array;
+import java.lang.reflect.Modifier;
+
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Array;
 import junit.framework.TestCase;
 
 public class StaticHelperTest extends TestCase {
@@ -47,5 +49,9 @@ public class StaticHelperTest extends TestCase {
     Tensor result4 = StaticHelper.zeroVectors(5, prefix);
     assertEquals(result3, Tensors.of(Tensors.vector(1, 2, 0), Tensors.vector(3, 4, 0)));
     assertEquals(result4, Tensors.of(Tensors.vector(1, 2, 0, 0, 0, 0, 0), Tensors.vector(3, 4, 0, 0, 0, 0, 0)));
+  }
+
+  public void testPackageVisibility() {
+    assertFalse(Modifier.isPublic(StaticHelper.class.getModifiers()));
   }
 }

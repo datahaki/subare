@@ -3,6 +3,10 @@ package ch.ethz.idsc.subare.ch04.gambler;
 
 import java.util.concurrent.TimeUnit;
 
+import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.ext.HomeDirectory;
+import ch.alpine.tensor.io.AnimationWriter;
+import ch.alpine.tensor.io.GifAnimationWriter;
 import ch.ethz.idsc.subare.core.alg.Random1StepTabularQPlanning;
 import ch.ethz.idsc.subare.core.util.ActionValueStatistics;
 import ch.ethz.idsc.subare.core.util.DefaultLearningRate;
@@ -12,10 +16,6 @@ import ch.ethz.idsc.subare.core.util.DiscreteValueFunctions;
 import ch.ethz.idsc.subare.core.util.Infoline;
 import ch.ethz.idsc.subare.core.util.TabularSteps;
 import ch.ethz.idsc.subare.core.util.gfx.StateActionRasters;
-import ch.ethz.idsc.tensor.RationalScalar;
-import ch.ethz.idsc.tensor.ext.HomeDirectory;
-import ch.ethz.idsc.tensor.io.AnimationWriter;
-import ch.ethz.idsc.tensor.io.GifAnimationWriter;
 
 // R1STQP algorithm is not suited for gambler's dilemma
 /* package */ enum RSTQP_Gambler {

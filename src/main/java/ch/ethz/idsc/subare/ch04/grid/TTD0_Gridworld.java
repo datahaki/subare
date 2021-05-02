@@ -1,6 +1,7 @@
 // code by jph
 package ch.ethz.idsc.subare.ch04.grid;
 
+import ch.alpine.tensor.sca.Round;
 import ch.ethz.idsc.subare.core.Policy;
 import ch.ethz.idsc.subare.core.td.TabularTemporalDifference0;
 import ch.ethz.idsc.subare.core.util.DefaultLearningRate;
@@ -9,7 +10,6 @@ import ch.ethz.idsc.subare.core.util.DiscreteUtils;
 import ch.ethz.idsc.subare.core.util.DiscreteVs;
 import ch.ethz.idsc.subare.core.util.EquiprobablePolicy;
 import ch.ethz.idsc.subare.core.util.ExploringStarts;
-import ch.ethz.idsc.tensor.sca.Round;
 
 /** Example 4.1, p.82
  * 

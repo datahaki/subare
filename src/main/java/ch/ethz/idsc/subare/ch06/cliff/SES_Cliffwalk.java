@@ -3,6 +3,9 @@ package ch.ethz.idsc.subare.ch06.cliff;
 
 import java.util.concurrent.TimeUnit;
 
+import ch.alpine.tensor.ext.HomeDirectory;
+import ch.alpine.tensor.io.AnimationWriter;
+import ch.alpine.tensor.io.GifAnimationWriter;
 import ch.ethz.idsc.subare.core.Policy;
 import ch.ethz.idsc.subare.core.StateActionCounter;
 import ch.ethz.idsc.subare.core.td.Sarsa;
@@ -17,9 +20,6 @@ import ch.ethz.idsc.subare.core.util.LearningRate;
 import ch.ethz.idsc.subare.core.util.LinearExplorationRate;
 import ch.ethz.idsc.subare.core.util.PolicyType;
 import ch.ethz.idsc.subare.core.util.gfx.StateActionRasters;
-import ch.ethz.idsc.tensor.ext.HomeDirectory;
-import ch.ethz.idsc.tensor.io.AnimationWriter;
-import ch.ethz.idsc.tensor.io.GifAnimationWriter;
 
 /** 1, or N-step Original/Expected Sarsa, and QLearning for gridworld
  * 

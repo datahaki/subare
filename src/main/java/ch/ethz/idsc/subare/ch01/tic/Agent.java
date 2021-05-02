@@ -11,8 +11,8 @@ import java.util.Map.Entry;
 import java.util.NavigableMap;
 import java.util.TreeMap;
 
+import ch.alpine.tensor.RealScalar;
 import ch.ethz.idsc.subare.util.Coinflip;
-import ch.ethz.idsc.tensor.RealScalar;
 
 /* package */ class Agent {
   double stepSize;

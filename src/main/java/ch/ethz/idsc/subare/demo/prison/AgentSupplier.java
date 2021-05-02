@@ -6,15 +6,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 
+import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
 import ch.ethz.idsc.subare.ch02.Agent;
 import ch.ethz.idsc.subare.ch02.EGreedyAgent;
 import ch.ethz.idsc.subare.ch02.GradientAgent;
 import ch.ethz.idsc.subare.ch02.OptimistAgent;
 import ch.ethz.idsc.subare.ch02.RandomAgent;
 import ch.ethz.idsc.subare.ch02.UCBAgent;
-import ch.ethz.idsc.tensor.RationalScalar;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
 
 /* package */ enum AgentSupplier {
   ;

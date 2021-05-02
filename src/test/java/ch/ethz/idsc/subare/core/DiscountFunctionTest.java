@@ -1,12 +1,12 @@
 // code by jph
 package ch.ethz.idsc.subare.core;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.num.Series;
 import ch.ethz.idsc.subare.util.AssertFail;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.num.Series;
 import junit.framework.TestCase;
 
 public class DiscountFunctionTest extends TestCase {

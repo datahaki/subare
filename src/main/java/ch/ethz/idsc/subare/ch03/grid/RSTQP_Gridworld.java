@@ -1,6 +1,7 @@
 // code by jph
 package ch.ethz.idsc.subare.ch03.grid;
 
+import ch.alpine.tensor.RealScalar;
 import ch.ethz.idsc.subare.core.StepDigest;
 import ch.ethz.idsc.subare.core.alg.ActionValueIterations;
 import ch.ethz.idsc.subare.core.alg.Random1StepTabularQPlanning;
@@ -8,7 +9,6 @@ import ch.ethz.idsc.subare.core.util.ConstantLearningRate;
 import ch.ethz.idsc.subare.core.util.DiscreteQsa;
 import ch.ethz.idsc.subare.core.util.Infoline;
 import ch.ethz.idsc.subare.core.util.TabularSteps;
-import ch.ethz.idsc.tensor.RealScalar;
 
 /* package */ enum RSTQP_Gridworld {
   ;

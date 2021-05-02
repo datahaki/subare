@@ -1,6 +1,9 @@
 // code by jph
 package ch.ethz.idsc.subare.ch06.walk;
 
+import ch.alpine.tensor.alg.Array;
+import ch.alpine.tensor.sca.Clips;
+import ch.alpine.tensor.sca.Round;
 import ch.ethz.idsc.subare.core.Policy;
 import ch.ethz.idsc.subare.core.VsInterface;
 import ch.ethz.idsc.subare.core.adapter.PolynomialBasis;
@@ -12,9 +15,6 @@ import ch.ethz.idsc.subare.core.util.DiscreteVs;
 import ch.ethz.idsc.subare.core.util.EquiprobablePolicy;
 import ch.ethz.idsc.subare.core.util.ExploringStarts;
 import ch.ethz.idsc.subare.core.util.LinearApproximationVs;
-import ch.ethz.idsc.tensor.alg.Array;
-import ch.ethz.idsc.tensor.sca.Clips;
-import ch.ethz.idsc.tensor.sca.Round;
 
 /** tabular temporal difference (0) to learn value of states
  * 

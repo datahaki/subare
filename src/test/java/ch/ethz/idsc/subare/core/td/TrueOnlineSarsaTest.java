@@ -1,6 +1,8 @@
 // code by jph
 package ch.ethz.idsc.subare.core.td;
 
+import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.RealScalar;
 import ch.ethz.idsc.subare.ch04.gambler.GamblerModel;
 import ch.ethz.idsc.subare.core.MonteCarloInterface;
 import ch.ethz.idsc.subare.core.QsaInterface;
@@ -19,8 +21,6 @@ import ch.ethz.idsc.subare.core.util.LearningRate;
 import ch.ethz.idsc.subare.core.util.PolicyBase;
 import ch.ethz.idsc.subare.core.util.PolicyType;
 import ch.ethz.idsc.subare.util.AssertFail;
-import ch.ethz.idsc.tensor.RationalScalar;
-import ch.ethz.idsc.tensor.RealScalar;
 import junit.framework.TestCase;
 
 public class TrueOnlineSarsaTest extends TestCase {

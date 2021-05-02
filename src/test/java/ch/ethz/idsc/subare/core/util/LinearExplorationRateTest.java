@@ -1,9 +1,9 @@
 // code by jph
 package ch.ethz.idsc.subare.core.util;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.mat.Tolerance;
 import ch.ethz.idsc.subare.util.AssertFail;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.mat.Tolerance;
 import junit.framework.TestCase;
 
 public class LinearExplorationRateTest extends TestCase {

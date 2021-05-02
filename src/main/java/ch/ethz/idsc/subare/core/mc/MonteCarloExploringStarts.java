@@ -7,6 +7,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Accumulate;
+import ch.alpine.tensor.alg.Last;
+import ch.alpine.tensor.num.Series;
 import ch.ethz.idsc.subare.core.DiscreteModel;
 import ch.ethz.idsc.subare.core.EpisodeInterface;
 import ch.ethz.idsc.subare.core.EpisodeQsaEstimator;
@@ -17,13 +24,6 @@ import ch.ethz.idsc.subare.core.util.DiscreteQsa;
 import ch.ethz.idsc.subare.core.util.DiscreteStateActionCounter;
 import ch.ethz.idsc.subare.core.util.StateAction;
 import ch.ethz.idsc.subare.util.AverageTracker;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.alg.Accumulate;
-import ch.ethz.idsc.tensor.alg.Last;
-import ch.ethz.idsc.tensor.num.Series;
 
 /** Monte Carlo exploring starts improves an initial policy
  * based on average returns from complete episodes.

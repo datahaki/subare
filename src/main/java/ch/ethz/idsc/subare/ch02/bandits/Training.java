@@ -1,15 +1,15 @@
 // code by jph
 package ch.ethz.idsc.subare.ch02.bandits;
 
+import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
 import ch.ethz.idsc.subare.ch02.EGreedyAgent;
 import ch.ethz.idsc.subare.ch02.GradientAgent;
 import ch.ethz.idsc.subare.ch02.OptimistAgent;
 import ch.ethz.idsc.subare.ch02.RandomAgent;
 import ch.ethz.idsc.subare.ch02.UCBAgent;
-import ch.ethz.idsc.tensor.RationalScalar;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Scalars;
 
 /** chapter 2:
  * Multi-arm Bandits */

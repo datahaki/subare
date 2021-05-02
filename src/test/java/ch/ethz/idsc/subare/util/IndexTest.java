@@ -1,10 +1,10 @@
 // code by jph
 package ch.ethz.idsc.subare.util;
 
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.num.Pi;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.num.Pi;
 import junit.framework.TestCase;
 
 public class IndexTest extends TestCase {

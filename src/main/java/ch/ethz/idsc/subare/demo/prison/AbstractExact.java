@@ -5,10 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Supplier;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.ch02.Agent;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
 
 /* package */ abstract class AbstractExact {
   private final Supplier<Agent> sup1;

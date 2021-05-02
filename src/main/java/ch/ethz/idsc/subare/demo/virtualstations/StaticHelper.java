@@ -1,12 +1,12 @@
 // code by fluric
 package ch.ethz.idsc.subare.demo.virtualstations;
 
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.alg.Append;
-import ch.ethz.idsc.tensor.alg.Array;
-import ch.ethz.idsc.tensor.alg.Join;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Append;
+import ch.alpine.tensor.alg.Array;
+import ch.alpine.tensor.alg.Join;
 
 /* package */ enum StaticHelper {
   ;

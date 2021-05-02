@@ -3,6 +3,9 @@ package ch.ethz.idsc.subare.ch06.cliff;
 
 import java.util.concurrent.TimeUnit;
 
+import ch.alpine.tensor.ext.HomeDirectory;
+import ch.alpine.tensor.io.AnimationWriter;
+import ch.alpine.tensor.io.GifAnimationWriter;
 import ch.ethz.idsc.subare.core.StateActionCounter;
 import ch.ethz.idsc.subare.core.mc.MonteCarloExploringStarts;
 import ch.ethz.idsc.subare.core.util.DiscreteQsa;
@@ -12,9 +15,6 @@ import ch.ethz.idsc.subare.core.util.Infoline;
 import ch.ethz.idsc.subare.core.util.PolicyBase;
 import ch.ethz.idsc.subare.core.util.PolicyType;
 import ch.ethz.idsc.subare.core.util.gfx.StateActionRasters;
-import ch.ethz.idsc.tensor.ext.HomeDirectory;
-import ch.ethz.idsc.tensor.io.AnimationWriter;
-import ch.ethz.idsc.tensor.io.GifAnimationWriter;
 
 /** monte carlo is bad in this example, since the steep negative reward biases most episodes */
 // TODO this does not really converge at all

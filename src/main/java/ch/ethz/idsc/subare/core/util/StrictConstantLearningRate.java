@@ -1,9 +1,9 @@
 // code by fluric
 package ch.ethz.idsc.subare.core.util;
 
+import ch.alpine.tensor.Scalar;
 import ch.ethz.idsc.subare.core.StateActionCounter;
 import ch.ethz.idsc.subare.core.StepInterface;
-import ch.ethz.idsc.tensor.Scalar;
 
 /** THE USE OF THIS CLASS IS NOT RECOMMENDED BECAUSE THE
  * UPDATE IS BIASED TOWARDS AN UNWARRANTED INITIAL VALUE */

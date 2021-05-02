@@ -1,9 +1,9 @@
 // code by jph
 package ch.ethz.idsc.subare.core;
 
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.pdf.Distribution;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.pdf.Distribution;
 
 /** a policy is a function that maps a state-action pair to a real number,
  * i.e. the probability that a given action is taken when in given state.

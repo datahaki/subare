@@ -8,9 +8,9 @@ import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.red.Max;
-import ch.ethz.idsc.tensor.red.Min;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.red.Max;
+import ch.alpine.tensor.red.Min;
 
 /** ArgMax returns the index of the first element in the input sequence, which is equal to the max value. */
 public class FairArg implements Serializable {

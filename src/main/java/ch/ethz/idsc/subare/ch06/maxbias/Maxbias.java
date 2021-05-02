@@ -1,18 +1,18 @@
 // code by jph
 package ch.ethz.idsc.subare.ch06.maxbias;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.TensorRuntimeException;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Range;
+import ch.alpine.tensor.pdf.Distribution;
+import ch.alpine.tensor.pdf.NormalDistribution;
+import ch.alpine.tensor.pdf.RandomVariate;
+import ch.alpine.tensor.red.KroneckerDelta;
 import ch.ethz.idsc.subare.core.MonteCarloInterface;
 import ch.ethz.idsc.subare.core.StandardModel;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.TensorRuntimeException;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.alg.Range;
-import ch.ethz.idsc.tensor.pdf.Distribution;
-import ch.ethz.idsc.tensor.pdf.NormalDistribution;
-import ch.ethz.idsc.tensor.pdf.RandomVariate;
-import ch.ethz.idsc.tensor.red.KroneckerDelta;
 
 /** Example 6.7 p.134: Maximization bias
  * 

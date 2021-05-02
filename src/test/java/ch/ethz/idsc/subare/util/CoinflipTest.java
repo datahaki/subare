@@ -1,10 +1,10 @@
 // code by fluric
 package ch.ethz.idsc.subare.util;
 
-import ch.ethz.idsc.tensor.RationalScalar;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.sca.Chop;
+import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.sca.Chop;
 import junit.framework.TestCase;
 
 public class CoinflipTest extends TestCase {

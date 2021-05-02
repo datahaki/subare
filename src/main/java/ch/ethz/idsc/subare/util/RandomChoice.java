@@ -5,7 +5,7 @@ import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
 
-import ch.ethz.idsc.tensor.Tensor;
+import ch.alpine.tensor.Tensor;
 
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/RandomChoice.html">RandomChoice</a> */

@@ -1,16 +1,16 @@
 // code by jph
 package ch.ethz.idsc.subare.ch06.walk;
 
+import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Last;
+import ch.alpine.tensor.alg.Range;
+import ch.alpine.tensor.num.Boole;
 import ch.ethz.idsc.subare.core.MonteCarloInterface;
 import ch.ethz.idsc.subare.util.Coinflip;
-import ch.ethz.idsc.tensor.RationalScalar;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.alg.Last;
-import ch.ethz.idsc.tensor.alg.Range;
-import ch.ethz.idsc.tensor.num.Boole;
 
 /** Example 6.2: Random Walk, p.133 */
 class Randomwalk implements MonteCarloInterface {

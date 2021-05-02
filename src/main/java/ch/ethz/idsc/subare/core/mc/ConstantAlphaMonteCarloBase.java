@@ -4,14 +4,14 @@ package ch.ethz.idsc.subare.core.mc;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
 import ch.ethz.idsc.subare.core.DiscountFunction;
 import ch.ethz.idsc.subare.core.EpisodeDigest;
 import ch.ethz.idsc.subare.core.EpisodeInterface;
 import ch.ethz.idsc.subare.core.StateActionCounter;
 import ch.ethz.idsc.subare.core.StepInterface;
 import ch.ethz.idsc.subare.core.util.LearningRate;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
 
 public abstract class ConstantAlphaMonteCarloBase implements EpisodeDigest {
   protected final DiscountFunction discountFunction;

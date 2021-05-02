@@ -3,11 +3,11 @@ package ch.ethz.idsc.subare.core.td;
 
 import java.util.PriorityQueue;
 
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.sca.Sign;
 import ch.ethz.idsc.subare.core.StepDigest;
 import ch.ethz.idsc.subare.core.StepInterface;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Scalars;
-import ch.ethz.idsc.tensor.sca.Sign;
 
 /** Prioritized Sweeping for a deterministic environment
  * 

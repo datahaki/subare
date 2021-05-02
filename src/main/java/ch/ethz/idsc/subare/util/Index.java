@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import ch.ethz.idsc.tensor.Tensor;
+import ch.alpine.tensor.Tensor;
 
 /** index is similar to a database index over the 0-level entries of the tensor.
  * the index allows fast checks for containment and gives the position of the key

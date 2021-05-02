@@ -3,9 +3,9 @@ package ch.ethz.idsc.subare.core.adapter;
 
 import java.util.Objects;
 
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.core.StepInterface;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
 
 /** adapter to hold the four entries (s, a, r, s') */
 public final class StepAdapter implements StepInterface {

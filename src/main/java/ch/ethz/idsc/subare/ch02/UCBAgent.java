@@ -1,18 +1,18 @@
 // code by jph
 package ch.ethz.idsc.subare.ch02;
 
-import ch.ethz.idsc.tensor.DeterminateScalarQ;
-import ch.ethz.idsc.tensor.DoubleScalar;
-import ch.ethz.idsc.tensor.IntegerQ;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Scalars;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.alg.Array;
-import ch.ethz.idsc.tensor.red.Total;
-import ch.ethz.idsc.tensor.sca.Log;
-import ch.ethz.idsc.tensor.sca.Sign;
-import ch.ethz.idsc.tensor.sca.Sqrt;
+import ch.alpine.tensor.DeterminateScalarQ;
+import ch.alpine.tensor.DoubleScalar;
+import ch.alpine.tensor.IntegerQ;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.alg.Array;
+import ch.alpine.tensor.red.Total;
+import ch.alpine.tensor.sca.Log;
+import ch.alpine.tensor.sca.Sign;
+import ch.alpine.tensor.sca.Sqrt;
 
 /** Section 2.6 "upper-confidence-bound action selection" */
 public class UCBAgent extends FairArgAgent {

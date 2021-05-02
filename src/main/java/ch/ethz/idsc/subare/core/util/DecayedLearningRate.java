@@ -1,19 +1,19 @@
 // code by jz and jph
 package ch.ethz.idsc.subare.core.util;
 
+import ch.alpine.tensor.DoubleScalar;
+import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.TensorRuntimeException;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.red.Min;
+import ch.alpine.tensor.sca.Power;
+import ch.alpine.tensor.sca.Sign;
 import ch.ethz.idsc.subare.core.StateActionCounter;
 import ch.ethz.idsc.subare.core.StepInterface;
-import ch.ethz.idsc.tensor.DoubleScalar;
-import ch.ethz.idsc.tensor.RationalScalar;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Scalars;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.TensorRuntimeException;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.red.Min;
-import ch.ethz.idsc.tensor.sca.Power;
-import ch.ethz.idsc.tensor.sca.Sign;
 
 /** stochastic approximation theory
  * p.35 equation (2.7)

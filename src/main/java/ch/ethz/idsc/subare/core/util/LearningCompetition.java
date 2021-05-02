@@ -6,19 +6,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.alg.Array;
-import ch.ethz.idsc.tensor.api.ScalarTensorFunction;
-import ch.ethz.idsc.tensor.ext.HomeDirectory;
-import ch.ethz.idsc.tensor.ext.Timing;
-import ch.ethz.idsc.tensor.img.ColorDataGradients;
-import ch.ethz.idsc.tensor.img.ImageResize;
-import ch.ethz.idsc.tensor.io.AnimationWriter;
-import ch.ethz.idsc.tensor.io.GifAnimationWriter;
-import ch.ethz.idsc.tensor.red.Min;
-import ch.ethz.idsc.tensor.sca.Round;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.alg.Array;
+import ch.alpine.tensor.api.ScalarTensorFunction;
+import ch.alpine.tensor.ext.HomeDirectory;
+import ch.alpine.tensor.ext.Timing;
+import ch.alpine.tensor.img.ColorDataGradients;
+import ch.alpine.tensor.img.ImageResize;
+import ch.alpine.tensor.io.AnimationWriter;
+import ch.alpine.tensor.io.GifAnimationWriter;
+import ch.alpine.tensor.red.Min;
+import ch.alpine.tensor.sca.Round;
 
 public class LearningCompetition {
   private final Map<Point, LearningContender> map = new HashMap<>();

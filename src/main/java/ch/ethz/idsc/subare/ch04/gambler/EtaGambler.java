@@ -3,18 +3,18 @@ package ch.ethz.idsc.subare.ch04.gambler;
 
 import java.util.Arrays;
 
+import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.alg.ArrayPad;
+import ch.alpine.tensor.alg.ConstantArray;
+import ch.alpine.tensor.nrm.NormalizeTotal;
+import ch.alpine.tensor.red.Total;
+import ch.alpine.tensor.sca.Sign;
 import ch.ethz.idsc.subare.core.Policy;
 import ch.ethz.idsc.subare.core.alg.OnPolicyStateDistribution;
 import ch.ethz.idsc.subare.core.util.DiscreteVs;
-import ch.ethz.idsc.tensor.RationalScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.alg.Array;
-import ch.ethz.idsc.tensor.alg.ArrayPad;
-import ch.ethz.idsc.tensor.nrm.NormalizeTotal;
-import ch.ethz.idsc.tensor.red.Total;
-import ch.ethz.idsc.tensor.sca.Increment;
-import ch.ethz.idsc.tensor.sca.Sign;
 
 /* package */ enum EtaGambler {
   ;
@@ -24,7 +24,7 @@ import ch.ethz.idsc.tensor.sca.Sign;
     Policy policy = GamblerHelper.getOptimalPolicy(gamblerModel);
     OnPolicyStateDistribution opsd = new OnPolicyStateDistribution(gamblerModel, gamblerModel, policy);
     Tensor values = //
-        ArrayPad.of(Array.zeros(9).map(Increment.ONE), Arrays.asList(1), Arrays.asList(1));
+        ArrayPad.of(ConstantArray.of(RealScalar.ONE, 9), Arrays.asList(1), Arrays.asList(1));
     values.map(Sign::requirePositiveOrZero);
     values = NormalizeTotal.FUNCTION.apply(values);
     Scalar scalar = Total.ofVector(values);

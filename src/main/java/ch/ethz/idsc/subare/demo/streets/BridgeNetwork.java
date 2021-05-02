@@ -4,8 +4,8 @@ package ch.ethz.idsc.subare.demo.streets;
 import java.util.Arrays;
 import java.util.List;
 
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
 
 /** example network by Julian
  * three possible actions */

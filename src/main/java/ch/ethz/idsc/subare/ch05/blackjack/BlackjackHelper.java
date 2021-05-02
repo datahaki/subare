@@ -6,19 +6,19 @@ import java.awt.Point;
 import java.util.List;
 import java.util.Objects;
 
+import ch.alpine.tensor.DoubleScalar;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.alg.Array;
+import ch.alpine.tensor.alg.Dimensions;
+import ch.alpine.tensor.alg.Join;
+import ch.alpine.tensor.img.ArrayPlot;
+import ch.alpine.tensor.img.ColorDataGradients;
+import ch.alpine.tensor.img.ImageResize;
 import ch.ethz.idsc.subare.core.Policy;
 import ch.ethz.idsc.subare.core.util.DiscreteQsa;
 import ch.ethz.idsc.subare.core.util.PolicyType;
 import ch.ethz.idsc.subare.core.util.gfx.StateRasters;
-import ch.ethz.idsc.tensor.DoubleScalar;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.alg.Array;
-import ch.ethz.idsc.tensor.alg.Dimensions;
-import ch.ethz.idsc.tensor.alg.Join;
-import ch.ethz.idsc.tensor.img.ArrayPlot;
-import ch.ethz.idsc.tensor.img.ColorDataGradients;
-import ch.ethz.idsc.tensor.img.ImageResize;
 
 /* package */ enum BlackjackHelper {
   ;

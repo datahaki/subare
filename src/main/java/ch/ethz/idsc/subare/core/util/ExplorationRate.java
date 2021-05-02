@@ -1,9 +1,9 @@
 // code by jph and fluric
 package ch.ethz.idsc.subare.core.util;
 
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.core.StateActionCounter;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
 
 @FunctionalInterface
 public interface ExplorationRate {

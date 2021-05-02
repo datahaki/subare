@@ -1,10 +1,10 @@
 // code by jph
 package ch.ethz.idsc.subare.demo.fish;
 
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.api.ScalarUnaryOperator;
-import ch.ethz.idsc.tensor.sca.Exp;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.api.ScalarUnaryOperator;
+import ch.alpine.tensor.sca.Exp;
 
 /* package */ enum DLogisticSigmoid implements ScalarUnaryOperator {
   FUNCTION;

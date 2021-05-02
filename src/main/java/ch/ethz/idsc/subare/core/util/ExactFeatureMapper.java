@@ -5,10 +5,10 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.alg.Array;
+import ch.alpine.tensor.alg.UnitVector;
 import ch.ethz.idsc.subare.core.MonteCarloInterface;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.alg.Array;
-import ch.ethz.idsc.tensor.alg.UnitVector;
 
 /** requires keys constructed by {@link StateAction}
  * 

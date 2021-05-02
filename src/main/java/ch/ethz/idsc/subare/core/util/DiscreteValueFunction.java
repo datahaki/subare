@@ -3,7 +3,7 @@ package ch.ethz.idsc.subare.core.util;
 
 import java.util.stream.Stream;
 
-import ch.ethz.idsc.tensor.Tensor;
+import ch.alpine.tensor.Tensor;
 
 public interface DiscreteValueFunction {
   /** @return */

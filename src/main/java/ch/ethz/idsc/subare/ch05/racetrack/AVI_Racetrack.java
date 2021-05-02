@@ -1,15 +1,15 @@
 // code by jph
 package ch.ethz.idsc.subare.ch05.racetrack;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.ext.HomeDirectory;
+import ch.alpine.tensor.io.Export;
+import ch.alpine.tensor.io.Import;
+import ch.alpine.tensor.red.Tally;
 import ch.ethz.idsc.subare.core.alg.ActionValueIteration;
 import ch.ethz.idsc.subare.core.util.DiscreteQsa;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.ext.HomeDirectory;
-import ch.ethz.idsc.tensor.io.Export;
-import ch.ethz.idsc.tensor.io.Import;
-import ch.ethz.idsc.tensor.red.Tally;
 
 /** action value iteration for gambler's dilemma */
 enum AVI_Racetrack {

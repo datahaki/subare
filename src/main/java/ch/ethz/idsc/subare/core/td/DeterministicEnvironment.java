@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
 import ch.ethz.idsc.subare.core.StepDigest;
 import ch.ethz.idsc.subare.core.StepInterface;
 import ch.ethz.idsc.subare.core.util.StateAction;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
 
 /** utility class to implement "Model" for deterministic environments
  * in Tabular Dyna-Q p.172 */

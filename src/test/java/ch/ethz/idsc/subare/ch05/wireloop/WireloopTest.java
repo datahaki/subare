@@ -4,12 +4,12 @@ package ch.ethz.idsc.subare.ch05.wireloop;
 import java.awt.Dimension;
 import java.util.Arrays;
 
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.alg.Dimensions;
-import ch.ethz.idsc.tensor.red.Entrywise;
-import ch.ethz.idsc.tensor.red.Max;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Dimensions;
+import ch.alpine.tensor.red.Entrywise;
+import ch.alpine.tensor.red.Max;
 import junit.framework.TestCase;
 
 public class WireloopTest extends TestCase {

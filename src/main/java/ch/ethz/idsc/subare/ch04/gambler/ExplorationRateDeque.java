@@ -4,10 +4,10 @@ package ch.ethz.idsc.subare.ch04.gambler;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Scalars;
-import ch.ethz.idsc.tensor.red.Min;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.red.Min;
 
 @Deprecated
 class ExplorationRateDeque {

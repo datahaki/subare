@@ -3,6 +3,7 @@ package ch.ethz.idsc.subare.analysis;
 
 import java.util.function.Supplier;
 
+import ch.alpine.tensor.RationalScalar;
 import ch.ethz.idsc.subare.ch04.gambler.GamblerModel;
 import ch.ethz.idsc.subare.ch04.grid.Gridworld;
 import ch.ethz.idsc.subare.ch05.infvar.InfiniteVariance;
@@ -16,7 +17,6 @@ import ch.ethz.idsc.subare.ch08.maze.DynamazeHelper;
 import ch.ethz.idsc.subare.core.MonteCarloInterface;
 import ch.ethz.idsc.subare.demo.airport.Airport;
 import ch.ethz.idsc.subare.demo.virtualstations.VirtualStations;
-import ch.ethz.idsc.tensor.RationalScalar;
 
 public enum MonteCarloExamples implements Supplier<MonteCarloInterface> {
   AIRPORT(() -> Airport.INSTANCE), //

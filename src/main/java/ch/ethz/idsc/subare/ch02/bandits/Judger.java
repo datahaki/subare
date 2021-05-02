@@ -8,14 +8,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.sca.Clip;
+import ch.alpine.tensor.sca.Round;
 import ch.ethz.idsc.subare.ch02.Agent;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Scalars;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.sca.Clip;
-import ch.ethz.idsc.tensor.sca.Round;
 
 /* package */ class Judger {
   private final Bandits bandit;

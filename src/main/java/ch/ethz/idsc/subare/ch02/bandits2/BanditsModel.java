@@ -4,22 +4,22 @@ package ch.ethz.idsc.subare.ch02.bandits2;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Range;
+import ch.alpine.tensor.api.TensorUnaryOperator;
+import ch.alpine.tensor.nrm.Normalize;
+import ch.alpine.tensor.pdf.Distribution;
+import ch.alpine.tensor.pdf.NormalDistribution;
+import ch.alpine.tensor.pdf.RandomVariate;
+import ch.alpine.tensor.red.KroneckerDelta;
+import ch.alpine.tensor.red.Mean;
+import ch.alpine.tensor.red.StandardDeviation;
 import ch.ethz.idsc.subare.core.MonteCarloInterface;
 import ch.ethz.idsc.subare.core.StandardModel;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Scalars;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.alg.Range;
-import ch.ethz.idsc.tensor.api.TensorUnaryOperator;
-import ch.ethz.idsc.tensor.nrm.Normalize;
-import ch.ethz.idsc.tensor.pdf.Distribution;
-import ch.ethz.idsc.tensor.pdf.NormalDistribution;
-import ch.ethz.idsc.tensor.pdf.RandomVariate;
-import ch.ethz.idsc.tensor.red.KroneckerDelta;
-import ch.ethz.idsc.tensor.red.Mean;
-import ch.ethz.idsc.tensor.red.StandardDeviation;
 
 /** "A k-armed Bandit Problem"
  * Section 2.1 p.28 */

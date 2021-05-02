@@ -1,6 +1,13 @@
 // code by fluric
 package ch.ethz.idsc.subare.core.td;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Array;
+import ch.alpine.tensor.red.Mean;
+import ch.alpine.tensor.red.Times;
 import ch.ethz.idsc.subare.core.MonteCarloInterface;
 import ch.ethz.idsc.subare.core.QsaInterface;
 import ch.ethz.idsc.subare.core.StateActionCounter;
@@ -14,13 +21,6 @@ import ch.ethz.idsc.subare.core.util.PolicyExt;
 import ch.ethz.idsc.subare.core.util.StateAction;
 import ch.ethz.idsc.subare.core.util.StateActionCounterUtil;
 import ch.ethz.idsc.subare.util.Coinflip;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.alg.Array;
-import ch.ethz.idsc.tensor.red.Mean;
-import ch.ethz.idsc.tensor.red.Times;
 
 public class DoubleTrueOnlineSarsa extends AbstractTrueOnlineSarsa {
   private final Coinflip coinflip = Coinflip.fair();

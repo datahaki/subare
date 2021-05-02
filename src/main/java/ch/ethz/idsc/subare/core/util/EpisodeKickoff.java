@@ -4,11 +4,11 @@ package ch.ethz.idsc.subare.core.util;
 import java.util.ArrayDeque;
 import java.util.Random;
 
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.core.EpisodeInterface;
 import ch.ethz.idsc.subare.core.MonteCarloInterface;
 import ch.ethz.idsc.subare.core.Policy;
 import ch.ethz.idsc.subare.core.mc.MonteCarloEpisode;
-import ch.ethz.idsc.tensor.Tensor;
 
 public enum EpisodeKickoff {
   ;

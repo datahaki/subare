@@ -1,10 +1,10 @@
 // code by jph
 package ch.ethz.idsc.subare.core.td;
 
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.core.StepInterface;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Scalars;
-import ch.ethz.idsc.tensor.Tensor;
 
 public class PrioritizedStateAction implements Comparable<PrioritizedStateAction> {
   private final Scalar P;

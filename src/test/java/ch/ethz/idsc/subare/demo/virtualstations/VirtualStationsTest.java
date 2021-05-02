@@ -1,11 +1,11 @@
 // code by jph
 package ch.ethz.idsc.subare.demo.virtualstations;
 
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.red.Total;
-import ch.ethz.idsc.tensor.sca.Power;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.red.Total;
+import ch.alpine.tensor.sca.Power;
 import junit.framework.TestCase;
 
 public class VirtualStationsTest extends TestCase {

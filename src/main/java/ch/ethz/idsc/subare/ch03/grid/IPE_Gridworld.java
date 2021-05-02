@@ -2,11 +2,11 @@
 // inspired by Shangtong Zhang
 package ch.ethz.idsc.subare.ch03.grid;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.sca.Round;
 import ch.ethz.idsc.subare.core.alg.IterativePolicyEvaluation;
 import ch.ethz.idsc.subare.core.util.DiscreteUtils;
 import ch.ethz.idsc.subare.core.util.EquiprobablePolicy;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.sca.Round;
 
 /** produces results on p.64-65:
  * 

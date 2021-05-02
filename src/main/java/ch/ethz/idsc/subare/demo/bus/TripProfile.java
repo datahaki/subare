@@ -1,7 +1,7 @@
 // code by jph
 package ch.ethz.idsc.subare.demo.bus;
 
-import ch.ethz.idsc.tensor.Scalar;
+import ch.alpine.tensor.Scalar;
 
 /* package */ interface TripProfile {
   int length();

@@ -4,12 +4,12 @@ package ch.ethz.idsc.subare.demo.streets;
 import java.util.Arrays;
 import java.util.List;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.ch02.Agent;
 import ch.ethz.idsc.subare.ch02.FairArgAgent;
 import ch.ethz.idsc.subare.ch02.OptimistAgent;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
 
 class Judger {
   final Network network;

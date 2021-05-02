@@ -3,8 +3,8 @@ package ch.ethz.idsc.subare.ch08.maze;
 
 import java.util.Arrays;
 
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.alg.Dimensions;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.alg.Dimensions;
 import junit.framework.TestCase;
 
 public class DynamazeHelperTest extends TestCase {

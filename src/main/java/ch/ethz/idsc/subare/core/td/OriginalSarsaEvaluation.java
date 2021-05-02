@@ -1,14 +1,14 @@
 // code by jph, fluric
 package ch.ethz.idsc.subare.core.td;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
 import ch.ethz.idsc.subare.core.DiscreteModel;
 import ch.ethz.idsc.subare.core.util.PolicyExt;
 import ch.ethz.idsc.subare.core.util.PolicyWrap;
 import ch.ethz.idsc.subare.core.util.StateAction;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
 
 /* package */ class OriginalSarsaEvaluation extends AbstractSarsaEvaluation {
   public OriginalSarsaEvaluation(DiscreteModel discreteModel) {

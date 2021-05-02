@@ -7,19 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
+import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.alg.ConstantArray;
+import ch.alpine.tensor.alg.Join;
+import ch.alpine.tensor.alg.Subdivide;
+import ch.alpine.tensor.ext.HomeDirectory;
+import ch.alpine.tensor.img.ColorDataGradients;
+import ch.alpine.tensor.io.Export;
+import ch.alpine.tensor.sca.N;
 import ch.ethz.idsc.subare.ch02.Agent;
 import ch.ethz.idsc.subare.ch02.OptimistAgent;
-import ch.ethz.idsc.tensor.RationalScalar;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.alg.ConstantArray;
-import ch.ethz.idsc.tensor.alg.Join;
-import ch.ethz.idsc.tensor.alg.Subdivide;
-import ch.ethz.idsc.tensor.ext.HomeDirectory;
-import ch.ethz.idsc.tensor.img.ColorDataGradients;
-import ch.ethz.idsc.tensor.io.Export;
-import ch.ethz.idsc.tensor.sca.N;
 
 /* package */ class OptimistsArray {
   private final List<List<AbstractExact>> array = new ArrayList<>();

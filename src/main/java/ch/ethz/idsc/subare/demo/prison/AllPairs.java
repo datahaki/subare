@@ -4,12 +4,12 @@ package ch.ethz.idsc.subare.demo.prison;
 import java.util.List;
 import java.util.function.Supplier;
 
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Array;
+import ch.alpine.tensor.red.Mean;
+import ch.alpine.tensor.sca.Chop;
 import ch.ethz.idsc.subare.ch02.Agent;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.alg.Array;
-import ch.ethz.idsc.tensor.red.Mean;
-import ch.ethz.idsc.tensor.sca.Chop;
 
 /* package */ enum AllPairs {
   ;

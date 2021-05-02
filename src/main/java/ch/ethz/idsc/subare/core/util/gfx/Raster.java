@@ -1,8 +1,8 @@
 // code by jph
 package ch.ethz.idsc.subare.core.util.gfx;
 
+import ch.alpine.tensor.Scalar;
 import ch.ethz.idsc.subare.core.DiscreteModel;
-import ch.ethz.idsc.tensor.Scalar;
 
 interface Raster {
   /** @return underlying discrete model */

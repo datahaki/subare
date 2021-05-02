@@ -1,20 +1,20 @@
 // code by jph
 package ch.ethz.idsc.subare.ch06.cliff;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Array;
+import ch.alpine.tensor.alg.Flatten;
+import ch.alpine.tensor.nrm.Vector1Norm;
+import ch.alpine.tensor.num.Boole;
+import ch.alpine.tensor.sca.Clip;
+import ch.alpine.tensor.sca.Clips;
+import ch.alpine.tensor.sca.Sign;
 import ch.ethz.idsc.subare.core.MonteCarloInterface;
 import ch.ethz.idsc.subare.core.adapter.DeterministicStandardModel;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Scalars;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.alg.Array;
-import ch.ethz.idsc.tensor.alg.Flatten;
-import ch.ethz.idsc.tensor.nrm.Vector1Norm;
-import ch.ethz.idsc.tensor.num.Boole;
-import ch.ethz.idsc.tensor.sca.Clip;
-import ch.ethz.idsc.tensor.sca.Clips;
-import ch.ethz.idsc.tensor.sca.Sign;
 
 /** Example 6.6 p. 132, cliff walking */
 public class Cliffwalk extends DeterministicStandardModel implements MonteCarloInterface {

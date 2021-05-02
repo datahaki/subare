@@ -1,8 +1,8 @@
 // code by jph
 package ch.ethz.idsc.subare.core;
 
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
 
 /** function that maps a given state to a value
  * in addition, the interface provides update */

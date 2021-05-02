@@ -1,8 +1,8 @@
 // code by jph
 package ch.ethz.idsc.subare.ch06.windy;
 
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
 import junit.framework.TestCase;
 
 public class WindygridTest extends TestCase {

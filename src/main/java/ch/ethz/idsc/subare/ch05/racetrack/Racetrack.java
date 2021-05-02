@@ -5,25 +5,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Array;
+import ch.alpine.tensor.alg.Dimensions;
+import ch.alpine.tensor.alg.Join;
+import ch.alpine.tensor.alg.Subdivide;
+import ch.alpine.tensor.itp.Interpolation;
+import ch.alpine.tensor.itp.NearestInterpolation;
+import ch.alpine.tensor.sca.Clip;
+import ch.alpine.tensor.sca.Clips;
 import ch.ethz.idsc.subare.core.MonteCarloInterface;
 import ch.ethz.idsc.subare.core.adapter.DeterministicStandardModel;
 import ch.ethz.idsc.subare.core.util.StateActionMap;
 import ch.ethz.idsc.subare.core.util.StateActionMaps;
 import ch.ethz.idsc.subare.util.Index;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Scalars;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.alg.Array;
-import ch.ethz.idsc.tensor.alg.Dimensions;
-import ch.ethz.idsc.tensor.alg.Join;
-import ch.ethz.idsc.tensor.alg.Subdivide;
-import ch.ethz.idsc.tensor.itp.Interpolation;
-import ch.ethz.idsc.tensor.itp.NearestInterpolation;
-import ch.ethz.idsc.tensor.sca.Clip;
-import ch.ethz.idsc.tensor.sca.Clips;
-import ch.ethz.idsc.tensor.sca.Decrement;
 
 /** Exercise 5.8 p.111: Racetrack (programming)
  * Figure 5.6
@@ -54,7 +53,7 @@ class Racetrack extends DeterministicStandardModel implements MonteCarloInterfac
   final Tensor statesStart = Tensors.empty();
   final Tensor statesTerminal = Tensors.empty();
   final Tensor actions = //
-      Tensor.of(Array.of(Tensors::vector, 3, 3).flatten(1)).map(Decrement.ONE).unmodifiable();
+      Tensor.of(Array.of(Tensors::vector, 3, 3).flatten(1)).map(s -> s.subtract(RealScalar.ONE)).unmodifiable();
   final Index statesIndex;
   final Index statesStartIndex;
   final Index statesTerminalIndex;
@@ -70,7 +69,7 @@ class Racetrack extends DeterministicStandardModel implements MonteCarloInterfac
     System.out.println("grid size=" + Dimensions.of(blue));
     interpolation = NearestInterpolation.of(blue);
     List<Integer> list = Dimensions.of(image);
-    dimensions = Tensors.vector(list.get(0), list.get(1)).map(Decrement.ONE);
+    dimensions = Tensors.vector(list.get(0), list.get(1)).map(s -> s.subtract(RealScalar.ONE));
     clipPositionX = Clips.positive(dimensions.Get(0));
     clipPositionY = Clips.positive(dimensions.Get(1));
     clipSpeed = Clips.positive(maxSpeed);

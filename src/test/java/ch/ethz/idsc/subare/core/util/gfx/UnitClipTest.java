@@ -1,8 +1,8 @@
 // code by jph
 package ch.ethz.idsc.subare.core.util.gfx;
 
-import ch.ethz.idsc.tensor.DoubleScalar;
-import ch.ethz.idsc.tensor.RealScalar;
+import ch.alpine.tensor.DoubleScalar;
+import ch.alpine.tensor.RealScalar;
 import junit.framework.TestCase;
 
 public class UnitClipTest extends TestCase {

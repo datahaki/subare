@@ -1,15 +1,15 @@
 // code by jph
 package ch.ethz.idsc.subare.ch05.infvar;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.num.Boole;
+import ch.alpine.tensor.red.KroneckerDelta;
 import ch.ethz.idsc.subare.core.MonteCarloInterface;
 import ch.ethz.idsc.subare.core.StandardModel;
 import ch.ethz.idsc.subare.util.Coinflip;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.num.Boole;
-import ch.ethz.idsc.tensor.red.KroneckerDelta;
 
 /** Example 5.5 p.106: Infinite Variance */
 public class InfiniteVariance implements StandardModel, MonteCarloInterface {

@@ -1,11 +1,11 @@
 // code by jph
 package ch.ethz.idsc.subare.ch05.infvar;
 
+import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.sca.N;
 import ch.ethz.idsc.subare.core.Policy;
 import ch.ethz.idsc.subare.core.mc.FirstVisitPolicyEvaluation;
 import ch.ethz.idsc.subare.core.util.ExploringStarts;
-import ch.ethz.idsc.tensor.RationalScalar;
-import ch.ethz.idsc.tensor.sca.N;
 
 /* package */ enum FVPE_InfiniteVariance {
   ;

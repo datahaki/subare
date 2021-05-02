@@ -1,9 +1,9 @@
 // code by jph and fluric
 package ch.ethz.idsc.subare.core.td;
 
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
 import ch.ethz.idsc.subare.core.util.PolicyExt;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
 
 /* package */ interface SarsaEvaluation {
   Scalar evaluate(Tensor state, PolicyExt policy);

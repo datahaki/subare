@@ -1,12 +1,12 @@
 // code by jph
 package ch.ethz.idsc.subare.core.adapter;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.api.TensorUnaryOperator;
+import ch.alpine.tensor.sca.Clips;
 import ch.ethz.idsc.subare.util.AssertFail;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.api.TensorUnaryOperator;
-import ch.ethz.idsc.tensor.sca.Clips;
 import junit.framework.TestCase;
 
 public class CosineBasisTest extends TestCase {

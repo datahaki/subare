@@ -6,10 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
 
 public abstract class Agent {
   protected static final Random RANDOM = new Random();

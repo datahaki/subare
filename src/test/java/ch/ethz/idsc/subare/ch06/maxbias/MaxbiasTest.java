@@ -1,8 +1,8 @@
 // code by jph
 package ch.ethz.idsc.subare.ch06.maxbias;
 
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Tensors;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Tensors;
 import junit.framework.TestCase;
 
 public class MaxbiasTest extends TestCase {

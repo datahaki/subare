@@ -1,16 +1,16 @@
 // code by jph
 package ch.ethz.idsc.subare.core.util;
 
+import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.alg.Rescale;
+import ch.alpine.tensor.api.TensorScalarFunction;
+import ch.alpine.tensor.nrm.Vector1Norm;
+import ch.alpine.tensor.sca.InvertUnlessZero;
+import ch.alpine.tensor.sca.LogisticSigmoid;
+import ch.alpine.tensor.sca.N;
 import ch.ethz.idsc.subare.core.StateActionCounter;
-import ch.ethz.idsc.tensor.RationalScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.alg.Rescale;
-import ch.ethz.idsc.tensor.api.TensorScalarFunction;
-import ch.ethz.idsc.tensor.nrm.Vector1Norm;
-import ch.ethz.idsc.tensor.sca.InvertUnlessZero;
-import ch.ethz.idsc.tensor.sca.LogisticSigmoid;
-import ch.ethz.idsc.tensor.sca.N;
 
 public enum DiscreteValueFunctions {
   ;

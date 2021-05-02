@@ -2,13 +2,13 @@
 // inspired by Shangtong Zhang
 package ch.ethz.idsc.subare.ch03.grid;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.sca.Round;
 import ch.ethz.idsc.subare.core.Policy;
 import ch.ethz.idsc.subare.core.alg.ValueIteration;
 import ch.ethz.idsc.subare.core.util.DiscreteUtils;
 import ch.ethz.idsc.subare.core.util.Policies;
 import ch.ethz.idsc.subare.core.util.PolicyType;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.sca.Round;
 
 /** solving grid world
  * 

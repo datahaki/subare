@@ -1,6 +1,7 @@
 // code by jph
 package ch.ethz.idsc.subare.ch06.maxbias;
 
+import ch.alpine.tensor.sca.Round;
 import ch.ethz.idsc.subare.core.StateActionCounter;
 import ch.ethz.idsc.subare.core.td.Sarsa;
 import ch.ethz.idsc.subare.core.td.SarsaType;
@@ -16,7 +17,6 @@ import ch.ethz.idsc.subare.core.util.Infoline;
 import ch.ethz.idsc.subare.core.util.LearningRate;
 import ch.ethz.idsc.subare.core.util.LinearExplorationRate;
 import ch.ethz.idsc.subare.core.util.PolicyType;
-import ch.ethz.idsc.tensor.sca.Round;
 
 enum Sarsa_Maxbias {
   ;

@@ -3,12 +3,12 @@ package ch.ethz.idsc.subare.util;
 
 import java.util.Objects;
 
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.Scalar;
-import ch.ethz.idsc.tensor.Tensor;
-import ch.ethz.idsc.tensor.Tensors;
-import ch.ethz.idsc.tensor.red.Mean;
-import ch.ethz.idsc.tensor.sca.Chop;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.red.Mean;
+import ch.alpine.tensor.sca.Chop;
 import junit.framework.TestCase;
 
 public class AverageTrackerTest extends TestCase {

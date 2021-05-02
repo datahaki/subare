@@ -1,15 +1,15 @@
 // code by jph
 package ch.ethz.idsc.subare.ch02.bandits2;
 
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.sca.Chop;
+import ch.alpine.tensor.sca.Sign;
 import ch.ethz.idsc.subare.core.td.SarsaType;
 import ch.ethz.idsc.subare.core.util.DefaultLearningRate;
 import ch.ethz.idsc.subare.core.util.DiscreteQsa;
 import ch.ethz.idsc.subare.core.util.DiscreteUtils;
 import ch.ethz.idsc.subare.core.util.DiscreteVs;
 import ch.ethz.idsc.subare.core.util.LearningRate;
-import ch.ethz.idsc.tensor.RealScalar;
-import ch.ethz.idsc.tensor.sca.Chop;
-import ch.ethz.idsc.tensor.sca.Sign;
 import junit.framework.TestCase;
 
 public class Sarsa_BanditsTest extends TestCase {

@@ -4,7 +4,7 @@ package ch.alpine.subare.core;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.api.TensorScalarFunction;
-import ch.alpine.tensor.num.Series;
+import ch.alpine.tensor.num.Polynomial;
 import ch.alpine.tensor.sca.Clips;
 
 /** provides different implementation for adding the discounted rewards:
@@ -17,6 +17,6 @@ public interface DiscountFunction extends TensorScalarFunction {
     if (gamma.equals(RealScalar.ONE))
       return StaticHelper.TOTAL;
     Clips.unit().requireInside(gamma);
-    return rewards -> Series.of(rewards).apply(gamma);
+    return rewards -> Polynomial.of(rewards).apply(gamma);
   }
 }

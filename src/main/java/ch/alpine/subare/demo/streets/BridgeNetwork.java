@@ -32,8 +32,9 @@ class BridgeNetwork extends Network {
       return Arrays.asList(2, 3);
     case 2:
       return Arrays.asList(2, 4, 1);
+    default:
+      throw new IllegalArgumentException();
     }
-    return null;
   }
 
   @Override

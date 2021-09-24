@@ -6,7 +6,7 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
-import ch.alpine.tensor.num.Series;
+import ch.alpine.tensor.num.Polynomial;
 import junit.framework.TestCase;
 
 public class DiscountFunctionTest extends TestCase {
@@ -14,7 +14,7 @@ public class DiscountFunctionTest extends TestCase {
     Tensor coeffs = Tensors.vector(3, 2, -3, 2, .3);
     DiscountFunction discountFunction = DiscountFunction.of(RealScalar.ONE);
     Scalar gain1 = discountFunction.apply(coeffs);
-    Scalar gain2 = Series.of(coeffs).apply(RealScalar.ONE);
+    Scalar gain2 = Polynomial.of(coeffs).apply(RealScalar.ONE);
     assertEquals(gain1, gain2);
   }
 
@@ -23,7 +23,7 @@ public class DiscountFunctionTest extends TestCase {
     Scalar alpha = RealScalar.of(.2);
     DiscountFunction discountFunction = DiscountFunction.of(alpha);
     Scalar gain1 = discountFunction.apply(coeffs);
-    Scalar gain2 = Series.of(coeffs).apply(alpha);
+    Scalar gain2 = Polynomial.of(coeffs).apply(alpha);
     assertEquals(gain1, gain2);
   }
 

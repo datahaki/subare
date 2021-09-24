@@ -23,7 +23,7 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Accumulate;
 import ch.alpine.tensor.alg.Last;
-import ch.alpine.tensor.num.Series;
+import ch.alpine.tensor.num.Polynomial;
 
 /** Monte Carlo exploring starts improves an initial policy
  * based on average returns from complete episodes.
@@ -74,7 +74,7 @@ public class MonteCarloExploringStarts implements EpisodeQsaEstimator, StateActi
       for (Entry<Tensor, Integer> entry : first.entrySet()) {
         Tensor key = entry.getKey();
         final int fromIndex = entry.getValue();
-        Scalar gain = Series.of(rewards.extract(fromIndex, rewards.length())).apply(gamma);
+        Scalar gain = Polynomial.of(rewards.extract(fromIndex, rewards.length())).apply(gamma);
         gains.put(key, gain);
       }
     }

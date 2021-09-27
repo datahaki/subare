@@ -111,7 +111,8 @@ public class ActionValueIteration implements DiscreteQsaSupplier {
       Scalar prob = actionValueInterface.transitionProbability(state, action, next);
       Scalar max = discreteModel.actions(next).stream() //
           .map(actionN -> qsa_new.value(next, actionN)) //
-          .reduce(Max::of).get();
+          .reduce(Max::of) //
+          .orElseThrow();
       eqsa = eqsa.add(prob.multiply(max));
     }
     return ersa.add(gamma.multiply(eqsa));

@@ -75,12 +75,13 @@ public class DiscreteQsa implements QsaInterface, DiscreteValueFunction, Seriali
   }
 
   /**************************************************/
+  // TODO strictly speaking, the presence of these functions here is not requires
   public Scalar getMin() {
-    return (Scalar) values.flatten(-1).reduce(Min::of).get();
+    return values.stream().map(Scalar.class::cast).reduce(Min::of).orElseThrow();
   }
 
   public Scalar getMax() {
-    return (Scalar) values.flatten(-1).reduce(Max::of).get();
+    return values.stream().map(Scalar.class::cast).reduce(Max::of).orElseThrow();
   }
 
   public int size() {

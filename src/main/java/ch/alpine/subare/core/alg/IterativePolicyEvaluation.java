@@ -89,7 +89,8 @@ public class IterativePolicyEvaluation {
     return standardModel.actions(state).stream() //
         .map(action -> policy.probability(state, action).multiply( //
             actionValueAdapter.qsa(state, action, gvalues))) //
-        .reduce(Scalar::add).get();
+        .reduce(Scalar::add) //
+        .orElseThrow();
   }
 
   public DiscreteVs vs() {

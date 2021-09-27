@@ -22,6 +22,7 @@ import ch.alpine.tensor.Tensors;
       return RealScalar.ZERO;
     return actions.stream() //
         .map(action -> policy1.probability(state, action).multiply(policy2.qsaInterface().value(state, action))) //
-        .reduce(Scalar::add).get();
+        .reduce(Scalar::add) //
+        .orElseThrow();
   }
 }

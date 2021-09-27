@@ -22,7 +22,7 @@ class ExplorationRateDeque {
     errors.add(error);
     if (errors.size() == 2) {
       Scalar error_prev = errors.poll(); // n-5
-      Scalar error_min = errors.stream().reduce(Min::of).get();
+      Scalar error_min = errors.stream().reduce(Min::of).orElseThrow();
       if (Scalars.lessThan(error_prev, error_min)) {
         epsilon /= 2;
         System.out.println("Current epsilon: " + epsilon);

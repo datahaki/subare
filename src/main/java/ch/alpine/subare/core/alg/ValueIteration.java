@@ -91,7 +91,8 @@ public class ValueIteration implements DiscreteVsSupplier {
   private Scalar jacobiMax(Tensor state, VsInterface gvalues) {
     return discreteModel.actions(state).stream() //
         .map(action -> actionValueAdapter.qsa(state, action, gvalues)) //
-        .reduce(Max::of).get();
+        .reduce(Max::of) //
+        .orElseThrow();
   }
 
   @Override

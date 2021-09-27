@@ -18,7 +18,8 @@ import ch.alpine.tensor.TensorRuntimeException;
   private static void _isConsistent(ActionValueInterface actionValueInterface, Tensor state, Tensor action) {
     Scalar norm = actionValueInterface.transitions(state, action).stream() //
         .map(next -> actionValueInterface.transitionProbability(state, action, next)) //
-        .reduce(Scalar::add).get();
+        .reduce(Scalar::add) //
+        .orElseThrow();
     if (!norm.equals(RealScalar.ONE)) {
       System.out.println("state =" + state);
       System.out.println("action=" + action);

@@ -20,7 +20,7 @@ public class ExactFeatureMapper implements FeatureMapper, Serializable {
     return new ExactFeatureMapper(monteCarloInterface);
   }
 
-  /***************************************************/
+  // ---
   private final Map<Tensor, Tensor> stateToFeature = new HashMap<>();
   private final int stateActionSize;
 

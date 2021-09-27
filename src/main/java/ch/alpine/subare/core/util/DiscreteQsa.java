@@ -32,7 +32,7 @@ public class DiscreteQsa implements QsaInterface, DiscreteValueFunction, Seriali
         : init, index.size()));
   }
 
-  /***************************************************/
+  // ---
   private final Index index;
   private final Tensor values;
 
@@ -58,7 +58,7 @@ public class DiscreteQsa implements QsaInterface, DiscreteValueFunction, Seriali
     return new DiscreteQsa(index, values.copy());
   }
 
-  /**************************************************/
+  // ---
   @Override // from DiscreteValueFunction
   public Tensor keys() {
     return index.keys();
@@ -74,7 +74,7 @@ public class DiscreteQsa implements QsaInterface, DiscreteValueFunction, Seriali
     return new DiscreteQsa(index, Tensor.of(stream));
   }
 
-  /**************************************************/
+  // ---
   // TODO strictly speaking, the presence of these functions here is not requires
   public Scalar getMin() {
     return values.stream().map(Scalar.class::cast).reduce(Min::of).orElseThrow();

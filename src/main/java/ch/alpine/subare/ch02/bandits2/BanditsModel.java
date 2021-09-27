@@ -62,7 +62,7 @@ import ch.alpine.tensor.red.StandardDeviation;
     return RealScalar.ONE;
   }
 
-  /**************************************************/
+  // ---
   @Override // from MoveInterface
   public Tensor move(Tensor state, Tensor action) {
     return END;
@@ -76,7 +76,7 @@ import ch.alpine.tensor.red.StandardDeviation;
     return RandomVariate.of(distributions.get(index));
   }
 
-  /**************************************************/
+  // ---
   @Override // from TerminalInterface
   public boolean isTerminal(Tensor state) {
     return state.equals(END);
@@ -87,7 +87,7 @@ import ch.alpine.tensor.red.StandardDeviation;
     return Tensors.of(START);
   }
 
-  /**************************************************/
+  // ---
   @Override // from TransitionInterface
   public Tensor transitions(Tensor state, Tensor action) {
     return Tensors.of(END);

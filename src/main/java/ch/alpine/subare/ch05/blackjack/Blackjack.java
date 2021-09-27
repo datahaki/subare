@@ -58,7 +58,7 @@ class Blackjack implements MonteCarloInterface {
     return RealScalar.ONE;
   }
 
-  /**************************************************/
+  // ---
   @Override // from MoveInterface
   public Tensor move(Tensor state, Tensor action) {
     if (isTerminal(state))
@@ -111,7 +111,7 @@ class Blackjack implements MonteCarloInterface {
         : RealScalar.ZERO;
   }
 
-  /**************************************************/
+  // ---
   @Override // from MonteCarloInterface
   public Tensor startStates() {
     return startStates;

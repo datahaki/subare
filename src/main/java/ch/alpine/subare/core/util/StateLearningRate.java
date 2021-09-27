@@ -26,7 +26,7 @@ public class StateLearningRate extends DecayedLearningRate {
     return of(RealScalar.of(factor), RealScalar.of(exponent));
   }
 
-  /***************************************************/
+  // ---
   private StateLearningRate(Scalar factor, Scalar exponent) {
     super(factor, exponent);
   }

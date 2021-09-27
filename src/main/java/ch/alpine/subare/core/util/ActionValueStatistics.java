@@ -68,7 +68,7 @@ public class ActionValueStatistics implements DequeDigest, EpisodeDigest, Action
     // digestTerminal(stepInterface.nextState()); // terminal state, already handled in constructor
   }
 
-  /**************************************************/
+  // ---
   /** build a step interface for the transition from the terminal state into the terminal state
    * 
    * @param state */
@@ -107,7 +107,7 @@ public class ActionValueStatistics implements DequeDigest, EpisodeDigest, Action
     return RationalScalar.of(num, den);
   }
 
-  /**************************************************/
+  // ---
   @Override
   public Scalar expectedReward(Tensor state, Tensor action) {
     Tensor key = StateAction.key(state, action);

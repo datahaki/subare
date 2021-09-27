@@ -37,7 +37,7 @@ public class InfiniteVariance implements StandardModel, MonteCarloInterface {
     return RealScalar.ONE;
   }
 
-  /**************************************************/
+  // ---
   @Override
   public Scalar reward(Tensor state, Tensor action, Tensor next) {
     return Boole.of(action.equals(BACK) && isTerminal(next));
@@ -54,19 +54,19 @@ public class InfiniteVariance implements StandardModel, MonteCarloInterface {
     return END; // END is used as state
   }
 
-  /**************************************************/
+  // ---
   @Override // from MonteCarloInterface
   public Tensor startStates() {
     return Tensors.vector(0);
   }
 
-  /**************************************************/
+  // ---
   @Override // from TerminalInterface
   public boolean isTerminal(Tensor state) {
     return state.equals(END); // END is used as state
   }
 
-  /**************************************************/
+  // ---
   @Override // from TransitionInterface
   public Tensor transitions(Tensor state, Tensor action) {
     return isTerminal(state) ? Tensors.of(state) : states();

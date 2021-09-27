@@ -66,7 +66,7 @@ public enum StateActionRasters {
     return _render(stateActionRaster, Policies.toQsa(stateActionRaster.discreteModel(), policy));
   }
 
-  /***************************************************/
+  // ---
   public static Tensor qsa(StateActionRaster stateActionRaster, DiscreteQsa qsa) {
     return ImageResize.nearest(_render(stateActionRaster, qsa), stateActionRaster.magnify());
   }

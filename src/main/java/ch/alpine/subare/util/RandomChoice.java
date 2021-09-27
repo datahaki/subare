@@ -21,7 +21,7 @@ public enum RandomChoice {
     return (T) tensor.get(RANDOM.nextInt(tensor.length()));
   }
 
-  /***************************************************/
+  // ---
   /** @param list
    * @param random
    * @return random entry of list

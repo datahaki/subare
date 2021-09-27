@@ -86,7 +86,7 @@ import ch.alpine.tensor.sca.Sign;
     return next;
   }
 
-  /**************************************************/
+  // ---
   @Override
   public Tensor move(Tensor state, Tensor action) {
     Tensor morning = night_move(state, action);
@@ -134,7 +134,7 @@ import ch.alpine.tensor.sca.Sign;
     return sum.add(rented.multiply(RENTAL_CREDIT));
   }
 
-  /**************************************************/
+  // ---
   @Override
   public Scalar expectedReward(Tensor state, Tensor action) {
     Scalar sum = RealScalar.ZERO;

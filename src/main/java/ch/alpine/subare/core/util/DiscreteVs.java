@@ -24,7 +24,7 @@ public class DiscreteVs implements VsInterface, DiscreteValueFunction, Serializa
     return new DiscreteVs(Index.build(states), values);
   }
 
-  /***************************************************/
+  // ---
   private final Index index;
   private final Tensor values;
 
@@ -61,7 +61,7 @@ public class DiscreteVs implements VsInterface, DiscreteValueFunction, Serializa
     return new DiscreteVs(index, values.multiply(gamma));
   }
 
-  /**************************************************/
+  // ---
   @Override // from DiscreteValueFunction
   public Tensor keys() {
     return index.keys();

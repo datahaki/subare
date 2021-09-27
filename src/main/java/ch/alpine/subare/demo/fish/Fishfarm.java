@@ -49,7 +49,7 @@ class Fishfarm extends DeterministicStandardModel implements MonteCarloInterface
     return RealScalar.ONE;
   }
 
-  /**************************************************/
+  // ---
   @Override
   public Tensor move(Tensor state, Tensor action) {
     if (isTerminal(state))
@@ -85,7 +85,7 @@ class Fishfarm extends DeterministicStandardModel implements MonteCarloInterface
     return fish.add(penalty);
   }
 
-  /**************************************************/
+  // ---
   @Override // from TerminalInterface
   public boolean isTerminal(Tensor state) {
     return state.Get(0).equals(RealScalar.of(period));

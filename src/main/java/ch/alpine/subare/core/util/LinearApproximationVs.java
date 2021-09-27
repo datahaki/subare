@@ -16,7 +16,7 @@ public class LinearApproximationVs implements VsInterface, Serializable {
     return new LinearApproximationVs(represent, weight);
   }
 
-  /***************************************************/
+  // ---
   private final TensorUnaryOperator represent;
   private Tensor weight;
 

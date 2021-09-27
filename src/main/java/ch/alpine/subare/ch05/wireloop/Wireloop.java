@@ -82,7 +82,7 @@ class Wireloop extends DeterministicStandardModel implements MonteCarloInterface
     return RealScalar.ONE;
   }
 
-  /**************************************************/
+  // ---
   @Override
   public Tensor move(Tensor state, Tensor action) {
     return state.add(action);
@@ -97,7 +97,7 @@ class Wireloop extends DeterministicStandardModel implements MonteCarloInterface
     return wireloopReward.reward(state, action, next);
   }
 
-  /**************************************************/
+  // ---
   @Override // from MonteCarloInterface
   public Tensor startStates() {
     return Tensor.of(startStates.stream());
@@ -108,7 +108,7 @@ class Wireloop extends DeterministicStandardModel implements MonteCarloInterface
     return endStates.contains(state);
   }
 
-  /**************************************************/
+  // ---
   public Tensor image() {
     return image.copy();
   }

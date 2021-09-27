@@ -77,7 +77,7 @@ public class Windygrid extends DeterministicStandardModel implements MonteCarloI
     return RealScalar.ONE; // undiscounted task
   }
 
-  /**************************************************/
+  // ---
   @Override
   public Scalar reward(Tensor state, Tensor action, Tensor next) {
     return isTerminal(next) //
@@ -100,7 +100,7 @@ public class Windygrid extends DeterministicStandardModel implements MonteCarloI
     return next;
   }
 
-  /**************************************************/
+  // ---
   @Override // from MonteCarloInterface
   public Tensor startStates() {
     return Tensors.of(START);

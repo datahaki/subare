@@ -71,7 +71,7 @@ public class Cliffwalk extends DeterministicStandardModel implements MonteCarloI
     return RealScalar.ONE;
   }
 
-  /**************************************************/
+  // ---
   @Override
   public Scalar reward(Tensor state, Tensor action, Tensor next) {
     if (isTerminal(next))
@@ -100,7 +100,7 @@ public class Cliffwalk extends DeterministicStandardModel implements MonteCarloI
         Sign.isPositive(x) && Scalars.lessThan(x, RealScalar.of(MX));
   }
 
-  /**************************************************/
+  // ---
   @Override // from MonteCarloInterface
   public Tensor startStates() {
     return Tensors.of(START);

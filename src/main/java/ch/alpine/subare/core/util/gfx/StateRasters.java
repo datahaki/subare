@@ -56,7 +56,7 @@ public enum StateRasters {
     return _render(stateRaster, vs.create(Rescale.of(vs.values()).stream()));
   }
 
-  /***************************************************/
+  // ---
   public static Tensor vs(StateRaster stateRaster, DiscreteVs vs) {
     return ImageResize.nearest(_render(stateRaster, vs), stateRaster.magnify());
   }

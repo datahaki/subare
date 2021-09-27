@@ -53,7 +53,7 @@ public enum DiscreteUtils {
     return reduce(stateActionModel, qsa, Max::of);
   }
 
-  /**************************************************/
+  // ---
   public static void print(DiscreteQsa qsa, Function<Scalar, Scalar> round) {
     for (Tensor key : qsa.keys()) {
       Scalar value = qsa.value(key.get(0), key.get(1));
@@ -65,7 +65,7 @@ public enum DiscreteUtils {
     print(qsa, Function.identity());
   }
 
-  /**************************************************/
+  // ---
   public static String infoString(DiscreteQsa qsa) {
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append("#{q(s,a)}=" + qsa.size() + "\n");
@@ -74,7 +74,7 @@ public enum DiscreteUtils {
     return stringBuilder.toString().trim();
   }
 
-  /**************************************************/
+  // ---
   public static void print(StateActionModel stateActionModel, VsInterface vs, Function<Scalar, Scalar> round) {
     for (Tensor key : stateActionModel.states()) {
       Scalar value = vs.value(key);

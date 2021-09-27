@@ -27,7 +27,7 @@ public class LinearExplorationRate implements ExplorationRate, Serializable {
     return of(RealScalar.of(decayInterval), RealScalar.of(maximum), RealScalar.of(minimum));
   }
 
-  /***************************************************/
+  // ---
   private final Scalar decayInterval;
   private final Scalar minimum;
   private final Scalar maximum;

@@ -19,7 +19,7 @@ public class CosineBasis implements TensorUnaryOperator {
     return new CosineBasis(order, clip);
   }
 
-  /***************************************************/
+  // ---
   private final int order;
   private final Clip clip;
 

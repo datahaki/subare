@@ -50,7 +50,7 @@ public class Maxbias implements StandardModel, MonteCarloInterface {
     return RealScalar.ONE;
   }
 
-  /**************************************************/
+  // ---
   @Override
   public Tensor move(Tensor state, Tensor action) {
     if (state.equals(STATE_A))
@@ -67,20 +67,20 @@ public class Maxbias implements StandardModel, MonteCarloInterface {
         : RealScalar.ZERO;
   }
 
-  /**************************************************/
+  // ---
   @Override // from TerminalInterface
   public boolean isTerminal(Tensor state) {
     return !state.equals(STATE_A) //
         && !state.equals(STATE_B);
   }
 
-  /**************************************************/
+  // ---
   @Override // from MonteCarloInterface
   public Tensor startStates() {
     return Tensors.of(STATE_A);
   }
 
-  /**************************************************/
+  // ---
   @Override
   public Scalar expectedReward(Tensor state, Tensor action) {
     return state.equals(STATE_B) //

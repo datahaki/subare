@@ -73,7 +73,7 @@ class Dynamaze extends DeterministicStandardModel implements MonteCarloInterface
     return RealScalar.of(0.95); // TODO check how this behaves with 19/20
   }
 
-  /**************************************************/
+  // ---
   @Override
   public Tensor move(Tensor state, Tensor action) {
     Tensor next = state.add(action);
@@ -85,7 +85,7 @@ class Dynamaze extends DeterministicStandardModel implements MonteCarloInterface
     return Boole.of(!isTerminal(state) && isTerminal(next));
   }
 
-  /**************************************************/
+  // ---
   @Override // from TerminalInterface
   public boolean isTerminal(Tensor state) {
     return terminalIndex.containsKey(state);
@@ -96,7 +96,7 @@ class Dynamaze extends DeterministicStandardModel implements MonteCarloInterface
     return startStates;
   }
 
-  /**************************************************/
+  // ---
   public Tensor image() {
     return image.copy();
   }

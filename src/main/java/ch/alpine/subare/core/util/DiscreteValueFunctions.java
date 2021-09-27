@@ -65,7 +65,7 @@ public enum DiscreteValueFunctions {
     return qsa1.create(qsa1.values().pmul(visits1).add(qsa2.values().pmul(visits2)).pmul(inverse).stream());
   }
 
-  /**************************************************/
+  // ---
   // helper function
   private static boolean _isCompatible(DiscreteValueFunction tvi1, DiscreteValueFunction tvi2) {
     return tvi1.keys().equals(tvi2.keys());

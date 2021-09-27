@@ -65,7 +65,7 @@ public class GamblerModel implements StandardModel, MonteCarloInterface {
     return RealScalar.ONE;
   }
 
-  /**************************************************/
+  // ---
   @Override
   public Tensor move(Tensor state, Tensor action) { // non-deterministic
     if (coinflip.tossHead()) // win
@@ -80,7 +80,7 @@ public class GamblerModel implements StandardModel, MonteCarloInterface {
         : KroneckerDelta.of(next, last);
   }
 
-  /**************************************************/
+  // ---
   @Override // from MonteCarloInterface
   public Tensor startStates() {
     return states.extract(1, states.length() - 1);
@@ -92,7 +92,7 @@ public class GamblerModel implements StandardModel, MonteCarloInterface {
         || state.equals(last);
   }
 
-  /**************************************************/
+  // ---
   @Override
   public Scalar expectedReward(Tensor state, Tensor action) {
     return isTerminal(state) //

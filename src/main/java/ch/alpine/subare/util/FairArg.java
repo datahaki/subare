@@ -36,7 +36,7 @@ public class FairArg implements Serializable {
         .collect(Collectors.toList());
   }
 
-  /***************************************************/
+  // ---
   private final List<Integer> list;
 
   private FairArg(List<Integer> list) {

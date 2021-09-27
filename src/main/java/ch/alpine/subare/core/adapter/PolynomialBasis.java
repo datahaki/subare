@@ -18,7 +18,7 @@ public class PolynomialBasis implements TensorUnaryOperator {
     return new PolynomialBasis(order, clip);
   }
 
-  /***************************************************/
+  // ---
   private final int order;
   private final Clip clip;
 

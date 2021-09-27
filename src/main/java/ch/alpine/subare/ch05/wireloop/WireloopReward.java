@@ -22,7 +22,7 @@ public interface WireloopReward extends RewardInterface {
     return (s, a, n) -> RealScalar.of(-1.4); // -1.2
   }
 
-  /***************************************************/
+  // ---
   static Scalar id_x(Tensor state) {
     return state.Get(0);
   }

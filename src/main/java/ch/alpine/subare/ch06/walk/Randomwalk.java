@@ -46,7 +46,7 @@ class Randomwalk implements MonteCarloInterface {
     return RealScalar.ONE;
   }
 
-  /**************************************************/
+  // ---
   @Override
   public Scalar reward(Tensor state, Tensor action, Tensor next) {
     return Boole.of(!isTerminal(state) && next.equals(terminate2));
@@ -61,7 +61,7 @@ class Randomwalk implements MonteCarloInterface {
         : state.subtract(RealScalar.ONE);
   }
 
-  /**************************************************/
+  // ---
   @Override // from MonteCarloInterface
   public Tensor startStates() {
     return Tensors.vector(states().length() / 2);

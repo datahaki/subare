@@ -75,7 +75,7 @@ public class Airport implements StandardModel, MonteCarloInterface {
     return RealScalar.ONE;
   }
 
-  /**************************************************/
+  // ---
   @Override
   public Tensor move(Tensor state, Tensor action) {
     if (isTerminal(state)) {
@@ -102,7 +102,7 @@ public class Airport implements StandardModel, MonteCarloInterface {
     return reward;
   }
 
-  /**************************************************/
+  // ---
   @Override // from MonteCarloInterface
   public Tensor startStates() {
     return states.extract(0, 1);
@@ -113,7 +113,7 @@ public class Airport implements StandardModel, MonteCarloInterface {
     return state.Get(0).equals(RealScalar.of(LASTT));
   }
 
-  /**************************************************/
+  // ---
   @Override
   public Scalar expectedReward(Tensor state, Tensor action) {
     if (isTerminal(state))

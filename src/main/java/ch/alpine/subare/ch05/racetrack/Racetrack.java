@@ -149,7 +149,7 @@ class Racetrack extends DeterministicStandardModel implements MonteCarloInterfac
     return RealScalar.ONE;
   }
 
-  /**************************************************/
+  // ---
   private static Tensor split(Tensor p, Tensor q, Scalar scalar) {
     return q.subtract(p).multiply(scalar).add(p);
   }
@@ -192,7 +192,7 @@ class Racetrack extends DeterministicStandardModel implements MonteCarloInterfac
     return statesStartIndex.containsKey(state);
   }
 
-  /**************************************************/
+  // ---
   @Override // from MonteCarloInterface
   public Tensor startStates() {
     return statesStart;
@@ -203,7 +203,7 @@ class Racetrack extends DeterministicStandardModel implements MonteCarloInterfac
     return statesTerminalIndex.containsKey(state);
   }
 
-  /**************************************************/
+  // ---
   public Tensor image() {
     return image.copy();
   }

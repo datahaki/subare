@@ -46,7 +46,7 @@ import ch.alpine.tensor.sca.Clips;
     return DoubleScalar.of(.9);
   }
 
-  /**************************************************/
+  // ---
   @Override
   public Scalar reward(Tensor state, Tensor action, Tensor next) {
     if (state.equals(WARP1_ANTE))
@@ -69,7 +69,7 @@ import ch.alpine.tensor.sca.Clips;
     return state.add(action).map(CLIP);
   }
 
-  /**************************************************/
+  // ---
   @Override // from MonteCarloInterface
   public Tensor startStates() {
     return states;

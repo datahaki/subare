@@ -13,7 +13,7 @@ public class LearningContender {
     return new LearningContender(monteCarloInterface, sarsa, sarsa.qsa());
   }
 
-  /***************************************************/
+  // ---
   private final MonteCarloInterface monteCarloInterface;
   private final DiscreteQsa qsa;
   private final Sarsa sarsa;

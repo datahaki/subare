@@ -8,6 +8,7 @@ import ch.alpine.subare.ch02.Agent;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Array;
+import ch.alpine.tensor.ext.Integers;
 import ch.alpine.tensor.red.Mean;
 import ch.alpine.tensor.sca.Chop;
 
@@ -24,8 +25,7 @@ import ch.alpine.tensor.sca.Chop;
           Agent a2 = list.get(i2).get();
           table.append(Training.train(a1, a2, epochs));
         }
-        if (table.length() != runs)
-          throw new RuntimeException();
+        Integers.requireEquals(table.length(), runs);
         Tensor mean = Mean.of(table);
         Chop.NONE.requireAllZero(matrix.Get(i1, i2));
         Chop.NONE.requireAllZero(matrix.Get(i2, i1));

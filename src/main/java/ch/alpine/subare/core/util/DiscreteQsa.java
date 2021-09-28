@@ -11,9 +11,9 @@ import ch.alpine.subare.util.Index;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.TensorRuntimeException;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Array;
+import ch.alpine.tensor.ext.Integers;
 import ch.alpine.tensor.red.Max;
 import ch.alpine.tensor.red.Min;
 
@@ -37,8 +37,7 @@ public class DiscreteQsa implements QsaInterface, DiscreteValueFunction, Seriali
   private final Tensor values;
 
   private DiscreteQsa(Index index, Tensor values) {
-    if (index.size() != values.length())
-      throw TensorRuntimeException.of(index.keys(), values);
+    Integers.requireEquals(index.size(), values.length());
     this.index = index;
     this.values = values;
   }

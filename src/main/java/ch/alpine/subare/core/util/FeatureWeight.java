@@ -4,8 +4,8 @@ package ch.alpine.subare.core.util;
 import java.io.Serializable;
 
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.TensorRuntimeException;
 import ch.alpine.tensor.alg.Array;
+import ch.alpine.tensor.ext.Integers;
 
 public class FeatureWeight implements Serializable {
   private final FeatureMapper featureMapper;
@@ -23,8 +23,7 @@ public class FeatureWeight implements Serializable {
 
   /** @param w vector of same length as feature size */
   public void set(Tensor w) {
-    if (w.length() != featureMapper.featureSize())
-      throw TensorRuntimeException.of(w);
+    Integers.requireEquals(w.length(), featureMapper.featureSize());
     this.w = w;
   }
 }

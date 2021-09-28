@@ -8,8 +8,8 @@ import ch.alpine.subare.core.VsInterface;
 import ch.alpine.subare.util.Index;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.TensorRuntimeException;
 import ch.alpine.tensor.alg.Array;
+import ch.alpine.tensor.ext.Integers;
 
 public class DiscreteVs implements VsInterface, DiscreteValueFunction, Serializable {
   /** initializes all state value to zero
@@ -31,8 +31,7 @@ public class DiscreteVs implements VsInterface, DiscreteValueFunction, Serializa
   /** @param index
    * @param values */
   public DiscreteVs(Index index, Tensor values) {
-    if (index.size() != values.length())
-      throw TensorRuntimeException.of(index.keys(), values);
+    Integers.requireEquals(index.size(), values.length());
     this.index = index;
     this.values = values;
   }

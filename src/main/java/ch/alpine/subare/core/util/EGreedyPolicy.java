@@ -12,7 +12,7 @@ import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.pdf.DiscreteUniformDistribution;
 import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.EmpiricalDistribution;
 
@@ -50,9 +50,11 @@ public class EGreedyPolicy extends PolicyBase {
     final int optimalCount = bestActions.length();
     final int nonOptimalCount = discreteModel.actions(state).length() - optimalCount;
     Scalar epsilon = explorationRate.epsilon(state, sac);
+    // TODO check logic
     if (nonOptimalCount == 0) {
-      Tensor pdf = Tensors.vector(v -> RationalScalar.of(1, optimalCount), bestActions.length());
-      return EmpiricalDistribution.fromUnscaledPDF(pdf);
+      return DiscreteUniformDistribution.of(0, bestActions.length());
+      // Tensor pdf = Tensors.vector(v -> RationalScalar.of(1, optimalCount), bestActions.length());
+      // return EmpiricalDistribution.fromUnscaledPDF(pdf);
     }
     Tensor pdf = Tensor.of(discreteModel.actions(state).stream() //
         .map(action -> index.containsKey(action) //

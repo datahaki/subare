@@ -3,7 +3,7 @@ package ch.alpine.subare.ch02;
 
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Array;
 
 /** Section 2.5 "Optimistic Initial Values" */
 public final class OptimistAgent extends FairArgAgent {
@@ -16,7 +16,7 @@ public final class OptimistAgent extends FairArgAgent {
    * @param alpha is weight for difference (r-Qa) */
   public OptimistAgent(int n, Scalar Q0, Scalar alpha) {
     this.Q0 = Q0;
-    Qt = Tensors.vector(i -> Q0, n);
+    Qt = Array.fill(() -> Q0, n);
     this.alpha = alpha;
   }
 

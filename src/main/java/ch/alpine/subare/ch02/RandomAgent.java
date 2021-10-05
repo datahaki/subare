@@ -4,7 +4,7 @@ package ch.alpine.subare.ch02;
 import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.ConstantArray;
 
 /** the random agent picks any action equally likely
  * the policy is a constant vector of pi(a)=1/n */
@@ -28,7 +28,7 @@ public class RandomAgent extends Agent {
 
   @Override
   protected Tensor protected_QValues() {
-    return Tensors.vector(i -> RationalScalar.of(1, n), n);
+    return ConstantArray.of(RationalScalar.of(1, n), n);
   }
 
   @Override

@@ -18,7 +18,7 @@ import ch.alpine.tensor.pdf.EmpiricalDistribution;
 
 /** p.33 */
 public class EGreedyPolicy extends PolicyBase {
-  // LONGTERM make explorationRate final
+  // TODO make explorationRate final
   private ExplorationRate explorationRate;
 
   public EGreedyPolicy(DiscreteModel discreteModel, QsaInterface qsa, StateActionCounter sac) {

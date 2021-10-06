@@ -15,7 +15,7 @@ import ch.alpine.tensor.ext.HomeDirectory;
 import ch.alpine.tensor.io.AnimationWriter;
 import ch.alpine.tensor.io.GifAnimationWriter;
 
-/* package */ enum CAMC_Gridworld { // LONGTERM work in progress?
+/* package */ enum CAMC_Gridworld { // TODO work in progress?
   ;
   public static void main(String[] args) throws Exception {
     Gridworld gridworld = new Gridworld();

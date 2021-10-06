@@ -7,7 +7,7 @@ import ch.alpine.subare.core.EpisodeInterface;
 public class EveryVisitPolicyEvaluation implements EpisodeDigest {
   @Override
   public void digest(EpisodeInterface episodeInterface) {
-    // LONGTERM implement
+    // TODO implement
     // average gain at every visit of s
   }
 }

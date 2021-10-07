@@ -46,10 +46,7 @@ public class ActionValueStatistics implements DequeDigest, EpisodeDigest, Action
 
   @Override
   public void digest(StepInterface stepInterface) {
-    Tensor key = StateAction.key(stepInterface);
-    if (!transitionTrackers.containsKey(key))
-      transitionTrackers.put(key, new TransitionTracker());
-    transitionTrackers.get(key).digest(stepInterface);
+    transitionTrackers.computeIfAbsent(StateAction.key(stepInterface), i -> new TransitionTracker()).digest(stepInterface);
   }
 
   @Override

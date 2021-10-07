@@ -31,9 +31,6 @@ import ch.alpine.tensor.TensorRuntimeException;
   @Override
   public void digest(StepInterface stepInterface) {
     // TODO code redudant to StepSet
-    Tensor key = stepInterface.nextState();
-    if (!map.containsKey(key))
-      map.put(key, new StepSet());
-    map.get(key).register(stepInterface);
+    map.computeIfAbsent(stepInterface.nextState(), i -> new StepSet()).register(stepInterface);
   }
 }

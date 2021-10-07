@@ -50,8 +50,7 @@ public class MonteCarloExploringStarts implements EpisodeQsaEstimator, StateActi
     while (episodeInterface.hasNext()) {
       StepInterface stepInterface = episodeInterface.step();
       Tensor key = StateAction.key(stepInterface);
-      if (!first.containsKey(key))
-        first.put(key, trajectory.size());
+      first.computeIfAbsent(key, i -> trajectory.size());
       rewards.append(stepInterface.reward());
       trajectory.add(stepInterface);
       sac.digest(stepInterface);

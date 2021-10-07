@@ -45,24 +45,22 @@ class AllStates {
     return allStates.get(state.hashCode);
   }
 
-  public State getEquivalent(State state) {
-    final State key = getRepresentative(state);
-    if (!equivalence.containsKey(key)) {
+  public State getEquivalent(State _state) {
+    final State key = getRepresentative(_state);
+    return equivalence.computeIfAbsent(key, j -> {
       NavigableMap<Integer, State> subset = new TreeMap<>();
-      {
-        for (int i = 0; i < 4; ++i) {
-          state = state.getRotated();
-          subset.put(state.hashCode, state);
-        }
-        state = state.getMirrored();
-        for (int i = 0; i < 4; ++i) {
-          state = state.getRotated();
-          subset.put(state.hashCode, state);
-        }
+      State state = _state;
+      for (int i = 0; i < 4; ++i) {
+        state = state.getRotated();
+        subset.put(state.hashCode, state);
       }
-      equivalence.put(key, getRepresentative(subset.firstEntry().getValue()));
-    }
-    return equivalence.get(key);
+      state = state.getMirrored();
+      for (int i = 0; i < 4; ++i) {
+        state = state.getRotated();
+        subset.put(state.hashCode, state);
+      }
+      return getRepresentative(subset.firstEntry().getValue());
+    });
   }
 
   public Set<State> getEquivalenceSet() {

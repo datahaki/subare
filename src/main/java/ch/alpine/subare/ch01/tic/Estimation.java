@@ -42,10 +42,7 @@ import java.util.Objects;
   }
 
   public double get(State state) {
-    state = normalize(state);
-    return map.containsKey(state) //
-        ? map.get(state)
-        : 0.0;
+    return map.getOrDefault(normalize(state), 0.0);
   }
 
   public void put(State state, double value) {

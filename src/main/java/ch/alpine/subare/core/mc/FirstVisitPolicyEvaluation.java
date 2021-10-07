@@ -49,8 +49,7 @@ public class FirstVisitPolicyEvaluation implements EpisodeVsEstimator {
     while (episodeInterface.hasNext()) {
       StepInterface stepInterface = episodeInterface.step();
       Tensor state = stepInterface.prevState();
-      if (!first.containsKey(state))
-        first.put(state, trajectory.size());
+      first.computeIfAbsent(state, i -> trajectory.size());
       rewards.append(stepInterface.reward());
       trajectory.add(stepInterface);
     }

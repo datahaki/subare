@@ -8,6 +8,7 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Rescale;
 import ch.alpine.tensor.api.TensorScalarFunction;
 import ch.alpine.tensor.nrm.Vector1Norm;
+import ch.alpine.tensor.red.Times;
 import ch.alpine.tensor.sca.InvertUnlessZero;
 import ch.alpine.tensor.sca.LogisticSigmoid;
 import ch.alpine.tensor.sca.N;
@@ -62,7 +63,9 @@ public enum DiscreteValueFunctions {
     Tensor visits1 = Tensor.of(qsa1.keys().stream().map(sac1::stateActionCount));
     Tensor visits2 = Tensor.of(qsa2.keys().stream().map(sac2::stateActionCount));
     Tensor inverse = visits1.add(visits2).map(InvertUnlessZero.FUNCTION);
-    return qsa1.create(qsa1.values().pmul(visits1).add(qsa2.values().pmul(visits2)).pmul(inverse).stream());
+    return qsa1.create( //
+        Times.of(Times.of(qsa1.values(),visits1).add(Times.of(qsa2.values(),visits2)),inverse)
+        .stream());
   }
 
   // ---

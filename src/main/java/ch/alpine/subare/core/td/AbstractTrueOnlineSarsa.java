@@ -10,7 +10,6 @@ import ch.alpine.subare.core.util.LearningRate;
 import ch.alpine.subare.core.util.StateAction;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.red.Times;
 import ch.alpine.tensor.sca.Clips;
 
 abstract class AbstractTrueOnlineSarsa implements TrueOnlineInterface, StateActionCounterSupplier {
@@ -27,7 +26,7 @@ abstract class AbstractTrueOnlineSarsa implements TrueOnlineInterface, StateActi
     this.monteCarloInterface = monteCarloInterface;
     this.evaluationType = evaluationType;
     this.gamma = monteCarloInterface.gamma();
-    gamma_lambda = Times.of(gamma, Clips.unit().requireInside(lambda));
+    gamma_lambda = gamma.multiply(Clips.unit().requireInside(lambda));
     this.learningRate = learningRate;
     this.featureMapper = featureMapper;
   }

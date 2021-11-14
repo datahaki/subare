@@ -16,9 +16,9 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.alg.Join;
-import ch.alpine.tensor.img.ArrayPlot;
 import ch.alpine.tensor.img.ColorDataGradients;
 import ch.alpine.tensor.img.ImageResize;
+import ch.alpine.tensor.img.Raster;
 
 /* package */ enum BlackjackHelper {
   ;
@@ -36,7 +36,7 @@ import ch.alpine.tensor.img.ImageResize;
         tensor.set(policy.probability(state, action), point.x, point.y);
       }
     }
-    return ArrayPlot.of(tensor, ColorDataGradients.CLASSIC);
+    return Raster.of(tensor,ColorDataGradients.CLASSIC);
   }
 
   public static Tensor render(Blackjack blackjack, DiscreteQsa qsa) {

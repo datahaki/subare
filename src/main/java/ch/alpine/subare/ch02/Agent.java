@@ -10,6 +10,7 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.ext.Integers;
 
 public abstract class Agent {
   protected static final Random RANDOM = new Random();
@@ -42,8 +43,7 @@ public abstract class Agent {
   protected abstract void protected_feedback(int a, Scalar value);
 
   public final void feedback(int a, Scalar value) {
-    if (a != actionReminder)
-      throw new IllegalArgumentException(a + " " + actionReminder);
+    Integers.requireEquals(a, actionReminder);
     total = total.add(value);
     actions.append(RealScalar.of(a));
     ++count;

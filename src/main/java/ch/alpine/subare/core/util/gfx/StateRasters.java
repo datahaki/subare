@@ -19,9 +19,9 @@ import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.alg.Join;
 import ch.alpine.tensor.alg.Rescale;
-import ch.alpine.tensor.img.ArrayPlot;
 import ch.alpine.tensor.img.ColorDataGradients;
 import ch.alpine.tensor.img.ImageResize;
+import ch.alpine.tensor.img.Raster;
 import ch.alpine.tensor.sca.Clips;
 
 public enum StateRasters {
@@ -44,7 +44,7 @@ public enum StateRasters {
       if (Objects.nonNull(point))
         tensor.set(vs.value(state), point.y, point.x);
     }
-    return ArrayPlot.of(tensor, ColorDataGradients.CLASSIC);
+    return Raster.of(tensor,ColorDataGradients.CLASSIC);
   }
 
   private static Tensor _vs(StateRaster stateRaster, DiscreteQsa qsa) {

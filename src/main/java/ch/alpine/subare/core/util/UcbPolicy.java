@@ -13,7 +13,7 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.pdf.Distribution;
-import ch.alpine.tensor.pdf.EmpiricalDistribution;
+import ch.alpine.tensor.pdf.CategoricalDistribution;
 
 /** upper confidence bound is greedy except that it encourages
  * exploration if an action has not been encountered often relative to other actions */
@@ -42,7 +42,7 @@ import ch.alpine.tensor.pdf.EmpiricalDistribution;
     final int optimalCount = bestActions.length();
     Tensor pdf = Tensor.of(discreteModel.actions(state).stream() //
         .map(action -> index.containsKey(action) ? RationalScalar.of(1, optimalCount) : RealScalar.ZERO));
-    return EmpiricalDistribution.fromUnscaledPDF(pdf);
+    return CategoricalDistribution.fromUnscaledPDF(pdf);
   }
 
   @Override // from Policy

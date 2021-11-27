@@ -14,7 +14,7 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.pdf.DiscreteUniformDistribution;
 import ch.alpine.tensor.pdf.Distribution;
-import ch.alpine.tensor.pdf.EmpiricalDistribution;
+import ch.alpine.tensor.pdf.CategoricalDistribution;
 
 /** p.33 */
 public class EGreedyPolicy extends PolicyBase {
@@ -60,7 +60,7 @@ public class EGreedyPolicy extends PolicyBase {
         .map(action -> index.containsKey(action) //
             ? RealScalar.ONE.subtract(epsilon).divide(RealScalar.of(optimalCount))
             : epsilon.divide(RealScalar.of(nonOptimalCount))));
-    return EmpiricalDistribution.fromUnscaledPDF(pdf);
+    return CategoricalDistribution.fromUnscaledPDF(pdf);
   }
 
   @Override

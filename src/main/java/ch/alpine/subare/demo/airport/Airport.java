@@ -11,7 +11,7 @@ import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Range;
 import ch.alpine.tensor.nrm.NormalizeTotal;
 import ch.alpine.tensor.pdf.Distribution;
-import ch.alpine.tensor.pdf.EmpiricalDistribution;
+import ch.alpine.tensor.pdf.CategoricalDistribution;
 import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.red.Min;
 import ch.alpine.tensor.red.Total;
@@ -33,7 +33,7 @@ public class Airport implements StandardModel, MonteCarloInterface {
   private static final Tensor CUSTOMER_HIST = Tensors.vector(1, 2, 4, 3);
   private static final Tensor CUSTOMER_PROB = NormalizeTotal.FUNCTION.apply(CUSTOMER_HIST);
   // for EmpiricalDistribution#fromUnscaledPDF the numbers don't have to add up to 1
-  private static final Distribution DISTRIBUTION = EmpiricalDistribution.fromUnscaledPDF(CUSTOMER_HIST);
+  private static final Distribution DISTRIBUTION = CategoricalDistribution.fromUnscaledPDF(CUSTOMER_HIST);
   public static final Airport INSTANCE = new Airport();
   // ---
   private final Tensor states;

@@ -16,9 +16,9 @@ import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.alg.Join;
 import ch.alpine.tensor.alg.Rescale;
-import ch.alpine.tensor.img.ArrayPlot;
 import ch.alpine.tensor.img.ColorDataGradients;
 import ch.alpine.tensor.img.ImageResize;
+import ch.alpine.tensor.img.Raster;
 
 /* package */ enum CarRentalHelper {
   ;
@@ -32,7 +32,7 @@ import ch.alpine.tensor.img.ImageResize;
       int y = Scalars.intValueExact(state.Get(1));
       tensor.set(sca, x, y);
     }
-    Tensor image = ArrayPlot.of(tensor, ColorDataGradients.CLASSIC);
+    Tensor image = Raster.of(tensor,ColorDataGradients.CLASSIC);
     return ImageResize.nearest(image, 4);
   }
 
@@ -46,7 +46,7 @@ import ch.alpine.tensor.img.ImageResize;
       Scalar sca = RealScalar.of(5).add(action).divide(RealScalar.of(10));
       tensor.set(sca, x, y);
     }
-    Tensor image = ArrayPlot.of(tensor, ColorDataGradients.CLASSIC);
+    Tensor image = Raster.of(tensor,ColorDataGradients.CLASSIC);
     return ImageResize.nearest(image, 4);
   }
 

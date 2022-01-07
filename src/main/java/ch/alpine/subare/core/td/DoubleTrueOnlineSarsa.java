@@ -20,7 +20,6 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.red.Mean;
-import ch.alpine.tensor.red.Times;
 
 public class DoubleTrueOnlineSarsa extends AbstractTrueOnlineSarsa {
   private final Coinflip coinflip = Coinflip.fair();
@@ -98,7 +97,7 @@ public class DoubleTrueOnlineSarsa extends AbstractTrueOnlineSarsa {
     Scalar reward = monteCarloInterface.reward(prevState, prevAction, nextState);
     // ---
     Scalar alpha = learningRate.alpha(stepInterface, Sac1);
-    Scalar alpha_gamma_lambda = Times.of(alpha, gamma_lambda);
+    Scalar alpha_gamma_lambda = alpha.multiply(gamma_lambda);
     Tensor x = featureMapper.getFeature(StateAction.key(prevState, prevAction));
     Scalar prevQ = (Scalar) W1.get().dot(x);
     Scalar nextQ = evaluationType.crossEvaluate(nextState, Policy1, Policy2);

@@ -6,6 +6,7 @@ import java.util.List;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Array;
+import ch.alpine.tensor.red.Times;
 
 abstract class Network {
   abstract int actions();
@@ -30,6 +31,6 @@ abstract class Network {
   }
 
   final Tensor cost() {
-    return affine().add(usage.pmul(linear()));
+    return affine().add(Times.of(usage, linear()));
   }
 }

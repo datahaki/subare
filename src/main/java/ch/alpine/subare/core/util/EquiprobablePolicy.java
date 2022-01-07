@@ -13,7 +13,7 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.TensorRuntimeException;
 import ch.alpine.tensor.pdf.Distribution;
-import ch.alpine.tensor.pdf.EmpiricalDistribution;
+import ch.alpine.tensor.pdf.CategoricalDistribution;
 
 /** the term "equiprobable" appears in Exercise 4.1 */
 public class EquiprobablePolicy implements Policy {
@@ -47,6 +47,6 @@ public class EquiprobablePolicy implements Policy {
   public Distribution getDistribution(Tensor state) {
     Tensor pdf = Tensor.of(stateActionModel.actions(state).stream() //
         .map(action -> probability(state, action)));
-    return EmpiricalDistribution.fromUnscaledPDF(pdf);
+    return CategoricalDistribution.fromUnscaledPDF(pdf);
   }
 }

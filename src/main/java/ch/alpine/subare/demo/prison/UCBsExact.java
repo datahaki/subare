@@ -15,9 +15,9 @@ import ch.alpine.tensor.alg.Join;
 import ch.alpine.tensor.alg.Rescale;
 import ch.alpine.tensor.alg.Subdivide;
 import ch.alpine.tensor.ext.HomeDirectory;
-import ch.alpine.tensor.img.ArrayPlot;
 import ch.alpine.tensor.img.ColorDataGradients;
 import ch.alpine.tensor.img.ImageResize;
+import ch.alpine.tensor.img.Raster;
 import ch.alpine.tensor.io.Export;
 import ch.alpine.tensor.io.Put;
 
@@ -59,7 +59,7 @@ import ch.alpine.tensor.io.Put;
     }
     {
       Tensor rescale = Rescale.of(expectedRewards.get(Tensor.ALL, Tensor.ALL, 0));
-      Tensor image = ArrayPlot.of(rescale, ColorDataGradients.CLASSIC);
+      Tensor image = Raster.of(rescale,ColorDataGradients.CLASSIC);
       Export.of(HomeDirectory.Pictures("ucbs.png"), ImageResize.nearest(image, 2));
     }
     Put.of(HomeDirectory.file("ucb"), res);

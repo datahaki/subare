@@ -1,8 +1,8 @@
 ![alpine_877](https://user-images.githubusercontent.com/4012178/116814864-1b1a1580-ab5b-11eb-97e6-1441af4ececa.png)
 
-# ch.alpine.subare <a href="https://travis-ci.com/datahaki/subare"><img src="https://travis-ci.com/datahaki/subare.svg?branch=master" alt="Build Status"></a>
+# ch.alpine.subare
 
-Library for reinforcement learning in Java, version `0.4.1`
+Library for reinforcement learning in Java, version `0.4.2`
 
 Repository includes algorithms, examples, and exercises from the 2nd edition of [*Reinforcement Learning: An Introduction*](http://incompleteideas.net/book/the-book-2nd.html) by Richard S. Sutton, and Andrew G. Barto.
 
@@ -326,7 +326,7 @@ Specify `dependency` and `repository` of the tensor library in the `pom.xml` fil
   <dependency>
     <groupId>ch.alpine</groupId>
     <artifactId>subare</artifactId>
-    <version>0.4.1</version>
+    <version>0.4.2</version>
   </dependency>
 </dependencies>
 

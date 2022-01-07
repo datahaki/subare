@@ -16,7 +16,6 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Array;
-import ch.alpine.tensor.red.Times;
 
 /** implementation of box "True Online Sarsa(lambda) for estimating w'x approx. q_pi or q_*
  * 
@@ -69,7 +68,7 @@ public class TrueOnlineSarsa extends AbstractTrueOnlineSarsa {
     Scalar reward = stepInterface.reward();
     // ---
     Scalar alpha = learningRate.alpha(stepInterface, sac);
-    Scalar alpha_gamma_lambda = Times.of(alpha, gamma_lambda);
+    Scalar alpha_gamma_lambda = alpha.multiply(gamma_lambda);
     Tensor x = featureMapper.getFeature(StateAction.key(prevState, prevAction));
     Scalar prevQ = (Scalar) w.get().dot(x);
     Scalar nextQ = evaluationType.evaluate(nextState, policy);

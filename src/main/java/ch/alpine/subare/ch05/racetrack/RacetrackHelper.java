@@ -8,9 +8,9 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Rescale;
-import ch.alpine.tensor.img.ArrayPlot;
 import ch.alpine.tensor.img.ColorDataGradients;
 import ch.alpine.tensor.img.ImageResize;
+import ch.alpine.tensor.img.Raster;
 import ch.alpine.tensor.io.ResourceData;
 
 public enum RacetrackHelper {
@@ -39,7 +39,7 @@ public enum RacetrackHelper {
             // ---
           }
       }
-    Tensor image = ArrayPlot.of(tensor, ColorDataGradients.CLASSIC);
+    Tensor image = Raster.of(tensor,ColorDataGradients.CLASSIC);
     return ImageResize.nearest(image, 8);
   }
 }

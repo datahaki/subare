@@ -64,8 +64,7 @@ public enum DiscreteValueFunctions {
     Tensor visits2 = Tensor.of(qsa2.keys().stream().map(sac2::stateActionCount));
     Tensor inverse = visits1.add(visits2).map(InvertUnlessZero.FUNCTION);
     return qsa1.create( //
-        Times.of(Times.of(qsa1.values(),visits1).add(Times.of(qsa2.values(),visits2)),inverse)
-        .stream());
+        Times.of(Times.of(qsa1.values(), visits1).add(Times.of(qsa2.values(), visits2)), inverse).stream());
   }
 
   // ---

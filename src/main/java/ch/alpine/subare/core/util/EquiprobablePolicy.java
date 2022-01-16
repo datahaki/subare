@@ -12,8 +12,8 @@ import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.TensorRuntimeException;
-import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.CategoricalDistribution;
+import ch.alpine.tensor.pdf.Distribution;
 
 /** the term "equiprobable" appears in Exercise 4.1 */
 public class EquiprobablePolicy implements Policy {

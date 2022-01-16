@@ -59,7 +59,7 @@ import ch.alpine.tensor.io.Put;
     }
     {
       Tensor rescale = Rescale.of(expectedRewards.get(Tensor.ALL, Tensor.ALL, 0));
-      Tensor image = Raster.of(rescale,ColorDataGradients.CLASSIC);
+      Tensor image = Raster.of(rescale, ColorDataGradients.CLASSIC);
       Export.of(HomeDirectory.Pictures("ucbs.png"), ImageResize.nearest(image, 2));
     }
     Put.of(HomeDirectory.file("ucb"), res);

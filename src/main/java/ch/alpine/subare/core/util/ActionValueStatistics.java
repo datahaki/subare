@@ -36,12 +36,10 @@ public class ActionValueStatistics implements DequeDigest, EpisodeDigest, Action
 
   public ActionValueStatistics(DiscreteModel discreteModel) {
     this.discreteModel = discreteModel;
-    if (discreteModel instanceof TerminalInterface) {
-      TerminalInterface terminalInterface = (TerminalInterface) discreteModel;
+    if (discreteModel instanceof TerminalInterface terminalInterface)
       for (Tensor state : discreteModel.states())
         if (terminalInterface.isTerminal(state))
           digestTerminal(state);
-    }
   }
 
   @Override
@@ -76,8 +74,7 @@ public class ActionValueStatistics implements DequeDigest, EpisodeDigest, Action
       throw TensorRuntimeException.of(state, actions);
     final Tensor action = actions.get(0);
     final Scalar reward = RealScalar.ZERO;
-    if (discreteModel instanceof RewardInterface) {
-      RewardInterface rewardInterface = (RewardInterface) discreteModel;
+    if (discreteModel instanceof RewardInterface rewardInterface) {
       Scalar compare = rewardInterface.reward(state, action, state);
       if (!compare.equals(reward))
         throw TensorRuntimeException.of(state, compare, reward);

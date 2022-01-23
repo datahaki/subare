@@ -64,5 +64,6 @@ import ch.alpine.tensor.io.GifAnimationWriter;
     Sarsa_Gambler sarsa_Gambler = new Sarsa_Gambler(gambler);
     LearningRate learningRate = DefaultLearningRate.of(RealScalar.of(3), RealScalar.of(0.81));
     DiscreteQsa qsa = sarsa_Gambler.train(SarsaType.QLEARNING, 20, learningRate);
+    qsa.copy();
   }
 }

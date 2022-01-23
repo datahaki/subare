@@ -9,15 +9,10 @@ import ch.alpine.tensor.red.Max;
 import ch.alpine.tensor.sca.Chop;
 
 /** RobustArgMax accounts for entries that are numerically close to the maximum and
- * returns the first such close match. */
-public class RobustArgMax implements Serializable {
-  private final Chop chop;
-
-  /** @param chop that performs proximity check to the max via {@link Chop#isClose(Tensor, Tensor)} */
-  public RobustArgMax(Chop chop) {
-    this.chop = chop;
-  }
-
+ * returns the first such close match.
+ * 
+ * @param chop that performs proximity check to the max via {@link Chop#isClose(Tensor, Tensor)} */
+public record RobustArgMax(Chop chop) implements Serializable {
   /** @param vector
    * @return indices of entries that are close to the maximum entry in vector
    * @throws Exception if vector is empty, or not a tensor of rank 1 */

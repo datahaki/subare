@@ -36,7 +36,7 @@ import ch.alpine.tensor.img.Raster;
         tensor.set(policy.probability(state, action), point.x, point.y);
       }
     }
-    return Raster.of(tensor,ColorDataGradients.CLASSIC);
+    return Raster.of(tensor, ColorDataGradients.CLASSIC);
   }
 
   public static Tensor render(Blackjack blackjack, DiscreteQsa qsa) {

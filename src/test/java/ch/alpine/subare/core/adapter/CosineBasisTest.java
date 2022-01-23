@@ -11,19 +11,19 @@ import junit.framework.TestCase;
 
 public class CosineBasisTest extends TestCase {
   public void testLo() {
-    TensorUnaryOperator fb = CosineBasis.create(4, Clips.interval(50, 100));
+    TensorUnaryOperator fb = new CosineBasis(4, Clips.interval(50, 100));
     Tensor result = fb.apply(RealScalar.of(50));
     assertEquals(result, Tensors.vector(1, 1, 1, 1));
   }
 
   public void testHi() {
-    TensorUnaryOperator fb = CosineBasis.create(4, Clips.interval(0, 100));
+    TensorUnaryOperator fb = new CosineBasis(4, Clips.interval(0, 100));
     Tensor result = fb.apply(RealScalar.of(100));
     assertEquals(result, Tensors.vector(1, -1, 1, -1));
   }
 
   public void testFail() {
-    TensorUnaryOperator tuo = CosineBasis.create(4, Clips.interval(50, 100));
+    TensorUnaryOperator tuo = new CosineBasis(4, Clips.interval(50, 100));
     AssertFail.of(() -> tuo.apply(RealScalar.ZERO));
   }
 }

@@ -12,9 +12,9 @@ import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.pdf.CategoricalDistribution;
 import ch.alpine.tensor.pdf.DiscreteUniformDistribution;
 import ch.alpine.tensor.pdf.Distribution;
-import ch.alpine.tensor.pdf.CategoricalDistribution;
 
 /** p.33 */
 public class EGreedyPolicy extends PolicyBase {

@@ -37,6 +37,7 @@ import ch.alpine.tensor.sca.Round;
    * @throws Exception */
   DiscreteQsa train(SarsaType sarsaType, int batches, LearningRate learningRate) {
     Tensor epsilon = Subdivide.of(0.6, 0.01, batches);
+    epsilon.unmodifiable();
     DiscreteQsa qsa = DiscreteQsa.build(banditsModel); // q-function for training, initialized to 0
     StateActionCounter sac = new DiscreteStateActionCounter();
     EGreedyPolicy policy = (EGreedyPolicy) PolicyType.EGREEDY.bestEquiprobable(banditsModel, qsa, sac);
@@ -46,6 +47,7 @@ import ch.alpine.tensor.sca.Round;
     // ---
     for (int index = 0; index < batches; ++index) {
       Scalar error1 = Loss.accumulation(banditsModel, ref, qsa);
+      error1.zero();
       // System.out.println(index + " " + epsilon.Get(index).map(Round._2) + " " + error1.map(Round._3));
       ExploringStarts.batch(banditsModel, policy, 1, sarsa);
     }

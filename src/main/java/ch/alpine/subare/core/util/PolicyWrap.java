@@ -7,19 +7,13 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.mat.Tolerance;
-import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.CategoricalDistribution;
+import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.red.Total;
 
 /** class picks action based on distribution defined by given {@link Policy} */
-public class PolicyWrap {
-  private final Policy policy;
-
-  public PolicyWrap(Policy policy) {
-    this.policy = policy;
-  }
-
+public record PolicyWrap(Policy policy) {
   /** @param state
    * @param actions non-empty subset of all possible actions from given state
    * @return */

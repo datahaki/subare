@@ -25,16 +25,12 @@ class BridgeNetwork extends Network {
 
   @Override
   List<Integer> streetsFromAction(int k) {
-    switch (k) {
-    case 0:
-      return Arrays.asList(0, 1);
-    case 1:
-      return Arrays.asList(2, 3);
-    case 2:
-      return Arrays.asList(2, 4, 1);
-    default:
-      throw new IllegalArgumentException();
-    }
+    return switch (k) {
+    case 0 -> Arrays.asList(0, 1);
+    case 1 -> Arrays.asList(2, 3);
+    case 2 -> Arrays.asList(2, 4, 1);
+    default -> throw new IllegalArgumentException();
+    };
   }
 
   @Override

@@ -44,7 +44,7 @@ public enum StateRasters {
       if (Objects.nonNull(point))
         tensor.set(vs.value(state), point.y, point.x);
     }
-    return Raster.of(tensor,ColorDataGradients.CLASSIC);
+    return Raster.of(tensor, ColorDataGradients.CLASSIC);
   }
 
   private static Tensor _vs(StateRaster stateRaster, DiscreteQsa qsa) {

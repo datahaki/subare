@@ -18,22 +18,18 @@ import ch.alpine.tensor.sca.Clips;
  * 
  * Implementation also covers
  * Semi-gradient TD(0) for estimating an approximate value function
- * in 9.3, p. 164 */
-public class TabularTemporalDifference0 implements StepDigest {
-  private final VsInterface vs;
-  private final Scalar gamma;
-  private final LearningRate learningRate;
-  private final StateActionCounter sac;
-
-  /** @param vs
-   * @param gamma discount factor
-   * @param learningRate */
-  public TabularTemporalDifference0( //
-      VsInterface vs, Scalar gamma, LearningRate learningRate, StateActionCounter sac) {
-    this.vs = vs;
-    this.gamma = Clips.unit().requireInside(gamma);
-    this.learningRate = learningRate;
-    this.sac = sac;
+ * in 9.3, p. 164
+ * 
+ * @param vs
+ * @param gamma discount factor
+ * @param learningRate */
+public record TabularTemporalDifference0( //
+    VsInterface vs, //
+    Scalar gamma, //
+    LearningRate learningRate, //
+    StateActionCounter sac) implements StepDigest {
+  public TabularTemporalDifference0 {
+    Clips.unit().requireInside(gamma);
   }
 
   @Override // from StepDigest

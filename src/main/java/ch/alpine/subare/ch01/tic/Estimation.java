@@ -26,12 +26,8 @@ import java.util.Objects;
         map.put(state, 0.5);
       } else
         switch (state.winner) {
-        case 0:
-          map.put(state, 0.0); // not sure how to rate a draw
-          break;
-        default:
-          map.put(state, state.winner == symbol ? 1.0 : 0.0);
-          break;
+        case 0 -> map.put(state, 0.0); // not sure how to rate a draw
+        default -> map.put(state, state.winner == symbol ? 1.0 : 0.0);
         }
     }
   }

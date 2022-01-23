@@ -32,7 +32,7 @@ import ch.alpine.tensor.img.Raster;
       int y = Scalars.intValueExact(state.Get(1));
       tensor.set(sca, x, y);
     }
-    Tensor image = Raster.of(tensor,ColorDataGradients.CLASSIC);
+    Tensor image = Raster.of(tensor, ColorDataGradients.CLASSIC);
     return ImageResize.nearest(image, 4);
   }
 
@@ -46,7 +46,7 @@ import ch.alpine.tensor.img.Raster;
       Scalar sca = RealScalar.of(5).add(action).divide(RealScalar.of(10));
       tensor.set(sca, x, y);
     }
-    Tensor image = Raster.of(tensor,ColorDataGradients.CLASSIC);
+    Tensor image = Raster.of(tensor, ColorDataGradients.CLASSIC);
     return ImageResize.nearest(image, 4);
   }
 

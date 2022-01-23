@@ -48,8 +48,8 @@ import java.util.Objects;
 
   @Override
   public boolean equals(Object object) {
-    return object instanceof State //
-        ? hashCode == ((State) object).hashCode
+    return object instanceof State state //
+        ? hashCode == state.hashCode
         : false;
   }
 

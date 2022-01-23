@@ -39,7 +39,7 @@ public enum RacetrackHelper {
             // ---
           }
       }
-    Tensor image = Raster.of(tensor,ColorDataGradients.CLASSIC);
+    Tensor image = Raster.of(tensor, ColorDataGradients.CLASSIC);
     return ImageResize.nearest(image, 8);
   }
 }

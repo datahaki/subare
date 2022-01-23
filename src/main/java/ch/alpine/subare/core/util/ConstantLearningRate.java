@@ -8,7 +8,7 @@ import ch.alpine.tensor.Scalar;
 
 /** learning rate of alpha except in first update of state-action pair
  * for which the learning rate equals 1 in the case of warmStart. */
-public class ConstantLearningRate implements LearningRate {
+public record ConstantLearningRate(Scalar alpha) implements LearningRate {
   /** @param alpha
    * @return constant learning rate with factor alpha */
   public static LearningRate of(Scalar alpha) {
@@ -28,12 +28,6 @@ public class ConstantLearningRate implements LearningRate {
   }
 
   // ---
-  private final Scalar alpha;
-
-  private ConstantLearningRate(Scalar alpha) {
-    this.alpha = alpha;
-  }
-
   @Override
   public Scalar alpha(StepInterface stepInterface, StateActionCounter stateActionCounter) {
     return stateActionCounter.isEncountered(StateAction.key(stepInterface)) ? alpha : RealScalar.ONE;

@@ -5,7 +5,7 @@ import ch.alpine.subare.core.MonteCarloInterface;
 import ch.alpine.subare.core.td.Sarsa;
 
 /**  */
-public class LearningContender {
+public record LearningContender(MonteCarloInterface monteCarloInterface, Sarsa sarsa, DiscreteQsa qsa) {
   /** @param monteCarloInterface
    * @param sarsa
    * @return */
@@ -14,16 +14,6 @@ public class LearningContender {
   }
 
   // ---
-  private final MonteCarloInterface monteCarloInterface;
-  private final DiscreteQsa qsa;
-  private final Sarsa sarsa;
-
-  private LearningContender(MonteCarloInterface monteCarloInterface, Sarsa sarsa, DiscreteQsa qsa) {
-    this.monteCarloInterface = monteCarloInterface;
-    this.qsa = qsa;
-    this.sarsa = sarsa;
-  }
-
   public void stepAndCompare(ExplorationRate explorationRate, int nstep, DiscreteQsa ref) {
     EGreedyPolicy policy = (EGreedyPolicy) PolicyType.EGREEDY.bestEquiprobable(monteCarloInterface, ref, sarsa.sac());
     policy.setExplorationRate(explorationRate);

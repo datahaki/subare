@@ -12,17 +12,10 @@ import ch.alpine.tensor.Tensor;
 /** box in 9.2, p.161
  * 
  * output is denoted with eta: S -> R */
-public class OnPolicyStateDistribution {
-  private final StateActionModel stateActionModel;
-  private final TransitionInterface transitionInterface;
-  private final Policy policy;
-
-  public OnPolicyStateDistribution(StateActionModel stateActionModel, TransitionInterface transitionInterface, Policy policy) {
-    this.stateActionModel = stateActionModel;
-    this.transitionInterface = transitionInterface;
-    this.policy = policy;
-  }
-
+public record OnPolicyStateDistribution( //
+    StateActionModel stateActionModel, //
+    TransitionInterface transitionInterface, //
+    Policy policy) {
   public DiscreteVs iterate(DiscreteVs vs_old) {
     DiscreteVs vs_new = vs_old.discounted(RealScalar.ZERO);
     for (Tensor state : stateActionModel.states()) {

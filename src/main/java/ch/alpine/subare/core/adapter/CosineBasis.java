@@ -11,23 +11,11 @@ import ch.alpine.tensor.sca.Cos;
 
 /** 9.5.2 Fourier Basis p.171
  * 
- * univariate basis functions on the unit interval */
-public class CosineBasis implements TensorUnaryOperator {
-  /** @param order number of basis functions
-   * @param clip */
-  public static TensorUnaryOperator create(int order, Clip clip) {
-    return new CosineBasis(order, clip);
-  }
-
-  // ---
-  private final int order;
-  private final Clip clip;
-
-  private CosineBasis(int order, Clip clip) {
-    this.order = order;
-    this.clip = clip;
-  }
-
+ * univariate basis functions on the unit interval
+ * 
+ * @param order number of basis functions
+ * @param clip */
+public record CosineBasis(int order, Clip clip) implements TensorUnaryOperator {
   @Override // from UnaryOperator
   public Tensor apply(Tensor tensor) {
     Scalar param = clip.requireInside((Scalar) tensor);

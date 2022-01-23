@@ -6,13 +6,7 @@ import ch.alpine.subare.core.VsInterface;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 
-public class ActionValueAdapter {
-  private final ActionValueInterface actionValueInterface;
-
-  public ActionValueAdapter(ActionValueInterface actionValueInterface) {
-    this.actionValueInterface = actionValueInterface;
-  }
-
+public record ActionValueAdapter(ActionValueInterface actionValueInterface) {
   /** function implements the formula
    * Sum_{s', r} p(s', r | s, a) * [r + gamma * v_*(s')]
    * 

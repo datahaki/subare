@@ -10,8 +10,8 @@ import ch.alpine.tensor.TensorRuntimeException;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Range;
 import ch.alpine.tensor.pdf.Distribution;
-import ch.alpine.tensor.pdf.NormalDistribution;
 import ch.alpine.tensor.pdf.RandomVariate;
+import ch.alpine.tensor.pdf.c.NormalDistribution;
 import ch.alpine.tensor.red.KroneckerDelta;
 
 /** Example 6.7 p.134: Maximization bias

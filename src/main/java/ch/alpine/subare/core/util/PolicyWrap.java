@@ -7,9 +7,9 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.mat.Tolerance;
-import ch.alpine.tensor.pdf.CategoricalDistribution;
 import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.RandomVariate;
+import ch.alpine.tensor.pdf.d.CategoricalDistribution;
 import ch.alpine.tensor.red.Total;
 
 /** class picks action based on distribution defined by given {@link Policy} */

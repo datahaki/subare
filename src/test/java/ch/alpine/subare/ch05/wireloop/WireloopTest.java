@@ -13,7 +13,7 @@ import ch.alpine.tensor.red.Max;
 import junit.framework.TestCase;
 
 public class WireloopTest extends TestCase {
-  public void testSimple() throws Exception {
+  public void testSimple() {
     String name = "wirec";
     WireloopReward wireloopReward = WireloopReward.freeSteps();
     wireloopReward = WireloopReward.constantCost();

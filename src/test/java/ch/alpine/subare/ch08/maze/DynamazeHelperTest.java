@@ -8,12 +8,12 @@ import ch.alpine.tensor.alg.Dimensions;
 import junit.framework.TestCase;
 
 public class DynamazeHelperTest extends TestCase {
-  public void testMaze2() throws Exception {
+  public void testMaze2() {
     Tensor image = DynamazeHelper.load("maze2");
     assertEquals(Dimensions.of(image), Arrays.asList(6, 9, 4));
   }
 
-  public void testMaze5() throws Exception {
+  public void testMaze5() {
     Tensor image = DynamazeHelper.load("maze5");
     assertEquals(Dimensions.of(image), Arrays.asList(32, 16, 4));
   }

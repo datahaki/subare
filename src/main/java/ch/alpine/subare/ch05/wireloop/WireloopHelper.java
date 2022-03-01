@@ -31,7 +31,7 @@ public enum WireloopHelper {
     return new Wireloop(ResourceData.of("/ch05/" + trackName + ".png"), function, wireloopReward);
   }
 
-  static Wireloop create(String trackName, TensorScalarFunction function) throws Exception {
+  static Wireloop create(String trackName, TensorScalarFunction function) {
     return create(trackName, function, WireloopReward.freeSteps());
   }
 

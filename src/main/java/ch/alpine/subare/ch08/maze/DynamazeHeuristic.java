@@ -36,7 +36,7 @@ enum DynamazeHeuristic {
     System.out.println("diff to heuristic = " + DiscreteValueFunctions.distance(qsa, est));
   }
 
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     demo(DynamazeHelper.original("maze2"));
     demo(DynamazeHelper.create5(2));
   }

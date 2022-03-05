@@ -10,9 +10,9 @@ import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.red.Total;
-import ch.alpine.tensor.sca.Log;
 import ch.alpine.tensor.sca.Sign;
-import ch.alpine.tensor.sca.Sqrt;
+import ch.alpine.tensor.sca.exp.Log;
+import ch.alpine.tensor.sca.pow.Sqrt;
 
 /** Section 2.6 "upper-confidence-bound action selection" */
 public class UCBAgent extends FairArgAgent {

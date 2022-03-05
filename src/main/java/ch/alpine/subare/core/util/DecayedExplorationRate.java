@@ -9,8 +9,8 @@ import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.red.Min;
-import ch.alpine.tensor.sca.Power;
 import ch.alpine.tensor.sca.Sign;
+import ch.alpine.tensor.sca.pow.Power;
 
 /** using formula: epsilon = factor*(1/(1+N))^(exponent), N is the number of state visits
  * good values are: factor = 0.5, exponent = 0.5, depends strongly on problem */

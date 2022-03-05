@@ -10,8 +10,8 @@ import ch.alpine.tensor.api.TensorScalarFunction;
 import ch.alpine.tensor.nrm.Vector1Norm;
 import ch.alpine.tensor.red.Times;
 import ch.alpine.tensor.sca.InvertUnlessZero;
-import ch.alpine.tensor.sca.LogisticSigmoid;
 import ch.alpine.tensor.sca.N;
+import ch.alpine.tensor.sca.exp.LogisticSigmoid;
 
 public enum DiscreteValueFunctions {
   ;

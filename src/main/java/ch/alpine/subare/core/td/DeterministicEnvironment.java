@@ -38,7 +38,7 @@ import ch.alpine.tensor.Tensors;
       map.put(key, stepInterface);
       keys.append(key); // after updating the map, for conservative size
     } else {
-      // TODO can verify that stored step is identical to provided step
+      // TODO SUBARE can verify that stored step is identical to provided step
     }
   }
 

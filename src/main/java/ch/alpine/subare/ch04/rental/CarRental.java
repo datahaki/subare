@@ -114,7 +114,7 @@ import ch.alpine.tensor.sca.Sign;
     Scalar n2out = null;
     boolean status = false;
     int attempts = 0;
-    // TODO this is very inefficient for trajectory generation...
+    // TODO SUBARE this is very inefficient for trajectory generation...
     while (!status) {
       if (200 < attempts) {
         System.out.println("warning: give up");

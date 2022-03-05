@@ -19,6 +19,7 @@ public class GradientAgent extends Agent {
     Ht = Array.zeros(n); // initially all values equal, p.38
   }
 
+  @SuppressWarnings("null")
   @Override
   public int protected_takeAction() {
     Tensor pi = SoftmaxLayer.of(Ht);

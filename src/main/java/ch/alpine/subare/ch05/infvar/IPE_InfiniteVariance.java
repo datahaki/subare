@@ -9,7 +9,7 @@ import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.sca.Round;
 
-// TODO check again
+// TODO SUBARE check again
 enum IPE_InfiniteVariance {
   ;
   public static void main(String[] args) {

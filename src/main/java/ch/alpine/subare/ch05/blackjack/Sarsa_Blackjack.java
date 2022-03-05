@@ -20,7 +20,7 @@ import ch.alpine.tensor.io.AnimationWriter;
 import ch.alpine.tensor.io.GifAnimationWriter;
 import ch.alpine.tensor.sca.Round;
 
-// TODO this demo throws an exception
+// TODO SUBARE this demo throws an exception
 /* package */ enum Sarsa_Blackjack {
   ;
   static void handle(SarsaType sarsaType) throws Exception {

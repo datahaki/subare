@@ -31,12 +31,12 @@ import ch.alpine.tensor.alg.Array;
 public class FirstVisitPolicyEvaluation implements EpisodeVsEstimator {
   private final DiscreteModel discreteModel;
   // private final DiscreteVs vs;
-  private final Map<Tensor, AverageTracker> map = new HashMap<>(); // TODO no good!
+  private final Map<Tensor, AverageTracker> map = new HashMap<>(); // TODO SUBARE no good!
   private final DiscountFunction discountFunction;
 
   public FirstVisitPolicyEvaluation(DiscreteModel discreteModel, DiscreteVs vs) {
     this.discreteModel = discreteModel;
-    // this.vs = vs; // TODO write results directly in vs!
+    // this.vs = vs; // TODO SUBARE write results directly in vs!
     discountFunction = DiscountFunction.of(discreteModel.gamma());
   }
 
@@ -58,7 +58,7 @@ public class FirstVisitPolicyEvaluation implements EpisodeVsEstimator {
       int fromIndex = entry.getValue();
       gains.put(state, discountFunction.apply(rewards.extract(fromIndex, rewards.length())));
     }
-    // TODO more efficient update of average
+    // TODO SUBARE more efficient update of average
     for (StepInterface stepInterface : trajectory) {
       Tensor stateP = stepInterface.prevState();
       if (!map.containsKey(stateP))

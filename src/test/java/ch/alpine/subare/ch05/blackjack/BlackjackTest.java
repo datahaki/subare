@@ -17,7 +17,7 @@ public class BlackjackTest extends TestCase {
   @SuppressWarnings("unused")
   public void testSimple() {
     Blackjack blackjack = new Blackjack();
-    // TODO fail sometimes, correct or wrong?
+    // TODO SUBARE fail sometimes, correct or wrong?
     {
       Tensor next = blackjack.move(Tensors.vector(0, 18, 7), RealScalar.ONE);
       // assertEquals(next, Tensors.vector(-1));

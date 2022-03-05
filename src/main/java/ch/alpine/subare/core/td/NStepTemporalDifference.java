@@ -15,7 +15,7 @@ import ch.alpine.tensor.Tensor;
 /** n-step temporal difference for estimating V(s)
  * 
  * box on p.154 */
-// TODO not tested yet
+// TODO SUBARE not tested yet
 public class NStepTemporalDifference extends DequeDigestAdapter {
   private final VsInterface vs;
   private final DiscountFunction discountFunction;

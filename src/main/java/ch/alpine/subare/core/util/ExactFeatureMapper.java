@@ -35,7 +35,7 @@ public class ExactFeatureMapper implements FeatureMapper, Serializable {
       for (Tensor action : monteCarloInterface.actions(state))
         stateToFeature.put(StateAction.key(state, action), //
             monteCarloInterface.isTerminal(state) //
-                ? Array.zeros(stateActionSize) // TODO this vector is probably never used
+                ? Array.zeros(stateActionSize) // TODO SUBARE this vector is probably never used
                 : UnitVector.of(stateActionSize, ++index));
   }
 

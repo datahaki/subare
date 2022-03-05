@@ -24,7 +24,7 @@ import ch.alpine.tensor.img.Raster;
   ;
   private static final int MAGNIFY = 5;
 
-  // TODO magnify irregular
+  // TODO SUBARE magnify irregular
   public static Tensor render(Blackjack blackjack, Policy policy) {
     BlackjackRaster blackjackRaster = new BlackjackRaster(blackjack);
     Dimension dimension = blackjackRaster.dimensionStateRaster();

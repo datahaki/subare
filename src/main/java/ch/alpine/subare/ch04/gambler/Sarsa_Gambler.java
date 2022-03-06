@@ -1,6 +1,7 @@
 // code by jph
 package ch.alpine.subare.ch04.gambler;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import ch.alpine.subare.core.StateActionCounter;
@@ -42,8 +43,8 @@ import ch.alpine.tensor.io.GifAnimationWriter;
     EGreedyPolicy policy = (EGreedyPolicy) PolicyType.EGREEDY.bestEquiprobable(gamblerModel, qsa, sac);
     policy.setExplorationRate(LinearExplorationRate.of(batches, 0.2, 0.01));
     // ---
-    try (AnimationWriter animationWriter1 = new GifAnimationWriter(HomeDirectory.Pictures("gambler_qsa_" + sarsaType + ".gif"), 150, TimeUnit.MILLISECONDS)) {
-      try (AnimationWriter animationWriter2 = new GifAnimationWriter(HomeDirectory.Pictures("gambler_sac_" + sarsaType + ".gif"), 150, TimeUnit.MILLISECONDS)) {
+    try (AnimationWriter animationWriter1 = new GifAnimationWriter(getGifFileQsa(sarsaType), 150, TimeUnit.MILLISECONDS)) {
+      try (AnimationWriter animationWriter2 = new GifAnimationWriter(getGifFileSac(sarsaType), 150, TimeUnit.MILLISECONDS)) {
         Sarsa sarsa = sarsaType.sarsa(gamblerModel, learningRate, qsa, sac, policy);
         for (int index = 0; index < batches; ++index) {
           Infoline.print(gamblerModel, index, ref, qsa);
@@ -57,6 +58,14 @@ import ch.alpine.tensor.io.GifAnimationWriter;
     }
     GamblerHelper.play(gamblerModel, qsa);
     return qsa;
+  }
+
+  public static File getGifFileQsa(SarsaType sarsaType) {
+    return HomeDirectory.Pictures("gambler_qsa_" + sarsaType + ".gif");
+  }
+
+  public static File getGifFileSac(SarsaType sarsaType) {
+    return HomeDirectory.Pictures("gambler_sac_" + sarsaType + ".gif");
   }
 
   public static void main(String[] args) throws Exception {

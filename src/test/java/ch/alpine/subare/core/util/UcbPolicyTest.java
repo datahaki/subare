@@ -56,7 +56,7 @@ public class UcbPolicyTest extends TestCase {
     DiscreteQsa ucbInQsa = UcbUtils.getUcbInQsa(airport, qsa, sarsa.sac());
     for (Tensor state : airport.states()) {
       for (Tensor action : airport.actions(state)) {
-        assertTrue(UcbUtils.getUpperConfidenceBound(state, action, qsa.value(state, action), sarsa.sac(), airport).equals(DoubleScalar.POSITIVE_INFINITY));
+        assertTrue(UcbUtils.getUpperConfidenceBound(state, action, qsa.value(state, action), sarsa.sac()).equals(DoubleScalar.POSITIVE_INFINITY));
         assertTrue(ucbInQsa.value(state, action).equals(DoubleScalar.POSITIVE_INFINITY));
       }
     }

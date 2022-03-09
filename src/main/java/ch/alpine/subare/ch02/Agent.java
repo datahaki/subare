@@ -87,15 +87,16 @@ public abstract class Agent {
   }
 
   @Override
-  public String toString() {
+  public final String toString() {
     return getAbsDesc();
   }
 
-  public int getRandomizedDecisionCount() {
+  public final int getRandomizedDecisionCount() {
     return randomizedDecisionCount;
   }
 
-  public void setOpeningSequence(Integer... actions) {
+  @SafeVarargs
+  public final void setOpeningSequence(Integer... actions) {
     openingSequence.addAll(Arrays.asList(actions));
   }
 }

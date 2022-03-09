@@ -57,11 +57,11 @@ class Wireloop extends DeterministicStandardModel implements MonteCarloInterface
           startStates.add(row);
           states.append(row);
         } else //
-        if (rgba.equals(WHITE)) {
-          Tensor row = Tensors.vector(x, y);
-          endStates.add(row);
-          states.append(row);
-        }
+          if (rgba.equals(WHITE)) {
+            Tensor row = Tensors.vector(x, y);
+            endStates.add(row);
+            states.append(row);
+          }
       }
   }
 

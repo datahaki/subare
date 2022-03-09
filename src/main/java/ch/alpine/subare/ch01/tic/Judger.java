@@ -32,13 +32,13 @@ class Judger {
       p1.feedReward(1);
       p2.feedReward(0);
     } else //
-    if (currentState.winner == p2Symbol) {
-      p1.feedReward(0);
-      p2.feedReward(1);
-    } else {
-      p1.feedReward(0);
-      p2.feedReward(0);
-    }
+      if (currentState.winner == p2Symbol) {
+        p1.feedReward(0);
+        p2.feedReward(1);
+      } else {
+        p1.feedReward(0);
+        p2.feedReward(0);
+      }
   }
 
   private void feedCurrentState() {

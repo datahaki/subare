@@ -30,7 +30,7 @@ import ch.alpine.tensor.pdf.d.CategoricalDistribution;
   public Tensor getBestActions(Tensor state) {
     Tensor actions = discreteModel.actions(state);
     Tensor va = Tensor.of(actions.stream().parallel() //
-        .map(action -> UcbUtils.getUpperConfidenceBound(state, action, qsa.value(state, action), sac, discreteModel)));
+        .map(action -> UcbUtils.getUpperConfidenceBound(state, action, qsa.value(state, action), sac)));
     FairArg fairArg = FairArg.max(va);
     return Tensor.of(fairArg.options().stream().map(actions::get));
   }

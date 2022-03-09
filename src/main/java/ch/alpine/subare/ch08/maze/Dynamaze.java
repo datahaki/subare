@@ -48,8 +48,8 @@ class Dynamaze extends DeterministicStandardModel implements MonteCarloInterface
           if (color.equals(GREEN))
             startStates.append(state);
           else //
-          if (color.equals(RED))
-            terminal.append(state);
+            if (color.equals(RED))
+              terminal.append(state);
         }
       }
     statesIndex = Index.build(states);

@@ -15,6 +15,7 @@ class Judger {
   final Network network;
   final List<Agent> list;
 
+  @SafeVarargs
   Judger(Network network, Agent... agents) {
     this.network = network;
     list = Arrays.asList(agents);

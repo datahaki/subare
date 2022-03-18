@@ -12,8 +12,8 @@ import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.pdf.CategoricalDistribution;
 import ch.alpine.tensor.pdf.Distribution;
+import ch.alpine.tensor.pdf.d.CategoricalDistribution;
 
 /** upper confidence bound is greedy except that it encourages
  * exploration if an action has not been encountered often relative to other actions */
@@ -30,7 +30,7 @@ import ch.alpine.tensor.pdf.Distribution;
   public Tensor getBestActions(Tensor state) {
     Tensor actions = discreteModel.actions(state);
     Tensor va = Tensor.of(actions.stream().parallel() //
-        .map(action -> UcbUtils.getUpperConfidenceBound(state, action, qsa.value(state, action), sac, discreteModel)));
+        .map(action -> UcbUtils.getUpperConfidenceBound(state, action, qsa.value(state, action), sac)));
     FairArg fairArg = FairArg.max(va);
     return Tensor.of(fairArg.options().stream().map(actions::get));
   }

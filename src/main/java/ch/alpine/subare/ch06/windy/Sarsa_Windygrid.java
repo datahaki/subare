@@ -2,6 +2,7 @@
 // inspired by Shangtong Zhang
 package ch.alpine.subare.ch06.windy;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import ch.alpine.subare.core.StateActionCounter;
@@ -34,7 +35,7 @@ enum Sarsa_Windygrid {
     EGreedyPolicy policy = (EGreedyPolicy) PolicyType.EGREEDY.bestEquiprobable(windygrid, qsa, sac);
     Sarsa sarsa = sarsaType.sarsa(windygrid, learningRate, qsa, sac, policy);
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("windygrid_qsa_" + sarsaType + ".gif"), 100, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(getFileQsa(sarsaType), 100, TimeUnit.MILLISECONDS)) {
       for (int index = 0; index < batches; ++index) {
         Infoline infoline = Infoline.print(windygrid, index, ref, qsa);
         // sarsa.supplyPolicy(() -> policy);
@@ -45,6 +46,10 @@ enum Sarsa_Windygrid {
           break;
       }
     }
+  }
+
+  public static File getFileQsa(SarsaType sarsaType) {
+    return HomeDirectory.Pictures("windygrid_qsa_" + sarsaType + ".gif");
   }
 
   public static void main(String[] args) throws Exception {

@@ -1,12 +1,17 @@
 // code by jph
 package ch.alpine.subare.ch05.racetrack;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 
-import ch.alpine.tensor.ext.HomeDirectory;
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 
-public class VI_RaceTrackTest extends TestCase {
+import ch.alpine.tensor.ext.HomeDirectory;
+
+public class VI_RaceTrackTest {
+  @Test
   public void testSimple() throws Exception {
     File file = HomeDirectory.Pictures(getClass().getSimpleName() + ".gif");
     assertFalse(file.exists());

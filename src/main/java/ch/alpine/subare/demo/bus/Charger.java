@@ -71,7 +71,7 @@ import ch.alpine.tensor.sca.Clips;
     final int time = Scalars.intValueExact(state.Get(0));
     Scalar total = tripProfile.costPerUnit(time).multiply((Scalar) action).negate();
     if (capacity == 0)
-      total = total.add(RealScalar.of(-20)); // TODO possibly make terminal
+      total = total.add(RealScalar.of(-20)); // TODO SUBARE possibly make terminal
     return total;
   }
 

@@ -12,8 +12,8 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.TensorRuntimeException;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.red.Min;
-import ch.alpine.tensor.sca.Power;
 import ch.alpine.tensor.sca.Sign;
+import ch.alpine.tensor.sca.pow.Power;
 
 /** stochastic approximation theory
  * p.35 equation (2.7)
@@ -44,7 +44,7 @@ abstract class DecayedLearningRate implements LearningRate {
     Tensor key = StateAction.key(stepInterface);
     int index = Scalars.intValueExact(stateActionCounter.stateActionCount(key));
     while (memo.length() <= index)
-      memo.append(Min.of( // TODO the "+1" in the denominator may not be ideal... perhaps +0.5, or +0 ?
+      memo.append(Min.of( // TODO SUBARE the "+1" in the denominator may not be ideal... perhaps +0.5, or +0 ?
           factor.multiply(Power.of(DoubleScalar.of(1.0 / (index + 1)), exponent)), //
           RealScalar.ONE));
     return memo.Get(index);

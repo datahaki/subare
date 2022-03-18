@@ -1,15 +1,19 @@
 // code by jph
 package ch.alpine.subare.ch04.grid;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import ch.alpine.subare.core.alg.ActionValueIteration;
 import ch.alpine.subare.core.alg.ValueIteration;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.DiscreteVs;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensors;
-import junit.framework.TestCase;
 
-public class GridworldTest extends TestCase {
+public class GridworldTest {
+  @Test
   public void testVI() {
     Gridworld gridworld = new Gridworld();
     ValueIteration vi = new ValueIteration(gridworld, gridworld);
@@ -22,6 +26,7 @@ public class GridworldTest extends TestCase {
     assertEquals(vs.value(Tensors.vector(3, 3)), RealScalar.of(0));
   }
 
+  @Test
   public void testAVI() {
     Gridworld gridworld = new Gridworld();
     ActionValueIteration avi = ActionValueIteration.of(gridworld);

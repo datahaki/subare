@@ -1,6 +1,12 @@
 // code by jph
 package ch.alpine.subare.core.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
 import ch.alpine.subare.core.StateActionCounter;
 import ch.alpine.subare.core.StepInterface;
 import ch.alpine.subare.core.adapter.StepAdapter;
@@ -8,9 +14,9 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensors;
-import junit.framework.TestCase;
 
-public class DiscreteStateActionCounterTest extends TestCase {
+public class DiscreteStateActionCounterTest {
+  @Test
   public void testSimple() {
     StateActionCounter stateActionCounter = new DiscreteStateActionCounter();
     assertFalse(stateActionCounter.isEncountered(Tensors.vector(1, 2, 3)));

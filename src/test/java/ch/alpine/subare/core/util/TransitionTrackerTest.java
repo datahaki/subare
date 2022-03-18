@@ -1,12 +1,15 @@
 // code by jph
 package ch.alpine.subare.core.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 
-public class TransitionTrackerTest extends TestCase {
+public class TransitionTrackerTest {
+  @Test
   public void testSimple() {
     Map<Integer, Integer> map = new HashMap<>();
     map.merge(10, 101, (i, j) -> i + j);

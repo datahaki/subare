@@ -1,15 +1,18 @@
 // code by jph
 package ch.alpine.subare.core.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import ch.alpine.subare.core.DiscreteModel;
 import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
-import junit.framework.TestCase;
 
-public class LossTest extends TestCase {
+public class LossTest {
   static DiscreteModel create14() {
     return new DiscreteModel() {
       @Override
@@ -29,6 +32,7 @@ public class LossTest extends TestCase {
     };
   }
 
+  @Test
   public void testAccumulation0() {
     DiscreteModel discreteModel = create14();
     DiscreteQsa ref = DiscreteQsa.build(discreteModel).create(Tensors.vector(0, 0, 0, 0).stream());
@@ -37,6 +41,7 @@ public class LossTest extends TestCase {
     assertEquals(scalar, RealScalar.ZERO);
   }
 
+  @Test
   public void testAccumulation1() {
     DiscreteModel discreteModel = create14();
     DiscreteQsa ref = DiscreteQsa.build(discreteModel).create(Tensors.vector(0, 0, 1, 0).stream());
@@ -45,6 +50,7 @@ public class LossTest extends TestCase {
     assertEquals(scalar, RealScalar.ZERO);
   }
 
+  @Test
   public void testAccumulation2() {
     DiscreteModel discreteModel = create14();
     DiscreteQsa ref = DiscreteQsa.build(discreteModel).create(Tensors.vector(0, 0, 1, 0).stream());
@@ -53,6 +59,7 @@ public class LossTest extends TestCase {
     assertEquals(scalar, RationalScalar.HALF);
   }
 
+  @Test
   public void testAccumulation3() {
     DiscreteModel discreteModel = create14();
     DiscreteQsa ref = DiscreteQsa.build(discreteModel).create(Tensors.vector(0, 0, 1, 0).stream());

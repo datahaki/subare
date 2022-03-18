@@ -1,6 +1,11 @@
 // code by jph
 package ch.alpine.subare.core.td;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
 import ch.alpine.subare.core.MonteCarloInterface;
 import ch.alpine.subare.core.StateActionCounter;
 import ch.alpine.subare.core.adapter.SimpleTestModel;
@@ -15,9 +20,9 @@ import ch.alpine.subare.core.util.PolicyBase;
 import ch.alpine.subare.core.util.PolicyType;
 import ch.alpine.subare.core.util.StateAction;
 import ch.alpine.tensor.RealScalar;
-import junit.framework.TestCase;
 
-public class SarsaTest extends TestCase {
+public class SarsaTest {
+  @Test
   public void testConstantOneExact() {
     for (SarsaType sarsaType : SarsaType.values()) {
       MonteCarloInterface monteCarloInterface = SimpleTestModel.INSTANCE;
@@ -34,6 +39,7 @@ public class SarsaTest extends TestCase {
     }
   }
 
+  @Test
   public void testConstantNonOneExact() {
     for (SarsaType sarsaType : SarsaType.values()) {
       MonteCarloInterface monteCarloInterface = SimpleTestModel.INSTANCE;
@@ -50,6 +56,7 @@ public class SarsaTest extends TestCase {
     }
   }
 
+  @Test
   public void testDefaultExact() {
     for (SarsaType sarsaType : SarsaType.values()) {
       MonteCarloInterface monteCarloInterface = SimpleTestModel.INSTANCE;

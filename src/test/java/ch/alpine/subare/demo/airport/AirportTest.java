@@ -1,7 +1,11 @@
 // code by fluric
 package ch.alpine.subare.demo.airport;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.stream.IntStream;
+
+import org.junit.jupiter.api.Test;
 
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.RealScalar;
@@ -12,9 +16,9 @@ import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.sca.Clip;
 import ch.alpine.tensor.sca.Clips;
-import junit.framework.TestCase;
 
-public class AirportTest extends TestCase {
+public class AirportTest {
+  @Test
   public void testTerminalState() {
     Airport airport = Airport.INSTANCE;
     assertEquals(airport.isTerminal(Tensors.vector(Airport.LASTT, 0, Airport.VEHICLES)), true);
@@ -25,6 +29,7 @@ public class AirportTest extends TestCase {
         RealScalar.ZERO);
   }
 
+  @Test
   public void testCustProb() {
     Airport airport = Airport.INSTANCE;
     Tensor state = Tensors.vector(1, 2, 3);

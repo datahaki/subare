@@ -1,8 +1,12 @@
 // code by jph
 package ch.alpine.subare.ch05.wireloop;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.awt.Dimension;
 import java.util.Arrays;
+
+import org.junit.jupiter.api.Test;
 
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensor;
@@ -10,10 +14,10 @@ import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.red.Entrywise;
 import ch.alpine.tensor.red.Max;
-import junit.framework.TestCase;
 
-public class WireloopTest extends TestCase {
-  public void testSimple() throws Exception {
+public class WireloopTest {
+  @Test
+  public void testSimple() {
     String name = "wirec";
     WireloopReward wireloopReward = WireloopReward.freeSteps();
     wireloopReward = WireloopReward.constantCost();

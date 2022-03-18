@@ -1,12 +1,22 @@
 // code by jph
 package ch.alpine.subare.ch06.windy;
 
-import ch.alpine.subare.core.td.SarsaType;
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class Sarsa_WindygridTest extends TestCase {
+import java.io.File;
+
+import org.junit.jupiter.api.Test;
+
+import ch.alpine.subare.core.td.SarsaType;
+
+public class Sarsa_WindygridTest {
+  @Test
   public void testSimple() throws Exception {
-    for (SarsaType sarsaType : SarsaType.values())
+    for (SarsaType sarsaType : SarsaType.values()) {
       Sarsa_Windygrid.handle(sarsaType, 10);
+      File file = Sarsa_Windygrid.getFileQsa(sarsaType);
+      assertTrue(file.isFile());
+      file.delete();
+    }
   }
 }

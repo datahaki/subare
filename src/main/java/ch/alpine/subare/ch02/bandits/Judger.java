@@ -21,6 +21,7 @@ import ch.alpine.tensor.sca.Round;
   private final Bandits bandit;
   private final Map<Agent, Tensor> map = new HashMap<>();
 
+  @SafeVarargs
   Judger(Bandits bandit, Agent... agents) {
     this.bandit = bandit;
     Stream.of(agents).forEach(agent -> map.put(agent, Tensors.empty()));

@@ -1,9 +1,10 @@
 // code by jph
 package ch.alpine.subare.demo.prison;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 
-public class AbstractExactTest extends TestCase {
+public class AbstractExactTest {
+  @Test
   public void testSimple() {
     // ---
   }

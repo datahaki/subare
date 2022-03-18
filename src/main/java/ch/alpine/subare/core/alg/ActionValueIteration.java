@@ -86,7 +86,7 @@ public class ActionValueIteration implements DiscreteQsaSupplier {
           break;
         }
       past = delta;
-      // TODO JAN consider changing to lessEquals (requires renaming of API functions)
+      // TODO SUBARE consider changing to lessEquals (requires renaming of API functions)
       if (Scalars.lessThan(delta, threshold))
         break;
     }

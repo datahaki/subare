@@ -25,7 +25,7 @@ import ch.alpine.tensor.img.ColorDataGradients;
 import ch.alpine.tensor.img.ImageResize;
 import ch.alpine.tensor.sca.Clips;
 
-// TODO all non-terminal function should be package visibility
+// TODO SUBARE all non-terminal function should be package visibility
 public enum StateActionRasters {
   ;
   /** @param stateActionRaster

@@ -18,8 +18,8 @@ import java.util.Arrays;
     if (sum == 3)
       private_winner = 1;
     else //
-    if (sum == -3)
-      private_winner = -1;
+      if (sum == -3)
+        private_winner = -1;
   }
 
   private Integer computeWinner() {

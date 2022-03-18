@@ -49,7 +49,7 @@ public class InfiniteVariance implements StandardModel, MonteCarloInterface {
       return state;
     if (action.equals(END))
       return END; // END is used as state
-    if (coinflip.tossHead()) // TODO check if this is the model
+    if (coinflip.tossHead()) // TODO SUBARE check if this is the model
       return BACK; // BACK is used as state
     return END; // END is used as state
   }

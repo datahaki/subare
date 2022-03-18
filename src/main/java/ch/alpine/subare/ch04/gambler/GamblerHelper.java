@@ -27,7 +27,7 @@ import ch.alpine.tensor.sca.Round;
   }
 
   public static Policy getOptimalPolicy(GamblerModel gamblerModel) {
-    // TODO test for equality of policies from qsa and vs
+    // TODO SUBARE test for equality of policies from qsa and vs
     ValueIteration vi = new ValueIteration(gamblerModel, gamblerModel);
     vi.untilBelow(RealScalar.of(1e-10));
     return PolicyType.GREEDY.bestEquiprobable(gamblerModel, vi.vs(), null);

@@ -20,7 +20,7 @@ import ch.alpine.tensor.sca.Round;
 
 enum Sarsa_Maxbias {
   ;
-  static void handle(SarsaType sarsaType, int nstep) throws Exception {
+  static void handle(SarsaType sarsaType, int nstep) {
     System.out.println(sarsaType);
     Maxbias maxbias = new Maxbias(3);
     final DiscreteQsa ref = MaxbiasHelper.getOptimalQsa(maxbias);
@@ -42,7 +42,7 @@ enum Sarsa_Maxbias {
     DiscreteUtils.print(vs, Round._3);
   }
 
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     handle(SarsaType.ORIGINAL, 3);
     handle(SarsaType.EXPECTED, 3);
     handle(SarsaType.QLEARNING, 3);

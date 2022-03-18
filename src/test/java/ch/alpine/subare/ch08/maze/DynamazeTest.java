@@ -1,10 +1,13 @@
 // code by jph
 package ch.alpine.subare.ch08.maze;
 
-import junit.framework.TestCase;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DynamazeTest extends TestCase {
-  public void testSimple() throws Exception {
+import org.junit.jupiter.api.Test;
+
+public class DynamazeTest {
+  @Test
+  public void testSimple() {
     Dynamaze dynamaze = DynamazeHelper.original("maze2");
     assertEquals(dynamaze.startStates().length(), 1);
   }

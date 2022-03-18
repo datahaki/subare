@@ -1,14 +1,19 @@
 // code by jph
 package ch.alpine.subare.demo.bus;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.red.Tally;
-import junit.framework.TestCase;
 
-public class ChargerTest extends TestCase {
+public class ChargerTest {
+  @Test
   public void testSimple() {
     TripProfile tripProfile = new ConstantDrawTrip(16, 2);
     Charger charger = new Charger(tripProfile, 7);
@@ -17,6 +22,7 @@ public class ChargerTest extends TestCase {
     assertEquals(actions.length(), 5);
   }
 
+  @Test
   public void testDrawn() {
     TripProfile tripProfile = new ConstantDrawTrip(16, 2);
     Charger charger = new Charger(tripProfile, 7);
@@ -26,6 +32,7 @@ public class ChargerTest extends TestCase {
     assertEquals(res.Get(1), RealScalar.of(3 + 3).subtract(drawn));
   }
 
+  @Test
   public void testCostPerUnit() {
     TripProfile tripProfile = new ConstantDrawTrip(16, 2);
     Tensor costs = Tensors.vector(i -> tripProfile.costPerUnit(i), 10);

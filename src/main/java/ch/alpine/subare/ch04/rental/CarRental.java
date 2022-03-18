@@ -14,8 +14,8 @@ import ch.alpine.tensor.alg.Flatten;
 import ch.alpine.tensor.alg.Range;
 import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.PDF;
-import ch.alpine.tensor.pdf.PoissonDistribution;
 import ch.alpine.tensor.pdf.RandomVariate;
+import ch.alpine.tensor.pdf.d.PoissonDistribution;
 import ch.alpine.tensor.red.Min;
 import ch.alpine.tensor.red.Times;
 import ch.alpine.tensor.sca.Abs;
@@ -114,7 +114,7 @@ import ch.alpine.tensor.sca.Sign;
     Scalar n2out = null;
     boolean status = false;
     int attempts = 0;
-    // TODO this is very inefficient for trajectory generation...
+    // TODO SUBARE this is very inefficient for trajectory generation...
     while (!status) {
       if (200 < attempts) {
         System.out.println("warning: give up");

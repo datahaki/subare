@@ -1,6 +1,8 @@
 // code by jph
 package ch.alpine.subare.core.td;
 
+import org.junit.jupiter.api.Test;
+
 import ch.alpine.subare.core.StateActionCounter;
 import ch.alpine.subare.core.adapter.SimpleTestModel;
 import ch.alpine.subare.core.adapter.SimpleTestModels;
@@ -12,9 +14,9 @@ import ch.alpine.subare.core.util.LearningRate;
 import ch.alpine.subare.core.util.PolicyBase;
 import ch.alpine.subare.core.util.PolicyType;
 import ch.alpine.tensor.RealScalar;
-import junit.framework.TestCase;
 
-public class PrioritizedSweepingTest extends TestCase {
+public class PrioritizedSweepingTest {
+  @Test
   public void testSimple() {
     SimpleTestModel simpleTestModel = SimpleTestModel.INSTANCE;
     LearningRate learningRate = DefaultLearningRate.of(8, 2);

@@ -10,8 +10,8 @@ import ch.alpine.tensor.TensorRuntimeException;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Range;
 import ch.alpine.tensor.pdf.Distribution;
-import ch.alpine.tensor.pdf.NormalDistribution;
 import ch.alpine.tensor.pdf.RandomVariate;
+import ch.alpine.tensor.pdf.c.NormalDistribution;
 import ch.alpine.tensor.red.KroneckerDelta;
 
 /** Example 6.7 p.134: Maximization bias
@@ -95,7 +95,7 @@ public class Maxbias implements StandardModel, MonteCarloInterface {
 
   @Override
   public Scalar transitionProbability(Tensor state, Tensor action, Tensor next) {
-    // TODO this implementation does not make sense
+    // TODO SUBARE this implementation does not make sense
     if (move(state, action).equals(next))
       return KroneckerDelta.of(move(state, action), next);
     throw TensorRuntimeException.of(state, action, next);

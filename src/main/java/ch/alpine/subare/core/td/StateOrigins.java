@@ -18,7 +18,7 @@ import ch.alpine.tensor.TensorRuntimeException;
    * @return step interfaces with nextState == state */
   Collection<StepInterface> values(Tensor state) {
     if (map.containsKey(state)) {
-      // TODO this is a preliminary check only during development
+      // TODO SUBARE this is a preliminary check only during development
       Collection<StepInterface> collection = map.get(state).values();
       for (StepInterface stepInterface : collection)
         if (!stepInterface.nextState().equals(state))
@@ -30,7 +30,7 @@ import ch.alpine.tensor.TensorRuntimeException;
 
   @Override
   public void digest(StepInterface stepInterface) {
-    // TODO code redudant to StepSet
+    // TODO SUBARE code redundant to StepSet
     map.computeIfAbsent(stepInterface.nextState(), i -> new StepSet()).register(stepInterface);
   }
 }

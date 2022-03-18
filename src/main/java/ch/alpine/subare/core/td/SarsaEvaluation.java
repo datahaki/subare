@@ -9,6 +9,7 @@ import ch.alpine.tensor.Tensor;
   Scalar evaluate(Tensor state, PolicyExt policy);
 
   /** The action probabilities are chosen according to policy1 and then added up by the qsa of policy2
+   * 
    * @param state
    * @param policy1
    * @param policy2

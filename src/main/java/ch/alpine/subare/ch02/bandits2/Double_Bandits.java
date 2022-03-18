@@ -6,7 +6,7 @@ import ch.alpine.subare.core.td.SarsaType;
 /** Double Sarsa for maximization bias */
 /* package */ enum Double_Bandits {
   ;
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     BanditsModel banditsModel = new BanditsModel(20);
     BanditsTrain sarsa_Bandits = new BanditsTrain(banditsModel);
     sarsa_Bandits.handle(SarsaType.QLEARNING, 1);

@@ -1,6 +1,11 @@
 // code by jph
 package ch.alpine.subare.core.util;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
 import ch.alpine.subare.core.StateActionCounter;
 import ch.alpine.subare.core.adapter.StepAdapter;
 import ch.alpine.subare.core.td.Sarsa;
@@ -9,9 +14,9 @@ import ch.alpine.subare.demo.airport.Airport;
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensor;
-import junit.framework.TestCase;
 
-public class UcbPolicyTest extends TestCase {
+public class UcbPolicyTest {
+  @Test
   public void testSimple() {
     Airport airport = Airport.INSTANCE;
     DiscreteQsa qsa = DiscreteQsa.build(airport);
@@ -47,6 +52,7 @@ public class UcbPolicyTest extends TestCase {
     }
   }
 
+  @Test
   public void testUcb() {
     Airport airport = Airport.INSTANCE;
     DiscreteQsa qsa = DiscreteQsa.build(airport);
@@ -56,7 +62,7 @@ public class UcbPolicyTest extends TestCase {
     DiscreteQsa ucbInQsa = UcbUtils.getUcbInQsa(airport, qsa, sarsa.sac());
     for (Tensor state : airport.states()) {
       for (Tensor action : airport.actions(state)) {
-        assertTrue(UcbUtils.getUpperConfidenceBound(state, action, qsa.value(state, action), sarsa.sac(), airport).equals(DoubleScalar.POSITIVE_INFINITY));
+        assertTrue(UcbUtils.getUpperConfidenceBound(state, action, qsa.value(state, action), sarsa.sac()).equals(DoubleScalar.POSITIVE_INFINITY));
         assertTrue(ucbInQsa.value(state, action).equals(DoubleScalar.POSITIVE_INFINITY));
       }
     }

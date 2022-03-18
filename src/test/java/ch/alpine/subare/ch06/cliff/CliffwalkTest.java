@@ -1,16 +1,23 @@
 // code by jph
 package ch.alpine.subare.ch06.cliff;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensors;
-import junit.framework.TestCase;
 
-public class CliffwalkTest extends TestCase {
+public class CliffwalkTest {
+  @Test
   public void testStates() {
     Cliffwalk cliffwalk = new Cliffwalk(12, 4);
     assertEquals(cliffwalk.states().length(), 12 * 3 + 2);
   }
 
+  @Test
   public void testMove() {
     Cliffwalk cliffwalk = new Cliffwalk(12, 4);
     assertEquals(cliffwalk.move(Tensors.vector(0, 0), Tensors.vector(0, -1)), Tensors.vector(0, 0));
@@ -20,6 +27,7 @@ public class CliffwalkTest extends TestCase {
     assertEquals(cliffwalk.move(Tensors.vector(11, 3), Tensors.vector(0, -1)), Tensors.vector(11, 3));
   }
 
+  @Test
   public void testCliff() {
     Cliffwalk cliffwalk = new Cliffwalk(12, 4);
     assertFalse(cliffwalk.isCliff(Tensors.vector(0, 3)));
@@ -28,6 +36,7 @@ public class CliffwalkTest extends TestCase {
     assertFalse(cliffwalk.isCliff(Tensors.vector(11, 3)));
   }
 
+  @Test
   public void testReward() {
     Cliffwalk cliffwalk = new Cliffwalk(12, 4);
     assertEquals(cliffwalk.reward(Tensors.vector(11, 2), null, Tensors.vector(11, 3)), RealScalar.ONE);

@@ -65,7 +65,7 @@ class Blackjack implements MonteCarloInterface {
       return state;
     // player stays, the next state is terminal
     if (Scalars.isZero((Scalar) action)) { // stay
-      // TODO natural: ACE+10-card
+      // TODO SUBARE natural: ACE+10-card
       int dealer = Scalars.intValueExact(state.Get(2));
       boolean usableAce = dealer == 1;
       if (usableAce)

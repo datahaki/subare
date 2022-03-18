@@ -12,7 +12,7 @@ import ch.alpine.tensor.sca.Round;
 
 /* package */ enum Sarsa_Bandits {
   ;
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     BanditsModel banditsModel = new BanditsModel(10);
     BanditsTrain sarsa_Bandits = new BanditsTrain(banditsModel);
     LearningRate learningRate = DefaultLearningRate.of(RealScalar.of(16), RealScalar.of(1.15));

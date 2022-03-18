@@ -7,7 +7,7 @@ import ch.alpine.subare.util.Index;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.nrm.Vector1Norm;
-import ch.alpine.tensor.sca.Power;
+import ch.alpine.tensor.sca.pow.Power;
 
 enum DynamazeHeuristic {
   ;
@@ -36,7 +36,7 @@ enum DynamazeHeuristic {
     System.out.println("diff to heuristic = " + DiscreteValueFunctions.distance(qsa, est));
   }
 
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     demo(DynamazeHelper.original("maze2"));
     demo(DynamazeHelper.create5(2));
   }

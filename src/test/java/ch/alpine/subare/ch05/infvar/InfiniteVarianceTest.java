@@ -1,6 +1,11 @@
 // code by jph
 package ch.alpine.subare.ch05.infvar;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
 import ch.alpine.subare.core.alg.ActionValueIteration;
 import ch.alpine.subare.core.alg.ValueIteration;
 import ch.alpine.subare.core.util.DiscreteQsa;
@@ -9,9 +14,9 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.sca.Abs;
-import junit.framework.TestCase;
 
-public class InfiniteVarianceTest extends TestCase {
+public class InfiniteVarianceTest {
+  @Test
   public void testActionValueIteration() {
     InfiniteVariance infiniteVariance = new InfiniteVariance();
     ActionValueIteration avi = ActionValueIteration.of(infiniteVariance);
@@ -23,6 +28,7 @@ public class InfiniteVarianceTest extends TestCase {
     assertEquals(qsa.value(InfiniteVariance.END, InfiniteVariance.END), RealScalar.ZERO);
   }
 
+  @Test
   public void testValueIteration() {
     InfiniteVariance infiniteVariance = new InfiniteVariance();
     ValueIteration vi = new ValueIteration(infiniteVariance);

@@ -12,23 +12,23 @@ import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.pdf.CategoricalDistribution;
-import ch.alpine.tensor.pdf.DiscreteUniformDistribution;
 import ch.alpine.tensor.pdf.Distribution;
+import ch.alpine.tensor.pdf.d.CategoricalDistribution;
+import ch.alpine.tensor.pdf.d.DiscreteUniformDistribution;
 
 /** p.33 */
 public class EGreedyPolicy extends PolicyBase {
-  // TODO make explorationRate final
+  // TODO SUBARE make explorationRate final
   private ExplorationRate explorationRate;
 
   public EGreedyPolicy(DiscreteModel discreteModel, QsaInterface qsa, StateActionCounter sac) {
     super(discreteModel, qsa, sac);
-    explorationRate = ConstantExplorationRate.of(0.1); // TODO magic const
+    explorationRate = ConstantExplorationRate.of(0.1); // TODO SUBARE magic const
   }
 
   public EGreedyPolicy(StandardModel standardModel, VsInterface vs, StateActionCounter sac) {
     super(standardModel, vs, sac);
-    explorationRate = ConstantExplorationRate.of(0.1); // TODO magic const
+    explorationRate = ConstantExplorationRate.of(0.1); // TODO SUBARE magic const
   }
 
   public void setExplorationRate(ExplorationRate explorationRate) {
@@ -50,7 +50,7 @@ public class EGreedyPolicy extends PolicyBase {
     final int optimalCount = bestActions.length();
     final int nonOptimalCount = discreteModel.actions(state).length() - optimalCount;
     Scalar epsilon = explorationRate.epsilon(state, sac);
-    // TODO check logic
+    // TODO SUBARE check logic
     if (nonOptimalCount == 0) {
       return DiscreteUniformDistribution.of(0, bestActions.length());
       // Tensor pdf = Tensors.vector(v -> RationalScalar.of(1, optimalCount), bestActions.length());

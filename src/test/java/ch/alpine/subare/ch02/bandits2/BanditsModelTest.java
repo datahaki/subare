@@ -1,6 +1,10 @@
 // code by jph
 package ch.alpine.subare.ch02.bandits2;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
@@ -9,9 +13,9 @@ import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.red.Mean;
 import ch.alpine.tensor.red.Variance;
 import ch.alpine.tensor.sca.Chop;
-import junit.framework.TestCase;
 
-public class BanditsModelTest extends TestCase {
+public class BanditsModelTest {
+  @Test
   public void testMean() {
     int num = 10;
     BanditsModel banditsModel = new BanditsModel(num);
@@ -21,6 +25,7 @@ public class BanditsModelTest extends TestCase {
     assertEquals(starts.length(), 1);
   }
 
+  @Test
   public void testExact() {
     int num = 20;
     BanditsModel banditsModel = new BanditsModel(num);

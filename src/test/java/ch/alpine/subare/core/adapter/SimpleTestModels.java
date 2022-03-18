@@ -1,15 +1,17 @@
 // code by jph
 package ch.alpine.subare.core.adapter;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.DiscreteUtils;
 import ch.alpine.tensor.ExactScalarQ;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.sca.Chop;
-import junit.framework.TestCase;
 
-public class SimpleTestModels extends TestCase {
+public class SimpleTestModels {
   public static void _checkExact(DiscreteQsa qsa) {
     Scalar value_s0_a1 = qsa.value(RealScalar.ZERO, RealScalar.ONE);
     assertEquals(value_s0_a1, RealScalar.of(3));

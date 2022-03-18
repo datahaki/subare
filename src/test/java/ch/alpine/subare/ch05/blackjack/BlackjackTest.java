@@ -1,7 +1,11 @@
 // code by jph
 package ch.alpine.subare.ch05.blackjack;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.Map;
+
+import org.junit.jupiter.api.Test;
 
 import ch.alpine.subare.core.EpisodeInterface;
 import ch.alpine.subare.core.Policy;
@@ -11,10 +15,10 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.red.Tally;
-import junit.framework.TestCase;
 
-public class BlackjackTest extends TestCase {
+public class BlackjackTest {
   @SuppressWarnings("unused")
+  @Test
   public void testSimple() {
     Blackjack blackjack = new Blackjack();
     // TODO SUBARE fail sometimes, correct or wrong?
@@ -28,6 +32,7 @@ public class BlackjackTest extends TestCase {
     }
   }
 
+  @Test
   public void testEpisodeLength() {
     Blackjack blackjack = new Blackjack();
     Policy pi = EquiprobablePolicy.create(blackjack);

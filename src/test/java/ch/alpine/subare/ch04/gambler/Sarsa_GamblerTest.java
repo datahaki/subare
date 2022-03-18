@@ -1,16 +1,20 @@
 // code by jph
 package ch.alpine.subare.ch04.gambler;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
+
+import org.junit.jupiter.api.Test;
 
 import ch.alpine.subare.core.td.SarsaType;
 import ch.alpine.subare.core.util.DefaultLearningRate;
 import ch.alpine.subare.core.util.LearningRate;
 import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.RealScalar;
-import junit.framework.TestCase;
 
-public class Sarsa_GamblerTest extends TestCase {
+public class Sarsa_GamblerTest {
+  @Test
   public void testSimple() throws Exception {
     for (SarsaType sarsaType : SarsaType.values()) {
       GamblerModel gamblerModel = new GamblerModel(20, RationalScalar.of(4, 10));

@@ -1,6 +1,11 @@
 // code by jph
 package ch.alpine.subare.core.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
 import ch.alpine.subare.ch04.gambler.GamblerModel;
 import ch.alpine.subare.core.QsaInterface;
 import ch.alpine.subare.core.StateActionCounter;
@@ -13,9 +18,9 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
-import junit.framework.TestCase;
 
-public class DefaultLearningRateTest extends TestCase {
+public class DefaultLearningRateTest {
+  @Test
   public void testFirst() {
     LearningRate learningRate = DefaultLearningRate.of(0.9, .51);
     GamblerModel gamblerModel = new GamblerModel(100, RealScalar.of(0.4));
@@ -31,11 +36,13 @@ public class DefaultLearningRateTest extends TestCase {
     assertTrue(Scalars.lessThan(second, first));
   }
 
+  @Test
   public void testFailFactor() {
     AssertFail.of(() -> DefaultLearningRate.of(0, 1));
     AssertFail.of(() -> DefaultLearningRate.of(-1, 1));
   }
 
+  @Test
   public void testFailExponent() {
     AssertFail.of(() -> DefaultLearningRate.of(1, 0.5));
     AssertFail.of(() -> DefaultLearningRate.of(1, 0.4));

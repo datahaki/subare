@@ -1,6 +1,8 @@
 // code by jph
 package ch.alpine.subare.ch02.bandits2;
 
+import org.junit.jupiter.api.Test;
+
 import ch.alpine.subare.core.td.SarsaType;
 import ch.alpine.subare.core.util.DefaultLearningRate;
 import ch.alpine.subare.core.util.DiscreteQsa;
@@ -10,9 +12,9 @@ import ch.alpine.subare.core.util.LearningRate;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.sca.Chop;
 import ch.alpine.tensor.sca.Sign;
-import junit.framework.TestCase;
 
-public class Sarsa_BanditsTest extends TestCase {
+public class Sarsa_BanditsTest {
+  @Test
   public void testSimple() {
     BanditsModel banditsModel = new BanditsModel(10);
     BanditsTrain sarsa_Bandits = new BanditsTrain(banditsModel);

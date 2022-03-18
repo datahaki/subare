@@ -1,7 +1,13 @@
 // code by jph
 package ch.alpine.subare.ch05.racetrack;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.Arrays;
+
+import org.junit.jupiter.api.Test;
 
 import ch.alpine.subare.util.AssertFail;
 import ch.alpine.subare.util.Index;
@@ -10,9 +16,9 @@ import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.ArrayQ;
 import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.io.ResourceData;
-import junit.framework.TestCase;
 
-public class RacetrackTest extends TestCase {
+public class RacetrackTest {
+  @Test
   public void testStartAction() {
     Racetrack racetrack = new Racetrack(ResourceData.of("/ch05/track0.png"), 3);
     Index statesIndex = Index.build(racetrack.states());
@@ -22,6 +28,7 @@ public class RacetrackTest extends TestCase {
     AssertFail.of(() -> racetrack.actions(Tensors.vector(1, 0, 0)));
   }
 
+  @Test
   public void testMove() {
     Racetrack racetrack = new Racetrack(ResourceData.of("/ch05/track0.png"), 3);
     assertEquals(Dimensions.of(racetrack.image()), Arrays.asList(8, 11, 4));
@@ -34,12 +41,14 @@ public class RacetrackTest extends TestCase {
     assertEquals(move, Tensors.vector(3, 3, 2, 3));
   }
 
+  @Test
   public void testSome() {
     Racetrack racetrack = new Racetrack(ResourceData.of("/ch05/track0.png"), 3);
     for (Tensor state : racetrack.states())
       racetrack.actions(state);
   }
 
+  @Test
   public void testArray() {
     Racetrack racetrack = new Racetrack(ResourceData.of("/ch05/track0.png"), 3);
     ArrayQ.require(racetrack.actions);

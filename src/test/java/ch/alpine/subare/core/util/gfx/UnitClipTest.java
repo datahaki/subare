@@ -1,11 +1,15 @@
 // code by jph
 package ch.alpine.subare.core.util.gfx;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.RealScalar;
-import junit.framework.TestCase;
 
-public class UnitClipTest extends TestCase {
+public class UnitClipTest {
+  @Test
   public void testSimple() {
     assertEquals(UnitClip.FUNCTION.apply(DoubleScalar.INDETERMINATE).toString(), DoubleScalar.INDETERMINATE.toString());
     assertEquals(UnitClip.FUNCTION.apply(DoubleScalar.POSITIVE_INFINITY), DoubleScalar.POSITIVE_INFINITY);

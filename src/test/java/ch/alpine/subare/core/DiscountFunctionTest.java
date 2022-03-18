@@ -1,15 +1,19 @@
 // code by jph
 package ch.alpine.subare.core;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import ch.alpine.subare.util.AssertFail;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.num.Polynomial;
-import junit.framework.TestCase;
 
-public class DiscountFunctionTest extends TestCase {
+public class DiscountFunctionTest {
+  @Test
   public void testSimple() {
     Tensor coeffs = Tensors.vector(3, 2, -3, 2, .3);
     DiscountFunction discountFunction = DiscountFunction.of(RealScalar.ONE);
@@ -18,6 +22,7 @@ public class DiscountFunctionTest extends TestCase {
     assertEquals(gain1, gain2);
   }
 
+  @Test
   public void testHorner() {
     Tensor coeffs = Tensors.vector(3, 2, -3, 2, .3);
     Scalar alpha = RealScalar.of(.2);
@@ -27,6 +32,7 @@ public class DiscountFunctionTest extends TestCase {
     assertEquals(gain1, gain2);
   }
 
+  @Test
   public void testFail() {
     AssertFail.of(() -> DiscountFunction.of(RealScalar.of(1.1)));
   }

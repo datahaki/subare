@@ -1,8 +1,13 @@
 // code by jph
 package ch.alpine.subare.ch04.rental;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.HashSet;
 import java.util.Set;
+
+import org.junit.jupiter.api.Test;
 
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
@@ -10,19 +15,21 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Range;
 import ch.alpine.tensor.sca.Chop;
-import junit.framework.TestCase;
 
-public class CarRentalTest extends TestCase {
+public class CarRentalTest {
+  @Test
   public void testActions() {
     CarRental carRental = new CarRental(20);
     assertEquals(carRental.actions(Tensors.vector(3, 1)), Range.of(-3, 1 + 1));
   }
 
+  @Test
   public void testActions2() {
     CarRental carRental = new CarRental(20);
     assertEquals(carRental.actions(Tensors.vector(10, 10)), Range.of(-5, 5 + 1));
   }
 
+  @Test
   public void testTransitionProb() {
     CarRental carRental = new CarRental(20);
     Tensor state = Tensors.vector(2, 3);
@@ -32,6 +39,7 @@ public class CarRentalTest extends TestCase {
     Chop._03.requireClose(prob, RealScalar.of(0.01849));
   }
 
+  @Test
   public void testTransitionProb1() {
     CarRental carRental = new CarRental(20);
     Tensor state = Tensors.vector(2, 3);
@@ -41,6 +49,7 @@ public class CarRentalTest extends TestCase {
     Chop._09.requireClose(prob, RealScalar.of(2.053630315535358E-7));
   }
 
+  @Test
   public void testTransitionsProb() {
     CarRental carRental = new CarRental(10);
     Tensor state = Tensors.vector(3, 2);
@@ -54,6 +63,7 @@ public class CarRentalTest extends TestCase {
     // System.out.println("sum=" + sum);
   }
 
+  @Test
   public void testExpectedReward() {
     CarRental carRental = new CarRental(10);
     Tensor state = Tensors.vector(3, 2);
@@ -63,6 +73,7 @@ public class CarRentalTest extends TestCase {
     // System.out.println("rewardTotal=" + reward);
   }
 
+  @Test
   public void testExpectedRewardNext() {
     CarRental carRental = new CarRental(10);
     Tensor state = Tensors.vector(3, 2);
@@ -73,6 +84,7 @@ public class CarRentalTest extends TestCase {
     // System.out.println("reward=" + reward);
   }
 
+  @Test
   public void testMove() {
     CarRental carRental = new CarRental(20);
     Set<Tensor> set = new HashSet<>();
@@ -85,6 +97,7 @@ public class CarRentalTest extends TestCase {
     assertTrue(30 < set.size());
   }
 
+  @Test
   public void testReward() {
     CarRental carRental = new CarRental(20);
     Tensor state = Tensors.vector(10, 10);

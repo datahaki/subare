@@ -1,6 +1,8 @@
 // code by jph
 package ch.alpine.subare.core.td;
 
+import org.junit.jupiter.api.Test;
+
 import ch.alpine.subare.core.MonteCarloInterface;
 import ch.alpine.subare.core.StateActionCounter;
 import ch.alpine.subare.core.adapter.SimpleTestModel;
@@ -14,9 +16,9 @@ import ch.alpine.subare.core.util.LearningRate;
 import ch.alpine.subare.core.util.PolicyBase;
 import ch.alpine.subare.core.util.PolicyType;
 import ch.alpine.tensor.RealScalar;
-import junit.framework.TestCase;
 
-public class DoubleSarsaTest extends TestCase {
+public class DoubleSarsaTest {
+  @Test
   public void testExact() {
     for (SarsaType sarsaType : SarsaType.values()) {
       MonteCarloInterface monteCarloInterface = SimpleTestModel.INSTANCE;
@@ -38,6 +40,7 @@ public class DoubleSarsaTest extends TestCase {
     }
   }
 
+  @Test
   public void testExact2() {
     for (SarsaType sarsaType : SarsaType.values()) {
       MonteCarloInterface monteCarloInterface = SimpleTestModel.INSTANCE;

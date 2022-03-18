@@ -3,10 +3,10 @@
   <groupId>ch.alpine</groupId>
   <artifactId>subare</artifactId>
   <versioning>
-    <release>0.4.2</release>
+    <release>0.4.3</release>
     <versions>
-      <version>0.4.2</version>
+      <version>0.4.3</version>
     </versions>
-    <lastUpdated>20220123200909</lastUpdated>
+    <lastUpdated>20220318185125</lastUpdated>
   </versioning>
 </metadata>

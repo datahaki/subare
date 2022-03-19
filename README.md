@@ -2,7 +2,7 @@
 
 # ch.alpine.subare
 
-Library for reinforcement learning in Java 17, version `0.4.3`
+Library for reinforcement learning in Java 17, version `0.4.4`
 
 Repository includes algorithms, examples, and exercises from the 2nd edition of [*Reinforcement Learning: An Introduction*](http://incompleteideas.net/book/the-book-2nd.html) by Richard S. Sutton, and Andrew G. Barto.
 
@@ -326,7 +326,7 @@ Specify `dependency` and `repository` of the tensor library in the `pom.xml` fil
   <dependency>
     <groupId>ch.alpine</groupId>
     <artifactId>subare</artifactId>
-    <version>0.4.3</version>
+    <version>0.4.4</version>
   </dependency>
 </dependencies>
 

@@ -3,13 +3,13 @@ package ch.alpine.subare.ch05.racetrack;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.util.AssertFail;
 import ch.alpine.subare.util.Index;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
@@ -25,7 +25,7 @@ public class RacetrackTest {
     assertEquals(statesIndex.size(), 724);
     assertEquals(racetrack.statesStart, Tensors.fromString("{{1, 0, 0, 0}, {2, 0, 0, 0}, {3, 0, 0, 0}}"));
     assertEquals(racetrack.statesTerminal.length() % 3, 1);
-    AssertFail.of(() -> racetrack.actions(Tensors.vector(1, 0, 0)));
+    assertThrows(Exception.class, () -> racetrack.actions(Tensors.vector(1, 0, 0)));
   }
 
   @Test

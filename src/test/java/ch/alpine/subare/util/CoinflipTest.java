@@ -1,6 +1,7 @@
 // code by fluric
 package ch.alpine.subare.util;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -38,7 +39,7 @@ public class CoinflipTest {
 
   @Test
   public void testFail() {
-    AssertFail.of(() -> Coinflip.of(RealScalar.of(-0.1)));
-    AssertFail.of(() -> Coinflip.of(RealScalar.of(1.1)));
+    assertThrows(Exception.class, () -> Coinflip.of(RealScalar.of(-0.1)));
+    assertThrows(Exception.class, () -> Coinflip.of(RealScalar.of(1.1)));
   }
 }

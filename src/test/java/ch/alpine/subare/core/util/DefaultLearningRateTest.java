@@ -2,6 +2,7 @@
 package ch.alpine.subare.core.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,6 @@ import ch.alpine.subare.core.StateActionCounter;
 import ch.alpine.subare.core.adapter.StepAdapter;
 import ch.alpine.subare.core.td.Sarsa;
 import ch.alpine.subare.core.td.SarsaType;
-import ch.alpine.subare.util.AssertFail;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
@@ -38,13 +38,13 @@ public class DefaultLearningRateTest {
 
   @Test
   public void testFailFactor() {
-    AssertFail.of(() -> DefaultLearningRate.of(0, 1));
-    AssertFail.of(() -> DefaultLearningRate.of(-1, 1));
+    assertThrows(Exception.class, () -> DefaultLearningRate.of(0, 1));
+    assertThrows(Exception.class, () -> DefaultLearningRate.of(-1, 1));
   }
 
   @Test
   public void testFailExponent() {
-    AssertFail.of(() -> DefaultLearningRate.of(1, 0.5));
-    AssertFail.of(() -> DefaultLearningRate.of(1, 0.4));
+    assertThrows(Exception.class, () -> DefaultLearningRate.of(1, 0.5));
+    assertThrows(Exception.class, () -> DefaultLearningRate.of(1, 0.4));
   }
 }

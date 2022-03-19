@@ -2,10 +2,10 @@
 package ch.alpine.subare.core.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.util.AssertFail;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 
@@ -24,6 +24,6 @@ public class StateActionMapTest {
   public void testDuplicateFail() {
     StateActionMap stateActionMap = new StateActionMap();
     stateActionMap.put(Tensors.vector(1), Tensors.vector(1, 2));
-    AssertFail.of(() -> stateActionMap.put(Tensors.vector(1), Tensors.vector(1, 2)));
+    assertThrows(Exception.class, () -> stateActionMap.put(Tensors.vector(1), Tensors.vector(1, 2)));
   }
 }

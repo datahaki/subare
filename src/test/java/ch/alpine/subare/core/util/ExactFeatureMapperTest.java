@@ -2,12 +2,12 @@
 package ch.alpine.subare.core.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 import ch.alpine.subare.ch04.gambler.GamblerModel;
 import ch.alpine.subare.core.MonteCarloInterface;
-import ch.alpine.subare.util.AssertFail;
 
 public class ExactFeatureMapperTest {
   @Test
@@ -19,6 +19,6 @@ public class ExactFeatureMapperTest {
 
   @Test
   public void testFail() {
-    AssertFail.of(() -> ExactFeatureMapper.of(null));
+    assertThrows(Exception.class, () -> ExactFeatureMapper.of(null));
   }
 }

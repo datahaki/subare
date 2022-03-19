@@ -2,10 +2,10 @@
 package ch.alpine.subare.core.adapter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.util.AssertFail;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.api.TensorUnaryOperator;
@@ -23,6 +23,6 @@ public class PolynomialBasisTest {
   @Test
   public void testFail() {
     TensorUnaryOperator tuo = new PolynomialBasis(4, Clips.interval(50, 100));
-    AssertFail.of(() -> tuo.apply(RealScalar.ZERO));
+    assertThrows(Exception.class, () -> tuo.apply(RealScalar.ZERO));
   }
 }

@@ -2,10 +2,10 @@
 package ch.alpine.subare.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.util.AssertFail;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -34,6 +34,6 @@ public class DiscountFunctionTest {
 
   @Test
   public void testFail() {
-    AssertFail.of(() -> DiscountFunction.of(RealScalar.of(1.1)));
+    assertThrows(Exception.class, () -> DiscountFunction.of(RealScalar.of(1.1)));
   }
 }

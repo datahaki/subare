@@ -2,6 +2,7 @@
 package ch.alpine.subare.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -46,12 +47,12 @@ public class RandomChoiceTest {
 
   @Test
   public void testTensorFail() {
-    AssertFail.of(() -> RandomChoice.of(Tensors.vector()));
-    AssertFail.of(() -> RandomChoice.of(RealScalar.ONE));
+    assertThrows(Exception.class, () -> RandomChoice.of(Tensors.vector()));
+    assertThrows(Exception.class, () -> RandomChoice.of(RealScalar.ONE));
   }
 
   @Test
   public void testListEmptyFail() {
-    AssertFail.of(() -> RandomChoice.of(Collections.emptyList()));
+    assertThrows(Exception.class, () -> RandomChoice.of(Collections.emptyList()));
   }
 }

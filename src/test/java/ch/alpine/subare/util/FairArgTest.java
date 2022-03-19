@@ -2,6 +2,7 @@
 package ch.alpine.subare.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -51,11 +52,11 @@ public class FairArgTest {
 
   @Test
   public void testEmptyFail() {
-    AssertFail.of(() -> FairArg.max(Tensors.empty()));
+    assertThrows(Exception.class, () -> FairArg.max(Tensors.empty()));
   }
 
   @Test
   public void testScalarFail() {
-    AssertFail.of(() -> FairArg.max(RealScalar.ONE));
+    assertThrows(Exception.class, () -> FairArg.max(RealScalar.ONE));
   }
 }

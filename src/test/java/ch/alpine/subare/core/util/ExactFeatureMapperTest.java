@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import ch.alpine.subare.ch04.gambler.GamblerModel;
 import ch.alpine.subare.core.MonteCarloInterface;
 
-public class ExactFeatureMapperTest {
+class ExactFeatureMapperTest {
   @Test
   public void testSimple() {
     MonteCarloInterface monteCarloInterface = GamblerModel.createDefault();

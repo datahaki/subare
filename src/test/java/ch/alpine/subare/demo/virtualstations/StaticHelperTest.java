@@ -12,7 +12,7 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Array;
 
-public class StaticHelperTest {
+class StaticHelperTest {
   @Test
   public void testSimple() {
     Tensor prefix = Tensors.empty();

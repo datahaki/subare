@@ -11,7 +11,7 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.red.Total;
 import ch.alpine.tensor.sca.pow.Power;
 
-public class VirtualStationsTest {
+class VirtualStationsTest {
   // each state the time interval followed by the NVnodes many virtual node informations
   // per time interval there are 2^NVnodes many different states (the end state is an additional interval)
   @Test

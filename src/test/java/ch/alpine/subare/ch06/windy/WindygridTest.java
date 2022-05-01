@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 
-public class WindygridTest {
+class WindygridTest {
   @Test
   public void testWindy() {
     Windygrid windyGrid = Windygrid.createFour();

@@ -14,7 +14,7 @@ import ch.alpine.tensor.red.Mean;
 import ch.alpine.tensor.red.Variance;
 import ch.alpine.tensor.sca.Chop;
 
-public class BanditsModelTest {
+class BanditsModelTest {
   @Test
   public void testMean() {
     int num = 10;

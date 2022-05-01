@@ -10,7 +10,7 @@ import ch.alpine.subare.core.adapter.SimpleTestModels;
 import ch.alpine.subare.core.util.ExploringStarts;
 import ch.alpine.subare.core.util.PolicyType;
 
-public class MonteCarloExploringStartsTest {
+class MonteCarloExploringStartsTest {
   @Test
   public void testSimple() {
     MonteCarloInterface monteCarloInterface = SimpleTestModel.INSTANCE;

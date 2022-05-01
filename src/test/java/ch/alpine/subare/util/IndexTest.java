@@ -11,7 +11,7 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.num.Pi;
 
-public class IndexTest {
+class IndexTest {
   @Test
   public void testSimple() {
     Tensor tensor = Tensors.vector(5, 7, 11);

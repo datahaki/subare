@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.RealScalar;
 
-public class UnitClipTest {
+class UnitClipTest {
   @Test
   public void testSimple() {
     assertEquals(UnitClip.FUNCTION.apply(DoubleScalar.INDETERMINATE).toString(), DoubleScalar.INDETERMINATE.toString());

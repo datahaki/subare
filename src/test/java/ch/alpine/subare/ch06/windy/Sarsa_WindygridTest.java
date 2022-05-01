@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import ch.alpine.subare.core.td.SarsaType;
 
-public class Sarsa_WindygridTest {
+class Sarsa_WindygridTest {
   @Test
   public void testSimple() throws Exception {
     for (SarsaType sarsaType : SarsaType.values()) {

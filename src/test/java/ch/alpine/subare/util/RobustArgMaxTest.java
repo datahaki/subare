@@ -16,7 +16,7 @@ import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.mat.HilbertMatrix;
 import ch.alpine.tensor.sca.Chop;
 
-public class RobustArgMaxTest {
+class RobustArgMaxTest {
   @Test
   public void testSimple() {
     Tensor tensor = Tensors.vector(-9, 0, 0.9999999, .3, 1, 0.9999999);

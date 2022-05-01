@@ -12,7 +12,7 @@ import ch.alpine.tensor.api.TensorUnaryOperator;
 import ch.alpine.tensor.sca.Chop;
 import ch.alpine.tensor.sca.Clips;
 
-public class LinearApproximationVsTest {
+class LinearApproximationVsTest {
   @Test
   public void testSimple() {
     TensorUnaryOperator represent = new CosineBasis(5, Clips.positive(20));

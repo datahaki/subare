@@ -19,7 +19,7 @@ import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.UnitVector;
 import ch.alpine.tensor.mat.IdentityMatrix;
 
-public class RandomChoiceTest {
+class RandomChoiceTest {
   @Test
   public void testSimple() {
     Set<Integer> set = new HashSet<>();

@@ -11,7 +11,7 @@ import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.api.TensorUnaryOperator;
 import ch.alpine.tensor.sca.Clips;
 
-public class PolynomialBasisTest {
+class PolynomialBasisTest {
   @Test
   public void testLo() {
     TensorUnaryOperator tuo = new PolynomialBasis(4, Clips.interval(50, 100));

@@ -19,7 +19,7 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensors;
 
-public class GridworldTest {
+class GridworldTest {
   @Test
   public void testBasics() {
     Gridworld gridworld = new Gridworld();

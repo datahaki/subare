@@ -25,7 +25,7 @@ import ch.alpine.subare.core.util.PolicyType;
 import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.RealScalar;
 
-public class TrueOnlineSarsaTest {
+class TrueOnlineSarsaTest {
   @Test
   public void testExact() {
     for (SarsaType sarsaType : SarsaType.values()) {

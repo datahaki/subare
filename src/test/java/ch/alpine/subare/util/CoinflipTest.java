@@ -11,7 +11,7 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.sca.Chop;
 
-public class CoinflipTest {
+class CoinflipTest {
   @Test
   public void testProbabilityDistribution() {
     Scalar headProbability0 = RealScalar.of(0.1);

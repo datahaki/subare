@@ -10,7 +10,7 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Range;
 
-public class RandomwalkTest {
+class RandomwalkTest {
   @Test
   public void testSmall() {
     Randomwalk rw = new Randomwalk(5);

@@ -12,7 +12,7 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.red.Tally;
 
-public class ChargerTest {
+class ChargerTest {
   @Test
   public void testSimple() {
     TripProfile tripProfile = new ConstantDrawTrip(16, 2);

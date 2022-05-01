@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Dimensions;
 
-public class DynamazeHelperTest {
+class DynamazeHelperTest {
   @Test
   public void testMaze2() {
     Tensor image = DynamazeHelper.load("maze2");

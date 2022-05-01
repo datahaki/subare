@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensors;
 
-public class CliffwalkTest {
+class CliffwalkTest {
   @Test
   public void testStates() {
     Cliffwalk cliffwalk = new Cliffwalk(12, 4);

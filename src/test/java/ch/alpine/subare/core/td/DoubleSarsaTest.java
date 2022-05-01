@@ -17,7 +17,7 @@ import ch.alpine.subare.core.util.PolicyBase;
 import ch.alpine.subare.core.util.PolicyType;
 import ch.alpine.tensor.RealScalar;
 
-public class DoubleSarsaTest {
+class DoubleSarsaTest {
   @Test
   public void testExact() {
     for (SarsaType sarsaType : SarsaType.values()) {

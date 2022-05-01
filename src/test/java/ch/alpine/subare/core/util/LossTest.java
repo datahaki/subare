@@ -12,7 +12,7 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 
-public class LossTest {
+class LossTest {
   static DiscreteModel create14() {
     return new DiscreteModel() {
       @Override

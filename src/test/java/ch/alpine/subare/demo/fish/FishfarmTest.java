@@ -10,7 +10,7 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Range;
 
-public class FishfarmTest {
+class FishfarmTest {
   @Test
   public void testActions() {
     Fishfarm fishfarm = new Fishfarm(20, 10);

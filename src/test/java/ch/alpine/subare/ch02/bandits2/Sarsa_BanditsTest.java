@@ -13,7 +13,7 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.sca.Chop;
 import ch.alpine.tensor.sca.Sign;
 
-public class Sarsa_BanditsTest {
+class Sarsa_BanditsTest {
   @Test
   public void testSimple() {
     BanditsModel banditsModel = new BanditsModel(10);

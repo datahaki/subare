@@ -15,7 +15,7 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.sca.Abs;
 
-public class InfiniteVarianceTest {
+class InfiniteVarianceTest {
   @Test
   public void testActionValueIteration() {
     InfiniteVariance infiniteVariance = new InfiniteVariance();

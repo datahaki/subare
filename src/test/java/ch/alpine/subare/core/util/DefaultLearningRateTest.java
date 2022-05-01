@@ -19,7 +19,7 @@ import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 
-public class DefaultLearningRateTest {
+class DefaultLearningRateTest {
   @Test
   public void testFirst() {
     LearningRate learningRate = DefaultLearningRate.of(0.9, .51);

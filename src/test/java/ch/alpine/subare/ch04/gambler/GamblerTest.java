@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensors;
 
-public class GamblerTest {
+class GamblerTest {
   @Test
   public void testActions() {
     GamblerModel gamblerModel = new GamblerModel(100, RealScalar.of(0.4));

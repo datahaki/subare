@@ -18,7 +18,7 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.ext.Serialization;
 
-public class FairArgTest {
+class FairArgTest {
   @Test
   public void testMaxIsFair() throws ClassNotFoundException, IOException {
     Tensor d = Tensors.vectorDouble(3, .3, 3, .6, 3);

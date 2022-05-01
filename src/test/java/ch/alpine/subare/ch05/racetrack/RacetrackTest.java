@@ -17,7 +17,7 @@ import ch.alpine.tensor.alg.ArrayQ;
 import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.io.ResourceData;
 
-public class RacetrackTest {
+class RacetrackTest {
   @Test
   public void testStartAction() {
     Racetrack racetrack = new Racetrack(ResourceData.of("/ch05/track0.png"), 3);

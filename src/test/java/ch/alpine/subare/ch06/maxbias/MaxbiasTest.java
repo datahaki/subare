@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensors;
 
-public class MaxbiasTest {
+class MaxbiasTest {
   @Test
   public void testMove() {
     Maxbias maxbias = new Maxbias(3);

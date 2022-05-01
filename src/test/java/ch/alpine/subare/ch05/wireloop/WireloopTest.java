@@ -15,7 +15,7 @@ import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.red.Entrywise;
 import ch.alpine.tensor.red.Max;
 
-public class WireloopTest {
+class WireloopTest {
   @Test
   public void testSimple() {
     String name = "wirec";

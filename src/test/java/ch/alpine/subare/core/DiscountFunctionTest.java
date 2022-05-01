@@ -12,7 +12,7 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.num.Polynomial;
 
-public class DiscountFunctionTest {
+class DiscountFunctionTest {
   @Test
   public void testSimple() {
     Tensor coeffs = Tensors.vector(3, 2, -3, 2, .3);

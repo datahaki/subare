@@ -15,7 +15,7 @@ import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensor;
 
-public class UcbPolicyTest {
+class UcbPolicyTest {
   @Test
   public void testSimple() {
     Airport airport = Airport.INSTANCE;

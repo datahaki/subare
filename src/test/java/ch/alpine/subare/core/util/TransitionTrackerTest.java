@@ -8,7 +8,7 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-public class TransitionTrackerTest {
+class TransitionTrackerTest {
   @Test
   public void testSimple() {
     Map<Integer, Integer> map = new HashMap<>();

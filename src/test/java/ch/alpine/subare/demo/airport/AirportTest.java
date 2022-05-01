@@ -17,7 +17,7 @@ import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.sca.Clip;
 import ch.alpine.tensor.sca.Clips;
 
-public class AirportTest {
+class AirportTest {
   @Test
   public void testTerminalState() {
     Airport airport = Airport.INSTANCE;

@@ -12,7 +12,7 @@ import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.api.TensorUnaryOperator;
 import ch.alpine.tensor.sca.Clips;
 
-public class CosineBasisTest {
+class CosineBasisTest {
   @Test
   public void testLo() {
     TensorUnaryOperator fb = new CosineBasis(4, Clips.interval(50, 100));

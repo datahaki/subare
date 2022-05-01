@@ -9,7 +9,7 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Range;
 
-public class SawtoothTest {
+class SawtoothTest {
   @Test
   public void testSimple() {
     Sawtooth sawtooth = new Sawtooth(3);

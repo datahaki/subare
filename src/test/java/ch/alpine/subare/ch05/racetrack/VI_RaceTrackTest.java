@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import ch.alpine.tensor.ext.HomeDirectory;
 
-public class VI_RaceTrackTest {
+class VI_RaceTrackTest {
   @Test
   public void testSimple() throws Exception {
     File file = HomeDirectory.Pictures(getClass().getSimpleName() + ".gif");

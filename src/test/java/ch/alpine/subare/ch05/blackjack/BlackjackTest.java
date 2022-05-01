@@ -16,7 +16,7 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.red.Tally;
 
-public class BlackjackTest {
+class BlackjackTest {
   @SuppressWarnings("unused")
   @Test
   public void testSimple() {

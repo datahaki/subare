@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.mat.Tolerance;
 
-public class LinearExplorationRateTest {
+class LinearExplorationRateTest {
   @Test
   public void testSimple() {
     LinearExplorationRate.of(10, 1, .5);

@@ -13,7 +13,7 @@ import ch.alpine.subare.core.util.LearningRate;
 import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.RealScalar;
 
-public class Sarsa_GamblerTest {
+class Sarsa_GamblerTest {
   @Test
   public void testSimple() throws Exception {
     for (SarsaType sarsaType : SarsaType.values()) {

@@ -15,7 +15,7 @@ import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.red.Mean;
 import ch.alpine.tensor.sca.Chop;
 
-public class AverageTrackerTest {
+class AverageTrackerTest {
   @Test
   public void testAverage() {
     AverageTracker avg = new AverageTracker();

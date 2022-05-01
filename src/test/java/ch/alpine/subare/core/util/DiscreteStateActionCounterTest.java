@@ -15,7 +15,7 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensors;
 
-public class DiscreteStateActionCounterTest {
+class DiscreteStateActionCounterTest {
   @Test
   public void testSimple() {
     StateActionCounter stateActionCounter = new DiscreteStateActionCounter();

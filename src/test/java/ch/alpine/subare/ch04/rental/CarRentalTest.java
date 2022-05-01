@@ -16,7 +16,7 @@ import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Range;
 import ch.alpine.tensor.sca.Chop;
 
-public class CarRentalTest {
+class CarRentalTest {
   @Test
   public void testActions() {
     CarRental carRental = new CarRental(20);

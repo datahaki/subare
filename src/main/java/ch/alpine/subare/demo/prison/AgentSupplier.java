@@ -2,7 +2,6 @@
 package ch.alpine.subare.demo.prison;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -18,7 +17,7 @@ import ch.alpine.tensor.Scalar;
 
 /* package */ enum AgentSupplier {
   ;
-  public static final List<Supplier<Agent>> mixed = Arrays.asList( //
+  public static final List<Supplier<Agent>> mixed = List.of( //
       // () -> new ConstantAgent(2, 0), //
       // () -> new ConstantAgent(2, 1), //
       () -> new TitForTatAgent(), //

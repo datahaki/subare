@@ -2,7 +2,6 @@
 package ch.alpine.subare.core.util;
 
 import java.util.ArrayDeque;
-import java.util.Arrays;
 import java.util.Deque;
 import java.util.List;
 
@@ -19,7 +18,7 @@ public abstract class DequeExploringStarts extends AbstractExploringStarts {
       MonteCarloInterface monteCarloInterface, int nstep, DequeDigest... dequeDigest) {
     super(monteCarloInterface);
     this.nstep = nstep;
-    list = Arrays.asList(dequeDigest);
+    list = List.of(dequeDigest);
     nextBatch();
   }
 

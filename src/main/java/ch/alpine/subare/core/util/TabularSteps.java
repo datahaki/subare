@@ -1,7 +1,6 @@
 // code by jph
 package ch.alpine.subare.core.util;
 
-import java.util.Arrays;
 import java.util.List;
 
 import ch.alpine.subare.core.DiscreteModel;
@@ -18,7 +17,7 @@ public enum TabularSteps {
    * @param sampleModel
    * @param stepDigest */
   public static void batch(DiscreteModel discreteModel, SampleModel sampleModel, StepDigest... stepDigest) {
-    List<StepDigest> list = Arrays.asList(stepDigest);
+    List<StepDigest> list = List.of(stepDigest);
     TabularStepBatch tabularStepBatch = new TabularStepBatch(discreteModel, sampleModel);
     while (tabularStepBatch.hasNext()) {
       StepInterface stepInterface = tabularStepBatch.next();

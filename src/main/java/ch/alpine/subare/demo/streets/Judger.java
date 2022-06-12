@@ -1,7 +1,6 @@
 // code by jph
 package ch.alpine.subare.demo.streets;
 
-import java.util.Arrays;
 import java.util.List;
 
 import ch.alpine.subare.ch02.Agent;
@@ -18,7 +17,7 @@ class Judger {
   @SafeVarargs
   Judger(Network network, Agent... agents) {
     this.network = network;
-    list = Arrays.asList(agents);
+    list = List.of(agents);
   }
 
   void play() {

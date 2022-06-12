@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +31,7 @@ class RacetrackTest {
   @Test
   public void testMove() {
     Racetrack racetrack = new Racetrack(ResourceData.of("/ch05/track0.png"), 3);
-    assertEquals(Dimensions.of(racetrack.image()), Arrays.asList(8, 11, 4));
+    assertEquals(Dimensions.of(racetrack.image()), List.of(8, 11, 4));
     Tensor start = Tensors.vector(1, 0, 0, 0);
     assertTrue(racetrack.isStart(start));
     assertFalse(racetrack.isTerminal(start));

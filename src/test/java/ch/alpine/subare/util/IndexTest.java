@@ -13,7 +13,7 @@ import ch.alpine.tensor.num.Pi;
 
 class IndexTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     Tensor tensor = Tensors.vector(5, 7, 11);
     Index index = Index.build(tensor);
     assertEquals(index.of(RealScalar.of(7)), 1);
@@ -21,7 +21,7 @@ class IndexTest {
   }
 
   @Test
-  public void testScalarFail() {
+  void testScalarFail() {
     assertThrows(Exception.class, () -> Index.build(Pi.VALUE));
   }
 }

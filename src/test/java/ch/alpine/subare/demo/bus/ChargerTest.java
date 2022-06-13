@@ -14,7 +14,7 @@ import ch.alpine.tensor.red.Tally;
 
 class ChargerTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     TripProfile tripProfile = new ConstantDrawTrip(16, 2);
     Charger charger = new Charger(tripProfile, 7);
     assertTrue(charger.isTerminal(Tensors.vector(15, 2)));
@@ -23,7 +23,7 @@ class ChargerTest {
   }
 
   @Test
-  public void testDrawn() {
+  void testDrawn() {
     TripProfile tripProfile = new ConstantDrawTrip(16, 2);
     Charger charger = new Charger(tripProfile, 7);
     final int time = 2;
@@ -33,7 +33,7 @@ class ChargerTest {
   }
 
   @Test
-  public void testCostPerUnit() {
+  void testCostPerUnit() {
     TripProfile tripProfile = new ConstantDrawTrip(16, 2);
     Tensor costs = Tensors.vector(i -> tripProfile.costPerUnit(i), 10);
     assertEquals(Tally.of(costs).size(), 4);

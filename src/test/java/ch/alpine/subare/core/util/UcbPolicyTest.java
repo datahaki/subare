@@ -17,7 +17,7 @@ import ch.alpine.tensor.Tensor;
 
 class UcbPolicyTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     Airport airport = Airport.INSTANCE;
     DiscreteQsa qsa = DiscreteQsa.build(airport);
     StateActionCounter sac = new DiscreteStateActionCounter();
@@ -53,7 +53,7 @@ class UcbPolicyTest {
   }
 
   @Test
-  public void testUcb() {
+  void testUcb() {
     Airport airport = Airport.INSTANCE;
     DiscreteQsa qsa = DiscreteQsa.build(airport);
     StateActionCounter sac = new DiscreteStateActionCounter();

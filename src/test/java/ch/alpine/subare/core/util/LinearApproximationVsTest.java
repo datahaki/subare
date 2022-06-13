@@ -14,7 +14,7 @@ import ch.alpine.tensor.sca.Clips;
 
 class LinearApproximationVsTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     TensorUnaryOperator represent = new CosineBasis(5, Clips.positive(20));
     VsInterface vs = LinearApproximationVs.create(represent, Tensors.vector(0, 1, 0, 0, 0));
     Scalar value = vs.value(RealScalar.of(10));

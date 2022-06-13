@@ -11,7 +11,7 @@ import ch.alpine.tensor.Tensors;
 
 class StateActionMapTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     StateActionMap stateActionMap = new StateActionMap();
     Tensor key = Tensors.vector(1);
     Tensor values = Tensors.vector(1, 2);
@@ -21,7 +21,7 @@ class StateActionMapTest {
   }
 
   @Test
-  public void testDuplicateFail() {
+  void testDuplicateFail() {
     StateActionMap stateActionMap = new StateActionMap();
     stateActionMap.put(Tensors.vector(1), Tensors.vector(1, 2));
     assertThrows(Exception.class, () -> stateActionMap.put(Tensors.vector(1), Tensors.vector(1, 2)));

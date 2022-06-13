@@ -10,14 +10,14 @@ import ch.alpine.tensor.mat.Tolerance;
 
 class LinearExplorationRateTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     LinearExplorationRate.of(10, 1, .5);
     LinearExplorationRate.of(10, 1, 1);
     assertThrows(Exception.class, () -> LinearExplorationRate.of(10, .1, .2));
   }
 
   @Test
-  public void testValue() {
+  void testValue() {
     LinearExplorationRate explorationRate = (LinearExplorationRate) LinearExplorationRate.of(10, 0.7, .2);
     Tolerance.CHOP.requireClose(explorationRate.epsilon(RealScalar.of(0)), RealScalar.of(0.7));
     Tolerance.CHOP.requireClose(explorationRate.epsilon(RealScalar.of(5)), RealScalar.of(0.45));

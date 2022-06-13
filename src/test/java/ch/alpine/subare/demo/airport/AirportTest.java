@@ -19,7 +19,7 @@ import ch.alpine.tensor.sca.Clips;
 
 class AirportTest {
   @Test
-  public void testTerminalState() {
+  void testTerminalState() {
     Airport airport = Airport.INSTANCE;
     assertEquals(airport.isTerminal(Tensors.vector(Airport.LASTT, 0, Airport.VEHICLES)), true);
     assertEquals(airport.actions(Tensors.vector(Airport.LASTT, 0, Airport.VEHICLES)), Array.zeros(1, 1));
@@ -30,7 +30,7 @@ class AirportTest {
   }
 
   @Test
-  public void testCustProb() {
+  void testCustProb() {
     Airport airport = Airport.INSTANCE;
     Tensor state = Tensors.vector(1, 2, 3);
     Tensor actions = airport.actions(state);

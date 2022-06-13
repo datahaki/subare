@@ -14,28 +14,28 @@ import ch.alpine.tensor.alg.Array;
 
 class StaticHelperTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     Tensor prefix = Tensors.empty();
     Tensor result = StaticHelper.binaryVectors(3, prefix);
     assertEquals(result.length(), 8);
   }
 
   @Test
-  public void testBaseCase() {
+  void testBaseCase() {
     Tensor prefix = Tensors.empty();
     Tensor result = StaticHelper.binaryVectors(0, prefix);
     assertEquals(result.length(), 0);
   }
 
   @Test
-  public void testMore() {
+  void testMore() {
     Tensor result = StaticHelper.binaryVectors(2, Tensors.vector(1, 2, 3, 4).map(Tensors::of));
     assertEquals(result, Tensors.fromString( //
         "{{1, 1, 1}, {1, 1, 0}, {1, 0, 1}, {1, 0, 0}, {2, 1, 1}, {2, 1, 0}, {2, 0, 1}, {2, 0, 0}, {3, 1, 1}, {3, 1, 0}, {3, 0, 1}, {3, 0, 0}, {4, 1, 1}, {4, 1, 0}, {4, 0, 1}, {4, 0, 0}}"));
   }
 
   @Test
-  public void testZeroVectorsEmpty() {
+  void testZeroVectorsEmpty() {
     Tensor prefix = Tensors.empty();
     Tensor result1 = StaticHelper.zeroVectors(1, prefix);
     Tensor result2 = StaticHelper.zeroVectors(10, prefix);
@@ -44,7 +44,7 @@ class StaticHelperTest {
   }
 
   @Test
-  public void testZeroVectorsFilled() {
+  void testZeroVectorsFilled() {
     Tensor prefix = Tensors.of(Tensors.vector(1, 2));
     Tensor result0 = StaticHelper.zeroVectors(0, prefix);
     Tensor result1 = StaticHelper.zeroVectors(1, prefix);
@@ -61,7 +61,7 @@ class StaticHelperTest {
   }
 
   @Test
-  public void testPackageVisibility() {
+  void testPackageVisibility() {
     assertFalse(Modifier.isPublic(StaticHelper.class.getModifiers()));
   }
 }

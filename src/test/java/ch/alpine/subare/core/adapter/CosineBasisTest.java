@@ -14,21 +14,21 @@ import ch.alpine.tensor.sca.Clips;
 
 class CosineBasisTest {
   @Test
-  public void testLo() {
+  void testLo() {
     TensorUnaryOperator fb = new CosineBasis(4, Clips.interval(50, 100));
     Tensor result = fb.apply(RealScalar.of(50));
     assertEquals(result, Tensors.vector(1, 1, 1, 1));
   }
 
   @Test
-  public void testHi() {
+  void testHi() {
     TensorUnaryOperator fb = new CosineBasis(4, Clips.interval(0, 100));
     Tensor result = fb.apply(RealScalar.of(100));
     assertEquals(result, Tensors.vector(1, -1, 1, -1));
   }
 
   @Test
-  public void testFail() {
+  void testFail() {
     TensorUnaryOperator tuo = new CosineBasis(4, Clips.interval(50, 100));
     assertThrows(Exception.class, () -> tuo.apply(RealScalar.ZERO));
   }

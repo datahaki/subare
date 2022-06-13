@@ -17,7 +17,7 @@ import ch.alpine.tensor.Tensors;
 
 class DiscreteStateActionCounterTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     StateActionCounter stateActionCounter = new DiscreteStateActionCounter();
     assertFalse(stateActionCounter.isEncountered(Tensors.vector(1, 2, 3)));
     Scalar scalar = stateActionCounter.stateCount(Tensors.vector(1, 2, 3));

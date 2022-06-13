@@ -17,7 +17,7 @@ import ch.alpine.tensor.RealScalar;
 
 class PrioritizedSweepingTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     SimpleTestModel simpleTestModel = SimpleTestModel.INSTANCE;
     LearningRate learningRate = DefaultLearningRate.of(8, 2);
     DiscreteQsa qsa = DiscreteQsa.build(simpleTestModel, RealScalar.ZERO);

@@ -19,7 +19,7 @@ import ch.alpine.tensor.RealScalar;
 
 class DoubleSarsaTest {
   @Test
-  public void testExact() {
+  void testExact() {
     for (SarsaType sarsaType : SarsaType.values()) {
       MonteCarloInterface monteCarloInterface = SimpleTestModel.INSTANCE;
       LearningRate learningRate = DefaultLearningRate.of(RealScalar.of(2.3), RealScalar.of(0.6));
@@ -41,7 +41,7 @@ class DoubleSarsaTest {
   }
 
   @Test
-  public void testExact2() {
+  void testExact2() {
     for (SarsaType sarsaType : SarsaType.values()) {
       MonteCarloInterface monteCarloInterface = SimpleTestModel.INSTANCE;
       LearningRate learningRate = ConstantLearningRate.one();

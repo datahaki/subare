@@ -27,7 +27,7 @@ import ch.alpine.tensor.RealScalar;
 
 class TrueOnlineSarsaTest {
   @Test
-  public void testExact() {
+  void testExact() {
     for (SarsaType sarsaType : SarsaType.values()) {
       MonteCarloInterface monteCarloInterface = SimpleTestModel.INSTANCE;
       FeatureMapper featureMapper = ExactFeatureMapper.of(monteCarloInterface);
@@ -45,7 +45,7 @@ class TrueOnlineSarsaTest {
   }
 
   @Test
-  public void testLambda() {
+  void testLambda() {
     for (SarsaType sarsaType : SarsaType.values()) {
       MonteCarloInterface monteCarloInterface = SimpleTestModel.INSTANCE;
       FeatureMapper featureMapper = ExactFeatureMapper.of(monteCarloInterface);
@@ -66,7 +66,7 @@ class TrueOnlineSarsaTest {
   }
 
   @Test
-  public void testFailLambda() {
+  void testFailLambda() {
     MonteCarloInterface monteCarloInterface = new GamblerModel(10, RationalScalar.HALF);
     LearningRate learningRate = ConstantLearningRate.of(RationalScalar.HALF);
     FeatureMapper featureMapper = ExactFeatureMapper.of(monteCarloInterface);
@@ -76,7 +76,7 @@ class TrueOnlineSarsaTest {
   }
 
   @Test
-  public void testFail() {
+  void testFail() {
     LearningRate learningRate = ConstantLearningRate.of(RationalScalar.HALF);
     MonteCarloInterface monteCarloInterface = new GamblerModel(10, RationalScalar.HALF);
     FeatureMapper featureMapper = ExactFeatureMapper.of(monteCarloInterface);

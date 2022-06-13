@@ -21,7 +21,7 @@ import ch.alpine.tensor.mat.IdentityMatrix;
 
 class RandomChoiceTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     Set<Integer> set = new HashSet<>();
     for (int index = 0; index < 100; ++index) {
       int value = RandomChoice.of(Arrays.asList(1, 2, 3, 4));
@@ -31,13 +31,13 @@ class RandomChoiceTest {
   }
 
   @Test
-  public void testTensor() {
+  void testTensor() {
     Scalar scalar = RandomChoice.of(Tensors.vector(2, 5));
     assertTrue(scalar.equals(RealScalar.of(2)) || scalar.equals(RealScalar.of(5)));
   }
 
   @Test
-  public void testIdentityMatrix() {
+  void testIdentityMatrix() {
     Tensor tensor = RandomChoice.of(IdentityMatrix.of(3));
     assertTrue( //
         tensor.equals(UnitVector.of(3, 0)) || //
@@ -46,13 +46,13 @@ class RandomChoiceTest {
   }
 
   @Test
-  public void testTensorFail() {
+  void testTensorFail() {
     assertThrows(Exception.class, () -> RandomChoice.of(Tensors.vector()));
     assertThrows(Exception.class, () -> RandomChoice.of(RealScalar.ONE));
   }
 
   @Test
-  public void testListEmptyFail() {
+  void testListEmptyFail() {
     assertThrows(Exception.class, () -> RandomChoice.of(Collections.emptyList()));
   }
 }

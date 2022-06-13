@@ -20,7 +20,7 @@ import ch.alpine.tensor.ext.Serialization;
 
 class FairArgTest {
   @Test
-  public void testMaxIsFair() throws ClassNotFoundException, IOException {
+  void testMaxIsFair() throws ClassNotFoundException, IOException {
     Tensor d = Tensors.vectorDouble(3, .3, 3, .6, 3);
     Set<Integer> set = new HashSet<>();
     FairArg fairArg = Serialization.copy(FairArg.max(d));
@@ -30,7 +30,7 @@ class FairArgTest {
   }
 
   @Test
-  public void testMinIsFair() {
+  void testMinIsFair() {
     Tensor d = Tensors.vectorDouble(3, .3, 3, .6, 3, .3);
     Set<Integer> set = new HashSet<>();
     FairArg fairArg = FairArg.min(d);
@@ -40,7 +40,7 @@ class FairArgTest {
   }
 
   @Test
-  public void testInfty() {
+  void testInfty() {
     Tensor d = Tensors.of( //
         DoubleScalar.POSITIVE_INFINITY, RealScalar.ONE, //
         DoubleScalar.POSITIVE_INFINITY, DoubleScalar.POSITIVE_INFINITY);
@@ -51,12 +51,12 @@ class FairArgTest {
   }
 
   @Test
-  public void testEmptyFail() {
+  void testEmptyFail() {
     assertThrows(Exception.class, () -> FairArg.max(Tensors.empty()));
   }
 
   @Test
-  public void testScalarFail() {
+  void testScalarFail() {
     assertThrows(Exception.class, () -> FairArg.max(RealScalar.ONE));
   }
 }

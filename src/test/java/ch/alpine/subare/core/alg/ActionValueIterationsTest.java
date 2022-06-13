@@ -10,7 +10,7 @@ import ch.alpine.tensor.RealScalar;
 
 class ActionValueIterationsTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     DiscreteQsa qsa = ActionValueIterations.solve(SimpleTestModel.INSTANCE, RealScalar.of(.001));
     SimpleTestModels._checkExact(qsa);
   }

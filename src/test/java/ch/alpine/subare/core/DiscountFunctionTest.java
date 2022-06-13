@@ -14,7 +14,7 @@ import ch.alpine.tensor.num.Polynomial;
 
 class DiscountFunctionTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     Tensor coeffs = Tensors.vector(3, 2, -3, 2, .3);
     DiscountFunction discountFunction = DiscountFunction.of(RealScalar.ONE);
     Scalar gain1 = discountFunction.apply(coeffs);
@@ -23,7 +23,7 @@ class DiscountFunctionTest {
   }
 
   @Test
-  public void testHorner() {
+  void testHorner() {
     Tensor coeffs = Tensors.vector(3, 2, -3, 2, .3);
     Scalar alpha = RealScalar.of(.2);
     DiscountFunction discountFunction = DiscountFunction.of(alpha);
@@ -33,7 +33,7 @@ class DiscountFunctionTest {
   }
 
   @Test
-  public void testFail() {
+  void testFail() {
     assertThrows(Exception.class, () -> DiscountFunction.of(RealScalar.of(1.1)));
   }
 }

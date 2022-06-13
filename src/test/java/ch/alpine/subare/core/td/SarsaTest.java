@@ -23,7 +23,7 @@ import ch.alpine.tensor.RealScalar;
 
 class SarsaTest {
   @Test
-  public void testConstantOneExact() {
+  void testConstantOneExact() {
     for (SarsaType sarsaType : SarsaType.values()) {
       MonteCarloInterface monteCarloInterface = SimpleTestModel.INSTANCE;
       LearningRate learningRate = ConstantLearningRate.one();
@@ -40,7 +40,7 @@ class SarsaTest {
   }
 
   @Test
-  public void testConstantNonOneExact() {
+  void testConstantNonOneExact() {
     for (SarsaType sarsaType : SarsaType.values()) {
       MonteCarloInterface monteCarloInterface = SimpleTestModel.INSTANCE;
       DiscreteQsa qsa = DiscreteQsa.build(monteCarloInterface);
@@ -57,7 +57,7 @@ class SarsaTest {
   }
 
   @Test
-  public void testDefaultExact() {
+  void testDefaultExact() {
     for (SarsaType sarsaType : SarsaType.values()) {
       MonteCarloInterface monteCarloInterface = SimpleTestModel.INSTANCE;
       LearningRate learningRate = DefaultLearningRate.of(1.5, 0.6);

@@ -17,7 +17,7 @@ import ch.alpine.tensor.sca.Abs;
 
 class InfiniteVarianceTest {
   @Test
-  public void testActionValueIteration() {
+  void testActionValueIteration() {
     InfiniteVariance infiniteVariance = new InfiniteVariance();
     ActionValueIteration avi = ActionValueIteration.of(infiniteVariance);
     avi.untilBelow(RealScalar.of(.00001));
@@ -29,7 +29,7 @@ class InfiniteVarianceTest {
   }
 
   @Test
-  public void testValueIteration() {
+  void testValueIteration() {
     InfiniteVariance infiniteVariance = new InfiniteVariance();
     ValueIteration vi = new ValueIteration(infiniteVariance);
     vi.untilBelow(RealScalar.of(.00001));

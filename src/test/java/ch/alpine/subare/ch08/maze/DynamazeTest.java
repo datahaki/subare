@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class DynamazeTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     Dynamaze dynamaze = DynamazeHelper.original("maze2");
     assertEquals(dynamaze.startStates().length(), 1);
   }

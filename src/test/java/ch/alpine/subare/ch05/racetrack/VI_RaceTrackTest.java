@@ -12,7 +12,7 @@ import ch.alpine.tensor.ext.HomeDirectory;
 
 class VI_RaceTrackTest {
   @Test
-  public void testSimple() throws Exception {
+  void testSimple() throws Exception {
     File file = HomeDirectory.Pictures(getClass().getSimpleName() + ".gif");
     assertFalse(file.exists());
     VI_RaceTrack.make("track2", 4, file);

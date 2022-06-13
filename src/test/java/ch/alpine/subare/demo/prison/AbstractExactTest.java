@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 class AbstractExactTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     // ---
   }
 }

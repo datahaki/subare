@@ -12,21 +12,21 @@ import ch.alpine.tensor.alg.Range;
 
 class FishfarmTest {
   @Test
-  public void testActions() {
+  void testActions() {
     Fishfarm fishfarm = new Fishfarm(20, 10);
     Tensor actions = fishfarm.actions(Tensors.vector(2, 6));
     assertEquals(actions, Range.of(0, 6 + 1));
   }
 
   @Test
-  public void testMove() {
+  void testMove() {
     Fishfarm fishfarm = new Fishfarm(20, 10);
     Tensor next = fishfarm.move(Tensors.vector(2, 10), RealScalar.of(1));
     assertEquals(next, Tensors.vector(3, 9));
   }
 
   @Test
-  public void testGrowth() {
+  void testGrowth() {
     int n = 20;
     Fishfarm fishfarm = new Fishfarm(1, n);
     @SuppressWarnings("unused")

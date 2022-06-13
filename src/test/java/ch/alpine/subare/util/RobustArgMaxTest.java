@@ -18,7 +18,7 @@ import ch.alpine.tensor.sca.Chop;
 
 class RobustArgMaxTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     Tensor tensor = Tensors.vector(-9, 0, 0.9999999, .3, 1, 0.9999999);
     RobustArgMax robustArgMax = new RobustArgMax(Chop._06);
     int index = robustArgMax.of(tensor);
@@ -26,7 +26,7 @@ class RobustArgMaxTest {
   }
 
   @Test
-  public void testOptions() {
+  void testOptions() {
     RobustArgMax robustArgMax = new RobustArgMax(Chop._04);
     IntStream options = robustArgMax.options(Tensors.vector(0, 0.99, 1, 1.00001, -3, 0.999999));
     List<Integer> list = options.boxed().collect(Collectors.toList());
@@ -34,7 +34,7 @@ class RobustArgMaxTest {
   }
 
   @Test
-  public void testFailEmpty() {
+  void testFailEmpty() {
     RobustArgMax robustArgMax = new RobustArgMax(Chop._06);
     try {
       robustArgMax.options(Tensors.empty());
@@ -45,7 +45,7 @@ class RobustArgMaxTest {
   }
 
   @Test
-  public void testFailMatrix() {
+  void testFailMatrix() {
     RobustArgMax robustArgMax = new RobustArgMax(Chop._06);
     try {
       robustArgMax.options(HilbertMatrix.of(3, 4));

@@ -17,7 +17,7 @@ import ch.alpine.tensor.red.Max;
 
 class WireloopTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     String name = "wirec";
     WireloopReward wireloopReward = WireloopReward.freeSteps();
     wireloopReward = WireloopReward.constantCost();

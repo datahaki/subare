@@ -33,7 +33,7 @@ class LossTest {
   }
 
   @Test
-  public void testAccumulation0() {
+  void testAccumulation0() {
     DiscreteModel discreteModel = create14();
     DiscreteQsa ref = DiscreteQsa.build(discreteModel).create(Tensors.vector(0, 0, 0, 0).stream());
     DiscreteQsa qsa = DiscreteQsa.build(discreteModel).create(Tensors.vector(0, 0, 0, 0).stream());
@@ -42,7 +42,7 @@ class LossTest {
   }
 
   @Test
-  public void testAccumulation1() {
+  void testAccumulation1() {
     DiscreteModel discreteModel = create14();
     DiscreteQsa ref = DiscreteQsa.build(discreteModel).create(Tensors.vector(0, 0, 1, 0).stream());
     DiscreteQsa qsa = DiscreteQsa.build(discreteModel).create(Tensors.vector(1, 0, 2, -2).stream());
@@ -51,7 +51,7 @@ class LossTest {
   }
 
   @Test
-  public void testAccumulation2() {
+  void testAccumulation2() {
     DiscreteModel discreteModel = create14();
     DiscreteQsa ref = DiscreteQsa.build(discreteModel).create(Tensors.vector(0, 0, 1, 0).stream());
     DiscreteQsa qsa = DiscreteQsa.build(discreteModel).create(Tensors.vector(2, 0, 2, -2).stream());
@@ -60,7 +60,7 @@ class LossTest {
   }
 
   @Test
-  public void testAccumulation3() {
+  void testAccumulation3() {
     DiscreteModel discreteModel = create14();
     DiscreteQsa ref = DiscreteQsa.build(discreteModel).create(Tensors.vector(0, 0, 1, 0).stream());
     DiscreteQsa qsa = DiscreteQsa.build(discreteModel).create(Tensors.vector(2, 2, 1.5, 2).stream());

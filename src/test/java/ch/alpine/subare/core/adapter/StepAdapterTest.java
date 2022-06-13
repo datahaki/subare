@@ -9,7 +9,7 @@ import ch.alpine.tensor.Tensors;
 
 class StepAdapterTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     assertThrows(Exception.class, () -> new StepAdapter(Tensors.empty(), Tensors.empty(), null, Tensors.empty()));
   }
 }

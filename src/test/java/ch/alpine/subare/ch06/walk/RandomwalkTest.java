@@ -12,7 +12,7 @@ import ch.alpine.tensor.alg.Range;
 
 class RandomwalkTest {
   @Test
-  public void testSmall() {
+  void testSmall() {
     Randomwalk rw = new Randomwalk(5);
     assertEquals(rw.states(), Range.of(0, 7));
     assertEquals(rw.startStates(), Tensors.vector(3));
@@ -20,7 +20,7 @@ class RandomwalkTest {
   }
 
   @Test
-  public void testLarge() {
+  void testLarge() {
     Randomwalk rw = new Randomwalk(19);
     assertEquals(rw.states(), Range.of(0, 21));
     assertEquals(rw.startStates(), Tensors.vector(10));

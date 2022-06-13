@@ -10,7 +10,7 @@ import ch.alpine.tensor.RealScalar;
 
 class UnitClipTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     assertEquals(UnitClip.FUNCTION.apply(DoubleScalar.INDETERMINATE).toString(), DoubleScalar.INDETERMINATE.toString());
     assertEquals(UnitClip.FUNCTION.apply(DoubleScalar.POSITIVE_INFINITY), DoubleScalar.POSITIVE_INFINITY);
     assertEquals(UnitClip.FUNCTION.apply(RealScalar.of(3)), RealScalar.ONE);

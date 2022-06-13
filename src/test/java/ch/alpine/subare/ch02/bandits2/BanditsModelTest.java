@@ -16,7 +16,7 @@ import ch.alpine.tensor.sca.Chop;
 
 class BanditsModelTest {
   @Test
-  public void testMean() {
+  void testMean() {
     int num = 10;
     BanditsModel banditsModel = new BanditsModel(num);
     Tensor means = Tensors.vector(k -> banditsModel.expectedReward(BanditsModel.START, RealScalar.of(k)), num);
@@ -26,7 +26,7 @@ class BanditsModelTest {
   }
 
   @Test
-  public void testExact() {
+  void testExact() {
     int num = 20;
     BanditsModel banditsModel = new BanditsModel(num);
     DiscreteQsa ref = BanditsHelper.getOptimalQsa(banditsModel);

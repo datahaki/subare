@@ -17,7 +17,7 @@ import ch.alpine.tensor.sca.Chop;
 
 class AverageTrackerTest {
   @Test
-  public void testAverage() {
+  void testAverage() {
     AverageTracker avg = new AverageTracker();
     avg.track(RealScalar.of(3));
     assertEquals(avg.getScalar(), RealScalar.of(3));
@@ -28,7 +28,7 @@ class AverageTrackerTest {
   }
 
   @Test
-  public void testMean() {
+  void testMean() {
     Tensor vec = Tensors.vector(3, 2, 9, 19, 99, 29, 30);
     AverageTracker avg = new AverageTracker();
     vec.stream().forEach(scalar -> avg.track(scalar));
@@ -36,7 +36,7 @@ class AverageTrackerTest {
   }
 
   @Test
-  public void testMean2() {
+  void testMean2() {
     Tensor vec = Tensors.vector(3, 2, 9, 19, 99, 29, 30);
     AverageTracker avg = new AverageTracker();
     vec.stream().map(Scalar.class::cast).forEach(avg::track);
@@ -44,7 +44,7 @@ class AverageTrackerTest {
   }
 
   @Test
-  public void testEmpty() {
+  void testEmpty() {
     AverageTracker avg = new AverageTracker();
     assertTrue(Objects.isNull(avg.get()));
   }

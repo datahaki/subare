@@ -21,14 +21,14 @@ import ch.alpine.tensor.Tensors;
 
 class GridworldTest {
   @Test
-  public void testBasics() {
+  void testBasics() {
     Gridworld gridworld = new Gridworld();
     assertEquals(gridworld.reward(Tensors.vector(0, 0), Tensors.vector(1, 0), null), RealScalar.ZERO);
     assertEquals(gridworld.reward(Tensors.vector(0, 0), Tensors.vector(-1, 0), null), RealScalar.ONE.negate());
   }
 
   @Test
-  public void testIndex() {
+  void testIndex() {
     Gridworld gridworld = new Gridworld();
     Index actionsIndex = Index.build(gridworld.actions(null));
     int index = actionsIndex.of(Tensors.vector(1, 0));
@@ -36,7 +36,7 @@ class GridworldTest {
   }
 
   @Test
-  public void testR1STQL() {
+  void testR1STQL() {
     Gridworld gridworld = new Gridworld();
     DiscreteQsa ref = ActionValueIterations.solve(gridworld, RealScalar.of(0.0001));
     DiscreteQsa qsa = DiscreteQsa.build(gridworld);

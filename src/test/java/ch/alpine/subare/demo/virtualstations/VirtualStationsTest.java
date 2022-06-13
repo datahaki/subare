@@ -15,7 +15,7 @@ class VirtualStationsTest {
   // each state the time interval followed by the NVnodes many virtual node informations
   // per time interval there are 2^NVnodes many different states (the end state is an additional interval)
   @Test
-  public void testStateSize() {
+  void testStateSize() {
     VirtualStations virtualStations = (VirtualStations) VirtualStations.INSTANCE;
     virtualStations.states().forEach(v -> assertEquals(v.length(), virtualStations.getNVnodes() + 1));
     assertEquals(virtualStations.states().length(), (int) ((virtualStations.getTimeIntervals() + 1) * Math.pow(2, virtualStations.getNVnodes())));
@@ -23,14 +23,14 @@ class VirtualStationsTest {
 
   // startStates all contain the lowest inveral number 0
   @Test
-  public void testStartState() {
+  void testStartState() {
     VirtualStations virtualStations = (VirtualStations) VirtualStations.INSTANCE;
     Tensor startStates = virtualStations.startStates();
     startStates.forEach(v -> assertEquals(v.Get(0), RealScalar.ZERO));
   }
 
   @Test
-  public void testActions() {
+  void testActions() {
     VirtualStations virtualStations = (VirtualStations) VirtualStations.INSTANCE;
     for (Tensor state : virtualStations.states()) {
       Tensor actions = virtualStations.actions(state);
@@ -46,7 +46,7 @@ class VirtualStationsTest {
   }
 
   @Test
-  public void testTerminalStates() {
+  void testTerminalStates() {
     VirtualStations virtualStations = (VirtualStations) VirtualStations.INSTANCE;
     for (Tensor state : virtualStations.states()) {
       assertEquals(virtualStations.isTerminal(state), state.Get(0).equals(RealScalar.of(virtualStations.getTimeIntervals())));

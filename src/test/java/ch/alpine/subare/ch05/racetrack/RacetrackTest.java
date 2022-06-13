@@ -19,7 +19,7 @@ import ch.alpine.tensor.io.ResourceData;
 
 class RacetrackTest {
   @Test
-  public void testStartAction() {
+  void testStartAction() {
     Racetrack racetrack = new Racetrack(ResourceData.of("/ch05/track0.png"), 3);
     Index statesIndex = Index.build(racetrack.states());
     assertEquals(statesIndex.size(), 724);
@@ -29,7 +29,7 @@ class RacetrackTest {
   }
 
   @Test
-  public void testMove() {
+  void testMove() {
     Racetrack racetrack = new Racetrack(ResourceData.of("/ch05/track0.png"), 3);
     assertEquals(Dimensions.of(racetrack.image()), List.of(8, 11, 4));
     Tensor start = Tensors.vector(1, 0, 0, 0);
@@ -42,14 +42,14 @@ class RacetrackTest {
   }
 
   @Test
-  public void testSome() {
+  void testSome() {
     Racetrack racetrack = new Racetrack(ResourceData.of("/ch05/track0.png"), 3);
     for (Tensor state : racetrack.states())
       racetrack.actions(state);
   }
 
   @Test
-  public void testArray() {
+  void testArray() {
     Racetrack racetrack = new Racetrack(ResourceData.of("/ch05/track0.png"), 3);
     ArrayQ.require(racetrack.actions);
   }

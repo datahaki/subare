@@ -12,13 +12,13 @@ import ch.alpine.tensor.alg.Dimensions;
 
 class DynamazeHelperTest {
   @Test
-  public void testMaze2() {
+  void testMaze2() {
     Tensor image = DynamazeHelper.load("maze2");
     assertEquals(Dimensions.of(image), List.of(6, 9, 4));
   }
 
   @Test
-  public void testMaze5() {
+  void testMaze5() {
     Tensor image = DynamazeHelper.load("maze5");
     assertEquals(Dimensions.of(image), List.of(32, 16, 4));
   }

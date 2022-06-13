@@ -21,7 +21,7 @@ import ch.alpine.tensor.Tensors;
 
 class DefaultLearningRateTest {
   @Test
-  public void testFirst() {
+  void testFirst() {
     LearningRate learningRate = DefaultLearningRate.of(0.9, .51);
     GamblerModel gamblerModel = new GamblerModel(100, RealScalar.of(0.4));
     QsaInterface qsa = DiscreteQsa.build(gamblerModel);
@@ -37,13 +37,13 @@ class DefaultLearningRateTest {
   }
 
   @Test
-  public void testFailFactor() {
+  void testFailFactor() {
     assertThrows(Exception.class, () -> DefaultLearningRate.of(0, 1));
     assertThrows(Exception.class, () -> DefaultLearningRate.of(-1, 1));
   }
 
   @Test
-  public void testFailExponent() {
+  void testFailExponent() {
     assertThrows(Exception.class, () -> DefaultLearningRate.of(1, 0.5));
     assertThrows(Exception.class, () -> DefaultLearningRate.of(1, 0.4));
   }

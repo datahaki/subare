@@ -15,7 +15,7 @@ import ch.alpine.tensor.sca.Sign;
 
 class Sarsa_BanditsTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     BanditsModel banditsModel = new BanditsModel(10);
     BanditsTrain sarsa_Bandits = new BanditsTrain(banditsModel);
     LearningRate learningRate = DefaultLearningRate.of(RealScalar.of(16), RealScalar.of(1.15));

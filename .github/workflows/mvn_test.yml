@@ -1,4 +1,4 @@
-name: mvn test
+name: mvn test with JDK 17
 on:
   push:
     paths:
@@ -9,8 +9,11 @@ on:
     types:
       - opened
 jobs:
-  CI:
-    runs-on: ubuntu-latest
+  os_matrix:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
       - name: Set up JDK 17
@@ -18,13 +21,12 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: mvn install tensor 107
+      - name: mvn install tensor
         working-directory: .
         run: |
           cd ..
           git clone https://github.com/datahaki/tensor.git
           cd tensor
-          git checkout v107
           mvn clean install -DskipTests=true
       - name: mvn test
         working-directory: .

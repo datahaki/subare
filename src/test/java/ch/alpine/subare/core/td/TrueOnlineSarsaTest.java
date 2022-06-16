@@ -1,6 +1,8 @@
 // code by jph
 package ch.alpine.subare.core.td;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
 
 import ch.alpine.subare.ch04.gambler.GamblerModel;
@@ -20,13 +22,12 @@ import ch.alpine.subare.core.util.FeatureWeight;
 import ch.alpine.subare.core.util.LearningRate;
 import ch.alpine.subare.core.util.PolicyBase;
 import ch.alpine.subare.core.util.PolicyType;
-import ch.alpine.subare.util.AssertFail;
 import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.RealScalar;
 
-public class TrueOnlineSarsaTest {
+class TrueOnlineSarsaTest {
   @Test
-  public void testExact() {
+  void testExact() {
     for (SarsaType sarsaType : SarsaType.values()) {
       MonteCarloInterface monteCarloInterface = SimpleTestModel.INSTANCE;
       FeatureMapper featureMapper = ExactFeatureMapper.of(monteCarloInterface);
@@ -44,7 +45,7 @@ public class TrueOnlineSarsaTest {
   }
 
   @Test
-  public void testLambda() {
+  void testLambda() {
     for (SarsaType sarsaType : SarsaType.values()) {
       MonteCarloInterface monteCarloInterface = SimpleTestModel.INSTANCE;
       FeatureMapper featureMapper = ExactFeatureMapper.of(monteCarloInterface);
@@ -65,22 +66,22 @@ public class TrueOnlineSarsaTest {
   }
 
   @Test
-  public void testFailLambda() {
+  void testFailLambda() {
     MonteCarloInterface monteCarloInterface = new GamblerModel(10, RationalScalar.HALF);
     LearningRate learningRate = ConstantLearningRate.of(RationalScalar.HALF);
     FeatureMapper featureMapper = ExactFeatureMapper.of(monteCarloInterface);
     FeatureWeight w = new FeatureWeight(featureMapper);
-    AssertFail.of(() -> SarsaType.ORIGINAL.trueOnline(SimpleTestModel.INSTANCE, RealScalar.of(2), featureMapper, //
+    assertThrows(Exception.class, () -> SarsaType.ORIGINAL.trueOnline(SimpleTestModel.INSTANCE, RealScalar.of(2), featureMapper, //
         learningRate, w, new DiscreteStateActionCounter(), null));
   }
 
   @Test
-  public void testFail() {
+  void testFail() {
     LearningRate learningRate = ConstantLearningRate.of(RationalScalar.HALF);
     MonteCarloInterface monteCarloInterface = new GamblerModel(10, RationalScalar.HALF);
     FeatureMapper featureMapper = ExactFeatureMapper.of(monteCarloInterface);
     FeatureWeight w = new FeatureWeight(featureMapper);
-    AssertFail.of(() -> SarsaType.ORIGINAL.trueOnline(null, RealScalar.of(0.9), featureMapper, //
+    assertThrows(Exception.class, () -> SarsaType.ORIGINAL.trueOnline(null, RealScalar.of(0.9), featureMapper, //
         learningRate, w, new DiscreteStateActionCounter(), null));
   }
 }

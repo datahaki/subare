@@ -1,7 +1,6 @@
 // code by jph
 package ch.alpine.subare.ch02;
 
-import ch.alpine.tensor.DeterminateScalarQ;
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.IntegerQ;
 import ch.alpine.tensor.RealScalar;
@@ -9,6 +8,7 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Array;
+import ch.alpine.tensor.chq.FiniteTensorQ;
 import ch.alpine.tensor.red.Total;
 import ch.alpine.tensor.sca.Sign;
 import ch.alpine.tensor.sca.exp.Log;
@@ -62,7 +62,7 @@ public class UCBAgent extends FairArgAgent {
   @Override
   protected Tensor protected_QValues() {
     Tensor dec = getQVector();
-    return dec.flatten(-1).map(Scalar.class::cast).allMatch(DeterminateScalarQ::of) //
+    return FiniteTensorQ.of(dec) //
         ? dec
         : Qt;
   }

@@ -15,9 +15,9 @@ import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensor;
 
-public class UcbPolicyTest {
+class UcbPolicyTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     Airport airport = Airport.INSTANCE;
     DiscreteQsa qsa = DiscreteQsa.build(airport);
     StateActionCounter sac = new DiscreteStateActionCounter();
@@ -53,7 +53,7 @@ public class UcbPolicyTest {
   }
 
   @Test
-  public void testUcb() {
+  void testUcb() {
     Airport airport = Airport.INSTANCE;
     DiscreteQsa qsa = DiscreteQsa.build(airport);
     StateActionCounter sac = new DiscreteStateActionCounter();

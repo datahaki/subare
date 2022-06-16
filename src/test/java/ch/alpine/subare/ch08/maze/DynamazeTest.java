@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-public class DynamazeTest {
+class DynamazeTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     Dynamaze dynamaze = DynamazeHelper.original("maze2");
     assertEquals(dynamaze.startStates().length(), 1);
   }

@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 
 import ch.alpine.subare.core.td.SarsaType;
 
-public class Sarsa_WindygridTest {
+class Sarsa_WindygridTest {
   @Test
-  public void testSimple() throws Exception {
+  void testSimple() throws Exception {
     for (SarsaType sarsaType : SarsaType.values()) {
       Sarsa_Windygrid.handle(sarsaType, 10);
       File file = Sarsa_Windygrid.getFileQsa(sarsaType);

@@ -12,9 +12,9 @@ import ch.alpine.subare.core.util.DiscreteVs;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensors;
 
-public class GridworldTest {
+class GridworldTest {
   @Test
-  public void testVI() {
+  void testVI() {
     Gridworld gridworld = new Gridworld();
     ValueIteration vi = new ValueIteration(gridworld, gridworld);
     vi.untilBelow(RealScalar.of(.0001));
@@ -27,7 +27,7 @@ public class GridworldTest {
   }
 
   @Test
-  public void testAVI() {
+  void testAVI() {
     Gridworld gridworld = new Gridworld();
     ActionValueIteration avi = ActionValueIteration.of(gridworld);
     avi.untilBelow(RealScalar.of(.0001));

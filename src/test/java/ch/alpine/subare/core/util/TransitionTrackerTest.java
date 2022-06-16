@@ -8,9 +8,9 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-public class TransitionTrackerTest {
+class TransitionTrackerTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     Map<Integer, Integer> map = new HashMap<>();
     map.merge(10, 101, (i, j) -> i + j);
     map.merge(10, 1, (i, j) -> i + j);

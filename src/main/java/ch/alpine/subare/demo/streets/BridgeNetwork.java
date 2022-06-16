@@ -1,7 +1,6 @@
 // code by jph
 package ch.alpine.subare.demo.streets;
 
-import java.util.Arrays;
 import java.util.List;
 
 import ch.alpine.tensor.Tensor;
@@ -26,9 +25,9 @@ class BridgeNetwork extends Network {
   @Override
   List<Integer> streetsFromAction(int k) {
     return switch (k) {
-    case 0 -> Arrays.asList(0, 1);
-    case 1 -> Arrays.asList(2, 3);
-    case 2 -> Arrays.asList(2, 4, 1);
+    case 0 -> List.of(0, 1);
+    case 1 -> List.of(2, 3);
+    case 2 -> List.of(2, 4, 1);
     default -> throw new IllegalArgumentException();
     };
   }

@@ -10,9 +10,9 @@ import ch.alpine.subare.core.adapter.SimpleTestModels;
 import ch.alpine.subare.core.util.ExploringStarts;
 import ch.alpine.subare.core.util.PolicyType;
 
-public class MonteCarloExploringStartsTest {
+class MonteCarloExploringStartsTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     MonteCarloInterface monteCarloInterface = SimpleTestModel.INSTANCE;
     MonteCarloExploringStarts mces = new MonteCarloExploringStarts(monteCarloInterface);
     Policy policy = PolicyType.EGREEDY.bestEquiprobable(monteCarloInterface, mces.qsa(), mces.sac());

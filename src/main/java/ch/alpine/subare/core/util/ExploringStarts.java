@@ -1,7 +1,6 @@
 // code by jph
 package ch.alpine.subare.core.util;
 
-import java.util.Arrays;
 import java.util.List;
 
 import ch.alpine.subare.core.DequeDigest;
@@ -30,7 +29,7 @@ public enum ExploringStarts {
 
   public static int batchWithReplay( //
       MonteCarloInterface monteCarloInterface, Policy policy, EpisodeDigest... episodeDigest) {
-    List<EpisodeDigest> list = Arrays.asList(episodeDigest);
+    List<EpisodeDigest> list = List.of(episodeDigest);
     ExploringStartsBatch exploringStartBatch = new ExploringStartsBatch(monteCarloInterface);
     int episodes = 0;
     while (exploringStartBatch.hasNext()) {

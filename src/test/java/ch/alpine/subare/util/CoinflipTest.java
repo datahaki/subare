@@ -1,6 +1,7 @@
 // code by fluric
 package ch.alpine.subare.util;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -10,9 +11,9 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.sca.Chop;
 
-public class CoinflipTest {
+class CoinflipTest {
   @Test
-  public void testProbabilityDistribution() {
+  void testProbabilityDistribution() {
     Scalar headProbability0 = RealScalar.of(0.1);
     Scalar headProbability1 = RealScalar.of(0.5);
     Scalar headProbability2 = RealScalar.of(0.9);
@@ -32,13 +33,13 @@ public class CoinflipTest {
   }
 
   @Test
-  public void testInstances() {
+  void testInstances() {
     assertTrue(Coinflip.fair() != Coinflip.fair());
   }
 
   @Test
-  public void testFail() {
-    AssertFail.of(() -> Coinflip.of(RealScalar.of(-0.1)));
-    AssertFail.of(() -> Coinflip.of(RealScalar.of(1.1)));
+  void testFail() {
+    assertThrows(Exception.class, () -> Coinflip.of(RealScalar.of(-0.1)));
+    assertThrows(Exception.class, () -> Coinflip.of(RealScalar.of(1.1)));
   }
 }

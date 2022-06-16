@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import ch.alpine.subare.core.td.SarsaType;
 
-public class Double_BanditsTest {
+class Double_BanditsTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     BanditsModel banditsModel = new BanditsModel(20);
     BanditsTrain sarsa_Bandits = new BanditsTrain(banditsModel);
     sarsa_Bandits.handle(SarsaType.QLEARNING, 1);

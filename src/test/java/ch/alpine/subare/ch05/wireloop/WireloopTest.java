@@ -4,7 +4,7 @@ package ch.alpine.subare.ch05.wireloop;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.awt.Dimension;
-import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,14 +15,14 @@ import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.red.Entrywise;
 import ch.alpine.tensor.red.Max;
 
-public class WireloopTest {
+class WireloopTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     String name = "wirec";
     WireloopReward wireloopReward = WireloopReward.freeSteps();
     wireloopReward = WireloopReward.constantCost();
     Wireloop wireloop = WireloopHelper.create(name, WireloopReward::id_x, wireloopReward);
-    assertEquals(Dimensions.of(wireloop.states()), Arrays.asList(297, 2));
+    assertEquals(Dimensions.of(wireloop.states()), List.of(297, 2));
     assertEquals(wireloop.states().stream().reduce(Entrywise.max()).get(), Tensors.vector(15, 23));
     assertEquals(RealScalar.of(15), //
         wireloop.states().get(Tensor.ALL, 0).stream().reduce(Max::of).get());

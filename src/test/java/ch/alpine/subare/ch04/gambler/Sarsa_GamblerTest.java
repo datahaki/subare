@@ -13,9 +13,9 @@ import ch.alpine.subare.core.util.LearningRate;
 import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.RealScalar;
 
-public class Sarsa_GamblerTest {
+class Sarsa_GamblerTest {
   @Test
-  public void testSimple() throws Exception {
+  void testSimple() throws Exception {
     for (SarsaType sarsaType : SarsaType.values()) {
       GamblerModel gamblerModel = new GamblerModel(20, RationalScalar.of(4, 10));
       Sarsa_Gambler sarsa_Gambler = new Sarsa_Gambler(gamblerModel);

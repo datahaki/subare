@@ -2,6 +2,7 @@
 package ch.alpine.subare.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -18,9 +19,9 @@ import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.UnitVector;
 import ch.alpine.tensor.mat.IdentityMatrix;
 
-public class RandomChoiceTest {
+class RandomChoiceTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     Set<Integer> set = new HashSet<>();
     for (int index = 0; index < 100; ++index) {
       int value = RandomChoice.of(Arrays.asList(1, 2, 3, 4));
@@ -30,13 +31,13 @@ public class RandomChoiceTest {
   }
 
   @Test
-  public void testTensor() {
+  void testTensor() {
     Scalar scalar = RandomChoice.of(Tensors.vector(2, 5));
     assertTrue(scalar.equals(RealScalar.of(2)) || scalar.equals(RealScalar.of(5)));
   }
 
   @Test
-  public void testIdentityMatrix() {
+  void testIdentityMatrix() {
     Tensor tensor = RandomChoice.of(IdentityMatrix.of(3));
     assertTrue( //
         tensor.equals(UnitVector.of(3, 0)) || //
@@ -45,13 +46,13 @@ public class RandomChoiceTest {
   }
 
   @Test
-  public void testTensorFail() {
-    AssertFail.of(() -> RandomChoice.of(Tensors.vector()));
-    AssertFail.of(() -> RandomChoice.of(RealScalar.ONE));
+  void testTensorFail() {
+    assertThrows(Exception.class, () -> RandomChoice.of(Tensors.vector()));
+    assertThrows(Exception.class, () -> RandomChoice.of(RealScalar.ONE));
   }
 
   @Test
-  public void testListEmptyFail() {
-    AssertFail.of(() -> RandomChoice.of(Collections.emptyList()));
+  void testListEmptyFail() {
+    assertThrows(Exception.class, () -> RandomChoice.of(Collections.emptyList()));
   }
 }

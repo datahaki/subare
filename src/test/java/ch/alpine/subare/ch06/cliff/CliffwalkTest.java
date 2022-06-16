@@ -10,15 +10,15 @@ import org.junit.jupiter.api.Test;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensors;
 
-public class CliffwalkTest {
+class CliffwalkTest {
   @Test
-  public void testStates() {
+  void testStates() {
     Cliffwalk cliffwalk = new Cliffwalk(12, 4);
     assertEquals(cliffwalk.states().length(), 12 * 3 + 2);
   }
 
   @Test
-  public void testMove() {
+  void testMove() {
     Cliffwalk cliffwalk = new Cliffwalk(12, 4);
     assertEquals(cliffwalk.move(Tensors.vector(0, 0), Tensors.vector(0, -1)), Tensors.vector(0, 0));
     assertEquals(cliffwalk.move(Tensors.vector(0, 0), Tensors.vector(0, 1)), Tensors.vector(0, 1));
@@ -28,7 +28,7 @@ public class CliffwalkTest {
   }
 
   @Test
-  public void testCliff() {
+  void testCliff() {
     Cliffwalk cliffwalk = new Cliffwalk(12, 4);
     assertFalse(cliffwalk.isCliff(Tensors.vector(0, 3)));
     assertTrue(cliffwalk.isCliff(Tensors.vector(1, 3)));
@@ -37,7 +37,7 @@ public class CliffwalkTest {
   }
 
   @Test
-  public void testReward() {
+  void testReward() {
     Cliffwalk cliffwalk = new Cliffwalk(12, 4);
     assertEquals(cliffwalk.reward(Tensors.vector(11, 2), null, Tensors.vector(11, 3)), RealScalar.ONE);
     assertEquals(cliffwalk.reward(Tensors.vector(11, 3), null, Tensors.vector(11, 3)), RealScalar.ZERO);

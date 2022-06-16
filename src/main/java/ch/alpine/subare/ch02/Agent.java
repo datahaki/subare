@@ -2,7 +2,6 @@
 package ch.alpine.subare.ch02;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -97,6 +96,7 @@ public abstract class Agent {
 
   @SafeVarargs
   public final void setOpeningSequence(Integer... actions) {
-    openingSequence.addAll(Arrays.asList(actions));
+    // TODO SUBARE set != addAll !?
+    openingSequence.addAll(List.of(actions));
   }
 }

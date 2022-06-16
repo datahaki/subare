@@ -15,9 +15,9 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.sca.Abs;
 
-public class InfiniteVarianceTest {
+class InfiniteVarianceTest {
   @Test
-  public void testActionValueIteration() {
+  void testActionValueIteration() {
     InfiniteVariance infiniteVariance = new InfiniteVariance();
     ActionValueIteration avi = ActionValueIteration.of(infiniteVariance);
     avi.untilBelow(RealScalar.of(.00001));
@@ -29,7 +29,7 @@ public class InfiniteVarianceTest {
   }
 
   @Test
-  public void testValueIteration() {
+  void testValueIteration() {
     InfiniteVariance infiniteVariance = new InfiniteVariance();
     ValueIteration vi = new ValueIteration(infiniteVariance);
     vi.untilBelow(RealScalar.of(.00001));

@@ -16,10 +16,10 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.red.Tally;
 
-public class BlackjackTest {
+class BlackjackTest {
   @SuppressWarnings("unused")
   @Test
-  public void testSimple() {
+  void testSimple() {
     Blackjack blackjack = new Blackjack();
     // TODO SUBARE fail sometimes, correct or wrong?
     {
@@ -33,7 +33,7 @@ public class BlackjackTest {
   }
 
   @Test
-  public void testEpisodeLength() {
+  void testEpisodeLength() {
     Blackjack blackjack = new Blackjack();
     Policy pi = EquiprobablePolicy.create(blackjack);
     Tensor tally = Tensors.empty();

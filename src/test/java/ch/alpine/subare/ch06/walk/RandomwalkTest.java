@@ -10,9 +10,9 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Range;
 
-public class RandomwalkTest {
+class RandomwalkTest {
   @Test
-  public void testSmall() {
+  void testSmall() {
     Randomwalk rw = new Randomwalk(5);
     assertEquals(rw.states(), Range.of(0, 7));
     assertEquals(rw.startStates(), Tensors.vector(3));
@@ -20,7 +20,7 @@ public class RandomwalkTest {
   }
 
   @Test
-  public void testLarge() {
+  void testLarge() {
     Randomwalk rw = new Randomwalk(19);
     assertEquals(rw.states(), Range.of(0, 21));
     assertEquals(rw.startStates(), Tensors.vector(10));

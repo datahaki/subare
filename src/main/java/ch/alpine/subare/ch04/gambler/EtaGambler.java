@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.ch04.gambler;
 
-import java.util.Arrays;
+import java.util.List;
 
 import ch.alpine.subare.core.Policy;
 import ch.alpine.subare.core.alg.OnPolicyStateDistribution;
@@ -24,7 +24,7 @@ import ch.alpine.tensor.sca.Sign;
     Policy policy = GamblerHelper.getOptimalPolicy(gamblerModel);
     OnPolicyStateDistribution opsd = new OnPolicyStateDistribution(gamblerModel, gamblerModel, policy);
     Tensor values = //
-        ArrayPad.of(ConstantArray.of(RealScalar.ONE, 9), Arrays.asList(1), Arrays.asList(1));
+        ArrayPad.of(ConstantArray.of(RealScalar.ONE, 9), List.of(1), List.of(1));
     values.map(Sign::requirePositiveOrZero);
     values = NormalizeTotal.FUNCTION.apply(values);
     Scalar scalar = Total.ofVector(values);

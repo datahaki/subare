@@ -1,7 +1,6 @@
 // code by jph
 package ch.alpine.subare.core.util;
 
-import java.util.Arrays;
 import java.util.List;
 
 import ch.alpine.subare.core.EpisodeInterface;
@@ -14,7 +13,7 @@ public abstract class StepExploringStarts extends AbstractExploringStarts {
 
   public StepExploringStarts(MonteCarloInterface monteCarloInterface, StepDigest... dequeDigest) {
     super(monteCarloInterface);
-    list = Arrays.asList(dequeDigest);
+    list = List.of(dequeDigest);
     nextBatch();
   }
 

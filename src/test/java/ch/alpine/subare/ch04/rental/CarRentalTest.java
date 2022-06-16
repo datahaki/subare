@@ -16,21 +16,21 @@ import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Range;
 import ch.alpine.tensor.sca.Chop;
 
-public class CarRentalTest {
+class CarRentalTest {
   @Test
-  public void testActions() {
+  void testActions() {
     CarRental carRental = new CarRental(20);
     assertEquals(carRental.actions(Tensors.vector(3, 1)), Range.of(-3, 1 + 1));
   }
 
   @Test
-  public void testActions2() {
+  void testActions2() {
     CarRental carRental = new CarRental(20);
     assertEquals(carRental.actions(Tensors.vector(10, 10)), Range.of(-5, 5 + 1));
   }
 
   @Test
-  public void testTransitionProb() {
+  void testTransitionProb() {
     CarRental carRental = new CarRental(20);
     Tensor state = Tensors.vector(2, 3);
     Tensor action = RealScalar.of(-1);
@@ -40,7 +40,7 @@ public class CarRentalTest {
   }
 
   @Test
-  public void testTransitionProb1() {
+  void testTransitionProb1() {
     CarRental carRental = new CarRental(20);
     Tensor state = Tensors.vector(2, 3);
     Tensor action = RealScalar.of(-1);
@@ -50,7 +50,7 @@ public class CarRentalTest {
   }
 
   @Test
-  public void testTransitionsProb() {
+  void testTransitionsProb() {
     CarRental carRental = new CarRental(10);
     Tensor state = Tensors.vector(3, 2);
     Tensor action = RealScalar.of(0);
@@ -64,7 +64,7 @@ public class CarRentalTest {
   }
 
   @Test
-  public void testExpectedReward() {
+  void testExpectedReward() {
     CarRental carRental = new CarRental(10);
     Tensor state = Tensors.vector(3, 2);
     Tensor action = RealScalar.of(0);
@@ -74,7 +74,7 @@ public class CarRentalTest {
   }
 
   @Test
-  public void testExpectedRewardNext() {
+  void testExpectedRewardNext() {
     CarRental carRental = new CarRental(10);
     Tensor state = Tensors.vector(3, 2);
     Tensor action = RealScalar.of(0);
@@ -85,7 +85,7 @@ public class CarRentalTest {
   }
 
   @Test
-  public void testMove() {
+  void testMove() {
     CarRental carRental = new CarRental(20);
     Set<Tensor> set = new HashSet<>();
     for (int c = 0; c < 100; ++c) {
@@ -98,7 +98,7 @@ public class CarRentalTest {
   }
 
   @Test
-  public void testReward() {
+  void testReward() {
     CarRental carRental = new CarRental(20);
     Tensor state = Tensors.vector(10, 10);
     Tensor action = RealScalar.of(2);

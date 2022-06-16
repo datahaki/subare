@@ -15,9 +15,9 @@ import ch.alpine.subare.core.util.PolicyBase;
 import ch.alpine.subare.core.util.PolicyType;
 import ch.alpine.tensor.RealScalar;
 
-public class PrioritizedSweepingTest {
+class PrioritizedSweepingTest {
   @Test
-  public void testSimple() {
+  void testSimple() {
     SimpleTestModel simpleTestModel = SimpleTestModel.INSTANCE;
     LearningRate learningRate = DefaultLearningRate.of(8, 2);
     DiscreteQsa qsa = DiscreteQsa.build(simpleTestModel, RealScalar.ZERO);

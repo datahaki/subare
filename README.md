@@ -2,7 +2,7 @@
 
 # ch.alpine.subare
 
-Library for reinforcement learning in Java 17, version `0.4.3`
+Library for reinforcement learning in Java 17.
 
 Repository includes algorithms, examples, and exercises from the 2nd edition of [*Reinforcement Learning: An Introduction*](http://incompleteideas.net/book/the-book-2nd.html) by Richard S. Sutton, and Andrew G. Barto.
 
@@ -319,10 +319,11 @@ Exact expected reward of two adversarial Upper-Confidence-Bound agents depending
 
 ## Integration
 
-Specify `dependency` and `repository` of the tensor library in the `pom.xml` file of your maven project:
+From time to time, a version is deployed and made available for maven integration. Specify `repository` and `dependency` of the subare library in the `pom.xml` file of your maven project:
 
 ```xml
 <dependencies>
+  <!-- other dependencies -->
   <dependency>
     <groupId>ch.alpine</groupId>
     <artifactId>subare</artifactId>
@@ -331,6 +332,7 @@ Specify `dependency` and `repository` of the tensor library in the `pom.xml` fil
 </dependencies>
 
 <repositories>
+  <!-- other repositories -->
   <repository>
     <id>subare-mvn-repo</id>
     <url>https://raw.github.com/datahaki/subare/mvn-repo/</url>
@@ -341,7 +343,10 @@ Specify `dependency` and `repository` of the tensor library in the `pom.xml` fil
   </repository>
 </repositories>
 ```
+
 The source code is attached to every release.
+
+The branch `master` always contains the latest features for Java 17, and does not correspond to the most recent deployed version generally.
 
 ## Contributors
 

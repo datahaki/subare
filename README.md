@@ -4,6 +4,8 @@
 
 Library for reinforcement learning in Java 17.
 
+![](https://github.com/datahaki/subare/actions/workflows/mvn_test.yml/badge.svg)
+
 Repository includes algorithms, examples, and exercises from the 2nd edition of [*Reinforcement Learning: An Introduction*](http://incompleteideas.net/book/the-book-2nd.html) by Richard S. Sutton, and Andrew G. Barto.
 
 Our implementation is inspired by the

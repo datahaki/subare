@@ -33,11 +33,12 @@ public class EquiprobablePolicy implements Policy {
 
   @Override
   public synchronized Scalar probability(Tensor state, Tensor action) {
-    Index index = map.get(state);
-    if (Objects.isNull(index)) {
-      index = Index.build(stateActionModel.actions(state));
-      map.put(state, index);
-    }
+    Index index = map.computeIfAbsent(state, s -> Index.build(stateActionModel.actions(s)));
+    // Index index = map.get(state);
+    // if (Objects.isNull(index)) {
+    // index = Index.build(stateActionModel.actions(state));
+    // map.put(state, index);
+    // }
     if (index.containsKey(action)) // alternatively return 0
       return RationalScalar.of(1, index.size());
     throw TensorRuntimeException.of(state, action); // action invalid

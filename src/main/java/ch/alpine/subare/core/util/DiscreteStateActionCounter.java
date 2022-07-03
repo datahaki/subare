@@ -32,16 +32,12 @@ public class DiscreteStateActionCounter implements StateActionCounter, Serializa
 
   @Override // from StateActionCounter
   public Scalar stateActionCount(Tensor key) {
-    return stateActionMap.containsKey(key) //
-        ? RealScalar.of(stateActionMap.get(key))
-        : RealScalar.ZERO;
+    return RealScalar.of(stateActionMap.getOrDefault(key, 0));
   }
 
   @Override // from StateActionCounter
   public Scalar stateCount(Tensor state) {
-    return stateMap.containsKey(state) //
-        ? RealScalar.of(stateMap.get(state))
-        : RealScalar.ZERO;
+    return RealScalar.of(stateMap.getOrDefault(state, 0));
   }
 
   @Override // from StateActionCounter
@@ -59,6 +55,7 @@ public class DiscreteStateActionCounter implements StateActionCounter, Serializa
 
   public Scalar getLogarithmicStateActionCount(Tensor state, Tensor action) {
     Tensor key = StateAction.key(state, action);
+    // TODO SUBARE inconsistent LOGARITHMIC[0] == log[0+1] != -Infty
     return stateActionMap.containsKey(key) //
         ? LOGARITHMIC.apply(RealScalar.of(stateActionMap.get(key)))
         : DoubleScalar.NEGATIVE_INFINITY;

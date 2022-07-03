@@ -8,7 +8,6 @@ import ch.alpine.subare.core.StepDigest;
 import ch.alpine.subare.core.StepInterface;
 import ch.alpine.subare.util.AverageTracker;
 import ch.alpine.tensor.RationalScalar;
-import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 
@@ -42,8 +41,6 @@ import ch.alpine.tensor.Tensor;
   }
 
   public Scalar transitionProbability(Tensor next) {
-    return map.containsKey(next) //
-        ? RationalScalar.of(map.get(next), total)
-        : RealScalar.ZERO;
+    return RationalScalar.of(map.getOrDefault(next, 0), total);
   }
 }

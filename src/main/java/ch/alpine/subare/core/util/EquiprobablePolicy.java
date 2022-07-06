@@ -11,7 +11,7 @@ import ch.alpine.subare.util.Index;
 import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.TensorRuntimeException;
+import ch.alpine.tensor.Throw;
 import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.d.CategoricalDistribution;
 
@@ -41,7 +41,7 @@ public class EquiprobablePolicy implements Policy {
     // }
     if (index.containsKey(action)) // alternatively return 0
       return RationalScalar.of(1, index.size());
-    throw TensorRuntimeException.of(state, action); // action invalid
+    throw Throw.of(state, action); // action invalid
   }
 
   @Override

@@ -8,8 +8,8 @@ import java.util.Set;
 
 import ch.alpine.subare.core.MoveInterface;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.TensorRuntimeException;
 import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.Throw;
 
 /** for deterministic {@link MoveInterface} to precompute and store the effective actions */
 public enum StateActionMaps {
@@ -32,7 +32,7 @@ public enum StateActionMaps {
           filter.append(action);
       }
       if (Tensors.isEmpty(filter))
-        throw TensorRuntimeException.of(state); // missing actions
+        throw Throw.of(state); // missing actions
       map.put(state, filter.unmodifiable());
     }
     return new StateActionMap(map);

@@ -2,11 +2,11 @@
 package ch.alpine.subare.ch02.bandits;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
 import ch.alpine.subare.ch02.Agent;
 import ch.alpine.tensor.RealScalar;
@@ -24,7 +24,7 @@ import ch.alpine.tensor.sca.Round;
   @SafeVarargs
   Judger(Bandits bandit, Agent... agents) {
     this.bandit = bandit;
-    Stream.of(agents).forEach(agent -> map.put(agent, Tensors.empty()));
+    Arrays.stream(agents).forEach(agent -> map.put(agent, Tensors.empty()));
   }
 
   void play() {

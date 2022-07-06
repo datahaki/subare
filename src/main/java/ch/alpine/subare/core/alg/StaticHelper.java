@@ -5,7 +5,7 @@ import ch.alpine.subare.core.ActionValueInterface;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.TensorRuntimeException;
+import ch.alpine.tensor.Throw;
 
 /* package */ enum StaticHelper {
   ;
@@ -28,7 +28,7 @@ import ch.alpine.tensor.TensorRuntimeException;
         System.out.println(next + " " + prob);
       });
       System.exit(0);
-      throw TensorRuntimeException.of(norm, state, action); // probabilities have to sum up to 1
+      throw Throw.of(norm, state, action); // probabilities have to sum up to 1
     }
   }
 }

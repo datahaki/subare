@@ -7,7 +7,7 @@ import java.util.Objects;
 
 import ch.alpine.subare.core.MoveInterface;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.TensorRuntimeException;
+import ch.alpine.tensor.Throw;
 
 /** for deterministic {@link MoveInterface} to precompute and store the effective actions */
 public class StateActionMap {
@@ -32,7 +32,7 @@ public class StateActionMap {
    * @throws Exception if state already exists as key in this map */
   public void put(Tensor state, Tensor actions) {
     if (map.containsKey(state))
-      throw TensorRuntimeException.of(state);
+      throw Throw.of(state);
     map.put(state, actions.unmodifiable());
   }
 }

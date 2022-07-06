@@ -9,7 +9,7 @@ import java.util.Map;
 import ch.alpine.subare.core.StepDigest;
 import ch.alpine.subare.core.StepInterface;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.TensorRuntimeException;
+import ch.alpine.tensor.Throw;
 
 /* package */ class StateOrigins implements StepDigest {
   private final Map<Tensor, StepSet> map = new HashMap<>();
@@ -22,7 +22,7 @@ import ch.alpine.tensor.TensorRuntimeException;
       Collection<StepInterface> collection = map.get(state).values();
       for (StepInterface stepInterface : collection)
         if (!stepInterface.nextState().equals(state))
-          throw TensorRuntimeException.of(state);
+          throw Throw.of(state);
       return collection;
     }
     return Collections.emptyList();

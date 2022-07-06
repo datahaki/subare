@@ -19,7 +19,7 @@ import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.TensorRuntimeException;
+import ch.alpine.tensor.Throw;
 
 /** class digests (s, a, r, s') and maintains a statistic to estimate
  * 
@@ -71,13 +71,13 @@ public class ActionValueStatistics implements DequeDigest, EpisodeDigest, Action
     final Tensor actions = discreteModel.actions(state);
     if (actions.length() != 1)
       // terminal state should only allow 1 action
-      throw TensorRuntimeException.of(state, actions);
+      throw Throw.of(state, actions);
     final Tensor action = actions.get(0);
     final Scalar reward = RealScalar.ZERO;
     if (discreteModel instanceof RewardInterface rewardInterface) {
       Scalar compare = rewardInterface.reward(state, action, state);
       if (!compare.equals(reward))
-        throw TensorRuntimeException.of(state, compare, reward);
+        throw Throw.of(state, compare, reward);
     }
     digest(new StepAdapter(state, action, reward, state));
   }

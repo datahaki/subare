@@ -6,8 +6,8 @@ import ch.alpine.subare.core.StandardModel;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.TensorRuntimeException;
 import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.Throw;
 import ch.alpine.tensor.alg.Range;
 import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.RandomVariate;
@@ -98,6 +98,6 @@ public class Maxbias implements StandardModel, MonteCarloInterface {
     // TODO SUBARE this implementation does not make sense
     if (move(state, action).equals(next))
       return KroneckerDelta.of(move(state, action), next);
-    throw TensorRuntimeException.of(state, action, next);
+    throw Throw.of(state, action, next);
   }
 }

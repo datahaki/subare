@@ -9,8 +9,8 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.TensorRuntimeException;
 import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.Throw;
 import ch.alpine.tensor.red.Min;
 import ch.alpine.tensor.sca.Sign;
 import ch.alpine.tensor.sca.pow.Power;
@@ -34,7 +34,7 @@ abstract class DecayedLearningRate implements LearningRate {
 
   /* package */ DecayedLearningRate(Scalar factor, Scalar exponent) {
     if (Scalars.lessEquals(exponent, RationalScalar.HALF))
-      throw TensorRuntimeException.of(factor, exponent);
+      throw Throw.of(factor, exponent);
     this.factor = Sign.requirePositive(factor);
     this.exponent = exponent;
   }

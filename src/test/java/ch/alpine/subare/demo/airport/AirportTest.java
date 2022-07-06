@@ -11,8 +11,8 @@ import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.TensorRuntimeException;
 import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.Throw;
 import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.sca.Clip;
 import ch.alpine.tensor.sca.Clips;
@@ -48,7 +48,7 @@ class AirportTest {
       if (!clip.isInside(R.subtract(mean))) {
         System.err.println(state + " " + action);
         System.err.println(R + " " + mean);
-        throw TensorRuntimeException.of(state, action, R, mean);
+        throw Throw.of(state, action, R, mean);
         // fail(); // does not always work
       }
     }

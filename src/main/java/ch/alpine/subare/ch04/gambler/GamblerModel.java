@@ -10,8 +10,8 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.TensorRuntimeException;
 import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.Throw;
 import ch.alpine.tensor.alg.Last;
 import ch.alpine.tensor.alg.Range;
 import ch.alpine.tensor.red.KroneckerDelta;
@@ -117,6 +117,6 @@ public class GamblerModel implements StandardModel, MonteCarloInterface {
       return P_win;
     if (state.subtract(action).equals(next))
       return RealScalar.ONE.subtract(P_win);
-    throw TensorRuntimeException.of(state, action, next);
+    throw Throw.of(state, action, next);
   }
 }

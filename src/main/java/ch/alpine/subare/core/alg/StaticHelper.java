@@ -28,7 +28,7 @@ import ch.alpine.tensor.Throw;
         System.out.println(next + " " + prob);
       });
       System.exit(0);
-      throw Throw.of(norm, state, action); // probabilities have to sum up to 1
+      throw new Throw(norm, state, action); // probabilities have to sum up to 1
     }
   }
 }

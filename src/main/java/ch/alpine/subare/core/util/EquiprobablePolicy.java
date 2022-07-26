@@ -41,7 +41,7 @@ public class EquiprobablePolicy implements Policy {
     // }
     if (index.containsKey(action)) // alternatively return 0
       return RationalScalar.of(1, index.size());
-    throw Throw.of(state, action); // action invalid
+    throw new Throw(state, action); // action invalid
   }
 
   @Override

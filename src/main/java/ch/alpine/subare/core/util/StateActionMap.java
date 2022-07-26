@@ -32,7 +32,7 @@ public class StateActionMap {
    * @throws Exception if state already exists as key in this map */
   public void put(Tensor state, Tensor actions) {
     if (map.containsKey(state))
-      throw Throw.of(state);
+      throw new Throw(state);
     map.put(state, actions.unmodifiable());
   }
 }

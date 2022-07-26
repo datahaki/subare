@@ -34,7 +34,7 @@ abstract class DecayedLearningRate implements LearningRate {
 
   /* package */ DecayedLearningRate(Scalar factor, Scalar exponent) {
     if (Scalars.lessEquals(exponent, RationalScalar.HALF))
-      throw Throw.of(factor, exponent);
+      throw new Throw(factor, exponent);
     this.factor = Sign.requirePositive(factor);
     this.exponent = exponent;
   }

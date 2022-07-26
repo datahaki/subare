@@ -98,6 +98,6 @@ public class Maxbias implements StandardModel, MonteCarloInterface {
     // TODO SUBARE this implementation does not make sense
     if (move(state, action).equals(next))
       return KroneckerDelta.of(move(state, action), next);
-    throw Throw.of(state, action, next);
+    throw new Throw(state, action, next);
   }
 }

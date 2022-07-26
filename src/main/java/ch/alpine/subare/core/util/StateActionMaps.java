@@ -32,7 +32,7 @@ public enum StateActionMaps {
           filter.append(action);
       }
       if (Tensors.isEmpty(filter))
-        throw Throw.of(state); // missing actions
+        throw new Throw(state); // missing actions
       map.put(state, filter.unmodifiable());
     }
     return new StateActionMap(map);

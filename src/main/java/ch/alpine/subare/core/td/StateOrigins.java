@@ -22,7 +22,7 @@ import ch.alpine.tensor.Throw;
       Collection<StepInterface> collection = map.get(state).values();
       for (StepInterface stepInterface : collection)
         if (!stepInterface.nextState().equals(state))
-          throw Throw.of(state);
+          throw new Throw(state);
       return collection;
     }
     return Collections.emptyList();

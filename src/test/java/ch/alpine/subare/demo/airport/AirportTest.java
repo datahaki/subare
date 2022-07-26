@@ -48,7 +48,7 @@ class AirportTest {
       if (!clip.isInside(R.subtract(mean))) {
         System.err.println(state + " " + action);
         System.err.println(R + " " + mean);
-        throw Throw.of(state, action, R, mean);
+        throw new Throw(state, action, R, mean);
         // fail(); // does not always work
       }
     }

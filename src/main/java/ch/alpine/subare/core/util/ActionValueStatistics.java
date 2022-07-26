@@ -71,13 +71,13 @@ public class ActionValueStatistics implements DequeDigest, EpisodeDigest, Action
     final Tensor actions = discreteModel.actions(state);
     if (actions.length() != 1)
       // terminal state should only allow 1 action
-      throw Throw.of(state, actions);
+      throw new Throw(state, actions);
     final Tensor action = actions.get(0);
     final Scalar reward = RealScalar.ZERO;
     if (discreteModel instanceof RewardInterface rewardInterface) {
       Scalar compare = rewardInterface.reward(state, action, state);
       if (!compare.equals(reward))
-        throw Throw.of(state, compare, reward);
+        throw new Throw(state, compare, reward);
     }
     digest(new StepAdapter(state, action, reward, state));
   }

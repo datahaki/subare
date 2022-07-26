@@ -117,6 +117,6 @@ public class GamblerModel implements StandardModel, MonteCarloInterface {
       return P_win;
     if (state.subtract(action).equals(next))
       return RealScalar.ONE.subtract(P_win);
-    throw Throw.of(state, action, next);
+    throw new Throw(state, action, next);
   }
 }

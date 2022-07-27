@@ -51,8 +51,7 @@ public class DoubleSarsa extends DequeDigestAdapter implements DiscreteQsaSuppli
 
   /** @param sarsaEvaluation
    * @param discreteModel
-   * @param learningRate1
-   * @param learningRate2
+   * @param learningRate
    * @param qsa1
    * @param qsa2
    * @param sac1

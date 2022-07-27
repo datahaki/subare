@@ -49,8 +49,7 @@ public class IterativePolicyEvaluation {
     vs_new = DiscreteVs.build(standardModel.states());
   }
 
-  /** @param gamma
-   * @param threshold
+  /** @param threshold
    * @return */
   public void until(Scalar threshold) {
     until(threshold, Integer.MAX_VALUE);

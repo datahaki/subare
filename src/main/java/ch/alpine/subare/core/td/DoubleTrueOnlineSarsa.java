@@ -30,8 +30,8 @@ public class DoubleTrueOnlineSarsa extends AbstractTrueOnlineSarsa {
   private final PolicyExt policy2;
   // ---
   /** feature weight vectors w1 and w2 are a long-term memory, accumulating over the lifetime of the system */
-  private FeatureWeight w1;
-  private FeatureWeight w2;
+  private final FeatureWeight w1;
+  private final FeatureWeight w2;
   // ---
   private Scalar nextQOld;
   /** eligibility trace z is a short-term memory, typically lasting less time than the length of an episode */
@@ -121,9 +121,9 @@ public class DoubleTrueOnlineSarsa extends AbstractTrueOnlineSarsa {
       resetEligibility();
   }
 
-  private final void resetEligibility() {
+  private void resetEligibility() {
     nextQOld = RealScalar.ZERO;
-    /** eligibility trace vector is initialized to zero at the beginning of the episode */
+    /* eligibility trace vector is initialized to zero at the beginning of the episode */
     z = Array.zeros(featureMapper.featureSize());
   }
 

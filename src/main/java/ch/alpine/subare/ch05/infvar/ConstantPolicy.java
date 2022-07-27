@@ -7,13 +7,7 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.pdf.Distribution;
 
-/* package */ class ConstantPolicy implements Policy {
-  final Scalar backProb;
-
-  public ConstantPolicy(Scalar backProb) {
-    this.backProb = backProb;
-  }
-
+/* package */ record ConstantPolicy(Scalar backProb) implements Policy {
   @Override
   public Scalar probability(Tensor state, Tensor action) {
     if (state.equals(RealScalar.ZERO))

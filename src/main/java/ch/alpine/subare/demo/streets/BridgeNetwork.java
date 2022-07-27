@@ -9,8 +9,8 @@ import ch.alpine.tensor.Tensors;
 /** example network by Julian
  * three possible actions */
 class BridgeNetwork extends Network {
-  private Tensor affine = Tensors.vectorInt(-3, 0, 0, -3, 0).unmodifiable();
-  private Tensor linear = Tensors.vectorInt(0, -1, -1, 0, 0).unmodifiable();
+  private final Tensor affine = Tensors.vectorInt(-3, 0, 0, -3, 0).unmodifiable();
+  private final Tensor linear = Tensors.vectorInt(0, -1, -1, 0, 0).unmodifiable();
 
   @Override
   int actions() {

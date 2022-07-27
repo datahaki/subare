@@ -35,7 +35,7 @@ class ChargerTest {
   @Test
   void testCostPerUnit() {
     TripProfile tripProfile = new ConstantDrawTrip(16, 2);
-    Tensor costs = Tensors.vector(i -> tripProfile.costPerUnit(i), 10);
+    Tensor costs = Tensors.vector(tripProfile::costPerUnit, 10);
     assertEquals(Tally.of(costs).size(), 4);
   }
 }

@@ -1,8 +1,8 @@
 // code by fluric
 package ch.alpine.subare.util;
 
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -34,7 +34,7 @@ class CoinflipTest {
 
   @Test
   void testInstances() {
-    assertTrue(Coinflip.fair() != Coinflip.fair());
+    assertNotSame(Coinflip.fair(), Coinflip.fair());
   }
 
   @Test

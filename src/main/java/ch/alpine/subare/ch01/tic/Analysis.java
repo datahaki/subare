@@ -39,7 +39,7 @@ import java.util.stream.Collectors;
       // }
       if (1 < subset.size()) {
         double[] data = //
-            subset.stream().mapToDouble(s -> estimation.get(s)).toArray();
+            subset.stream().mapToDouble(estimation::get).toArray();
         // System.out.println("-----");
         // System.out.println(subset.iterator().next());
         for (@SuppressWarnings("unused")

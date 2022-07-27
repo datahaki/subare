@@ -14,7 +14,7 @@ import ch.alpine.tensor.ext.Integers;
 public class DiscreteVs implements VsInterface, DiscreteValueFunction, Serializable {
   /** initializes all state value to zero
    * 
-   * @param discreteModel
+   * @param states
    * @return */
   public static DiscreteVs build(Tensor states) {
     return build(states, Array.zeros(states.length()));

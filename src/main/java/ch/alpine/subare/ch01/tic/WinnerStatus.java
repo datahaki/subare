@@ -4,11 +4,11 @@ package ch.alpine.subare.ch01.tic;
 import java.util.Arrays;
 
 /* package */ class WinnerStatus {
-  final int data[];
+  final int[] data;
   private Integer private_winner = null;
   final Integer winner;
 
-  WinnerStatus(int data[]) {
+  WinnerStatus(int[] data) {
     this.data = data;
     winner = computeWinner();
   }

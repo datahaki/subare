@@ -39,7 +39,7 @@ import ch.alpine.tensor.sca.Round;
 
   void ranking() {
     List<Agent> list = new ArrayList<>(map.keySet());
-    Collections.sort(list, (a1, a2) -> Scalars.compare(a1.getRewardTotal(), a2.getRewardTotal()));
+    list.sort((a1, a2) -> Scalars.compare(a1.getRewardTotal(), a2.getRewardTotal()));
     Clip clip = bandit.clip();
     for (Agent agent : list) {
       Scalar s = clip.rescale(agent.getRewardTotal()).multiply(RealScalar.of(100));

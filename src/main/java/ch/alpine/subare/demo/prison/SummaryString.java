@@ -11,6 +11,6 @@ import ch.alpine.tensor.sca.Round;
     int rnd = agent.getRandomizedDecisionCount();
     Scalar avg = Round._3.apply(agent.getRewardAverage());
     return String.format("%25s  %s  %5d RND", //
-        agent.toString(), avg, rnd);
+        agent, avg, rnd);
   }
 }

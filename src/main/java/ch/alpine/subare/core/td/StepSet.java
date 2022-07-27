@@ -13,7 +13,7 @@ import ch.alpine.tensor.Tensor;
   private final Map<Tensor, StepInterface> map = new HashMap<>();
 
   void register(StepInterface stepInterface) {
-    map.computeIfAbsent(StateAction.key(stepInterface), i -> stepInterface);
+    map.putIfAbsent(StateAction.key(stepInterface), stepInterface);
   }
 
   Collection<StepInterface> values() {

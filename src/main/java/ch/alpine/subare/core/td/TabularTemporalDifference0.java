@@ -33,7 +33,7 @@ public record TabularTemporalDifference0( //
   }
 
   @Override // from StepDigest
-  public final void digest(StepInterface stepInterface) {
+  public void digest(StepInterface stepInterface) {
     Tensor state0 = stepInterface.prevState();
     // action is only required for learning rate
     Scalar reward = stepInterface.reward();

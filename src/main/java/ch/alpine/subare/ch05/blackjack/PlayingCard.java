@@ -18,7 +18,7 @@ enum PlayingCard {
 
   final int value;
 
-  private PlayingCard(int value) {
+  PlayingCard(int value) {
     this.value = value;
   }
 }

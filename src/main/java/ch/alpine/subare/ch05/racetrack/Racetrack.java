@@ -48,7 +48,6 @@ class Racetrack extends DeterministicStandardModel implements MonteCarloInterfac
   private final Clip clipPositionX;
   private final Clip clipPositionY;
   private final Clip clipSpeed;
-  private final Tensor dimensions;
   private final Tensor states = Tensors.empty(); // (px, py, vx, vy)
   final Tensor statesStart = Tensors.empty();
   final Tensor statesTerminal = Tensors.empty();
@@ -69,7 +68,7 @@ class Racetrack extends DeterministicStandardModel implements MonteCarloInterfac
     System.out.println("grid size=" + Dimensions.of(blue));
     interpolation = NearestInterpolation.of(blue);
     List<Integer> list = Dimensions.of(image);
-    dimensions = Tensors.vector(list.get(0), list.get(1)).map(s -> s.subtract(RealScalar.ONE));
+    Tensor dimensions = Tensors.vector(list.get(0), list.get(1)).map(s -> s.subtract(RealScalar.ONE));
     clipPositionX = Clips.positive(dimensions.Get(0));
     clipPositionY = Clips.positive(dimensions.Get(1));
     clipSpeed = Clips.positive(maxSpeed);

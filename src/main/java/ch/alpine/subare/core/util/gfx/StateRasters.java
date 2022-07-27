@@ -32,7 +32,7 @@ public enum StateRasters {
         Scalars.intValueExact(state.Get(1)));
   }
 
-  /** @param stateActionRaster
+  /** @param stateRaster
    * @param vs scaled to contain values in the interval [0, 1]
    * @return */
   private static Tensor _render(StateRaster stateRaster, DiscreteVs vs) {

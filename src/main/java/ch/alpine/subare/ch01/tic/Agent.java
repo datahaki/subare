@@ -18,7 +18,7 @@ import ch.alpine.tensor.RealScalar;
   double stepSize;
   // double exploreRate;
   private Coinflip coinflip = Coinflip.fair();
-  List<State> states = new ArrayList<>();
+  final List<State> states = new ArrayList<>();
   final int symbol;
   Estimation estimation = new Estimation();
   protected State currentState;

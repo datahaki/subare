@@ -22,7 +22,7 @@ public enum MonteCarloExamples implements Supplier<MonteCarloInterface> {
   AIRPORT(() -> Airport.INSTANCE), //
   VIRTUALSTATIONS(() -> VirtualStations.INSTANCE), //
   GAMBLER_20(() -> new GamblerModel(20, RationalScalar.of(4, 10))), //
-  GAMBLER_100(() -> GamblerModel.createDefault()), //
+  GAMBLER_100(GamblerModel::createDefault), //
   MAZE2(() -> DynamazeHelper.original("maze2")), //
   MAZE5(() -> DynamazeHelper.create5(3)), //
   WIRELOOP_4(() -> {
@@ -40,17 +40,17 @@ public enum MonteCarloExamples implements Supplier<MonteCarloInterface> {
     wireloopReward = WireloopReward.constantCost();
     return WireloopHelper.create("wirec", WireloopReward::id_x, wireloopReward);
   }), //
-  GRIDWORLD(() -> new Gridworld()), //
-  INFINITEVARIANCE(() -> new InfiniteVariance()), //
+  GRIDWORLD(Gridworld::new), //
+  INFINITEVARIANCE(InfiniteVariance::new), //
   RACETRACK(() -> RacetrackHelper.create("track0", 5)), //
   CLIFFWALK(() -> new Cliffwalk(12, 4)), //
   MAXBIAS(() -> new Maxbias(5)), //
-  WINDYGRID(() -> Windygrid.createFour()), //
+  WINDYGRID(Windygrid::createFour), //
   ;
 
   private final Supplier<MonteCarloInterface> supplier;
 
-  private MonteCarloExamples(Supplier<MonteCarloInterface> supplier) {
+  MonteCarloExamples(Supplier<MonteCarloInterface> supplier) {
     this.supplier = supplier;
   }
 

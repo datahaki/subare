@@ -3,6 +3,7 @@ package ch.alpine.subare.core.adapter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.DiscreteUtils;
@@ -42,7 +43,7 @@ public class SimpleTestModels {
     Chop CHOP_3 = Chop._03;
     if (!CHOP_3.isClose(value_s0_a1, RealScalar.of(3))) {
       DiscreteUtils.print(qsa);
-      assertTrue(false);
+      fail();
     }
   }
 

@@ -89,9 +89,9 @@ public class TrueOnlineSarsa extends AbstractTrueOnlineSarsa {
       resetEligibility();
   }
 
-  private final void resetEligibility() {
+  private void resetEligibility() {
     nextQOld = RealScalar.ZERO;
-    /** eligibility trace vector is initialized to zero at the beginning of the
+    /* eligibility trace vector is initialized to zero at the beginning of the
      * episode */
     z = Array.zeros(featureSize);
   }

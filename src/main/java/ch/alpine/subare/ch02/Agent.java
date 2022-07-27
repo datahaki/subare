@@ -19,8 +19,8 @@ public abstract class Agent {
   private int count_copy;
   private int randomizedDecisionCount = 0;
   private int actionReminder;
-  private Tensor actions = Tensors.empty();
-  private Tensor qvalues = Tensors.empty();
+  private final Tensor actions = Tensors.empty();
+  private final Tensor qvalues = Tensors.empty();
   /** EXPERIMENTAL opening sequence of action */
   protected List<Integer> openingSequence = new ArrayList<>();
 

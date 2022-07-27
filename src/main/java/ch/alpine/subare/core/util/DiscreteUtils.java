@@ -68,9 +68,9 @@ public enum DiscreteUtils {
   // ---
   public static String infoString(DiscreteQsa qsa) {
     StringBuilder stringBuilder = new StringBuilder();
-    stringBuilder.append("#{q(s,a)}=" + qsa.size() + "\n");
-    stringBuilder.append("   min(q)=" + qsa.getMin() + "\n");
-    stringBuilder.append("   max(q)=" + qsa.getMax() + "\n");
+    stringBuilder.append("#{q(s,a)}=").append(qsa.size()).append("\n");
+    stringBuilder.append("   min(q)=").append(qsa.getMin()).append("\n");
+    stringBuilder.append("   max(q)=").append(qsa.getMax()).append("\n");
     return stringBuilder.toString().trim();
   }
 

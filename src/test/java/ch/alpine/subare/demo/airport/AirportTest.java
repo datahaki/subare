@@ -2,6 +2,7 @@
 package ch.alpine.subare.demo.airport;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.stream.IntStream;
 
@@ -21,7 +22,7 @@ class AirportTest {
   @Test
   void testTerminalState() {
     Airport airport = Airport.INSTANCE;
-    assertEquals(airport.isTerminal(Tensors.vector(Airport.LASTT, 0, Airport.VEHICLES)), true);
+    assertTrue(airport.isTerminal(Tensors.vector(Airport.LASTT, 0, Airport.VEHICLES)));
     assertEquals(airport.actions(Tensors.vector(Airport.LASTT, 0, Airport.VEHICLES)), Array.zeros(1, 1));
     assertEquals(airport.expectedReward(Tensors.vector(Airport.LASTT, 0, Airport.VEHICLES), Tensors.of(RealScalar.ZERO)), RealScalar.ZERO);
     assertEquals(

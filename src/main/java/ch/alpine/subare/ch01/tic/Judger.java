@@ -60,7 +60,7 @@ class Judger {
       }
       // ---
       Action action = currentPlayer.takeAction();
-      currentState = currentState.nextState(action.pos, action.symbol);
+      currentState = currentState.nextState(action.pos(), action.symbol());
       feedCurrentState();
       if (currentState.isEnd()) {
         if (feedback)

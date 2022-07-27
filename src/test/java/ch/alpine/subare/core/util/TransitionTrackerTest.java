@@ -12,9 +12,9 @@ class TransitionTrackerTest {
   @Test
   void testSimple() {
     Map<Integer, Integer> map = new HashMap<>();
-    map.merge(10, 101, (i, j) -> i + j);
-    map.merge(10, 1, (i, j) -> i + j);
-    map.merge(10, 1, (i, j) -> i + j);
+    map.merge(10, 101, Integer::sum);
+    map.merge(10, 1, Integer::sum);
+    map.merge(10, 1, Integer::sum);
     assertEquals(map.get(10).intValue(), 103);
   }
 }

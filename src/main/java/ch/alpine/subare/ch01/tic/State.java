@@ -48,9 +48,8 @@ import java.util.Objects;
 
   @Override
   public boolean equals(Object object) {
-    return object instanceof State state //
-        ? hashCode == state.hashCode
-        : false;
+    //
+    return object instanceof State state && hashCode == state.hashCode;
   }
 
   boolean isEnd() {
@@ -90,14 +89,14 @@ import java.util.Objects;
       }
       stringBuilder.append(" | ");
       if (del == 0) {
-        stringBuilder.append("hash=" + hashCode());
+        stringBuilder.append("hash=").append(hashCode());
       }
       if (del < 2) {
         stringBuilder.append('\n');
       }
     }
     if (isEnd())
-      stringBuilder.append("winner=" + winner + "\n");
+      stringBuilder.append("winner=").append(winner).append("\n");
     return stringBuilder.toString();
   }
 }

@@ -13,7 +13,7 @@ public interface StateActionCounter extends StepDigest {
    * @return number of updates of qsa value for given state-action pair due to learning */
   Scalar stateActionCount(Tensor key);
 
-  /** @param key same as listed in {@link DiscreteQsa#keys()}
+  /** @param state same as listed in {@link DiscreteQsa#keys()}
    * @return number of updates of qsa value for given state due to learning */
   Scalar stateCount(Tensor state);
 

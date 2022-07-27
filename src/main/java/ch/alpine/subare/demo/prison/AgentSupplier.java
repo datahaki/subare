@@ -20,7 +20,7 @@ import ch.alpine.tensor.Scalar;
   public static final List<Supplier<Agent>> mixed = List.of( //
       // () -> new ConstantAgent(2, 0), //
       // () -> new ConstantAgent(2, 1), //
-      () -> new TitForTatAgent(), //
+      TitForTatAgent::new, //
       () -> new RandomAgent(2), //
       () -> new EGreedyAgent(2, i -> RationalScalar.of(1, 5), "1/5"), //
       () -> new EGreedyAgent(2, i -> RationalScalar.of(1, i.number().intValue() + 1), "1/i"), //

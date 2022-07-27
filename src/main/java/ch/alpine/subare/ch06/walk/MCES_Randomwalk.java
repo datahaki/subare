@@ -24,7 +24,7 @@ import ch.alpine.tensor.sca.Round;
  * </pre> */
 enum MCES_Randomwalk {
   ;
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     Randomwalk randomwalk = new Randomwalk(5);
     MonteCarloExploringStarts mces = new MonteCarloExploringStarts(randomwalk);
     StateActionCounter sac = new DiscreteStateActionCounter();

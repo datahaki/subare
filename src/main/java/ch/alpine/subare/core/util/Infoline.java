@@ -9,7 +9,7 @@ import ch.alpine.tensor.sca.Round;
 public class Infoline {
   public static Infoline print(DiscreteModel discreteModel, int index, DiscreteQsa ref, DiscreteQsa qsa) {
     Infoline infoline = new Infoline(discreteModel, ref, qsa);
-    System.out.println(String.format("%2d %8s  %s", index, infoline.error.map(Round._1), infoline.loss));
+    System.out.printf("%2d %8s  %s%n", index, infoline.error.map(Round._1), infoline.loss);
     return infoline;
   }
 

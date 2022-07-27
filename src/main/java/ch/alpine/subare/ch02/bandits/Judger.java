@@ -43,8 +43,8 @@ import ch.alpine.tensor.sca.Round;
     Clip clip = bandit.clip();
     for (Agent agent : list) {
       Scalar s = clip.rescale(agent.getRewardTotal()).multiply(RealScalar.of(100));
-      System.out.println(String.format("%25s%5s %%%8s RND", //
-          agent, Round.of(s), "" + agent.getRandomizedDecisionCount()));
+      System.out.printf("%25s%5s %%%8s RND%n", //
+          agent, Round.of(s), "" + agent.getRandomizedDecisionCount());
     }
   }
 

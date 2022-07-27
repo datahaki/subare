@@ -7,8 +7,8 @@ import java.util.Arrays;
 import ch.alpine.tensor.ext.Integers;
 
 /* package */ class Statistics {
-  double[] data;
-  int size;
+  final double[] data;
+  final int size;
 
   Statistics(double[] data) {
     this.data = data;

@@ -22,7 +22,7 @@ public abstract class Agent {
   private final Tensor actions = Tensors.empty();
   private final Tensor qvalues = Tensors.empty();
   /** EXPERIMENTAL opening sequence of action */
-  protected List<Integer> openingSequence = new ArrayList<>();
+  protected final List<Integer> openingSequence = new ArrayList<>();
 
   protected abstract int protected_takeAction();
 

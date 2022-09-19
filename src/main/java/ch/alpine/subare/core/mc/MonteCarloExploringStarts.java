@@ -23,7 +23,7 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Accumulate;
 import ch.alpine.tensor.alg.Last;
-import ch.alpine.tensor.num.Polynomial;
+import ch.alpine.tensor.sca.ply.Polynomial;
 
 /** Monte Carlo exploring starts improves an initial policy
  * based on average returns from complete episodes.

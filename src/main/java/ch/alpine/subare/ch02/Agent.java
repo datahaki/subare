@@ -94,7 +94,6 @@ public abstract class Agent {
     return randomizedDecisionCount;
   }
 
-  @SafeVarargs
   public final void setOpeningSequence(Integer... actions) {
     // TODO SUBARE set != addAll !?
     openingSequence.addAll(List.of(actions));

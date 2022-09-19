@@ -4,8 +4,8 @@ package ch.alpine.subare.core;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.api.TensorScalarFunction;
-import ch.alpine.tensor.num.Polynomial;
 import ch.alpine.tensor.sca.Clips;
+import ch.alpine.tensor.sca.ply.Polynomial;
 
 /** provides different implementation for adding the discounted rewards:
  * in case gamma == 1, the rewards are simply added, else the horner scheme is used */

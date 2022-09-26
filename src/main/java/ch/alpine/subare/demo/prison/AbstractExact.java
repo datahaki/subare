@@ -55,7 +55,7 @@ import ch.alpine.tensor.Tensor;
     }
   }
 
-  public AbstractExact(Supplier<Agent> sup1, Supplier<Agent> sup2) {
+  protected AbstractExact(Supplier<Agent> sup1, Supplier<Agent> sup2) {
     this.sup1 = sup1;
     this.sup2 = sup2;
   }

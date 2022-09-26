@@ -20,7 +20,7 @@ abstract class AbstractTrueOnlineSarsa implements TrueOnlineInterface, StateActi
   final Scalar gamma;
   final Scalar gamma_lambda;
 
-  public AbstractTrueOnlineSarsa(MonteCarloInterface monteCarloInterface, SarsaEvaluation evaluationType, //
+  protected AbstractTrueOnlineSarsa(MonteCarloInterface monteCarloInterface, SarsaEvaluation evaluationType, //
       Scalar lambda, LearningRate learningRate, //
       FeatureMapper featureMapper) {
     this.monteCarloInterface = monteCarloInterface;

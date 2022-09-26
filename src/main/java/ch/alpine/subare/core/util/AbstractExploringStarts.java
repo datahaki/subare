@@ -12,7 +12,7 @@ import ch.alpine.subare.core.Policy;
   private ExploringStartsBatch exploringStartBatch;
   private int episodeIndex = 0;
 
-  AbstractExploringStarts(MonteCarloInterface monteCarloInterface) {
+  protected AbstractExploringStarts(MonteCarloInterface monteCarloInterface) {
     this.monteCarloInterface = monteCarloInterface;
   }
 

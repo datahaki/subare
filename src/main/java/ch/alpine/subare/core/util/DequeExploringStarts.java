@@ -14,7 +14,7 @@ public abstract class DequeExploringStarts extends AbstractExploringStarts {
   private final int nstep;
   private final List<DequeDigest> list;
 
-  public DequeExploringStarts( //
+  protected DequeExploringStarts( //
       MonteCarloInterface monteCarloInterface, int nstep, DequeDigest... dequeDigest) {
     super(monteCarloInterface);
     this.nstep = nstep;

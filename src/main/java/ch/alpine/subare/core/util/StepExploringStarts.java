@@ -11,7 +11,7 @@ import ch.alpine.subare.core.StepInterface;
 public abstract class StepExploringStarts extends AbstractExploringStarts {
   private final List<StepDigest> list;
 
-  public StepExploringStarts(MonteCarloInterface monteCarloInterface, StepDigest... dequeDigest) {
+  protected StepExploringStarts(MonteCarloInterface monteCarloInterface, StepDigest... dequeDigest) {
     super(monteCarloInterface);
     list = List.of(dequeDigest);
     nextBatch();

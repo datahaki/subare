@@ -48,7 +48,7 @@ public class Sarsa extends DequeDigestAdapter implements DiscreteQsaSupplier, St
    * @param qsa
    * @param sac
    * @param policy */
-  public Sarsa( //
+  protected Sarsa( //
       SarsaEvaluation sarsaEvaluation, //
       DiscreteModel discreteModel, //
       LearningRate learningRate, //

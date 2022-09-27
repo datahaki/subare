@@ -10,7 +10,7 @@ import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.pdf.c.NormalDistribution;
 import ch.alpine.tensor.red.Mean;
-import ch.alpine.tensor.red.ScalarSummaryStatistics;
+import ch.alpine.tensor.red.MinMax;
 import ch.alpine.tensor.red.StandardDeviation;
 import ch.alpine.tensor.red.Variance;
 import ch.alpine.tensor.sca.Chop;
@@ -37,10 +37,9 @@ import ch.alpine.tensor.sca.Clips;
 
   Tensor pullAll() {
     Tensor states = prep.add(RandomVariate.of(STANDARD, prep.length()));
-    ScalarSummaryStatistics scalarSummaryStatistics = //
-        states.stream().map(Scalar.class::cast).collect(ScalarSummaryStatistics.collector());
-    min = min.add(scalarSummaryStatistics.getMin());
-    max = max.add(scalarSummaryStatistics.getMax());
+    MinMax minMax = states.stream().map(Scalar.class::cast).collect(MinMax.collector());
+    min = min.add(minMax.getMin());
+    max = max.add(minMax.getMax());
     return states;
   }
 

@@ -37,9 +37,9 @@ import ch.alpine.tensor.sca.Clips;
 
   Tensor pullAll() {
     Tensor states = prep.add(RandomVariate.of(STANDARD, prep.length()));
-    MinMax minMax = states.stream().map(Scalar.class::cast).collect(MinMax.collector());
-    min = min.add(minMax.getMin());
-    max = max.add(minMax.getMax());
+    Clip clip = states.stream().map(Scalar.class::cast).collect(MinMax.toClip());
+    min = min.add(clip.min());
+    max = max.add(clip.max());
     return states;
   }
 

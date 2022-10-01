@@ -45,6 +45,7 @@ public class LinearExplorationRate implements ExplorationRate, Serializable {
   }
 
   final Scalar epsilon(Scalar stateCount) {
+    // TODO explore
     Scalar decayedValue = maximum.subtract(maximum.subtract(minimum).multiply(stateCount).divide(decayInterval));
     return Max.of(minimum, decayedValue);
   }

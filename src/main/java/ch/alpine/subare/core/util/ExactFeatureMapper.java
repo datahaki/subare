@@ -4,6 +4,7 @@ package ch.alpine.subare.core.util;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import ch.alpine.subare.core.MonteCarloInterface;
 import ch.alpine.tensor.Tensor;
@@ -26,8 +27,9 @@ public class ExactFeatureMapper implements FeatureMapper, Serializable {
 
   private ExactFeatureMapper(MonteCarloInterface monteCarloInterface) {
     // count the number of possible state-action pairs first
+    
     stateActionSize = monteCarloInterface.states().stream() //
-        .filter(state -> !monteCarloInterface.isTerminal(state)) //
+        .filter(Predicate.not(monteCarloInterface::isTerminal)) //
         .mapToInt(state -> monteCarloInterface.actions(state).length()) //
         .sum();
     int index = -1;

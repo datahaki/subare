@@ -1,6 +1,8 @@
 // code by jph
 package ch.alpine.subare.ch04.grid;
 
+import java.util.function.Predicate;
+
 import ch.alpine.subare.core.MonteCarloInterface;
 import ch.alpine.subare.core.adapter.DeterministicStandardModel;
 import ch.alpine.tensor.RealScalar;
@@ -62,7 +64,7 @@ public class Gridworld extends DeterministicStandardModel implements MonteCarloI
   // ---
   @Override // from MonteCarloInterface
   public Tensor startStates() {
-    return Tensor.of(STATES.stream().filter(state -> !isTerminal(state)));
+    return Tensor.of(STATES.stream().filter(Predicate.not(this::isTerminal)));
   }
 
   @Override // from TerminalInterface

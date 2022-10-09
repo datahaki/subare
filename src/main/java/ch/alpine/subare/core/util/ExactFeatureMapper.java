@@ -27,7 +27,6 @@ public class ExactFeatureMapper implements FeatureMapper, Serializable {
 
   private ExactFeatureMapper(MonteCarloInterface monteCarloInterface) {
     // count the number of possible state-action pairs first
-    
     stateActionSize = monteCarloInterface.states().stream() //
         .filter(Predicate.not(monteCarloInterface::isTerminal)) //
         .mapToInt(state -> monteCarloInterface.actions(state).length()) //

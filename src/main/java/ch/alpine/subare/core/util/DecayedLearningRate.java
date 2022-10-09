@@ -40,7 +40,7 @@ import ch.alpine.tensor.sca.pow.Power;
   }
 
   @Override // from LearningRate
-  public synchronized final Scalar alpha(StepInterface stepInterface, StateActionCounter stateActionCounter) {
+  public final synchronized Scalar alpha(StepInterface stepInterface, StateActionCounter stateActionCounter) {
     Tensor key = StateAction.key(stepInterface);
     int index = Scalars.intValueExact(stateActionCounter.stateActionCount(key));
     while (memo.length() <= index)

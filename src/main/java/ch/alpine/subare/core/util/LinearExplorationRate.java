@@ -32,6 +32,7 @@ public class LinearExplorationRate implements ExplorationRate, Serializable {
   private final Scalar minimum;
   private final Scalar maximum;
 
+  // TODO SUBARE input parameter type one Clip instead of two scalars
   private LinearExplorationRate(Scalar decayInterval, Scalar maximum, Scalar minimum) {
     this.decayInterval = Sign.requirePositive(decayInterval);
     Clips.interval(minimum, maximum);
@@ -45,7 +46,7 @@ public class LinearExplorationRate implements ExplorationRate, Serializable {
   }
 
   final Scalar epsilon(Scalar stateCount) {
-    // TODO explore
+    // TODO SUBARE explore
     Scalar decayedValue = maximum.subtract(maximum.subtract(minimum).multiply(stateCount).divide(decayInterval));
     return Max.of(minimum, decayedValue);
   }

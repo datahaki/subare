@@ -3,7 +3,6 @@ package ch.alpine.subare.ch08.maze;
 
 import ch.alpine.subare.core.alg.ActionValueIterations;
 import ch.alpine.subare.core.util.DiscreteQsa;
-import ch.alpine.subare.core.util.gfx.StateRaster;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
@@ -14,11 +13,6 @@ public enum DynamazeHelper {
   ;
   private static final Tensor STARTS_5 = Tensors.matrixInt(new int[][] { //
       { 31, 15 }, { 9, 15 }, { 18, 12 } });
-
-  @Deprecated
-  public static StateRaster createRaster(Dynamaze dynamaze) {
-    return new DynamazeRaster(dynamaze);
-  }
 
   /** @param name, for instance "maze2"
    * @return */

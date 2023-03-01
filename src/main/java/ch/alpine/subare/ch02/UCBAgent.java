@@ -2,13 +2,13 @@
 package ch.alpine.subare.ch02;
 
 import ch.alpine.tensor.DoubleScalar;
-import ch.alpine.tensor.IntegerQ;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.chq.FiniteTensorQ;
+import ch.alpine.tensor.chq.IntegerQ;
 import ch.alpine.tensor.red.Total;
 import ch.alpine.tensor.sca.Sign;
 import ch.alpine.tensor.sca.exp.Log;

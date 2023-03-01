@@ -2,6 +2,7 @@
 package ch.alpine.subare.util;
 
 import java.util.Random;
+import java.util.random.RandomGenerator;
 
 import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.Scalar;
@@ -25,7 +26,7 @@ public class Coinflip {
   }
 
   // ---
-  private final Random random = new Random();
+  private final RandomGenerator random = new Random();
   private final float p_head;
 
   private Coinflip(Scalar p_head) {

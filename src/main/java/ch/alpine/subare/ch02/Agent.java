@@ -4,6 +4,7 @@ package ch.alpine.subare.ch02;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.random.RandomGenerator;
 
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
@@ -12,7 +13,7 @@ import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.ext.Integers;
 
 public abstract class Agent {
-  protected static final Random RANDOM = new Random();
+  protected static final RandomGenerator RANDOM = new Random();
   // ---
   private Scalar total = RealScalar.ZERO;
   private Integer count = 0;
@@ -21,7 +22,7 @@ public abstract class Agent {
   private int actionReminder;
   private final Tensor actions = Tensors.empty();
   private final Tensor qvalues = Tensors.empty();
-  /** EXPERIMENTAL opening sequence of action */
+  /** EXPERIMENTAL SUBARE opening sequence of action */
   protected final List<Integer> openingSequence = new ArrayList<>();
 
   protected abstract int protected_takeAction();

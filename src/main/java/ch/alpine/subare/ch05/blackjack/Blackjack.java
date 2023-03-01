@@ -2,6 +2,7 @@
 package ch.alpine.subare.ch05.blackjack;
 
 import java.util.Random;
+import java.util.random.RandomGenerator;
 
 import ch.alpine.subare.core.MonteCarloInterface;
 import ch.alpine.tensor.RealScalar;
@@ -19,7 +20,7 @@ class Blackjack implements MonteCarloInterface {
   private static final Tensor END_DRAW = Tensors.vector(0);
   private static final Tensor END_LOSS = Tensors.vector(-1);
   // ---
-  private final Random random = new Random();
+  private final RandomGenerator random = new Random();
   // states are product of
   // dealer showing: 1(=A), 2, 3, 4, 5, 6, 7, 8, 9, {T, J, Q, K} - #=10
   // player sum 12, 13, ..., 21 - #=10

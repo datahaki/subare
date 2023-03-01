@@ -4,6 +4,7 @@ package ch.alpine.subare.core.adapter;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import java.util.random.RandomGenerator;
 
 import ch.alpine.subare.core.Policy;
 import ch.alpine.subare.core.StateActionModel;
@@ -14,7 +15,7 @@ import ch.alpine.tensor.num.Boole;
 import ch.alpine.tensor.pdf.Distribution;
 
 public class FixedRandomPolicy implements Policy {
-  private static final Random RANDOM = new Random();
+  private static final RandomGenerator RANDOM = new Random();
   // ---
   private final Set<Tensor> set = new HashSet<>();
 

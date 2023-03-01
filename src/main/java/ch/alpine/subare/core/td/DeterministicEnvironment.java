@@ -4,6 +4,7 @@ package ch.alpine.subare.core.td;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.random.RandomGenerator;
 
 import ch.alpine.subare.core.StepDigest;
 import ch.alpine.subare.core.StepInterface;
@@ -14,7 +15,7 @@ import ch.alpine.tensor.Tensors;
 /** utility class to implement "Model" for deterministic environments
  * in Tabular Dyna-Q p.172 */
 /* package */ class DeterministicEnvironment implements StepDigest {
-  private static final Random RANDOM = new Random();
+  private static final RandomGenerator RANDOM = new Random();
   // ---
   private final Map<Tensor, StepInterface> map = new HashMap<>();
   private final Tensor keys = Tensors.empty();

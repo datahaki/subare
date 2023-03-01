@@ -3,7 +3,7 @@ package ch.alpine.subare.util;
 
 import java.security.SecureRandom;
 import java.util.List;
-import java.util.Random;
+import java.util.random.RandomGenerator;
 
 import ch.alpine.tensor.Tensor;
 
@@ -11,7 +11,7 @@ import ch.alpine.tensor.Tensor;
  * <a href="https://reference.wolfram.com/language/ref/RandomChoice.html">RandomChoice</a> */
 public enum RandomChoice {
   ;
-  private static final Random RANDOM = new SecureRandom();
+  private static final RandomGenerator RANDOM = new SecureRandom();
 
   /** @param tensor
    * @return random entry of tensor
@@ -26,7 +26,7 @@ public enum RandomChoice {
    * @param random
    * @return random entry of list
    * @throws Exception if given list is empty */
-  public static <T> T of(List<T> list, Random random) {
+  public static <T> T of(List<T> list, RandomGenerator random) {
     return list.get(random.nextInt(list.size()));
   }
 

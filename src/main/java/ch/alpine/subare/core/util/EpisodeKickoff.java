@@ -3,6 +3,7 @@ package ch.alpine.subare.core.util;
 
 import java.util.ArrayDeque;
 import java.util.Random;
+import java.util.random.RandomGenerator;
 
 import ch.alpine.subare.core.EpisodeInterface;
 import ch.alpine.subare.core.MonteCarloInterface;
@@ -12,7 +13,7 @@ import ch.alpine.tensor.Tensor;
 
 public enum EpisodeKickoff {
   ;
-  private static final Random RANDOM = new Random();
+  private static final RandomGenerator RANDOM = new Random();
 
   public static EpisodeInterface single(MonteCarloInterface monteCarloInterface, Policy policy) {
     Tensor starts = monteCarloInterface.startStates();

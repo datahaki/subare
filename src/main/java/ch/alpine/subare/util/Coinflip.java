@@ -26,7 +26,7 @@ public class Coinflip {
   }
 
   // ---
-  private final RandomGenerator random = new Random();
+  private final RandomGenerator randomGenerator = new Random();
   private final float p_head;
 
   private Coinflip(Scalar p_head) {
@@ -35,6 +35,6 @@ public class Coinflip {
 
   /** returns true if the coin toss ended up with head */
   public boolean tossHead() {
-    return random.nextFloat() < p_head;
+    return randomGenerator.nextFloat() < p_head;
   }
 }

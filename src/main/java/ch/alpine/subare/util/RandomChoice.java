@@ -23,11 +23,11 @@ public enum RandomChoice {
 
   // ---
   /** @param list
-   * @param random
+   * @param randomGenerator
    * @return random entry of list
    * @throws Exception if given list is empty */
-  public static <T> T of(List<T> list, RandomGenerator random) {
-    return list.get(random.nextInt(list.size()));
+  public static <T> T of(List<T> list, RandomGenerator randomGenerator) {
+    return list.get(randomGenerator.nextInt(list.size()));
   }
 
   /** @param list

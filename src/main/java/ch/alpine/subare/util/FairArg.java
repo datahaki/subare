@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.ext.RandomChoice;
 import ch.alpine.tensor.red.Max;
 import ch.alpine.tensor.red.Min;
 

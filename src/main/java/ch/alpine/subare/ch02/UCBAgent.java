@@ -42,8 +42,8 @@ public class UCBAgent extends FairArgAgent {
         bias = DoubleScalar.POSITIVE_INFINITY;
       else {
         Scalar count = Sign.requirePositive(IntegerQ.require(Total.ofVector(Na)));
-        Scalar logt = Log.of(count);
-        bias = c.multiply(Sqrt.of(logt.divide(Nta)));
+        Scalar logt = Log.FUNCTION.apply(count);
+        bias = c.multiply(Sqrt.FUNCTION.apply(logt.divide(Nta)));
       }
       dec.set(QA -> QA.add(bias), a);
     }

@@ -43,7 +43,7 @@ import ch.alpine.tensor.sca.Round;
     for (Agent agent : list) {
       Scalar s = clip.rescale(agent.getRewardTotal()).multiply(RealScalar.of(100));
       System.out.printf("%25s%5s %%%8s RND%n", //
-          agent, Round.of(s), "" + agent.getRandomizedDecisionCount());
+          agent, Round.FUNCTION.apply(s), "" + agent.getRandomizedDecisionCount());
     }
   }
 

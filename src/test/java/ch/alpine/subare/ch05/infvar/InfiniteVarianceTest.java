@@ -23,7 +23,7 @@ class InfiniteVarianceTest {
     avi.untilBelow(RealScalar.of(.00001));
     DiscreteQsa qsa = avi.qsa();
     Scalar diff = qsa.value(InfiniteVariance.BACK, InfiniteVariance.BACK).subtract(RealScalar.ONE);
-    assertTrue(Scalars.lessThan(Abs.of(diff), RealScalar.of(.001)));
+    assertTrue(Scalars.lessThan(Abs.FUNCTION.apply(diff), RealScalar.of(.001)));
     assertEquals(qsa.value(InfiniteVariance.BACK, InfiniteVariance.END), RealScalar.ZERO);
     assertEquals(qsa.value(InfiniteVariance.END, InfiniteVariance.END), RealScalar.ZERO);
   }
@@ -35,7 +35,7 @@ class InfiniteVarianceTest {
     vi.untilBelow(RealScalar.of(.00001));
     DiscreteVs vs = vi.vs();
     Scalar diff = vs.value(InfiniteVariance.BACK).subtract(RealScalar.ONE);
-    assertTrue(Scalars.lessThan(Abs.of(diff), RealScalar.of(.001)));
+    assertTrue(Scalars.lessThan(Abs.FUNCTION.apply(diff), RealScalar.of(.001)));
     assertEquals(vs.value(InfiniteVariance.END), RealScalar.ZERO);
   }
 }

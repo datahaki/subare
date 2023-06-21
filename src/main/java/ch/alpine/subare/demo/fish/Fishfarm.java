@@ -68,7 +68,7 @@ class Fishfarm extends DeterministicStandardModel implements MonteCarloInterface
     Scalar factor = RealScalar.of(8).divide(max);
     Scalar x = population.subtract(max_half).multiply(factor); // x-n/2
     Scalar res = DLogisticSigmoid.FUNCTION.apply(x);
-    return Round.of(res.multiply(max));
+    return Round.FUNCTION.apply(res.multiply(max));
   }
 
   @Override

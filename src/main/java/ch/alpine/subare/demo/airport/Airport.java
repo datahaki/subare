@@ -94,7 +94,7 @@ public class Airport implements StandardModel, MonteCarloInterface {
     Scalar customers = RandomVariate.of(DISTRIBUTION); // either 0, 1, 2, 3
     // deal with rebalancing costs
     Scalar reward = action.Get(0).multiply(REBALANCE_COST);
-    reward = reward.add(Ramp.of(action.Get(1).subtract(customers)).multiply(REBALANCE_COST));
+    reward = reward.add(Ramp.FUNCTION.apply(action.Get(1).subtract(customers)).multiply(REBALANCE_COST));
     // deal with parking cost of airport
     reward = reward.add(state.Get(2).subtract(action.Get(1)).multiply(AIRPORT_WAIT_COST));
     // deal with customer reward
@@ -121,7 +121,7 @@ public class Airport implements StandardModel, MonteCarloInterface {
     // deal with rebalancing costs
     Scalar reward = action.Get(0).multiply(REBALANCE_COST);
     for (int i = 0; i < CUSTOMER_PROB.length(); i++) {
-      reward = reward.add(Ramp.of(action.Get(1).subtract(RealScalar.of(i))).multiply(REBALANCE_COST).multiply(CUSTOMER_PROB.Get(i)));
+      reward = reward.add(Ramp.FUNCTION.apply(action.Get(1).subtract(RealScalar.of(i))).multiply(REBALANCE_COST).multiply(CUSTOMER_PROB.Get(i)));
     }
     // deal with parking cost of airport
     reward = reward.add(state.Get(2).subtract(action.Get(1)).multiply(AIRPORT_WAIT_COST));

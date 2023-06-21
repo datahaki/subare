@@ -17,7 +17,7 @@ import ch.alpine.tensor.api.ScalarUnaryOperator;
 import ch.alpine.tensor.sca.exp.Log;
 
 public class DiscreteStateActionCounter implements StateActionCounter, Serializable {
-  private static final ScalarUnaryOperator LOGARITHMIC = scalar -> Log.of(scalar.add(RealScalar.ONE));
+  private static final ScalarUnaryOperator LOGARITHMIC = scalar -> Log.FUNCTION.apply(scalar.add(RealScalar.ONE));
   // ---
   private final Map<Tensor, Integer> stateActionMap = new HashMap<>();
   private final Map<Tensor, Integer> stateMap = new HashMap<>();

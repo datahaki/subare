@@ -23,7 +23,7 @@ import ch.alpine.tensor.Throw;
     if (!norm.equals(RealScalar.ONE)) {
       System.out.println("state =" + state);
       System.out.println("action=" + action);
-      actionValueInterface.transitions(state, action).stream().forEach(next -> {
+      actionValueInterface.transitions(state, action).forEach(next -> {
         Scalar prob = actionValueInterface.transitionProbability(state, action, next);
         System.out.println(next + " " + prob);
       });

@@ -31,7 +31,7 @@ class AverageTrackerTest {
   void testMean() {
     Tensor vec = Tensors.vector(3, 2, 9, 19, 99, 29, 30);
     AverageTracker avg = new AverageTracker();
-    vec.stream().forEach(avg::track);
+    vec.forEach(avg::track);
     assertEquals(avg.getScalar(), Mean.of(vec));
   }
 

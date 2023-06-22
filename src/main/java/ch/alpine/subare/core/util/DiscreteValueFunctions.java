@@ -17,7 +17,7 @@ public enum DiscreteValueFunctions {
   ;
   @SuppressWarnings("unchecked")
   public static <T extends DiscreteValueFunction> T numeric(T tvi) {
-    return (T) tvi.create(N.DOUBLE.of(tvi.values()).stream());
+    return (T) tvi.create(tvi.values().map(N.DOUBLE).stream());
   }
 
   @SuppressWarnings("unchecked")
@@ -44,12 +44,12 @@ public enum DiscreteValueFunctions {
 
   @SuppressWarnings("unchecked")
   public static <T extends DiscreteValueFunction> T logisticDifference(T tvi1, T tvi2) {
-    return (T) tvi1.create(LogisticSigmoid.of(_difference(tvi1, tvi2)).stream());
+    return (T) tvi1.create(_difference(tvi1, tvi2).map(LogisticSigmoid.FUNCTION).stream());
   }
 
   @SuppressWarnings("unchecked")
   public static <T extends DiscreteValueFunction> T logisticDifference(T tvi1, T tvi2, Scalar factor) {
-    return (T) tvi1.create(LogisticSigmoid.of(_difference(tvi1, tvi2).multiply(factor)).stream());
+    return (T) tvi1.create(_difference(tvi1, tvi2).multiply(factor).map(LogisticSigmoid.FUNCTION).stream());
   }
 
   /** @param qsa1

@@ -79,7 +79,7 @@ public enum StateRasters {
     DiscreteVs loss = Loss.perState(stateRaster.discreteModel(), ref, qsa);
     loss = loss.create(loss.values().stream() //
         .map(tensor -> tensor.multiply(stateRaster.scaleLoss())) //
-        .map(Clips.unit()::of));
+        .map(tensor -> tensor.map(Clips.unit())));
     Tensor image2 = _render(stateRaster, loss);
     Tensor image3 = _vs(stateRaster, DiscreteValueFunctions.logisticDifference(qsa, ref, stateRaster.scaleQdelta()));
     List<Integer> list = Dimensions.of(image1);

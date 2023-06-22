@@ -61,7 +61,7 @@ public class ActionValueIteration implements DiscreteQsaSupplier {
 
   /** state-action values are stored in numeric precision */
   public void setMachinePrecision() {
-    gamma = N.DOUBLE.of(gamma);
+    gamma = N.DOUBLE.apply(gamma);
   }
 
   /** perform iteration until values don't change more than threshold

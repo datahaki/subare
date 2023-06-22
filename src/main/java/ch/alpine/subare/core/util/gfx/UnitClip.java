@@ -3,7 +3,6 @@ package ch.alpine.subare.core.util.gfx;
 
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.Scalar;
-import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.api.ScalarUnaryOperator;
 import ch.alpine.tensor.chq.FiniteScalarQ;
 import ch.alpine.tensor.sca.Clips;
@@ -18,10 +17,5 @@ import ch.alpine.tensor.sca.Clips;
     return FiniteScalarQ.of(scalar) //
         ? Clips.unit().apply(scalar)
         : scalar;
-  }
-
-  @SuppressWarnings("unchecked")
-  public static <T extends Tensor> T of(T tensor) {
-    return (T) tensor.map(FUNCTION);
   }
 }

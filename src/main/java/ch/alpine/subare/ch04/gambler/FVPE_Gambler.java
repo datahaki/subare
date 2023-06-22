@@ -23,7 +23,7 @@ import ch.alpine.tensor.sca.N;
       ExploringStarts.batch(gamblerModel, policy, fvpe);
       DiscreteVs vs = fvpe.vs();
       Scalar diff = DiscreteValueFunctions.distance(vs, ref);
-      System.out.println(count + " " + N.DOUBLE.of(diff));
+      System.out.println(count + " " + N.DOUBLE.apply(diff));
     }
   }
 }

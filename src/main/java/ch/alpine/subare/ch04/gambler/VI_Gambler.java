@@ -32,7 +32,7 @@ import ch.alpine.tensor.sca.N;
     final DiscreteVs vs = vi.vs();
     final DiscreteVs vr = DiscreteUtils.createVs(gamblerModel, ref);
     Scalar diff = DiscreteValueFunctions.distance(vs, vr);
-    System.out.println("error=" + N.DOUBLE.of(diff));
+    System.out.println("error=" + N.DOUBLE.apply(diff));
     Policy policy = PolicyType.GREEDY.bestEquiprobable(gamblerModel, ref, null);
     Policies.print(policy, gamblerModel.states());
   }

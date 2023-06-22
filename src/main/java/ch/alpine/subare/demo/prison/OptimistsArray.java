@@ -58,7 +58,7 @@ import ch.alpine.tensor.sca.N;
     Tensor init = Subdivide.of(RationalScalar.of(+21, 10), RationalScalar.of(-11, 10), 280 - 1); //
     Tensor separator = ConstantArray.of(RealScalar.ZERO, init.length(), 5);
     Scalar alpha = RealScalar.of(0.22);
-    OptimistsArray optimistsArray = new OptimistsArray(N.DOUBLE.of(init), alpha);
+    OptimistsArray optimistsArray = new OptimistsArray(init.map(N.DOUBLE), alpha);
     File folder = HomeDirectory.Pictures(optimistsArray.getClass().getSimpleName() + "_" + alpha);
     folder.mkdir();
     for (int frame = 0; frame < 300; ++frame) {

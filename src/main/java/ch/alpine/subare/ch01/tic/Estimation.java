@@ -55,8 +55,8 @@ import java.util.Objects;
       // Export.object(file, object);(object)
       // return (Estimation) ObjectExchange.readObject(of(symbol));
       return null;
-    } catch (Exception myException) {
-      myException.printStackTrace();
+    } catch (Exception exception) {
+      exception.printStackTrace();
     }
     return new Estimation();
   }

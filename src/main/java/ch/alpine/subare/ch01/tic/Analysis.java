@@ -46,8 +46,8 @@ import java.util.stream.Collectors;
         State state : subset) {
           // System.out.println(estimation.get(state));
         }
-        Statistics myStatistics = new Statistics(data);
-        double var = myStatistics.getVariance();
+        Statistics statistics = new Statistics(data);
+        double var = statistics.getVariance();
         list.add(var);
       }
       //

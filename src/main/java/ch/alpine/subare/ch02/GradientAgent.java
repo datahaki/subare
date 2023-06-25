@@ -1,6 +1,8 @@
 // code by jph
 package ch.alpine.subare.ch02;
 
+import java.util.Objects;
+
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -29,7 +31,7 @@ public class GradientAgent extends Agent {
     Integer a = null;
     for (int k = 0; k < n; ++k) {
       sum += pi.Get(k).number().doubleValue();
-      if (rnd < sum && a == null)
+      if (rnd < sum && Objects.isNull(a))
         a = k;
     }
     Chop._10.requireClose(RealScalar.of(sum), RealScalar.ONE);

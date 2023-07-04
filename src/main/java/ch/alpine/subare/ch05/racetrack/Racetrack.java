@@ -17,6 +17,7 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.Dimensions;
+import ch.alpine.tensor.alg.Flatten;
 import ch.alpine.tensor.alg.Join;
 import ch.alpine.tensor.alg.Subdivide;
 import ch.alpine.tensor.itp.Interpolation;
@@ -52,7 +53,7 @@ class Racetrack extends DeterministicStandardModel implements MonteCarloInterfac
   final Tensor statesStart = Tensors.empty();
   final Tensor statesTerminal = Tensors.empty();
   final Tensor actions = //
-      Tensor.of(Array.of(Tensors::vector, 3, 3).flatten(1)).map(s -> s.subtract(RealScalar.ONE)).unmodifiable();
+      Flatten.of(Array.of(Tensors::vector, 3, 3), 1).map(s -> s.subtract(RealScalar.ONE)).unmodifiable();
   final Index statesIndex;
   final Index statesStartIndex;
   final Index statesTerminalIndex;

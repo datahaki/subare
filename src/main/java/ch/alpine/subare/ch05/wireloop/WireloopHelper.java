@@ -16,7 +16,7 @@ import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.alg.Join;
 import ch.alpine.tensor.api.TensorScalarFunction;
-import ch.alpine.tensor.io.ResourceData;
+import ch.alpine.tensor.io.Import;
 import ch.alpine.tensor.sca.Chop;
 import ch.alpine.tensor.sca.Clips;
 
@@ -28,7 +28,7 @@ public enum WireloopHelper {
    * @return
    * @throws Exception if resource associated to trackName does not exist */
   public static Wireloop create(String trackName, TensorScalarFunction function, WireloopReward wireloopReward) {
-    return new Wireloop(ResourceData.of("/ch05/" + trackName + ".png"), function, wireloopReward);
+    return new Wireloop(Import.of("/ch05/" + trackName + ".png"), function, wireloopReward);
   }
 
   static Wireloop create(String trackName, TensorScalarFunction function) {

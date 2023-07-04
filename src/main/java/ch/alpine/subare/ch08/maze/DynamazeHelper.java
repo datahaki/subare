@@ -7,7 +7,7 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
-import ch.alpine.tensor.io.ResourceData;
+import ch.alpine.tensor.io.Import;
 
 public enum DynamazeHelper {
   ;
@@ -36,7 +36,7 @@ public enum DynamazeHelper {
   }
 
   /* package */ static Tensor load(String name) {
-    return ResourceData.of("/ch08/" + name + ".png");
+    return Import.of("/ch08/" + name + ".png");
   }
 
   static DiscreteQsa getOptimalQsa(Dynamaze dynamaze) {

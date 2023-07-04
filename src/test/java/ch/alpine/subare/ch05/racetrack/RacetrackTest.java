@@ -15,12 +15,12 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.ArrayQ;
 import ch.alpine.tensor.alg.Dimensions;
-import ch.alpine.tensor.io.ResourceData;
+import ch.alpine.tensor.io.Import;
 
 class RacetrackTest {
   @Test
   void testStartAction() {
-    Racetrack racetrack = new Racetrack(ResourceData.of("/ch05/track0.png"), 3);
+    Racetrack racetrack = new Racetrack(Import.of("/ch05/track0.png"), 3);
     Index statesIndex = Index.build(racetrack.states());
     assertEquals(statesIndex.size(), 724);
     assertEquals(racetrack.statesStart, Tensors.fromString("{{1, 0, 0, 0}, {2, 0, 0, 0}, {3, 0, 0, 0}}"));
@@ -30,7 +30,7 @@ class RacetrackTest {
 
   @Test
   void testMove() {
-    Racetrack racetrack = new Racetrack(ResourceData.of("/ch05/track0.png"), 3);
+    Racetrack racetrack = new Racetrack(Import.of("/ch05/track0.png"), 3);
     assertEquals(Dimensions.of(racetrack.image()), List.of(8, 11, 4));
     Tensor start = Tensors.vector(1, 0, 0, 0);
     assertTrue(racetrack.isStart(start));
@@ -43,14 +43,14 @@ class RacetrackTest {
 
   @Test
   void testSome() {
-    Racetrack racetrack = new Racetrack(ResourceData.of("/ch05/track0.png"), 3);
+    Racetrack racetrack = new Racetrack(Import.of("/ch05/track0.png"), 3);
     for (Tensor state : racetrack.states())
       racetrack.actions(state);
   }
 
   @Test
   void testArray() {
-    Racetrack racetrack = new Racetrack(ResourceData.of("/ch05/track0.png"), 3);
+    Racetrack racetrack = new Racetrack(Import.of("/ch05/track0.png"), 3);
     ArrayQ.require(racetrack.actions);
   }
 }

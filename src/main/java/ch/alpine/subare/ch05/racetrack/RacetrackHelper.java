@@ -11,7 +11,7 @@ import ch.alpine.tensor.alg.Rescale;
 import ch.alpine.tensor.img.ColorDataGradients;
 import ch.alpine.tensor.img.ImageResize;
 import ch.alpine.tensor.img.Raster;
-import ch.alpine.tensor.io.ResourceData;
+import ch.alpine.tensor.io.Import;
 
 public enum RacetrackHelper {
   ;
@@ -20,7 +20,7 @@ public enum RacetrackHelper {
    * @return
    * @throws Exception if resource associated to trackName does not exist */
   public static Racetrack create(String trackName, int maxSpeed) {
-    return new Racetrack(ResourceData.of("/ch05/" + trackName + ".png"), maxSpeed);
+    return new Racetrack(Import.of("/ch05/" + trackName + ".png"), maxSpeed);
   }
 
   static Tensor render(Racetrack racetrack, DiscreteQsa qsa, Tensor speed, Tensor action) {

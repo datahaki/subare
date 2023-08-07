@@ -10,13 +10,14 @@ import ch.alpine.subare.core.util.DiscreteUtils;
 import ch.alpine.subare.core.util.DiscreteVs;
 import ch.alpine.subare.core.util.EquiprobablePolicy;
 import ch.alpine.subare.core.util.ExploringStarts;
+import ch.alpine.tensor.ext.ResourceData;
 import ch.alpine.tensor.io.Import;
 import ch.alpine.tensor.sca.Round;
 
 enum FVPE_RaceTrack {
   ;
   public static void main(String[] args) throws IOException {
-    String path = "".getClass().getResource("/ch05/track0.png").getPath();
+    String path = ResourceData.class.getResource("/ch05/track0.png").getPath();
     Racetrack racetrack = new Racetrack(Import.of(new File(path)), 3);
     FirstVisitPolicyEvaluation fvpe = new FirstVisitPolicyEvaluation( //
         racetrack, null);

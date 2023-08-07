@@ -1,5 +1,5 @@
 // code by fluric
-package ch.alpine.subare.analysis;
+package ch.alpine.subare.demo2;
 
 import java.util.function.Supplier;
 

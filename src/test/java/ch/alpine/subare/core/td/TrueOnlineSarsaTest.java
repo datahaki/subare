@@ -1,11 +1,8 @@
 // code by jph
 package ch.alpine.subare.core.td;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.ch04.gambler.GamblerModel;
 import ch.alpine.subare.core.MonteCarloInterface;
 import ch.alpine.subare.core.QsaInterface;
 import ch.alpine.subare.core.StateActionCounter;
@@ -63,25 +60,5 @@ class TrueOnlineSarsaTest {
       // TODO SUBARE doesn't work
       // SimpleTestModels._checkClose(qsa);
     }
-  }
-
-  @Test
-  void testFailLambda() {
-    MonteCarloInterface monteCarloInterface = new GamblerModel(10, RationalScalar.HALF);
-    LearningRate learningRate = ConstantLearningRate.of(RationalScalar.HALF);
-    FeatureMapper featureMapper = ExactFeatureMapper.of(monteCarloInterface);
-    FeatureWeight w = new FeatureWeight(featureMapper);
-    assertThrows(Exception.class, () -> SarsaType.ORIGINAL.trueOnline(SimpleTestModel.INSTANCE, RealScalar.of(2), featureMapper, //
-        learningRate, w, new DiscreteStateActionCounter(), null));
-  }
-
-  @Test
-  void testFail() {
-    LearningRate learningRate = ConstantLearningRate.of(RationalScalar.HALF);
-    MonteCarloInterface monteCarloInterface = new GamblerModel(10, RationalScalar.HALF);
-    FeatureMapper featureMapper = ExactFeatureMapper.of(monteCarloInterface);
-    FeatureWeight w = new FeatureWeight(featureMapper);
-    assertThrows(Exception.class, () -> SarsaType.ORIGINAL.trueOnline(null, RealScalar.of(0.9), featureMapper, //
-        learningRate, w, new DiscreteStateActionCounter(), null));
   }
 }

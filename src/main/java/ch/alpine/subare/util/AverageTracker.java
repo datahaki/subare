@@ -1,29 +1,37 @@
 // code by jph
 package ch.alpine.subare.util;
 
+import java.util.Objects;
+
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.io.MathematicaFormat;
+import ch.alpine.tensor.itp.BinaryAverage;
+import ch.alpine.tensor.itp.LinearBinaryAverage;
 
 /** consumes Tensor/Scalar and tracks average
  * without the overhead of storing all input. */
 public class AverageTracker {
+  private final BinaryAverage binaryAverage;
   private Tensor average = null;
   private Scalar count = RealScalar.ZERO;
 
+  public AverageTracker(BinaryAverage binaryAverage) {
+    this.binaryAverage = Objects.requireNonNull(binaryAverage);
+  }
+
+  public AverageTracker() {
+    this(LinearBinaryAverage.INSTANCE);
+  }
+
   /** @param tensor that contributes to the average of all tracked {@link Tensor}s */
   public void track(Tensor tensor) {
-    if (Scalars.isZero(count)) { // <- previous count is required here
-      count = count.add(RealScalar.ONE);
+    if (Scalars.isZero(count))
       average = tensor.copy();
-    } else {
-      count = count.add(RealScalar.ONE);
-      Scalar weight = count.reciprocal();
-      average = average //
-          .multiply(RealScalar.ONE.subtract(weight)) //
-          .add(tensor.divide(count));
-    }
+    count = count.add(RealScalar.ONE);
+    average = binaryAverage.split(average, tensor, count.reciprocal());
   }
 
   /** @return average of {@link Tensor}s tracked by {@link #track(Tensor)},
@@ -33,12 +41,12 @@ public class AverageTracker {
   }
 
   /** @return {@link #get()} cast to {@link Scalar} */
-  public Scalar getScalar() {
+  public Scalar Get() {
     return (Scalar) average;
   }
 
-  @Override
+  @Override // from Object
   public String toString() {
-    return average.toString();
+    return MathematicaFormat.concise("AverageTracker", average, count);
   }
 }

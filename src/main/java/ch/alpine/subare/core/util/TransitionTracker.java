@@ -33,7 +33,7 @@ import ch.alpine.tensor.Tensor;
   }
 
   public Scalar expectedReward() {
-    return average.getScalar();
+    return average.Get();
   }
 
   public Tensor transitions() {

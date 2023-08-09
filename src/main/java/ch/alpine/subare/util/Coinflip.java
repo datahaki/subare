@@ -1,14 +1,22 @@
 // code by fluric
 package ch.alpine.subare.util;
 
-import java.util.Random;
+import java.security.SecureRandom;
 import java.util.random.RandomGenerator;
 
 import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.pdf.Distribution;
+import ch.alpine.tensor.pdf.RandomVariate;
+import ch.alpine.tensor.pdf.d.BernoulliDistribution;
 import ch.alpine.tensor.sca.Clips;
 
 public class Coinflip {
+  private static final RandomGenerator RANDOM_GENERATOR = new SecureRandom();
+  private static final Coinflip FAIR = new Coinflip(RationalScalar.HALF);
+
   /** @param p_head in the interval [0, 1]
    * @return new instance of Coinflip with given probability p_head that {@link #tossHead()} returns true
    * @throws Exception if given probability is not inside the unit interval */
@@ -22,19 +30,24 @@ public class Coinflip {
    * 
    * @return new instance of Coinflip for which {@link #tossHead()} returns true with probability 1/2 */
   public static Coinflip fair() {
-    return new Coinflip(RationalScalar.HALF);
+    return FAIR;
   }
 
   // ---
-  private final RandomGenerator randomGenerator = new Random();
-  private final float p_head;
+  private final Distribution distribution;
 
   private Coinflip(Scalar p_head) {
-    this.p_head = p_head.number().floatValue();
+    distribution = BernoulliDistribution.of(RealScalar.ONE.subtract(p_head));
   }
 
-  /** returns true if the coin toss ended up with head */
+  /** @param randomGenerator
+   * @return whether the coin toss ended up with head */
+  public boolean tossHead(RandomGenerator randomGenerator) {
+    return Scalars.isZero(RandomVariate.of(distribution, randomGenerator));
+  }
+
+  /** @return whether the coin toss ended up with head */
   public boolean tossHead() {
-    return randomGenerator.nextFloat() < p_head;
+    return tossHead(RANDOM_GENERATOR);
   }
 }

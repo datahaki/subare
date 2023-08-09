@@ -90,7 +90,7 @@ public class MonteCarloExploringStarts implements EpisodeQsaEstimator, StateActi
         Tensor key = entry.getKey();
         Tensor state = key.get(0);
         Tensor action = key.get(1);
-        Scalar value = entry.getValue().getScalar();
+        Scalar value = entry.getValue().Get();
         // System.out.println(value);
         qsa.assign(state, action, value);
       }

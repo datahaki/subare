@@ -1,7 +1,7 @@
 // code by fluric
 package ch.alpine.subare.util;
 
-import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -22,6 +22,7 @@ class CoinflipTest {
     Coinflip coinflip2 = Coinflip.of(headProbability2);
     int[] counters = { 0, 0, 0 };
     int rounds = 100000;
+    // Stream.generate(()->1).limit(100_000).filter(i->coinflip0.tossHead()).count();
     for (int i = 0; i < rounds; ++i) {
       counters[0] += coinflip0.tossHead() ? 1 : 0;
       counters[1] += coinflip1.tossHead() ? 1 : 0;
@@ -34,7 +35,7 @@ class CoinflipTest {
 
   @Test
   void testInstances() {
-    assertNotSame(Coinflip.fair(), Coinflip.fair());
+    assertSame(Coinflip.fair(), Coinflip.fair());
   }
 
   @Test

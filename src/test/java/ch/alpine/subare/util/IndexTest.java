@@ -16,8 +16,16 @@ class IndexTest {
   void testSimple() {
     Tensor tensor = Tensors.vector(5, 7, 11);
     Index index = Index.build(tensor);
+    assertEquals(index.of(RealScalar.of(5)), 0);
     assertEquals(index.of(RealScalar.of(7)), 1);
+    assertEquals(index.of(RealScalar.of(11)), 2);
     assertThrows(Exception.class, () -> index.of(RealScalar.of(8)));
+  }
+
+  @Test
+  void testDuplicateFail() {
+    Tensor tensor = Tensors.vector(5, 7, 11, 7);
+    assertThrows(Exception.class, () -> Index.build(tensor));
   }
 
   @Test

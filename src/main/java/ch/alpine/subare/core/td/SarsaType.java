@@ -12,19 +12,19 @@ import ch.alpine.subare.core.util.PolicyExt;
 import ch.alpine.tensor.Scalar;
 
 public enum SarsaType {
-  ORIGINAL() {
+  ORIGINAL {
     @Override
     SarsaEvaluation sarsaEvaluation(DiscreteModel discreteModel) {
       return new OriginalSarsaEvaluation(discreteModel);
     }
-  }, //
-  EXPECTED() {
+  },
+  EXPECTED {
     @Override
     SarsaEvaluation sarsaEvaluation(DiscreteModel discreteModel) {
       return new ExpectedSarsaEvaluation(discreteModel);
     }
-  }, //
-  QLEARNING() {
+  },
+  QLEARNING {
     @Override
     SarsaEvaluation sarsaEvaluation(DiscreteModel discreteModel) {
       return new QLearningSarsaEvaluation(discreteModel);

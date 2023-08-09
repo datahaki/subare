@@ -8,6 +8,7 @@ import java.util.Map;
 
 import ch.alpine.subare.analysis.DiscreteModelErrorAnalysis;
 import ch.alpine.subare.analysis.MonteCarloAlgorithms;
+import ch.alpine.subare.analysis.MonteCarloTrial;
 import ch.alpine.subare.analysis.SarsaMonteCarloTrial;
 import ch.alpine.subare.core.MonteCarloInterface;
 import ch.alpine.subare.core.StandardModel;
@@ -43,7 +44,7 @@ import ch.alpine.tensor.ext.Timing;
       DiscreteQsa qsa = DiscreteQsa.build(monteCarloInterface);
       StateActionCounter sac = new DiscreteStateActionCounter();
       PolicyBase policy = PolicyType.EGREEDY.bestEquiprobable(monteCarloInterface, qsa, sac);
-      final SarsaMonteCarloTrial sarsa = SarsaMonteCarloTrial.of(monteCarloInterface, SarsaType.QLEARNING, //
+      final MonteCarloTrial sarsa = SarsaMonteCarloTrial.of(monteCarloInterface, SarsaType.QLEARNING, //
           ConstantLearningRate.of(RealScalar.of(0.05)), qsa, sac, policy, 1);
       Timing timing = Timing.started();
       for (int index = 0; index < batches * 10; ++index)

@@ -25,7 +25,7 @@ import ch.alpine.tensor.Scalar;
   private static final Scalar ALPHA = RealScalar.of(0.05);
   private static final Scalar LAMBDA = RealScalar.of(0.3);
 
-  public static DoubleTrueOnlineMonteCarloTrial create(MonteCarloInterface monteCarloInterface, SarsaType sarsaType) {
+  public static MonteCarloTrial create(MonteCarloInterface monteCarloInterface, SarsaType sarsaType) {
     DiscreteQsa qsa1 = DiscreteQsa.build(monteCarloInterface);
     DiscreteQsa qsa2 = DiscreteQsa.build(monteCarloInterface);
     StateActionCounter sac1 = new DiscreteStateActionCounter();
@@ -75,7 +75,7 @@ import ch.alpine.tensor.Scalar;
     return doubleTrueOnlineSarsa.qsaInterface();
   }
 
-  @Override
+  @Override // from StateActionCounterSupplier
   public StateActionCounter sac() {
     return doubleTrueOnlineSarsa.sac();
   }

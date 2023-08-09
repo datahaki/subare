@@ -24,7 +24,7 @@ import ch.alpine.tensor.Scalar;
   private static final Scalar ALPHA = RealScalar.of(0.05);
   private static final Scalar LAMBDA = RealScalar.of(0.3);
 
-  public static TrueOnlineMonteCarloTrial of(MonteCarloInterface monteCarloInterface, SarsaType sarsaType) {
+  public static MonteCarloTrial of(MonteCarloInterface monteCarloInterface, SarsaType sarsaType) {
     FeatureMapper featureMapper = ExactFeatureMapper.of(monteCarloInterface);
     QsaInterface qsa = DiscreteQsa.build(monteCarloInterface);
     StateActionCounter sac = new DiscreteStateActionCounter();

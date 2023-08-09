@@ -22,7 +22,7 @@ import ch.alpine.subare.core.util.PolicyType;
 import ch.alpine.tensor.RealScalar;
 
 /* package */ class DoubleSarsaMonteCarloTrial implements MonteCarloTrial {
-  public static DoubleSarsaMonteCarloTrial of(MonteCarloInterface monteCarloInterface, SarsaType sarsaType) {
+  public static MonteCarloTrial of(MonteCarloInterface monteCarloInterface, SarsaType sarsaType) {
     DiscreteQsa qsa1 = DiscreteQsa.build(monteCarloInterface);
     DiscreteQsa qsa2 = DiscreteQsa.build(monteCarloInterface);
     StateActionCounter sac1 = new DiscreteStateActionCounter();

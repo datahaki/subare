@@ -20,7 +20,8 @@ import ch.alpine.tensor.sca.Sign;
 
 /** class is used externally */
 public class SarsaMonteCarloTrial implements MonteCarloTrial {
-  public static SarsaMonteCarloTrial of(MonteCarloInterface monteCarloInterface, SarsaType sarsaType, LearningRate learningRate, DiscreteQsa qsa,
+  public static MonteCarloTrial of( //
+      MonteCarloInterface monteCarloInterface, SarsaType sarsaType, LearningRate learningRate, DiscreteQsa qsa, //
       StateActionCounter sac, PolicyBase policy, int digestDepth) {
     return new SarsaMonteCarloTrial(monteCarloInterface, sarsaType, learningRate, qsa, sac, policy, digestDepth);
   }
@@ -32,8 +33,9 @@ public class SarsaMonteCarloTrial implements MonteCarloTrial {
   private final PolicyBase policy;
   private final int digestDepth; // 0 is equal to the MonteCarlo approach
 
-  private SarsaMonteCarloTrial(MonteCarloInterface monteCarloInterface, SarsaType sarsaType, LearningRate learningRate, DiscreteQsa qsa, StateActionCounter sac,
-      PolicyBase policy, int digestDepth) {
+  private SarsaMonteCarloTrial( //
+      MonteCarloInterface monteCarloInterface, SarsaType sarsaType, LearningRate learningRate, DiscreteQsa qsa, //
+      StateActionCounter sac, PolicyBase policy, int digestDepth) {
     this.monteCarloInterface = monteCarloInterface;
     sarsa = sarsaType.sarsa(monteCarloInterface, learningRate, qsa, sac, policy);
     this.policy = policy;

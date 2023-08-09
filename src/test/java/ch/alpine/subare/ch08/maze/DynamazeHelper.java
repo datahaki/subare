@@ -1,12 +1,15 @@
 // code by jph
 package ch.alpine.subare.ch08.maze;
 
+import java.io.File;
+
 import ch.alpine.subare.core.alg.ActionValueIterations;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.Unprotect;
 import ch.alpine.tensor.io.Import;
 
 public enum DynamazeHelper {
@@ -36,7 +39,12 @@ public enum DynamazeHelper {
   }
 
   /* package */ static Tensor load(String name) {
-    return Import.of("/ch08/" + name + ".png");
+    File file = Unprotect.file("/ch08/" + name + ".png");
+    try {
+      return Import.of(file);
+    } catch (Exception exception) {
+      throw new RuntimeException(exception);
+    }
   }
 
   static DiscreteQsa getOptimalQsa(Dynamaze dynamaze) {

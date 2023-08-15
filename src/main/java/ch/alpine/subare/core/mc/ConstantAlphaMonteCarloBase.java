@@ -8,7 +8,7 @@ import ch.alpine.subare.core.DiscountFunction;
 import ch.alpine.subare.core.EpisodeDigest;
 import ch.alpine.subare.core.EpisodeInterface;
 import ch.alpine.subare.core.StateActionCounter;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.util.LearningRate;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
@@ -27,14 +27,14 @@ public abstract class ConstantAlphaMonteCarloBase implements EpisodeDigest {
   @Override // from EpisodeDigest
   public final void digest(EpisodeInterface episodeInterface) {
     Tensor rewards = Tensors.empty();
-    List<StepInterface> trajectory = new ArrayList<>();
+    List<StepRecord> trajectory = new ArrayList<>();
     while (episodeInterface.hasNext()) {
-      StepInterface stepInterface = episodeInterface.step();
+      StepRecord stepInterface = episodeInterface.step();
       rewards.append(stepInterface.reward());
       trajectory.add(stepInterface);
     }
     digest(rewards, trajectory);
   }
 
-  protected abstract void digest(Tensor rewards, List<StepInterface> trajectory);
+  protected abstract void digest(Tensor rewards, List<StepRecord> trajectory);
 }

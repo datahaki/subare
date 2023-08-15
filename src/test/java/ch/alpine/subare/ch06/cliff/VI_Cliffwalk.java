@@ -4,7 +4,7 @@ package ch.alpine.subare.ch06.cliff;
 
 import ch.alpine.subare.core.EpisodeInterface;
 import ch.alpine.subare.core.Policy;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.alg.ValueIteration;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.DiscreteUtils;
@@ -44,7 +44,7 @@ enum VI_Cliffwalk {
     Policy policy = PolicyType.GREEDY.bestEquiprobable(cliffwalk, ref, null);
     EpisodeInterface mce = EpisodeKickoff.single(cliffwalk, policy);
     while (mce.hasNext()) {
-      StepInterface stepInterface = mce.step();
+      StepRecord stepInterface = mce.step();
       Tensor state = stepInterface.prevState();
       System.out.println(state + " then " + stepInterface.action());
     }

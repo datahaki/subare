@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.core.util;
 
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 
@@ -16,7 +16,7 @@ public enum StateAction {
 
   /** @param stepInterface
    * @return */
-  public static Tensor key(StepInterface stepInterface) {
+  public static Tensor key(StepRecord stepInterface) {
     return key(stepInterface.prevState(), stepInterface.action());
   }
 

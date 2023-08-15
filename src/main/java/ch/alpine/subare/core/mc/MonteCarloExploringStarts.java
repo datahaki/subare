@@ -12,7 +12,7 @@ import ch.alpine.subare.core.EpisodeInterface;
 import ch.alpine.subare.core.EpisodeQsaEstimator;
 import ch.alpine.subare.core.StateActionCounter;
 import ch.alpine.subare.core.StateActionCounterSupplier;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.DiscreteStateActionCounter;
 import ch.alpine.subare.core.util.StateAction;
@@ -46,9 +46,9 @@ public class MonteCarloExploringStarts implements EpisodeQsaEstimator, StateActi
   public void digest(EpisodeInterface episodeInterface) {
     Map<Tensor, Integer> first = new HashMap<>();
     Tensor rewards = Tensors.empty();
-    List<StepInterface> trajectory = new ArrayList<>();
+    List<StepRecord> trajectory = new ArrayList<>();
     while (episodeInterface.hasNext()) {
-      StepInterface stepInterface = episodeInterface.step();
+      StepRecord stepInterface = episodeInterface.step();
       Tensor key = StateAction.key(stepInterface);
       first.computeIfAbsent(key, i -> trajectory.size());
       rewards.append(stepInterface.reward());
@@ -79,7 +79,7 @@ public class MonteCarloExploringStarts implements EpisodeQsaEstimator, StateActi
     }
     // TODO SUBARE more efficient update of average
     // compute average(Returns(s, a))
-    for (StepInterface stepInterface : trajectory) {
+    for (StepRecord stepInterface : trajectory) {
       Tensor key = StateAction.key(stepInterface);
       if (!map.containsKey(key))
         map.put(key, new AverageTracker());

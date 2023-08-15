@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 import ch.alpine.subare.core.MonteCarloInterface;
 import ch.alpine.subare.core.QsaInterface;
 import ch.alpine.subare.core.StateActionCounter;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.adapter.SimpleTestModel;
-import ch.alpine.subare.core.adapter.StepAdapter;
 import ch.alpine.subare.core.td.Sarsa;
 import ch.alpine.subare.core.td.SarsaType;
 import ch.alpine.subare.core.util.ConstantLearningRate;
@@ -74,10 +74,10 @@ class GamblerModelTest {
     Sarsa sarsa = SarsaType.ORIGINAL.sarsa(gamblerModel, learningRate, qsa, sac, PolicyType.EGREEDY.bestEquiprobable(gamblerModel, qsa, sac));
     Tensor state = Tensors.vector(1);
     Tensor action = Tensors.vector(0);
-    Scalar first = learningRate.alpha(new StepAdapter(state, action, RealScalar.ZERO, state), sarsa.sac());
+    Scalar first = learningRate.alpha(new StepRecord(state, action, RealScalar.ZERO, state), sarsa.sac());
     assertEquals(first, RealScalar.ONE);
-    sarsa.sac().digest(new StepAdapter(state, action, RealScalar.ZERO, state));
-    Scalar second = learningRate.alpha(new StepAdapter(state, action, RealScalar.ZERO, state), sarsa.sac());
+    sarsa.sac().digest(new StepRecord(state, action, RealScalar.ZERO, state));
+    Scalar second = learningRate.alpha(new StepRecord(state, action, RealScalar.ZERO, state), sarsa.sac());
     assertTrue(Scalars.lessThan(second, first));
   }
 

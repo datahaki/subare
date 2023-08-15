@@ -6,7 +6,7 @@ import java.util.List;
 import ch.alpine.subare.core.DiscreteModel;
 import ch.alpine.subare.core.SampleModel;
 import ch.alpine.subare.core.StepDigest;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 
 /** only suitable for models with all states as start states... */
 public enum TabularSteps {
@@ -20,7 +20,7 @@ public enum TabularSteps {
     List<StepDigest> list = List.of(stepDigest);
     TabularStepBatch tabularStepBatch = new TabularStepBatch(discreteModel, sampleModel);
     while (tabularStepBatch.hasNext()) {
-      StepInterface stepInterface = tabularStepBatch.next();
+      StepRecord stepInterface = tabularStepBatch.next();
       list.stream().parallel().forEach(_stepDigest -> _stepDigest.digest(stepInterface));
     }
   }

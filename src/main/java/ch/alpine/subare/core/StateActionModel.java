@@ -4,7 +4,7 @@ package ch.alpine.subare.core;
 import ch.alpine.tensor.Tensor;
 
 public interface StateActionModel {
-  /** @return all states */
+  /** @return all states, elements are unique */
   Tensor states();
 
   /** for a terminal state, the returned actions(state) should have length() == 1

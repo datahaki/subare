@@ -68,7 +68,7 @@ public class LearningCompetition {
   }
 
   private void processEntry(Tensor image, Point point, LearningContender learningContender, int index) {
-    ConstantExplorationRate explorationRate = ConstantExplorationRate.of(epsilon.Get(index).number().doubleValue());
+    ExplorationRate explorationRate = ConstantExplorationRate.of(epsilon.Get(index));
     learningContender.stepAndCompare(explorationRate, nstep, ref);
     Infoline infoline = learningContender.infoline(ref);
     {

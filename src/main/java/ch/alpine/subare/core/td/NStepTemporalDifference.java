@@ -5,7 +5,7 @@ import java.util.Deque;
 
 import ch.alpine.subare.core.DiscountFunction;
 import ch.alpine.subare.core.StateActionCounter;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.VsInterface;
 import ch.alpine.subare.core.adapter.DequeDigestAdapter;
 import ch.alpine.subare.core.util.LearningRate;
@@ -30,12 +30,12 @@ public class NStepTemporalDifference extends DequeDigestAdapter {
   }
 
   @Override
-  public void digest(Deque<StepInterface> deque) {
-    StepInterface last = deque.getLast();
-    Tensor rewards = Tensor.of(deque.stream().map(StepInterface::reward));
+  public void digest(Deque<StepRecord> deque) {
+    StepRecord last = deque.getLast();
+    Tensor rewards = Tensor.of(deque.stream().map(StepRecord::reward));
     rewards.append(vs.value(last.nextState()));
     // ---
-    final StepInterface stepInterface = deque.getFirst(); // first step in queue
+    final StepRecord stepInterface = deque.getFirst(); // first step in queue
     // ---
     Tensor state0 = stepInterface.prevState();
     Scalar value0 = vs.value(state0);

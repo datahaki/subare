@@ -7,7 +7,7 @@ import ch.alpine.subare.core.DiscountFunction;
 import ch.alpine.subare.core.DiscreteModel;
 import ch.alpine.subare.core.EpisodeQsaEstimator;
 import ch.alpine.subare.core.StateActionCounter;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.LearningRate;
 import ch.alpine.tensor.Scalar;
@@ -28,9 +28,9 @@ public class ConstantAlphaMonteCarloQsa extends ConstantAlphaMonteCarloBase impl
   }
 
   @Override
-  protected void digest(Tensor rewards, List<StepInterface> trajectory) {
+  protected void digest(Tensor rewards, List<StepRecord> trajectory) {
     int fromIndex = 0;
-    for (StepInterface stepInterface : trajectory) {
+    for (StepRecord stepInterface : trajectory) {
       Tensor state = stepInterface.prevState();
       Tensor action = stepInterface.action();
       Scalar gain = discountFunction.apply(rewards.extract(fromIndex, rewards.length()));

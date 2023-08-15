@@ -4,7 +4,7 @@ package ch.alpine.subare.analysis;
 import ch.alpine.subare.core.MonteCarloInterface;
 import ch.alpine.subare.core.QsaInterface;
 import ch.alpine.subare.core.StateActionCounter;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.td.SarsaType;
 import ch.alpine.subare.core.td.TrueOnlineSarsa;
 import ch.alpine.subare.core.util.ConstantLearningRate;
@@ -21,6 +21,7 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 
 /* package */ class TrueOnlineMonteCarloTrial implements MonteCarloTrial {
+  // TODO SUBARE make configurable
   private static final Scalar ALPHA = RealScalar.of(0.05);
   private static final Scalar LAMBDA = RealScalar.of(0.3);
 
@@ -56,7 +57,7 @@ import ch.alpine.tensor.Scalar;
   }
 
   @Override // from MonteCarloTrial
-  public void digest(StepInterface stepInterface) {
+  public void digest(StepRecord stepInterface) {
     trueOnlineSarsa.digest(stepInterface);
   }
 

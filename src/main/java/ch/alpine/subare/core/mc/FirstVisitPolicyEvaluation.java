@@ -11,7 +11,7 @@ import ch.alpine.subare.core.DiscountFunction;
 import ch.alpine.subare.core.DiscreteModel;
 import ch.alpine.subare.core.EpisodeInterface;
 import ch.alpine.subare.core.EpisodeVsEstimator;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.util.DiscreteVs;
 import ch.alpine.subare.util.AverageTracker;
 import ch.alpine.subare.util.Index;
@@ -45,9 +45,9 @@ public class FirstVisitPolicyEvaluation implements EpisodeVsEstimator {
     Map<Tensor, Integer> first = new HashMap<>();
     Map<Tensor, Scalar> gains = new HashMap<>();
     Tensor rewards = Tensors.empty();
-    List<StepInterface> trajectory = new ArrayList<>();
+    List<StepRecord> trajectory = new ArrayList<>();
     while (episodeInterface.hasNext()) {
-      StepInterface stepInterface = episodeInterface.step();
+      StepRecord stepInterface = episodeInterface.step();
       Tensor state = stepInterface.prevState();
       first.computeIfAbsent(state, i -> trajectory.size());
       rewards.append(stepInterface.reward());
@@ -59,7 +59,7 @@ public class FirstVisitPolicyEvaluation implements EpisodeVsEstimator {
       gains.put(state, discountFunction.apply(rewards.extract(fromIndex, rewards.length())));
     }
     // TODO SUBARE more efficient update of average
-    for (StepInterface stepInterface : trajectory) {
+    for (StepRecord stepInterface : trajectory) {
       Tensor stateP = stepInterface.prevState();
       if (!map.containsKey(stateP))
         map.put(stateP, new AverageTracker());

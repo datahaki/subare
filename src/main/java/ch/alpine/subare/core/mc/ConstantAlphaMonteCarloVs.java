@@ -7,7 +7,7 @@ import ch.alpine.subare.core.DiscountFunction;
 import ch.alpine.subare.core.DiscreteModel;
 import ch.alpine.subare.core.EpisodeVsEstimator;
 import ch.alpine.subare.core.StateActionCounter;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.VsInterface;
 import ch.alpine.subare.core.util.DiscreteStateActionCounter;
 import ch.alpine.subare.core.util.DiscreteVs;
@@ -35,9 +35,9 @@ public class ConstantAlphaMonteCarloVs extends ConstantAlphaMonteCarloBase imple
   }
 
   @Override
-  protected void digest(Tensor rewards, List<StepInterface> trajectory) {
+  protected void digest(Tensor rewards, List<StepRecord> trajectory) {
     int fromIndex = 0;
-    for (StepInterface stepInterface : trajectory) {
+    for (StepRecord stepInterface : trajectory) {
       Tensor state = stepInterface.prevState();
       Scalar gain = discountFunction.apply(rewards.extract(fromIndex, rewards.length()));
       Scalar value0 = vs.value(state);

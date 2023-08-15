@@ -2,7 +2,7 @@
 package ch.alpine.subare.core.util;
 
 import ch.alpine.subare.core.StateActionCounter;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 
@@ -29,7 +29,7 @@ public record ConstantLearningRate(Scalar alpha) implements LearningRate {
 
   // ---
   @Override
-  public Scalar alpha(StepInterface stepInterface, StateActionCounter stateActionCounter) {
+  public Scalar alpha(StepRecord stepInterface, StateActionCounter stateActionCounter) {
     return stateActionCounter.isEncountered(StateAction.key(stepInterface)) ? alpha : RealScalar.ONE;
   }
 }

@@ -9,10 +9,14 @@ import ch.alpine.tensor.Tensor;
 /** learning rate of alpha except in first update of state-action pair
  * for which the learning rate equals 1 in the case of warmStart. */
 public class ConstantExplorationRate implements ExplorationRate {
+  public static ExplorationRate of(Scalar epsilon) {
+    return new ConstantExplorationRate(epsilon);
+  }
+
   /** @param epsilon
    * @return constant learning rate with factor alpha */
-  public static ConstantExplorationRate of(double epsilon) {
-    return new ConstantExplorationRate(RealScalar.of(epsilon));
+  public static ExplorationRate of(Number epsilon) {
+    return of(RealScalar.of(epsilon));
   }
 
   // ---
@@ -24,14 +28,6 @@ public class ConstantExplorationRate implements ExplorationRate {
 
   @Override
   public Scalar epsilon(Tensor state, StateActionCounter stateActionCounter) {
-    return epsilon;
-  }
-
-  public void setEpsilon(Scalar epsilon) {
-    this.epsilon = epsilon;
-  }
-
-  public Scalar getEpsilon() {
     return epsilon;
   }
 }

@@ -1,16 +1,16 @@
 // code by jph
 package ch.alpine.subare.core.td;
 
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
 
 public class PrioritizedStateAction implements Comparable<PrioritizedStateAction> {
   private final Scalar P;
-  private final StepInterface stepInterface;
+  private final StepRecord stepInterface;
 
-  public PrioritizedStateAction(Scalar P, StepInterface stepInterface) {
+  public PrioritizedStateAction(Scalar P, StepRecord stepInterface) {
     this.P = P;
     this.stepInterface = stepInterface;
   }

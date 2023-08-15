@@ -7,5 +7,5 @@ public interface StepDigest {
   /** update based on a single step of an episode
    * 
    * @param stepInterface */
-  void digest(StepInterface stepInterface);
+  void digest(StepRecord stepInterface);
 }

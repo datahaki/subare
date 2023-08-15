@@ -6,7 +6,7 @@ import ch.alpine.subare.core.QsaInterface;
 import ch.alpine.subare.core.StateActionCounter;
 import ch.alpine.subare.core.StateActionCounterSupplier;
 import ch.alpine.subare.core.StepDigest;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.DiscreteStateActionCounter;
 import ch.alpine.subare.core.util.LearningRate;
@@ -49,7 +49,7 @@ public class Random1StepTabularQPlanning implements StepDigest, StateActionCount
   }
 
   @Override
-  public void digest(StepInterface stepInterface) {
+  public void digest(StepRecord stepInterface) {
     Tensor state0 = stepInterface.prevState();
     Tensor action = stepInterface.action();
     Scalar reward = stepInterface.reward();

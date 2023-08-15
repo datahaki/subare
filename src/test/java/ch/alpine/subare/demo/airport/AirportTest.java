@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 import org.junit.jupiter.api.Test;
 
 import ch.alpine.subare.core.StateActionCounter;
-import ch.alpine.subare.core.adapter.StepAdapter;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.td.Sarsa;
 import ch.alpine.subare.core.td.SarsaType;
 import ch.alpine.subare.core.util.ConstantLearningRate;
@@ -83,7 +83,7 @@ class AirportTest {
     Tensor state = airport.states().get(0);
     Tensor action = airport.actions(state).get(0);
     Tensor nextState = airport.move(state, action);
-    sarsa.digest(new StepAdapter(state, action, RealScalar.ZERO, nextState));
+    sarsa.digest(new StepRecord(state, action, RealScalar.ZERO, nextState));
     for (Tensor s : airport.states()) {
       for (Tensor a : airport.actions(state)) {
         if (state.equals(s)) {
@@ -119,7 +119,7 @@ class AirportTest {
     Tensor state = airport.states().get(0);
     Tensor action = airport.actions(state).get(0);
     Tensor nextState = airport.move(state, action);
-    sarsa.digest(new StepAdapter(state, action, RealScalar.ZERO, nextState));
+    sarsa.digest(new StepRecord(state, action, RealScalar.ZERO, nextState));
     ucbInQsa = UcbUtils.getUcbInQsa(airport, qsa, sarsa.sac());
     for (Tensor s : airport.states()) {
       for (Tensor a : airport.actions(s)) {

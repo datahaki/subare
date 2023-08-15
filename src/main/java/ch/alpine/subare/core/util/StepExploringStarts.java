@@ -6,7 +6,7 @@ import java.util.List;
 import ch.alpine.subare.core.EpisodeInterface;
 import ch.alpine.subare.core.MonteCarloInterface;
 import ch.alpine.subare.core.StepDigest;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 
 public abstract class StepExploringStarts extends AbstractExploringStarts {
   private final List<StepDigest> list;
@@ -20,7 +20,7 @@ public abstract class StepExploringStarts extends AbstractExploringStarts {
   @Override
   public final void protected_nextEpisode(EpisodeInterface episodeInterface) {
     while (episodeInterface.hasNext()) {
-      StepInterface stepInterface = episodeInterface.step();
+      StepRecord stepInterface = episodeInterface.step();
       list.stream().parallel() //
           .forEach(_dequeDigest -> _dequeDigest.digest(stepInterface));
     }

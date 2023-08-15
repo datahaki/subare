@@ -11,7 +11,7 @@ import ch.alpine.subare.core.QsaInterface;
 import ch.alpine.subare.core.StateActionCounter;
 import ch.alpine.subare.core.StateActionCounterSupplier;
 import ch.alpine.subare.core.StepDigest;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.adapter.DequeDigestAdapter;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.LearningRate;
@@ -64,13 +64,13 @@ public class Sarsa extends DequeDigestAdapter implements DiscreteQsaSupplier, St
   }
 
   @Override // from DequeDigest
-  public final void digest(Deque<StepInterface> deque) {
-    Tensor rewards = Tensor.of(deque.stream().map(StepInterface::reward));
+  public final void digest(Deque<StepRecord> deque) {
+    Tensor rewards = Tensor.of(deque.stream().map(StepRecord::reward));
     Tensor nextState = deque.getLast().nextState();
     // ---
     // for terminal state in queue, "=last.next"
     // ---
-    final StepInterface stepInterface = deque.getFirst(); // first step in queue
+    final StepRecord stepInterface = deque.getFirst(); // first step in queue
     Tensor state0 = stepInterface.prevState();
     Tensor action = stepInterface.action();
     // ---
@@ -89,7 +89,7 @@ public class Sarsa extends DequeDigestAdapter implements DiscreteQsaSupplier, St
 
   /** @param stepInterface
    * @return non-negative priority rating */
-  final Scalar priority(StepInterface stepInterface) {
+  final Scalar priority(StepRecord stepInterface) {
     Tensor state0 = stepInterface.prevState();
     Tensor action = stepInterface.action();
     Scalar value0 = qsa.value(state0, action);

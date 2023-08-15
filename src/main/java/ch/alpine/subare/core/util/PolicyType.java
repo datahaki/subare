@@ -12,14 +12,14 @@ public enum PolicyType {
     @Override
     public PolicyBase bestEquiprobable(DiscreteModel discreteModel, QsaInterface qsa, StateActionCounter sac) {
       EGreedyPolicy eGreedyPolicy = new EGreedyPolicy(discreteModel, qsa, sac);
-      eGreedyPolicy.setExplorationRate(ConstantExplorationRate.of(0));
+      eGreedyPolicy.setExplorationRate(ConstantExplorationRate.of(0.0));
       return eGreedyPolicy;
     }
 
     @Override
     public PolicyBase bestEquiprobable(StandardModel standardModel, VsInterface vs, StateActionCounter sac) {
       EGreedyPolicy eGreedyPolicy = new EGreedyPolicy(standardModel, vs, sac);
-      eGreedyPolicy.setExplorationRate(ConstantExplorationRate.of(0));
+      eGreedyPolicy.setExplorationRate(ConstantExplorationRate.of(0.0));
       return eGreedyPolicy;
     }
   },

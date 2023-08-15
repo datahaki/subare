@@ -7,8 +7,7 @@ import java.util.stream.Collectors;
 
 import ch.alpine.subare.core.DiscreteModel;
 import ch.alpine.subare.core.SampleModel;
-import ch.alpine.subare.core.StepInterface;
-import ch.alpine.subare.core.adapter.StepAdapter;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.util.Index;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -32,15 +31,15 @@ import ch.alpine.tensor.Tensor;
     return index < list.size();
   }
 
-  public StepInterface next() {
+  public StepRecord next() {
     Tensor key = list.get(index);
     ++index;
     return step(key.get(0), key.get(1));
   }
 
-  private StepInterface step(Tensor state, Tensor action) {
+  private StepRecord step(Tensor state, Tensor action) {
     Tensor next = sampleModel.move(state, action);
     Scalar reward = sampleModel.reward(state, action, next);
-    return new StepAdapter(state, action, reward, next);
+    return new StepRecord(state, action, reward, next);
   }
 }

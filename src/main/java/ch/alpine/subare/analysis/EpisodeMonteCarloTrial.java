@@ -3,7 +3,7 @@ package ch.alpine.subare.analysis;
 
 import ch.alpine.subare.core.MonteCarloInterface;
 import ch.alpine.subare.core.QsaInterface;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.mc.MonteCarloExploringStarts;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.ExploringStarts;
@@ -31,7 +31,7 @@ import ch.alpine.subare.core.util.PolicyBase;
   }
 
   @Override // from MonteCarloTrial
-  public void digest(StepInterface stepInterface) {
+  public void digest(StepRecord stepInterface) {
     throw new UnsupportedOperationException();
   }
 

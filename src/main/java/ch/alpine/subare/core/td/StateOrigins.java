@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ch.alpine.subare.core.StepDigest;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Throw;
 
@@ -16,11 +16,11 @@ import ch.alpine.tensor.Throw;
 
   /** @param state
    * @return step interfaces with nextState == state */
-  Collection<StepInterface> values(Tensor state) {
+  Collection<StepRecord> values(Tensor state) {
     if (map.containsKey(state)) {
       // TODO SUBARE this is a preliminary check only during development
-      Collection<StepInterface> collection = map.get(state).values();
-      for (StepInterface stepInterface : collection)
+      Collection<StepRecord> collection = map.get(state).values();
+      for (StepRecord stepInterface : collection)
         if (!stepInterface.nextState().equals(state))
           throw new Throw(state);
       return collection;
@@ -29,7 +29,7 @@ import ch.alpine.tensor.Throw;
   }
 
   @Override
-  public void digest(StepInterface stepInterface) {
+  public void digest(StepRecord stepInterface) {
     // TODO SUBARE code redundant to StepSet
     map.computeIfAbsent(stepInterface.nextState(), i -> new StepSet()).register(stepInterface);
   }

@@ -12,9 +12,8 @@ import ch.alpine.subare.core.DiscreteModel;
 import ch.alpine.subare.core.EpisodeDigest;
 import ch.alpine.subare.core.EpisodeInterface;
 import ch.alpine.subare.core.RewardInterface;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.TerminalInterface;
-import ch.alpine.subare.core.adapter.StepAdapter;
 import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
@@ -43,18 +42,18 @@ public class ActionValueStatistics implements DequeDigest, EpisodeDigest, Action
   }
 
   @Override
-  public void digest(StepInterface stepInterface) {
+  public void digest(StepRecord stepInterface) {
     transitionTrackers.computeIfAbsent(StateAction.key(stepInterface), i -> new TransitionTracker()).digest(stepInterface);
   }
 
   @Override
-  public void digest(Deque<StepInterface> deque) {
+  public void digest(Deque<StepRecord> deque) {
     digest(deque.getFirst()); // only track first
   }
 
   @Override
   public void digest(EpisodeInterface episodeInterface) {
-    StepInterface stepInterface = null;
+    StepRecord stepInterface = null;
     while (episodeInterface.hasNext()) {
       stepInterface = episodeInterface.step();
       digest(stepInterface);
@@ -79,7 +78,7 @@ public class ActionValueStatistics implements DequeDigest, EpisodeDigest, Action
       if (!compare.equals(reward))
         throw new Throw(state, compare, reward);
     }
-    digest(new StepAdapter(state, action, reward, state));
+    digest(new StepRecord(state, action, reward, state));
   }
 
   /** @return true, if all states from model have been digested at least once

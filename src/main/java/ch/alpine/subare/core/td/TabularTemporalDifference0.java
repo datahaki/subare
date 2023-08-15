@@ -3,7 +3,7 @@ package ch.alpine.subare.core.td;
 
 import ch.alpine.subare.core.StateActionCounter;
 import ch.alpine.subare.core.StepDigest;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.VsInterface;
 import ch.alpine.subare.core.util.LearningRate;
 import ch.alpine.tensor.Scalar;
@@ -33,7 +33,7 @@ public record TabularTemporalDifference0( //
   }
 
   @Override // from StepDigest
-  public void digest(StepInterface stepInterface) {
+  public void digest(StepRecord stepInterface) {
     Tensor state0 = stepInterface.prevState();
     // action is only required for learning rate
     Scalar reward = stepInterface.reward();

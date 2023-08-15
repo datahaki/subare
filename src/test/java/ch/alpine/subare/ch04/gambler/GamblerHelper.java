@@ -3,7 +3,7 @@ package ch.alpine.subare.ch04.gambler;
 
 import ch.alpine.subare.core.EpisodeInterface;
 import ch.alpine.subare.core.Policy;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.alg.ActionValueIterations;
 import ch.alpine.subare.core.alg.ValueIteration;
 import ch.alpine.subare.core.alg.ValueIterations;
@@ -40,7 +40,7 @@ import ch.alpine.tensor.sca.Round;
     EpisodeInterface mce = EpisodeKickoff.single(gamblerModel, policy, //
         gamblerModel.startStates().get(gamblerModel.startStates().length() / 2));
     while (mce.hasNext()) {
-      StepInterface stepInterface = mce.step();
+      StepRecord stepInterface = mce.step();
       Tensor state = stepInterface.prevState();
       System.out.println(state + " then " + stepInterface.action());
     }

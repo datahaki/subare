@@ -7,7 +7,7 @@ import java.util.Random;
 import java.util.random.RandomGenerator;
 
 import ch.alpine.subare.core.StepDigest;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.util.StateAction;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
@@ -17,24 +17,24 @@ import ch.alpine.tensor.Tensors;
 /* package */ class DeterministicEnvironment implements StepDigest {
   private static final RandomGenerator RANDOM = new Random();
   // ---
-  private final Map<Tensor, StepInterface> map = new HashMap<>();
+  private final Map<Tensor, StepRecord> map = new HashMap<>();
   private final Tensor keys = Tensors.empty();
 
-  public StepInterface getRandomStep() {
+  public StepRecord getRandomStep() {
     return map.get(keys.get(RANDOM.nextInt(size())));
   }
 
-  public StepInterface get(Tensor state, Tensor action) {
+  public StepRecord get(Tensor state, Tensor action) {
     return map.get(StateAction.key(state, action));
   }
 
   @Override
-  public void digest(StepInterface stepInterface) {
+  public void digest(StepRecord stepInterface) {
     Tensor key = StateAction.key(stepInterface);
     register(key, stepInterface);
   }
 
-  private synchronized void register(Tensor key, StepInterface stepInterface) {
+  private synchronized void register(Tensor key, StepRecord stepInterface) {
     if (!map.containsKey(key)) {
       map.put(key, stepInterface);
       keys.append(key); // after updating the map, for conservative size

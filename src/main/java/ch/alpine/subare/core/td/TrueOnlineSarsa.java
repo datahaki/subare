@@ -4,7 +4,7 @@ package ch.alpine.subare.core.td;
 import ch.alpine.subare.core.MonteCarloInterface;
 import ch.alpine.subare.core.QsaInterface;
 import ch.alpine.subare.core.StateActionCounter;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.util.FeatureMapper;
 import ch.alpine.subare.core.util.FeatureQsaAdapter;
 import ch.alpine.subare.core.util.FeatureWeight;
@@ -60,7 +60,7 @@ public class TrueOnlineSarsa extends AbstractTrueOnlineSarsa {
   }
 
   @Override // from StepDigest
-  public final void digest(StepInterface stepInterface) {
+  public final void digest(StepRecord stepInterface) {
     ((PolicyBase) policy).setQsa(qsaInterface());
     Tensor prevState = stepInterface.prevState();
     Tensor prevAction = stepInterface.action();

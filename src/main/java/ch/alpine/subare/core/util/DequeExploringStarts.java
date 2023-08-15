@@ -8,7 +8,7 @@ import java.util.List;
 import ch.alpine.subare.core.DequeDigest;
 import ch.alpine.subare.core.EpisodeInterface;
 import ch.alpine.subare.core.MonteCarloInterface;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 
 public abstract class DequeExploringStarts extends AbstractExploringStarts {
   private final int nstep;
@@ -24,9 +24,9 @@ public abstract class DequeExploringStarts extends AbstractExploringStarts {
 
   @Override
   public final void protected_nextEpisode(EpisodeInterface episodeInterface) {
-    Deque<StepInterface> deque = new ArrayDeque<>();
+    Deque<StepRecord> deque = new ArrayDeque<>();
     while (episodeInterface.hasNext()) {
-      final StepInterface stepInterface = episodeInterface.step();
+      final StepRecord stepInterface = episodeInterface.step();
       deque.add(stepInterface);
       if (deque.size() == nstep) { // never true, if nstep == 0
         list.stream().parallel() //

@@ -5,18 +5,18 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.util.StateAction;
 import ch.alpine.tensor.Tensor;
 
 /* package */ class StepSet {
-  private final Map<Tensor, StepInterface> map = new HashMap<>();
+  private final Map<Tensor, StepRecord> map = new HashMap<>();
 
-  void register(StepInterface stepInterface) {
+  void register(StepRecord stepInterface) {
     map.putIfAbsent(StateAction.key(stepInterface), stepInterface);
   }
 
-  Collection<StepInterface> values() {
+  Collection<StepRecord> values() {
     return map.values();
   }
 }

@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
 import ch.alpine.subare.core.Policy;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.alg.ValueIteration;
 import ch.alpine.subare.core.mc.MonteCarloEpisode;
 import ch.alpine.subare.core.util.PolicyType;
@@ -35,7 +35,7 @@ import ch.alpine.tensor.io.Primitives;
         MonteCarloEpisode mce = new MonteCarloEpisode( //
             racetrack, policy, start, new LinkedList<>());
         while (mce.hasNext()) {
-          StepInterface stepInterface = mce.step();
+          StepRecord stepInterface = mce.step();
           {
             Tensor state = stepInterface.prevState();
             int[] index = Primitives.toIntArray(state);

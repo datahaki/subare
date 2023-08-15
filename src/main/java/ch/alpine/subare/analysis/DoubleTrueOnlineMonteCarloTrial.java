@@ -5,7 +5,7 @@ import ch.alpine.subare.core.MonteCarloInterface;
 import ch.alpine.subare.core.QsaInterface;
 import ch.alpine.subare.core.StateActionCounter;
 import ch.alpine.subare.core.StateActionCounterSupplier;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.td.DoubleTrueOnlineSarsa;
 import ch.alpine.subare.core.td.SarsaType;
 import ch.alpine.subare.core.util.ConstantLearningRate;
@@ -66,7 +66,7 @@ import ch.alpine.tensor.Scalar;
   }
 
   @Override // from MonteCarloTrial
-  public void digest(StepInterface stepInterface) {
+  public void digest(StepRecord stepInterface) {
     doubleTrueOnlineSarsa.digest(stepInterface);
   }
 

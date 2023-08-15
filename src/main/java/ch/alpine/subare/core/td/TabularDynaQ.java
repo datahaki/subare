@@ -2,7 +2,7 @@
 package ch.alpine.subare.core.td;
 
 import ch.alpine.subare.core.StepDigest;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 
 /** Tabular Dyna-Q
  * 
@@ -20,7 +20,7 @@ public class TabularDynaQ implements StepDigest {
   }
 
   @Override
-  public void digest(StepInterface stepInterface) {
+  public void digest(StepRecord stepInterface) {
     sarsa.digest(stepInterface);
     deterministicEnvironment.digest(stepInterface);
     // replay previously observed steps:

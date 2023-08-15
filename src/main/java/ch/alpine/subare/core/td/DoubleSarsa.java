@@ -9,7 +9,7 @@ import ch.alpine.subare.core.DiscreteQsaSupplier;
 import ch.alpine.subare.core.QsaInterface;
 import ch.alpine.subare.core.StateActionCounter;
 import ch.alpine.subare.core.StateActionCounterSupplier;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.adapter.DequeDigestAdapter;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.DiscreteValueFunctions;
@@ -87,19 +87,19 @@ public class DoubleSarsa extends DequeDigestAdapter implements DiscreteQsaSuppli
   }
 
   @Override // from DequeDigest
-  public void digest(Deque<StepInterface> deque) {
+  public void digest(Deque<StepRecord> deque) {
     // randomly select which qsa to read and write
     boolean flip = coinflip.tossHead(); // flip coin, probability 0.5 each
     PolicyExt Policy1 = flip ? policy2 : policy1;
     PolicyExt Policy2 = flip ? policy1 : policy2;
     // ---
-    Tensor rewards = Tensor.of(deque.stream().map(StepInterface::reward));
+    Tensor rewards = Tensor.of(deque.stream().map(StepRecord::reward));
     Tensor nextState = deque.getLast().nextState();
     Scalar expectedReward = sarsaEvaluation.crossEvaluate(nextState, Policy1, Policy2);
     rewards.append(expectedReward);
     // ---
     // the code below is identical to Sarsa
-    StepInterface first = deque.getFirst();
+    StepRecord first = deque.getFirst();
     Tensor state0 = first.prevState(); // state-action pair that is being updated in Q
     Tensor action0 = first.action();
     Scalar value0 = Policy1.qsaInterface().value(state0, action0);

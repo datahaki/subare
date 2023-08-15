@@ -6,8 +6,7 @@ import java.util.Queue;
 import ch.alpine.subare.core.EpisodeInterface;
 import ch.alpine.subare.core.MonteCarloInterface;
 import ch.alpine.subare.core.Policy;
-import ch.alpine.subare.core.StepInterface;
-import ch.alpine.subare.core.adapter.StepAdapter;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.util.PolicyWrap;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -33,7 +32,7 @@ public final class MonteCarloEpisode implements EpisodeInterface {
   }
 
   @Override // from EpisodeInterface
-  public StepInterface step() {
+  public StepRecord step() {
     final Tensor prev = state;
     final Tensor action;
     if (openingActions.isEmpty()) {
@@ -45,7 +44,7 @@ public final class MonteCarloEpisode implements EpisodeInterface {
     final Tensor next = monteCarloInterface.move(state, action);
     final Scalar reward = monteCarloInterface.reward(state, action, next);
     state = next;
-    return new StepAdapter(prev, action, reward, next);
+    return new StepRecord(prev, action, reward, next);
   }
 
   @Override // from EpisodeInterface

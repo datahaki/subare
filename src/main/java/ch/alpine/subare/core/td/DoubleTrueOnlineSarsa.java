@@ -4,7 +4,7 @@ package ch.alpine.subare.core.td;
 import ch.alpine.subare.core.MonteCarloInterface;
 import ch.alpine.subare.core.QsaInterface;
 import ch.alpine.subare.core.StateActionCounter;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.util.FeatureMapper;
 import ch.alpine.subare.core.util.FeatureQsaAdapter;
 import ch.alpine.subare.core.util.FeatureWeight;
@@ -80,7 +80,7 @@ public class DoubleTrueOnlineSarsa extends AbstractTrueOnlineSarsa {
   }
 
   @Override // from StepDigest
-  public final void digest(StepInterface stepInterface) {
+  public final void digest(StepRecord stepInterface) {
     ((PolicyBase) policy1).setQsa(qsaInterface(w1.get()));
     ((PolicyBase) policy2).setQsa(qsaInterface(w2.get()));
     // randomly select which w to read and write

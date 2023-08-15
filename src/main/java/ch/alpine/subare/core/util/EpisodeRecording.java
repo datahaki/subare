@@ -6,25 +6,25 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ch.alpine.subare.core.EpisodeInterface;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 
 /** class steps through a given episode and stores the steps for one or multiple replays */
 public class EpisodeRecording {
-  private final List<StepInterface> list = new LinkedList<>();
+  private final List<StepRecord> list = new LinkedList<>();
 
   public EpisodeRecording(EpisodeInterface episodeInterface) {
     while (episodeInterface.hasNext()) {
-      StepInterface stepInterface = episodeInterface.step();
+      StepRecord stepInterface = episodeInterface.step();
       list.add(stepInterface);
     }
   }
 
   public EpisodeInterface replay() {
     return new EpisodeInterface() {
-      final Iterator<StepInterface> iterator = list.iterator();
+      final Iterator<StepRecord> iterator = list.iterator();
 
       @Override
-      public StepInterface step() {
+      public StepRecord step() {
         return iterator.next();
       }
 

@@ -1,11 +1,11 @@
 // code by fluric
 package ch.alpine.subare.core.util;
 
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.tensor.Tensor;
 
 public interface FeatureMapper {
-  /** @param key for instance {@link StateAction#key(Tensor, Tensor)}, or {@link StateAction#key(StepInterface)}
+  /** @param key for instance {@link StateAction#key(Tensor, Tensor)}, or {@link StateAction#key(StepRecord)}
    * @return a vector with the features as elements, has to be used as dot product,
    * e.g. the {@link ExactFeatureMapper} returns a unit vector for non-terminal keys */
   Tensor getFeature(Tensor key);

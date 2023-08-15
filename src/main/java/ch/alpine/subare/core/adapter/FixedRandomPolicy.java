@@ -1,38 +1,39 @@
 // code by jph
 package ch.alpine.subare.core.adapter;
 
-import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
-import java.util.random.RandomGenerator;
+import java.util.stream.Collectors;
 
 import ch.alpine.subare.core.Policy;
 import ch.alpine.subare.core.StateActionModel;
+import ch.alpine.subare.core.util.StateAction;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.ext.RandomChoice;
 import ch.alpine.tensor.num.Boole;
 import ch.alpine.tensor.pdf.Distribution;
+import ch.alpine.tensor.pdf.d.CategoricalDistribution;
 
 public class FixedRandomPolicy implements Policy {
-  private static final RandomGenerator RANDOM = new Random();
-  // ---
-  private final Set<Tensor> set = new HashSet<>();
+  private final StateActionModel stateActionModel;
+  private final Set<Tensor> set;
 
   public FixedRandomPolicy(StateActionModel stateActionModel) {
-    for (Tensor state : stateActionModel.states()) {
-      Tensor actions = stateActionModel.actions(state);
-      set.add(Tensors.of(state, actions.get(RANDOM.nextInt(actions.length()))));
-    }
+    this.stateActionModel = stateActionModel;
+    set = stateActionModel.states().stream() //
+        .map(state -> StateAction.key(state, RandomChoice.of(stateActionModel.actions(state)))) //
+        .collect(Collectors.toSet());
   }
 
   @Override // from Policy
   public final Scalar probability(Tensor state, Tensor action) {
-    return Boole.of(set.contains(Tensors.of(state, action)));
+    return Boole.of(set.contains(StateAction.key(state, action)));
   }
 
-  @Override
+  @Override // from Policy
   public Distribution getDistribution(Tensor state) {
-    throw new UnsupportedOperationException();
+    Tensor pdf = Tensor.of(stateActionModel.actions(state).stream() //
+        .map(action -> probability(state, action)));
+    return CategoricalDistribution.fromUnscaledPDF(pdf);
   }
 }

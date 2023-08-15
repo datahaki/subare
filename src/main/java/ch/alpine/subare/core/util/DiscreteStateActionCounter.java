@@ -7,7 +7,7 @@ import java.util.Map;
 
 import ch.alpine.subare.core.DiscreteModel;
 import ch.alpine.subare.core.StateActionCounter;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
@@ -23,7 +23,7 @@ public class DiscreteStateActionCounter implements StateActionCounter, Serializa
   private final Map<Tensor, Integer> stateMap = new HashMap<>();
 
   @Override // from StepDigest
-  public void digest(StepInterface stepInterface) {
+  public void digest(StepRecord stepInterface) {
     Tensor key = StateAction.key(stepInterface);
     Tensor state = stepInterface.prevState();
     stateMap.merge(state, 1, Math::addExact);

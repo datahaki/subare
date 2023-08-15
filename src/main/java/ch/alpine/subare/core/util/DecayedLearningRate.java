@@ -2,7 +2,7 @@
 package ch.alpine.subare.core.util;
 
 import ch.alpine.subare.core.StateActionCounter;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.RealScalar;
@@ -40,7 +40,7 @@ import ch.alpine.tensor.sca.pow.Power;
   }
 
   @Override // from LearningRate
-  public final synchronized Scalar alpha(StepInterface stepInterface, StateActionCounter stateActionCounter) {
+  public final synchronized Scalar alpha(StepRecord stepInterface, StateActionCounter stateActionCounter) {
     Tensor key = StateAction.key(stepInterface);
     int index = Scalars.intValueExact(stateActionCounter.stateActionCount(key));
     while (memo.length() <= index)

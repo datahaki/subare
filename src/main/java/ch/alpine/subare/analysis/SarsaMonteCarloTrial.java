@@ -8,7 +8,7 @@ import ch.alpine.subare.core.MonteCarloInterface;
 import ch.alpine.subare.core.Policy;
 import ch.alpine.subare.core.QsaInterface;
 import ch.alpine.subare.core.StateActionCounter;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.td.Sarsa;
 import ch.alpine.subare.core.td.SarsaType;
 import ch.alpine.subare.core.util.DiscreteQsa;
@@ -29,7 +29,7 @@ public class SarsaMonteCarloTrial implements MonteCarloTrial {
   // ---
   private final MonteCarloInterface monteCarloInterface;
   private final Sarsa sarsa;
-  private final Deque<StepInterface> deque = new ArrayDeque<>();
+  private final Deque<StepRecord> deque = new ArrayDeque<>();
   private final PolicyBase policy;
   private final int digestDepth; // 0 is equal to the MonteCarlo approach
 
@@ -54,7 +54,7 @@ public class SarsaMonteCarloTrial implements MonteCarloTrial {
   }
 
   @Override // from MonteCarloTrial
-  public void digest(StepInterface stepInterface) {
+  public void digest(StepRecord stepInterface) {
     deque.add(stepInterface);
     if (!monteCarloInterface.isTerminal(stepInterface.nextState())) {
       if (deque.size() == digestDepth) { // never true, if nstep == 0

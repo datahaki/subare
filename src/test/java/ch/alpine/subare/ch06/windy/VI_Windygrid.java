@@ -3,7 +3,7 @@ package ch.alpine.subare.ch06.windy;
 
 import ch.alpine.subare.core.EpisodeInterface;
 import ch.alpine.subare.core.Policy;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.alg.ValueIteration;
 import ch.alpine.subare.core.util.EpisodeKickoff;
 import ch.alpine.subare.core.util.PolicyType;
@@ -22,7 +22,7 @@ enum VI_Windygrid {
     Policy policy = PolicyType.GREEDY.bestEquiprobable(windygrid, vi.vs(), null);
     EpisodeInterface episodeInterface = EpisodeKickoff.single(windygrid, policy);
     while (episodeInterface.hasNext()) {
-      StepInterface stepInterface = episodeInterface.step();
+      StepRecord stepInterface = episodeInterface.step();
       System.out.println(stepInterface.prevState() + " + " + stepInterface.action() + " -> " + stepInterface.nextState());
     }
   }

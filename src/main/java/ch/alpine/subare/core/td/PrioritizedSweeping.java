@@ -4,7 +4,7 @@ package ch.alpine.subare.core.td;
 import java.util.PriorityQueue;
 
 import ch.alpine.subare.core.StepDigest;
-import ch.alpine.subare.core.StepInterface;
+import ch.alpine.subare.core.StepRecord;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.sca.Sign;
@@ -33,23 +33,23 @@ public class PrioritizedSweeping implements StepDigest {
   // }
 
   // check priority of learning experience
-  private void consider(StepInterface stepInterface) {
+  private void consider(StepRecord stepInterface) {
     Scalar P = sarsa.priority(stepInterface);
     if (Scalars.lessThan(theta, P))
       priorityQueue.add(new PrioritizedStateAction(P, stepInterface));
   }
 
   @Override
-  public void digest(StepInterface stepInterface) {
+  public void digest(StepRecord stepInterface) {
     deterministicEnvironment.digest(stepInterface);
     stateOrigins.digest(stepInterface);
     consider(stepInterface);
     // ---
     for (int count = 0; count < n && !priorityQueue.isEmpty(); ++count) {
       PrioritizedStateAction head = priorityQueue.poll();
-      final StepInterface model = deterministicEnvironment.get(head.state(), head.action());
+      final StepRecord model = deterministicEnvironment.get(head.state(), head.action());
       sarsa.digest(model);
-      for (StepInterface origin : stateOrigins.values(head.state()))
+      for (StepRecord origin : stateOrigins.values(head.state()))
         consider(origin);
     }
   }

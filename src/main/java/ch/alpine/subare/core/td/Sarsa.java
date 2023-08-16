@@ -16,7 +16,6 @@ import ch.alpine.subare.core.adapter.DequeDigestAdapter;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.LearningRate;
 import ch.alpine.subare.core.util.PolicyExt;
-import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
@@ -73,17 +72,10 @@ public class Sarsa extends DequeDigestAdapter implements DiscreteQsaSupplier, St
     final StepRecord stepInterface = deque.getFirst(); // first step in queue
     Tensor state0 = stepInterface.prevState();
     Tensor action = stepInterface.action();
-    // ---
-    Scalar value0 = qsa.value(state0, action);
     Scalar alpha = learningRate.alpha(stepInterface, sac);
     rewards.append(sarsaEvaluation.evaluate(nextState, policy)); // <- evaluate(...) is called here
     Scalar value1 = discountFunction.apply(rewards);
-    if (alpha.equals(RealScalar.ONE))
-      qsa.assign(state0, action, value1);
-    else {
-      Scalar delta = value1.subtract(value0).multiply(alpha);
-      qsa.assign(state0, action, value0.add(delta));
-    }
+    qsa.blend(state0, action, value1, alpha);
     sac.digest(stepInterface);
   }
 

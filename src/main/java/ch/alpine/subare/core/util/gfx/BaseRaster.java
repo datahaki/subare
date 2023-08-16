@@ -4,7 +4,7 @@ package ch.alpine.subare.core.util.gfx;
 import ch.alpine.subare.core.DiscreteModel;
 import ch.alpine.tensor.Scalar;
 
-interface Raster {
+/* package */ interface BaseRaster {
   /** @return underlying discrete model */
   DiscreteModel discreteModel();
 

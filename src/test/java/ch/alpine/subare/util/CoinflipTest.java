@@ -4,11 +4,14 @@ package ch.alpine.subare.util;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.io.IOException;
+
 import org.junit.jupiter.api.Test;
 
 import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.ext.Serialization;
 import ch.alpine.tensor.sca.Chop;
 
 class CoinflipTest {
@@ -36,6 +39,11 @@ class CoinflipTest {
   @Test
   void testInstances() {
     assertSame(Coinflip.fair(), Coinflip.fair());
+  }
+
+  @Test
+  void testSerial() throws ClassNotFoundException, IOException {
+    Serialization.copy(Coinflip.of(RationalScalar.of(3, 5)));
   }
 
   @Test

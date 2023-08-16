@@ -1,6 +1,7 @@
 // code by fluric
 package ch.alpine.subare.util;
 
+import java.io.Serializable;
 import java.security.SecureRandom;
 import java.util.random.RandomGenerator;
 
@@ -11,9 +12,8 @@ import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.pdf.d.BernoulliDistribution;
-import ch.alpine.tensor.sca.Clips;
 
-public class Coinflip {
+public class Coinflip implements Serializable {
   private static final RandomGenerator RANDOM_GENERATOR = new SecureRandom();
   private static final Coinflip FAIR = new Coinflip(RationalScalar.HALF);
 
@@ -21,7 +21,11 @@ public class Coinflip {
    * @return new instance of Coinflip with given probability p_head that {@link #tossHead()} returns true
    * @throws Exception if given probability is not inside the unit interval */
   public static Coinflip of(Scalar p_head) {
-    return new Coinflip(Clips.unit().requireInside(p_head));
+    return new Coinflip(p_head);
+  }
+
+  public static Coinflip of(Number p_head) {
+    return of(RealScalar.of(p_head));
   }
 
   /** Quote from Wikipedia:

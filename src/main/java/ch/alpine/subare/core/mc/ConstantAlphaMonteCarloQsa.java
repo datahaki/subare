@@ -30,15 +30,13 @@ public class ConstantAlphaMonteCarloQsa extends ConstantAlphaMonteCarloBase impl
   @Override
   protected void digest(Tensor rewards, List<StepRecord> trajectory) {
     int fromIndex = 0;
-    for (StepRecord stepInterface : trajectory) {
-      Tensor state = stepInterface.prevState();
-      Tensor action = stepInterface.action();
+    for (StepRecord stepRecord : trajectory) {
+      Tensor state = stepRecord.prevState();
+      Tensor action = stepRecord.action();
       Scalar gain = discountFunction.apply(rewards.extract(fromIndex, rewards.length()));
-      Scalar value0 = qsa.value(state, action);
-      Scalar alpha = learningRate.alpha(stepInterface, sac);
-      Scalar delta = gain.subtract(value0).multiply(alpha);
-      qsa.assign(state, action, value0.add(delta)); // (6.1)
-      sac.digest(stepInterface);
+      Scalar alpha = learningRate.alpha(stepRecord, sac);
+      qsa.blend(state, action, gain, alpha); // (6.1)
+      sac.digest(stepRecord);
       ++fromIndex;
     }
   }

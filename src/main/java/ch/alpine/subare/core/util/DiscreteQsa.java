@@ -53,6 +53,16 @@ public class DiscreteQsa implements QsaInterface, DiscreteValueFunction, Seriali
   }
 
   @Override // from QsaInterface
+  public void blend(Tensor state, Tensor action, Scalar value, Scalar alpha) {
+    int i = index.of(StateAction.key(state, action));
+    // the condition permits "Infinity" as initial qsa value, or NaN
+    if (alpha.equals(RealScalar.ONE))
+      values.set(value, i);
+    else
+      values.set(v_old -> v_old.add(value.subtract(v_old).multiply(alpha)), i);
+  }
+
+  @Override // from QsaInterface
   public DiscreteQsa copy() {
     return new DiscreteQsa(index, values.copy());
   }

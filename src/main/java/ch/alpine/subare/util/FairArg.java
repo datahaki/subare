@@ -49,7 +49,7 @@ public class FairArg implements Serializable {
   }
 
   public boolean isUnique() {
-    return list.size() == 1;
+    return optionsCount() == 1;
   }
 
   public int optionsCount() {

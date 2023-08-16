@@ -102,10 +102,9 @@ public class DoubleSarsa extends DequeDigestAdapter implements DiscreteQsaSuppli
     StepRecord first = deque.getFirst();
     Tensor state0 = first.prevState(); // state-action pair that is being updated in Q
     Tensor action0 = first.action();
-    Scalar value0 = Policy1.qsaInterface().value(state0, action0);
     Scalar alpha = learningRate.alpha(first, Policy1.sac());
-    Scalar delta = discountFunction.apply(rewards).subtract(value0).multiply(alpha);
-    Policy1.qsaInterface().assign(state0, action0, value0.add(delta)); // update Qsa1
+    Scalar gain = discountFunction.apply(rewards);
+    Policy1.qsaInterface().blend(state0, action0, gain, alpha); // update Qsa1
     Policy1.sac().digest(first); // signal to LearningRate1
   }
 

@@ -61,16 +61,9 @@ public class Random1StepTabularQPlanning implements StepDigest, StateActionCount
         .map(action1 -> qsa.value(state1, action1)) //
         .reduce(Max::of) //
         .orElse(RealScalar.ZERO);
-    Scalar value0 = qsa.value(state0, action);
     Scalar alpha = learningRate.alpha(stepInterface, sac);
     Scalar value1 = reward.add(gamma.multiply(max));
-    // the condition permits "Infinity" as initial qsa value
-    if (alpha.equals(RealScalar.ONE))
-      qsa.assign(state0, action, value1);
-    else {
-      Scalar delta = value1.subtract(value0).multiply(alpha);
-      qsa.assign(state0, action, value0.add(delta));
-    }
+    qsa.blend(state0, action, value1, alpha);
     sac.digest(stepInterface);
   }
 

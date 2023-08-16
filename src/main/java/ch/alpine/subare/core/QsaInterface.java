@@ -18,6 +18,12 @@ public interface QsaInterface {
    * @throws Exception if assign operation is not supported */
   void assign(Tensor state, Tensor action, Scalar value);
 
+  /** @param state
+   * @param action
+   * @param value
+   * @param alpha */
+  void blend(Tensor state, Tensor action, Scalar value, Scalar alpha);
+
   /** @return */
   QsaInterface copy();
 }

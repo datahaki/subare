@@ -6,7 +6,7 @@ import java.awt.Point;
 
 import ch.alpine.tensor.Tensor;
 
-public interface StateRaster extends Raster {
+public interface StateRaster extends BaseRaster {
   /** @return dimension of raster */
   Dimension dimensionStateRaster();
 

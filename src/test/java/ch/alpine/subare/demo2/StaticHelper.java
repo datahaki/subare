@@ -42,8 +42,8 @@ import ch.alpine.tensor.ext.HomeDirectory;
   private static Show create(Map<String, Tensor> map, int index) {
     Show show = new Show();
     for (Entry<String, Tensor> entry : map.entrySet()) {
-      Showable visualRow = show.add(ListPlot.of(entry.getValue()));
-      visualRow.setLabel(entry.getKey());
+      Showable showable = show.add(ListPlot.of(entry.getValue()));
+      showable.setLabel(entry.getKey());
     }
     return show;
   }

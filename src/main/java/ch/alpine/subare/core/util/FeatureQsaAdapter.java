@@ -28,6 +28,11 @@ public class FeatureQsaAdapter implements QsaInterface {
     throw new UnsupportedOperationException();
   }
 
+  @Override
+  public void blend(Tensor state, Tensor action, Scalar value, Scalar alpha) {
+    throw new UnsupportedOperationException();
+  }
+
   @Override // from QsaInterface
   public QsaInterface copy() {
     return this;

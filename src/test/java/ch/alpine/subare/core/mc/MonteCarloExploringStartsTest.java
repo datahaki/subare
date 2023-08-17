@@ -3,12 +3,12 @@ package ch.alpine.subare.core.mc;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.core.adapter.SimpleTestModel;
-import ch.alpine.subare.core.adapter.SimpleTestModels;
 import ch.alpine.subare.core.api.MonteCarloInterface;
 import ch.alpine.subare.core.api.Policy;
 import ch.alpine.subare.core.util.ExploringStarts;
 import ch.alpine.subare.core.util.PolicyType;
+import ch.alpine.subare.core.util.SimpleTestModel;
+import ch.alpine.subare.core.util.SimpleTestModels;
 
 class MonteCarloExploringStartsTest {
   @Test

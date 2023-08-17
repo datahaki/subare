@@ -1,12 +1,11 @@
 // code by jph
-package ch.alpine.subare.core.adapter;
+package ch.alpine.subare.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.util.CosineBasis;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;

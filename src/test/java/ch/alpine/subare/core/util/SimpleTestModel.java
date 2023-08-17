@@ -1,5 +1,5 @@
 // code by jph
-package ch.alpine.subare.core.adapter;
+package ch.alpine.subare.core.util;
 
 import ch.alpine.subare.core.api.MonteCarloInterface;
 import ch.alpine.subare.core.api.StandardModel;

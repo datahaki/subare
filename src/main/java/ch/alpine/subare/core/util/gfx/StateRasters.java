@@ -6,7 +6,7 @@ import java.awt.Point;
 import java.util.List;
 import java.util.Objects;
 
-import ch.alpine.subare.core.DiscreteModel;
+import ch.alpine.subare.core.api.DiscreteModel;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.DiscreteUtils;
 import ch.alpine.subare.core.util.DiscreteValueFunctions;

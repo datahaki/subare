@@ -4,7 +4,7 @@ package ch.alpine.subare.demo.fish;
 
 import java.util.concurrent.TimeUnit;
 
-import ch.alpine.subare.core.StateActionCounter;
+import ch.alpine.subare.core.api.StateActionCounter;
 import ch.alpine.subare.core.td.Sarsa;
 import ch.alpine.subare.core.td.SarsaType;
 import ch.alpine.subare.core.util.DefaultLearningRate;

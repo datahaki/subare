@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.core.util;
 
-import ch.alpine.subare.core.MonteCarloInterface;
+import ch.alpine.subare.core.api.MonteCarloInterface;
 import ch.alpine.subare.core.td.Sarsa;
 
 /**  */

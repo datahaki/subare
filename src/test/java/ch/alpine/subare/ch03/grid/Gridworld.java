@@ -1,8 +1,8 @@
 // code by jph
 package ch.alpine.subare.ch03.grid;
 
-import ch.alpine.subare.core.MonteCarloInterface;
-import ch.alpine.subare.core.adapter.DeterministicStandardModel;
+import ch.alpine.subare.core.api.MonteCarloInterface;
+import ch.alpine.subare.core.util.DeterministicStandardModel;
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;

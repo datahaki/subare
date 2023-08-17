@@ -4,7 +4,7 @@ package ch.alpine.subare.ch05.racetrack;
 import java.io.File;
 import java.io.IOException;
 
-import ch.alpine.subare.core.Policy;
+import ch.alpine.subare.core.api.Policy;
 import ch.alpine.subare.core.mc.FirstVisitPolicyEvaluation;
 import ch.alpine.subare.core.util.DiscreteUtils;
 import ch.alpine.subare.core.util.DiscreteVs;

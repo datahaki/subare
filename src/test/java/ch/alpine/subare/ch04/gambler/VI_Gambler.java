@@ -2,8 +2,8 @@
 // inspired by Shangtong Zhang
 package ch.alpine.subare.ch04.gambler;
 
-import ch.alpine.subare.core.Policy;
 import ch.alpine.subare.core.alg.ValueIteration;
+import ch.alpine.subare.core.api.Policy;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.DiscreteUtils;
 import ch.alpine.subare.core.util.DiscreteValueFunctions;

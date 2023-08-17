@@ -5,9 +5,9 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import ch.alpine.subare.core.DiscreteModel;
-import ch.alpine.subare.core.StateActionCounter;
-import ch.alpine.subare.core.StepRecord;
+import ch.alpine.subare.core.api.DiscreteModel;
+import ch.alpine.subare.core.api.StateActionCounter;
+import ch.alpine.subare.core.api.StepRecord;
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;

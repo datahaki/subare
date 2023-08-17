@@ -4,8 +4,8 @@ package ch.alpine.subare.ch08.maze;
 
 import java.util.concurrent.TimeUnit;
 
-import ch.alpine.subare.core.Policy;
 import ch.alpine.subare.core.alg.ActionValueIteration;
+import ch.alpine.subare.core.api.Policy;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.DiscreteUtils;
 import ch.alpine.subare.core.util.DiscreteVs;

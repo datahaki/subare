@@ -1,9 +1,9 @@
 // code by jph, fluric
 package ch.alpine.subare.core.td;
 
-import ch.alpine.subare.core.MonteCarloInterface;
-import ch.alpine.subare.core.StateActionCounterSupplier;
-import ch.alpine.subare.core.TrueOnlineInterface;
+import ch.alpine.subare.core.api.MonteCarloInterface;
+import ch.alpine.subare.core.api.StateActionCounterSupplier;
+import ch.alpine.subare.core.api.TrueOnlineInterface;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.FeatureMapper;
 import ch.alpine.subare.core.util.LearningRate;

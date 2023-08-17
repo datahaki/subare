@@ -1,8 +1,8 @@
 // code by jph
 package ch.alpine.subare.core.mc;
 
-import ch.alpine.subare.core.EpisodeDigest;
-import ch.alpine.subare.core.EpisodeInterface;
+import ch.alpine.subare.core.api.EpisodeDigest;
+import ch.alpine.subare.core.api.EpisodeInterface;
 
 public class EveryVisitPolicyEvaluation implements EpisodeDigest {
   @Override

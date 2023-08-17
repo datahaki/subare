@@ -1,10 +1,10 @@
 // code by jph
 package ch.alpine.subare.core.td;
 
-import ch.alpine.subare.core.StateActionCounter;
-import ch.alpine.subare.core.StepDigest;
-import ch.alpine.subare.core.StepRecord;
-import ch.alpine.subare.core.VsInterface;
+import ch.alpine.subare.core.api.StateActionCounter;
+import ch.alpine.subare.core.api.StepDigest;
+import ch.alpine.subare.core.api.StepRecord;
+import ch.alpine.subare.core.api.VsInterface;
 import ch.alpine.subare.core.util.LearningRate;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

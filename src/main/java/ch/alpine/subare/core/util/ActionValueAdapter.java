@@ -1,8 +1,8 @@
 // code by jph
 package ch.alpine.subare.core.util;
 
-import ch.alpine.subare.core.ActionValueInterface;
-import ch.alpine.subare.core.VsInterface;
+import ch.alpine.subare.core.api.ActionValueInterface;
+import ch.alpine.subare.core.api.VsInterface;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 

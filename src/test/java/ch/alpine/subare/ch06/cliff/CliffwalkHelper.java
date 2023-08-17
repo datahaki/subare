@@ -1,9 +1,9 @@
 // code by jph
 package ch.alpine.subare.ch06.cliff;
 
-import ch.alpine.subare.core.Policy;
 import ch.alpine.subare.core.alg.ActionValueIterations;
 import ch.alpine.subare.core.alg.ValueIteration;
+import ch.alpine.subare.core.api.Policy;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.PolicyType;
 import ch.alpine.tensor.RealScalar;

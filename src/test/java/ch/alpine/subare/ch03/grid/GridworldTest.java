@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.core.StepDigest;
 import ch.alpine.subare.core.alg.ActionValueIterations;
 import ch.alpine.subare.core.alg.Random1StepTabularQPlanning;
+import ch.alpine.subare.core.api.StepDigest;
 import ch.alpine.subare.core.util.ConstantLearningRate;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.DiscreteValueFunctions;

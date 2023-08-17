@@ -1,7 +1,7 @@
 // code by fluric
 package ch.alpine.subare.core.util;
 
-import ch.alpine.subare.core.StepRecord;
+import ch.alpine.subare.core.api.StepRecord;
 import ch.alpine.tensor.Tensor;
 
 public interface FeatureMapper {

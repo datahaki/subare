@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.ch06.walk;
 
-import ch.alpine.subare.core.StateActionCounter;
+import ch.alpine.subare.core.api.StateActionCounter;
 import ch.alpine.subare.core.mc.MonteCarloExploringStarts;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.DiscreteStateActionCounter;

@@ -4,9 +4,9 @@ package ch.alpine.subare.core.util;
 import java.io.Serializable;
 import java.util.stream.Stream;
 
-import ch.alpine.subare.core.MonteCarloInterface;
-import ch.alpine.subare.core.QsaInterface;
-import ch.alpine.subare.core.StateActionModel;
+import ch.alpine.subare.core.api.MonteCarloInterface;
+import ch.alpine.subare.core.api.QsaInterface;
+import ch.alpine.subare.core.api.StateActionModel;
 import ch.alpine.subare.util.Index;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;

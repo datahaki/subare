@@ -3,10 +3,10 @@ package ch.alpine.subare.core.util;
 
 import java.util.List;
 
-import ch.alpine.subare.core.EpisodeInterface;
-import ch.alpine.subare.core.MonteCarloInterface;
-import ch.alpine.subare.core.StepDigest;
-import ch.alpine.subare.core.StepRecord;
+import ch.alpine.subare.core.api.EpisodeInterface;
+import ch.alpine.subare.core.api.MonteCarloInterface;
+import ch.alpine.subare.core.api.StepDigest;
+import ch.alpine.subare.core.api.StepRecord;
 
 public abstract class StepExploringStarts extends AbstractExploringStarts {
   private final List<StepDigest> list;

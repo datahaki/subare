@@ -1,9 +1,9 @@
 // code by jph
 package ch.alpine.subare.core.util;
 
-import ch.alpine.subare.core.DiscreteModel;
-import ch.alpine.subare.core.Policy;
-import ch.alpine.subare.core.QsaInterface;
+import ch.alpine.subare.core.api.DiscreteModel;
+import ch.alpine.subare.core.api.Policy;
+import ch.alpine.subare.core.api.QsaInterface;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

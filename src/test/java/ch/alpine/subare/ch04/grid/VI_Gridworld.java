@@ -2,8 +2,8 @@
 // inspired by Shangtong Zhang
 package ch.alpine.subare.ch04.grid;
 
-import ch.alpine.subare.core.Policy;
 import ch.alpine.subare.core.alg.ValueIteration;
+import ch.alpine.subare.core.api.Policy;
 import ch.alpine.subare.core.util.DiscreteUtils;
 import ch.alpine.subare.core.util.DiscreteValueFunctions;
 import ch.alpine.subare.core.util.Policies;

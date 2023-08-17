@@ -4,7 +4,7 @@ package ch.alpine.subare.demo.virtualstations;
 import java.util.HashMap;
 import java.util.Map;
 
-import ch.alpine.subare.core.MonteCarloInterface;
+import ch.alpine.subare.core.api.MonteCarloInterface;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;

@@ -1,7 +1,7 @@
 // code by fluric
 package ch.alpine.subare.core.util;
 
-import ch.alpine.subare.core.QsaInterface;
+import ch.alpine.subare.core.api.QsaInterface;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 

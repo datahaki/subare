@@ -5,9 +5,9 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
-import ch.alpine.subare.core.Policy;
-import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.alg.ValueIteration;
+import ch.alpine.subare.core.api.Policy;
+import ch.alpine.subare.core.api.StepRecord;
 import ch.alpine.subare.core.mc.MonteCarloEpisode;
 import ch.alpine.subare.core.util.PolicyType;
 import ch.alpine.tensor.RealScalar;

@@ -3,7 +3,7 @@ package ch.alpine.subare.core.td;
 
 import java.util.Objects;
 
-import ch.alpine.subare.core.DiscreteModel;
+import ch.alpine.subare.core.api.DiscreteModel;
 import ch.alpine.subare.core.util.PolicyExt;
 import ch.alpine.subare.core.util.StateAction;
 import ch.alpine.subare.util.FairArg;

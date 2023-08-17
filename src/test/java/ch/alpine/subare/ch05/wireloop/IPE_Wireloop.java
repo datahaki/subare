@@ -3,8 +3,8 @@ package ch.alpine.subare.ch05.wireloop;
 
 import java.util.concurrent.TimeUnit;
 
-import ch.alpine.subare.core.Policy;
 import ch.alpine.subare.core.alg.IterativePolicyEvaluation;
+import ch.alpine.subare.core.api.Policy;
 import ch.alpine.subare.core.util.EquiprobablePolicy;
 import ch.alpine.subare.core.util.gfx.StateRasters;
 import ch.alpine.tensor.ext.HomeDirectory;

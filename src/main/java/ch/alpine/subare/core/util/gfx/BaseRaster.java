@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.core.util.gfx;
 
-import ch.alpine.subare.core.DiscreteModel;
+import ch.alpine.subare.core.api.DiscreteModel;
 import ch.alpine.tensor.Scalar;
 
 /* package */ interface BaseRaster {

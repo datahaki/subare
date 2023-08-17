@@ -3,8 +3,8 @@ package ch.alpine.subare.ch04.gambler;
 
 import java.util.List;
 
-import ch.alpine.subare.core.Policy;
 import ch.alpine.subare.core.alg.OnPolicyStateDistribution;
+import ch.alpine.subare.core.api.Policy;
 import ch.alpine.subare.core.util.DiscreteVs;
 import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.RealScalar;

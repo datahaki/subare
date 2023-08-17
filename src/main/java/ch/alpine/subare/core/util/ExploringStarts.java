@@ -3,12 +3,12 @@ package ch.alpine.subare.core.util;
 
 import java.util.List;
 
-import ch.alpine.subare.core.DequeDigest;
-import ch.alpine.subare.core.EpisodeDigest;
-import ch.alpine.subare.core.EpisodeInterface;
-import ch.alpine.subare.core.MonteCarloInterface;
-import ch.alpine.subare.core.Policy;
-import ch.alpine.subare.core.StepDigest;
+import ch.alpine.subare.core.api.DequeDigest;
+import ch.alpine.subare.core.api.EpisodeDigest;
+import ch.alpine.subare.core.api.EpisodeInterface;
+import ch.alpine.subare.core.api.MonteCarloInterface;
+import ch.alpine.subare.core.api.Policy;
+import ch.alpine.subare.core.api.StepDigest;
 
 /** contains helper functions to launch batches of episodes
  * that satisfy the exploring starts condition and have them processed by

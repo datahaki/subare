@@ -4,8 +4,8 @@ package ch.alpine.subare.core.util;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import ch.alpine.subare.core.StepDigest;
-import ch.alpine.subare.core.StepRecord;
+import ch.alpine.subare.core.api.StepDigest;
+import ch.alpine.subare.core.api.StepRecord;
 import ch.alpine.subare.util.AverageTracker;
 import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.Scalar;

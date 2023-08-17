@@ -1,9 +1,9 @@
 // code by jph
 package ch.alpine.subare.core.util;
 
-import ch.alpine.subare.core.EpisodeInterface;
-import ch.alpine.subare.core.MonteCarloInterface;
-import ch.alpine.subare.core.Policy;
+import ch.alpine.subare.core.api.EpisodeInterface;
+import ch.alpine.subare.core.api.MonteCarloInterface;
+import ch.alpine.subare.core.api.Policy;
 
 /* package */ abstract class AbstractExploringStarts {
   private final MonteCarloInterface monteCarloInterface;

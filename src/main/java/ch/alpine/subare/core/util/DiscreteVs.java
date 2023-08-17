@@ -4,7 +4,7 @@ package ch.alpine.subare.core.util;
 import java.io.Serializable;
 import java.util.stream.Stream;
 
-import ch.alpine.subare.core.VsInterface;
+import ch.alpine.subare.core.api.VsInterface;
 import ch.alpine.subare.util.Index;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

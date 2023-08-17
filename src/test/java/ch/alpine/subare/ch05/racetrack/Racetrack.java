@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ch.alpine.subare.core.MonteCarloInterface;
-import ch.alpine.subare.core.adapter.DeterministicStandardModel;
+import ch.alpine.subare.core.api.MonteCarloInterface;
+import ch.alpine.subare.core.util.DeterministicStandardModel;
 import ch.alpine.subare.core.util.StateActionMap;
 import ch.alpine.subare.core.util.StateActionMaps;
 import ch.alpine.subare.util.Index;

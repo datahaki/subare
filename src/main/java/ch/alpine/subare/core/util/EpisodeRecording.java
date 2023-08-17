@@ -5,8 +5,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import ch.alpine.subare.core.EpisodeInterface;
-import ch.alpine.subare.core.StepRecord;
+import ch.alpine.subare.core.api.EpisodeInterface;
+import ch.alpine.subare.core.api.StepRecord;
 
 /** class steps through a given episode and stores the steps for one or multiple replays */
 public class EpisodeRecording {

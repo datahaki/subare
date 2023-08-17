@@ -1,9 +1,9 @@
 // code by jph
 package ch.alpine.subare.ch05.infvar;
 
-import ch.alpine.subare.core.Policy;
-import ch.alpine.subare.core.StandardModel;
 import ch.alpine.subare.core.alg.IterativePolicyEvaluation;
+import ch.alpine.subare.core.api.Policy;
+import ch.alpine.subare.core.api.StandardModel;
 import ch.alpine.subare.core.util.DiscreteUtils;
 import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.RealScalar;

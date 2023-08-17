@@ -3,7 +3,7 @@ package ch.alpine.subare.ch05.wireloop;
 
 import java.awt.Point;
 
-import ch.alpine.subare.core.StateActionCounter;
+import ch.alpine.subare.core.api.StateActionCounter;
 import ch.alpine.subare.core.td.Sarsa;
 import ch.alpine.subare.core.td.SarsaType;
 import ch.alpine.subare.core.util.DefaultLearningRate;

@@ -5,10 +5,10 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
 
-import ch.alpine.subare.core.DequeDigest;
-import ch.alpine.subare.core.EpisodeInterface;
-import ch.alpine.subare.core.MonteCarloInterface;
-import ch.alpine.subare.core.StepRecord;
+import ch.alpine.subare.core.api.DequeDigest;
+import ch.alpine.subare.core.api.EpisodeInterface;
+import ch.alpine.subare.core.api.MonteCarloInterface;
+import ch.alpine.subare.core.api.StepRecord;
 
 public abstract class DequeExploringStarts extends AbstractExploringStarts {
   private final int nstep;

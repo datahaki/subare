@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.ch06.walk;
 
-import ch.alpine.subare.core.MonteCarloInterface;
+import ch.alpine.subare.core.api.MonteCarloInterface;
 import ch.alpine.subare.util.Coinflip;
 import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.RealScalar;

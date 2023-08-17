@@ -1,9 +1,9 @@
 // code by jph
 package ch.alpine.subare.core.alg;
 
-import ch.alpine.subare.core.Policy;
-import ch.alpine.subare.core.StateActionModel;
-import ch.alpine.subare.core.TransitionInterface;
+import ch.alpine.subare.core.api.Policy;
+import ch.alpine.subare.core.api.StateActionModel;
+import ch.alpine.subare.core.api.TransitionInterface;
 import ch.alpine.subare.core.util.DiscreteVs;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;

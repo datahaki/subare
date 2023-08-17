@@ -4,11 +4,11 @@ package ch.alpine.subare.core.mc;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.alpine.subare.core.DiscountFunction;
-import ch.alpine.subare.core.EpisodeDigest;
-import ch.alpine.subare.core.EpisodeInterface;
-import ch.alpine.subare.core.StateActionCounter;
-import ch.alpine.subare.core.StepRecord;
+import ch.alpine.subare.core.api.DiscountFunction;
+import ch.alpine.subare.core.api.EpisodeDigest;
+import ch.alpine.subare.core.api.EpisodeInterface;
+import ch.alpine.subare.core.api.StateActionCounter;
+import ch.alpine.subare.core.api.StepRecord;
 import ch.alpine.subare.core.util.LearningRate;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;

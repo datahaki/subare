@@ -4,10 +4,10 @@ package ch.alpine.subare.core.util;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 
-import ch.alpine.subare.core.QsaInterface;
-import ch.alpine.subare.core.StandardModel;
-import ch.alpine.subare.core.StateActionModel;
-import ch.alpine.subare.core.VsInterface;
+import ch.alpine.subare.core.api.QsaInterface;
+import ch.alpine.subare.core.api.StandardModel;
+import ch.alpine.subare.core.api.StateActionModel;
+import ch.alpine.subare.core.api.VsInterface;
 import ch.alpine.subare.util.Index;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

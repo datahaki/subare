@@ -3,8 +3,8 @@ package ch.alpine.subare.ch05.wireloop;
 
 import java.util.List;
 
-import ch.alpine.subare.core.QsaInterface;
 import ch.alpine.subare.core.alg.ActionValueIterations;
+import ch.alpine.subare.core.api.QsaInterface;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.DiscreteVs;
 import ch.alpine.subare.core.util.Loss;

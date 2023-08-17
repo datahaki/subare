@@ -3,8 +3,8 @@ package ch.alpine.subare.ch04.grid;
 
 import java.util.concurrent.TimeUnit;
 
-import ch.alpine.subare.core.EpisodeVsEstimator;
-import ch.alpine.subare.core.Policy;
+import ch.alpine.subare.core.api.EpisodeVsEstimator;
+import ch.alpine.subare.core.api.Policy;
 import ch.alpine.subare.core.mc.ConstantAlphaMonteCarloVs;
 import ch.alpine.subare.core.util.DefaultLearningRate;
 import ch.alpine.subare.core.util.DiscreteValueFunctions;

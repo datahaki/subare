@@ -1,7 +1,7 @@
 // code by jph, fluric
 package ch.alpine.subare.core.td;
 
-import ch.alpine.subare.core.DiscreteModel;
+import ch.alpine.subare.core.api.DiscreteModel;
 import ch.alpine.subare.core.util.PolicyExt;
 import ch.alpine.subare.core.util.StateAction;
 import ch.alpine.tensor.RealScalar;

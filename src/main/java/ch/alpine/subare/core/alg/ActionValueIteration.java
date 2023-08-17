@@ -3,11 +3,11 @@ package ch.alpine.subare.core.alg;
 
 import java.util.Objects;
 
-import ch.alpine.subare.core.ActionValueInterface;
-import ch.alpine.subare.core.DiscreteModel;
-import ch.alpine.subare.core.DiscreteQsaSupplier;
-import ch.alpine.subare.core.QsaInterface;
-import ch.alpine.subare.core.StandardModel;
+import ch.alpine.subare.core.api.ActionValueInterface;
+import ch.alpine.subare.core.api.DiscreteModel;
+import ch.alpine.subare.core.api.DiscreteQsaSupplier;
+import ch.alpine.subare.core.api.QsaInterface;
+import ch.alpine.subare.core.api.StandardModel;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.DiscreteValueFunctions;
 import ch.alpine.tensor.Scalar;

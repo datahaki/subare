@@ -1,9 +1,9 @@
 // code by jph
 package ch.alpine.subare.ch03.grid;
 
-import ch.alpine.subare.core.StepDigest;
 import ch.alpine.subare.core.alg.ActionValueIterations;
 import ch.alpine.subare.core.alg.Random1StepTabularQPlanning;
+import ch.alpine.subare.core.api.StepDigest;
 import ch.alpine.subare.core.util.ConstantLearningRate;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.Infoline;

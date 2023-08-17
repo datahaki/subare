@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.core.alg;
 
-import ch.alpine.subare.core.ActionValueInterface;
+import ch.alpine.subare.core.api.ActionValueInterface;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

@@ -4,8 +4,8 @@ package ch.alpine.subare.ch05.racetrack;
 import java.io.File;
 import java.io.IOException;
 
-import ch.alpine.subare.core.Policy;
 import ch.alpine.subare.core.alg.IterativePolicyEvaluation;
+import ch.alpine.subare.core.api.Policy;
 import ch.alpine.subare.core.util.DiscreteUtils;
 import ch.alpine.subare.core.util.EquiprobablePolicy;
 import ch.alpine.tensor.RealScalar;

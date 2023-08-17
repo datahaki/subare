@@ -1,7 +1,7 @@
 // code by jph and fluric
 package ch.alpine.subare.core.util;
 
-import ch.alpine.subare.core.StateActionCounter;
+import ch.alpine.subare.core.api.StateActionCounter;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 

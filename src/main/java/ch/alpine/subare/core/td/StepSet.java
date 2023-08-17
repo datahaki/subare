@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import ch.alpine.subare.core.StepRecord;
+import ch.alpine.subare.core.api.StepRecord;
 import ch.alpine.subare.core.util.StateAction;
 import ch.alpine.tensor.Tensor;
 

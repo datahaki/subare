@@ -1,8 +1,8 @@
 // code by jph
 package ch.alpine.subare.core.td;
 
-import ch.alpine.subare.core.StepDigest;
-import ch.alpine.subare.core.StepRecord;
+import ch.alpine.subare.core.api.StepDigest;
+import ch.alpine.subare.core.api.StepRecord;
 
 /** Tabular Dyna-Q
  * 

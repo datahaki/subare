@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.ch04.grid;
 
-import ch.alpine.subare.core.Policy;
+import ch.alpine.subare.core.api.Policy;
 import ch.alpine.subare.core.td.TabularTemporalDifference0;
 import ch.alpine.subare.core.util.DefaultLearningRate;
 import ch.alpine.subare.core.util.DiscreteStateActionCounter;

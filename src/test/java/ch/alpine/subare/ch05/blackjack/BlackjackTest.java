@@ -7,8 +7,8 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.core.EpisodeInterface;
-import ch.alpine.subare.core.Policy;
+import ch.alpine.subare.core.api.EpisodeInterface;
+import ch.alpine.subare.core.api.Policy;
 import ch.alpine.subare.core.util.EpisodeKickoff;
 import ch.alpine.subare.core.util.EquiprobablePolicy;
 import ch.alpine.tensor.RealScalar;

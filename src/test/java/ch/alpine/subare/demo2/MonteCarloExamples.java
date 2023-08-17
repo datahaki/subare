@@ -13,7 +13,7 @@ import ch.alpine.subare.ch06.cliff.Cliffwalk;
 import ch.alpine.subare.ch06.maxbias.Maxbias;
 import ch.alpine.subare.ch06.windy.Windygrid;
 import ch.alpine.subare.ch08.maze.DynamazeHelper;
-import ch.alpine.subare.core.MonteCarloInterface;
+import ch.alpine.subare.core.api.MonteCarloInterface;
 import ch.alpine.subare.demo.airport.Airport;
 import ch.alpine.subare.demo.virtualstations.VirtualStations;
 import ch.alpine.tensor.RationalScalar;

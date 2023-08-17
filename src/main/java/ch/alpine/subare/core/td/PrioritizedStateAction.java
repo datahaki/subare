@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.core.td;
 
-import ch.alpine.subare.core.StepRecord;
+import ch.alpine.subare.core.api.StepRecord;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;

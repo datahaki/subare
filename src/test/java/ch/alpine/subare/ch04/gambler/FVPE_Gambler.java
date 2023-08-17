@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.ch04.gambler;
 
-import ch.alpine.subare.core.Policy;
+import ch.alpine.subare.core.api.Policy;
 import ch.alpine.subare.core.mc.FirstVisitPolicyEvaluation;
 import ch.alpine.subare.core.util.DiscreteValueFunctions;
 import ch.alpine.subare.core.util.DiscreteVs;

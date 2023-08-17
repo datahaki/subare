@@ -3,10 +3,10 @@ package ch.alpine.subare.core.td;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.core.MonteCarloInterface;
-import ch.alpine.subare.core.StateActionCounter;
 import ch.alpine.subare.core.adapter.SimpleTestModel;
 import ch.alpine.subare.core.adapter.SimpleTestModels;
+import ch.alpine.subare.core.api.MonteCarloInterface;
+import ch.alpine.subare.core.api.StateActionCounter;
 import ch.alpine.subare.core.util.ConstantLearningRate;
 import ch.alpine.subare.core.util.DefaultLearningRate;
 import ch.alpine.subare.core.util.DiscreteQsa;

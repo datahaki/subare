@@ -1,12 +1,12 @@
 // code by jph
 package ch.alpine.subare.ch04.gambler;
 
-import ch.alpine.subare.core.EpisodeInterface;
-import ch.alpine.subare.core.Policy;
-import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.alg.ActionValueIterations;
 import ch.alpine.subare.core.alg.ValueIteration;
 import ch.alpine.subare.core.alg.ValueIterations;
+import ch.alpine.subare.core.api.EpisodeInterface;
+import ch.alpine.subare.core.api.Policy;
+import ch.alpine.subare.core.api.StepRecord;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.DiscreteUtils;
 import ch.alpine.subare.core.util.DiscreteVs;

@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.ch05.infvar;
 
-import ch.alpine.subare.core.Policy;
+import ch.alpine.subare.core.api.Policy;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

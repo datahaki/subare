@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.UnaryOperator;
 
-import ch.alpine.subare.core.DiscreteModel;
-import ch.alpine.subare.core.Policy;
+import ch.alpine.subare.core.api.DiscreteModel;
+import ch.alpine.subare.core.api.Policy;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.DiscreteValueFunctions;
 import ch.alpine.subare.core.util.Loss;

@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.random.RandomGenerator;
 
-import ch.alpine.subare.core.StepDigest;
-import ch.alpine.subare.core.StepRecord;
+import ch.alpine.subare.core.api.StepDigest;
+import ch.alpine.subare.core.api.StepRecord;
 import ch.alpine.subare.core.util.StateAction;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;

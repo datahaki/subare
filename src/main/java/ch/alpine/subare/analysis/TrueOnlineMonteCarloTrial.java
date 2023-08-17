@@ -1,10 +1,10 @@
 // code by fluric
 package ch.alpine.subare.analysis;
 
-import ch.alpine.subare.core.MonteCarloInterface;
-import ch.alpine.subare.core.QsaInterface;
-import ch.alpine.subare.core.StateActionCounter;
-import ch.alpine.subare.core.StepRecord;
+import ch.alpine.subare.core.api.MonteCarloInterface;
+import ch.alpine.subare.core.api.QsaInterface;
+import ch.alpine.subare.core.api.StateActionCounter;
+import ch.alpine.subare.core.api.StepRecord;
 import ch.alpine.subare.core.td.SarsaType;
 import ch.alpine.subare.core.td.TrueOnlineSarsa;
 import ch.alpine.subare.core.util.ConstantLearningRate;

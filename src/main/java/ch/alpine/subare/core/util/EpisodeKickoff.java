@@ -5,9 +5,9 @@ import java.util.ArrayDeque;
 import java.util.Random;
 import java.util.random.RandomGenerator;
 
-import ch.alpine.subare.core.EpisodeInterface;
-import ch.alpine.subare.core.MonteCarloInterface;
-import ch.alpine.subare.core.Policy;
+import ch.alpine.subare.core.api.EpisodeInterface;
+import ch.alpine.subare.core.api.MonteCarloInterface;
+import ch.alpine.subare.core.api.Policy;
 import ch.alpine.subare.core.mc.MonteCarloEpisode;
 import ch.alpine.tensor.Tensor;
 

@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.ch05.infvar;
 
-import ch.alpine.subare.core.Policy;
+import ch.alpine.subare.core.api.Policy;
 import ch.alpine.subare.core.mc.FirstVisitPolicyEvaluation;
 import ch.alpine.subare.core.util.ExploringStarts;
 import ch.alpine.tensor.RationalScalar;

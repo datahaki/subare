@@ -3,10 +3,10 @@ package ch.alpine.subare.core.mc;
 
 import java.util.Queue;
 
-import ch.alpine.subare.core.EpisodeInterface;
-import ch.alpine.subare.core.MonteCarloInterface;
-import ch.alpine.subare.core.Policy;
-import ch.alpine.subare.core.StepRecord;
+import ch.alpine.subare.core.api.EpisodeInterface;
+import ch.alpine.subare.core.api.MonteCarloInterface;
+import ch.alpine.subare.core.api.Policy;
+import ch.alpine.subare.core.api.StepRecord;
 import ch.alpine.subare.core.util.PolicyWrap;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

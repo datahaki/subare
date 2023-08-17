@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.ch02.bandits2;
 
-import ch.alpine.subare.core.StateActionCounter;
+import ch.alpine.subare.core.api.StateActionCounter;
 import ch.alpine.subare.core.td.DoubleSarsa;
 import ch.alpine.subare.core.td.Sarsa;
 import ch.alpine.subare.core.td.SarsaType;

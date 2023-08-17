@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import ch.alpine.subare.core.DiscountFunction;
-import ch.alpine.subare.core.DiscreteModel;
-import ch.alpine.subare.core.EpisodeInterface;
-import ch.alpine.subare.core.EpisodeVsEstimator;
-import ch.alpine.subare.core.StepRecord;
+import ch.alpine.subare.core.api.DiscountFunction;
+import ch.alpine.subare.core.api.DiscreteModel;
+import ch.alpine.subare.core.api.EpisodeInterface;
+import ch.alpine.subare.core.api.EpisodeVsEstimator;
+import ch.alpine.subare.core.api.StepRecord;
 import ch.alpine.subare.core.util.DiscreteVs;
 import ch.alpine.subare.util.AverageTracker;
 import ch.alpine.subare.util.Index;

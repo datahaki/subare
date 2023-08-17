@@ -2,10 +2,10 @@
 // inspired by Shangtong Zhang
 package ch.alpine.subare.ch06.cliff;
 
-import ch.alpine.subare.core.EpisodeInterface;
-import ch.alpine.subare.core.Policy;
-import ch.alpine.subare.core.StepRecord;
 import ch.alpine.subare.core.alg.ValueIteration;
+import ch.alpine.subare.core.api.EpisodeInterface;
+import ch.alpine.subare.core.api.Policy;
+import ch.alpine.subare.core.api.StepRecord;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.DiscreteUtils;
 import ch.alpine.subare.core.util.DiscreteValueFunctions;

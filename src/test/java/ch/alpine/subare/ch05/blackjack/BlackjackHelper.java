@@ -6,7 +6,7 @@ import java.awt.Point;
 import java.util.List;
 import java.util.Objects;
 
-import ch.alpine.subare.core.Policy;
+import ch.alpine.subare.core.api.Policy;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.PolicyType;
 import ch.alpine.subare.core.util.gfx.StateRasters;

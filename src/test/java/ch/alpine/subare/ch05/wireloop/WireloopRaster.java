@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.util.List;
 
-import ch.alpine.subare.core.DiscreteModel;
+import ch.alpine.subare.core.api.DiscreteModel;
 import ch.alpine.subare.core.util.gfx.StateRaster;
 import ch.alpine.subare.core.util.gfx.StateRasters;
 import ch.alpine.tensor.RealScalar;

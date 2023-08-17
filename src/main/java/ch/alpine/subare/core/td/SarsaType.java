@@ -1,10 +1,10 @@
 // code by fluric, jph
 package ch.alpine.subare.core.td;
 
-import ch.alpine.subare.core.DiscreteModel;
-import ch.alpine.subare.core.MonteCarloInterface;
-import ch.alpine.subare.core.QsaInterface;
-import ch.alpine.subare.core.StateActionCounter;
+import ch.alpine.subare.core.api.DiscreteModel;
+import ch.alpine.subare.core.api.MonteCarloInterface;
+import ch.alpine.subare.core.api.QsaInterface;
+import ch.alpine.subare.core.api.StateActionCounter;
 import ch.alpine.subare.core.util.FeatureMapper;
 import ch.alpine.subare.core.util.FeatureWeight;
 import ch.alpine.subare.core.util.LearningRate;

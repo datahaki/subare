@@ -3,7 +3,7 @@ package ch.alpine.subare.ch06.cliff;
 
 import java.util.concurrent.TimeUnit;
 
-import ch.alpine.subare.core.StateActionCounter;
+import ch.alpine.subare.core.api.StateActionCounter;
 import ch.alpine.subare.core.mc.MonteCarloExploringStarts;
 import ch.alpine.subare.core.util.DiscreteQsa;
 import ch.alpine.subare.core.util.DiscreteStateActionCounter;

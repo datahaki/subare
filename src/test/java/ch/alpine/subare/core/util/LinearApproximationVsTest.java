@@ -3,8 +3,8 @@ package ch.alpine.subare.core.util;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.core.VsInterface;
-import ch.alpine.subare.core.adapter.CosineBasis;
+import ch.alpine.subare.core.api.VsInterface;
+import ch.alpine.subare.util.CosineBasis;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensors;

@@ -3,9 +3,9 @@ package ch.alpine.subare.analysis;
 
 import java.util.List;
 
-import ch.alpine.subare.core.MonteCarloInterface;
-import ch.alpine.subare.core.QsaInterface;
-import ch.alpine.subare.core.StateActionCounter;
+import ch.alpine.subare.core.api.MonteCarloInterface;
+import ch.alpine.subare.core.api.QsaInterface;
+import ch.alpine.subare.core.api.StateActionCounter;
 import ch.alpine.subare.core.td.SarsaType;
 import ch.alpine.subare.core.util.ConstantLearningRate;
 import ch.alpine.subare.core.util.DecayedExplorationRate;

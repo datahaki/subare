@@ -1,8 +1,8 @@
 // code by fluric
 package ch.alpine.subare.core.util;
 
-import ch.alpine.subare.core.DiscreteModel;
-import ch.alpine.subare.core.StateActionCounter;
+import ch.alpine.subare.core.api.DiscreteModel;
+import ch.alpine.subare.core.api.StateActionCounter;
 import ch.alpine.tensor.Tensor;
 
 public enum StateActionCounterUtil {

@@ -4,8 +4,8 @@ package ch.alpine.subare.ch02.bandits2;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ch.alpine.subare.core.MonteCarloInterface;
-import ch.alpine.subare.core.StandardModel;
+import ch.alpine.subare.core.api.MonteCarloInterface;
+import ch.alpine.subare.core.api.StandardModel;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;

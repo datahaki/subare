@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.core.alg;
 
-import ch.alpine.subare.core.StandardModel;
+import ch.alpine.subare.core.api.StandardModel;
 import ch.alpine.subare.core.util.DiscreteVs;
 import ch.alpine.tensor.Scalar;
 

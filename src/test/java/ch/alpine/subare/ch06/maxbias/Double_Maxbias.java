@@ -1,10 +1,10 @@
 // code by jph
 package ch.alpine.subare.ch06.maxbias;
 
-import ch.alpine.subare.core.EpisodeInterface;
-import ch.alpine.subare.core.Policy;
-import ch.alpine.subare.core.StateActionCounter;
-import ch.alpine.subare.core.StepRecord;
+import ch.alpine.subare.core.api.EpisodeInterface;
+import ch.alpine.subare.core.api.Policy;
+import ch.alpine.subare.core.api.StateActionCounter;
+import ch.alpine.subare.core.api.StepRecord;
 import ch.alpine.subare.core.td.DoubleSarsa;
 import ch.alpine.subare.core.td.SarsaType;
 import ch.alpine.subare.core.util.DefaultLearningRate;

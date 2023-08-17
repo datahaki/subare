@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import ch.alpine.subare.core.MoveInterface;
+import ch.alpine.subare.core.api.MoveInterface;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Throw;
 

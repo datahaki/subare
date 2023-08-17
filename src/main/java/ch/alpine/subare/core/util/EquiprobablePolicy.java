@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import ch.alpine.subare.core.Policy;
-import ch.alpine.subare.core.StateActionModel;
+import ch.alpine.subare.core.api.Policy;
+import ch.alpine.subare.core.api.StateActionModel;
 import ch.alpine.subare.util.Index;
 import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.Scalar;

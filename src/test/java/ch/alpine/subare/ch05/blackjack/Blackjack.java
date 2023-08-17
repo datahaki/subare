@@ -4,7 +4,7 @@ package ch.alpine.subare.ch05.blackjack;
 import java.util.Random;
 import java.util.random.RandomGenerator;
 
-import ch.alpine.subare.core.MonteCarloInterface;
+import ch.alpine.subare.core.api.MonteCarloInterface;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;

@@ -1,8 +1,8 @@
 // code by jph
 package ch.alpine.subare.core.adapter;
 
-import ch.alpine.subare.core.MonteCarloInterface;
-import ch.alpine.subare.core.StandardModel;
+import ch.alpine.subare.core.api.MonteCarloInterface;
+import ch.alpine.subare.core.api.StandardModel;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

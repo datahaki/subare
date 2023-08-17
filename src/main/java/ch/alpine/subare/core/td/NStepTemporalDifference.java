@@ -3,11 +3,11 @@ package ch.alpine.subare.core.td;
 
 import java.util.Deque;
 
-import ch.alpine.subare.core.DiscountFunction;
-import ch.alpine.subare.core.StateActionCounter;
-import ch.alpine.subare.core.StepRecord;
-import ch.alpine.subare.core.VsInterface;
-import ch.alpine.subare.core.adapter.DequeDigestAdapter;
+import ch.alpine.subare.core.api.DiscountFunction;
+import ch.alpine.subare.core.api.StateActionCounter;
+import ch.alpine.subare.core.api.StepRecord;
+import ch.alpine.subare.core.api.VsInterface;
+import ch.alpine.subare.core.util.DequeDigestAdapter;
 import ch.alpine.subare.core.util.LearningRate;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

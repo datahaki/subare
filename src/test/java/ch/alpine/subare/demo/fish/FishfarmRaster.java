@@ -4,8 +4,8 @@ package ch.alpine.subare.demo.fish;
 import java.awt.Dimension;
 import java.awt.Point;
 
-import ch.alpine.subare.core.api.DiscreteModel;
-import ch.alpine.subare.core.util.gfx.StateRaster;
+import ch.alpine.subare.api.DiscreteModel;
+import ch.alpine.subare.util.gfx.StateRaster;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;

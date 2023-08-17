@@ -4,7 +4,7 @@ package ch.alpine.subare.demo.prison;
 import java.util.List;
 import java.util.function.Supplier;
 
-import ch.alpine.subare.ch02.Agent;
+import ch.alpine.subare.book.ch02.Agent;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.sca.Round;
 

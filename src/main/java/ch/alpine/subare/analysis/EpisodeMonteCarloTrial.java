@@ -1,13 +1,13 @@
 // code by fluric
 package ch.alpine.subare.analysis;
 
-import ch.alpine.subare.core.api.MonteCarloInterface;
-import ch.alpine.subare.core.api.QsaInterface;
-import ch.alpine.subare.core.api.StepRecord;
-import ch.alpine.subare.core.mc.MonteCarloExploringStarts;
-import ch.alpine.subare.core.util.DiscreteQsa;
-import ch.alpine.subare.core.util.ExploringStarts;
-import ch.alpine.subare.core.util.PolicyBase;
+import ch.alpine.subare.api.MonteCarloInterface;
+import ch.alpine.subare.api.QsaInterface;
+import ch.alpine.subare.api.StepRecord;
+import ch.alpine.subare.mc.MonteCarloExploringStarts;
+import ch.alpine.subare.util.DiscreteQsa;
+import ch.alpine.subare.util.ExploringStarts;
+import ch.alpine.subare.util.PolicyBase;
 
 /* package */ class EpisodeMonteCarloTrial implements MonteCarloTrial {
   private final MonteCarloInterface monteCarloInterface;

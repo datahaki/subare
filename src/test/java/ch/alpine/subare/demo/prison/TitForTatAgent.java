@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.demo.prison;
 
-import ch.alpine.subare.ch02.Agent;
+import ch.alpine.subare.book.ch02.Agent;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;

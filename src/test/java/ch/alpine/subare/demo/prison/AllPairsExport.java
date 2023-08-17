@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.function.Supplier;
 
-import ch.alpine.subare.ch02.Agent;
+import ch.alpine.subare.book.ch02.Agent;
 import ch.alpine.tensor.ext.HomeDirectory;
 import ch.alpine.tensor.io.Put;
 

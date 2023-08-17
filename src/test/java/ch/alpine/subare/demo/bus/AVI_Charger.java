@@ -3,9 +3,9 @@ package ch.alpine.subare.demo.bus;
 
 import java.io.IOException;
 
-import ch.alpine.subare.core.alg.ActionValueIterations;
-import ch.alpine.subare.core.util.DiscreteQsa;
-import ch.alpine.subare.core.util.gfx.StateActionRasters;
+import ch.alpine.subare.alg.ActionValueIterations;
+import ch.alpine.subare.util.DiscreteQsa;
+import ch.alpine.subare.util.gfx.StateActionRasters;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.ext.HomeDirectory;
 import ch.alpine.tensor.io.Export;

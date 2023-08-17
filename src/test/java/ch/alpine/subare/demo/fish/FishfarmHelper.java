@@ -1,8 +1,8 @@
 // code by jph
 package ch.alpine.subare.demo.fish;
 
-import ch.alpine.subare.core.alg.ActionValueIterations;
-import ch.alpine.subare.core.util.DiscreteQsa;
+import ch.alpine.subare.alg.ActionValueIterations;
+import ch.alpine.subare.util.DiscreteQsa;
 import ch.alpine.tensor.RealScalar;
 
 enum FishfarmHelper {

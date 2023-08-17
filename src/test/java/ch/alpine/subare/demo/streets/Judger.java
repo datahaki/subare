@@ -3,9 +3,9 @@ package ch.alpine.subare.demo.streets;
 
 import java.util.List;
 
-import ch.alpine.subare.ch02.Agent;
-import ch.alpine.subare.ch02.FairArgAgent;
-import ch.alpine.subare.ch02.OptimistAgent;
+import ch.alpine.subare.book.ch02.Agent;
+import ch.alpine.subare.book.ch02.FairArgAgent;
+import ch.alpine.subare.book.ch02.OptimistAgent;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

@@ -1,22 +1,22 @@
 // code by fluric
 package ch.alpine.subare.analysis;
 
-import ch.alpine.subare.core.api.MonteCarloInterface;
-import ch.alpine.subare.core.api.QsaInterface;
-import ch.alpine.subare.core.api.StateActionCounter;
-import ch.alpine.subare.core.api.StepRecord;
-import ch.alpine.subare.core.td.SarsaType;
-import ch.alpine.subare.core.td.TrueOnlineSarsa;
-import ch.alpine.subare.core.util.ConstantLearningRate;
-import ch.alpine.subare.core.util.DiscreteQsa;
-import ch.alpine.subare.core.util.DiscreteStateActionCounter;
-import ch.alpine.subare.core.util.ExactFeatureMapper;
-import ch.alpine.subare.core.util.ExploringStarts;
-import ch.alpine.subare.core.util.FeatureMapper;
-import ch.alpine.subare.core.util.FeatureWeight;
-import ch.alpine.subare.core.util.LearningRate;
-import ch.alpine.subare.core.util.PolicyBase;
-import ch.alpine.subare.core.util.PolicyType;
+import ch.alpine.subare.api.MonteCarloInterface;
+import ch.alpine.subare.api.QsaInterface;
+import ch.alpine.subare.api.StateActionCounter;
+import ch.alpine.subare.api.StepRecord;
+import ch.alpine.subare.td.SarsaType;
+import ch.alpine.subare.td.TrueOnlineSarsa;
+import ch.alpine.subare.util.ConstantLearningRate;
+import ch.alpine.subare.util.DiscreteQsa;
+import ch.alpine.subare.util.DiscreteStateActionCounter;
+import ch.alpine.subare.util.ExactFeatureMapper;
+import ch.alpine.subare.util.ExploringStarts;
+import ch.alpine.subare.util.FeatureMapper;
+import ch.alpine.subare.util.FeatureWeight;
+import ch.alpine.subare.util.LearningRate;
+import ch.alpine.subare.util.PolicyBase;
+import ch.alpine.subare.util.PolicyType;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 

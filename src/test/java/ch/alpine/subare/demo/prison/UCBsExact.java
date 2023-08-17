@@ -4,8 +4,8 @@ package ch.alpine.subare.demo.prison;
 import java.io.IOException;
 import java.util.function.Supplier;
 
-import ch.alpine.subare.ch02.Agent;
-import ch.alpine.subare.ch02.UCBAgent;
+import ch.alpine.subare.book.ch02.Agent;
+import ch.alpine.subare.book.ch02.UCBAgent;
 import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

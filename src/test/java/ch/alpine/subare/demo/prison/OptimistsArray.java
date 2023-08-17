@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-import ch.alpine.subare.ch02.Agent;
-import ch.alpine.subare.ch02.OptimistAgent;
+import ch.alpine.subare.book.ch02.Agent;
+import ch.alpine.subare.book.ch02.OptimistAgent;
 import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;

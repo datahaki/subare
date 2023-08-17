@@ -4,21 +4,21 @@ package ch.alpine.subare.analysis;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-import ch.alpine.subare.core.api.MonteCarloInterface;
-import ch.alpine.subare.core.api.Policy;
-import ch.alpine.subare.core.api.QsaInterface;
-import ch.alpine.subare.core.api.StateActionCounter;
-import ch.alpine.subare.core.api.StepRecord;
-import ch.alpine.subare.core.td.DoubleSarsa;
-import ch.alpine.subare.core.td.SarsaType;
-import ch.alpine.subare.core.util.ConstantLearningRate;
-import ch.alpine.subare.core.util.DiscreteQsa;
-import ch.alpine.subare.core.util.DiscreteStateActionCounter;
-import ch.alpine.subare.core.util.ExploringStarts;
-import ch.alpine.subare.core.util.LearningRate;
-import ch.alpine.subare.core.util.PolicyBase;
-import ch.alpine.subare.core.util.PolicyExt;
-import ch.alpine.subare.core.util.PolicyType;
+import ch.alpine.subare.api.MonteCarloInterface;
+import ch.alpine.subare.api.Policy;
+import ch.alpine.subare.api.QsaInterface;
+import ch.alpine.subare.api.StateActionCounter;
+import ch.alpine.subare.api.StepRecord;
+import ch.alpine.subare.td.DoubleSarsa;
+import ch.alpine.subare.td.SarsaType;
+import ch.alpine.subare.util.ConstantLearningRate;
+import ch.alpine.subare.util.DiscreteQsa;
+import ch.alpine.subare.util.DiscreteStateActionCounter;
+import ch.alpine.subare.util.ExploringStarts;
+import ch.alpine.subare.util.LearningRate;
+import ch.alpine.subare.util.PolicyBase;
+import ch.alpine.subare.util.PolicyExt;
+import ch.alpine.subare.util.PolicyType;
 import ch.alpine.tensor.RealScalar;
 
 /* package */ class DoubleSarsaMonteCarloTrial implements MonteCarloTrial {

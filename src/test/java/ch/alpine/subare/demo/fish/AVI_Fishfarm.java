@@ -4,10 +4,10 @@ package ch.alpine.subare.demo.fish;
 
 import java.util.concurrent.TimeUnit;
 
-import ch.alpine.subare.core.alg.ActionValueIteration;
-import ch.alpine.subare.core.util.DiscreteQsa;
-import ch.alpine.subare.core.util.Infoline;
-import ch.alpine.subare.core.util.gfx.StateRasters;
+import ch.alpine.subare.alg.ActionValueIteration;
+import ch.alpine.subare.util.DiscreteQsa;
+import ch.alpine.subare.util.Infoline;
+import ch.alpine.subare.util.gfx.StateRasters;
 import ch.alpine.tensor.ext.HomeDirectory;
 import ch.alpine.tensor.io.AnimationWriter;
 import ch.alpine.tensor.io.GifAnimationWriter;

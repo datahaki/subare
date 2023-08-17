@@ -3,13 +3,13 @@ package ch.alpine.subare.demo.fish;
 
 import java.util.concurrent.TimeUnit;
 
-import ch.alpine.subare.core.alg.Random1StepTabularQPlanning;
-import ch.alpine.subare.core.util.ConstantLearningRate;
-import ch.alpine.subare.core.util.DiscreteQsa;
-import ch.alpine.subare.core.util.DiscreteUtils;
-import ch.alpine.subare.core.util.Infoline;
-import ch.alpine.subare.core.util.TabularSteps;
-import ch.alpine.subare.core.util.gfx.StateRasters;
+import ch.alpine.subare.alg.Random1StepTabularQPlanning;
+import ch.alpine.subare.util.ConstantLearningRate;
+import ch.alpine.subare.util.DiscreteQsa;
+import ch.alpine.subare.util.DiscreteUtils;
+import ch.alpine.subare.util.Infoline;
+import ch.alpine.subare.util.TabularSteps;
+import ch.alpine.subare.util.gfx.StateRasters;
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.ext.HomeDirectory;
 import ch.alpine.tensor.io.AnimationWriter;

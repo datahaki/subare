@@ -4,8 +4,8 @@ package ch.alpine.subare.demo.bus;
 import java.awt.Dimension;
 import java.awt.Point;
 
-import ch.alpine.subare.core.api.DiscreteModel;
-import ch.alpine.subare.core.util.gfx.StateActionRaster;
+import ch.alpine.subare.api.DiscreteModel;
+import ch.alpine.subare.util.gfx.StateActionRaster;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;

@@ -3,7 +3,7 @@ package ch.alpine.subare.demo.prison;
 
 import java.util.function.Supplier;
 
-import ch.alpine.subare.ch02.Agent;
+import ch.alpine.subare.book.ch02.Agent;
 
 /* package */ class OptimistsExact extends AbstractExact {
   public OptimistsExact(Supplier<Agent> sup1, Supplier<Agent> sup2) {

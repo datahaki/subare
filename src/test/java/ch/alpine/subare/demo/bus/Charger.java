@@ -3,8 +3,8 @@ package ch.alpine.subare.demo.bus;
 
 import java.awt.Dimension;
 
-import ch.alpine.subare.core.api.TerminalInterface;
-import ch.alpine.subare.core.util.DeterministicStandardModel;
+import ch.alpine.subare.api.TerminalInterface;
+import ch.alpine.subare.util.DeterministicStandardModel;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;

@@ -14,8 +14,8 @@ public class EpisodeRecording {
 
   public EpisodeRecording(EpisodeInterface episodeInterface) {
     while (episodeInterface.hasNext()) {
-      StepRecord stepInterface = episodeInterface.step();
-      list.add(stepInterface);
+      StepRecord stepRecord = episodeInterface.step();
+      list.add(stepRecord);
     }
   }
 

@@ -60,14 +60,14 @@ public class TrueOnlineSarsa extends AbstractTrueOnlineSarsa {
   }
 
   @Override // from StepDigest
-  public final void digest(StepRecord stepInterface) {
+  public final void digest(StepRecord stepRecord) {
     ((PolicyBase) policy).setQsa(qsaInterface());
-    Tensor prevState = stepInterface.prevState();
-    Tensor prevAction = stepInterface.action();
-    Tensor nextState = stepInterface.nextState();
-    Scalar reward = stepInterface.reward();
+    Tensor prevState = stepRecord.prevState();
+    Tensor prevAction = stepRecord.action();
+    Tensor nextState = stepRecord.nextState();
+    Scalar reward = stepRecord.reward();
     // ---
-    Scalar alpha = learningRate.alpha(stepInterface, sac);
+    Scalar alpha = learningRate.alpha(stepRecord, sac);
     Scalar alpha_gamma_lambda = alpha.multiply(gamma_lambda);
     Tensor x = featureMapper.getFeature(StateAction.key(prevState, prevAction));
     Scalar prevQ = (Scalar) w.get().dot(x);
@@ -83,7 +83,7 @@ public class TrueOnlineSarsa extends AbstractTrueOnlineSarsa {
     w.set(w.get().add(scalez).subtract(scalex));
     nextQOld = nextQ;
     // ---
-    sac.digest(stepInterface);
+    sac.digest(stepRecord);
     // ---
     if (monteCarloInterface.isTerminal(nextState))
       resetEligibility();

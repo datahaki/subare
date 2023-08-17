@@ -1,9 +1,9 @@
 // code by jph
 package ch.alpine.subare.book.ch02;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.random.RandomGenerator;
 
 import ch.alpine.tensor.RealScalar;
@@ -13,7 +13,7 @@ import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.ext.Integers;
 
 public abstract class Agent {
-  protected static final RandomGenerator RANDOM = new Random();
+  protected static final RandomGenerator RANDOM = new SecureRandom();
   // ---
   private Scalar total = RealScalar.ZERO;
   private Integer count = 0;

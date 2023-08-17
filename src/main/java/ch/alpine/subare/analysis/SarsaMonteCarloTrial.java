@@ -54,9 +54,9 @@ public class SarsaMonteCarloTrial implements MonteCarloTrial {
   }
 
   @Override // from MonteCarloTrial
-  public void digest(StepRecord stepInterface) {
-    deque.add(stepInterface);
-    if (!monteCarloInterface.isTerminal(stepInterface.nextState())) {
+  public void digest(StepRecord stepRecord) {
+    deque.add(stepRecord);
+    if (!monteCarloInterface.isTerminal(stepRecord.nextState())) {
       if (deque.size() == digestDepth) { // never true, if nstep == 0
         sarsa.digest(deque);
         deque.poll();

@@ -69,23 +69,23 @@ public class Sarsa extends DequeDigestAdapter implements DiscreteQsaSupplier, St
     // ---
     // for terminal state in queue, "=last.next"
     // ---
-    final StepRecord stepInterface = deque.getFirst(); // first step in queue
-    Tensor state0 = stepInterface.prevState();
-    Tensor action = stepInterface.action();
-    Scalar alpha = learningRate.alpha(stepInterface, sac);
+    final StepRecord stepRecord = deque.getFirst(); // first step in queue
+    Tensor state0 = stepRecord.prevState();
+    Tensor action = stepRecord.action();
+    Scalar alpha = learningRate.alpha(stepRecord, sac);
     rewards.append(sarsaEvaluation.evaluate(nextState, policy)); // <- evaluate(...) is called here
     Scalar value1 = discountFunction.apply(rewards);
     qsa.blend(state0, action, value1, alpha);
-    sac.digest(stepInterface);
+    sac.digest(stepRecord);
   }
 
-  /** @param stepInterface
+  /** @param stepRecord
    * @return non-negative priority rating */
-  final Scalar priority(StepRecord stepInterface) {
-    Tensor state0 = stepInterface.prevState();
-    Tensor action = stepInterface.action();
+  final Scalar priority(StepRecord stepRecord) {
+    Tensor state0 = stepRecord.prevState();
+    Tensor action = stepRecord.action();
     Scalar value0 = qsa.value(state0, action);
-    Tensor rewards = Tensors.of(stepInterface.reward(), sarsaEvaluation.evaluate(stepInterface.nextState(), policy));
+    Tensor rewards = Tensors.of(stepRecord.reward(), sarsaEvaluation.evaluate(stepRecord.nextState(), policy));
     return Abs.between(discountFunction.apply(rewards), value0);
   }
 

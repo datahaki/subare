@@ -33,17 +33,17 @@ public record TabularTemporalDifference0( //
   }
 
   @Override // from StepDigest
-  public void digest(StepRecord stepInterface) {
-    Tensor state0 = stepInterface.prevState();
+  public void digest(StepRecord stepRecord) {
+    Tensor state0 = stepRecord.prevState();
     // action is only required for learning rate
-    Scalar reward = stepInterface.reward();
-    Tensor state1 = stepInterface.nextState();
+    Scalar reward = stepRecord.reward();
+    Tensor state1 = stepRecord.nextState();
     // ---
     Scalar value0 = vs.value(state0);
     Scalar value1 = vs.value(state1);
-    Scalar alpha = learningRate.alpha(stepInterface, sac);
+    Scalar alpha = learningRate.alpha(stepRecord, sac);
     Scalar delta = reward.add(gamma.multiply(value1)).subtract(value0).multiply(alpha);
     vs.increment(state0, delta);
-    sac.digest(stepInterface);
+    sac.digest(stepRecord);
   }
 }

@@ -31,7 +31,7 @@ import ch.alpine.subare.util.PolicyBase;
   }
 
   @Override // from MonteCarloTrial
-  public void digest(StepRecord stepInterface) {
+  public void digest(StepRecord stepRecord) {
     throw new UnsupportedOperationException();
   }
 

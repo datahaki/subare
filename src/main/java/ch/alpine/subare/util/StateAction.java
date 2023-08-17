@@ -14,10 +14,10 @@ public enum StateAction {
     return Tensors.of(state, action);
   }
 
-  /** @param stepInterface
+  /** @param stepRecord
    * @return */
-  public static Tensor key(StepRecord stepInterface) {
-    return key(stepInterface.prevState(), stepInterface.action());
+  public static Tensor key(StepRecord stepRecord) {
+    return key(stepRecord.prevState(), stepRecord.action());
   }
 
   public static Tensor getState(Tensor key) {

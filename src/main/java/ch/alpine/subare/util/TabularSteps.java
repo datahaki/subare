@@ -20,8 +20,8 @@ public enum TabularSteps {
     List<StepDigest> list = List.of(stepDigest);
     TabularStepBatch tabularStepBatch = new TabularStepBatch(discreteModel, sampleModel);
     while (tabularStepBatch.hasNext()) {
-      StepRecord stepInterface = tabularStepBatch.next();
-      list.stream().parallel().forEach(_stepDigest -> _stepDigest.digest(stepInterface));
+      StepRecord stepRecord = tabularStepBatch.next();
+      list.stream().parallel().forEach(_stepDigest -> _stepDigest.digest(stepRecord));
     }
   }
 }

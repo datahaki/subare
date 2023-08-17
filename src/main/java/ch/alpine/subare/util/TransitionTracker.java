@@ -20,12 +20,12 @@ import ch.alpine.tensor.Tensor;
   private long total = 0;
 
   @Override
-  public void digest(StepRecord stepInterface) {
+  public void digest(StepRecord stepRecord) {
     // it is imperative that state0 and action do not change per transition tracker, maybe check this!?
     // Tensor state0 = stepInterface.prevState();
     // Tensor action = stepInterface.action();
-    Scalar reward = stepInterface.reward();
-    Tensor next = stepInterface.nextState();
+    Scalar reward = stepRecord.reward();
+    Tensor next = stepRecord.nextState();
     // ---
     average.track(reward);
     map.merge(next, 1, Math::addExact);

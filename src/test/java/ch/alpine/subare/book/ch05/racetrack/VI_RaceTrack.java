@@ -35,14 +35,14 @@ import ch.alpine.tensor.io.Primitives;
         MonteCarloEpisode mce = new MonteCarloEpisode( //
             racetrack, policy, start, new LinkedList<>());
         while (mce.hasNext()) {
-          StepRecord stepInterface = mce.step();
+          StepRecord stepRecord = mce.step();
           {
-            Tensor state = stepInterface.prevState();
+            Tensor state = stepRecord.prevState();
             int[] index = Primitives.toIntArray(state);
             image.set(Tensors.vector(128, 128, 128, 255), index[0], index[1]);
           }
           {
-            Tensor state = stepInterface.nextState();
+            Tensor state = stepRecord.nextState();
             int[] index = Primitives.toIntArray(state);
             image.set(Tensors.vector(128, 128, 128, 255), index[0], index[1]);
           }

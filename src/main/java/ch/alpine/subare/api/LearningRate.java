@@ -13,5 +13,5 @@ public interface LearningRate {
    * @param {@link StepRecord}
    * @param {@link StateActionCounter}
    * @return learning rate for given state-action pair */
-  Scalar alpha(StepRecord stepInterface, StateActionCounter stateActionCounter);
+  Scalar alpha(StepRecord stepRecord, StateActionCounter stateActionCounter);
 }

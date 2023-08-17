@@ -35,13 +35,13 @@ public class NStepTemporalDifference extends DequeDigestAdapter {
     Tensor rewards = Tensor.of(deque.stream().map(StepRecord::reward));
     rewards.append(vs.value(last.nextState()));
     // ---
-    final StepRecord stepInterface = deque.getFirst(); // first step in queue
+    final StepRecord stepRecord = deque.getFirst(); // first step in queue
     // ---
-    Tensor state0 = stepInterface.prevState();
+    Tensor state0 = stepRecord.prevState();
     Scalar value0 = vs.value(state0);
-    Scalar alpha = learningRate.alpha(stepInterface, sac);
+    Scalar alpha = learningRate.alpha(stepRecord, sac);
     Scalar delta = discountFunction.apply(rewards).subtract(value0).multiply(alpha);
     vs.increment(state0, delta);
-    sac.digest(stepInterface);
+    sac.digest(stepRecord);
   }
 }

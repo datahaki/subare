@@ -47,11 +47,11 @@ public class FirstVisitPolicyEvaluation implements EpisodeVsEstimator {
     Tensor rewards = Tensors.empty();
     List<StepRecord> trajectory = new ArrayList<>();
     while (episodeInterface.hasNext()) {
-      StepRecord stepInterface = episodeInterface.step();
-      Tensor state = stepInterface.prevState();
+      StepRecord stepRecord = episodeInterface.step();
+      Tensor state = stepRecord.prevState();
       first.computeIfAbsent(state, i -> trajectory.size());
-      rewards.append(stepInterface.reward());
-      trajectory.add(stepInterface);
+      rewards.append(stepRecord.reward());
+      trajectory.add(stepRecord);
     }
     for (Entry<Tensor, Integer> entry : first.entrySet()) {
       Tensor state = entry.getKey();
@@ -59,8 +59,8 @@ public class FirstVisitPolicyEvaluation implements EpisodeVsEstimator {
       gains.put(state, discountFunction.apply(rewards.extract(fromIndex, rewards.length())));
     }
     // TODO SUBARE more efficient update of average
-    for (StepRecord stepInterface : trajectory) {
-      Tensor stateP = stepInterface.prevState();
+    for (StepRecord stepRecord : trajectory) {
+      Tensor stateP = stepRecord.prevState();
       if (!map.containsKey(stateP))
         map.put(stateP, new AverageTracker());
       map.get(stateP).track(gains.get(stateP));

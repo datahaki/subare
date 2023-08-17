@@ -68,9 +68,9 @@ enum Double_Gridworld {
     Policy policyVs = PolicyType.GREEDY.bestEquiprobable(gridworld, vs, null);
     EpisodeInterface ei = EpisodeKickoff.single(gridworld, policyVs);
     while (ei.hasNext()) {
-      StepRecord stepInterface = ei.step();
-      Tensor state = stepInterface.prevState();
-      System.out.println(state + " then " + stepInterface.action());
+      StepRecord stepRecord = ei.step();
+      Tensor state = stepRecord.prevState();
+      System.out.println(state + " then " + stepRecord.action());
     }
   }
 

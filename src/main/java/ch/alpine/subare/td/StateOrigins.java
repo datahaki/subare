@@ -20,8 +20,8 @@ import ch.alpine.tensor.Throw;
     if (map.containsKey(state)) {
       // TODO SUBARE this is a preliminary check only during development
       Collection<StepRecord> collection = map.get(state).values();
-      for (StepRecord stepInterface : collection)
-        if (!stepInterface.nextState().equals(state))
+      for (StepRecord stepRecord : collection)
+        if (!stepRecord.nextState().equals(state))
           throw new Throw(state);
       return collection;
     }
@@ -29,8 +29,8 @@ import ch.alpine.tensor.Throw;
   }
 
   @Override
-  public void digest(StepRecord stepInterface) {
+  public void digest(StepRecord stepRecord) {
     // TODO SUBARE code redundant to StepSet
-    map.computeIfAbsent(stepInterface.nextState(), i -> new StepSet()).register(stepInterface);
+    map.computeIfAbsent(stepRecord.nextState(), i -> new StepSet()).register(stepRecord);
   }
 }

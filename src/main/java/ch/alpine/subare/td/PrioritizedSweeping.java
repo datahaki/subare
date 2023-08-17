@@ -33,17 +33,17 @@ public class PrioritizedSweeping implements StepDigest {
   // }
 
   // check priority of learning experience
-  private void consider(StepRecord stepInterface) {
-    Scalar P = sarsa.priority(stepInterface);
+  private void consider(StepRecord stepRecord) {
+    Scalar P = sarsa.priority(stepRecord);
     if (Scalars.lessThan(theta, P))
-      priorityQueue.add(new PrioritizedStateAction(P, stepInterface));
+      priorityQueue.add(new PrioritizedStateAction(P, stepRecord));
   }
 
   @Override
-  public void digest(StepRecord stepInterface) {
-    deterministicEnvironment.digest(stepInterface);
-    stateOrigins.digest(stepInterface);
-    consider(stepInterface);
+  public void digest(StepRecord stepRecord) {
+    deterministicEnvironment.digest(stepRecord);
+    stateOrigins.digest(stepRecord);
+    consider(stepRecord);
     // ---
     for (int count = 0; count < n && !priorityQueue.isEmpty(); ++count) {
       PrioritizedStateAction head = priorityQueue.poll();

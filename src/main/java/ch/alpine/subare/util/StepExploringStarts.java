@@ -20,9 +20,9 @@ public abstract class StepExploringStarts extends AbstractExploringStarts {
   @Override
   public final void protected_nextEpisode(EpisodeInterface episodeInterface) {
     while (episodeInterface.hasNext()) {
-      StepRecord stepInterface = episodeInterface.step();
+      StepRecord stepRecord = episodeInterface.step();
       list.stream().parallel() //
-          .forEach(_dequeDigest -> _dequeDigest.digest(stepInterface));
+          .forEach(_dequeDigest -> _dequeDigest.digest(stepRecord));
     }
   }
 }

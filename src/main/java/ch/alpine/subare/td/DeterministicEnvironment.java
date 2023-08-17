@@ -1,9 +1,9 @@
 // code by jph
 package ch.alpine.subare.td;
 
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 import java.util.random.RandomGenerator;
 
 import ch.alpine.subare.api.StepDigest;
@@ -15,13 +15,13 @@ import ch.alpine.tensor.Tensors;
 /** utility class to implement "Model" for deterministic environments
  * in Tabular Dyna-Q p.172 */
 /* package */ class DeterministicEnvironment implements StepDigest {
-  private static final RandomGenerator RANDOM = new Random();
+  private static final RandomGenerator RANDOM_GENERATOR = new SecureRandom();
   // ---
   private final Map<Tensor, StepRecord> map = new HashMap<>();
   private final Tensor keys = Tensors.empty();
 
   public StepRecord getRandomStep() {
-    return map.get(keys.get(RANDOM.nextInt(size())));
+    return map.get(keys.get(RANDOM_GENERATOR.nextInt(size())));
   }
 
   public StepRecord get(Tensor state, Tensor action) {
@@ -29,14 +29,14 @@ import ch.alpine.tensor.Tensors;
   }
 
   @Override
-  public void digest(StepRecord stepInterface) {
-    Tensor key = StateAction.key(stepInterface);
-    register(key, stepInterface);
+  public void digest(StepRecord stepRecord) {
+    Tensor key = StateAction.key(stepRecord);
+    register(key, stepRecord);
   }
 
-  private synchronized void register(Tensor key, StepRecord stepInterface) {
+  private synchronized void register(Tensor key, StepRecord stepRecord) {
     if (!map.containsKey(key)) {
-      map.put(key, stepInterface);
+      map.put(key, stepRecord);
       keys.append(key); // after updating the map, for conservative size
     } else {
       // TODO SUBARE can verify that stored step is identical to provided step

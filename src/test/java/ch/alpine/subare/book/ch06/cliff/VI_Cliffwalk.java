@@ -44,9 +44,9 @@ enum VI_Cliffwalk {
     Policy policy = PolicyType.GREEDY.bestEquiprobable(cliffwalk, ref, null);
     EpisodeInterface mce = EpisodeKickoff.single(cliffwalk, policy);
     while (mce.hasNext()) {
-      StepRecord stepInterface = mce.step();
-      Tensor state = stepInterface.prevState();
-      System.out.println(state + " then " + stepInterface.action());
+      StepRecord stepRecord = mce.step();
+      Tensor state = stepRecord.prevState();
+      System.out.println(state + " then " + stepRecord.action());
     }
   }
 }

@@ -12,8 +12,8 @@ import ch.alpine.tensor.Tensor;
 /* package */ class StepSet {
   private final Map<Tensor, StepRecord> map = new HashMap<>();
 
-  void register(StepRecord stepInterface) {
-    map.putIfAbsent(StateAction.key(stepInterface), stepInterface);
+  void register(StepRecord stepRecord) {
+    map.putIfAbsent(StateAction.key(stepRecord), stepRecord);
   }
 
   Collection<StepRecord> values() {

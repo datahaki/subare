@@ -8,11 +8,11 @@ import ch.alpine.tensor.Tensor;
 
 public class PrioritizedStateAction implements Comparable<PrioritizedStateAction> {
   private final Scalar P;
-  private final StepRecord stepInterface;
+  private final StepRecord stepRecord;
 
-  public PrioritizedStateAction(Scalar P, StepRecord stepInterface) {
+  public PrioritizedStateAction(Scalar P, StepRecord stepRecord) {
     this.P = P;
-    this.stepInterface = stepInterface;
+    this.stepRecord = stepRecord;
   }
 
   @Override
@@ -21,10 +21,10 @@ public class PrioritizedStateAction implements Comparable<PrioritizedStateAction
   }
 
   public Tensor state() {
-    return stepInterface.prevState();
+    return stepRecord.prevState();
   }
 
   public Tensor action() {
-    return stepInterface.action();
+    return stepRecord.action();
   }
 }

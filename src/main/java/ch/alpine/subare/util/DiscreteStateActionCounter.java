@@ -22,9 +22,9 @@ public class DiscreteStateActionCounter implements StateActionCounter, Serializa
   private final Map<Tensor, Integer> stateMap = new HashMap<>();
 
   @Override // from StepDigest
-  public void digest(StepRecord stepInterface) {
-    Tensor key = StateAction.key(stepInterface);
-    Tensor state = stepInterface.prevState();
+  public void digest(StepRecord stepRecord) {
+    Tensor key = StateAction.key(stepRecord);
+    Tensor state = stepRecord.prevState();
     stateMap.merge(state, 1, Math::addExact);
     stateActionMap.merge(key, 1, Math::addExact);
   }

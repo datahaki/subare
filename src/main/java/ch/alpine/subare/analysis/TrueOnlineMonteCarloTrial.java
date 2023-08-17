@@ -57,8 +57,8 @@ import ch.alpine.tensor.Scalar;
   }
 
   @Override // from MonteCarloTrial
-  public void digest(StepRecord stepInterface) {
-    trueOnlineSarsa.digest(stepInterface);
+  public void digest(StepRecord stepRecord) {
+    trueOnlineSarsa.digest(stepRecord);
   }
 
   @Override // from MonteCarloTrial

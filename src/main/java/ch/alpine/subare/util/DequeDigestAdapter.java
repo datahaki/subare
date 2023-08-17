@@ -9,9 +9,9 @@ import ch.alpine.subare.api.StepRecord;
 
 public abstract class DequeDigestAdapter implements DequeDigest {
   @Override // from StepDigest
-  public final void digest(StepRecord stepInterface) {
+  public final void digest(StepRecord stepRecord) {
     Deque<StepRecord> deque = new ArrayDeque<>();
-    deque.add(stepInterface); // deque holds a single step
+    deque.add(stepRecord); // deque holds a single step
     digest(deque);
   }
 }

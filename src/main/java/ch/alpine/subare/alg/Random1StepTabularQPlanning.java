@@ -49,11 +49,11 @@ public class Random1StepTabularQPlanning implements StepDigest, StateActionCount
   }
 
   @Override
-  public void digest(StepRecord stepInterface) {
-    Tensor state0 = stepInterface.prevState();
-    Tensor action = stepInterface.action();
-    Scalar reward = stepInterface.reward();
-    Tensor state1 = stepInterface.nextState();
+  public void digest(StepRecord stepRecord) {
+    Tensor state0 = stepRecord.prevState();
+    Tensor action = stepRecord.action();
+    Scalar reward = stepRecord.reward();
+    Tensor state1 = stepRecord.nextState();
     // ---
     Scalar max = discreteModel.actions(state1).stream() //
         // ignore un-encountered state-action pairs, otherwise influenced by initial qsa value
@@ -61,10 +61,10 @@ public class Random1StepTabularQPlanning implements StepDigest, StateActionCount
         .map(action1 -> qsa.value(state1, action1)) //
         .reduce(Max::of) //
         .orElse(RealScalar.ZERO);
-    Scalar alpha = learningRate.alpha(stepInterface, sac);
+    Scalar alpha = learningRate.alpha(stepRecord, sac);
     Scalar value1 = reward.add(gamma.multiply(max));
     qsa.blend(state0, action, value1, alpha);
-    sac.digest(stepInterface);
+    sac.digest(stepRecord);
   }
 
   @Override

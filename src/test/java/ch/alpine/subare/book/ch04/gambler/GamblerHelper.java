@@ -40,9 +40,9 @@ import ch.alpine.tensor.sca.Round;
     EpisodeInterface mce = EpisodeKickoff.single(gamblerModel, policy, //
         gamblerModel.startStates().get(gamblerModel.startStates().length() / 2));
     while (mce.hasNext()) {
-      StepRecord stepInterface = mce.step();
-      Tensor state = stepInterface.prevState();
-      System.out.println(state + " then " + stepInterface.action());
+      StepRecord stepRecord = mce.step();
+      Tensor state = stepRecord.prevState();
+      System.out.println(state + " then " + stepRecord.action());
     }
   }
 }

@@ -42,8 +42,8 @@ public class ActionValueStatistics implements DequeDigest, EpisodeDigest, Action
   }
 
   @Override
-  public void digest(StepRecord stepInterface) {
-    transitionTrackers.computeIfAbsent(StateAction.key(stepInterface), i -> new TransitionTracker()).digest(stepInterface);
+  public void digest(StepRecord stepRecord) {
+    transitionTrackers.computeIfAbsent(StateAction.key(stepRecord), i -> new TransitionTracker()).digest(stepRecord);
   }
 
   @Override
@@ -53,12 +53,12 @@ public class ActionValueStatistics implements DequeDigest, EpisodeDigest, Action
 
   @Override
   public void digest(EpisodeInterface episodeInterface) {
-    StepRecord stepInterface = null;
+    StepRecord stepRecord = null;
     while (episodeInterface.hasNext()) {
-      stepInterface = episodeInterface.step();
-      digest(stepInterface);
+      stepRecord = episodeInterface.step();
+      digest(stepRecord);
     }
-    Objects.requireNonNull(stepInterface); // episode start should not be terminal
+    Objects.requireNonNull(stepRecord); // episode start should not be terminal
     // digestTerminal(stepInterface.nextState()); // terminal state, already handled in constructor
   }
 

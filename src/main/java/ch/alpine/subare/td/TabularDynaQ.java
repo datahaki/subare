@@ -20,9 +20,9 @@ public class TabularDynaQ implements StepDigest {
   }
 
   @Override
-  public void digest(StepRecord stepInterface) {
-    sarsa.digest(stepInterface);
-    deterministicEnvironment.digest(stepInterface);
+  public void digest(StepRecord stepRecord) {
+    sarsa.digest(stepRecord);
+    deterministicEnvironment.digest(stepRecord);
     // replay previously observed steps:
     int min = Math.min(deterministicEnvironment.size(), n);
     for (int count = 0; count < min; ++count)

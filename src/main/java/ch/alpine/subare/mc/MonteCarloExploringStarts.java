@@ -48,12 +48,12 @@ public class MonteCarloExploringStarts implements EpisodeQsaEstimator, StateActi
     Tensor rewards = Tensors.empty();
     List<StepRecord> trajectory = new ArrayList<>();
     while (episodeInterface.hasNext()) {
-      StepRecord stepInterface = episodeInterface.step();
-      Tensor key = StateAction.key(stepInterface);
+      StepRecord stepRecord = episodeInterface.step();
+      Tensor key = StateAction.key(stepRecord);
       first.computeIfAbsent(key, i -> trajectory.size());
-      rewards.append(stepInterface.reward());
-      trajectory.add(stepInterface);
-      sac.digest(stepInterface);
+      rewards.append(stepRecord.reward());
+      trajectory.add(stepRecord);
+      sac.digest(stepRecord);
     }
     Map<Tensor, Scalar> gains = new HashMap<>();
     if (gamma.equals(RealScalar.ONE)) {
@@ -79,8 +79,8 @@ public class MonteCarloExploringStarts implements EpisodeQsaEstimator, StateActi
     }
     // TODO SUBARE more efficient update of average
     // compute average(Returns(s, a))
-    for (StepRecord stepInterface : trajectory) {
-      Tensor key = StateAction.key(stepInterface);
+    for (StepRecord stepRecord : trajectory) {
+      Tensor key = StateAction.key(stepRecord);
       // if (!map.containsKey(key))
       // map.put(key, new AverageTracker());
       map.computeIfAbsent(key, tensor -> new AverageTracker()).track(gains.get(key));

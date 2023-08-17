@@ -29,9 +29,9 @@ public abstract class ConstantAlphaMonteCarloBase implements EpisodeDigest {
     Tensor rewards = Tensors.empty();
     List<StepRecord> trajectory = new ArrayList<>();
     while (episodeInterface.hasNext()) {
-      StepRecord stepInterface = episodeInterface.step();
-      rewards.append(stepInterface.reward());
-      trajectory.add(stepInterface);
+      StepRecord stepRecord = episodeInterface.step();
+      rewards.append(stepRecord.reward());
+      trajectory.add(stepRecord);
     }
     digest(rewards, trajectory);
   }

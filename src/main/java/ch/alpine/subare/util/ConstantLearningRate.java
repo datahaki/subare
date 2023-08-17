@@ -30,7 +30,9 @@ public record ConstantLearningRate(Scalar alpha) implements LearningRate {
 
   // ---
   @Override
-  public Scalar alpha(StepRecord stepInterface, StateActionCounter stateActionCounter) {
-    return stateActionCounter.isEncountered(StateAction.key(stepInterface)) ? alpha : RealScalar.ONE;
+  public Scalar alpha(StepRecord stepRecord, StateActionCounter stateActionCounter) {
+    return stateActionCounter.isEncountered(StateAction.key(stepRecord)) //
+        ? alpha
+        : RealScalar.ONE;
   }
 }

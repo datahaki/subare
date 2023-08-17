@@ -80,7 +80,7 @@ public class DoubleTrueOnlineSarsa extends AbstractTrueOnlineSarsa {
   }
 
   @Override // from StepDigest
-  public final void digest(StepRecord stepInterface) {
+  public final void digest(StepRecord stepRecord) {
     ((PolicyBase) policy1).setQsa(qsaInterface(w1.get()));
     ((PolicyBase) policy2).setQsa(qsaInterface(w2.get()));
     // randomly select which w to read and write
@@ -90,13 +90,13 @@ public class DoubleTrueOnlineSarsa extends AbstractTrueOnlineSarsa {
     PolicyExt Policy1 = flip ? policy1 : policy2;
     PolicyExt Policy2 = flip ? policy2 : policy1;
     // ---
-    Tensor prevState = stepInterface.prevState();
-    Tensor prevAction = stepInterface.action();
-    Tensor nextState = stepInterface.nextState();
+    Tensor prevState = stepRecord.prevState();
+    Tensor prevAction = stepRecord.action();
+    Tensor nextState = stepRecord.nextState();
     // ---
     Scalar reward = monteCarloInterface.reward(prevState, prevAction, nextState);
     // ---
-    Scalar alpha = learningRate.alpha(stepInterface, Sac1);
+    Scalar alpha = learningRate.alpha(stepRecord, Sac1);
     Scalar alpha_gamma_lambda = alpha.multiply(gamma_lambda);
     Tensor x = featureMapper.getFeature(StateAction.key(prevState, prevAction));
     Scalar prevQ = (Scalar) W1.get().dot(x);
@@ -115,7 +115,7 @@ public class DoubleTrueOnlineSarsa extends AbstractTrueOnlineSarsa {
       w1.set(w1.get().add(scalez).subtract(scalex));
     nextQOld = nextQ;
     // ---
-    Sac1.digest(stepInterface);
+    Sac1.digest(stepRecord);
     // ---
     if (monteCarloInterface.isTerminal(nextState))
       resetEligibility();

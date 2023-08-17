@@ -4,6 +4,7 @@ package ch.alpine.subare.api;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.api.TensorScalarFunction;
+import ch.alpine.tensor.red.Total;
 import ch.alpine.tensor.sca.Clips;
 import ch.alpine.tensor.sca.ply.Polynomial;
 
@@ -15,7 +16,7 @@ public interface DiscountFunction extends TensorScalarFunction {
    * @return */
   static DiscountFunction of(Scalar gamma) {
     if (gamma.equals(RealScalar.ONE))
-      return StaticHelper.TOTAL;
+      return Total::ofVector;
     Clips.unit().requireInside(gamma);
     return rewards -> Polynomial.of(rewards).apply(gamma);
   }

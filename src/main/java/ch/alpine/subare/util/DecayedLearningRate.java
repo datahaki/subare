@@ -41,8 +41,8 @@ import ch.alpine.tensor.sca.pow.Power;
   }
 
   @Override // from LearningRate
-  public final synchronized Scalar alpha(StepRecord stepInterface, StateActionCounter stateActionCounter) {
-    Tensor key = StateAction.key(stepInterface);
+  public final synchronized Scalar alpha(StepRecord stepRecord, StateActionCounter stateActionCounter) {
+    Tensor key = StateAction.key(stepRecord);
     int index = stateActionCounter.stateActionCount(key);
     while (memo.length() <= index)
       memo.append(Min.of( // TODO SUBARE the "+1" in the denominator may not be ideal... perhaps +0.5, or +0 ?

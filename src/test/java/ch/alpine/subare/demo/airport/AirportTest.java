@@ -76,8 +76,8 @@ class AirportTest {
     for (Tensor state : airport.states()) {
       for (Tensor action : airport.actions(state)) {
         assertFalse(sarsa.sac().isEncountered(StateAction.key(state, action)));
-        assertEquals(sarsa.sac().stateActionCount(StateAction.key(state, action)), RealScalar.ZERO);
-        assertEquals(sarsa.sac().stateCount(state), RealScalar.ZERO);
+        assertEquals(sarsa.sac().stateActionCount(StateAction.key(state, action)), 0);
+        assertEquals(sarsa.sac().stateCount(state), 0);
       }
     }
     Tensor state = airport.states().get(0);
@@ -87,16 +87,16 @@ class AirportTest {
     for (Tensor s : airport.states()) {
       for (Tensor a : airport.actions(state)) {
         if (state.equals(s)) {
-          assertEquals(sarsa.sac().stateCount(s), RealScalar.ONE);
+          assertEquals(sarsa.sac().stateCount(s), 1);
           if (action.equals(a)) {
             assertTrue(sarsa.sac().isEncountered(StateAction.key(s, a)));
-            assertEquals(sarsa.sac().stateActionCount(StateAction.key(s, a)), RealScalar.ONE);
+            assertEquals(sarsa.sac().stateActionCount(StateAction.key(s, a)), 1);
           } else {
-            assertEquals(sarsa.sac().stateActionCount(StateAction.key(s, a)), RealScalar.ZERO);
+            assertEquals(sarsa.sac().stateActionCount(StateAction.key(s, a)), 0);
             assertFalse(sarsa.sac().isEncountered(StateAction.key(s, a)));
           }
         } else {
-          assertEquals(sarsa.sac().stateCount(s), RealScalar.ZERO);
+          assertEquals(sarsa.sac().stateCount(s), 0);
         }
       }
     }

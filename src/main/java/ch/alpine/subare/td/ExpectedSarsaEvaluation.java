@@ -2,7 +2,7 @@
 package ch.alpine.subare.td;
 
 import ch.alpine.subare.api.DiscreteModel;
-import ch.alpine.subare.util.PolicyExt;
+import ch.alpine.subare.api.PolicyExt;
 import ch.alpine.subare.util.StateAction;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;

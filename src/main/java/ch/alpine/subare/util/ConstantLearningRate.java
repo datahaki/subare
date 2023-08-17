@@ -1,6 +1,7 @@
 // code by jph and fluric
 package ch.alpine.subare.util;
 
+import ch.alpine.subare.api.LearningRate;
 import ch.alpine.subare.api.StateActionCounter;
 import ch.alpine.subare.api.StepRecord;
 import ch.alpine.tensor.RealScalar;

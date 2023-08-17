@@ -2,6 +2,7 @@
 // inspired by Shangtong Zhang
 package ch.alpine.subare.book.ch06.walk;
 
+import ch.alpine.subare.api.LearningRate;
 import ch.alpine.subare.api.Policy;
 import ch.alpine.subare.api.StateActionCounter;
 import ch.alpine.subare.td.Sarsa;
@@ -12,7 +13,6 @@ import ch.alpine.subare.util.DiscreteStateActionCounter;
 import ch.alpine.subare.util.DiscreteUtils;
 import ch.alpine.subare.util.EquiprobablePolicy;
 import ch.alpine.subare.util.ExploringStarts;
-import ch.alpine.subare.util.LearningRate;
 import ch.alpine.subare.util.PolicyBase;
 import ch.alpine.subare.util.PolicyType;
 import ch.alpine.tensor.sca.Round;

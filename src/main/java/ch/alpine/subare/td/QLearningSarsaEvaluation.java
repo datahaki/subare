@@ -4,8 +4,8 @@ package ch.alpine.subare.td;
 import java.util.Objects;
 
 import ch.alpine.subare.api.DiscreteModel;
+import ch.alpine.subare.api.PolicyExt;
 import ch.alpine.subare.math.FairArg;
-import ch.alpine.subare.util.PolicyExt;
 import ch.alpine.subare.util.StateAction;
 import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.RealScalar;

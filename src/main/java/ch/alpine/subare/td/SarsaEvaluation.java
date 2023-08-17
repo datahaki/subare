@@ -1,7 +1,7 @@
 // code by jph and fluric
 package ch.alpine.subare.td;
 
-import ch.alpine.subare.util.PolicyExt;
+import ch.alpine.subare.api.PolicyExt;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 

@@ -7,9 +7,9 @@ import java.io.File;
 
 import org.junit.jupiter.api.Test;
 
+import ch.alpine.subare.api.LearningRate;
 import ch.alpine.subare.td.SarsaType;
 import ch.alpine.subare.util.DefaultLearningRate;
-import ch.alpine.subare.util.LearningRate;
 import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.RealScalar;
 

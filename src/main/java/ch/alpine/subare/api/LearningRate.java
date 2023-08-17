@@ -1,8 +1,6 @@
-// code by jph and fluric
-package ch.alpine.subare.util;
+// code by jph, fluric
+package ch.alpine.subare.api;
 
-import ch.alpine.subare.api.StateActionCounter;
-import ch.alpine.subare.api.StepRecord;
 import ch.alpine.tensor.Scalar;
 
 @FunctionalInterface

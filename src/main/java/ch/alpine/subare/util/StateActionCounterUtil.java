@@ -16,8 +16,8 @@ public enum StateActionCounterUtil {
     for (Tensor state : discreteModel.states())
       for (Tensor action : discreteModel.actions(state)) {
         Tensor key = StateAction.key(state, action);
-        sac.setStateActionCount(key, sac1.stateActionCount(key).add(sac2.stateActionCount(key)));
-        sac.setStateCount(state, sac1.stateCount(state).add(sac2.stateCount(state)));
+        sac.setStateActionCount(key, Math.addExact(sac1.stateActionCount(key), sac2.stateActionCount(key)));
+        sac.setStateCount(state, Math.addExact(sac1.stateCount(state), sac2.stateCount(state)));
       }
     return sac;
   }

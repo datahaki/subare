@@ -5,6 +5,7 @@ package ch.alpine.subare.book.ch06.windy;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
+import ch.alpine.subare.api.LearningRate;
 import ch.alpine.subare.api.StateActionCounter;
 import ch.alpine.subare.td.Sarsa;
 import ch.alpine.subare.td.SarsaType;
@@ -14,7 +15,6 @@ import ch.alpine.subare.util.DiscreteStateActionCounter;
 import ch.alpine.subare.util.EGreedyPolicy;
 import ch.alpine.subare.util.ExploringStarts;
 import ch.alpine.subare.util.Infoline;
-import ch.alpine.subare.util.LearningRate;
 import ch.alpine.subare.util.PolicyType;
 import ch.alpine.subare.util.gfx.StateActionRasters;
 import ch.alpine.tensor.ext.HomeDirectory;

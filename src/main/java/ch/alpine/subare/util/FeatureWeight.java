@@ -3,6 +3,7 @@ package ch.alpine.subare.util;
 
 import java.io.Serializable;
 
+import ch.alpine.subare.api.FeatureMapper;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.ext.Integers;

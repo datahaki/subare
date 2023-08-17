@@ -3,6 +3,7 @@ package ch.alpine.subare.util;
 
 import java.io.Serializable;
 
+import ch.alpine.subare.api.ExplorationRate;
 import ch.alpine.subare.api.StateActionCounter;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
@@ -45,9 +46,9 @@ public class LinearExplorationRate implements ExplorationRate, Serializable {
     return epsilon(sac.stateCount(state));
   }
 
-  final Scalar epsilon(Scalar stateCount) {
+  final Scalar epsilon(int stateCount) {
     // TODO SUBARE explore
-    Scalar decayedValue = maximum.subtract(maximum.subtract(minimum).multiply(stateCount).divide(decayInterval));
+    Scalar decayedValue = maximum.subtract(maximum.subtract(minimum).multiply(RealScalar.of(stateCount)).divide(decayInterval));
     return Max.of(minimum, decayedValue);
   }
 }

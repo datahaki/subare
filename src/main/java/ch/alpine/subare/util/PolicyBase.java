@@ -2,6 +2,7 @@
 package ch.alpine.subare.util;
 
 import ch.alpine.subare.api.DiscreteModel;
+import ch.alpine.subare.api.PolicyExt;
 import ch.alpine.subare.api.QsaInterface;
 import ch.alpine.subare.api.StandardModel;
 import ch.alpine.subare.api.StateActionCounter;

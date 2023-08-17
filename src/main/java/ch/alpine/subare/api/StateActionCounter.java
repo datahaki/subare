@@ -2,7 +2,6 @@
 package ch.alpine.subare.api;
 
 import ch.alpine.subare.util.DiscreteQsa;
-import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 
 /** interface to indicate how often the state-action pair is visited during learning
@@ -11,11 +10,11 @@ import ch.alpine.tensor.Tensor;
 public interface StateActionCounter extends StepDigest {
   /** @param key same as listed in {@link DiscreteQsa#keys()}
    * @return number of updates of qsa value for given state-action pair due to learning */
-  Scalar stateActionCount(Tensor key);
+  int stateActionCount(Tensor key);
 
   /** @param state same as listed in {@link DiscreteQsa#keys()}
    * @return number of updates of qsa value for given state due to learning */
-  Scalar stateCount(Tensor state);
+  int stateCount(Tensor state);
 
   /** function exists to remove the initialization bias
    * 

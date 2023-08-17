@@ -24,10 +24,10 @@ public enum UcbUtils {
 
   public static Scalar getUpperConfidenceBound(Tensor state, Tensor action, Scalar qsaValue, StateActionCounter sac) {
     Tensor key = StateAction.key(state, action);
-    Scalar Nta = sac.stateActionCount(key);
+    Scalar Nta = RealScalar.of(sac.stateActionCount(key));
     if (Scalars.isZero(Nta))
       return DoubleScalar.POSITIVE_INFINITY;
-    Scalar bias = Sqrt.FUNCTION.apply(sac.stateCount(state)).divide(Nta);
+    Scalar bias = Sqrt.FUNCTION.apply(RealScalar.of(sac.stateCount(state))).divide(Nta);
     Scalar sign = Sign.isPositive(qsaValue) //
         ? RealScalar.ONE
         : RealScalar.of(-1);

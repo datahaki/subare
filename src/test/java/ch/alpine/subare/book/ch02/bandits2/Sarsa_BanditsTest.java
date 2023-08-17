@@ -3,12 +3,12 @@ package ch.alpine.subare.book.ch02.bandits2;
 
 import org.junit.jupiter.api.Test;
 
+import ch.alpine.subare.api.LearningRate;
 import ch.alpine.subare.td.SarsaType;
 import ch.alpine.subare.util.DefaultLearningRate;
 import ch.alpine.subare.util.DiscreteQsa;
 import ch.alpine.subare.util.DiscreteUtils;
 import ch.alpine.subare.util.DiscreteVs;
-import ch.alpine.subare.util.LearningRate;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.sca.Chop;
 import ch.alpine.tensor.sca.Sign;

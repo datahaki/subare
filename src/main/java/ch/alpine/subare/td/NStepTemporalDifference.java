@@ -4,11 +4,11 @@ package ch.alpine.subare.td;
 import java.util.Deque;
 
 import ch.alpine.subare.api.DiscountFunction;
+import ch.alpine.subare.api.LearningRate;
 import ch.alpine.subare.api.StateActionCounter;
 import ch.alpine.subare.api.StepRecord;
 import ch.alpine.subare.api.VsInterface;
 import ch.alpine.subare.util.DequeDigestAdapter;
-import ch.alpine.subare.util.LearningRate;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 

@@ -1,6 +1,7 @@
 // code by jz and jph
 package ch.alpine.subare.util;
 
+import ch.alpine.subare.api.LearningRate;
 import ch.alpine.subare.api.StateActionCounter;
 import ch.alpine.subare.api.StepRecord;
 import ch.alpine.tensor.DoubleScalar;
@@ -42,7 +43,7 @@ import ch.alpine.tensor.sca.pow.Power;
   @Override // from LearningRate
   public final synchronized Scalar alpha(StepRecord stepInterface, StateActionCounter stateActionCounter) {
     Tensor key = StateAction.key(stepInterface);
-    int index = Scalars.intValueExact(stateActionCounter.stateActionCount(key));
+    int index = stateActionCounter.stateActionCount(key);
     while (memo.length() <= index)
       memo.append(Min.of( // TODO SUBARE the "+1" in the denominator may not be ideal... perhaps +0.5, or +0 ?
           factor.multiply(Power.of(DoubleScalar.of(1.0 / (index + 1)), exponent)), //

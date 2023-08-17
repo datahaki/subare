@@ -1,9 +1,6 @@
 // code by jph
-package ch.alpine.subare.util;
+package ch.alpine.subare.api;
 
-import ch.alpine.subare.api.Policy;
-import ch.alpine.subare.api.QsaInterfaceSupplier;
-import ch.alpine.subare.api.StateActionCounterSupplier;
 import ch.alpine.tensor.Tensor;
 
 public interface PolicyExt extends Policy, QsaInterfaceSupplier, StateActionCounterSupplier {

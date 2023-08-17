@@ -1,11 +1,11 @@
 // code by fluric
 package ch.alpine.subare.util;
 
+import ch.alpine.subare.api.ExplorationRate;
 import ch.alpine.subare.api.StateActionCounter;
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
-import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.red.Min;
@@ -32,7 +32,7 @@ public class DecayedExplorationRate implements ExplorationRate {
 
   @Override // from ExplorationRate
   public synchronized final Scalar epsilon(Tensor state, StateActionCounter stateActionCounter) {
-    int index = Scalars.intValueExact(stateActionCounter.stateCount(state));
+    int index = stateActionCounter.stateCount(state);
     while (MEMO.length() <= index)
       MEMO.append(Min.of(factor.multiply(Power.of(DoubleScalar.of(1.0 / (index + 1)), exponent)), //
           RealScalar.ONE));

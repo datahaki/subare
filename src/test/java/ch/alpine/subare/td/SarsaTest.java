@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import ch.alpine.subare.api.LearningRate;
 import ch.alpine.subare.api.MonteCarloInterface;
 import ch.alpine.subare.api.StateActionCounter;
 import ch.alpine.subare.util.ConstantLearningRate;
@@ -13,7 +14,6 @@ import ch.alpine.subare.util.DefaultLearningRate;
 import ch.alpine.subare.util.DiscreteQsa;
 import ch.alpine.subare.util.DiscreteStateActionCounter;
 import ch.alpine.subare.util.ExploringStarts;
-import ch.alpine.subare.util.LearningRate;
 import ch.alpine.subare.util.PolicyBase;
 import ch.alpine.subare.util.PolicyType;
 import ch.alpine.subare.util.SimpleTestModel;

@@ -4,6 +4,7 @@ package ch.alpine.subare.book.ch08.maze;
 
 import java.util.concurrent.TimeUnit;
 
+import ch.alpine.subare.api.LearningRate;
 import ch.alpine.subare.api.Policy;
 import ch.alpine.subare.api.StateActionCounter;
 import ch.alpine.subare.td.PrioritizedSweeping;
@@ -14,7 +15,6 @@ import ch.alpine.subare.util.DiscreteQsa;
 import ch.alpine.subare.util.DiscreteStateActionCounter;
 import ch.alpine.subare.util.EGreedyPolicy;
 import ch.alpine.subare.util.Infoline;
-import ch.alpine.subare.util.LearningRate;
 import ch.alpine.subare.util.LinearExplorationRate;
 import ch.alpine.subare.util.PolicyType;
 import ch.alpine.subare.util.StepExploringStarts;

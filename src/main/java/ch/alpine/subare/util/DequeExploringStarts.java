@@ -26,8 +26,8 @@ public abstract class DequeExploringStarts extends AbstractExploringStarts {
   public final void protected_nextEpisode(EpisodeInterface episodeInterface) {
     Deque<StepRecord> deque = new ArrayDeque<>();
     while (episodeInterface.hasNext()) {
-      final StepRecord stepInterface = episodeInterface.step();
-      deque.add(stepInterface);
+      final StepRecord stepRecord = episodeInterface.step();
+      deque.add(stepRecord);
       if (deque.size() == nstep) { // never true, if nstep == 0
         list.stream().parallel() //
             .forEach(_dequeDigest -> _dequeDigest.digest(deque));

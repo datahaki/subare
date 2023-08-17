@@ -4,6 +4,7 @@ package ch.alpine.subare.util;
 import java.io.Serializable;
 import java.util.stream.Stream;
 
+import ch.alpine.subare.api.DiscreteValueFunction;
 import ch.alpine.subare.api.MonteCarloInterface;
 import ch.alpine.subare.api.QsaInterface;
 import ch.alpine.subare.api.StateActionModel;

@@ -4,8 +4,10 @@ package ch.alpine.subare.analysis;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+import ch.alpine.subare.api.LearningRate;
 import ch.alpine.subare.api.MonteCarloInterface;
 import ch.alpine.subare.api.Policy;
+import ch.alpine.subare.api.PolicyExt;
 import ch.alpine.subare.api.QsaInterface;
 import ch.alpine.subare.api.StateActionCounter;
 import ch.alpine.subare.api.StepRecord;
@@ -15,9 +17,7 @@ import ch.alpine.subare.util.ConstantLearningRate;
 import ch.alpine.subare.util.DiscreteQsa;
 import ch.alpine.subare.util.DiscreteStateActionCounter;
 import ch.alpine.subare.util.ExploringStarts;
-import ch.alpine.subare.util.LearningRate;
 import ch.alpine.subare.util.PolicyBase;
-import ch.alpine.subare.util.PolicyExt;
 import ch.alpine.subare.util.PolicyType;
 import ch.alpine.tensor.RealScalar;
 

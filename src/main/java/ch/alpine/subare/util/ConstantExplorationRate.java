@@ -1,6 +1,7 @@
 // code by fluric
 package ch.alpine.subare.util;
 
+import ch.alpine.subare.api.ExplorationRate;
 import ch.alpine.subare.api.StateActionCounter;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;

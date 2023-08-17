@@ -11,7 +11,6 @@ import ch.alpine.subare.api.StepRecord;
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
-import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.api.ScalarUnaryOperator;
 import ch.alpine.tensor.sca.exp.Log;
@@ -31,13 +30,13 @@ public class DiscreteStateActionCounter implements StateActionCounter, Serializa
   }
 
   @Override // from StateActionCounter
-  public Scalar stateActionCount(Tensor key) {
-    return RealScalar.of(stateActionMap.getOrDefault(key, 0));
+  public int stateActionCount(Tensor key) {
+    return stateActionMap.getOrDefault(key, 0);
   }
 
   @Override // from StateActionCounter
-  public Scalar stateCount(Tensor state) {
-    return RealScalar.of(stateMap.getOrDefault(state, 0));
+  public int stateCount(Tensor state) {
+    return stateMap.getOrDefault(state, 0);
   }
 
   @Override // from StateActionCounter
@@ -45,12 +44,12 @@ public class DiscreteStateActionCounter implements StateActionCounter, Serializa
     return stateActionMap.containsKey(key);
   }
 
-  public void setStateCount(Tensor state, Scalar value) {
-    stateMap.put(state, Scalars.intValueExact(value));
+  public void setStateCount(Tensor state, int value) {
+    stateMap.put(state, value);
   }
 
-  public void setStateActionCount(Tensor key, Scalar value) {
-    stateActionMap.put(key, Scalars.intValueExact(value));
+  public void setStateActionCount(Tensor key, int value) {
+    stateActionMap.put(key, value);
   }
 
   public Scalar getLogarithmicStateActionCount(Tensor state, Tensor action) {

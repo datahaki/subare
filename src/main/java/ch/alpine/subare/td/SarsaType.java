@@ -2,13 +2,13 @@
 package ch.alpine.subare.td;
 
 import ch.alpine.subare.api.DiscreteModel;
+import ch.alpine.subare.api.FeatureMapper;
+import ch.alpine.subare.api.LearningRate;
 import ch.alpine.subare.api.MonteCarloInterface;
+import ch.alpine.subare.api.PolicyExt;
 import ch.alpine.subare.api.QsaInterface;
 import ch.alpine.subare.api.StateActionCounter;
-import ch.alpine.subare.util.FeatureMapper;
 import ch.alpine.subare.util.FeatureWeight;
-import ch.alpine.subare.util.LearningRate;
-import ch.alpine.subare.util.PolicyExt;
 import ch.alpine.tensor.Scalar;
 
 public enum SarsaType {

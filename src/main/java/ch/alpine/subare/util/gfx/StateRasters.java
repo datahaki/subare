@@ -2,7 +2,6 @@
 package ch.alpine.subare.util.gfx;
 
 import java.awt.Dimension;
-import java.awt.Point;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,23 +12,23 @@ import ch.alpine.subare.util.DiscreteValueFunctions;
 import ch.alpine.subare.util.DiscreteVs;
 import ch.alpine.subare.util.Loss;
 import ch.alpine.tensor.DoubleScalar;
-import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.alg.Join;
 import ch.alpine.tensor.alg.Rescale;
+import ch.alpine.tensor.chq.ExactTensorQ;
 import ch.alpine.tensor.img.ColorDataGradients;
 import ch.alpine.tensor.img.ImageResize;
 import ch.alpine.tensor.img.Raster;
+import ch.alpine.tensor.io.Primitives;
 import ch.alpine.tensor.sca.Clips;
 
 public enum StateRasters {
   ;
-  public static Point canonicPoint(Tensor state) {
-    return new Point( //
-        Scalars.intValueExact(state.Get(0)), //
-        Scalars.intValueExact(state.Get(1)));
+  public static List<Integer> canonicPoint(Tensor state) {
+    ExactTensorQ.require(state);
+    return Primitives.toListInteger(state);
   }
 
   /** @param stateRaster
@@ -40,9 +39,9 @@ public enum StateRasters {
     Dimension dimension = stateRaster.dimensionStateRaster();
     Tensor tensor = Array.of(list -> DoubleScalar.INDETERMINATE, dimension.height, dimension.width);
     for (Tensor state : discreteModel.states()) {
-      Point point = stateRaster.point(state);
+      List<Integer> point = stateRaster.point(state);
       if (Objects.nonNull(point))
-        tensor.set(vs.value(state), point.y, point.x);
+        tensor.set(vs.value(state), point.get(1), point.get(0));
     }
     return Raster.of(tensor, ColorDataGradients.CLASSIC);
   }

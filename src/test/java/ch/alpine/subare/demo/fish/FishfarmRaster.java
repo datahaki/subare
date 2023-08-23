@@ -2,7 +2,7 @@
 package ch.alpine.subare.demo.fish;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.util.List;
 
 import ch.alpine.subare.api.DiscreteModel;
 import ch.alpine.subare.util.gfx.StateRaster;
@@ -49,9 +49,9 @@ class FishfarmRaster implements StateRaster {
   }
 
   @Override
-  public Point point(Tensor state) {
+  public List<Integer> point(Tensor state) {
     int sx = Scalars.intValueExact(state.Get(0));
     int sy = fishfarm.max_fish - Scalars.intValueExact(state.Get(1));
-    return new Point(sx, sy);
+    return List.of(sx, sy);
   }
 }

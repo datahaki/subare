@@ -2,7 +2,6 @@
 package ch.alpine.subare.book.ch05.wireloop;
 
 import java.awt.Dimension;
-import java.awt.Point;
 import java.util.List;
 
 import ch.alpine.subare.api.DiscreteModel;
@@ -32,7 +31,7 @@ class WireloopRaster implements StateRaster {
   }
 
   @Override
-  public Point point(Tensor state) {
+  public List<Integer> point(Tensor state) {
     return StateRasters.canonicPoint(state);
   }
 

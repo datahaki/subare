@@ -2,7 +2,6 @@
 package ch.alpine.subare.book.ch05.blackjack;
 
 import java.awt.Dimension;
-import java.awt.Point;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,10 +29,10 @@ import ch.alpine.tensor.img.Raster;
     Dimension dimension = blackjackRaster.dimensionStateRaster();
     Tensor tensor = Array.of(list -> DoubleScalar.INDETERMINATE, dimension.height, dimension.width);
     for (Tensor state : blackjack.states()) {
-      Point point = blackjackRaster.point(state);
+      List<Integer> point = blackjackRaster.point(state);
       if (Objects.nonNull(point)) {
         Tensor action = RealScalar.ZERO;
-        tensor.set(policy.probability(state, action), point.x, point.y);
+        tensor.set(policy.probability(state, action), point.get(0), point.get(1));
       }
     }
     return Raster.of(tensor, ColorDataGradients.CLASSIC);

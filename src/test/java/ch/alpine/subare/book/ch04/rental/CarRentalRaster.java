@@ -2,7 +2,7 @@
 package ch.alpine.subare.book.ch04.rental;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.util.List;
 
 import ch.alpine.subare.api.DiscreteModel;
 import ch.alpine.subare.util.gfx.StateRaster;
@@ -29,7 +29,7 @@ import ch.alpine.tensor.Tensor;
   }
 
   @Override
-  public Point point(Tensor state) {
+  public List<Integer> point(Tensor state) {
     return StateRasters.canonicPoint(state);
   }
 

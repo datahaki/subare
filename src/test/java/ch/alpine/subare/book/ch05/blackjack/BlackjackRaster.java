@@ -2,7 +2,7 @@
 package ch.alpine.subare.book.ch05.blackjack;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.util.List;
 
 import ch.alpine.subare.api.DiscreteModel;
 import ch.alpine.subare.util.gfx.StateRaster;
@@ -29,12 +29,12 @@ class BlackjackRaster implements StateRaster {
   }
 
   @Override
-  public Point point(Tensor state) {
+  public List<Integer> point(Tensor state) {
     if (state.length() == 3) {
       int useAce = Scalars.intValueExact(state.Get(0));
       int player = Scalars.intValueExact(state.Get(1)) - 12;
       int dealer = Scalars.intValueExact(state.Get(2)) - 1;
-      return new Point(dealer + (10 + 2) * useAce, 9 - player);
+      return List.of(dealer + (10 + 2) * useAce, 9 - player);
     }
     return null;
   }

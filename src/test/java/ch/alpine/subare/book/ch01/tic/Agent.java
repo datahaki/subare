@@ -41,8 +41,7 @@ import ch.alpine.tensor.RealScalar;
 
   // update estimation according to reward
   final void feedReward(double reward) {
-    Collections.reverse(states);
-    for (State latestState : states) {
+    for (State latestState : states.reversed()) {
       double value = estimation.get(latestState) //
           + stepSize * (reward - estimation.get(latestState));
       estimation.put(latestState, value);

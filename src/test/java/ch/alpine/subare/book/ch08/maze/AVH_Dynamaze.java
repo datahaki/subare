@@ -34,7 +34,7 @@ enum AVH_Dynamaze {
     }
   }
 
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     // create("maze2", DynamazeHelper.original("maze2"));
     create("maze5", DynamazeHelper.create5(2));
   }

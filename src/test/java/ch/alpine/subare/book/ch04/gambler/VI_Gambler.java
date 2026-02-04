@@ -24,7 +24,7 @@ import ch.alpine.tensor.sca.N;
  * chapter 4, example 3 */
 /* package */ enum VI_Gambler {
   ;
-  public static void main(String[] args) {
+  static void main() {
     GamblerModel gamblerModel = GamblerModel.createDefault();
     DiscreteQsa ref = GamblerHelper.getOptimalQsa(gamblerModel);
     ValueIteration vi = new ValueIteration(gamblerModel, gamblerModel);

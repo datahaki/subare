@@ -1,10 +1,9 @@
 // code by jph
 package ch.alpine.subare.td;
 
-import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.random.RandomGenerator;
+import java.util.concurrent.ThreadLocalRandom;
 
 import ch.alpine.subare.api.StepDigest;
 import ch.alpine.subare.api.StepRecord;
@@ -15,13 +14,11 @@ import ch.alpine.tensor.Tensors;
 /** utility class to implement "Model" for deterministic environments
  * in Tabular Dyna-Q p.172 */
 /* package */ class DeterministicEnvironment implements StepDigest {
-  private static final RandomGenerator RANDOM_GENERATOR = new SecureRandom();
-  // ---
   private final Map<Tensor, StepRecord> map = new HashMap<>();
   private final Tensor keys = Tensors.empty();
 
   public StepRecord getRandomStep() {
-    return map.get(keys.get(RANDOM_GENERATOR.nextInt(size())));
+    return map.get(keys.get(ThreadLocalRandom.current().nextInt(size())));
   }
 
   public StepRecord get(Tensor state, Tensor action) {

@@ -62,7 +62,7 @@ enum SES_Cliffwalk {
     }
   }
 
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     int nstep = 1;
     // handle(SarsaType.original, nstep, 3);
     // handle(SarsaType.expected, nstep, 3);

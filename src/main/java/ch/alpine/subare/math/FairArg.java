@@ -4,12 +4,12 @@ package ch.alpine.subare.math;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.ext.RandomChoice;
+import ch.alpine.tensor.api.TensorBinaryOperator;
+import ch.alpine.tensor.pdf.RandomChoice;
 import ch.alpine.tensor.red.Max;
 import ch.alpine.tensor.red.Min;
 
@@ -29,8 +29,8 @@ public class FairArg implements Serializable {
     return new FairArg(build(Min::of, tensor));
   }
 
-  private static List<Integer> build(BinaryOperator<Tensor> binaryOperator, Tensor tensor) {
-    Tensor value = tensor.stream().reduce(binaryOperator).get();
+  private static List<Integer> build(TensorBinaryOperator binaryOperator, Tensor tensor) {
+    Tensor value = tensor.stream().reduce(binaryOperator).orElseThrow();
     return IntStream.range(0, tensor.length()) //
         .filter(index -> tensor.get(index).equals(value)) //
         .boxed() //

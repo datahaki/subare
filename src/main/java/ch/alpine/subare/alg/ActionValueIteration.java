@@ -79,10 +79,10 @@ public class ActionValueIteration implements DiscreteQsaSupplier {
       step();
       final Scalar delta = DiscreteValueFunctions.distance(qsa_new, (DiscreteQsa) qsa_old);
       if (3E9 < timing.nanoSeconds()) // print info if iteration takes longer than 3 seconds
-        System.out.println(past + " -> " + delta + " " + alternate);
+        IO.println(past + " -> " + delta + " " + alternate);
       if (Objects.nonNull(past) && Scalars.lessThan(past, delta))
         if (flips < ++alternate) {
-          System.out.println("give up at " + past + " -> " + delta);
+          IO.println("give up at " + past + " -> " + delta);
           break;
         }
       past = delta;

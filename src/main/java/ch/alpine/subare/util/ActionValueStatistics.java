@@ -43,7 +43,7 @@ public class ActionValueStatistics implements DequeDigest, EpisodeDigest, Action
 
   @Override
   public void digest(StepRecord stepRecord) {
-    transitionTrackers.computeIfAbsent(StateAction.key(stepRecord), i -> new TransitionTracker()).digest(stepRecord);
+    transitionTrackers.computeIfAbsent(StateAction.key(stepRecord), _ -> new TransitionTracker()).digest(stepRecord);
   }
 
   @Override

@@ -37,7 +37,7 @@ import ch.alpine.tensor.io.Export;
  * {3, 3} 0 */
 enum VI_Gridworld {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     Gridworld gridworld = new Gridworld();
     GridworldRaster gridworldStateRaster = new GridworldRaster(gridworld);
     ValueIteration vi = new ValueIteration(gridworld, gridworld);

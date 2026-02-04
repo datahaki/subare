@@ -59,7 +59,7 @@ enum Sarsa_Fishfarm {
     // }
   }
 
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     // handle(SarsaType.original, 1, 30);
     handle(SarsaType.EXPECTED, 1, 30);
     // handle(SarsaType.qlearning, 1, 10);

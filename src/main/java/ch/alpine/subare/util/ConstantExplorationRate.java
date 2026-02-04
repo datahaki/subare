@@ -21,7 +21,7 @@ public class ConstantExplorationRate implements ExplorationRate {
   }
 
   // ---
-  private Scalar epsilon;
+  private final Scalar epsilon;
 
   private ConstantExplorationRate(Scalar epsilon) {
     this.epsilon = epsilon;

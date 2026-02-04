@@ -70,7 +70,7 @@ enum TOS_Wireloop {
     System.out.println("Time for TrueOnlineSarsa: " + timing.seconds() + "s");
   }
 
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     for (SarsaType sarsaType : SarsaType.values())
       run(sarsaType);
   }

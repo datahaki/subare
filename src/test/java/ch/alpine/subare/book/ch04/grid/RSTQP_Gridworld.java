@@ -16,7 +16,7 @@ import ch.alpine.tensor.io.GifAnimationWriter;
 /** Example 4.1, p.82 */
 enum RSTQP_Gridworld {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     Gridworld gridworld = new Gridworld();
     final DiscreteQsa ref = GridworldHelper.getOptimalQsa(gridworld);
     DiscreteQsa qsa = DiscreteQsa.build(gridworld);

@@ -13,7 +13,7 @@ import ch.alpine.tensor.sca.N;
 /** FirstVisitPolicyEvaluation of optimal greedy policy */
 /* package */ enum FVPE_Gambler {
   ;
-  public static void main(String[] args) {
+  static void main() {
     GamblerModel gamblerModel = GamblerModel.createDefault();
     DiscreteVs ref = GamblerHelper.getOptimalVs(gamblerModel);
     Policy policy = PolicyType.GREEDY.bestEquiprobable(gamblerModel, ref, null);

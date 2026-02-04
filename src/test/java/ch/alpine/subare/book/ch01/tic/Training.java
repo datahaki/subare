@@ -39,7 +39,7 @@ package ch.alpine.subare.book.ch01.tic;
     }
   }
 
-  public static void main(String[] args) {
+  static void main() {
     train(20000);
     // Analysis.showVariance();
     {

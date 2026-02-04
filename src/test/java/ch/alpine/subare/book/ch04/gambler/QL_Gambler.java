@@ -63,7 +63,7 @@ import ch.alpine.tensor.sca.Round;
     }
   }
 
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     handle();
   }
 }

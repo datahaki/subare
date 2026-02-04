@@ -37,7 +37,7 @@ import ch.alpine.tensor.io.GifAnimationWriter;
  * {3, 3} 0 */
 enum AVI_Gridworld {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     Gridworld gridworld = new Gridworld();
     GridworldRaster gridworldRaster = new GridworldRaster(gridworld);
     ActionValueIteration avi = ActionValueIteration.of(gridworld);

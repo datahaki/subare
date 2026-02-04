@@ -12,7 +12,7 @@ import ch.alpine.tensor.io.Export;
 
 /* package */ enum AVI_Charger {
   ;
-  public static void main(String[] args) throws IOException {
+  static void main() throws IOException {
     TripProfile tripProfile = new ConstantDrawTrip(24, 3);
     Charger charger = new Charger(tripProfile, 6);
     DiscreteQsa ref = ActionValueIterations.solve(charger, RealScalar.of(.0001));

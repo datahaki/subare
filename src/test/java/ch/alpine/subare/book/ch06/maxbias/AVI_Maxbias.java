@@ -27,7 +27,7 @@ import ch.alpine.subare.util.DiscreteVs;
  * 3 0 */
 enum AVI_Maxbias {
   ;
-  public static void main(String[] args) {
+  static void main() {
     Maxbias maxbias = new Maxbias(5);
     DiscreteQsa qsa = MaxbiasHelper.getOptimalQsa(maxbias);
     DiscreteUtils.print(qsa);

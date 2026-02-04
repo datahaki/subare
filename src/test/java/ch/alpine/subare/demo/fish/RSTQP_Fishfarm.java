@@ -18,7 +18,7 @@ import ch.alpine.tensor.sca.Round;
 
 enum RSTQP_Fishfarm {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     Fishfarm fishfarm = new Fishfarm(20, 20);
     FishfarmRaster cliffwalkRaster = new FishfarmRaster(fishfarm);
     final DiscreteQsa ref = FishfarmHelper.getOptimalQsa(fishfarm);

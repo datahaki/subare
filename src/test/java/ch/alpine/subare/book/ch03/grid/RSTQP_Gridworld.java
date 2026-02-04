@@ -12,7 +12,7 @@ import ch.alpine.tensor.RealScalar;
 
 /* package */ enum RSTQP_Gridworld {
   ;
-  public static void main(String[] args) {
+  static void main() {
     Gridworld gridworld = new Gridworld();
     DiscreteQsa ref = ActionValueIterations.solve(gridworld, RealScalar.of(0.0001));
     DiscreteQsa qsa = DiscreteQsa.build(gridworld);

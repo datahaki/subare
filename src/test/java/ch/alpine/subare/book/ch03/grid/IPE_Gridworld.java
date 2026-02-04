@@ -37,7 +37,7 @@ import ch.alpine.tensor.sca.Round;
  * {4, 4} -2.0 */
 /* package */ enum IPE_Gridworld {
   ;
-  public static void main(String[] args) {
+  static void main() {
     Gridworld gridworld = new Gridworld();
     IterativePolicyEvaluation ipe = new IterativePolicyEvaluation( //
         gridworld, EquiprobablePolicy.create(gridworld));

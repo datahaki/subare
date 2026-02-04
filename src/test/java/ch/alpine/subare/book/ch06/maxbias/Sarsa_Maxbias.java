@@ -42,7 +42,7 @@ enum Sarsa_Maxbias {
     DiscreteUtils.print(vs, Round._3);
   }
 
-  public static void main(String[] args) {
+  static void main() {
     handle(SarsaType.ORIGINAL, 3);
     handle(SarsaType.EXPECTED, 3);
     handle(SarsaType.QLEARNING, 3);

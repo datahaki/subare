@@ -35,7 +35,7 @@ class Judger {
     }
   }
 
-  public static void main(String[] args) {
+  static void main() {
     FairArgAgent a1 = new OptimistAgent(3, RealScalar.of(5), RealScalar.of(.1));
     FairArgAgent a2 = new OptimistAgent(3, RealScalar.of(5), RealScalar.of(.1));
     FairArgAgent a3 = new OptimistAgent(3, RealScalar.of(5), RealScalar.of(.1));

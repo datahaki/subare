@@ -53,7 +53,7 @@ import ch.alpine.tensor.io.Primitives;
     System.out.println("gif created");
   }
 
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     make("track2", 5, HomeDirectory.Pictures(VI_RaceTrack.class.getSimpleName() + ".gif"));
   }
 }

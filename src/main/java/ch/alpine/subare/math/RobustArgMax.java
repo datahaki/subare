@@ -17,7 +17,7 @@ public record RobustArgMax(Chop chop) implements Serializable {
    * @return indices of entries that are close to the maximum entry in vector
    * @throws Exception if vector is empty, or not a tensor of rank 1 */
   public IntStream options(Tensor vector) {
-    Tensor max = vector.stream().reduce(Max::of).get();
+    Tensor max = vector.stream().reduce(Max::of).orElseThrow();
     return IntStream.range(0, vector.length()) //
         .filter(index -> chop.isClose(vector.get(index), max));
   }
@@ -28,6 +28,6 @@ public record RobustArgMax(Chop chop) implements Serializable {
    * @return first index that is epsilon close to the maximum
    * @throws Exception if vector is empty, or not a tensor of rank 1 */
   public int of(Tensor vector) {
-    return options(vector).findFirst().getAsInt();
+    return options(vector).findFirst().orElseThrow();
   }
 }

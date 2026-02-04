@@ -22,7 +22,7 @@ import ch.alpine.tensor.Scalar;
       // () -> new ConstantAgent(2, 1), //
       TitForTatAgent::new, //
       () -> new RandomAgent(2), //
-      () -> new EGreedyAgent(2, i -> RationalScalar.of(1, 5), "1/5"), //
+      () -> new EGreedyAgent(2, _ -> RationalScalar.of(1, 5), "1/5"), //
       () -> new EGreedyAgent(2, i -> RationalScalar.of(1, i.number().intValue() + 1), "1/i"), //
       () -> new GradientAgent(2, RealScalar.of(.1)), //
       () -> new OptimistAgent(2, RealScalar.of(6), RealScalar.of(.1)), //
@@ -51,7 +51,7 @@ import ch.alpine.tensor.Scalar;
     List<Supplier<Agent>> list = new ArrayList<>();
     for (double c = cLo; c <= cHi; c += (cHi - cLo) / (steps - 1)) {
       Scalar cs = RealScalar.of(c);
-      Supplier<Agent> sup = () -> new EGreedyAgent(2, i -> cs, cs.toString());
+      Supplier<Agent> sup = () -> new EGreedyAgent(2, _ -> cs, cs.toString());
       list.add(sup);
     }
     return list;

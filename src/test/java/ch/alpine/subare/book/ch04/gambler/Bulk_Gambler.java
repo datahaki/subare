@@ -53,7 +53,7 @@ import ch.alpine.tensor.alg.Subdivide;
     learningCompetition.doit();
   }
 
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     handle(SarsaType.QLEARNING, 1);
   }
 }

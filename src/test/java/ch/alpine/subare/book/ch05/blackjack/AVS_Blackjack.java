@@ -25,7 +25,7 @@ import ch.alpine.tensor.io.GifAnimationWriter;
  * Figure 5.3 p.108 */
 enum AVS_Blackjack {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     Blackjack blackjack = new Blackjack();
     MonteCarloExploringStarts mces = new MonteCarloExploringStarts(blackjack);
     try (AnimationWriter animationWriter = //

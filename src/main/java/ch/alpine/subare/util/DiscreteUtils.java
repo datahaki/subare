@@ -41,7 +41,7 @@ public enum DiscreteUtils {
         Tensor.of(stateActionModel.states().stream() //
             .map(state -> stateActionModel.actions(state).stream() //
                 .map(action -> qsa.value(state, action)) //
-                .reduce(binaryOperator).get()))); // <- assumes greedy policy
+                .reduce(binaryOperator).orElseThrow()))); // <- assumes greedy policy
   }
 
   /** compute state value function v(s) based on given action-value function q(s, a)

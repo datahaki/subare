@@ -39,7 +39,7 @@ import ch.alpine.tensor.sca.Round;
  * {4, 4} 11.7 */
 /* package */ enum AVI_Gridworld {
   ;
-  public static void main(String[] args) {
+  static void main() {
     Gridworld gridworld = new Gridworld();
     ActionValueIteration avi = ActionValueIteration.of(gridworld);
     avi.untilBelow(RealScalar.of(.0001));

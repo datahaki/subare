@@ -38,7 +38,7 @@ enum TTD0_Randomwalk {
     DiscreteUtils.print(randomwalk, vs, Round._2);
   }
 
-  public static void main(String[] args) {
+  static void main() {
     Randomwalk randomwalk = new Randomwalk(5);
     some(randomwalk, DiscreteVs.build(randomwalk.states()));
     int order = 2;

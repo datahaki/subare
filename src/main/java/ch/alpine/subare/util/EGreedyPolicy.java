@@ -53,7 +53,7 @@ public class EGreedyPolicy extends PolicyBase {
     Scalar epsilon = explorationRate.epsilon(state, sac);
     // TODO SUBARE check logic
     if (nonOptimalCount == 0) {
-      return DiscreteUniformDistribution.of(0, bestActions.length());
+      return DiscreteUniformDistribution.forArray(bestActions.length());
       // Tensor pdf = Tensors.vector(v -> RationalScalar.of(1, optimalCount), bestActions.length());
       // return EmpiricalDistribution.fromUnscaledPDF(pdf);
     }

@@ -74,7 +74,7 @@ enum Double_Gridworld {
     }
   }
 
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     handle(SarsaType.ORIGINAL, 1);
     handle(SarsaType.EXPECTED, 1);
     handle(SarsaType.QLEARNING, 1);

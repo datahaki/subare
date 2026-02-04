@@ -70,7 +70,7 @@ import ch.alpine.tensor.RealScalar;
     NavigableMap<Double, List<Integer>> est = new TreeMap<>();
     for (Entry<Integer, State> entry : nextStates.entrySet()) {
       double key = estimation.get(entry.getValue());
-      est.computeIfAbsent(key, i -> new ArrayList<>()).add(entry.getKey());
+      est.computeIfAbsent(key, _ -> new ArrayList<>()).add(entry.getKey());
     }
     List<Integer> list = est.lastEntry().getValue();
     Collections.shuffle(list);

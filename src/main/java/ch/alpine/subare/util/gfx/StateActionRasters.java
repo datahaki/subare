@@ -34,7 +34,7 @@ public enum StateActionRasters {
   private static Tensor _render1(StateActionRaster stateActionRaster, DiscreteQsa qsa) {
     DiscreteModel discreteModel = stateActionRaster.discreteModel();
     Dimension dimension = stateActionRaster.dimensionStateActionRaster();
-    Tensor tensor = Array.of(list -> DoubleScalar.INDETERMINATE, dimension.height, dimension.width);
+    Tensor tensor = Array.of(_ -> DoubleScalar.INDETERMINATE, dimension.height, dimension.width);
     for (Tensor state : discreteModel.states())
       for (Tensor action : discreteModel.actions(state)) {
         Point point = stateActionRaster.point(state, action);

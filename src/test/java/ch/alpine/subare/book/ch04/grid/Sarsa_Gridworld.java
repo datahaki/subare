@@ -66,7 +66,7 @@ enum Sarsa_Gridworld {
     }
   }
 
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     int nstep = 2;
     handle(SarsaType.ORIGINAL, nstep);
     handle(SarsaType.EXPECTED, nstep);

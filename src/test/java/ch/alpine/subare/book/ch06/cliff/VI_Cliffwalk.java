@@ -22,7 +22,7 @@ import ch.alpine.tensor.io.Export;
 /** value iteration for cliffwalk */
 enum VI_Cliffwalk {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     Cliffwalk cliffwalk = new Cliffwalk(12, 4);
     CliffwalkRaster cliffwalkRaster = new CliffwalkRaster(cliffwalk);
     DiscreteQsa ref = CliffwalkHelper.getOptimalQsa(cliffwalk);

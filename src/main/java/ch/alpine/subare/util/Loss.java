@@ -30,7 +30,7 @@ public enum Loss {
       Tensor actions = discreteModel.actions(state);
       Scalar max = actions.stream() //
           .map(action -> ref.value(state, action)) //
-          .reduce(Max::of).get();
+          .reduce(Max::of).orElseThrow();
       // ---
       FairArg fairArg = FairArg.max(Tensor.of(actions.stream().map(action -> qsa.value(state, action))));
       Scalar weight = RationalScalar.of(1, fairArg.optionsCount());

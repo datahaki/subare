@@ -1,8 +1,7 @@
 // code by jph
 package ch.alpine.subare.book.ch05.blackjack;
 
-import java.security.SecureRandom;
-import java.util.random.RandomGenerator;
+import java.util.concurrent.ThreadLocalRandom;
 
 import ch.alpine.subare.api.MonteCarloInterface;
 import ch.alpine.tensor.RealScalar;
@@ -20,7 +19,6 @@ class Blackjack implements MonteCarloInterface {
   private static final Tensor END_DRAW = Tensors.vector(0);
   private static final Tensor END_LOSS = Tensors.vector(-1);
   // ---
-  private final RandomGenerator random = new SecureRandom();
   // states are product of
   // dealer showing: 1(=A), 2, 3, 4, 5, 6, 7, 8, 9, {T, J, Q, K} - #=10
   // player sum 12, 13, ..., 21 - #=10
@@ -72,7 +70,7 @@ class Blackjack implements MonteCarloInterface {
       if (usableAce)
         dealer += 10;
       while (dealer < 17) {
-        int index = random.nextInt(PlayingCard.values().length);
+        int index = ThreadLocalRandom.current().nextInt(PlayingCard.values().length);
         PlayingCard playingCard = PlayingCard.values()[index];
         dealer += playingCard.value;
         if (21 < dealer && usableAce) {
@@ -88,7 +86,7 @@ class Blackjack implements MonteCarloInterface {
     }
     // player hits
     int player = state.Get(1).number().intValue();
-    int index = random.nextInt(PlayingCard.values().length);
+    int index = ThreadLocalRandom.current().nextInt(PlayingCard.values().length);
     PlayingCard playingCard = PlayingCard.values()[index];
     player += playingCard.value;
     if (player <= 21) {

@@ -37,7 +37,7 @@ public enum StateRasters {
   private static Tensor _render(StateRaster stateRaster, DiscreteVs vs) {
     DiscreteModel discreteModel = stateRaster.discreteModel();
     Dimension dimension = stateRaster.dimensionStateRaster();
-    Tensor tensor = Array.of(list -> DoubleScalar.INDETERMINATE, dimension.height, dimension.width);
+    Tensor tensor = Array.of(_ -> DoubleScalar.INDETERMINATE, dimension.height, dimension.width);
     for (Tensor state : discreteModel.states()) {
       List<Integer> point = stateRaster.point(state);
       if (Objects.nonNull(point))

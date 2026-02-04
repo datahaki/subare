@@ -1,9 +1,8 @@
 // code by jph
 package ch.alpine.subare.util;
 
-import java.security.SecureRandom;
 import java.util.ArrayDeque;
-import java.util.random.RandomGenerator;
+import java.util.concurrent.ThreadLocalRandom;
 
 import ch.alpine.subare.api.EpisodeInterface;
 import ch.alpine.subare.api.MonteCarloInterface;
@@ -13,11 +12,9 @@ import ch.alpine.tensor.Tensor;
 
 public enum EpisodeKickoff {
   ;
-  private static final RandomGenerator RANDOM = new SecureRandom();
-
   public static EpisodeInterface single(MonteCarloInterface monteCarloInterface, Policy policy) {
     Tensor starts = monteCarloInterface.startStates();
-    Tensor start = starts.get(RANDOM.nextInt(starts.length()));
+    Tensor start = starts.get(ThreadLocalRandom.current().nextInt(starts.length()));
     return single(monteCarloInterface, policy, start);
   }
 

@@ -14,7 +14,7 @@ import ch.alpine.tensor.sca.Round;
 
 enum IPE_RaceTrack {
   ;
-  public static void main(String[] args) throws IOException {
+  static void main() throws IOException {
     String path = "".getClass().getResource("/ch05/track0.png").getPath();
     Racetrack racetrack = new Racetrack(Import.of(new File(path)), 3);
     Policy policy = EquiprobablePolicy.create(racetrack);

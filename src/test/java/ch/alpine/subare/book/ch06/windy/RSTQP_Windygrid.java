@@ -18,7 +18,7 @@ import ch.alpine.tensor.io.GifAnimationWriter;
  * instead of only the 1 start state of Windygrid */
 enum RSTQP_Windygrid {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     Windygrid windygrid = Windygrid.createFour();
     WindygridRaster windygridRaster = new WindygridRaster(windygrid);
     final DiscreteQsa ref = WindygridHelper.getOptimalQsa(windygrid);

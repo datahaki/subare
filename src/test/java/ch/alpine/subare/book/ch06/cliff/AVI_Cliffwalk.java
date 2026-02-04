@@ -22,7 +22,7 @@ import ch.alpine.tensor.io.GifAnimationWriter;
 /** action value iteration for cliff walk */
 enum AVI_Cliffwalk {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     Cliffwalk cliffwalk = new Cliffwalk(12, 4);
     CliffwalkRaster cliffwalkRaster = new CliffwalkRaster(cliffwalk);
     DiscreteQsa ref = CliffwalkHelper.getOptimalQsa(cliffwalk);

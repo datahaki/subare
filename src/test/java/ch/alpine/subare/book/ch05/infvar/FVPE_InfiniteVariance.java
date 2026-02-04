@@ -9,7 +9,7 @@ import ch.alpine.tensor.sca.N;
 
 /* package */ enum FVPE_InfiniteVariance {
   ;
-  public static void main(String[] args) {
+  static void main() {
     InfiniteVariance infiniteVariance = new InfiniteVariance();
     FirstVisitPolicyEvaluation fvpe = new FirstVisitPolicyEvaluation( //
         infiniteVariance, null);

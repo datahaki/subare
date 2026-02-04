@@ -59,7 +59,7 @@ import java.util.stream.Collectors;
     System.out.println(stats.getAverage());
   }
 
-  public static void main(String[] args) {
+  static void main() {
     Agent p1 = new Agent(1);
     p1.loadPolicy();
     Estimation estimation = p1.estimation;

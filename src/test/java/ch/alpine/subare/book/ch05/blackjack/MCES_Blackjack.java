@@ -22,7 +22,7 @@ import ch.alpine.tensor.io.GifAnimationWriter;
  * finding optimal policy to stay or hit */
 enum MCES_Blackjack {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     Blackjack blackjack = new Blackjack();
     MonteCarloExploringStarts mces = new MonteCarloExploringStarts(blackjack);
     try (AnimationWriter animationWriter = //

@@ -15,7 +15,7 @@ import ch.alpine.tensor.Scalar;
 
 enum RSTQP_Maxbias {
   ;
-  public static void main(String[] args) {
+  static void main() {
     Maxbias maxbias = new Maxbias(3);
     DiscreteQsa ref = MaxbiasHelper.getOptimalQsa(maxbias);
     DiscreteQsa qsa = DiscreteQsa.build(maxbias);

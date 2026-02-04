@@ -54,7 +54,7 @@ import ch.alpine.tensor.sca.N;
             .map(AbstractExact::getActionReminder))));
   }
 
-  public static void main(String[] args) throws IOException {
+  static void main() throws IOException {
     Tensor init = Subdivide.of(RationalScalar.of(+21, 10), RationalScalar.of(-11, 10), 280 - 1); //
     Tensor separator = ConstantArray.of(RealScalar.ZERO, init.length(), 5);
     Scalar alpha = RealScalar.of(0.22);

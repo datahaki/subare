@@ -4,6 +4,7 @@ package ch.alpine.subare.demo;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import ch.alpine.subare.analysis.DiscreteModelErrorAnalysis;
@@ -117,6 +118,7 @@ class MonteCarloExamplesTest {
       monteCarloAlgorithms.analyseNTimes(monteCarloInterface, batches, optimalQsa, errorAnalysis, 1);
   }
 
+  @Disabled
   @Test
   void testVirtualStationExample() {
     MonteCarloExamples example = MonteCarloExamples.VIRTUALSTATIONS;

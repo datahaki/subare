@@ -54,8 +54,8 @@ class AirportTest {
       assertEquals(next.get(0), RealScalar.of(2));
       Scalar R = airport.expectedReward(state, action);
       Scalar total = IntStream.range(0, probes) //
-          .mapToObj(i -> airport.reward(state, action, next)) //
-          .reduce(Scalar::add).get();
+          .mapToObj(_ -> airport.reward(state, action, next)) //
+          .reduce(Scalar::add).orElseThrow();
       Scalar mean = total.divide(DoubleScalar.of(probes));
       if (!clip.isInside(R.subtract(mean))) {
         System.err.println(state + " " + action);

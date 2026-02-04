@@ -24,7 +24,7 @@ import ch.alpine.tensor.img.Raster;
   ;
   public static Tensor render(CarRental carRental, DiscreteVs vs) {
     // TODO SUBARE use createRaster
-    final Tensor tensor = Array.of(list -> DoubleScalar.INDETERMINATE, 21, 21);
+    final Tensor tensor = Array.of(_ -> DoubleScalar.INDETERMINATE, 21, 21);
     DiscreteVs scaled = vs.create(Rescale.of(vs.values()).stream());
     for (Tensor state : carRental.states()) {
       Scalar sca = scaled.value(state);
@@ -37,7 +37,7 @@ import ch.alpine.tensor.img.Raster;
   }
 
   public static Tensor render(CarRental carRental, Policy policy) {
-    final Tensor tensor = Array.of(list -> DoubleScalar.INDETERMINATE, 21, 21);
+    final Tensor tensor = Array.of(_ -> DoubleScalar.INDETERMINATE, 21, 21);
     PolicyWrap policyWrap = new PolicyWrap(policy);
     for (Tensor state : carRental.states()) {
       Tensor action = policyWrap.next(state, carRental.actions(state));

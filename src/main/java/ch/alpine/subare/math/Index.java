@@ -3,10 +3,10 @@ package ch.alpine.subare.math;
 
 import java.io.Serializable;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.ext.Int;
 import ch.alpine.tensor.ext.Integers;
 
 /** index is similar to a database index over the 0-level entries of the tensor.
@@ -27,8 +27,8 @@ public class Index implements Serializable {
 
   private Index(Tensor keys) {
     this.keys = keys;
-    AtomicInteger atomicInteger = new AtomicInteger();
-    map = keys.stream().collect(Collectors.toMap(k -> k, k -> atomicInteger.getAndIncrement()));
+    Int i = new Int();
+    map = keys.stream().collect(Collectors.toMap(k -> k, _ -> i.getAndIncrement()));
     Integers.requireEquals(keys.length(), map.size());
   }
 

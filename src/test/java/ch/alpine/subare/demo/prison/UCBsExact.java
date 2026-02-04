@@ -38,7 +38,7 @@ import ch.alpine.tensor.io.Put;
     System.out.println(exact.getExpectedRewards());
   }
 
-  public static void main(String[] args) throws IOException {
+  static void main() throws IOException {
     Tensor init = Subdivide.of(RationalScalar.of(3, 5), RationalScalar.of(3, 2), 240);
     Tensor expectedRewards = Array.zeros(init.length(), init.length());
     int px = 0;

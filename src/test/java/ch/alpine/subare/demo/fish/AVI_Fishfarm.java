@@ -15,7 +15,7 @@ import ch.alpine.tensor.io.GifAnimationWriter;
 /** action value iteration for cliff walk */
 enum AVI_Fishfarm {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     Fishfarm fishfarm = new Fishfarm(20, 20);
     FishfarmRaster fishfarmRaster = new FishfarmRaster(fishfarm);
     DiscreteQsa ref = FishfarmHelper.getOptimalQsa(fishfarm);

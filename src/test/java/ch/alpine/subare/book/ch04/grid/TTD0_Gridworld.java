@@ -31,7 +31,7 @@ import ch.alpine.tensor.sca.Round;
  * {3, 3} 0 */
 enum TTD0_Gridworld {
   ;
-  public static void main(String[] args) {
+  static void main() {
     Gridworld gridWorld = new Gridworld();
     DiscreteVs vs = DiscreteVs.build(gridWorld.states());
     TabularTemporalDifference0 ttd0 = new TabularTemporalDifference0( //

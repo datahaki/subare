@@ -20,7 +20,7 @@ import ch.alpine.tensor.io.GifAnimationWriter;
 /** Example 4.1, p.82 */
 enum MCES_Gridworld {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     Gridworld gridworld = new Gridworld();
     final DiscreteQsa ref = GridworldHelper.getOptimalQsa(gridworld);
     MonteCarloExploringStarts mces = new MonteCarloExploringStarts(gridworld);

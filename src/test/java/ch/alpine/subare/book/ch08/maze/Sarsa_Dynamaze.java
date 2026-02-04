@@ -51,7 +51,7 @@ enum Sarsa_Dynamaze {
     }
   }
 
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     // handle(SarsaType.original, 3, 50);
     // handle(SarsaType.expected, 2, 50);
     handle(SarsaType.QLEARNING, 1, 50);

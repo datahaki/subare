@@ -21,7 +21,7 @@ import ch.alpine.tensor.Scalars;
     Judger judger = new Judger(new Bandits(n), //
         new RandomAgent(n), //
         new GradientAgent(n, RealScalar.of(.1)), //
-        new EGreedyAgent(n, i -> econst, econst.toString()), //
+        new EGreedyAgent(n, _ -> econst, econst.toString()), //
         new EGreedyAgent(n, i -> RationalScalar.of(1, Scalars.intValueExact(i) + 1), "1/i"), new UCBAgent(n, RealScalar.of(1)), //
         new UCBAgent(n, RealScalar.of(1.2)), //
         new UCBAgent(n, RealScalar.of(0.8)), //
@@ -34,7 +34,7 @@ import ch.alpine.tensor.Scalars;
     return judger;
   }
 
-  public static void main(String[] args) {
+  static void main() {
     Judger judger = train(100);
     judger.ranking();
     // Map<Agent, Tensor> map =

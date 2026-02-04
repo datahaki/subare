@@ -16,7 +16,7 @@ import ch.alpine.tensor.io.GifAnimationWriter;
 /** Example 4.1, p.82 */
 enum RSTQP_Wireloop {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     String name = "wire5";
     WireloopReward wireloopReward = WireloopReward.freeSteps();
     wireloopReward = WireloopReward.constantCost();

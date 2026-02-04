@@ -52,7 +52,7 @@ enum Sarsa_Windygrid {
     return HomeDirectory.Pictures("windygrid_qsa_" + sarsaType + ".gif");
   }
 
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     // handle(SarsaType.original, 20);
     // handle(SarsaType.expected, 20);
     handle(SarsaType.QLEARNING, 20);

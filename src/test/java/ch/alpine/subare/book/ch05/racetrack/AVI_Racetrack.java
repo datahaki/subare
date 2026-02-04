@@ -23,7 +23,7 @@ enum AVI_Racetrack {
     Export.object(HomeDirectory.file(name + ".object"), avi.qsa());
   }
 
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     String name = "track2";
     precompute(name);
     DiscreteQsa qsa = Import.object(HomeDirectory.file(name + ".object"));

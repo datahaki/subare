@@ -17,7 +17,7 @@ import ch.alpine.tensor.io.GifAnimationWriter;
 
 /* package */ enum CAMC_Gridworld { // TODO SUBARE work in progress?
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     Gridworld gridworld = new Gridworld();
     GridworldRaster gridworldRaster = new GridworldRaster(gridworld);
     // final DiscreteQsa ref = GridworldHelper.getOptimalQsa(gridworld);

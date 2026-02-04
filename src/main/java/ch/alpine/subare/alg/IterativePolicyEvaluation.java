@@ -62,10 +62,10 @@ public class IterativePolicyEvaluation {
       step();
       Scalar delta = DiscreteValueFunctions.distance(vs_new, vs_old);
       if (3e9 < timing.nanoSeconds())
-        System.out.println(past + " -> " + delta + " " + alternate);
+        IO.println(past + " -> " + delta + " " + alternate);
       if (Objects.nonNull(past) && Scalars.lessThan(past, delta))
         if (flips < ++alternate) {
-          System.out.println("give up at " + past + " -> " + delta);
+          IO.println("give up at " + past + " -> " + delta);
           break;
         }
       past = delta;

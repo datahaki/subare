@@ -2,7 +2,7 @@
 package ch.alpine.subare.math;
 
 import java.io.Serializable;
-import java.security.SecureRandom;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.random.RandomGenerator;
 
 import ch.alpine.tensor.RationalScalar;
@@ -14,7 +14,6 @@ import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.pdf.d.BernoulliDistribution;
 
 public class Coinflip implements Serializable {
-  private static final RandomGenerator RANDOM_GENERATOR = new SecureRandom();
   private static final Coinflip FAIR = new Coinflip(RationalScalar.HALF);
 
   /** @param p_head in the interval [0, 1]
@@ -52,6 +51,6 @@ public class Coinflip implements Serializable {
 
   /** @return whether the coin toss ended up with head */
   public boolean tossHead() {
-    return tossHead(RANDOM_GENERATOR);
+    return tossHead(ThreadLocalRandom.current());
   }
 }

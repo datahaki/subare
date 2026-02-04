@@ -66,7 +66,7 @@ enum TOS_Gridworld {
     System.out.println("Time for TrueOnlineSarsa: " + timing.seconds() + "s");
   }
 
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     run(SarsaType.ORIGINAL);
     run(SarsaType.EXPECTED);
     run(SarsaType.QLEARNING);

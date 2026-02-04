@@ -12,7 +12,7 @@ import ch.alpine.tensor.io.GifAnimationWriter;
 
 enum AVI_Wireloop {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     String name = "wirec";
     WireloopReward wireloopReward = WireloopReward.freeSteps();
     wireloopReward = WireloopReward.constantCost();

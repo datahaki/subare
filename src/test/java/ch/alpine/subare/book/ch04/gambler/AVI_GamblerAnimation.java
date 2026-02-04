@@ -17,7 +17,7 @@ import ch.alpine.tensor.io.ImageFormat;
  * visualizes each pass of the action value iteration */
 /* package */ enum AVI_GamblerAnimation {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     GamblerModel gamblerModel = GamblerModel.createDefault();
     final DiscreteQsa ref = GamblerHelper.getOptimalQsa(gamblerModel);
     ActionValueIteration avi = ActionValueIteration.of(gamblerModel);

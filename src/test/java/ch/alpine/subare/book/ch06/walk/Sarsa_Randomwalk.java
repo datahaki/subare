@@ -45,7 +45,7 @@ enum Sarsa_Randomwalk {
     DiscreteUtils.print(qsa, Round._2);
   }
 
-  public static void main(String[] args) {
+  static void main() {
     for (SarsaType type : SarsaType.values())
       handle(type, 1);
   }

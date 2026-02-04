@@ -10,7 +10,7 @@ import ch.alpine.tensor.sca.Round;
 
 /* package */ enum Listing {
   ;
-  public static void main(String[] args) {
+  static void main() {
     List<Supplier<Agent>> list = AgentSupplier.mixed;
     Tensor matrix = AllPairs.performance(list, 20, 100);
     final int size = matrix.length();

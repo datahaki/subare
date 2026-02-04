@@ -14,7 +14,7 @@ import ch.alpine.tensor.io.GifAnimationWriter;
  * p.87-88 */
 /* package */ enum VI_CarRental {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     CarRental carRental = new CarRental(20);
     ValueIteration vi = new ValueIteration(carRental);
     try (AnimationWriter animationWriter = //

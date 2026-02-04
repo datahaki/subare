@@ -30,7 +30,7 @@ import ch.alpine.tensor.sca.Round;
  * {3, 3} 0 */
 enum FVPE_Gridworld {
   ;
-  public static void main(String[] args) {
+  static void main() {
     Gridworld gridworld = new Gridworld();
     FirstVisitPolicyEvaluation fvpe = new FirstVisitPolicyEvaluation( //
         gridworld, null);

@@ -46,7 +46,7 @@ enum Sarsa_Wireloop {
     System.out.println("---");
   }
 
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     handle(SarsaType.QLEARNING, 1, 20);
     handle(SarsaType.EXPECTED, 1, 20);
   }

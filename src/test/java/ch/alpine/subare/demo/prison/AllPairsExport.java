@@ -11,7 +11,7 @@ import ch.alpine.tensor.io.Put;
 
 /* package */ enum AllPairsExport {
   ;
-  public static void main(String[] args) throws IOException {
+  static void main() throws IOException {
     // List<Supplier<Agent>> list = AgentSupplier.getOptimists(.01, .8, 30);
     // List<Supplier<Agent>> list = AgentSupplier.getUCBs(0, 6, 30);
     List<Supplier<Agent>> list = AgentSupplier.getEgreedyC(0.1, .8, 20);

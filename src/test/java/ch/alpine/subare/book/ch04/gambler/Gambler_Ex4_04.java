@@ -16,7 +16,7 @@ import ch.alpine.tensor.io.Put;
 
 /* package */ enum Gambler_Ex4_04 {
   ;
-  public static void main(String[] args) throws IOException {
+  static void main() throws IOException {
     GamblerModel gamblerModel = GamblerModel.createDefault();
     ValueIteration vi = new ValueIteration(gamblerModel, gamblerModel);
     Tensor record = Tensors.empty();

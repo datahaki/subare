@@ -47,7 +47,7 @@ class AllStates {
 
   public State getEquivalent(State _state) {
     final State key = getRepresentative(_state);
-    return equivalence.computeIfAbsent(key, j -> {
+    return equivalence.computeIfAbsent(key, _ -> {
       NavigableMap<Integer, State> subset = new TreeMap<>();
       State state = _state;
       for (int i = 0; i < 4; ++i) {
@@ -71,7 +71,7 @@ class AllStates {
     return allStates.get(key);
   }
 
-  public static void main(String[] args) {
+  static void main() {
     for (State s : INSTANCE.allStates.values()) {
       if (s.isEnd())
         System.out.println(s);

@@ -21,7 +21,7 @@ import ch.alpine.tensor.io.GifAnimationWriter;
 /** action value iteration for cliff walk */
 enum AVI_Windygrid {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     Windygrid windygrid = Windygrid.createFour();
     WindygridRaster windygridRaster = new WindygridRaster(windygrid);
     DiscreteQsa ref = WindygridHelper.getOptimalQsa(windygrid);

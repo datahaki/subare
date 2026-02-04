@@ -31,6 +31,6 @@ import ch.alpine.tensor.Throw;
   @Override
   public void digest(StepRecord stepRecord) {
     // TODO SUBARE code redundant to StepSet
-    map.computeIfAbsent(stepRecord.nextState(), i -> new StepSet()).register(stepRecord);
+    map.computeIfAbsent(stepRecord.nextState(), _ -> new StepSet()).register(stepRecord);
   }
 }

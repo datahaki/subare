@@ -62,7 +62,7 @@ enum PS_Dynamaze {
     }
   }
 
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     // handle(SarsaType.original, 10);
     // handle(SarsaType.expected, 50);
     handle(SarsaType.QLEARNING, 10);

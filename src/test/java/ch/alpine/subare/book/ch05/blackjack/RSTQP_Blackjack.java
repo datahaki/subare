@@ -16,7 +16,7 @@ import ch.alpine.tensor.io.GifAnimationWriter;
  * Random1StepTabularQPlanning does not seem to work on blackjack */
 enum RSTQP_Blackjack {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     Blackjack blackjack = new Blackjack();
     DiscreteQsa qsa = DiscreteQsa.build(blackjack);
     Random1StepTabularQPlanning rstqp = Random1StepTabularQPlanning.of( //

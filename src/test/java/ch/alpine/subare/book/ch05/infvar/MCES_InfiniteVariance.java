@@ -10,7 +10,7 @@ import ch.alpine.subare.util.ExploringStarts;
 
 enum MCES_InfiniteVariance {
   ;
-  public static void main(String[] args) {
+  static void main() {
     InfiniteVariance infiniteVariance = new InfiniteVariance();
     MonteCarloExploringStarts mces = new MonteCarloExploringStarts(infiniteVariance);
     Policy policy = EquiprobablePolicy.create(infiniteVariance);

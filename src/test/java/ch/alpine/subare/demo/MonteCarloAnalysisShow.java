@@ -58,7 +58,7 @@ import ch.alpine.tensor.ext.Timing;
     return optimalQsa;
   }
 
-  public static void main(String[] args) {
+  static void main() {
     MonteCarloInterface monteCarloInterface = MonteCarloExamples.AIRPORT.get();
     // ---
     List<MonteCarloAlgorithms> list = new ArrayList<>();

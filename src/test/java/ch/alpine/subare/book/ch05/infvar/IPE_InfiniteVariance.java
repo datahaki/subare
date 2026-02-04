@@ -12,7 +12,7 @@ import ch.alpine.tensor.sca.Round;
 // TODO SUBARE check again
 enum IPE_InfiniteVariance {
   ;
-  public static void main(String[] args) {
+  static void main() {
     StandardModel standardModel = new InfiniteVariance();
     Policy policy = new ConstantPolicy(RationalScalar.of(9, 10));
     IterativePolicyEvaluation a = new IterativePolicyEvaluation( //

@@ -51,8 +51,8 @@ public class LearningCompetition {
   private int RESX = 0;
 
   public void doit() throws Exception {
-    RESX = map.keySet().stream().mapToInt(point -> point.x).reduce(Math::max).getAsInt() + 1;
-    int RESY = map.keySet().stream().mapToInt(point -> point.y).reduce(Math::max).getAsInt() + 1;
+    RESX = map.keySet().stream().mapToInt(point -> point.x).reduce(Math::max).orElseThrow() + 1;
+    int RESY = map.keySet().stream().mapToInt(point -> point.y).reduce(Math::max).orElseThrow() + 1;
     Tensor image = Array.zeros(RESX + 1 + RESX, RESY, 4);
     try (AnimationWriter animationWriter = //
         new GifAnimationWriter(HomeDirectory.Pictures("bulk_" + name + ".gif"), period, TimeUnit.MILLISECONDS)) {

@@ -27,7 +27,7 @@ enum VI_Windygrid {
     }
   }
 
-  public static void main(String[] args) {
+  static void main() {
     simulate(Windygrid.createFour()); // reaches in
     simulate(Windygrid.createKing()); // reaches in 7
   }

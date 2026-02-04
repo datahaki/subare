@@ -18,7 +18,7 @@ import ch.alpine.tensor.sca.Sign;
 
 /* package */ enum EtaGambler {
   ;
-  public static void main(String[] args) {
+  static void main() {
     GamblerModel gamblerModel = new GamblerModel(10, RationalScalar.of(4, 10));
     // Policy policy = EquiprobablePolicy.create(gambler);
     Policy policy = GamblerHelper.getOptimalPolicy(gamblerModel);

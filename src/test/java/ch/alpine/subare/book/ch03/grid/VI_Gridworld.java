@@ -41,7 +41,7 @@ import ch.alpine.tensor.sca.Round;
  * {4, 4} 11.7 */
 /* package */ enum VI_Gridworld {
   ;
-  public static void main(String[] args) {
+  static void main() {
     Gridworld gridworld = new Gridworld();
     ValueIteration vi = new ValueIteration(gridworld, gridworld);
     vi.untilBelow(RealScalar.of(.0001));

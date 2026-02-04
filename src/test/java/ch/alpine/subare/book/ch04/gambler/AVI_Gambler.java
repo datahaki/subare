@@ -15,7 +15,7 @@ import ch.alpine.tensor.io.Put;
  * visualizes the exact optimal policy */
 /* package */ enum AVI_Gambler {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     GamblerModel gamblerModel = new GamblerModel(100, RealScalar.of(0.35));
     GamblerRaster gamblerRaster = new GamblerRaster(gamblerModel) {
       @Override

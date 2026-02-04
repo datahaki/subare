@@ -13,7 +13,7 @@ import ch.alpine.tensor.io.GifAnimationWriter;
 
 enum IPE_Wireloop {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     String name = "wire5";
     Wireloop wireloop = WireloopHelper.create(name, WireloopReward::id_x);
     WireloopRaster wireloopRaster = new WireloopRaster(wireloop);

@@ -18,7 +18,7 @@ import ch.alpine.tensor.sca.Round;
 
 enum RSTQP_Cliffwalk {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     Cliffwalk cliffwalk = new Cliffwalk(12, 4);
     CliffwalkRaster cliffwalkRaster = new CliffwalkRaster(cliffwalk);
     final DiscreteQsa ref = CliffwalkHelper.getOptimalQsa(cliffwalk);

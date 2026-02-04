@@ -8,9 +8,9 @@ import ch.alpine.subare.api.Policy;
 import ch.alpine.subare.api.StateActionModel;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.ext.RandomChoice;
 import ch.alpine.tensor.num.Boole;
 import ch.alpine.tensor.pdf.Distribution;
+import ch.alpine.tensor.pdf.RandomChoice;
 import ch.alpine.tensor.pdf.d.CategoricalDistribution;
 
 public class FixedRandomPolicy implements Policy {

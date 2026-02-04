@@ -68,7 +68,7 @@ import ch.alpine.tensor.io.GifAnimationWriter;
     return HomeDirectory.Pictures("gambler_sac_" + sarsaType + ".gif");
   }
 
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     GamblerModel gambler = new GamblerModel(20, RationalScalar.of(4, 10));
     Sarsa_Gambler sarsa_Gambler = new Sarsa_Gambler(gambler);
     LearningRate learningRate = DefaultLearningRate.of(RealScalar.of(3), RealScalar.of(0.81));

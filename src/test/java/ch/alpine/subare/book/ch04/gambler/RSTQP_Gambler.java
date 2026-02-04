@@ -20,7 +20,7 @@ import ch.alpine.tensor.io.GifAnimationWriter;
 // R1STQP algorithm is not suited for gambler's dilemma
 /* package */ enum RSTQP_Gambler {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     GamblerModel gamblerModel = new GamblerModel(20, RationalScalar.of(4, 10));
     GamblerRaster gamblerRaster = new GamblerRaster(gamblerModel);
     final DiscreteQsa ref = GamblerHelper.getOptimalQsa(gamblerModel);

@@ -163,7 +163,7 @@ class Racetrack extends DeterministicStandardModel implements MonteCarloInterfac
       Tensor pos0 = state.extract(0, 2);
       Tensor pos1 = next.extract(0, 2);
       Tensor key = Tensors.of(pos0, pos1);
-      return memo_freeSpace.computeIfAbsent(key, i -> Subdivide.of(0, 1, 5).stream() //
+      return memo_freeSpace.computeIfAbsent(key, _ -> Subdivide.of(0, 1, 5).stream() //
           .map(Scalar.class::cast).map(lambda -> interpolation.Get(split(pos0, pos1, lambda))) //
           .allMatch(Scalars::isZero)) //
               ? next

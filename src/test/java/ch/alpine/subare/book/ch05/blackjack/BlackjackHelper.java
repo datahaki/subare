@@ -27,7 +27,7 @@ import ch.alpine.tensor.img.Raster;
   public static Tensor render(Blackjack blackjack, Policy policy) {
     BlackjackRaster blackjackRaster = new BlackjackRaster(blackjack);
     Dimension dimension = blackjackRaster.dimensionStateRaster();
-    Tensor tensor = Array.of(list -> DoubleScalar.INDETERMINATE, dimension.height, dimension.width);
+    Tensor tensor = Array.of(_ -> DoubleScalar.INDETERMINATE, dimension.height, dimension.width);
     for (Tensor state : blackjack.states()) {
       List<Integer> point = blackjackRaster.point(state);
       if (Objects.nonNull(point)) {

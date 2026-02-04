@@ -67,13 +67,13 @@ import ch.alpine.tensor.Tensor;
   public final Tensor getExpectedRewards() {
     return list.stream() //
         .map(Opening::exactRewards) //
-        .reduce(Tensor::add).get();
+        .reduce(Tensor::add).orElseThrow();
   }
 
   public final Scalar getActionReminder() {
     return list.stream() //
         .map(Opening::actionReminder) //
-        .reduce(Scalar::add).get();
+        .reduce(Scalar::add).orElseThrow();
   }
 
   protected final void contribute(Integer[] a1open, Integer[] a2open) {

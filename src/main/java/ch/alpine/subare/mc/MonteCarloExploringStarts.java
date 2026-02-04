@@ -50,7 +50,7 @@ public class MonteCarloExploringStarts implements EpisodeQsaEstimator, StateActi
     while (episodeInterface.hasNext()) {
       StepRecord stepRecord = episodeInterface.step();
       Tensor key = StateAction.key(stepRecord);
-      first.computeIfAbsent(key, i -> trajectory.size());
+      first.computeIfAbsent(key, _ -> trajectory.size());
       rewards.append(stepRecord.reward());
       trajectory.add(stepRecord);
       sac.digest(stepRecord);
@@ -83,7 +83,7 @@ public class MonteCarloExploringStarts implements EpisodeQsaEstimator, StateActi
       Tensor key = StateAction.key(stepRecord);
       // if (!map.containsKey(key))
       // map.put(key, new AverageTracker());
-      map.computeIfAbsent(key, tensor -> new AverageTracker()).track(gains.get(key));
+      map.computeIfAbsent(key, _ -> new AverageTracker()).track(gains.get(key));
     }
     { // update
       for (Entry<Tensor, AverageTracker> entry : map.entrySet()) {

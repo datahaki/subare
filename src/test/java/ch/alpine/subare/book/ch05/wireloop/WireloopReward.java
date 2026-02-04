@@ -12,14 +12,14 @@ public interface WireloopReward extends RewardInterface {
    * 
    * @return constant zero */
   static WireloopReward freeSteps() {
-    return (s, a, n) -> RealScalar.ZERO;
+    return (_, _, _) -> RealScalar.ZERO;
   }
 
   /** steps are more expensive than reward along x
    * 
    * @return constant zero */
   static WireloopReward constantCost() {
-    return (s, a, n) -> RealScalar.of(-1.4); // -1.2
+    return (_, _, _) -> RealScalar.of(-1.4); // -1.2
   }
 
   // ---

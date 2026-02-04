@@ -31,7 +31,7 @@ import ch.alpine.tensor.ext.Timing;
 /** uses TrueOnlineSarsa */
 /* package */ enum AirportShow {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     Tensor XYmc = Tensors.empty();
     Tensor XYsarsa = Tensors.empty();
     Tensor XYtoSarsa = Tensors.empty();

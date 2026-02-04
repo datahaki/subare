@@ -17,7 +17,7 @@ import ch.alpine.tensor.io.GifAnimationWriter;
 /**  */
 enum RSTQP_Dynamaze {
   ;
-  public static void main(String[] args) throws Exception {
+  static void main() throws Exception {
     String name = "maze5";
     Dynamaze dynamaze = DynamazeHelper.create5(3);
     DynamazeRaster dynamazeRaster = new DynamazeRaster(dynamaze);

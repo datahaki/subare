@@ -22,7 +22,7 @@ import ch.alpine.tensor.sca.Round;
  * </pre> */
 enum FVPE_Randomwalk {
   ;
-  public static void main(String[] args) {
+  static void main() {
     Randomwalk randomwalk = new Randomwalk(5);
     FirstVisitPolicyEvaluation fvpe = new FirstVisitPolicyEvaluation( //
         randomwalk, null);

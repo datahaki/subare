@@ -21,7 +21,7 @@ enum AVI_Wireloop {
     DiscreteQsa ref = WireloopHelper.getOptimalQsa(wireloop);
     ActionValueIteration avi = ActionValueIteration.of(wireloop);
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures(name + "L_avi.gif"), 250, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve(name + "L_avi.gif"), 250, TimeUnit.MILLISECONDS)) {
       int batches = 50;
       for (int index = 0; index < batches; ++index) {
         Infoline infoline = Infoline.print(wireloop, index, ref, avi.qsa());

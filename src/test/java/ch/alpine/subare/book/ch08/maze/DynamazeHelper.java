@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.book.ch08.maze;
 
-import java.io.File;
+import java.nio.file.Path;
 
 import ch.alpine.subare.alg.ActionValueIterations;
 import ch.alpine.subare.util.DiscreteQsa;
@@ -39,7 +39,7 @@ public enum DynamazeHelper {
   }
 
   /* package */ static Tensor load(String name) {
-    File file = Unprotect.file("/ch08/" + name + ".png");
+    Path file = Unprotect.path("/ch08/" + name + ".png");
     try {
       return Import.of(file);
     } catch (Exception exception) {

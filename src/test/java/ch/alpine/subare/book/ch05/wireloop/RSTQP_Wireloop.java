@@ -27,7 +27,7 @@ enum RSTQP_Wireloop {
     Random1StepTabularQPlanning rstqp = Random1StepTabularQPlanning.of( //
         wireloop, qsa, ConstantLearningRate.of(RealScalar.ONE));
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures(name + "L_qsa_rstqp.gif"), 250, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve(name + "L_qsa_rstqp.gif"), 250, TimeUnit.MILLISECONDS)) {
       int batches = 50;
       for (int index = 0; index < batches; ++index) {
         Infoline infoline = Infoline.print(wireloop, index, ref, qsa);

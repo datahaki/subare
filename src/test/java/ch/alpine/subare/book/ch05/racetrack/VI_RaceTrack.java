@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.book.ch05.racetrack;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
@@ -21,7 +21,7 @@ import ch.alpine.tensor.io.Primitives;
 
 /* package */ enum VI_RaceTrack {
   ;
-  public static void make(String name, int maxSpeed, File file) throws Exception {
+  public static void make(String name, int maxSpeed, Path file) throws Exception {
     Racetrack racetrack = RacetrackHelper.create(name, maxSpeed);
     ValueIteration vi = new ValueIteration(racetrack, racetrack);
     vi.untilBelow(RealScalar.of(10), 5);
@@ -54,6 +54,6 @@ import ch.alpine.tensor.io.Primitives;
   }
 
   static void main() throws Exception {
-    make("track2", 5, HomeDirectory.Pictures(VI_RaceTrack.class.getSimpleName() + ".gif"));
+    make("track2", 5, HomeDirectory.Pictures.resolve(VI_RaceTrack.class.getSimpleName() + ".gif"));
   }
 }

@@ -21,7 +21,7 @@ enum IPE_Wireloop {
     IterativePolicyEvaluation ipe = new IterativePolicyEvaluation( //
         wireloop, policy);
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures(name + "_ipe_iteration.gif"), 200, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve(name + "_ipe_iteration.gif"), 200, TimeUnit.MILLISECONDS)) {
       for (int count = 0; count < 20; ++count) {
         System.out.println(count);
         animationWriter.write(StateRasters.vs_rescale(wireloopRaster, ipe.vs()));

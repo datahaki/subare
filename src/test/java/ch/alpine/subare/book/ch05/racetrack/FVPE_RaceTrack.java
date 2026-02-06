@@ -1,8 +1,8 @@
 // code by jph
 package ch.alpine.subare.book.ch05.racetrack;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 
 import ch.alpine.subare.api.Policy;
 import ch.alpine.subare.mc.FirstVisitPolicyEvaluation;
@@ -17,7 +17,7 @@ import ch.alpine.tensor.sca.Round;
 enum FVPE_RaceTrack {
   ;
   static void main() throws IOException {
-    File file = Unprotect.file("/ch05/track0.png");
+    Path file = Unprotect.path("/ch05/track0.png");
     Racetrack racetrack = new Racetrack(Import.of(file), 3);
     FirstVisitPolicyEvaluation fvpe = new FirstVisitPolicyEvaluation( //
         racetrack, null);

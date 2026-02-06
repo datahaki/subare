@@ -1,8 +1,9 @@
 // code by jph
 package ch.alpine.subare.demo.prison;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -59,8 +60,8 @@ import ch.alpine.tensor.sca.N;
     Tensor separator = ConstantArray.of(RealScalar.ZERO, init.length(), 5);
     Scalar alpha = RealScalar.of(0.22);
     OptimistsArray optimistsArray = new OptimistsArray(init.map(N.DOUBLE), alpha);
-    File folder = HomeDirectory.Pictures(optimistsArray.getClass().getSimpleName() + "_" + alpha);
-    folder.mkdir();
+    Path folder = HomeDirectory.Pictures.resolve(optimistsArray.getClass().getSimpleName() + "_" + alpha);
+    Files.createDirectories(folder);
     for (int frame = 0; frame < 300; ++frame) {
       System.out.println("frame=" + frame);
       optimistsArray.play(1);
@@ -72,7 +73,7 @@ import ch.alpine.tensor.sca.N;
       // System.out.println(scalarSummaryStatistics.toString());
       Tensor imageL = tensor.map(RealScalar.ONE::add).multiply(RationalScalar.HALF); //
       Tensor image = Join.of(1, imageL, separator, action).map(ColorDataGradients.CLASSIC);
-      File file = new File(folder, String.format("%04d.png", frame));
+      Path file = folder.resolve(String.format("%04d.png", frame));
       Export.of(file, image);
     }
   }

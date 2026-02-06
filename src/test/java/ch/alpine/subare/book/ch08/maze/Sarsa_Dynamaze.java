@@ -37,7 +37,7 @@ enum Sarsa_Dynamaze {
     LearningRate learningRate = DefaultLearningRate.of(15, 0.51);
     Sarsa sarsa = sarsaType.sarsa(dynamaze, learningRate, qsa, sac, policy);
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures(name + "n" + nstep + "_qsa_" + sarsaType + ".gif"), 200, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve(name + "n" + nstep + "_qsa_" + sarsaType + ".gif"), 200, TimeUnit.MILLISECONDS)) {
       for (int index = 0; index < batches; ++index) {
         // if (EPISODES - 10 < index)
         Infoline infoline = Infoline.print(dynamaze, index, ref, qsa);

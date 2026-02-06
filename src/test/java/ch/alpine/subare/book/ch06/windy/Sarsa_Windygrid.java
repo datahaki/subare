@@ -2,7 +2,7 @@
 // inspired by Shangtong Zhang
 package ch.alpine.subare.book.ch06.windy;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.concurrent.TimeUnit;
 
 import ch.alpine.subare.api.LearningRate;
@@ -48,8 +48,8 @@ enum Sarsa_Windygrid {
     }
   }
 
-  public static File getFileQsa(SarsaType sarsaType) {
-    return HomeDirectory.Pictures("windygrid_qsa_" + sarsaType + ".gif");
+  public static Path getFileQsa(SarsaType sarsaType) {
+    return HomeDirectory.Pictures.resolve("windygrid_qsa_" + sarsaType + ".gif");
   }
 
   static void main() throws Exception {

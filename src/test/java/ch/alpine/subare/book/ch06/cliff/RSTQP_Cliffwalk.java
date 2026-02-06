@@ -26,7 +26,7 @@ enum RSTQP_Cliffwalk {
     Random1StepTabularQPlanning rstqp = Random1StepTabularQPlanning.of( //
         cliffwalk, qsa, ConstantLearningRate.one());
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("cliffwalk_qsa_rstqp.gif"), 200, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve("cliffwalk_qsa_rstqp.gif"), 200, TimeUnit.MILLISECONDS)) {
       int batches = 20;
       for (int index = 0; index < batches; ++index) {
         Infoline infoline = Infoline.print(cliffwalk, index, ref, qsa);

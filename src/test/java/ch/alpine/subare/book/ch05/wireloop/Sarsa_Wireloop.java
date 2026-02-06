@@ -34,7 +34,7 @@ enum Sarsa_Wireloop {
     policy.setExplorationRate(LinearExplorationRate.of(batches, 0.2, 0.01));
     Sarsa sarsa = sarsaType.sarsa(wireloop, DefaultLearningRate.of(3, 0.51), qsa, sac, policy);
     try (AnimationWriter animationWriter = new GifAnimationWriter( //
-        HomeDirectory.Pictures(name + "L_qsa_" + sarsaType + "" + nstep + ".gif"), 250, TimeUnit.MILLISECONDS)) {
+        HomeDirectory.Pictures.resolve(name + "L_qsa_" + sarsaType + "" + nstep + ".gif"), 250, TimeUnit.MILLISECONDS)) {
       for (int index = 0; index < batches; ++index) {
         Infoline infoline = Infoline.print(wireloop, index, ref, qsa);
         ExploringStarts.batch(wireloop, policy, nstep, sarsa);

@@ -18,7 +18,7 @@ import ch.alpine.tensor.io.GifAnimationWriter;
     CarRental carRental = new CarRental(20);
     ValueIteration vi = new ValueIteration(carRental);
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("carrental_vi.gif"), 250, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve("carrental_vi.gif"), 250, TimeUnit.MILLISECONDS)) {
       for (int count = 0; count <= 25; ++count) {
         System.out.println(count);
         animationWriter.write(CarRentalHelper.joinAll(carRental, vi.vs()));

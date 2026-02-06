@@ -17,7 +17,7 @@ import ch.alpine.tensor.io.Export;
     Charger charger = new Charger(tripProfile, 6);
     DiscreteQsa ref = ActionValueIterations.solve(charger, RealScalar.of(.0001));
     ChargerRaster chargerRaster = new ChargerRaster(charger);
-    Export.of(HomeDirectory.Pictures("charger_qsa_avi.png"), //
+    Export.of(HomeDirectory.Pictures.resolve("charger_qsa_avi.png"), //
         StateActionRasters.qsaPolicy(chargerRaster, ref));
     // ref.print();
   }

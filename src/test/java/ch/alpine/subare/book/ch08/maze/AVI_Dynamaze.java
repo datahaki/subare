@@ -29,7 +29,7 @@ enum AVI_Dynamaze {
     // DynamazeHelper.render(windygrid, DiscreteValueFunctions.rescaled(ref)));
     ActionValueIteration avi = ActionValueIteration.of(dynamaze);
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures(name + "_qsa_avi.gif"), 250, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve(name + "_qsa_avi.gif"), 250, TimeUnit.MILLISECONDS)) {
       for (int index = 0; index < 50; ++index) {
         Infoline infoline = Infoline.print(dynamaze, index, ref, avi.qsa());
         animationWriter.write(StateRasters.qsaLossRef(dynamazeRaster, avi.qsa(), ref));

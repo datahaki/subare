@@ -27,11 +27,11 @@ import ch.alpine.tensor.io.Put;
     Tensor values = Last.of(record);
     // .untilBelow(RealScalar.of(1e-10));
     // System.out.println(values);
-    Put.of(HomeDirectory.file("ex403_values"), values);
-    Put.of(HomeDirectory.file("ex403_record"), record);
+    Put.of(HomeDirectory.path("ex403_values"), values);
+    Put.of(HomeDirectory.path("ex403_record"), record);
     PolicyBase policy = PolicyType.GREEDY.bestEquiprobable(gamblerModel, vi.vs(), null);
     Policies.print(policy, gamblerModel.states());
     Tensor greedy = Policies.flatten(policy, gamblerModel.states());
-    Put.of(HomeDirectory.file("ex403_greedy"), greedy);
+    Put.of(HomeDirectory.path("ex403_greedy"), greedy);
   }
 }

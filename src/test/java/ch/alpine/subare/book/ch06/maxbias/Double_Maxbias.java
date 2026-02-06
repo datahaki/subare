@@ -49,7 +49,7 @@ enum Double_Maxbias {
     // qsa.print(Round.toMultipleOf(DecimalScalar.of(.01)));
     System.out.println("---");
     DiscreteVs vs = DiscreteUtils.createVs(maxbias, qsa1);
-    Put.of(HomeDirectory.file("gridworld_" + sarsaType), vs.values());
+    Put.of(HomeDirectory.path("gridworld_" + sarsaType), vs.values());
     Policy policy = PolicyType.GREEDY.bestEquiprobable(maxbias, doubleSarsa.qsa(), doubleSarsa.sac());
     EpisodeInterface ei = EpisodeKickoff.single(maxbias, policy);
     while (ei.hasNext()) {

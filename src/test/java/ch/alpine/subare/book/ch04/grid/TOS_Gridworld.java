@@ -45,7 +45,7 @@ enum TOS_Gridworld {
     final String name = sarsaType.name().toLowerCase();
     Timing timing = Timing.started();
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("gridworld_tos_" + name + ".gif"), 250, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve("gridworld_tos_" + name + ".gif"), 250, TimeUnit.MILLISECONDS)) {
       for (int batch = 0; batch < 100; ++batch) {
         // System.out.println("starting batch " + (index + 1) + " of " + batches);
         policy.setQsa(trueOnlineSarsa.qsaInterface());

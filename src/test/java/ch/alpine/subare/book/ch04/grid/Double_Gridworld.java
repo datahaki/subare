@@ -51,7 +51,7 @@ enum Double_Gridworld {
         DefaultLearningRate.of(5, .51), //
         qsa1, qsa2, sac1, sac2, policy1, policy2);
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("gridworld_double_" + sarsaType + "" + nstep + ".gif"), 150, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve("gridworld_double_" + sarsaType + "" + nstep + ".gif"), 150, TimeUnit.MILLISECONDS)) {
       for (int index = 0; index < batches; ++index) {
         if (batches - 10 < index)
           Infoline.print(gridworld, index, ref, qsa1);
@@ -64,7 +64,7 @@ enum Double_Gridworld {
     // qsa.print(Round.toMultipleOf(DecimalScalar.of(.01)));
     System.out.println("---");
     DiscreteVs vs = DiscreteUtils.createVs(gridworld, doubleSarsa.qsa());
-    Put.of(HomeDirectory.file("gridworld_" + sarsaType), vs.values());
+    Put.of(HomeDirectory.path("gridworld_" + sarsaType), vs.values());
     Policy policyVs = PolicyType.GREEDY.bestEquiprobable(gridworld, vs, null);
     EpisodeInterface ei = EpisodeKickoff.single(gridworld, policyVs);
     while (ei.hasNext()) {

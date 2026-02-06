@@ -49,7 +49,7 @@ enum TOS_Wireloop {
     final String algo = sarsaType.name().toLowerCase();
     Timing timing = Timing.started();
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures(name + "_tos_" + algo + ".gif"), 250, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve(name + "_tos_" + algo + ".gif"), 250, TimeUnit.MILLISECONDS)) {
       for (int batch = 0; batch < 20; ++batch) {
         // System.out.println("batch " + batch);
         policy.setQsa(trueOnlineSarsa.qsaInterface());

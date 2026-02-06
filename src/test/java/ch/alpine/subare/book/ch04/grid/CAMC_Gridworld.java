@@ -24,7 +24,7 @@ import ch.alpine.tensor.io.GifAnimationWriter;
     EpisodeVsEstimator camc = ConstantAlphaMonteCarloVs.create( //
         gridworld, DefaultLearningRate.of(3, .51));
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("gridworld_vs_camc.gif"), 100, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve("gridworld_vs_camc.gif"), 100, TimeUnit.MILLISECONDS)) {
       final int batches = 50;
       // Tensor epsilon = Subdivide.of(.2, .05, batches);
       for (int index = 0; index < batches; ++index) {

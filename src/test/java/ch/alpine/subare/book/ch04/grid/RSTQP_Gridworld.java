@@ -23,7 +23,7 @@ enum RSTQP_Gridworld {
     Random1StepTabularQPlanning rstqp = Random1StepTabularQPlanning.of( //
         gridworld, qsa, ConstantLearningRate.one());
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("gridworld_qsa_rstqp.gif"), 250, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve("gridworld_qsa_rstqp.gif"), 250, TimeUnit.MILLISECONDS)) {
       int batches = 10;
       for (int index = 0; index < batches; ++index) {
         animationWriter.write(StateActionRasters.qsaLossRef(new GridworldRaster(gridworld), qsa, ref));

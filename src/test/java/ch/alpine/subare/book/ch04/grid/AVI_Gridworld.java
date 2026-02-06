@@ -42,7 +42,7 @@ enum AVI_Gridworld {
     GridworldRaster gridworldRaster = new GridworldRaster(gridworld);
     ActionValueIteration avi = ActionValueIteration.of(gridworld);
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("gridworld_qsa_avi.gif"), 250, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve("gridworld_qsa_avi.gif"), 250, TimeUnit.MILLISECONDS)) {
       for (int count = 0; count < 7; ++count) {
         animationWriter.write(StateActionRasters.qsa(gridworldRaster, DiscreteValueFunctions.rescaled(avi.qsa())));
         avi.step();

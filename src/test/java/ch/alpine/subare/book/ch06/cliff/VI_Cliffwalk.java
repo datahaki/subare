@@ -32,7 +32,7 @@ enum VI_Cliffwalk {
     DiscreteVs vr = DiscreteUtils.createVs(cliffwalk, ref);
     Scalar error = DiscreteValueFunctions.distance(vs, vr);
     System.out.println("error=" + error);
-    Export.of(HomeDirectory.Pictures("cliffwalk_qsa_vi.png"), //
+    Export.of(HomeDirectory.Pictures.resolve("cliffwalk_qsa_vi.png"), //
         StateRasters.vs_rescale(cliffwalkRaster, vi.vs()));
     // GreedyPolicy greedyPolicy = GreedyPolicy.bestEquiprobableGreedy(cliffWalk, values);
     // greedyPolicy.print(cliffWalk.states());

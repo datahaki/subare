@@ -26,7 +26,7 @@ enum RSTQP_Dynamaze {
     Random1StepTabularQPlanning rstqp = Random1StepTabularQPlanning.of( //
         dynamaze, qsa, ConstantLearningRate.of(RealScalar.ONE));
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures(name + "_qsa_rstqp.gif"), 250, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve(name + "_qsa_rstqp.gif"), 250, TimeUnit.MILLISECONDS)) {
       int batches = 50;
       for (int index = 0; index < batches; ++index) {
         Infoline infoline = Infoline.print(dynamaze, index, ref, qsa);

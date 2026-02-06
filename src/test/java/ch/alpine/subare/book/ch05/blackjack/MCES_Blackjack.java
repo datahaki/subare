@@ -26,7 +26,7 @@ enum MCES_Blackjack {
     Blackjack blackjack = new Blackjack();
     MonteCarloExploringStarts mces = new MonteCarloExploringStarts(blackjack);
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("blackjack_mces.gif"), 250, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve("blackjack_mces.gif"), 250, TimeUnit.MILLISECONDS)) {
       int batches = 10; // 40
       Tensor epsilon = Subdivide.of(.2, .05, batches);
       StateActionCounter sac = new DiscreteStateActionCounter();

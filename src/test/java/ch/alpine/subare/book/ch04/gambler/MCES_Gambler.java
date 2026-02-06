@@ -29,7 +29,7 @@ import ch.alpine.tensor.sca.Round;
     StateActionCounter sac = new DiscreteStateActionCounter();
     EGreedyPolicy policy = (EGreedyPolicy) PolicyType.EGREEDY.bestEquiprobable(gambler, mces.qsa(), sac);
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("gambler_qsa_mces.gif"), 200, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve("gambler_qsa_mces.gif"), 200, TimeUnit.MILLISECONDS)) {
       int batches = 20;
       for (int index = 0; index < batches; ++index) {
         Infoline.print(gambler, index, ref, mces.qsa());

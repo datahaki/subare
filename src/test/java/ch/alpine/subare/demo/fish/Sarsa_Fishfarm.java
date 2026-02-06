@@ -37,7 +37,7 @@ enum Sarsa_Fishfarm {
     policy.setExplorationRate(LinearExplorationRate.of(batches, 0.5, 0.01));
     Sarsa sarsa = sarsaType.sarsa(fishfarm, DefaultLearningRate.of(7, 0.61), qsa, sac, policy);
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("fishfarm_qsa_" + sarsaType + ".gif"), 200, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve("fishfarm_qsa_" + sarsaType + ".gif"), 200, TimeUnit.MILLISECONDS)) {
       for (int index = 0; index < batches; ++index) {
         // if (batches - 10 < index)
         Infoline infoline = Infoline.print(fishfarm, index, ref, qsa);

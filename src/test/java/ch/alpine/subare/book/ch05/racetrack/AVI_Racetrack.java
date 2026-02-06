@@ -20,13 +20,13 @@ enum AVI_Racetrack {
     avi.untilBelow(RealScalar.of(1e-3), 2);
     // avi.qsa().print();
     System.out.println(Tally.sorted(avi.qsa().values()));
-    Export.object(HomeDirectory.file(name + ".object"), avi.qsa());
+    Export.object(HomeDirectory.path(name + ".object"), avi.qsa());
   }
 
   static void main() throws Exception {
     String name = "track2";
     precompute(name);
-    DiscreteQsa qsa = Import.object(HomeDirectory.file(name + ".object"));
+    DiscreteQsa qsa = Import.object(HomeDirectory.path(name + ".object"));
     System.out.println(qsa.size());
     Racetrack racetrack = RacetrackHelper.create(name, 5);
     int c = 0;
@@ -39,11 +39,11 @@ enum AVI_Racetrack {
           // ---
         }
     System.out.println(c + " / " + qsa.size());
-    Export.of(HomeDirectory.Pictures("racetrack_qsa_avi_21_11.png"), //
+    Export.of(HomeDirectory.Pictures.resolve("racetrack_qsa_avi_21_11.png"), //
         RacetrackHelper.render(racetrack, qsa, Tensors.vector(2, 1), Tensors.vector(1, 1)));
-    Export.of(HomeDirectory.Pictures("racetrack_qsa_avi_21_10.png"), //
+    Export.of(HomeDirectory.Pictures.resolve("racetrack_qsa_avi_21_10.png"), //
         RacetrackHelper.render(racetrack, qsa, Tensors.vector(2, 1), Tensors.vector(1, 0)));
-    Export.of(HomeDirectory.Pictures("racetrack_qsa_avi_21_01.png"), //
+    Export.of(HomeDirectory.Pictures.resolve("racetrack_qsa_avi_21_01.png"), //
         RacetrackHelper.render(racetrack, qsa, Tensors.vector(2, 1), Tensors.vector(0, 1)));
   }
 }

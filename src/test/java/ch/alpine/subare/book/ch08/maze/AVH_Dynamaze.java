@@ -22,7 +22,7 @@ enum AVH_Dynamaze {
     // ---
     DiscreteQsa ref = DynamazeHelper.getOptimalQsa(dynamaze);
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures(name + "_qsa_avi.gif"), 500, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve(name + "_qsa_avi.gif"), 500, TimeUnit.MILLISECONDS)) {
       DynamazeRaster dynamazeRaster = new DynamazeRaster(dynamaze);
       for (int index = 0; index < 50; ++index) {
         Infoline infoline = Infoline.print(dynamaze, index, ref, avi.qsa());

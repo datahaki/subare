@@ -39,7 +39,7 @@ enum TDQ_Dynamaze {
     Sarsa sarsa = sarsaType.sarsa(dynamaze, learningRate, qsa, sac, policy);
     TabularDynaQ tabularDynaQ = new TabularDynaQ(sarsa, 10);
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures(name + "_tdq_" + sarsaType + ".gif"), 200, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve(name + "_tdq_" + sarsaType + ".gif"), 200, TimeUnit.MILLISECONDS)) {
       for (int index = 0; index < batches; ++index) {
         // if (EPISODES - 10 < index)
         Infoline.print(dynamaze, index, ref, qsa);

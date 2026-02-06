@@ -26,7 +26,7 @@ enum RSTQP_Windygrid {
     Random1StepTabularQPlanning rstqp = Random1StepTabularQPlanning.of( //
         windygrid, qsa, ConstantLearningRate.one());
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("windygrid_qsa_rstqp.gif"), 250, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve("windygrid_qsa_rstqp.gif"), 250, TimeUnit.MILLISECONDS)) {
       int batches = 40;
       for (int index = 0; index < batches; ++index) {
         Infoline infoline = Infoline.print(windygrid, index, ref, qsa);

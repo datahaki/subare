@@ -44,7 +44,7 @@ import ch.alpine.tensor.io.GifAnimationWriter;
     final String name = sarsaType.name().toLowerCase();
     Timing timing = Timing.started();
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("gambler_tos_" + name + ".gif"), 250, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve("gambler_tos_" + name + ".gif"), 250, TimeUnit.MILLISECONDS)) {
       for (int batch = 0; batch < 100; ++batch) {
         // System.out.println("batch " + batch);
         policy.setQsa(trueOnlineSarsa.qsaInterface());

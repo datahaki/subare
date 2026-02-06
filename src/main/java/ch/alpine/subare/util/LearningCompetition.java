@@ -55,7 +55,7 @@ public class LearningCompetition {
     int RESY = map.keySet().stream().mapToInt(point -> point.y).reduce(Math::max).orElseThrow() + 1;
     Tensor image = Array.zeros(RESX + 1 + RESX, RESY, 4);
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("bulk_" + name + ".gif"), period, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve("bulk_" + name + ".gif"), period, TimeUnit.MILLISECONDS)) {
       for (int index = 0; index < epsilon.length(); ++index) {
         final int findex = index;
         Timing timing = Timing.started();

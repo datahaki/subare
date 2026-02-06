@@ -2,7 +2,9 @@
 package ch.alpine.subare.demo;
 
 import java.awt.Dimension;
-import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -19,9 +21,13 @@ import ch.alpine.tensor.ext.HomeDirectory;
   private static final int WIDTH = 1280;
   private static final int HEIGHT = 720;
 
-  private static File directory() {
-    File directory = HomeDirectory.Pictures("plots");
-    directory.mkdir();
+  private static Path directory() {
+    Path directory = HomeDirectory.Pictures.resolve("plots");
+    try {
+      Files.createDirectories(directory);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
     return directory;
   }
 
@@ -57,8 +63,8 @@ import ch.alpine.tensor.ext.HomeDirectory;
     // return ListPlot.of(show);
   }
 
-  private static File savePlot(File directory, String fileTitle, Show show) throws Exception {
-    File file = new File(directory, fileTitle + ".png");
+  private static Path savePlot(Path directory, String fileTitle, Show show) throws Exception {
+    Path file = directory.resolve(fileTitle + ".png");
     show.export(file, new Dimension(WIDTH, HEIGHT));
     System.out.println("Exported " + fileTitle + ".png to " + directory);
     return file;

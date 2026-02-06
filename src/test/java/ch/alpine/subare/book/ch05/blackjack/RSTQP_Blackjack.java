@@ -22,7 +22,7 @@ enum RSTQP_Blackjack {
     Random1StepTabularQPlanning rstqp = Random1StepTabularQPlanning.of( //
         blackjack, qsa, DefaultLearningRate.of(5, 0.51));
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("blackjack_rstqp.gif"), 250, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve("blackjack_rstqp.gif"), 250, TimeUnit.MILLISECONDS)) {
       int batches = 60;
       for (int index = 0; index < batches; ++index) {
         for (int count = 0; count < 100; ++count)

@@ -25,11 +25,11 @@ enum AVI_Windygrid {
     Windygrid windygrid = Windygrid.createFour();
     WindygridRaster windygridRaster = new WindygridRaster(windygrid);
     DiscreteQsa ref = WindygridHelper.getOptimalQsa(windygrid);
-    Export.of(HomeDirectory.Pictures("windygrid_qsa_avi.png"), //
+    Export.of(HomeDirectory.Pictures.resolve("windygrid_qsa_avi.png"), //
         StateActionRasters.qsa_rescaled(windygridRaster, ref));
     ActionValueIteration avi = ActionValueIteration.of(windygrid);
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("windygrid_qsa_avi.gif"), 250, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve("windygrid_qsa_avi.gif"), 250, TimeUnit.MILLISECONDS)) {
       for (int index = 0; index < 20; ++index) {
         Infoline infoline = Infoline.print(windygrid, index, ref, avi.qsa());
         animationWriter.write(StateActionRasters.qsaLossRef(windygridRaster, avi.qsa(), ref));

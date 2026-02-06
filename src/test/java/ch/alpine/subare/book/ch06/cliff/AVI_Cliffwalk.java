@@ -26,11 +26,11 @@ enum AVI_Cliffwalk {
     Cliffwalk cliffwalk = new Cliffwalk(12, 4);
     CliffwalkRaster cliffwalkRaster = new CliffwalkRaster(cliffwalk);
     DiscreteQsa ref = CliffwalkHelper.getOptimalQsa(cliffwalk);
-    Export.of(HomeDirectory.Pictures("cliffwalk_qsa_avi.png"), //
+    Export.of(HomeDirectory.Pictures.resolve("cliffwalk_qsa_avi.png"), //
         StateActionRasters.qsa(new CliffwalkRaster(cliffwalk), DiscreteValueFunctions.rescaled(ref)));
     ActionValueIteration avi = ActionValueIteration.of(cliffwalk);
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("cliffwalk_qsa_avi.gif"), 200, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve("cliffwalk_qsa_avi.gif"), 200, TimeUnit.MILLISECONDS)) {
       for (int index = 0; index < 20; ++index) {
         Infoline infoline = Infoline.print(cliffwalk, index, ref, avi.qsa());
         animationWriter.write(StateActionRasters.qsaLossRef(cliffwalkRaster, avi.qsa(), ref));

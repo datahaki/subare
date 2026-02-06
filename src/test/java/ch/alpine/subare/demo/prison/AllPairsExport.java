@@ -15,7 +15,7 @@ import ch.alpine.tensor.io.Put;
     // List<Supplier<Agent>> list = AgentSupplier.getOptimists(.01, .8, 30);
     // List<Supplier<Agent>> list = AgentSupplier.getUCBs(0, 6, 30);
     List<Supplier<Agent>> list = AgentSupplier.getEgreedyC(0.1, .8, 20);
-    Put.of(HomeDirectory.file("egreedyc"), AllPairs.performance(list, 20, 500));
+    Put.of(HomeDirectory.path("egreedyc"), AllPairs.performance(list, 20, 500));
     System.out.println("done.");
   }
 }

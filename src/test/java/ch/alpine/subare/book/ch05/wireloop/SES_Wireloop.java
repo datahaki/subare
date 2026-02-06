@@ -42,7 +42,7 @@ enum SES_Wireloop {
       }
     };
     try (AnimationWriter animationWriter = new GifAnimationWriter( //
-        HomeDirectory.Pictures(name + "L_qsa_" + sarsaType + "" + nstep + ".gif"), 100, TimeUnit.MILLISECONDS)) {
+        HomeDirectory.Pictures.resolve(name + "L_qsa_" + sarsaType + "" + nstep + ".gif"), 100, TimeUnit.MILLISECONDS)) {
       int index = 0;
       while (exploringStartsStream.batchIndex() < batches) {
         exploringStartsStream.nextEpisode();

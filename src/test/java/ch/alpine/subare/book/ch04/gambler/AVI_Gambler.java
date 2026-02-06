@@ -24,12 +24,12 @@ import ch.alpine.tensor.io.Put;
       }
     };
     DiscreteQsa ref = GamblerHelper.getOptimalQsa(gamblerModel);
-    Export.of(HomeDirectory.Pictures("gambler_qsa.png"), //
+    Export.of(HomeDirectory.Pictures.resolve("gambler_qsa.png"), //
         StateActionRasters.qsa(gamblerRaster, ref));
-    Export.of(HomeDirectory.Pictures("gambler_qsa_avi.png"), //
+    Export.of(HomeDirectory.Pictures.resolve("gambler_qsa_avi.png"), //
         StateActionRasters.qsaPolicy(gamblerRaster, ref));
     DiscreteVs vs = DiscreteUtils.createVs(gamblerModel, ref);
-    Put.of(HomeDirectory.file("ex403_vs_values"), vs.values());
+    Put.of(HomeDirectory.path("ex403_vs_values"), vs.values());
     System.out.println("done.");
   }
 }

@@ -33,7 +33,7 @@ import ch.alpine.tensor.sca.Round;
     EGreedyPolicy policy = (EGreedyPolicy) PolicyType.EGREEDY.bestEquiprobable(blackjack, qsa, sac);
     policy.setExplorationRate(LinearExplorationRate.of(batches, 0.1, 0.01));
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("blackjack_qsa_" + sarsaType + ".gif"), 200, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve("blackjack_qsa_" + sarsaType + ".gif"), 200, TimeUnit.MILLISECONDS)) {
       Sarsa sarsa = sarsaType.sarsa(blackjack, DefaultLearningRate.of(2, 0.6), qsa, sac, policy);
       for (int index = 0; index < batches; ++index) {
         // Scalar error = DiscreteQsas.distance(qsa, ref);

@@ -42,7 +42,7 @@ import ch.alpine.tensor.sca.Round;
     policyEGreedy.setExplorationRate(LinearExplorationRate.of(batches, 0.1, 0.01));
     System.out.println(qsa.size());
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("gambler_qsa_ql.gif"), 100, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve("gambler_qsa_ql.gif"), 100, TimeUnit.MILLISECONDS)) {
       LearningRate learningRate = DefaultLearningRate.of(2, 0.51);
       Sarsa stepDigest = SarsaType.QLEARNING.sarsa(gamblerModel, learningRate, qsa, sac, policyEGreedy);
       for (int index = 0; index < batches; ++index) {

@@ -35,7 +35,7 @@ enum SES_Gridworld {
     EGreedyPolicy policy = (EGreedyPolicy) PolicyType.EGREEDY.bestEquiprobable(gridworld, qsa, sac);
     policy.setExplorationRate(LinearExplorationRate.of(batches, 0.2, 0.01));
     try (AnimationWriter animationWriter = new GifAnimationWriter( //
-        HomeDirectory.Pictures("gridworld_ses_" + sarsaType + "" + nstep + ".gif"), 250, TimeUnit.MILLISECONDS)) {
+        HomeDirectory.Pictures.resolve("gridworld_ses_" + sarsaType + "" + nstep + ".gif"), 250, TimeUnit.MILLISECONDS)) {
       LearningRate learningRate = DefaultLearningRate.of(5, 1.1);
       Sarsa sarsa = sarsaType.sarsa(gridworld, learningRate, qsa, sac, policy);
       DequeExploringStarts exploringStartsStream = new DequeExploringStarts(gridworld, nstep, sarsa) {

@@ -45,7 +45,7 @@ enum VI_Gridworld {
     DiscreteUtils.print(vi.vs());
     Policy policy = PolicyType.GREEDY.bestEquiprobable(gridworld, vi.vs(), null);
     Policies.print(policy, gridworld.states());
-    Export.of(HomeDirectory.Pictures("gridworld_vs_vi.png"), //
+    Export.of(HomeDirectory.Pictures.resolve("gridworld_vs_vi.png"), //
         StateRasters.vs(gridworldStateRaster, DiscreteValueFunctions.rescaled(vi.vs())));
     // GridworldHelper.render(gridworld, vi.vs())
   }

@@ -26,7 +26,7 @@ enum MCES_Cliffwalk {
     final DiscreteQsa ref = CliffwalkHelper.getOptimalQsa(cliffwalk);
     MonteCarloExploringStarts mces = new MonteCarloExploringStarts(cliffwalk);
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("cliffwalk_qsa_mces.gif"), 100, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve("cliffwalk_qsa_mces.gif"), 100, TimeUnit.MILLISECONDS)) {
       int batches = 100;
       for (int index = 0; index < batches; ++index) {
         Infoline.print(cliffwalk, index, ref, mces.qsa());

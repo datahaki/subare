@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.book.ch04.gambler;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.concurrent.TimeUnit;
 
 import ch.alpine.subare.api.LearningRate;
@@ -60,12 +60,12 @@ import ch.alpine.tensor.io.GifAnimationWriter;
     return qsa;
   }
 
-  public static File getGifFileQsa(SarsaType sarsaType) {
-    return HomeDirectory.Pictures("gambler_qsa_" + sarsaType + ".gif");
+  public static Path getGifFileQsa(SarsaType sarsaType) {
+    return HomeDirectory.Pictures.resolve("gambler_qsa_" + sarsaType + ".gif");
   }
 
-  public static File getGifFileSac(SarsaType sarsaType) {
-    return HomeDirectory.Pictures("gambler_sac_" + sarsaType + ".gif");
+  public static Path getGifFileSac(SarsaType sarsaType) {
+    return HomeDirectory.Pictures.resolve("gambler_sac_" + sarsaType + ".gif");
   }
 
   static void main() throws Exception {

@@ -43,7 +43,7 @@ enum Sarsa_Gridworld {
     EGreedyPolicy policy = (EGreedyPolicy) PolicyType.EGREEDY.bestEquiprobable(gridworld, qsa, sac);
     policy.setExplorationRate(LinearExplorationRate.of(batches, 0.2, 0.01));
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("gridworld_" + sarsaType + "" + nstep + ".gif"), 250, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve("gridworld_" + sarsaType + "" + nstep + ".gif"), 250, TimeUnit.MILLISECONDS)) {
       LearningRate learningRate = DefaultLearningRate.of(2, 0.6);
       Sarsa sarsa = sarsaType.sarsa(gridworld, learningRate, qsa, sac, policy);
       for (int index = 0; index < batches; ++index) {
@@ -56,7 +56,7 @@ enum Sarsa_Gridworld {
     // qsa.print(Round.toMultipleOf(DecimalScalar.of(.01)));
     System.out.println("---");
     DiscreteVs vs = DiscreteUtils.createVs(gridworld, qsa);
-    Put.of(HomeDirectory.file("gridworld_" + sarsaType), vs.values());
+    Put.of(HomeDirectory.path("gridworld_" + sarsaType), vs.values());
     Policy policyVs = PolicyType.GREEDY.bestEquiprobable(gridworld, vs, null);
     EpisodeInterface ei = EpisodeKickoff.single(gridworld, policyVs);
     while (ei.hasNext()) {

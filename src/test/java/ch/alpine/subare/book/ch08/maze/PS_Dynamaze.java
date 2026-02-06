@@ -44,7 +44,7 @@ enum PS_Dynamaze {
     PrioritizedSweeping prioritizedSweeping = new PrioritizedSweeping( //
         sarsa, 10, RealScalar.ZERO);
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures(name + "_ps_" + sarsaType + ".gif"), 250, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve(name + "_ps_" + sarsaType + ".gif"), 250, TimeUnit.MILLISECONDS)) {
       StepExploringStarts stepExploringStarts = //
           new StepExploringStarts(dynamaze, prioritizedSweeping) {
             @Override

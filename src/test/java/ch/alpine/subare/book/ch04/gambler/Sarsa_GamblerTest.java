@@ -3,7 +3,8 @@ package ch.alpine.subare.book.ch04.gambler;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +15,8 @@ import ch.alpine.tensor.RationalScalar;
 import ch.alpine.tensor.RealScalar;
 
 class Sarsa_GamblerTest {
+  // @TempDir
+  // Path tempDir;
   @Test
   void testSimple() throws Exception {
     for (SarsaType sarsaType : SarsaType.values()) {
@@ -22,14 +25,14 @@ class Sarsa_GamblerTest {
       LearningRate learningRate = DefaultLearningRate.of(RealScalar.of(3), RealScalar.of(0.81));
       sarsa_Gambler.train(sarsaType, 10, learningRate);
       {
-        File file = Sarsa_Gambler.getGifFileQsa(sarsaType);
-        assertTrue(file.isFile());
-        file.delete();
+        Path file = Sarsa_Gambler.getGifFileQsa(sarsaType);
+        assertTrue(Files.isRegularFile(file));
+        Files.delete(file);
       }
       {
-        File file = Sarsa_Gambler.getGifFileSac(sarsaType);
-        assertTrue(file.isFile());
-        file.delete();
+        Path file = Sarsa_Gambler.getGifFileSac(sarsaType);
+        assertTrue(Files.isRegularFile(file));
+        Files.delete(file);
       }
     }
   }

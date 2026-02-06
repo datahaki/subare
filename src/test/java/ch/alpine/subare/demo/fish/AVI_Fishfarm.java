@@ -23,7 +23,7 @@ enum AVI_Fishfarm {
     // StateActionRasters.qsa(new CliffwalkRaster(cliffwalk), DiscreteValueFunctions.rescaled(ref)));
     ActionValueIteration avi = ActionValueIteration.of(fishfarm);
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("fishfarm_qsa_avi.gif"), 200, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve("fishfarm_qsa_avi.gif"), 200, TimeUnit.MILLISECONDS)) {
       for (int index = 0; index < 20; ++index) {
         Infoline infoline = Infoline.print(fishfarm, index, ref, avi.qsa());
         animationWriter.write(StateRasters.qsaLossRef(fishfarmRaster, avi.qsa(), ref));

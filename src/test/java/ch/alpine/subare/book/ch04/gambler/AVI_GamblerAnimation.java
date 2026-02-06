@@ -22,7 +22,7 @@ import ch.alpine.tensor.io.ImageFormat;
     final DiscreteQsa ref = GamblerHelper.getOptimalQsa(gamblerModel);
     ActionValueIteration avi = ActionValueIteration.of(gamblerModel);
     try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures("gambler_qsa_avi.gif"), 500, TimeUnit.MILLISECONDS)) {
+        new GifAnimationWriter(HomeDirectory.Pictures.resolve("gambler_qsa_avi.gif"), 500, TimeUnit.MILLISECONDS)) {
       for (int index = 0; index < 13; ++index) {
         DiscreteQsa qsa = avi.qsa();
         Infoline.print(gamblerModel, index, ref, qsa);

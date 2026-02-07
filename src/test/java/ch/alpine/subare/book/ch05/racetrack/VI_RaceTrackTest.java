@@ -10,8 +10,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 class VI_RaceTrackTest {
+  @TempDir
+  Path tempDir;
+
   @Test
-  void testSimple(@TempDir Path tempDir) throws Exception {
+  void testSimple() throws Exception {
     Path file = tempDir.resolve(getClass().getSimpleName() + ".gif");
     VI_RaceTrack.make("track2", 4, file);
     assertTrue(Files.exists(file));

@@ -1,3 +1,4 @@
+// code by jph
 package ch.alpine.subare.book.ch04.gambler;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -3,7 +3,7 @@ package ch.alpine.subare.demo;
 
 import ch.alpine.bridge.fig.ListLinePlot;
 import ch.alpine.bridge.fig.Show;
-import ch.alpine.bridge.fig.ShowDialog;
+import ch.alpine.bridge.fig.ShowWindow;
 import ch.alpine.subare.alg.ActionValueIterations;
 import ch.alpine.subare.analysis.DiscreteModelErrorAnalysis;
 import ch.alpine.subare.api.FeatureMapper;
@@ -90,7 +90,7 @@ import ch.alpine.tensor.ext.Timing;
       show.add(ListLinePlot.of(XYmc)).setLabel("MonteCarlo");
       show.add(ListLinePlot.of(XYsarsa)).setLabel("Sarsa");
       show.add(ListLinePlot.of(XYtoSarsa)).setLabel("TrueOnlineSarsa");
-      ShowDialog.of(show);
+      ShowWindow.of(show);
     }
     // DiscreteQsa toQsa = toSarsa.qsa();
     // System.out.println(toSarsa.getW());

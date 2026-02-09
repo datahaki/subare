@@ -59,7 +59,7 @@ import ch.alpine.tensor.sca.N;
     Tensor init = Subdivide.of(RationalScalar.of(+21, 10), RationalScalar.of(-11, 10), 280 - 1); //
     Tensor separator = ConstantArray.of(RealScalar.ZERO, init.length(), 5);
     Scalar alpha = RealScalar.of(0.22);
-    OptimistsArray optimistsArray = new OptimistsArray(init.map(N.DOUBLE), alpha);
+    OptimistsArray optimistsArray = new OptimistsArray(init.maps(N.DOUBLE), alpha);
     Path folder = HomeDirectory.Pictures.resolve(optimistsArray.getClass().getSimpleName() + "_" + alpha);
     Files.createDirectories(folder);
     for (int frame = 0; frame < 300; ++frame) {
@@ -71,8 +71,8 @@ import ch.alpine.tensor.sca.N;
       // .map(Scalar.class::cast) //
       // .collect(ScalarSummaryStatistics.collector());
       // System.out.println(scalarSummaryStatistics.toString());
-      Tensor imageL = tensor.map(RealScalar.ONE::add).multiply(RationalScalar.HALF); //
-      Tensor image = Join.of(1, imageL, separator, action).map(ColorDataGradients.CLASSIC);
+      Tensor imageL = tensor.maps(RealScalar.ONE::add).multiply(RationalScalar.HALF); //
+      Tensor image = Join.of(1, imageL, separator, action).maps(ColorDataGradients.CLASSIC);
       Path file = folder.resolve(String.format("%04d.png", frame));
       Export.of(file, image);
     }

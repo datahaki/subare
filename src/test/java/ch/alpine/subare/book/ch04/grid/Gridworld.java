@@ -58,7 +58,7 @@ public class Gridworld extends DeterministicStandardModel implements MonteCarloI
   public Tensor move(Tensor state, Tensor action) {
     return isTerminal(state) //
         ? state
-        : state.add(action).map(CLIP);
+        : state.add(action).maps(CLIP);
   }
 
   // ---

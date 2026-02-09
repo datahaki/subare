@@ -20,7 +20,7 @@ public enum DiscreteValueFunctions {
   ;
   @SuppressWarnings("unchecked")
   public static <T extends DiscreteValueFunction> T numeric(T tvi) {
-    return (T) tvi.create(tvi.values().map(N.DOUBLE).stream());
+    return (T) tvi.create(tvi.values().maps(N.DOUBLE).stream());
   }
 
   @SuppressWarnings("unchecked")
@@ -47,12 +47,12 @@ public enum DiscreteValueFunctions {
 
   @SuppressWarnings("unchecked")
   public static <T extends DiscreteValueFunction> T logisticDifference(T tvi1, T tvi2) {
-    return (T) tvi1.create(_difference(tvi1, tvi2).map(LogisticSigmoid.FUNCTION).stream());
+    return (T) tvi1.create(_difference(tvi1, tvi2).maps(LogisticSigmoid.FUNCTION).stream());
   }
 
   @SuppressWarnings("unchecked")
   public static <T extends DiscreteValueFunction> T logisticDifference(T tvi1, T tvi2, Scalar factor) {
-    return (T) tvi1.create(_difference(tvi1, tvi2).multiply(factor).map(LogisticSigmoid.FUNCTION).stream());
+    return (T) tvi1.create(_difference(tvi1, tvi2).multiply(factor).maps(LogisticSigmoid.FUNCTION).stream());
   }
 
   /** @param qsa1
@@ -65,7 +65,7 @@ public enum DiscreteValueFunctions {
       StateActionCounter sac1, StateActionCounter sac2) {
     Tensor visits1 = Tensor.of(qsa1.keys().stream().map(sac1::stateActionCount).map(RealScalar::of));
     Tensor visits2 = Tensor.of(qsa2.keys().stream().map(sac2::stateActionCount).map(RealScalar::of));
-    Tensor inverse = visits1.add(visits2).map(InvertUnlessZero.FUNCTION);
+    Tensor inverse = visits1.add(visits2).maps(InvertUnlessZero.FUNCTION);
     return qsa1.create( //
         Times.of(Times.of(qsa1.values(), visits1).add(Times.of(qsa2.values(), visits2)), inverse).stream());
   }

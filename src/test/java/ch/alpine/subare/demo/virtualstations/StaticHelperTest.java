@@ -29,7 +29,7 @@ class StaticHelperTest {
 
   @Test
   void testMore() {
-    Tensor result = StaticHelper.binaryVectors(2, Tensors.vector(1, 2, 3, 4).map(Tensors::of));
+    Tensor result = StaticHelper.binaryVectors(2, Tensors.vector(1, 2, 3, 4).maps(Tensors::of));
     assertEquals(result, Tensors.fromString( //
         "{{1, 1, 1}, {1, 1, 0}, {1, 0, 1}, {1, 0, 0}, {2, 1, 1}, {2, 1, 0}, {2, 0, 1}, {2, 0, 0}, {3, 1, 1}, {3, 1, 0}, {3, 0, 1}, {3, 0, 0}, {4, 1, 1}, {4, 1, 0}, {4, 0, 1}, {4, 0, 0}}"));
   }

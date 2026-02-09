@@ -37,7 +37,7 @@ import ch.alpine.tensor.red.StandardDeviation;
   public BanditsModel(int k) {
     Tensor data = RandomVariate.of(NormalDistribution.standard(), k);
     Scalar mean = (Scalar) Mean.of(data);
-    Tensor prep = NORMALIZE.apply(data.map(x -> x.subtract(mean)));
+    Tensor prep = NORMALIZE.apply(data.maps(x -> x.subtract(mean)));
     distributions = prep.stream() //
         .map(Scalar.class::cast) //
         .map(scalar -> NormalDistribution.of(scalar, RealScalar.ONE)) //

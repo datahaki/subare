@@ -55,7 +55,7 @@ import ch.alpine.tensor.sca.Clips;
       return RealScalar.of(5);
     // check if action would take agent off the board
     Tensor effective = state.add(action);
-    return effective.map(CLIP).equals(effective) //
+    return effective.maps(CLIP).equals(effective) //
         ? RealScalar.ZERO
         : RealScalar.ONE.negate();
   }
@@ -66,7 +66,7 @@ import ch.alpine.tensor.sca.Clips;
       return WARP1_POST;
     if (state.equals(WARP2_ANTE))
       return WARP2_POST;
-    return state.add(action).map(CLIP);
+    return state.add(action).maps(CLIP);
   }
 
   // ---

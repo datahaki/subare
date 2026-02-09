@@ -20,9 +20,9 @@ import ch.alpine.tensor.sca.Round;
         Agent a2 = list.get(i2).get();
         System.out.println("---");
         System.out.printf("%s %s%n", //
-            a1.getAbsDesc(), matrix.Get(i1, i2).map(Round._3));
+            a1.getAbsDesc(), matrix.Get(i1, i2).maps(Round._3));
         System.out.printf("%s %s%n", //
-            a2.getAbsDesc(), matrix.Get(i2, i1).map(Round._3));
+            a2.getAbsDesc(), matrix.Get(i2, i1).maps(Round._3));
       }
     }
     System.out.println("done.");

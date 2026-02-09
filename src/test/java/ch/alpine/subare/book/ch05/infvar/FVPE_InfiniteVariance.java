@@ -16,6 +16,6 @@ import ch.alpine.tensor.sca.N;
     Policy policy = new ConstantPolicy(RationalScalar.of(5, 10));
     for (int count = 0; count < 100; ++count)
       ExploringStarts.batch(infiniteVariance, policy, fvpe);
-    System.out.println(fvpe.vs().values().map(N.DOUBLE));
+    System.out.println(fvpe.vs().values().maps(N.DOUBLE));
   }
 }

@@ -59,7 +59,7 @@ public enum StateActionRasters {
     tensor = uo.apply(tensor);
     // System.out.println(Pretty.of(tensor));
     // System.exit(0);
-    return tensor.map(ColorDataGradients.CLASSIC);
+    return tensor.maps(ColorDataGradients.CLASSIC);
   }
 
   private static Tensor _render(StateActionRaster stateActionRaster, Policy policy) {
@@ -93,7 +93,7 @@ public enum StateActionRasters {
     Policy policy = PolicyType.GREEDY.bestEquiprobable(stateActionRaster.discreteModel(), qsa, null);
     Tensor image2 = _render(stateActionRaster, policy);
     Scalar qdelta = stateActionRaster.scaleQdelta();
-    Tensor image3 = _render(stateActionRaster, DiscreteValueFunctions.logisticDifference(qsa, ref, qdelta), tensor -> tensor.map(UnitClip.FUNCTION));
+    Tensor image3 = _render(stateActionRaster, DiscreteValueFunctions.logisticDifference(qsa, ref, qdelta), tensor -> tensor.maps(UnitClip.FUNCTION));
     List<Integer> list = Dimensions.of(image1);
     int dim = stateActionRaster.joinAlongDimension();
     list.set(dim, 3);
@@ -106,7 +106,7 @@ public enum StateActionRasters {
     DiscreteQsa loss = Loss.asQsa(stateActionRaster.discreteModel(), ref, qsa);
     loss = loss.create(loss.values().stream() //
         .map(tensor -> tensor.multiply(stateActionRaster.scaleLoss())) //
-        .map(tensor -> tensor.map(Clips.unit())));
+        .map(tensor -> tensor.maps(Clips.unit())));
     Tensor image2 = _render(stateActionRaster, loss);
     Tensor image3 = _render(stateActionRaster, DiscreteValueFunctions.logisticDifference(qsa, ref));
     List<Integer> list = Dimensions.of(image1);

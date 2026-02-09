@@ -37,7 +37,7 @@ import ch.alpine.tensor.sca.Round;
       Sarsa sarsa = sarsaType.sarsa(blackjack, DefaultLearningRate.of(2, 0.6), qsa, sac, policy);
       for (int index = 0; index < batches; ++index) {
         // Scalar error = DiscreteQsas.distance(qsa, ref);
-        System.out.println(index + " " + epsilon.Get(index).map(Round._2));
+        System.out.println(index + " " + epsilon.Get(index).maps(Round._2));
         // sarsa.supplyPolicy(() -> policy);
         for (int count = 0; count < 10; ++count)
           ExploringStarts.batch(blackjack, policy, sarsa);

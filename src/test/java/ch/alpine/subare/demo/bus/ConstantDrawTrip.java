@@ -13,7 +13,7 @@ import ch.alpine.tensor.alg.Range;
 
   public ConstantDrawTrip(int length, int amount) {
     this.length = length;
-    costPerUnit = Range.of(0, length).map(new Sawtooth(3)); // .map(Increment.ONE);
+    costPerUnit = Range.of(0, length).maps(new Sawtooth(3)); // .map(Increment.ONE);
     draw = RealScalar.of(amount);
   }
 

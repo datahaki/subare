@@ -62,7 +62,7 @@ public class LearningCompetition {
         map.entrySet().stream().parallel().forEach(entry -> //
         processEntry(image, entry.getKey(), entry.getValue(), findex));
         //
-        System.out.printf("%3d %s sec%n", index, RealScalar.of(timing.seconds()).map(Round._1));
+        System.out.printf("%3d %s sec%n", index, RealScalar.of(timing.seconds()).maps(Round._1));
         animationWriter.write(ImageResize.nearest(image, magnify));
       }
     }

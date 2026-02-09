@@ -30,6 +30,6 @@ class FishfarmTest {
     int n = 20;
     Fishfarm fishfarm = new Fishfarm(1, n);
     @SuppressWarnings("unused")
-    Tensor res = Range.of(0, n + 1).map(fishfarm::growth);
+    Tensor res = Range.of(0, n + 1).maps(fishfarm::growth);
   }
 }

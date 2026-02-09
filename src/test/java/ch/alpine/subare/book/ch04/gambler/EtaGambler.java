@@ -25,7 +25,7 @@ import ch.alpine.tensor.sca.Sign;
     OnPolicyStateDistribution opsd = new OnPolicyStateDistribution(gamblerModel, gamblerModel, policy);
     Tensor values = //
         ArrayPad.of(ConstantArray.of(RealScalar.ONE, 9), List.of(1), List.of(1));
-    values.map(Sign::requirePositiveOrZero);
+    values.maps(Sign::requirePositiveOrZero);
     values = NormalizeTotal.FUNCTION.apply(values);
     Scalar scalar = Total.ofVector(values);
     System.out.println("sum=" + scalar);

@@ -74,7 +74,7 @@ import ch.alpine.tensor.sca.Round;
     for (int index = 0; index < batches; ++index) {
       Scalar error = Loss.accumulation(banditsModel, ref, qsa1);
       if (batches - 10 < index)
-        System.out.println(index + " " + epsilon.Get(index).map(Round._2) + " " + error.map(Round._3));
+        System.out.println(index + " " + epsilon.Get(index).maps(Round._2) + " " + error.maps(Round._3));
       policy.setQsa(doubleSarsa.qsa());
       policy.setSac(doubleSarsa.sac());
       ExploringStarts.batch(banditsModel, policy, n, doubleSarsa);

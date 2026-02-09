@@ -101,7 +101,7 @@ import ch.alpine.tensor.sca.Sign;
     morning = morning.copy();
     morning.set(cars -> cars.add(n1_in.subtract(n1out)), 0);
     morning.set(cars -> cars.add(n2_in.subtract(n2out)), 1);
-    return morning.map(CLIP);
+    return morning.maps(CLIP);
   }
 
   @Override

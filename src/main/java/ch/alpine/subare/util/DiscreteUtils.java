@@ -57,7 +57,7 @@ public enum DiscreteUtils {
   public static void print(DiscreteQsa qsa, Function<Scalar, Scalar> round) {
     for (Tensor key : qsa.keys()) {
       Scalar value = qsa.value(key.get(0), key.get(1));
-      System.out.println(key + " " + value.map(round));
+      System.out.println(key + " " + value.maps(round));
     }
   }
 
@@ -78,14 +78,14 @@ public enum DiscreteUtils {
   public static void print(StateActionModel stateActionModel, VsInterface vs, Function<Scalar, Scalar> round) {
     for (Tensor key : stateActionModel.states()) {
       Scalar value = vs.value(key);
-      System.out.println(key + " " + value.map(round));
+      System.out.println(key + " " + value.maps(round));
     }
   }
 
   public static void print(DiscreteVs vs, ScalarUnaryOperator round) {
     for (Tensor key : vs.keys()) {
       Scalar value = vs.value(key);
-      System.out.println(key + " " + value.map(round));
+      System.out.println(key + " " + value.maps(round));
     }
   }
 

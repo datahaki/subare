@@ -13,7 +13,7 @@ class SawtoothTest {
   @Test
   void testSimple() {
     Sawtooth sawtooth = new Sawtooth(3);
-    Tensor s = Range.of(0, 12).map(sawtooth);
+    Tensor s = Range.of(0, 12).maps(sawtooth);
     assertEquals(s, Tensors.vector(0, 1, 2, 3, 2, 1, 0, 1, 2, 3, 2, 1));
   }
 }

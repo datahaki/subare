@@ -13,7 +13,8 @@ import ch.alpine.subare.util.DiscreteValueFunctions;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.ext.Timing;
+import ch.alpine.tensor.qty.Quantity;
+import ch.alpine.tensor.qty.Timing;
 import ch.alpine.tensor.red.Max;
 import ch.alpine.tensor.sca.N;
 import ch.alpine.tensor.sca.Sign;
@@ -71,6 +72,8 @@ public class ActionValueIteration implements DiscreteQsaSupplier {
     untilBelow(threshold, Integer.MAX_VALUE);
   }
 
+  private static final Scalar LIMIT = Quantity.of(3e9, "ns");
+
   public void untilBelow(Scalar threshold, int flips) {
     Sign.requirePositive(threshold);
     Scalar past = null;
@@ -78,7 +81,7 @@ public class ActionValueIteration implements DiscreteQsaSupplier {
     while (true) {
       step();
       final Scalar delta = DiscreteValueFunctions.distance(qsa_new, (DiscreteQsa) qsa_old);
-      if (3E9 < timing.nanoSeconds()) // print info if iteration takes longer than 3 seconds
+      if (Scalars.lessThan(LIMIT, timing.nanoSeconds())) // print info if iteration takes longer than 3 seconds
         IO.println(past + " -> " + delta + " " + alternate);
       if (Objects.nonNull(past) && Scalars.lessThan(past, delta))
         if (flips < ++alternate) {

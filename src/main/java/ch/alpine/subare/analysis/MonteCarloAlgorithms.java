@@ -16,9 +16,11 @@ import ch.alpine.subare.util.LinearExplorationRate;
 import ch.alpine.subare.util.PolicyBase;
 import ch.alpine.subare.util.PolicyType;
 import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
-import ch.alpine.tensor.ext.Timing;
+import ch.alpine.tensor.qty.Quantity;
+import ch.alpine.tensor.qty.Timing;
 import ch.alpine.tensor.red.Mean;
 
 public enum MonteCarloAlgorithms {
@@ -132,7 +134,7 @@ public enum MonteCarloAlgorithms {
     Timing subWatch = Timing.started();
     for (int i = 0; i < nTimes; ++i) {
       nSamples.append(analyseAlgorithm(monteCarloInterface, batches, optimalQsa, errorAnalysis));
-      if (subWatch.seconds() > 10.0) {
+      if (Scalars.lessThan(Quantity.of(10, "s"), subWatch.seconds())) {
         System.out.println(name() + " has finished trial " + i);
         subWatch = Timing.started();
       }

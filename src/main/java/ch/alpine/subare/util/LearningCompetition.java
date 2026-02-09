@@ -13,11 +13,11 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.api.ScalarTensorFunction;
 import ch.alpine.tensor.ext.HomeDirectory;
-import ch.alpine.tensor.ext.Timing;
 import ch.alpine.tensor.img.ColorDataGradients;
 import ch.alpine.tensor.img.ImageResize;
 import ch.alpine.tensor.io.AnimationWriter;
 import ch.alpine.tensor.io.GifAnimationWriter;
+import ch.alpine.tensor.qty.Timing;
 import ch.alpine.tensor.red.Min;
 import ch.alpine.tensor.sca.Round;
 
@@ -62,7 +62,7 @@ public class LearningCompetition {
         map.entrySet().stream().parallel().forEach(entry -> //
         processEntry(image, entry.getKey(), entry.getValue(), findex));
         //
-        System.out.printf("%3d %s sec%n", index, RealScalar.of(timing.seconds()).maps(Round._1));
+        System.out.printf("%3d %s sec%n", index, timing.seconds().maps(Round._1));
         animationWriter.write(ImageResize.nearest(image, magnify));
       }
     }

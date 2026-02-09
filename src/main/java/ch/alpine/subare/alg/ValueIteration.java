@@ -14,7 +14,8 @@ import ch.alpine.subare.util.DiscreteVs;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.ext.Timing;
+import ch.alpine.tensor.qty.Quantity;
+import ch.alpine.tensor.qty.Timing;
 import ch.alpine.tensor.red.Max;
 
 /** value iteration: "policy evaluation is stopped after just one sweep"
@@ -57,13 +58,15 @@ public class ValueIteration implements DiscreteVsSupplier {
     untilBelow(threshold, Integer.MAX_VALUE);
   }
 
+  private static final Scalar LIMIT = Quantity.of(3e9, "ns");
+
   public void untilBelow(Scalar threshold, int flips) {
     Scalar past = null;
     Timing timing = Timing.started();
     while (true) {
       step();
       final Scalar delta = DiscreteValueFunctions.distance(vs_new, vs_old);
-      if (3e9 < timing.nanoSeconds())
+      if (Scalars.lessThan(LIMIT, timing.nanoSeconds()))
         System.out.println(past + " -> " + delta + " " + alternate);
       if (Objects.nonNull(past) && Scalars.lessThan(past, delta))
         if (flips < ++alternate) {

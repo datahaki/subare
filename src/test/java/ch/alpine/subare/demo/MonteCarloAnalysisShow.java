@@ -22,7 +22,7 @@ import ch.alpine.subare.util.PolicyBase;
 import ch.alpine.subare.util.PolicyType;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.ext.Timing;
+import ch.alpine.tensor.qty.Timing;
 
 /* package */ enum MonteCarloAnalysisShow {
   ;

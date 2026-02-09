@@ -13,7 +13,8 @@ import ch.alpine.subare.util.DiscreteVs;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.ext.Timing;
+import ch.alpine.tensor.qty.Quantity;
+import ch.alpine.tensor.qty.Timing;
 
 /** general bellman equation:
  * v_pi(s) == Sum_a pi(a|s) * Sum_{s', r} p(s', r | s, a) * (r + gamma * v_pi(s'))
@@ -55,13 +56,15 @@ public class IterativePolicyEvaluation {
     until(threshold, Integer.MAX_VALUE);
   }
 
+  private static final Scalar LIMIT = Quantity.of(3e9, "ns");
+
   public void until(Scalar threshold, int flips) {
     Scalar past = null;
     Timing timing = Timing.started();
     while (true) {
       step();
       Scalar delta = DiscreteValueFunctions.distance(vs_new, vs_old);
-      if (3e9 < timing.nanoSeconds())
+      if (Scalars.lessThan(LIMIT, timing.nanoSeconds()))
         IO.println(past + " -> " + delta + " " + alternate);
       if (Objects.nonNull(past) && Scalars.lessThan(past, delta))
         if (flips < ++alternate) {

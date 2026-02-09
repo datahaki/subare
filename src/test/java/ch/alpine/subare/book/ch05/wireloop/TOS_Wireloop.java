@@ -21,9 +21,9 @@ import ch.alpine.subare.util.gfx.StateRasters;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.ext.HomeDirectory;
-import ch.alpine.tensor.ext.Timing;
 import ch.alpine.tensor.io.AnimationWriter;
 import ch.alpine.tensor.io.GifAnimationWriter;
+import ch.alpine.tensor.qty.Timing;
 
 enum TOS_Wireloop {
   ;

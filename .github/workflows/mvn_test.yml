@@ -30,15 +30,6 @@ jobs:
         run: mvn -B -ntp install -DskipTests
         working-directory: ./tensor
 
-      - name: checkout bridge
-        uses: actions/checkout@v4
-        with:
-          repository: datahaki/bridge
-          path: bridge
-      - name: build and install bridge
-        run: mvn -B -ntp install -DskipTests
-        working-directory: ./bridge
-
       - name: mvn test
         shell: bash
         run: |

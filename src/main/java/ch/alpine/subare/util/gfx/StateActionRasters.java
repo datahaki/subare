@@ -21,6 +21,7 @@ import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.alg.Join;
 import ch.alpine.tensor.alg.Rescale;
+import ch.alpine.tensor.img.ColorDataGradient;
 import ch.alpine.tensor.img.ColorDataGradients;
 import ch.alpine.tensor.img.ImageResize;
 import ch.alpine.tensor.sca.Clips;
@@ -31,7 +32,7 @@ public enum StateActionRasters {
   /** @param stateActionRaster
    * @param qsa scaled to contain values in the interval [0, 1]
    * @return */
-  private static Tensor _render1(StateActionRaster stateActionRaster, DiscreteQsa qsa) {
+  public static Tensor _render1(StateActionRaster stateActionRaster, DiscreteQsa qsa) {
     DiscreteModel discreteModel = stateActionRaster.discreteModel();
     Dimension dimension = stateActionRaster.dimensionStateActionRaster();
     Tensor tensor = Array.of(_ -> DoubleScalar.INDETERMINATE, dimension.height, dimension.width);
@@ -47,6 +48,11 @@ public enum StateActionRasters {
     return tensor;
   }
 
+  public static Tensor _render2(StateActionRaster stateActionRaster, DiscreteQsa qsa) {
+    Policy policy = PolicyType.GREEDY.bestEquiprobable(stateActionRaster.discreteModel(), qsa, null);
+    return _render1(stateActionRaster, Policies.toQsa(stateActionRaster.discreteModel(), policy));
+  }
+
   /** @param stateActionRaster
    * @param qsa scaled to contain values in the interval [0, 1]
    * @return */
@@ -55,11 +61,15 @@ public enum StateActionRasters {
   }
 
   private static Tensor _render(StateActionRaster stateActionRaster, DiscreteQsa qsa, UnaryOperator<Tensor> uo) {
+    return _render(stateActionRaster, qsa, uo, ColorDataGradients.CLASSIC);
+  }
+
+  private static Tensor _render(StateActionRaster stateActionRaster, DiscreteQsa qsa, UnaryOperator<Tensor> uo, ColorDataGradient cdg) {
     Tensor tensor = _render1(stateActionRaster, qsa);
     tensor = uo.apply(tensor);
     // System.out.println(Pretty.of(tensor));
     // System.exit(0);
-    return tensor.maps(ColorDataGradients.CLASSIC);
+    return tensor.maps(cdg);
   }
 
   private static Tensor _render(StateActionRaster stateActionRaster, Policy policy) {

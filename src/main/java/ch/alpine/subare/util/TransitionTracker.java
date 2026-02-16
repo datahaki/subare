@@ -7,7 +7,7 @@ import java.util.Map;
 import ch.alpine.subare.api.StepDigest;
 import ch.alpine.subare.api.StepRecord;
 import ch.alpine.subare.math.AverageTracker;
-import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 
@@ -41,6 +41,6 @@ import ch.alpine.tensor.Tensor;
   }
 
   public Scalar transitionProbability(Tensor next) {
-    return RationalScalar.of(map.getOrDefault(next, 0), total);
+    return Rational.of(map.getOrDefault(next, 0), total);
   }
 }

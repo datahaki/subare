@@ -4,7 +4,7 @@ package ch.alpine.subare.util;
 import ch.alpine.subare.api.DiscreteValueFunction;
 import ch.alpine.subare.api.LearningRate;
 import ch.alpine.subare.api.StateActionCounter;
-import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -42,7 +42,7 @@ public enum DiscreteValueFunctions {
 
   @SuppressWarnings("unchecked")
   public static <T extends DiscreteValueFunction> T average(T tvi1, T tvi2) {
-    return (T) tvi1.create(tvi1.values().add(tvi2.values()).multiply(RationalScalar.HALF).stream());
+    return (T) tvi1.create(tvi1.values().add(tvi2.values()).multiply(Rational.HALF).stream());
   }
 
   @SuppressWarnings("unchecked")

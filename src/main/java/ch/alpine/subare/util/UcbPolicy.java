@@ -8,7 +8,7 @@ import ch.alpine.subare.api.StateActionCounter;
 import ch.alpine.subare.api.VsInterface;
 import ch.alpine.subare.math.FairArg;
 import ch.alpine.subare.math.Index;
-import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -41,7 +41,7 @@ import ch.alpine.tensor.pdf.d.CategoricalDistribution;
     Index index = Index.build(bestActions);
     final int optimalCount = bestActions.length();
     Tensor pdf = Tensor.of(discreteModel.actions(state).stream() //
-        .map(action -> index.containsKey(action) ? RationalScalar.of(1, optimalCount) : RealScalar.ZERO));
+        .map(action -> index.containsKey(action) ? Rational.of(1, optimalCount) : RealScalar.ZERO));
     return CategoricalDistribution.fromUnscaledPDF(pdf);
   }
 
@@ -49,7 +49,7 @@ import ch.alpine.tensor.pdf.d.CategoricalDistribution;
   public Scalar probability(Tensor state, Tensor action) {
     Tensor actions = getBestActions(state);
     return actions.stream().anyMatch(action::equals) // computational complexity is O(n)
-        ? RationalScalar.of(1, actions.length())
+        ? Rational.of(1, actions.length())
         : RealScalar.ZERO;
   }
 

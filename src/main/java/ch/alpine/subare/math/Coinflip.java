@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.random.RandomGenerator;
 
-import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
@@ -14,7 +14,7 @@ import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.pdf.d.BernoulliDistribution;
 
 public class Coinflip implements Serializable {
-  private static final Coinflip FAIR = new Coinflip(RationalScalar.HALF);
+  private static final Coinflip FAIR = new Coinflip(Rational.HALF);
 
   /** @param p_head in the interval [0, 1]
    * @return new instance of Coinflip with given probability p_head that {@link #tossHead()} returns true

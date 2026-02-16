@@ -3,7 +3,7 @@ package ch.alpine.subare.util;
 
 import ch.alpine.subare.api.DiscreteModel;
 import ch.alpine.subare.math.FairArg;
-import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.nrm.Vector1Norm;
@@ -33,7 +33,7 @@ public enum Loss {
           .reduce(Max::of).orElseThrow();
       // ---
       FairArg fairArg = FairArg.max(Tensor.of(actions.stream().map(action -> qsa.value(state, action))));
-      Scalar weight = RationalScalar.of(1, fairArg.optionsCount());
+      Scalar weight = Rational.of(1, fairArg.optionsCount());
       for (int index : fairArg.options()) {
         Tensor action = actions.get(index);
         Scalar delta = max.subtract(ref.value(state, action));

@@ -9,7 +9,7 @@ import ch.alpine.subare.api.StateActionCounter;
 import ch.alpine.subare.api.VsInterface;
 import ch.alpine.subare.math.FairArg;
 import ch.alpine.subare.math.Index;
-import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -71,7 +71,7 @@ public class EGreedyPolicy extends PolicyBase {
     final int optimalCount = bestActions.length();
     final int nonOptimalCount = discreteModel.actions(state).length() - optimalCount;
     if (nonOptimalCount == 0) // no non-optimal action exists
-      return RationalScalar.of(1, optimalCount);
+      return Rational.of(1, optimalCount);
     Scalar epsilon = explorationRate.epsilon(state, sac);
     if (index.containsKey(action))
       return RealScalar.ONE.subtract(epsilon).divide(RealScalar.of(optimalCount));

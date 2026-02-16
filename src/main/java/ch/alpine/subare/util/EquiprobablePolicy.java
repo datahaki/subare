@@ -8,7 +8,7 @@ import java.util.Objects;
 import ch.alpine.subare.api.Policy;
 import ch.alpine.subare.api.StateActionModel;
 import ch.alpine.subare.math.Index;
-import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Throw;
@@ -40,7 +40,7 @@ public class EquiprobablePolicy implements Policy {
     // map.put(state, index);
     // }
     if (index.containsKey(action)) // alternatively return 0
-      return RationalScalar.of(1, index.size());
+      return Rational.of(1, index.size());
     throw new Throw(state, action); // action invalid
   }
 

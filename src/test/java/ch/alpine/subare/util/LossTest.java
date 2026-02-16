@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import ch.alpine.subare.api.DiscreteModel;
-import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -56,7 +56,7 @@ class LossTest {
     DiscreteQsa ref = DiscreteQsa.build(discreteModel).create(Tensors.vector(0, 0, 1, 0).stream());
     DiscreteQsa qsa = DiscreteQsa.build(discreteModel).create(Tensors.vector(2, 0, 2, -2).stream());
     Scalar scalar = Loss.accumulation(discreteModel, ref, qsa);
-    assertEquals(scalar, RationalScalar.HALF);
+    assertEquals(scalar, Rational.HALF);
   }
 
   @Test

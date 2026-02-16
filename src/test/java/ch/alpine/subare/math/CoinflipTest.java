@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.ext.Serialization;
@@ -31,9 +31,9 @@ class CoinflipTest {
       counters[1] += coinflip1.tossHead() ? 1 : 0;
       counters[2] += coinflip2.tossHead() ? 1 : 0;
     }
-    Chop._02.requireClose(RationalScalar.of(counters[0], rounds), headProbability0);
-    Chop._02.requireClose(RationalScalar.of(counters[1], rounds), headProbability1);
-    Chop._02.requireClose(RationalScalar.of(counters[2], rounds), headProbability2);
+    Chop._02.requireClose(Rational.of(counters[0], rounds), headProbability0);
+    Chop._02.requireClose(Rational.of(counters[1], rounds), headProbability1);
+    Chop._02.requireClose(Rational.of(counters[2], rounds), headProbability2);
   }
 
   @Test
@@ -43,7 +43,7 @@ class CoinflipTest {
 
   @Test
   void testSerial() throws ClassNotFoundException, IOException {
-    Serialization.copy(Coinflip.of(RationalScalar.of(3, 5)));
+    Serialization.copy(Coinflip.of(Rational.of(3, 5)));
   }
 
   @Test

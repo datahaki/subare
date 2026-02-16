@@ -5,7 +5,7 @@ import ch.alpine.subare.api.LearningRate;
 import ch.alpine.subare.api.StateActionCounter;
 import ch.alpine.subare.api.StepRecord;
 import ch.alpine.tensor.DoubleScalar;
-import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
@@ -34,7 +34,7 @@ import ch.alpine.tensor.sca.pow.Power;
   private final Tensor memo = Tensors.vector(1.0); // index == 0 => learning rate == 1
 
   protected DecayedLearningRate(Scalar factor, Scalar exponent) {
-    if (Scalars.lessEquals(exponent, RationalScalar.HALF))
+    if (Scalars.lessEquals(exponent, Rational.HALF))
       throw new Throw(factor, exponent);
     this.factor = Sign.requirePositive(factor);
     this.exponent = exponent;

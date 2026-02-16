@@ -14,7 +14,7 @@ import ch.alpine.subare.api.EpisodeInterface;
 import ch.alpine.subare.api.RewardInterface;
 import ch.alpine.subare.api.StepRecord;
 import ch.alpine.subare.api.TerminalInterface;
-import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -97,7 +97,7 @@ public class ActionValueStatistics implements DequeDigest, EpisodeDigest, Action
         num += transitionTrackers.containsKey(key) ? 1 : 0;
         ++den;
       }
-    return RationalScalar.of(num, den);
+    return Rational.of(num, den);
   }
 
   // ---

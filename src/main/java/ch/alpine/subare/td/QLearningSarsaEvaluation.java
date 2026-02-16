@@ -7,7 +7,7 @@ import ch.alpine.subare.api.DiscreteModel;
 import ch.alpine.subare.api.PolicyExt;
 import ch.alpine.subare.math.FairArg;
 import ch.alpine.subare.util.StateAction;
-import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -39,7 +39,7 @@ import ch.alpine.tensor.red.Max;
       return RealScalar.ZERO;
     Tensor eval = Tensor.of(actions.stream().map(action -> policy1.qsaInterface().value(state, action)));
     FairArg fairArgMax = FairArg.max(eval);
-    Scalar weight = RationalScalar.of(1, fairArgMax.optionsCount()); // uniform distribution among best actions
+    Scalar weight = Rational.of(1, fairArgMax.optionsCount()); // uniform distribution among best actions
     for (int index : fairArgMax.options()) {
       Tensor action = actions.get(index);
       value = value.add(policy2.qsaInterface().value(state, action).multiply(weight)); // use Qsa2 to evaluate state-action pair

@@ -19,7 +19,7 @@ import ch.alpine.subare.util.PolicyBase;
 import ch.alpine.subare.util.PolicyType;
 import ch.alpine.subare.util.SimpleTestModel;
 import ch.alpine.subare.util.SimpleTestModels;
-import ch.alpine.tensor.RationalScalar;
+import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 
 class TrueOnlineSarsaTest {
@@ -28,7 +28,7 @@ class TrueOnlineSarsaTest {
     for (SarsaType sarsaType : SarsaType.values()) {
       MonteCarloInterface monteCarloInterface = SimpleTestModel.INSTANCE;
       FeatureMapper featureMapper = ExactFeatureMapper.of(monteCarloInterface);
-      LearningRate learningRate = ConstantLearningRate.of(RationalScalar.HALF);
+      LearningRate learningRate = ConstantLearningRate.of(Rational.HALF);
       FeatureWeight w = new FeatureWeight(featureMapper);
       QsaInterface qsa = DiscreteQsa.build(monteCarloInterface);
       StateActionCounter sac = new DiscreteStateActionCounter();
@@ -46,7 +46,7 @@ class TrueOnlineSarsaTest {
     for (SarsaType sarsaType : SarsaType.values()) {
       MonteCarloInterface monteCarloInterface = SimpleTestModel.INSTANCE;
       FeatureMapper featureMapper = ExactFeatureMapper.of(monteCarloInterface);
-      LearningRate learningRate = ConstantLearningRate.of(RationalScalar.HALF);
+      LearningRate learningRate = ConstantLearningRate.of(Rational.HALF);
       FeatureWeight w = new FeatureWeight(featureMapper);
       QsaInterface qsa = DiscreteQsa.build(monteCarloInterface);
       StateActionCounter sac = new DiscreteStateActionCounter();

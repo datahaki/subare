@@ -32,4 +32,11 @@ public enum NetChains {
         LinearLayer.of(distribution, ThreadLocalRandom.current(), dout, hidden), //
         new SoftArgMax());
   }
+
+  public static NetChain linTanhLin(int d_in, int hidden, int dout) {
+    return NetChain.of( //
+        LinearLayer.xavier(hidden, d_in), //
+        ElementwiseLayer.tanh(), //
+        LinearLayer.xavier(dout, hidden));
+  }
 }

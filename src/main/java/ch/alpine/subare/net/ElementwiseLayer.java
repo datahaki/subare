@@ -46,7 +46,7 @@ public abstract class ElementwiseLayer implements Layer {
    * @return */
   public static Layer tanh() {
     return new ElementwiseLayer(Tanh.FUNCTION) {
-      public ScalarUnaryOperator df = z -> z.one().subtract(z.multiply(z));
+      private final ScalarUnaryOperator df = z -> z.one().subtract(z.multiply(z));
 
       @Override
       public Tensor back(Tensor gradOutput) {

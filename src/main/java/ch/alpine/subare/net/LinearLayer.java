@@ -1,8 +1,10 @@
 // code by jph
 package ch.alpine.subare.net;
 
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.random.RandomGenerator;
 
+import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.Flatten;
@@ -10,15 +12,28 @@ import ch.alpine.tensor.io.MathematicaFormat;
 import ch.alpine.tensor.lie.TensorProduct;
 import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.RandomVariate;
+import ch.alpine.tensor.pdf.c.NormalDistribution;
 
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/LinearLayer.html">LinearLayer</a> */
 public class LinearLayer implements Layer {
-  public static LinearLayer of(Distribution d, RandomGenerator randomGenerator, int ante, int post) {
+  public static LinearLayer of(Distribution d, RandomGenerator randomGenerator, int post, int ante) {
     LinearLayer linearLayer = new LinearLayer();
-    linearLayer.W = RandomVariate.of(d, randomGenerator, ante, post);
-    linearLayer.b = Array.zeros(ante);
+    linearLayer.W = RandomVariate.of(d, randomGenerator, post, ante);
+    linearLayer.b = Array.zeros(post);
     return linearLayer;
+  }
+
+  public static Layer xavier(RandomGenerator randomGenerator, int post, int ante) {
+    Distribution distribution = NormalDistribution.of(RealScalar.ZERO, RealScalar.of(ante).reciprocal());
+    LinearLayer linearLayer = new LinearLayer();
+    linearLayer.W = RandomVariate.of(distribution, randomGenerator, post, ante);
+    linearLayer.b = Array.zeros(post);
+    return linearLayer;
+  }
+
+  public static Layer xavier(int post, int ante) {
+    return xavier(ThreadLocalRandom.current(), post, ante);
   }
 
   Tensor W;
@@ -30,8 +45,7 @@ public class LinearLayer implements Layer {
 
   @Override
   public Tensor forward(Tensor x) {
-    this.inputCache = x;
-    return W.dot(x).add(b);
+    return W.dot(inputCache = x).add(b);
   }
 
   @Override

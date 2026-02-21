@@ -3,6 +3,7 @@ package ch.alpine.subare.net;
 
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.api.ScalarUnaryOperator;
+import ch.alpine.tensor.io.MathematicaFormat;
 import ch.alpine.tensor.red.Entrywise;
 import ch.alpine.tensor.sca.Ramp;
 import ch.alpine.tensor.sca.UnitStep;
@@ -19,6 +20,11 @@ public abstract class ElementwiseLayer implements Layer {
       public Tensor back(Tensor gradOutput) {
         return Entrywise.mul().apply(gradOutput, outputCache.maps(DLogisticSigmoid.NESTED));
       }
+
+      @Override
+      public String toString() {
+        return MathematicaFormat.concise("LogisticSigmoidLayer");
+      }
     };
   }
 
@@ -34,6 +40,11 @@ public abstract class ElementwiseLayer implements Layer {
       public Tensor back(Tensor gradOutput) {
         return Entrywise.mul().apply(gradOutput, inputCache.maps(UnitStep.FUNCTION));
       }
+
+      @Override
+      public String toString() {
+        return MathematicaFormat.concise("ReLuLayer");
+      }
     };
   }
 
@@ -41,6 +52,10 @@ public abstract class ElementwiseLayer implements Layer {
    * gradInput[i] = gradOutput[i] * (1 - outputCache[i] * outputCache[i]);
    * Gradient shrinks near ±1
    * Can cause vanishing gradients
+   * 
+   * Tanh behaves best when:
+   * 
+   * input∼N(0,1)
    * 
    * @return */
   public static Layer tanh() {
@@ -50,6 +65,11 @@ public abstract class ElementwiseLayer implements Layer {
       @Override
       public Tensor back(Tensor gradOutput) {
         return Entrywise.mul().apply(gradOutput, outputCache.maps(df));
+      }
+
+      @Override
+      public String toString() {
+        return MathematicaFormat.concise("TanhLayer");
       }
     };
   }

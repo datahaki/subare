@@ -3,26 +3,21 @@ package ch.alpine.subare.net;
 
 import java.util.List;
 
+import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Flatten;
 import ch.alpine.tensor.ext.MergeIllegal;
+import ch.alpine.tensor.sca.Sign;
 
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/NetChain.html">NetChain</a> */
-public class NetChain {
+public record NetChain(List<Layer> list) {
   public static NetChain of(Layer... layers) {
     return new NetChain(List.of(layers));
   }
 
   public static NetChain of(List<Layer> layers) {
     return new NetChain(layers.stream().toList());
-  }
-
-  // ---
-  private final List<Layer> list;
-
-  private NetChain(List<Layer> list) {
-    this.list = list;
   }
 
   public Tensor forward(Tensor x0) {
@@ -43,5 +38,13 @@ public class NetChain {
 
   public Tensor error(Tensor tensor) {
     return list.getLast().error(tensor);
+  }
+
+  public void setL2(Scalar l2) {
+    Sign.requirePositiveOrZero(l2);
+    list.stream() //
+        .filter(linearLayer -> linearLayer instanceof LinearLayer) //
+        .map(LinearLayer.class::cast) //
+        .forEach(linearLayer -> linearLayer.l2 = l2);
   }
 }

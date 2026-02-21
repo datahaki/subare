@@ -5,6 +5,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.random.RandomGenerator;
 
 import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.Flatten;
@@ -13,6 +15,7 @@ import ch.alpine.tensor.lie.TensorProduct;
 import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.pdf.c.NormalDistribution;
+import ch.alpine.tensor.sca.Sign;
 
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/LinearLayer.html">LinearLayer</a> */
@@ -42,6 +45,7 @@ public class LinearLayer implements Layer {
   Tensor inputCache;
   Tensor gW;
   Tensor gb;
+  public Scalar l2 = RealScalar.ZERO;
 
   @Override
   public Tensor forward(Tensor x) {
@@ -50,8 +54,10 @@ public class LinearLayer implements Layer {
 
   @Override
   public Tensor back(Tensor gradOutput) {
-    // IO.println("L L recv " + gradOutput.maps(Round._3));
     gW = TensorProduct.of(gradOutput, inputCache);
+    Sign.requirePositiveOrZero(l2);
+    if (Scalars.nonZero(l2))
+      gW = gW.subtract(W.multiply(l2));
     gb = gradOutput;
     return gradOutput.dot(W); // gradInput
   }
@@ -74,6 +80,6 @@ public class LinearLayer implements Layer {
 
   @Override
   public String toString() {
-    return MathematicaFormat.concise("LinearLayer", W, b);
+    return MathematicaFormat.concise("LinearLayer", W, b, l2);
   }
 }

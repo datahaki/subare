@@ -19,7 +19,7 @@ public enum NetTrain {
    * @param consumer
    * @param timeout
    * @param maxEpoch */
-  public static void of(NetChain netChain, Tensor xdata, Tensor ydata, Scalar learningRate, Consumer<Tensor> consumer, Scalar timeout, int maxEpoch) {
+  public static void of(NetChain netChain, Tensor xdata, Tensor ydata, Scalar learningRate, Consumer<Tensor> consumer, Scalar timeout, int maxEpoch, int skip) {
     int epoch = 0;
     Timing timing = Timing.started();
     while (Scalars.lessThan(timing.seconds(), timeout) && epoch < maxEpoch) {
@@ -29,7 +29,7 @@ public enum NetTrain {
         netChain.back(d);
         netChain.update();
       }
-      if (epoch % 10 == 0)
+      if (epoch % skip == 0)
         consumer.accept(netChain.parameters());
       ++epoch;
     }

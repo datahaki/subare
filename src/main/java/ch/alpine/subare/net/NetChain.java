@@ -25,12 +25,12 @@ public class NetChain {
     this.list = list;
   }
 
-  public Tensor forward(Tensor x) {
-    return list.stream().reduce(x, Layer.forward(), MergeIllegal.operator());
+  public Tensor forward(Tensor x0) {
+    return list.stream().reduce(x0, (x, layer) -> layer.forward(x), MergeIllegal.operator());
   }
 
-  public Tensor back(Tensor d) {
-    return list.reversed().stream().reduce(d, Layer.back(), MergeIllegal.operator());
+  public Tensor back(Tensor grad0) {
+    return list.reversed().stream().reduce(grad0, (grad, layer) -> layer.back(grad), MergeIllegal.operator());
   }
 
   public void update() {

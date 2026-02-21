@@ -2,7 +2,6 @@
 package ch.alpine.subare.net;
 
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.api.ScalarUnaryOperator;
 import ch.alpine.tensor.red.Entrywise;
 import ch.alpine.tensor.sca.Ramp;
@@ -76,10 +75,5 @@ public abstract class ElementwiseLayer implements Layer {
   @Override
   public Tensor error(Tensor y) {
     throw new IllegalStateException();
-  }
-
-  @Override
-  public Tensor parameters() {
-    return Tensors.empty();
   }
 }

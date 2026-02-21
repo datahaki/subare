@@ -5,7 +5,6 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.UnitVector;
 import ch.alpine.tensor.ext.ArgMax;
 import ch.alpine.tensor.nrm.SoftmaxVector;
@@ -31,10 +30,5 @@ public class SoftArgMax implements Layer {
   public Tensor error(Tensor y) {
     int k = Scalars.intValueExact((Scalar) y);
     return UnitVector.of(interCache.length(), k).subtract(interCache); // one-hot target
-  }
-
-  @Override
-  public Tensor parameters() {
-    return Tensors.empty();
   }
 }

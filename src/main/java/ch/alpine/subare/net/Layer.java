@@ -1,19 +1,10 @@
 // code by jph
 package ch.alpine.subare.net;
 
-import java.util.function.BiFunction;
-
 import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
 
 public interface Layer {
-  public static BiFunction<Tensor, Layer, Tensor> back() {
-    return (d, layer) -> layer.back(d);
-  }
-
-  public static BiFunction<Tensor, Layer, Tensor> forward() {
-    return (x, layer) -> layer.forward(x);
-  }
-
   /** Forward pass
    * 
    * @param x
@@ -33,5 +24,7 @@ public interface Layer {
 
   Tensor error(Tensor y);
 
-  Tensor parameters();
+  default Tensor parameters() {
+    return Tensors.empty();
+  }
 }

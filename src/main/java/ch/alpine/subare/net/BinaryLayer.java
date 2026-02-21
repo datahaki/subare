@@ -2,7 +2,6 @@
 package ch.alpine.subare.net;
 
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.red.Entrywise;
 import ch.alpine.tensor.sca.exp.DLogisticSigmoid;
 
@@ -27,10 +26,5 @@ public class BinaryLayer implements Layer {
   public Tensor error(Tensor y) {
     // y should be either 0 or 1
     return y.subtract(x);
-  }
-
-  @Override
-  public Tensor parameters() {
-    return Tensors.empty();
   }
 }

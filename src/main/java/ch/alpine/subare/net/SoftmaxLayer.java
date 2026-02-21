@@ -3,7 +3,6 @@ package ch.alpine.subare.net;
 
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.nrm.SoftmaxVector;
 import ch.alpine.tensor.red.Entrywise;
 
@@ -30,10 +29,5 @@ public class SoftmaxLayer implements Layer {
   @Override
   public Tensor error(Tensor y) {
     throw new IllegalStateException();
-  }
-
-  @Override
-  public Tensor parameters() {
-    return Tensors.empty();
   }
 }

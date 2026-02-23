@@ -21,11 +21,11 @@ import ch.alpine.tensor.Throw;
         .reduce(Scalar::add) //
         .orElseThrow();
     if (!norm.equals(RealScalar.ONE)) {
-      System.out.println("state =" + state);
-      System.out.println("action=" + action);
+      IO.println("state =" + state);
+      IO.println("action=" + action);
       actionValueInterface.transitions(state, action).forEach(next -> {
         Scalar prob = actionValueInterface.transitionProbability(state, action, next);
-        System.out.println(next + " " + prob);
+        IO.println(next + " " + prob);
       });
       System.exit(0);
       throw new Throw(norm, state, action); // probabilities have to sum up to 1

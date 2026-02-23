@@ -135,11 +135,11 @@ public enum MonteCarloAlgorithms {
     for (int i = 0; i < nTimes; ++i) {
       nSamples.append(analyseAlgorithm(monteCarloInterface, batches, optimalQsa, errorAnalysis));
       if (Scalars.lessThan(Quantity.of(10, "s"), subWatch.seconds())) {
-        System.out.println(name() + " has finished trial " + i);
+        IO.println(name() + " has finished trial " + i);
         subWatch = Timing.started();
       }
     }
-    System.out.println("Time for executing " + name() + " " + nTimes + " times with " + batches + " batches: " + timing.seconds() + "[s]");
+    IO.println("Time for executing " + name() + " " + nTimes + " times with " + batches + " batches: " + timing.seconds() + "[s]");
     return Mean.of(nSamples);
   }
 
@@ -148,7 +148,7 @@ public enum MonteCarloAlgorithms {
     MonteCarloTrial monteCarloTrial = create(monteCarloInterface);
     Tensor samples = Tensors.empty();
     for (int index = 0; index < batches; ++index) {
-      // System.out.println("starting batch " + (index + 1) + " of " + batches);
+      // IO.println("starting batch " + (index + 1) + " of " + batches);
       monteCarloTrial.executeBatch();
       Tensor vector = Tensors.vector(index);
       for (DiscreteModelErrorAnalysis errorAnalysis : errorAnalysisList)

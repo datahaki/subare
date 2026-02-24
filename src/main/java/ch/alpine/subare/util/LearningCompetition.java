@@ -2,9 +2,11 @@
 package ch.alpine.subare.util;
 
 import java.awt.Point;
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
+
+import javax.swing.ImageIcon;
 
 import ch.alpine.subare.api.ExplorationRate;
 import ch.alpine.tensor.RealScalar;
@@ -12,11 +14,9 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.api.ScalarTensorFunction;
-import ch.alpine.tensor.ext.HomeDirectory;
+import ch.alpine.tensor.ext.AnimatedGifWriter;
 import ch.alpine.tensor.img.ColorDataGradients;
-import ch.alpine.tensor.img.ImageResize;
-import ch.alpine.tensor.io.AnimationWriter;
-import ch.alpine.tensor.io.GifAnimationWriter;
+import ch.alpine.tensor.io.ImageFormat;
 import ch.alpine.tensor.qty.Timing;
 import ch.alpine.tensor.red.Min;
 import ch.alpine.tensor.sca.Round;
@@ -26,7 +26,6 @@ public class LearningCompetition {
   private final ScalarTensorFunction colorDataFunction = ColorDataGradients.CLASSIC;
   // ---
   private final DiscreteQsa ref;
-  private final String name;
   private final Tensor epsilon;
   private final Scalar errorcap;
   private final Scalar errorcap2;
@@ -34,11 +33,9 @@ public class LearningCompetition {
   // override default values if necessary:
   public int period = 200;
   public int nstep = 1;
-  public int magnify = 5;
 
-  public LearningCompetition(DiscreteQsa ref, String name, Tensor epsilon, Scalar errorcap, Scalar errorcap2) {
+  public LearningCompetition(DiscreteQsa ref, Tensor epsilon, Scalar errorcap, Scalar errorcap2) {
     this.ref = ref;
-    this.name = name;
     this.epsilon = epsilon.unmodifiable();
     this.errorcap = errorcap;
     this.errorcap2 = errorcap2;
@@ -50,12 +47,13 @@ public class LearningCompetition {
 
   private int RESX = 0;
 
-  public void doit() throws Exception {
+  public ImageIcon doit() {
     RESX = map.keySet().stream().mapToInt(point -> point.x).reduce(Math::max).orElseThrow() + 1;
     int RESY = map.keySet().stream().mapToInt(point -> point.y).reduce(Math::max).orElseThrow() + 1;
     Tensor image = Array.zeros(RESX + 1 + RESX, RESY, 4);
-    try (AnimationWriter animationWriter = //
-        new GifAnimationWriter(HomeDirectory.Pictures.resolve("bulk_" + name + ".gif"), period, TimeUnit.MILLISECONDS)) {
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    try (AnimatedGifWriter animationWriter = //
+        AnimatedGifWriter.of(baos, period, true)) {
       for (int index = 0; index < epsilon.length(); ++index) {
         final int findex = index;
         Timing timing = Timing.started();
@@ -63,9 +61,12 @@ public class LearningCompetition {
         processEntry(image, entry.getKey(), entry.getValue(), findex));
         //
         System.out.printf("%3d %s sec%n", index, timing.seconds().maps(Round._1));
-        animationWriter.write(ImageResize.nearest(image, magnify));
+        animationWriter.write(ImageFormat.of(image));
       }
+    } catch (Exception e) {
+      throw new RuntimeException(e);
     }
+    return new ImageIcon(baos.toByteArray());
   }
 
   private void processEntry(Tensor image, Point point, LearningContender learningContender, int index) {

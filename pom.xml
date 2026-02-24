@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>ch.alpine</groupId>
+	<groupId>io.github.datahaki</groupId>
 	<artifactId>subare</artifactId>
 	<version>0.4.4</version>
 	<packaging>jar</packaging>
@@ -18,7 +18,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>ch.alpine</groupId>
+			<groupId>io.github.datahaki</groupId>
 			<artifactId>tensor</artifactId>
 			<version>1.0.7</version>
 		</dependency>
@@ -88,8 +88,9 @@
 			</plugin>
 
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
-				<version>3.1.1</version>
+				<version>3.1.4</version>
 				<configuration>
 					<altDeploymentRepository>
 						internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>

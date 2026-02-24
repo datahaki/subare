@@ -76,14 +76,14 @@ public class ActionValueIteration implements DiscreteQsaSupplier {
 
   /** perform iteration until values don't change more than threshold
    * 
-   * @param threshold positive */
-  public void untilBelow(Chop threshold) {
-    untilBelow(threshold, Integer.MAX_VALUE);
+   * @param chop */
+  public void untilBelow(Chop chop) {
+    untilBelow(chop, Integer.MAX_VALUE);
   }
 
   private static final Scalar LIMIT = Quantity.of(3e9, "ns");
 
-  public void untilBelow(Chop threshold, int flips) {
+  public void untilBelow(Chop chop, int flips) {
     Scalar past = null;
     Timing timing = Timing.started();
     while (true) {
@@ -97,8 +97,7 @@ public class ActionValueIteration implements DiscreteQsaSupplier {
           break;
         }
       past = delta;
-      // TODO SUBARE consider changing to lessEquals (requires renaming of API functions)
-      if (threshold.isZero(delta))
+      if (chop.isZero(N.DOUBLE.apply(delta)))
         break;
     }
   }

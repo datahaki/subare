@@ -17,6 +17,8 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.qty.Quantity;
 import ch.alpine.tensor.qty.Timing;
 import ch.alpine.tensor.red.Max;
+import ch.alpine.tensor.sca.Chop;
+import ch.alpine.tensor.sca.N;
 
 /** value iteration: "policy evaluation is stopped after just one sweep"
  * eq (3.14) in 3.5, p.46
@@ -32,9 +34,9 @@ public class ValueIteration implements DiscreteVsSupplier {
   /** @param standardModel
    * @param threshold
    * @return */
-  public static DiscreteVs solve(StandardModel standardModel, Scalar threshold) {
+  public static DiscreteVs solve(StandardModel standardModel, Chop chop) {
     ValueIteration valueIteration = new ValueIteration(standardModel);
-    valueIteration.untilBelow(threshold);
+    valueIteration.untilBelow(chop);
     return valueIteration.vs();
   }
 
@@ -64,13 +66,13 @@ public class ValueIteration implements DiscreteVsSupplier {
    * 
    * @param threshold
    * @return */
-  public void untilBelow(Scalar threshold) {
-    untilBelow(threshold, Integer.MAX_VALUE);
+  public void untilBelow(Chop chop) {
+    untilBelow(chop, Integer.MAX_VALUE);
   }
 
   private static final Scalar LIMIT = Quantity.of(3e9, "ns");
 
-  public void untilBelow(Scalar threshold, int flips) {
+  public void untilBelow(Chop chop, int flips) {
     Scalar past = null;
     Timing timing = Timing.started();
     while (true) {
@@ -84,7 +86,7 @@ public class ValueIteration implements DiscreteVsSupplier {
           break;
         }
       past = delta;
-      if (Scalars.lessThan(delta, threshold))
+      if (chop.isZero(N.DOUBLE.apply(delta)))
         break;
     }
   }

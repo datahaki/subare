@@ -23,7 +23,6 @@ import ch.alpine.tensor.alg.Join;
 import ch.alpine.tensor.alg.Rescale;
 import ch.alpine.tensor.img.ColorDataGradient;
 import ch.alpine.tensor.img.ColorDataGradients;
-import ch.alpine.tensor.img.ImageResize;
 import ch.alpine.tensor.sca.Clips;
 
 // TODO SUBARE all non-terminal function should be package visibility
@@ -78,7 +77,7 @@ public enum StateActionRasters {
 
   // ---
   public static Tensor qsa(StateActionRaster stateActionRaster, DiscreteQsa qsa) {
-    return ImageResize.nearest(_render(stateActionRaster, qsa), stateActionRaster.magnify());
+    return _render(stateActionRaster, qsa);
   }
 
   public static Tensor qsa_rescaled(StateActionRaster stateActionRaster, DiscreteQsa qsa) {
@@ -92,8 +91,7 @@ public enum StateActionRasters {
     List<Integer> list = Dimensions.of(image1);
     int dim = stateActionRaster.joinAlongDimension();
     list.set(dim, 3);
-    return ImageResize.nearest( //
-        Join.of(dim, image1, Array.zeros(list), image2), stateActionRaster.magnify());
+    return Join.of(dim, image1, Array.zeros(list), image2);
   }
 
   public static Tensor qsaPolicyRef(StateActionRaster stateActionRaster, DiscreteQsa qsa, DiscreteQsa ref) {
@@ -107,8 +105,7 @@ public enum StateActionRasters {
     List<Integer> list = Dimensions.of(image1);
     int dim = stateActionRaster.joinAlongDimension();
     list.set(dim, 3);
-    return ImageResize.nearest( //
-        Join.of(dim, image1, Array.zeros(list), image2, Array.zeros(list), image3), stateActionRaster.magnify());
+    return Join.of(dim, image1, Array.zeros(list), image2, Array.zeros(list), image3);
   }
 
   public static Tensor qsaLossRef(StateActionRaster stateActionRaster, DiscreteQsa qsa, DiscreteQsa ref) {
@@ -122,8 +119,7 @@ public enum StateActionRasters {
     List<Integer> list = Dimensions.of(image1);
     int dim = stateActionRaster.joinAlongDimension();
     list.set(dim, 1);
-    return ImageResize.nearest( //
-        Join.of(dim, image1, Array.zeros(list), image2, Array.zeros(list), image3), stateActionRaster.magnify());
+    return Join.of(dim, image1, Array.zeros(list), image2, Array.zeros(list), image3);
   }
 
   // not recommended, use qsaLossRef instead
@@ -134,7 +130,6 @@ public enum StateActionRasters {
     List<Integer> list = Dimensions.of(image1);
     int dim = stateActionRaster.joinAlongDimension();
     list.set(dim, 3);
-    return ImageResize.nearest( //
-        Join.of(dim, image1, Array.zeros(list), image2), stateActionRaster.magnify());
+    return Join.of(dim, image1, Array.zeros(list), image2);
   }
 }

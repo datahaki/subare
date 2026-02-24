@@ -19,7 +19,6 @@ import ch.alpine.tensor.alg.Join;
 import ch.alpine.tensor.alg.Rescale;
 import ch.alpine.tensor.chq.ExactTensorQ;
 import ch.alpine.tensor.img.ColorDataGradients;
-import ch.alpine.tensor.img.ImageResize;
 import ch.alpine.tensor.img.Raster;
 import ch.alpine.tensor.io.Primitives;
 import ch.alpine.tensor.sca.Clips;
@@ -57,7 +56,7 @@ public enum StateRasters {
 
   // ---
   public static Tensor vs(StateRaster stateRaster, DiscreteVs vs) {
-    return ImageResize.nearest(_render(stateRaster, vs), stateRaster.magnify());
+    return _render(stateRaster, vs);
   }
 
   public static Tensor vs_rescale(StateRaster stateRaster, DiscreteVs vs) {
@@ -84,7 +83,6 @@ public enum StateRasters {
     List<Integer> list = Dimensions.of(image1);
     int dim = stateRaster.joinAlongDimension();
     list.set(dim, 1);
-    return ImageResize.nearest( //
-        Join.of(dim, image1, Array.zeros(list), image2, Array.zeros(list), image3), stateRaster.magnify());
+    return Join.of(dim, image1, Array.zeros(list), image2, Array.zeros(list), image3);
   }
 }

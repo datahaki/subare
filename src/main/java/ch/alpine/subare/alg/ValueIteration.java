@@ -29,6 +29,16 @@ import ch.alpine.tensor.red.Max;
  * initial values are set to zeros
  * Jacobi style, i.e. updates take effect only in the next iteration */
 public class ValueIteration implements DiscreteVsSupplier {
+  /** @param standardModel
+   * @param threshold
+   * @return */
+  public static DiscreteVs solve(StandardModel standardModel, Scalar threshold) {
+    ValueIteration valueIteration = new ValueIteration(standardModel);
+    valueIteration.untilBelow(threshold);
+    return valueIteration.vs();
+  }
+
+  // ---
   private final DiscreteModel discreteModel;
   private final ActionValueAdapter actionValueAdapter;
   private final Scalar gamma;

@@ -16,8 +16,8 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.qty.Quantity;
 import ch.alpine.tensor.qty.Timing;
 import ch.alpine.tensor.red.Max;
+import ch.alpine.tensor.sca.Chop;
 import ch.alpine.tensor.sca.N;
-import ch.alpine.tensor.sca.Sign;
 
 /** action value iteration: "policy evaluation is stopped after just one sweep"
  * 
@@ -40,6 +40,15 @@ public class ActionValueIteration implements DiscreteQsaSupplier {
    * @param actionValueInterface */
   public static ActionValueIteration of(DiscreteModel discreteModel, ActionValueInterface actionValueInterface) {
     return new ActionValueIteration(discreteModel, actionValueInterface, DiscreteQsa.build(discreteModel));
+  }
+
+  /** @param standardModel
+   * @param threshold positive
+   * @return */
+  public static DiscreteQsa solve(StandardModel standardModel, Chop chop) {
+    ActionValueIteration actionValueIteration = of(standardModel);
+    actionValueIteration.untilBelow(chop);
+    return actionValueIteration.qsa();
   }
 
   // ---
@@ -68,14 +77,13 @@ public class ActionValueIteration implements DiscreteQsaSupplier {
   /** perform iteration until values don't change more than threshold
    * 
    * @param threshold positive */
-  public void untilBelow(Scalar threshold) {
+  public void untilBelow(Chop threshold) {
     untilBelow(threshold, Integer.MAX_VALUE);
   }
 
   private static final Scalar LIMIT = Quantity.of(3e9, "ns");
 
-  public void untilBelow(Scalar threshold, int flips) {
-    Sign.requirePositive(threshold);
+  public void untilBelow(Chop threshold, int flips) {
     Scalar past = null;
     Timing timing = Timing.started();
     while (true) {
@@ -90,7 +98,7 @@ public class ActionValueIteration implements DiscreteQsaSupplier {
         }
       past = delta;
       // TODO SUBARE consider changing to lessEquals (requires renaming of API functions)
-      if (Scalars.lessThan(delta, threshold))
+      if (threshold.isZero(delta))
         break;
     }
   }

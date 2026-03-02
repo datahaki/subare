@@ -22,6 +22,6 @@ public record LearningContender(MonteCarloInterface monteCarloInterface, Sarsa s
   }
 
   public Infoline infoline(DiscreteQsa ref) {
-    return new Infoline(monteCarloInterface, ref, qsa);
+    return Infoline.of(monteCarloInterface, ref, qsa);
   }
 }

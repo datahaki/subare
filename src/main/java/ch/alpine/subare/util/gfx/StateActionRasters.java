@@ -36,7 +36,7 @@ public enum StateActionRasters {
     Tensor tensor = Array.of(_ -> DoubleScalar.INDETERMINATE, dimension.height, dimension.width);
     for (Tensor state : discreteModel.states())
       for (Tensor action : discreteModel.actions(state)) {
-        D2Point point = stateActionRaster.point(state, action);
+        IntPoint point = stateActionRaster.point(state, action);
         if (Objects.nonNull(point))
           tensor.set(qsa.value(state, action), point.y(), point.x());
       }

@@ -2,7 +2,10 @@
 package ch.alpine.subare.util;
 
 import ch.alpine.subare.api.DiscreteModel;
+import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.sca.Chop;
 import ch.alpine.tensor.sca.Round;
 
@@ -19,6 +22,14 @@ public record Infoline(Scalar error, Scalar loss) {
 
   public boolean isErrorFree() {
     return Chop._10.isZero(error);
+  }
+
+  public Tensor vector() {
+    return Tensors.of(error, loss);
+  }
+
+  public Tensor indexedVector(int index) {
+    return Tensors.of(RealScalar.of(index), error, loss);
   }
 
   @Override

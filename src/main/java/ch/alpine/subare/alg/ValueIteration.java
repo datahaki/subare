@@ -31,6 +31,8 @@ import ch.alpine.tensor.sca.N;
  * initial values are set to zeros
  * Jacobi style, i.e. updates take effect only in the next iteration */
 public class ValueIteration implements DiscreteVsSupplier {
+  public static final ThreadLocal<Boolean> PRINT = ThreadLocal.withInitial(() -> false);
+
   /** @param standardModel
    * @param threshold
    * @return */
@@ -66,19 +68,19 @@ public class ValueIteration implements DiscreteVsSupplier {
    * 
    * @param threshold
    * @return */
-  public void untilBelow(Chop chop) {
-    untilBelow(chop, Integer.MAX_VALUE);
+  public int untilBelow(Chop chop) {
+    return untilBelow(chop, Integer.MAX_VALUE);
   }
 
   private static final Scalar LIMIT = Quantity.of(3e9, "ns");
 
-  public void untilBelow(Chop chop, int flips) {
+  public int untilBelow(Chop chop, int flips) {
     Scalar past = null;
     Timing timing = Timing.started();
     while (true) {
       step();
       final Scalar delta = DiscreteValueFunctions.distance(vs_new, vs_old);
-      if (Scalars.lessThan(LIMIT, timing.nanoSeconds()))
+      if (PRINT.get() && Scalars.lessThan(LIMIT, timing.nanoSeconds()))
         IO.println(past + " -> " + delta + " " + alternate);
       if (Objects.nonNull(past) && Scalars.lessThan(past, delta))
         if (flips < ++alternate) {
@@ -89,6 +91,7 @@ public class ValueIteration implements DiscreteVsSupplier {
       if (chop.isZero(N.DOUBLE.apply(delta)))
         break;
     }
+    return iterations;
   }
 
   /** perform one step of the iteration

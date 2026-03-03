@@ -3,9 +3,12 @@ package ch.alpine.subare.net;
 
 import java.util.function.Consumer;
 
+import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Join;
 import ch.alpine.tensor.qty.Timing;
 
 /** inspired by
@@ -30,7 +33,7 @@ public enum NetTrain {
         netChain.update();
       }
       if (epoch % skip == 0)
-        consumer.accept(netChain.parameters());
+        consumer.accept(Join.of(Tensors.of(RealScalar.of(epoch)), netChain.parameters()));
       ++epoch;
     }
   }

@@ -13,5 +13,5 @@ public interface StateActionRaster extends BaseRaster {
    * @param action
    * @return point with x, y as coordinates of state-action pair in raster,
    * or null if state-action pair does not have a position in the raster */
-  D2Point point(Tensor state, Tensor action);
+  IntPoint point(Tensor state, Tensor action);
 }

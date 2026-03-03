@@ -2,7 +2,6 @@
 package ch.alpine.subare.util.gfx;
 
 import java.awt.Dimension;
-import java.awt.Point;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.UnaryOperator;
@@ -37,9 +36,9 @@ public enum StateActionRasters {
     Tensor tensor = Array.of(_ -> DoubleScalar.INDETERMINATE, dimension.height, dimension.width);
     for (Tensor state : discreteModel.states())
       for (Tensor action : discreteModel.actions(state)) {
-        Point point = stateActionRaster.point(state, action);
+        D2Point point = stateActionRaster.point(state, action);
         if (Objects.nonNull(point))
-          tensor.set(qsa.value(state, action), point.y, point.x);
+          tensor.set(qsa.value(state, action), point.y(), point.x());
       }
     // Clip.UNIT.apply(scalar)
     // System.out.println(Pretty.of(tensor));

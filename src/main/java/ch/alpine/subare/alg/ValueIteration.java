@@ -30,7 +30,7 @@ import ch.alpine.tensor.sca.N;
  * parallel implementation
  * initial values are set to zeros
  * Jacobi style, i.e. updates take effect only in the next iteration */
-public class ValueIteration implements DiscreteVsSupplier {
+public class ValueIteration extends BaseIteration implements DiscreteVsSupplier {
   public static final ThreadLocal<Boolean> PRINT = ThreadLocal.withInitial(() -> false);
 
   /** @param standardModel
@@ -48,7 +48,6 @@ public class ValueIteration implements DiscreteVsSupplier {
   private final Scalar gamma;
   private DiscreteVs vs_new;
   private DiscreteVs vs_old;
-  private int iterations = 0;
   private int alternate = 0;
 
   /** @param standardModel */
@@ -68,18 +67,19 @@ public class ValueIteration implements DiscreteVsSupplier {
    * 
    * @param threshold
    * @return */
-  public int untilBelow(Chop chop) {
-    return untilBelow(chop, Integer.MAX_VALUE);
+  public void untilBelow(Chop chop) {
+    untilBelow(chop, Integer.MAX_VALUE);
   }
 
   private static final Scalar LIMIT = Quantity.of(3e9, "ns");
 
-  public int untilBelow(Chop chop, int flips) {
+  public void untilBelow(Chop chop, int flips) {
     Scalar past = null;
     Timing timing = Timing.started();
     while (true) {
       step();
       final Scalar delta = DiscreteValueFunctions.distance(vs_new, vs_old);
+      appendRow(delta);
       if (PRINT.get() && Scalars.lessThan(LIMIT, timing.nanoSeconds()))
         IO.println(past + " -> " + delta + " " + alternate);
       if (Objects.nonNull(past) && Scalars.lessThan(past, delta))
@@ -91,7 +91,6 @@ public class ValueIteration implements DiscreteVsSupplier {
       if (chop.isZero(N.DOUBLE.apply(delta)))
         break;
     }
-    return iterations;
   }
 
   /** perform one step of the iteration
@@ -103,7 +102,6 @@ public class ValueIteration implements DiscreteVsSupplier {
     vs_new = vs_new.create(vs_new.keys().stream() //
         .parallel() //
         .map(state -> jacobiMax(state, discounted)));
-    ++iterations;
   }
 
   private Scalar jacobiMax(Tensor state, VsInterface gvalues) {
@@ -116,9 +114,5 @@ public class ValueIteration implements DiscreteVsSupplier {
   @Override
   public DiscreteVs vs() {
     return vs_new;
-  }
-
-  public int iterations() {
-    return iterations;
   }
 }

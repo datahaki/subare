@@ -26,7 +26,7 @@ import ch.alpine.tensor.sca.N;
  * parallel implementation
  * initial values are set to zeros
  * Jacobi style, i.e. updates take effect only in the next iteration */
-public class ActionValueIteration implements DiscreteQsaSupplier {
+public class ActionValueIteration extends BaseIteration implements DiscreteQsaSupplier {
   /** @param standardModel */
   public static ActionValueIteration of(StandardModel standardModel) {
     return of(standardModel, standardModel);
@@ -57,7 +57,6 @@ public class ActionValueIteration implements DiscreteQsaSupplier {
   private Scalar gamma;
   private DiscreteQsa qsa_new;
   private QsaInterface qsa_old;
-  private int iterations = 0;
   private int alternate = 0;
 
   private ActionValueIteration( //
@@ -89,6 +88,7 @@ public class ActionValueIteration implements DiscreteQsaSupplier {
     while (true) {
       step();
       final Scalar delta = DiscreteValueFunctions.distance(qsa_new, (DiscreteQsa) qsa_old);
+      appendRow(delta);
       if (Scalars.lessThan(LIMIT, timing.nanoSeconds())) // print info if iteration takes longer than 3 seconds
         IO.println(past + " -> " + delta + " " + alternate);
       if (Objects.nonNull(past) && Scalars.lessThan(past, delta))
@@ -110,7 +110,6 @@ public class ActionValueIteration implements DiscreteQsaSupplier {
     qsa_new = qsa_new.create(qsa_new.keys().stream() //
         .parallel() //
         .map(pair -> jacobiMax(pair.get(0), pair.get(1))));
-    ++iterations;
   }
 
   // helper function
@@ -131,9 +130,5 @@ public class ActionValueIteration implements DiscreteQsaSupplier {
   @Override
   public DiscreteQsa qsa() {
     return qsa_new;
-  }
-
-  public int iterations() {
-    return iterations;
   }
 }

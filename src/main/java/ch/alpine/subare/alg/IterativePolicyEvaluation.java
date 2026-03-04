@@ -4,6 +4,7 @@ package ch.alpine.subare.alg;
 
 import java.util.Objects;
 
+import ch.alpine.subare.api.DiscreteVsSupplier;
 import ch.alpine.subare.api.Policy;
 import ch.alpine.subare.api.StandardModel;
 import ch.alpine.subare.api.VsInterface;
@@ -15,19 +16,20 @@ import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.qty.Quantity;
 import ch.alpine.tensor.qty.Timing;
+import ch.alpine.tensor.sca.Chop;
+import ch.alpine.tensor.sca.N;
 
 /** general bellman equation:
  * v_pi(s) == Sum_a pi(a|s) * Sum_{s', r} p(s', r | s, a) * (r + gamma * v_pi(s'))
  * bellman optimality equation:
  * v_*(s) == max_a Sum_{s', r} p(s', r | s, a) * (r + gamma * v_*(s')) */
-public class IterativePolicyEvaluation {
+public class IterativePolicyEvaluation extends BaseIteration implements DiscreteVsSupplier {
   private final StandardModel standardModel;
   private final ActionValueAdapter actionValueAdapter;
   private final Policy policy;
   private final Scalar gamma;
   private DiscreteVs vs_new;
   private DiscreteVs vs_old;
-  private int iterations = 0;
   private int alternate = 0;
 
   // ---
@@ -41,8 +43,7 @@ public class IterativePolicyEvaluation {
    * @param standardModel
    * @param policy
    * @return */
-  public IterativePolicyEvaluation( //
-      StandardModel standardModel, Policy policy) {
+  public IterativePolicyEvaluation(StandardModel standardModel, Policy policy) {
     this.standardModel = standardModel;
     actionValueAdapter = new ActionValueAdapter(standardModel);
     this.policy = policy;
@@ -52,18 +53,19 @@ public class IterativePolicyEvaluation {
 
   /** @param threshold
    * @return */
-  public void until(Scalar threshold) {
-    until(threshold, Integer.MAX_VALUE);
+  public void until(Chop chop) {
+    until(chop, Integer.MAX_VALUE);
   }
 
   private static final Scalar LIMIT = Quantity.of(3e9, "ns");
 
-  public void until(Scalar threshold, int flips) {
+  public void until(Chop chop, int flips) {
     Scalar past = null;
     Timing timing = Timing.started();
     while (true) {
       step();
       Scalar delta = DiscreteValueFunctions.distance(vs_new, vs_old);
+      appendRow(delta);
       if (Scalars.lessThan(LIMIT, timing.nanoSeconds()))
         IO.println(past + " -> " + delta + " " + alternate);
       if (Objects.nonNull(past) && Scalars.lessThan(past, delta))
@@ -71,9 +73,9 @@ public class IterativePolicyEvaluation {
           IO.println("give up at " + past + " -> " + delta);
           break;
         }
-      past = delta;
-      if (Scalars.lessThan(delta, threshold))
+      if (chop.isZero(N.DOUBLE.apply(delta)))
         break;
+      past = delta;
     }
   }
 
@@ -83,7 +85,6 @@ public class IterativePolicyEvaluation {
     vs_new = vs_new.create(standardModel.states().stream() //
         .parallel() //
         .map(state -> jacobiAdd(state, discounted)));
-    ++iterations;
   }
 
   // helper function
@@ -95,11 +96,8 @@ public class IterativePolicyEvaluation {
         .orElseThrow();
   }
 
+  @Override
   public DiscreteVs vs() {
     return vs_new;
-  }
-
-  public int iterations() {
-    return iterations;
   }
 }

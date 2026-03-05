@@ -25,6 +25,10 @@ import ch.alpine.tensor.red.Max;
  * 
  * algorithm performs poorly when rewards are unevenly distributed */
 public class Random1StepTabularQPlanning implements StepDigest, StateActionCounterSupplier {
+  /** @param discreteModel
+   * @param qsa
+   * @param learningRate
+   * @return */
   public static Random1StepTabularQPlanning of(DiscreteModel discreteModel, QsaInterface qsa, LearningRate learningRate) {
     return new Random1StepTabularQPlanning(discreteModel, qsa, learningRate, new DiscreteStateActionCounter());
   }
@@ -60,7 +64,7 @@ public class Random1StepTabularQPlanning implements StepDigest, StateActionCount
         .filter(action1 -> sac.isEncountered(StateAction.key(state1, action1))) //
         .map(action1 -> qsa.value(state1, action1)) //
         .reduce(Max::of) //
-        .orElse(RealScalar.ZERO);
+        .orElse(RealScalar.ZERO); // avoid this for the possibility of Quantities
     Scalar alpha = learningRate.alpha(stepRecord, sac);
     Scalar value1 = reward.add(gamma.multiply(max));
     qsa.blend(state0, action, value1, alpha);

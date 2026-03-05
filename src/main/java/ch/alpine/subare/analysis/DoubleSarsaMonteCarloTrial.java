@@ -21,7 +21,7 @@ import ch.alpine.subare.util.PolicyBase;
 import ch.alpine.subare.util.PolicyType;
 import ch.alpine.tensor.RealScalar;
 
-/* package */ class DoubleSarsaMonteCarloTrial implements MonteCarloTrial {
+class DoubleSarsaMonteCarloTrial implements MonteCarloTrial {
   public static MonteCarloTrial of(MonteCarloInterface monteCarloInterface, SarsaType sarsaType) {
     DiscreteQsa qsa1 = DiscreteQsa.build(monteCarloInterface);
     DiscreteQsa qsa2 = DiscreteQsa.build(monteCarloInterface);

@@ -27,6 +27,7 @@ public enum DiscreteModelErrorAnalysis {
   LINEAR_POLICY {
     @Override
     public Scalar getError(DiscreteModel discreteModel, DiscreteQsa refQsa, DiscreteQsa currentQsa) {
+      // TODO there should probably be ABS somewhere
       return Total.ofVector(Loss.asQsa(discreteModel, refQsa, currentQsa).values());
     }
   },

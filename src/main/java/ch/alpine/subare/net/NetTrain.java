@@ -1,6 +1,9 @@
 // code by jph
 package ch.alpine.subare.net;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
@@ -20,6 +23,7 @@ public class NetTrain {
    * @param consumer
    * @param timeout
    * @param maxEpoch */
+  private final List<NetTrainListener> list = new LinkedList<>();
   public final TableBuilder tparam = new TableBuilder();
   // TODO check terminology
   public final TableBuilder tloss = new TableBuilder();
@@ -32,6 +36,10 @@ public class NetTrain {
     this.netChain = netChain;
     this.xdata = xdata;
     this.ydata = ydata;
+  }
+
+  public void addListener(NetTrainListener runnable) {
+    list.add(runnable);
   }
 
   public void run(Scalar learningRate, Scalar timeout, int maxEpoch, int skip) {
@@ -50,6 +58,8 @@ public class NetTrain {
       if (epoch % skip == 0) {
         tloss.appendRow(RealScalar.of(epoch), ds);
         tparam.appendRow(RealScalar.of(epoch), netChain.parameters());
+        final int fi = epoch;
+        list.forEach(ntl -> ntl.epoch(fi));
       }
       ++epoch;
     }

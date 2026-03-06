@@ -45,6 +45,9 @@ public class LinearLayer implements Layer {
   Tensor inputCache;
   Tensor gW;
   Tensor gb;
+  /**
+   * 
+   */
   public Scalar l2 = RealScalar.ZERO;
 
   @Override

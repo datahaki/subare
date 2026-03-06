@@ -39,4 +39,11 @@ public enum NetChains {
         ElementwiseLayer.tanh(), //
         LinearLayer.xavier(dout, hidden));
   }
+
+  public static NetChain cnnRelu(int kernelSize) {
+    Distribution distribution = NormalDistribution.of(0, 0.1);
+    return NetChain.of( //
+        Conv1DLayer.of(distribution, ThreadLocalRandom.current(), kernelSize), // , //
+        ElementwiseLayer.relu());
+  }
 }

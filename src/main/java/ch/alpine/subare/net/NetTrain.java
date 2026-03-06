@@ -42,6 +42,7 @@ public class NetTrain {
       for (int i = 0; i < xdata.length(); i++) {
         Tensor y = netChain.forward(xdata.get(i));
         Tensor d = netChain.error(ydata.get(i)).multiply(learningRate);
+        // IO.println("error: "+d);
         ds.append(d);
         netChain.back(d);
         netChain.update();

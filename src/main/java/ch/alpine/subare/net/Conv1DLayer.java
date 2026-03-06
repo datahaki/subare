@@ -18,58 +18,60 @@ import ch.alpine.tensor.red.Total;
 public class Conv1DLayer implements Layer {
   public static Conv1DLayer of(Distribution d, RandomGenerator randomGenerator, int kernelSize) {
     Conv1DLayer conv1dLayer = new Conv1DLayer();
-    conv1dLayer.weights = RandomVariate.of(d, randomGenerator, kernelSize);
+    conv1dLayer.w = RandomVariate.of(d, randomGenerator, kernelSize);
     return conv1dLayer;
   }
 
-  Tensor weights;
-  Scalar b = RealScalar.ZERO;
+  public Tensor w;
+  public Scalar b = RealScalar.ZERO;
   /** input cache */
   Tensor inputCache;
+  Tensor outputCache;
   Tensor gW;
   Scalar gb;
 
   @Override
   public Tensor forward(Tensor x) {
-    return ListCorrelate.of(weights, inputCache = x).maps(b::add);
+    return outputCache = ListCorrelate.of(w, inputCache = x).maps(b::add);
   }
 
   @Override
   public Tensor back(Tensor gradOutput) {
     gW = dW(gradOutput, inputCache);
     gb = Total.ofVector(gradOutput);
-    return convsame(gradOutput, weights);
+    return convsame(gradOutput, w);
   }
 
   @Override
   public void update() {
-    weights = weights.add(gW);
+    w = w.add(gW);
     b = b.add(gb);
   }
 
   @Override
   public Tensor error(Tensor y) {
-    throw new IllegalStateException();
+    return y.subtract(outputCache).multiply(RealScalar.TWO);
   }
 
   @Override
   public Tensor parameters() {
-    return Append.of(weights, b);
+    return Append.of(w, b);
   }
 
-  public static Tensor dW(Tensor outputGradient, Tensor lastInput) {
-    int kernelSize = lastInput.length() - outputGradient.length() + 1;
+  private static Tensor dW(Tensor dY, Tensor x) {
+    int kernelSize = x.length() - dY.length() + 1;
     Tensor weightsGradient = Array.zeros(kernelSize);
-    for (int i = 0; i < outputGradient.length(); i++)
+    for (int i = 0; i < dY.length(); i++)
       for (int j = 0; j < kernelSize; j++) {
         // Gradient w.r.t weights: input * outputGradient
-        Scalar s = lastInput.Get(i + j).multiply(outputGradient.Get(i));
+        Scalar s = x.Get(i + j).multiply(dY.Get(i));
         weightsGradient.set(s::add, j);
       }
+    // IO.println(dY);
     return weightsGradient;
   }
 
-  public static Tensor convsame(Tensor gradOutput, Tensor weights) {
+  private static Tensor convsame(Tensor gradOutput, Tensor weights) {
     int kernelSize = weights.length();
     Tensor inputGradient = Array.zeros(gradOutput.length() + kernelSize - 1);
     for (int i = 0; i < gradOutput.length(); i++)
@@ -83,6 +85,6 @@ public class Conv1DLayer implements Layer {
 
   @Override
   public String toString() {
-    return MathematicaFormat.concise("Conv1DLayer", weights, b);
+    return MathematicaFormat.concise("Conv1DLayer", w, b);
   }
 }

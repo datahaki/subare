@@ -28,7 +28,7 @@ class Conv1DLayerTest {
     Tensor forward1 = Tensors.vectorDouble(conv1d.forward(x));
     // ---
     Conv1DLayer conv1dLayer = new Conv1DLayer();
-    conv1dLayer.weights = Tensors.vectorDouble(conv1d.weights);
+    conv1dLayer.w = Tensors.vectorDouble(conv1d.weights);
     conv1dLayer.b = RealScalar.of(conv1d.bias);
     Tensor forward2 = conv1dLayer.forward(Tensors.vectorDouble(x));
     Tolerance.CHOP.requireClose(forward1, forward2);

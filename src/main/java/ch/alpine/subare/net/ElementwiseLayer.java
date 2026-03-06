@@ -94,6 +94,6 @@ public abstract class ElementwiseLayer implements Layer {
 
   @Override
   public Tensor error(Tensor y) {
-    throw new IllegalStateException();
+    return y.subtract(outputCache);
   }
 }

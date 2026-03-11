@@ -1,7 +1,8 @@
 // code by jph
 package ch.alpine.subare.td;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import ch.alpine.subare.api.FeatureMapper;
 import ch.alpine.subare.api.LearningRate;
@@ -23,42 +24,40 @@ import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 
 class TrueOnlineSarsaTest {
-  @Test
-  void testExact() {
-    for (SarsaType sarsaType : SarsaType.values()) {
-      MonteCarloInterface monteCarloInterface = SimpleTestModel.INSTANCE;
-      FeatureMapper featureMapper = ExactFeatureMapper.of(monteCarloInterface);
-      LearningRate learningRate = ConstantLearningRate.of(Rational.HALF);
-      FeatureWeight w = new FeatureWeight(featureMapper);
-      QsaInterface qsa = DiscreteQsa.build(monteCarloInterface);
-      StateActionCounter sac = new DiscreteStateActionCounter();
-      PolicyBase policy = PolicyType.EGREEDY.bestEquiprobable(monteCarloInterface, qsa, sac);
-      TrueOnlineSarsa trueOnlineSarsa = sarsaType.trueOnline(SimpleTestModel.INSTANCE, RealScalar.ONE, featureMapper, //
-          learningRate, w, sac, policy);
-      ExploringStarts.batch(monteCarloInterface, policy, trueOnlineSarsa);
-      // DiscreteUtils.print(trueOnlineSarsa.qsa());
-      SimpleTestModels._checkExact(trueOnlineSarsa.qsa());
-    }
+  @ParameterizedTest
+  @EnumSource
+  void testExact(SarsaType sarsaType) {
+    MonteCarloInterface monteCarloInterface = SimpleTestModel.INSTANCE;
+    FeatureMapper featureMapper = ExactFeatureMapper.of(monteCarloInterface);
+    LearningRate learningRate = ConstantLearningRate.of(Rational.HALF);
+    FeatureWeight w = new FeatureWeight(featureMapper);
+    QsaInterface qsa = DiscreteQsa.build(monteCarloInterface);
+    StateActionCounter sac = new DiscreteStateActionCounter();
+    PolicyBase policy = PolicyType.EGREEDY.bestEquiprobable(monteCarloInterface, qsa, sac);
+    TrueOnlineSarsa trueOnlineSarsa = sarsaType.trueOnline(SimpleTestModel.INSTANCE, RealScalar.ONE, featureMapper, //
+        learningRate, w, sac, policy);
+    ExploringStarts.batch(monteCarloInterface, policy, trueOnlineSarsa);
+    // DiscreteUtils.print(trueOnlineSarsa.qsa());
+    SimpleTestModels._checkExact(trueOnlineSarsa.qsa());
   }
 
-  @Test
-  void testLambda() {
-    for (SarsaType sarsaType : SarsaType.values()) {
-      MonteCarloInterface monteCarloInterface = SimpleTestModel.INSTANCE;
-      FeatureMapper featureMapper = ExactFeatureMapper.of(monteCarloInterface);
-      LearningRate learningRate = ConstantLearningRate.of(Rational.HALF);
-      FeatureWeight w = new FeatureWeight(featureMapper);
-      QsaInterface qsa = DiscreteQsa.build(monteCarloInterface);
-      StateActionCounter sac = new DiscreteStateActionCounter();
-      PolicyBase policy = PolicyType.EGREEDY.bestEquiprobable(monteCarloInterface, qsa, sac);
-      TrueOnlineSarsa trueOnlineSarsa = sarsaType.trueOnline(SimpleTestModel.INSTANCE, RealScalar.of(0.9), featureMapper, //
-          learningRate, w, sac, policy);
-      for (int index = 0; index < 10; ++index) {
-        ExploringStarts.batch(monteCarloInterface, policy, trueOnlineSarsa);
-      }
-      DiscreteUtils.print(trueOnlineSarsa.qsa());
-      // TODO SUBARE doesn't work
-      // SimpleTestModels._checkClose(qsa);
+  @ParameterizedTest
+  @EnumSource
+  void testLambda(SarsaType sarsaType) {
+    MonteCarloInterface monteCarloInterface = SimpleTestModel.INSTANCE;
+    FeatureMapper featureMapper = ExactFeatureMapper.of(monteCarloInterface);
+    LearningRate learningRate = ConstantLearningRate.of(Rational.HALF);
+    FeatureWeight w = new FeatureWeight(featureMapper);
+    QsaInterface qsa = DiscreteQsa.build(monteCarloInterface);
+    StateActionCounter sac = new DiscreteStateActionCounter();
+    PolicyBase policy = PolicyType.EGREEDY.bestEquiprobable(monteCarloInterface, qsa, sac);
+    TrueOnlineSarsa trueOnlineSarsa = sarsaType.trueOnline(SimpleTestModel.INSTANCE, RealScalar.of(0.9), featureMapper, //
+        learningRate, w, sac, policy);
+    for (int index = 0; index < 10; ++index) {
+      ExploringStarts.batch(monteCarloInterface, policy, trueOnlineSarsa);
     }
+    DiscreteUtils.print(trueOnlineSarsa.qsa());
+    // TODO SUBARE doesn't work
+    // SimpleTestModels._checkClose(qsa);
   }
 }

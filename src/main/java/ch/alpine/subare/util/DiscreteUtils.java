@@ -6,8 +6,8 @@ import java.util.function.Function;
 
 import ch.alpine.subare.api.QsaInterface;
 import ch.alpine.subare.api.VsInterface;
+import ch.alpine.subare.api.mod.DiscreteModel;
 import ch.alpine.subare.api.mod.StandardModel;
-import ch.alpine.subare.api.mod.StateActionModel;
 import ch.alpine.subare.math.Index;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -17,40 +17,40 @@ import ch.alpine.tensor.red.Max;
 
 public enum DiscreteUtils {
   ;
-  /** collects all possible state-action pairs that can be built with {@code states} according to the {@code stateActionModel}
+  /** collects all possible state-action pairs that can be built with {@code states}
    * 
-   * @param stateActionModel
+   * @param discreteModel
    * @param states
    * @return index for state-action */
-  public static Index build(StateActionModel stateActionModel, Tensor states) {
+  public static Index build(DiscreteModel discreteModel, Tensor states) {
     Tensor tensor = Tensors.empty();
     for (Tensor state : states)
-      for (Tensor action : stateActionModel.actions(state))
+      for (Tensor action : discreteModel.actions(state))
         tensor.append(StateAction.key(state, action));
     return Index.build(tensor);
   }
 
   // ---
-  /** @param stateActionModel
+  /** @param discreteModel
    * @param qsa
    * @param binaryOperator
    * @return */
   public static DiscreteVs reduce( //
-      StateActionModel stateActionModel, QsaInterface qsa, BinaryOperator<Scalar> binaryOperator) {
-    return DiscreteVs.build(stateActionModel.states(), //
-        Tensor.of(stateActionModel.states().stream() //
-            .map(state -> stateActionModel.actions(state).stream() //
+      DiscreteModel discreteModel, QsaInterface qsa, BinaryOperator<Scalar> binaryOperator) {
+    return DiscreteVs.build(discreteModel.states(), //
+        Tensor.of(discreteModel.states().stream() //
+            .map(state -> discreteModel.actions(state).stream() //
                 .map(action -> qsa.value(state, action)) //
                 .reduce(binaryOperator).orElseThrow()))); // <- assumes greedy policy
   }
 
   /** compute state value function v(s) based on given action-value function q(s, a)
    * 
-   * @param stateActionModel
+   * @param discreteModel
    * @param qsa
    * @return state values */
-  public static DiscreteVs createVs(StateActionModel stateActionModel, QsaInterface qsa) {
-    return reduce(stateActionModel, qsa, Max::of);
+  public static DiscreteVs createVs(DiscreteModel discreteModel, QsaInterface qsa) {
+    return reduce(discreteModel, qsa, Max::of);
   }
 
   // ---
@@ -75,8 +75,8 @@ public enum DiscreteUtils {
   }
 
   // ---
-  public static void print(StateActionModel stateActionModel, VsInterface vs, Function<Scalar, Scalar> round) {
-    for (Tensor key : stateActionModel.states()) {
+  public static void print(DiscreteModel discreteModel, VsInterface vs, Function<Scalar, Scalar> round) {
+    for (Tensor key : discreteModel.states()) {
       Scalar value = vs.value(key);
       System.out.println(key + " " + value.maps(round));
     }

@@ -63,7 +63,7 @@ public class FirstVisitPolicyEvaluation implements EpisodeVsEstimator {
       Tensor stateP = stepRecord.prevState();
       if (!map.containsKey(stateP))
         map.put(stateP, new AverageTracker());
-      map.get(stateP).track(gains.get(stateP));
+      map.get(stateP).digest(gains.get(stateP));
     }
   }
 

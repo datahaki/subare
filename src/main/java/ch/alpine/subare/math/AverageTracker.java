@@ -27,15 +27,15 @@ public class AverageTracker {
   }
 
   /** @param tensor that contributes to the average of all tracked {@link Tensor}s */
-  public void track(Tensor tensor) {
+  public void digest(Tensor tensor) {
     if (Scalars.isZero(count))
       average = tensor.copy();
     count = count.add(RealScalar.ONE);
     average = binaryAverage.split(average, tensor, count.reciprocal());
   }
 
-  /** @return average of {@link Tensor}s tracked by {@link #track(Tensor)},
-   * or null if function {@link #track(Tensor)} has not been called. */
+  /** @return average of {@link Tensor}s tracked by {@link #digest(Tensor)},
+   * or null if function {@link #digest(Tensor)} has not been called. */
   public Tensor get() {
     return average;
   }

@@ -4,7 +4,7 @@ package ch.alpine.subare.util;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import ch.alpine.subare.api.mod.StateActionModel;
+import ch.alpine.subare.api.mod.DiscreteModel;
 import ch.alpine.subare.api.pol.Policy;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -14,13 +14,13 @@ import ch.alpine.tensor.pdf.RandomChoice;
 import ch.alpine.tensor.pdf.d.CategoricalDistribution;
 
 public class FixedRandomPolicy implements Policy {
-  private final StateActionModel stateActionModel;
+  private final DiscreteModel discreteModel;
   private final Set<Tensor> set;
 
-  public FixedRandomPolicy(StateActionModel stateActionModel) {
-    this.stateActionModel = stateActionModel;
-    set = stateActionModel.states().stream() //
-        .map(state -> StateAction.key(state, RandomChoice.of(stateActionModel.actions(state)))) //
+  public FixedRandomPolicy(DiscreteModel discreteModel) {
+    this.discreteModel = discreteModel;
+    set = discreteModel.states().stream() //
+        .map(state -> StateAction.key(state, RandomChoice.of(discreteModel.actions(state)))) //
         .collect(Collectors.toSet());
   }
 
@@ -31,7 +31,7 @@ public class FixedRandomPolicy implements Policy {
 
   @Override // from Policy
   public Distribution getDistribution(Tensor state) {
-    Tensor pdf = Tensor.of(stateActionModel.actions(state).stream() //
+    Tensor pdf = Tensor.of(discreteModel.actions(state).stream() //
         .map(action -> probability(state, action)));
     return CategoricalDistribution.fromUnscaledPDF(pdf);
   }

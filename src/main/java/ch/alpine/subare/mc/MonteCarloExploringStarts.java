@@ -83,7 +83,7 @@ public class MonteCarloExploringStarts implements EpisodeQsaEstimator, StateActi
       Tensor key = StateAction.key(stepRecord);
       // if (!map.containsKey(key))
       // map.put(key, new AverageTracker());
-      map.computeIfAbsent(key, _ -> new AverageTracker()).track(gains.get(key));
+      map.computeIfAbsent(key, _ -> new AverageTracker()).digest(gains.get(key));
     }
     { // update
       for (Entry<Tensor, AverageTracker> entry : map.entrySet()) {

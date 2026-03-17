@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import ch.alpine.subare.api.mod.StateActionModel;
+import ch.alpine.subare.api.mod.DiscreteModel;
 import ch.alpine.subare.api.pol.Policy;
 import ch.alpine.subare.math.Index;
 import ch.alpine.tensor.Rational;
@@ -17,23 +17,23 @@ import ch.alpine.tensor.pdf.d.CategoricalDistribution;
 
 /** the term "equiprobable" appears in Exercise 4.1 */
 public class EquiprobablePolicy implements Policy {
-  /** @param stateActionModel
+  /** @param discreteModel
    * @return */
-  public static Policy create(StateActionModel stateActionModel) {
-    return new EquiprobablePolicy(Objects.requireNonNull(stateActionModel));
+  public static Policy create(DiscreteModel discreteModel) {
+    return new EquiprobablePolicy(Objects.requireNonNull(discreteModel));
   }
 
   // ---
-  private final StateActionModel stateActionModel;
+  private final DiscreteModel discreteModel;
   private final Map<Tensor, Index> map = new HashMap<>();
 
-  private EquiprobablePolicy(StateActionModel stateActionModel) {
-    this.stateActionModel = stateActionModel;
+  private EquiprobablePolicy(DiscreteModel discreteModel) {
+    this.discreteModel = discreteModel;
   }
 
   @Override
   public synchronized Scalar probability(Tensor state, Tensor action) {
-    Index index = map.computeIfAbsent(state, s -> Index.build(stateActionModel.actions(s)));
+    Index index = map.computeIfAbsent(state, s -> Index.build(discreteModel.actions(s)));
     // Index index = map.get(state);
     // if (Objects.isNull(index)) {
     // index = Index.build(stateActionModel.actions(state));
@@ -46,7 +46,7 @@ public class EquiprobablePolicy implements Policy {
 
   @Override
   public Distribution getDistribution(Tensor state) {
-    Tensor pdf = Tensor.of(stateActionModel.actions(state).stream() //
+    Tensor pdf = Tensor.of(discreteModel.actions(state).stream() //
         .map(action -> probability(state, action)));
     return CategoricalDistribution.fromUnscaledPDF(pdf);
   }

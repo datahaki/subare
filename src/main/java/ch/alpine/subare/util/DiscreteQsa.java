@@ -6,8 +6,8 @@ import java.util.stream.Stream;
 
 import ch.alpine.subare.api.DiscreteValueFunction;
 import ch.alpine.subare.api.QsaInterface;
+import ch.alpine.subare.api.mod.DiscreteModel;
 import ch.alpine.subare.api.mod.MonteCarloInterface;
-import ch.alpine.subare.api.mod.StateActionModel;
 import ch.alpine.subare.math.Index;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
@@ -19,10 +19,10 @@ import ch.alpine.tensor.red.Max;
 import ch.alpine.tensor.red.Min;
 
 public class DiscreteQsa implements QsaInterface, DiscreteValueFunction, Serializable {
-  /** @param stateActionModel
+  /** @param discreteModel
    * @return qsa with q(s, a) == 0 for all state-action pairs */
-  public static DiscreteQsa build(StateActionModel stateActionModel) {
-    Index index = DiscreteUtils.build(stateActionModel, stateActionModel.states());
+  public static DiscreteQsa build(DiscreteModel discreteModel) {
+    Index index = DiscreteUtils.build(discreteModel, discreteModel.states());
     return new DiscreteQsa(index, Array.zeros(index.size()));
   }
 

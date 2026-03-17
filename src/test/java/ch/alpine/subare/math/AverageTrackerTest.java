@@ -20,11 +20,11 @@ class AverageTrackerTest {
   @Test
   void testAverage() {
     AverageTracker avg = new AverageTracker();
-    avg.track(RealScalar.of(3));
+    avg.digest(RealScalar.of(3));
     assertEquals(avg.Get(), RealScalar.of(3));
-    avg.track(RealScalar.of(1));
+    avg.digest(RealScalar.of(1));
     assertEquals(avg.Get(), RealScalar.of(2));
-    avg.track(RealScalar.of(1));
+    avg.digest(RealScalar.of(1));
     Chop._10.requireClose(avg.Get(), RealScalar.of(5. / 3));
   }
 
@@ -32,7 +32,7 @@ class AverageTrackerTest {
   void testMean() {
     Tensor vec = Tensors.vector(3, 2, 9, 19, 99, 29, 30);
     AverageTracker avg = new AverageTracker();
-    vec.forEach(avg::track);
+    vec.forEach(avg::digest);
     assertEquals(avg.Get(), Mean.of(vec));
     ExactTensorQ.require(avg.get());
   }
@@ -41,7 +41,7 @@ class AverageTrackerTest {
   void testMean2() {
     Tensor vec = Tensors.vector(3, 2, 9, 19, 99, 29, 30);
     AverageTracker avg = new AverageTracker();
-    vec.stream().map(Scalar.class::cast).forEach(avg::track);
+    vec.stream().map(Scalar.class::cast).forEach(avg::digest);
     assertEquals(avg.Get(), Mean.of(vec));
   }
 

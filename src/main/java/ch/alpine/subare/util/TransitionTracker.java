@@ -27,7 +27,7 @@ import ch.alpine.tensor.Tensor;
     Scalar reward = stepRecord.reward();
     Tensor next = stepRecord.nextState();
     // ---
-    average.track(reward);
+    average.digest(reward);
     map.merge(next, 1, Math::addExact);
     ++total;
   }

@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.util;
 
-import ch.alpine.subare.api.mod.StateActionModel;
+import ch.alpine.subare.api.mod.DiscreteModel;
 import ch.alpine.subare.api.pol.Policy;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalars;
@@ -25,10 +25,10 @@ public record PolicyWrap(Policy policy) {
   }
 
   /** @param state
-   * @param stateActionModel
+   * @param discreteModel
    * @return */
-  public Tensor next(Tensor state, StateActionModel stateActionModel) {
+  public Tensor next(Tensor state, DiscreteModel discreteModel) {
     Distribution distribution = policy.getDistribution(state);
-    return stateActionModel.actions(state).get(Scalars.intValueExact(RandomVariate.of(distribution)));
+    return discreteModel.actions(state).get(Scalars.intValueExact(RandomVariate.of(distribution)));
   }
 }

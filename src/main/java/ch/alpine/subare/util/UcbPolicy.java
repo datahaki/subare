@@ -1,11 +1,11 @@
 // code by jph
 package ch.alpine.subare.util;
 
-import ch.alpine.subare.api.QsaInterface;
-import ch.alpine.subare.api.VsInterface;
 import ch.alpine.subare.api.mod.DiscreteModel;
 import ch.alpine.subare.api.mod.StandardModel;
 import ch.alpine.subare.api.pol.StateActionCounter;
+import ch.alpine.subare.api.val.QsaInterface;
+import ch.alpine.subare.api.val.VsInterface;
 import ch.alpine.subare.math.FairArg;
 import ch.alpine.subare.math.Index;
 import ch.alpine.tensor.Rational;

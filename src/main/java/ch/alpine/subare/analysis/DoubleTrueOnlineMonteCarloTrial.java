@@ -3,11 +3,11 @@ package ch.alpine.subare.analysis;
 
 import ch.alpine.subare.api.FeatureMapper;
 import ch.alpine.subare.api.LearningRate;
-import ch.alpine.subare.api.QsaInterface;
 import ch.alpine.subare.api.StepRecord;
 import ch.alpine.subare.api.mod.MonteCarloInterface;
 import ch.alpine.subare.api.pol.StateActionCounter;
 import ch.alpine.subare.api.pol.StateActionCounterSupplier;
+import ch.alpine.subare.api.val.QsaInterface;
 import ch.alpine.subare.td.DoubleTrueOnlineSarsa;
 import ch.alpine.subare.td.SarsaType;
 import ch.alpine.subare.util.ConstantLearningRate;

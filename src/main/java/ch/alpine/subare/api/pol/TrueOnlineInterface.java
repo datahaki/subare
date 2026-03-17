@@ -1,6 +1,7 @@
 // code by jph, fluric
 package ch.alpine.subare.api.pol;
 
+import ch.alpine.subare.api.val.DiscreteQsaSupplier;
 import ch.alpine.subare.td.DoubleTrueOnlineSarsa;
 import ch.alpine.subare.td.TrueOnlineSarsa;
 

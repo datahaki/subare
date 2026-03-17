@@ -1,9 +1,9 @@
 // code by jph
-package ch.alpine.subare.api;
+package ch.alpine.subare.api.pol;
 
 import java.util.Deque;
 
-import ch.alpine.subare.api.pol.StepDigest;
+import ch.alpine.subare.api.StepRecord;
 
 /** interface is implemented by n-step temporal difference learning algorithms */
 public interface DequeDigest extends StepDigest {

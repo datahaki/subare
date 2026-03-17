@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import ch.alpine.subare.api.EpisodeInterface;
-import ch.alpine.subare.api.EpisodeQsaEstimator;
 import ch.alpine.subare.api.StepRecord;
+import ch.alpine.subare.api.epi.EpisodeQsaEstimator;
 import ch.alpine.subare.api.mod.DiscreteModel;
 import ch.alpine.subare.api.pol.StateActionCounter;
 import ch.alpine.subare.api.pol.StateActionCounterSupplier;

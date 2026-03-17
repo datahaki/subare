@@ -5,11 +5,11 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 import ch.alpine.subare.api.LearningRate;
-import ch.alpine.subare.api.QsaInterface;
 import ch.alpine.subare.api.StepRecord;
 import ch.alpine.subare.api.mod.MonteCarloInterface;
 import ch.alpine.subare.api.pol.Policy;
 import ch.alpine.subare.api.pol.StateActionCounter;
+import ch.alpine.subare.api.val.QsaInterface;
 import ch.alpine.subare.td.Sarsa;
 import ch.alpine.subare.td.SarsaType;
 import ch.alpine.subare.util.DiscreteQsa;

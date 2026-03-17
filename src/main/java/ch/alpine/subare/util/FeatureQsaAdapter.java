@@ -2,7 +2,7 @@
 package ch.alpine.subare.util;
 
 import ch.alpine.subare.api.FeatureMapper;
-import ch.alpine.subare.api.QsaInterface;
+import ch.alpine.subare.api.val.QsaInterface;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 

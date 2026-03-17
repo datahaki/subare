@@ -4,12 +4,12 @@ package ch.alpine.subare.mc;
 import java.util.List;
 
 import ch.alpine.subare.api.DiscountFunction;
-import ch.alpine.subare.api.EpisodeVsEstimator;
 import ch.alpine.subare.api.LearningRate;
 import ch.alpine.subare.api.StepRecord;
-import ch.alpine.subare.api.VsInterface;
+import ch.alpine.subare.api.epi.EpisodeVsEstimator;
 import ch.alpine.subare.api.mod.DiscreteModel;
 import ch.alpine.subare.api.pol.StateActionCounter;
+import ch.alpine.subare.api.val.VsInterface;
 import ch.alpine.subare.util.DiscreteStateActionCounter;
 import ch.alpine.subare.util.DiscreteVs;
 import ch.alpine.tensor.Scalar;

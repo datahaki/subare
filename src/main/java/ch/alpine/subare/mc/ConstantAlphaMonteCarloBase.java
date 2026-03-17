@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.alpine.subare.api.DiscountFunction;
-import ch.alpine.subare.api.EpisodeDigest;
 import ch.alpine.subare.api.EpisodeInterface;
 import ch.alpine.subare.api.LearningRate;
 import ch.alpine.subare.api.StepRecord;
+import ch.alpine.subare.api.epi.EpisodeDigest;
 import ch.alpine.subare.api.pol.StateActionCounter;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;

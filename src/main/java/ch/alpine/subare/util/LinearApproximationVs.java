@@ -3,7 +3,7 @@ package ch.alpine.subare.util;
 
 import java.io.Serializable;
 
-import ch.alpine.subare.api.VsInterface;
+import ch.alpine.subare.api.val.VsInterface;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.api.TensorUnaryOperator;

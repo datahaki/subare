@@ -3,10 +3,10 @@ package ch.alpine.subare.util;
 
 import java.util.List;
 
-import ch.alpine.subare.api.DequeDigest;
-import ch.alpine.subare.api.EpisodeDigest;
 import ch.alpine.subare.api.EpisodeInterface;
+import ch.alpine.subare.api.epi.EpisodeDigest;
 import ch.alpine.subare.api.mod.MonteCarloInterface;
+import ch.alpine.subare.api.pol.DequeDigest;
 import ch.alpine.subare.api.pol.Policy;
 import ch.alpine.subare.api.pol.StepDigest;
 

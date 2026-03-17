@@ -5,13 +5,13 @@ import java.util.Deque;
 
 import ch.alpine.subare.api.DiscountFunction;
 import ch.alpine.subare.api.LearningRate;
-import ch.alpine.subare.api.QsaInterface;
 import ch.alpine.subare.api.StepRecord;
 import ch.alpine.subare.api.mod.DiscreteModel;
-import ch.alpine.subare.api.pol.DiscreteQsaSupplier;
 import ch.alpine.subare.api.pol.PolicyExt;
 import ch.alpine.subare.api.pol.StateActionCounter;
 import ch.alpine.subare.api.pol.StateActionCounterSupplier;
+import ch.alpine.subare.api.val.DiscreteQsaSupplier;
+import ch.alpine.subare.api.val.QsaInterface;
 import ch.alpine.subare.math.Coinflip;
 import ch.alpine.subare.util.DequeDigestAdapter;
 import ch.alpine.subare.util.DiscreteQsa;

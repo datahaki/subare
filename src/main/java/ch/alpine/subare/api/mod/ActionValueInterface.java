@@ -4,7 +4,18 @@ package ch.alpine.subare.api.mod;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 
-public non-sealed interface ActionValueInterface extends TransitionInterface {
+public interface ActionValueInterface {
+  /** @param state
+   * @param action
+   * @return all states that are a possible result of taking action in given state */
+  Tensor transitions(Tensor state, Tensor action);
+
+  /** @param state
+   * @param action
+   * @param next
+   * @return probability to reach next as a result of taking action in given state */
+  Scalar transitionProbability(Tensor state, Tensor action, Tensor next);
+
   /** @param state
    * @param action
    * @return expected reward when action is taken in state */

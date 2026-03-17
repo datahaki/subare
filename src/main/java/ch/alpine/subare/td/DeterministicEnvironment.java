@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-import ch.alpine.subare.api.StepDigest;
 import ch.alpine.subare.api.StepRecord;
+import ch.alpine.subare.api.pol.StepDigest;
 import ch.alpine.subare.util.StateAction;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;

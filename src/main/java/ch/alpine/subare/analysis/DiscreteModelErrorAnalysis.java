@@ -1,7 +1,7 @@
 // code by fluric
 package ch.alpine.subare.analysis;
 
-import ch.alpine.subare.api.DiscreteModel;
+import ch.alpine.subare.api.mod.DiscreteModel;
 import ch.alpine.subare.util.DiscreteQsa;
 import ch.alpine.subare.util.DiscreteValueFunctions;
 import ch.alpine.subare.util.Loss;

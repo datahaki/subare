@@ -1,13 +1,13 @@
 // code by jph
 package ch.alpine.subare.alg;
 
-import ch.alpine.subare.api.DiscreteModel;
 import ch.alpine.subare.api.LearningRate;
 import ch.alpine.subare.api.QsaInterface;
-import ch.alpine.subare.api.StateActionCounter;
-import ch.alpine.subare.api.StateActionCounterSupplier;
-import ch.alpine.subare.api.StepDigest;
 import ch.alpine.subare.api.StepRecord;
+import ch.alpine.subare.api.mod.DiscreteModel;
+import ch.alpine.subare.api.pol.StateActionCounter;
+import ch.alpine.subare.api.pol.StateActionCounterSupplier;
+import ch.alpine.subare.api.pol.StepDigest;
 import ch.alpine.subare.util.DiscreteQsa;
 import ch.alpine.subare.util.DiscreteStateActionCounter;
 import ch.alpine.subare.util.StateAction;

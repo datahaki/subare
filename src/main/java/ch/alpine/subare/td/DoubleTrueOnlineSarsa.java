@@ -3,11 +3,11 @@ package ch.alpine.subare.td;
 
 import ch.alpine.subare.api.FeatureMapper;
 import ch.alpine.subare.api.LearningRate;
-import ch.alpine.subare.api.MonteCarloInterface;
-import ch.alpine.subare.api.PolicyExt;
 import ch.alpine.subare.api.QsaInterface;
-import ch.alpine.subare.api.StateActionCounter;
 import ch.alpine.subare.api.StepRecord;
+import ch.alpine.subare.api.mod.MonteCarloInterface;
+import ch.alpine.subare.api.pol.PolicyExt;
+import ch.alpine.subare.api.pol.StateActionCounter;
 import ch.alpine.subare.math.Coinflip;
 import ch.alpine.subare.util.FeatureQsaAdapter;
 import ch.alpine.subare.util.FeatureWeight;

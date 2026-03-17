@@ -4,8 +4,8 @@ package ch.alpine.subare.util;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import ch.alpine.subare.api.Policy;
-import ch.alpine.subare.api.StateActionModel;
+import ch.alpine.subare.api.mod.StateActionModel;
+import ch.alpine.subare.api.pol.Policy;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.num.Boole;

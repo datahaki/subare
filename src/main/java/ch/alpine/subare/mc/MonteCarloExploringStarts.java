@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import ch.alpine.subare.api.DiscreteModel;
 import ch.alpine.subare.api.EpisodeInterface;
 import ch.alpine.subare.api.EpisodeQsaEstimator;
-import ch.alpine.subare.api.StateActionCounter;
-import ch.alpine.subare.api.StateActionCounterSupplier;
 import ch.alpine.subare.api.StepRecord;
+import ch.alpine.subare.api.mod.DiscreteModel;
+import ch.alpine.subare.api.pol.StateActionCounter;
+import ch.alpine.subare.api.pol.StateActionCounterSupplier;
 import ch.alpine.subare.math.AverageTracker;
 import ch.alpine.subare.util.DiscreteQsa;
 import ch.alpine.subare.util.DiscreteStateActionCounter;

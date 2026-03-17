@@ -6,12 +6,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import ch.alpine.subare.api.MoveInterface;
+import ch.alpine.subare.api.mod.SampleModel;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.Throw;
 
-/** for deterministic {@link MoveInterface} to precompute and store the effective actions */
+/** for deterministic {@link SampleModel} to precompute and store the effective actions */
 public enum StateActionMaps {
   ;
   /** collects effective actions of deterministic move interface, i.e. for each
@@ -19,15 +19,15 @@ public enum StateActionMaps {
    * 
    * @param states
    * @param actions
-   * @param moveInterface deterministic
+   * @param sampleModel deterministic
    * @return */
-  public static StateActionMap build(Tensor states, Tensor actions, MoveInterface moveInterface) {
+  public static StateActionMap build(Tensor states, Tensor actions, SampleModel sampleModel) {
     Map<Tensor, Tensor> map = new HashMap<>();
     for (Tensor state : states) {
       Tensor filter = Tensors.empty(); // effective actions
       Set<Tensor> set = new HashSet<>();
       for (Tensor action : actions) {
-        Tensor next = moveInterface.move(state, action);
+        Tensor next = sampleModel.move(state, action);
         if (set.add(next))
           filter.append(action);
       }

@@ -3,8 +3,8 @@ package ch.alpine.subare.mc;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.api.MonteCarloInterface;
-import ch.alpine.subare.api.Policy;
+import ch.alpine.subare.api.mod.MonteCarloInterface;
+import ch.alpine.subare.api.pol.Policy;
 import ch.alpine.subare.util.ExploringStarts;
 import ch.alpine.subare.util.PolicyType;
 import ch.alpine.subare.util.SimpleTestModel;

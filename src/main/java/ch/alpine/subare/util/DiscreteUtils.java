@@ -5,9 +5,9 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 
 import ch.alpine.subare.api.QsaInterface;
-import ch.alpine.subare.api.StandardModel;
-import ch.alpine.subare.api.StateActionModel;
 import ch.alpine.subare.api.VsInterface;
+import ch.alpine.subare.api.mod.StandardModel;
+import ch.alpine.subare.api.mod.StateActionModel;
 import ch.alpine.subare.math.Index;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

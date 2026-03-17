@@ -4,11 +4,11 @@ package ch.alpine.subare.mc;
 import java.util.List;
 
 import ch.alpine.subare.api.DiscountFunction;
-import ch.alpine.subare.api.DiscreteModel;
 import ch.alpine.subare.api.EpisodeQsaEstimator;
 import ch.alpine.subare.api.LearningRate;
-import ch.alpine.subare.api.StateActionCounter;
 import ch.alpine.subare.api.StepRecord;
+import ch.alpine.subare.api.mod.DiscreteModel;
+import ch.alpine.subare.api.pol.StateActionCounter;
 import ch.alpine.subare.util.DiscreteQsa;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

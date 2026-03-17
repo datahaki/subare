@@ -3,11 +3,11 @@ package ch.alpine.subare.analysis;
 
 import ch.alpine.subare.api.FeatureMapper;
 import ch.alpine.subare.api.LearningRate;
-import ch.alpine.subare.api.MonteCarloInterface;
 import ch.alpine.subare.api.QsaInterface;
-import ch.alpine.subare.api.StateActionCounter;
-import ch.alpine.subare.api.StateActionCounterSupplier;
 import ch.alpine.subare.api.StepRecord;
+import ch.alpine.subare.api.mod.MonteCarloInterface;
+import ch.alpine.subare.api.pol.StateActionCounter;
+import ch.alpine.subare.api.pol.StateActionCounterSupplier;
 import ch.alpine.subare.td.DoubleTrueOnlineSarsa;
 import ch.alpine.subare.td.SarsaType;
 import ch.alpine.subare.util.ConstantLearningRate;
@@ -66,8 +66,8 @@ import ch.alpine.tensor.Scalar;
   }
 
   @Override // from MonteCarloTrial
-  public void digest(StepRecord stepInterface) {
-    doubleTrueOnlineSarsa.digest(stepInterface);
+  public void digest(StepRecord stepRecord) {
+    doubleTrueOnlineSarsa.digest(stepRecord);
   }
 
   @Override // from MonteCarloTrial

@@ -1,10 +1,10 @@
 // code by jph
-package ch.alpine.subare.api;
+package ch.alpine.subare.api.mod;
 
 import ch.alpine.tensor.Tensor;
 
-@FunctionalInterface
-public interface MoveInterface {
+/** name of class is motivated by box on p.169 */
+public interface SampleModel extends RewardInterface {
   /** the move function is not necessarily deterministic, i.e.
    * two consecutive calls may return different values
    * 

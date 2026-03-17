@@ -6,8 +6,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import ch.alpine.subare.api.StepDigest;
 import ch.alpine.subare.api.StepRecord;
+import ch.alpine.subare.api.pol.StepDigest;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Throw;
 

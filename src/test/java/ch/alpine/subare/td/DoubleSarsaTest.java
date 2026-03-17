@@ -5,8 +5,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
 import ch.alpine.subare.api.LearningRate;
-import ch.alpine.subare.api.MonteCarloInterface;
-import ch.alpine.subare.api.StateActionCounter;
+import ch.alpine.subare.api.mod.MonteCarloInterface;
+import ch.alpine.subare.api.pol.StateActionCounter;
 import ch.alpine.subare.util.ConstantLearningRate;
 import ch.alpine.subare.util.DefaultLearningRate;
 import ch.alpine.subare.util.DiscreteQsa;

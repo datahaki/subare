@@ -5,8 +5,8 @@ import java.util.ArrayDeque;
 import java.util.concurrent.ThreadLocalRandom;
 
 import ch.alpine.subare.api.EpisodeInterface;
-import ch.alpine.subare.api.MonteCarloInterface;
-import ch.alpine.subare.api.Policy;
+import ch.alpine.subare.api.mod.MonteCarloInterface;
+import ch.alpine.subare.api.pol.Policy;
 import ch.alpine.subare.mc.MonteCarloEpisode;
 import ch.alpine.tensor.Tensor;
 

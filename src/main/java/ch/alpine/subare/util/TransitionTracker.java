@@ -4,8 +4,8 @@ package ch.alpine.subare.util;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import ch.alpine.subare.api.StepDigest;
 import ch.alpine.subare.api.StepRecord;
+import ch.alpine.subare.api.pol.StepDigest;
 import ch.alpine.subare.math.AverageTracker;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.Scalar;
@@ -22,8 +22,8 @@ import ch.alpine.tensor.Tensor;
   @Override
   public void digest(StepRecord stepRecord) {
     // it is imperative that state0 and action do not change per transition tracker, maybe check this!?
-    // Tensor state0 = stepInterface.prevState();
-    // Tensor action = stepInterface.action();
+    // Tensor state0 = stepRecord.prevState();
+    // Tensor action = stepRecord.action();
     Scalar reward = stepRecord.reward();
     Tensor next = stepRecord.nextState();
     // ---

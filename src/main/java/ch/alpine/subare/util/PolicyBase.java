@@ -1,12 +1,12 @@
 // code by jph, fluric
 package ch.alpine.subare.util;
 
-import ch.alpine.subare.api.DiscreteModel;
-import ch.alpine.subare.api.PolicyExt;
 import ch.alpine.subare.api.QsaInterface;
-import ch.alpine.subare.api.StandardModel;
-import ch.alpine.subare.api.StateActionCounter;
 import ch.alpine.subare.api.VsInterface;
+import ch.alpine.subare.api.mod.DiscreteModel;
+import ch.alpine.subare.api.mod.StandardModel;
+import ch.alpine.subare.api.pol.PolicyExt;
+import ch.alpine.subare.api.pol.StateActionCounter;
 
 public abstract class PolicyBase implements PolicyExt {
   protected final DiscreteModel discreteModel;

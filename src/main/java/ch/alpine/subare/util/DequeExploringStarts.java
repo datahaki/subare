@@ -7,8 +7,8 @@ import java.util.List;
 
 import ch.alpine.subare.api.DequeDigest;
 import ch.alpine.subare.api.EpisodeInterface;
-import ch.alpine.subare.api.MonteCarloInterface;
 import ch.alpine.subare.api.StepRecord;
+import ch.alpine.subare.api.mod.MonteCarloInterface;
 
 public abstract class DequeExploringStarts extends AbstractExploringStarts {
   private final int nstep;

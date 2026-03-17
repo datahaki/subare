@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ch.alpine.subare.api.DiscreteModel;
-import ch.alpine.subare.api.SampleModel;
 import ch.alpine.subare.api.StepRecord;
+import ch.alpine.subare.api.mod.DiscreteModel;
+import ch.alpine.subare.api.mod.SampleModel;
 import ch.alpine.subare.math.Index;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

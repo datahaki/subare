@@ -1,5 +1,5 @@
 // code by jph
-package ch.alpine.subare.api;
+package ch.alpine.subare.api.pol;
 
 import ch.alpine.subare.util.DiscreteQsa;
 

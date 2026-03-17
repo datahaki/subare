@@ -3,10 +3,10 @@ package ch.alpine.subare.util;
 
 import java.util.List;
 
-import ch.alpine.subare.api.DiscreteModel;
-import ch.alpine.subare.api.SampleModel;
-import ch.alpine.subare.api.StepDigest;
 import ch.alpine.subare.api.StepRecord;
+import ch.alpine.subare.api.mod.DiscreteModel;
+import ch.alpine.subare.api.mod.SampleModel;
+import ch.alpine.subare.api.pol.StepDigest;
 
 /** only suitable for models with all states as start states... */
 public enum TabularSteps {

@@ -5,9 +5,9 @@ package ch.alpine.subare.alg;
 import java.util.Objects;
 
 import ch.alpine.subare.api.DiscreteVsSupplier;
-import ch.alpine.subare.api.Policy;
-import ch.alpine.subare.api.StandardModel;
 import ch.alpine.subare.api.VsInterface;
+import ch.alpine.subare.api.mod.StandardModel;
+import ch.alpine.subare.api.pol.Policy;
 import ch.alpine.subare.util.ActionValueAdapter;
 import ch.alpine.subare.util.DiscreteValueFunctions;
 import ch.alpine.subare.util.DiscreteVs;

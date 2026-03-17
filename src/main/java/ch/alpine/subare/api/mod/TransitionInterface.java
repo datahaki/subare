@@ -1,10 +1,10 @@
 // code by jph
-package ch.alpine.subare.api;
+package ch.alpine.subare.api.mod;
 
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 
-public interface TransitionInterface {
+public sealed interface TransitionInterface permits ActionValueInterface {
   /** @param state
    * @param action
    * @return all states that are a possible result of taking action in given state */

@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.util;
 
-import ch.alpine.subare.api.DiscreteModel;
+import ch.alpine.subare.api.mod.DiscreteModel;
 import ch.alpine.subare.math.FairArg;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.Scalar;

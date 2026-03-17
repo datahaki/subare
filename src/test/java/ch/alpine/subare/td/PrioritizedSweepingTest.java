@@ -4,7 +4,7 @@ package ch.alpine.subare.td;
 import org.junit.jupiter.api.Test;
 
 import ch.alpine.subare.api.LearningRate;
-import ch.alpine.subare.api.StateActionCounter;
+import ch.alpine.subare.api.pol.StateActionCounter;
 import ch.alpine.subare.util.DefaultLearningRate;
 import ch.alpine.subare.util.DiscreteQsa;
 import ch.alpine.subare.util.DiscreteStateActionCounter;

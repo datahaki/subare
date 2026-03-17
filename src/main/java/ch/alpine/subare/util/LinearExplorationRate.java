@@ -4,7 +4,7 @@ package ch.alpine.subare.util;
 import java.io.Serializable;
 
 import ch.alpine.subare.api.ExplorationRate;
-import ch.alpine.subare.api.StateActionCounter;
+import ch.alpine.subare.api.pol.StateActionCounter;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

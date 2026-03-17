@@ -1,6 +1,7 @@
 // code by jph
-package ch.alpine.subare.api;
+package ch.alpine.subare.api.pol;
 
+import ch.alpine.subare.api.QsaInterface;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.pdf.Distribution;

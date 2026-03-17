@@ -1,8 +1,8 @@
 // code by jph
 package ch.alpine.subare.util;
 
-import ch.alpine.subare.api.Policy;
-import ch.alpine.subare.api.StateActionModel;
+import ch.alpine.subare.api.mod.StateActionModel;
+import ch.alpine.subare.api.pol.Policy;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;

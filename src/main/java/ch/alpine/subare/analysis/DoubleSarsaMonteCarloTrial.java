@@ -5,12 +5,12 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 import ch.alpine.subare.api.LearningRate;
-import ch.alpine.subare.api.MonteCarloInterface;
-import ch.alpine.subare.api.Policy;
-import ch.alpine.subare.api.PolicyExt;
 import ch.alpine.subare.api.QsaInterface;
-import ch.alpine.subare.api.StateActionCounter;
 import ch.alpine.subare.api.StepRecord;
+import ch.alpine.subare.api.mod.MonteCarloInterface;
+import ch.alpine.subare.api.pol.Policy;
+import ch.alpine.subare.api.pol.PolicyExt;
+import ch.alpine.subare.api.pol.StateActionCounter;
 import ch.alpine.subare.td.DoubleSarsa;
 import ch.alpine.subare.td.SarsaType;
 import ch.alpine.subare.util.ConstantLearningRate;
@@ -62,9 +62,9 @@ class DoubleSarsaMonteCarloTrial implements MonteCarloTrial {
   }
 
   @Override // from MonteCarloTrial
-  public void digest(StepRecord stepInterface) {
-    deque.add(stepInterface);
-    if (!monteCarloInterface.isTerminal(stepInterface.nextState())) {
+  public void digest(StepRecord stepRecord) {
+    deque.add(stepRecord);
+    if (!monteCarloInterface.isTerminal(stepRecord.nextState())) {
       if (deque.size() == DIGEST_DEPTH) { // never true, if nstep == 0
         doubleSarsa.digest(deque);
         deque.poll();

@@ -1,9 +1,9 @@
 // code by fluric
 package ch.alpine.subare.analysis;
 
-import ch.alpine.subare.api.MonteCarloInterface;
 import ch.alpine.subare.api.QsaInterface;
 import ch.alpine.subare.api.StepRecord;
+import ch.alpine.subare.api.mod.MonteCarloInterface;
 import ch.alpine.subare.mc.MonteCarloExploringStarts;
 import ch.alpine.subare.util.DiscreteQsa;
 import ch.alpine.subare.util.ExploringStarts;

@@ -6,9 +6,9 @@ import java.util.List;
 import ch.alpine.subare.api.DequeDigest;
 import ch.alpine.subare.api.EpisodeDigest;
 import ch.alpine.subare.api.EpisodeInterface;
-import ch.alpine.subare.api.MonteCarloInterface;
-import ch.alpine.subare.api.Policy;
-import ch.alpine.subare.api.StepDigest;
+import ch.alpine.subare.api.mod.MonteCarloInterface;
+import ch.alpine.subare.api.pol.Policy;
+import ch.alpine.subare.api.pol.StepDigest;
 
 /** contains helper functions to launch batches of episodes
  * that satisfy the exploring starts condition and have them processed by

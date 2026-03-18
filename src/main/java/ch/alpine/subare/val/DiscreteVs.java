@@ -4,7 +4,6 @@ package ch.alpine.subare.val;
 import java.io.Serializable;
 import java.util.stream.Stream;
 
-import ch.alpine.subare.api.DiscreteValueFunction;
 import ch.alpine.subare.math.Index;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

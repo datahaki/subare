@@ -6,7 +6,6 @@ import java.util.Objects;
 
 import ch.alpine.subare.mod.StandardModel;
 import ch.alpine.subare.pol.Policy;
-import ch.alpine.subare.util.ActionValueAdapter;
 import ch.alpine.subare.val.DiscreteValueFunctions;
 import ch.alpine.subare.val.DiscreteVs;
 import ch.alpine.subare.val.DiscreteVsSupplier;
@@ -25,7 +24,6 @@ import ch.alpine.tensor.sca.N;
  * v_*(s) == max_a Sum_{s', r} p(s', r | s, a) * (r + gamma * v_*(s')) */
 public class IterativePolicyEvaluation extends BaseIteration implements DiscreteVsSupplier {
   private final StandardModel standardModel;
-  private final ActionValueAdapter actionValueAdapter;
   private final Policy policy;
   private final Scalar gamma;
   private DiscreteVs vs_new;
@@ -45,7 +43,6 @@ public class IterativePolicyEvaluation extends BaseIteration implements Discrete
    * @return */
   public IterativePolicyEvaluation(StandardModel standardModel, Policy policy) {
     this.standardModel = standardModel;
-    actionValueAdapter = new ActionValueAdapter(standardModel);
     this.policy = policy;
     this.gamma = standardModel.gamma();
     vs_new = DiscreteVs.build(standardModel.states());
@@ -91,7 +88,7 @@ public class IterativePolicyEvaluation extends BaseIteration implements Discrete
   private Scalar jacobiAdd(Tensor state, VsInterface gvalues) {
     return standardModel.actions(state).stream() //
         .map(action -> policy.probability(state, action).multiply( //
-            actionValueAdapter.qsa(state, action, gvalues))) //
+            standardModel.qsa(state, action, gvalues))) //
         .reduce(Scalar::add) //
         .orElseThrow();
   }

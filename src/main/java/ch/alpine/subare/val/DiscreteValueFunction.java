@@ -1,5 +1,5 @@
 // code by jph
-package ch.alpine.subare.api;
+package ch.alpine.subare.val;
 
 import java.util.stream.Stream;
 

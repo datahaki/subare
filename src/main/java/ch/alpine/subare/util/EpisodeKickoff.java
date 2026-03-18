@@ -4,7 +4,7 @@ package ch.alpine.subare.util;
 import java.util.ArrayDeque;
 import java.util.concurrent.ThreadLocalRandom;
 
-import ch.alpine.subare.api.EpisodeInterface;
+import ch.alpine.subare.epi.EpisodeInterface;
 import ch.alpine.subare.mc.MonteCarloEpisode;
 import ch.alpine.subare.mod.MonteCarloInterface;
 import ch.alpine.subare.pol.Policy;

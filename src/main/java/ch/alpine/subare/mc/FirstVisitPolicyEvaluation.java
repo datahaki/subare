@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import ch.alpine.subare.api.DiscountFunction;
-import ch.alpine.subare.api.EpisodeInterface;
 import ch.alpine.subare.api.StepRecord;
+import ch.alpine.subare.epi.EpisodeInterface;
 import ch.alpine.subare.epi.EpisodeVsEstimator;
 import ch.alpine.subare.math.AverageTracker;
 import ch.alpine.subare.math.Index;

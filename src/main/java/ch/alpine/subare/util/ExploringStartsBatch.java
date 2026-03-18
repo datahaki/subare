@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.stream.Collectors;
 
-import ch.alpine.subare.api.EpisodeInterface;
+import ch.alpine.subare.epi.EpisodeInterface;
 import ch.alpine.subare.math.Index;
 import ch.alpine.subare.mc.MonteCarloEpisode;
 import ch.alpine.subare.mod.MonteCarloInterface;

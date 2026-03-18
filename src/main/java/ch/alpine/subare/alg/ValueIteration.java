@@ -3,10 +3,7 @@ package ch.alpine.subare.alg;
 
 import java.util.Objects;
 
-import ch.alpine.subare.mod.ActionValueInterface;
-import ch.alpine.subare.mod.DiscreteModel;
 import ch.alpine.subare.mod.StandardModel;
-import ch.alpine.subare.util.ActionValueAdapter;
 import ch.alpine.subare.val.DiscreteValueFunctions;
 import ch.alpine.subare.val.DiscreteVs;
 import ch.alpine.subare.val.DiscreteVsSupplier;
@@ -43,8 +40,7 @@ public class ValueIteration extends BaseIteration implements DiscreteVsSupplier 
   }
 
   // ---
-  private final DiscreteModel discreteModel;
-  private final ActionValueAdapter actionValueAdapter;
+  private final StandardModel standardModel;
   private final Scalar gamma;
   private DiscreteVs vs_new;
   private DiscreteVs vs_old;
@@ -52,15 +48,9 @@ public class ValueIteration extends BaseIteration implements DiscreteVsSupplier 
 
   /** @param standardModel */
   public ValueIteration(StandardModel standardModel) {
-    this(standardModel, standardModel);
-  }
-
-  /** @param standardModel */
-  public ValueIteration(DiscreteModel discreteModel, ActionValueInterface actionValueInterface) {
-    this.discreteModel = discreteModel;
-    actionValueAdapter = new ActionValueAdapter(actionValueInterface);
-    this.gamma = discreteModel.gamma();
-    vs_new = DiscreteVs.build(discreteModel.states());
+    this.standardModel = standardModel;
+    this.gamma = standardModel.gamma();
+    vs_new = DiscreteVs.build(standardModel.states());
   }
 
   /** perform iteration until values don't change more than threshold
@@ -105,8 +95,8 @@ public class ValueIteration extends BaseIteration implements DiscreteVsSupplier 
   }
 
   private Scalar jacobiMax(Tensor state, VsInterface gvalues) {
-    return discreteModel.actions(state).stream() //
-        .map(action -> actionValueAdapter.qsa(state, action, gvalues)) //
+    return standardModel.actions(state).stream() //
+        .map(action -> standardModel.qsa(state, action, gvalues)) //
         .reduce(Max::of) //
         .orElseThrow();
   }

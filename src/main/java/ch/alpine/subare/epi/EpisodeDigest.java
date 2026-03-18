@@ -1,8 +1,6 @@
 // code by jph
 package ch.alpine.subare.epi;
 
-import ch.alpine.subare.api.EpisodeInterface;
-
 @FunctionalInterface
 public interface EpisodeDigest {
   /** @param episodeInterface */

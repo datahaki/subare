@@ -5,8 +5,8 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
 
-import ch.alpine.subare.api.EpisodeInterface;
 import ch.alpine.subare.api.StepRecord;
+import ch.alpine.subare.epi.EpisodeInterface;
 import ch.alpine.subare.mod.MonteCarloInterface;
 import ch.alpine.subare.pol.DequeDigest;
 

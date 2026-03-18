@@ -3,8 +3,8 @@ package ch.alpine.subare.mc;
 
 import java.util.Queue;
 
-import ch.alpine.subare.api.EpisodeInterface;
 import ch.alpine.subare.api.StepRecord;
+import ch.alpine.subare.epi.EpisodeInterface;
 import ch.alpine.subare.mod.MonteCarloInterface;
 import ch.alpine.subare.pol.Policy;
 import ch.alpine.subare.pol.PolicyWrap;

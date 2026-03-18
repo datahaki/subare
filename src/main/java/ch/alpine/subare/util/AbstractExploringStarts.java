@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.util;
 
-import ch.alpine.subare.api.EpisodeInterface;
+import ch.alpine.subare.epi.EpisodeInterface;
 import ch.alpine.subare.mod.MonteCarloInterface;
 import ch.alpine.subare.pol.Policy;
 

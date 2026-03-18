@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import ch.alpine.subare.api.EpisodeInterface;
 import ch.alpine.subare.api.StepRecord;
 import ch.alpine.subare.epi.EpisodeDigest;
+import ch.alpine.subare.epi.EpisodeInterface;
 import ch.alpine.subare.mod.ActionValueInterface;
 import ch.alpine.subare.mod.DiscreteModel;
 import ch.alpine.subare.mod.RewardInterface;

@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.alpine.subare.api.DiscountFunction;
-import ch.alpine.subare.api.EpisodeInterface;
 import ch.alpine.subare.api.StepRecord;
 import ch.alpine.subare.epi.EpisodeDigest;
+import ch.alpine.subare.epi.EpisodeInterface;
 import ch.alpine.subare.pol.StateActionCounter;
 import ch.alpine.subare.rate.LearningRate;
 import ch.alpine.tensor.Tensor;

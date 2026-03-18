@@ -1,7 +1,6 @@
 // code by jph
 package ch.alpine.subare.val;
 
-import ch.alpine.subare.api.DiscreteValueFunction;
 import ch.alpine.subare.pol.StateActionCounter;
 import ch.alpine.subare.rate.LearningRate;
 import ch.alpine.tensor.Rational;

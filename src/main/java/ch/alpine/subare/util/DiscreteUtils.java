@@ -99,11 +99,10 @@ public enum DiscreteUtils {
    * @param vs
    * @return */
   public static QsaInterface getQsaFromVs(StandardModel standardModel, VsInterface vs) {
-    ActionValueAdapter actionValueAdapter = new ActionValueAdapter(standardModel);
     DiscreteQsa qsa = DiscreteQsa.build(standardModel);
     for (Tensor state : standardModel.states())
       for (Tensor action : standardModel.actions(state))
-        qsa.assign(state, action, actionValueAdapter.qsa(state, action, vs));
+        qsa.assign(state, action, standardModel.qsa(state, action, vs));
     return qsa;
   }
 }

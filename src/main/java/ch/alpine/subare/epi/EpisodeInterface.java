@@ -1,5 +1,7 @@
 // code by jph
-package ch.alpine.subare.api;
+package ch.alpine.subare.epi;
+
+import ch.alpine.subare.api.StepRecord;
 
 public interface EpisodeInterface {
   /** @return (s, a, r, s') */

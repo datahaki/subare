@@ -1,14 +1,16 @@
 // code by jph, fluric
 package ch.alpine.subare.util;
 
-import ch.alpine.subare.api.ExplorationRate;
 import ch.alpine.subare.api.mod.DiscreteModel;
 import ch.alpine.subare.api.mod.StandardModel;
+import ch.alpine.subare.api.pol.PolicyBase;
 import ch.alpine.subare.api.pol.StateActionCounter;
 import ch.alpine.subare.api.val.QsaInterface;
 import ch.alpine.subare.api.val.VsInterface;
 import ch.alpine.subare.math.FairArg;
 import ch.alpine.subare.math.Index;
+import ch.alpine.subare.rate.ConstantExplorationRate;
+import ch.alpine.subare.rate.ExplorationRate;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;

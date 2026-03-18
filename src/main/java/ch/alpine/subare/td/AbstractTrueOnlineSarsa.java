@@ -2,10 +2,10 @@
 package ch.alpine.subare.td;
 
 import ch.alpine.subare.api.FeatureMapper;
-import ch.alpine.subare.api.LearningRate;
 import ch.alpine.subare.api.mod.MonteCarloInterface;
 import ch.alpine.subare.api.pol.StateActionCounterSupplier;
 import ch.alpine.subare.api.pol.TrueOnlineInterface;
+import ch.alpine.subare.rate.LearningRate;
 import ch.alpine.subare.util.DiscreteQsa;
 import ch.alpine.subare.util.StateAction;
 import ch.alpine.tensor.Scalar;

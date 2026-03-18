@@ -1,13 +1,13 @@
 // code by jph
-package ch.alpine.subare.util;
+package ch.alpine.subare.api.pol;
 
 import ch.alpine.subare.api.mod.DiscreteModel;
 import ch.alpine.subare.api.mod.StandardModel;
-import ch.alpine.subare.api.pol.StateActionCounter;
 import ch.alpine.subare.api.val.QsaInterface;
 import ch.alpine.subare.api.val.VsInterface;
 import ch.alpine.subare.math.FairArg;
 import ch.alpine.subare.math.Index;
+import ch.alpine.subare.util.UcbUtils;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;

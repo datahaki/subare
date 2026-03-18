@@ -1,8 +1,6 @@
 // code by jph
-package ch.alpine.subare.util;
+package ch.alpine.subare.api.mod;
 
-import ch.alpine.subare.api.mod.SampleModel;
-import ch.alpine.subare.api.mod.StandardModel;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;

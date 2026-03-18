@@ -1,9 +1,9 @@
 // code by jz and jph
-package ch.alpine.subare.util;
+package ch.alpine.subare.rate;
 
-import ch.alpine.subare.api.LearningRate;
 import ch.alpine.subare.api.StepRecord;
 import ch.alpine.subare.api.pol.StateActionCounter;
+import ch.alpine.subare.util.StateAction;
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;

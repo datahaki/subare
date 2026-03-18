@@ -1,11 +1,12 @@
 // code by jph
-package ch.alpine.subare.util;
+package ch.alpine.subare.api.pol;
 
 import ch.alpine.subare.api.mod.DiscreteModel;
 import ch.alpine.subare.api.mod.StandardModel;
-import ch.alpine.subare.api.pol.StateActionCounter;
 import ch.alpine.subare.api.val.QsaInterface;
 import ch.alpine.subare.api.val.VsInterface;
+import ch.alpine.subare.rate.ConstantExplorationRate;
+import ch.alpine.subare.util.EGreedyPolicy;
 
 public enum PolicyType {
   GREEDY {

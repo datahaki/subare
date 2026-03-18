@@ -7,7 +7,7 @@ import ch.alpine.subare.api.EpisodeInterface;
 import ch.alpine.subare.api.StepRecord;
 import ch.alpine.subare.api.mod.MonteCarloInterface;
 import ch.alpine.subare.api.pol.Policy;
-import ch.alpine.subare.util.PolicyWrap;
+import ch.alpine.subare.api.pol.PolicyWrap;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 

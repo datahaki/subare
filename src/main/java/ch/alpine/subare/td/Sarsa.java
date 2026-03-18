@@ -4,7 +4,6 @@ package ch.alpine.subare.td;
 import java.util.Deque;
 
 import ch.alpine.subare.api.DiscountFunction;
-import ch.alpine.subare.api.LearningRate;
 import ch.alpine.subare.api.StepRecord;
 import ch.alpine.subare.api.mod.DiscreteModel;
 import ch.alpine.subare.api.pol.DequeDigest;
@@ -14,6 +13,7 @@ import ch.alpine.subare.api.pol.StateActionCounterSupplier;
 import ch.alpine.subare.api.pol.StepDigest;
 import ch.alpine.subare.api.val.DiscreteQsaSupplier;
 import ch.alpine.subare.api.val.QsaInterface;
+import ch.alpine.subare.rate.LearningRate;
 import ch.alpine.subare.util.DequeDigestAdapter;
 import ch.alpine.subare.util.DiscreteQsa;
 import ch.alpine.tensor.Scalar;

@@ -7,12 +7,12 @@ import java.util.Objects;
 import java.util.function.UnaryOperator;
 
 import ch.alpine.subare.api.mod.DiscreteModel;
+import ch.alpine.subare.api.pol.Policies;
 import ch.alpine.subare.api.pol.Policy;
+import ch.alpine.subare.api.pol.PolicyType;
 import ch.alpine.subare.util.DiscreteQsa;
 import ch.alpine.subare.util.DiscreteValueFunctions;
 import ch.alpine.subare.util.Loss;
-import ch.alpine.subare.util.Policies;
-import ch.alpine.subare.util.PolicyType;
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

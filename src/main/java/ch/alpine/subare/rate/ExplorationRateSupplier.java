@@ -1,5 +1,5 @@
 // code by fluric
-package ch.alpine.subare.api;
+package ch.alpine.subare.rate;
 
 @FunctionalInterface
 public interface ExplorationRateSupplier {

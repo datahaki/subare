@@ -1,8 +1,9 @@
 // code by jph
 package ch.alpine.subare.util;
 
-import ch.alpine.subare.api.ExplorationRate;
 import ch.alpine.subare.api.mod.MonteCarloInterface;
+import ch.alpine.subare.api.pol.PolicyType;
+import ch.alpine.subare.rate.ExplorationRate;
 import ch.alpine.subare.td.Sarsa;
 
 /**  */

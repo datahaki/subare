@@ -2,12 +2,12 @@
 package ch.alpine.subare.td;
 
 import ch.alpine.subare.api.FeatureMapper;
-import ch.alpine.subare.api.LearningRate;
 import ch.alpine.subare.api.mod.DiscreteModel;
 import ch.alpine.subare.api.mod.MonteCarloInterface;
 import ch.alpine.subare.api.pol.PolicyExt;
 import ch.alpine.subare.api.pol.StateActionCounter;
 import ch.alpine.subare.api.val.QsaInterface;
+import ch.alpine.subare.rate.LearningRate;
 import ch.alpine.subare.util.FeatureWeight;
 import ch.alpine.tensor.Scalar;
 

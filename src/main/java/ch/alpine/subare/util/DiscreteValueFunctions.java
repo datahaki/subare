@@ -2,8 +2,8 @@
 package ch.alpine.subare.util;
 
 import ch.alpine.subare.api.DiscreteValueFunction;
-import ch.alpine.subare.api.LearningRate;
 import ch.alpine.subare.api.pol.StateActionCounter;
+import ch.alpine.subare.rate.LearningRate;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;

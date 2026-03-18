@@ -1,7 +1,6 @@
 // code by jz and jph
-package ch.alpine.subare.util;
+package ch.alpine.subare.rate;
 
-import ch.alpine.subare.api.LearningRate;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 

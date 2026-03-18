@@ -1,8 +1,7 @@
 // code by jph
-package ch.alpine.subare.util;
+package ch.alpine.subare.api.pol;
 
 import ch.alpine.subare.api.mod.DiscreteModel;
-import ch.alpine.subare.api.pol.Policy;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;

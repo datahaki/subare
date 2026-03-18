@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import ch.alpine.subare.api.mod.SampleModel;
+import ch.alpine.subare.mod.SampleModel;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Throw;
 

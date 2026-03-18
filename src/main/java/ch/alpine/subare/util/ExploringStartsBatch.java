@@ -8,10 +8,10 @@ import java.util.Queue;
 import java.util.stream.Collectors;
 
 import ch.alpine.subare.api.EpisodeInterface;
-import ch.alpine.subare.api.mod.MonteCarloInterface;
-import ch.alpine.subare.api.pol.Policy;
 import ch.alpine.subare.math.Index;
 import ch.alpine.subare.mc.MonteCarloEpisode;
+import ch.alpine.subare.mod.MonteCarloInterface;
+import ch.alpine.subare.pol.Policy;
 import ch.alpine.tensor.Tensor;
 
 /* package */ class ExploringStartsBatch {

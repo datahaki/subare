@@ -8,12 +8,12 @@ import java.util.Objects;
 
 import ch.alpine.subare.api.EpisodeInterface;
 import ch.alpine.subare.api.StepRecord;
-import ch.alpine.subare.api.epi.EpisodeDigest;
-import ch.alpine.subare.api.mod.ActionValueInterface;
-import ch.alpine.subare.api.mod.DiscreteModel;
-import ch.alpine.subare.api.mod.RewardInterface;
-import ch.alpine.subare.api.mod.TerminalInterface;
-import ch.alpine.subare.api.pol.DequeDigest;
+import ch.alpine.subare.epi.EpisodeDigest;
+import ch.alpine.subare.mod.ActionValueInterface;
+import ch.alpine.subare.mod.DiscreteModel;
+import ch.alpine.subare.mod.RewardInterface;
+import ch.alpine.subare.mod.TerminalInterface;
+import ch.alpine.subare.pol.DequeDigest;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;

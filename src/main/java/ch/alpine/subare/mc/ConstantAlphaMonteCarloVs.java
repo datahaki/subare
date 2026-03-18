@@ -5,13 +5,13 @@ import java.util.List;
 
 import ch.alpine.subare.api.DiscountFunction;
 import ch.alpine.subare.api.StepRecord;
-import ch.alpine.subare.api.epi.EpisodeVsEstimator;
-import ch.alpine.subare.api.mod.DiscreteModel;
-import ch.alpine.subare.api.pol.StateActionCounter;
-import ch.alpine.subare.api.val.VsInterface;
+import ch.alpine.subare.epi.EpisodeVsEstimator;
+import ch.alpine.subare.mod.DiscreteModel;
+import ch.alpine.subare.pol.StateActionCounter;
 import ch.alpine.subare.rate.LearningRate;
 import ch.alpine.subare.util.DiscreteStateActionCounter;
-import ch.alpine.subare.util.DiscreteVs;
+import ch.alpine.subare.val.DiscreteVs;
+import ch.alpine.subare.val.VsInterface;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 

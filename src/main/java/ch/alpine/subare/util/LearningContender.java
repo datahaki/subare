@@ -1,10 +1,12 @@
 // code by jph
 package ch.alpine.subare.util;
 
-import ch.alpine.subare.api.mod.MonteCarloInterface;
-import ch.alpine.subare.api.pol.PolicyType;
+import ch.alpine.subare.mod.MonteCarloInterface;
+import ch.alpine.subare.pol.EGreedyPolicy;
+import ch.alpine.subare.pol.PolicyType;
 import ch.alpine.subare.rate.ExplorationRate;
 import ch.alpine.subare.td.Sarsa;
+import ch.alpine.subare.val.DiscreteQsa;
 
 /**  */
 public record LearningContender(MonteCarloInterface monteCarloInterface, Sarsa sarsa, DiscreteQsa qsa) {

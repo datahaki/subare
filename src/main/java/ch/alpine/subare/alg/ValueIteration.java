@@ -3,14 +3,14 @@ package ch.alpine.subare.alg;
 
 import java.util.Objects;
 
-import ch.alpine.subare.api.mod.ActionValueInterface;
-import ch.alpine.subare.api.mod.DiscreteModel;
-import ch.alpine.subare.api.mod.StandardModel;
-import ch.alpine.subare.api.val.DiscreteVsSupplier;
-import ch.alpine.subare.api.val.VsInterface;
+import ch.alpine.subare.mod.ActionValueInterface;
+import ch.alpine.subare.mod.DiscreteModel;
+import ch.alpine.subare.mod.StandardModel;
 import ch.alpine.subare.util.ActionValueAdapter;
-import ch.alpine.subare.util.DiscreteValueFunctions;
-import ch.alpine.subare.util.DiscreteVs;
+import ch.alpine.subare.val.DiscreteValueFunctions;
+import ch.alpine.subare.val.DiscreteVs;
+import ch.alpine.subare.val.DiscreteVsSupplier;
+import ch.alpine.subare.val.VsInterface;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;

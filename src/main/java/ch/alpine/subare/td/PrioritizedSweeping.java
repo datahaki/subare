@@ -4,7 +4,7 @@ package ch.alpine.subare.td;
 import java.util.PriorityQueue;
 
 import ch.alpine.subare.api.StepRecord;
-import ch.alpine.subare.api.pol.StepDigest;
+import ch.alpine.subare.pol.StepDigest;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.sca.Sign;

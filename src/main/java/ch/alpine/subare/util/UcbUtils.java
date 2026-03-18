@@ -1,9 +1,10 @@
 // code by jph, fluric
 package ch.alpine.subare.util;
 
-import ch.alpine.subare.api.mod.DiscreteModel;
-import ch.alpine.subare.api.pol.StateActionCounter;
-import ch.alpine.subare.api.val.QsaInterface;
+import ch.alpine.subare.mod.DiscreteModel;
+import ch.alpine.subare.pol.StateActionCounter;
+import ch.alpine.subare.val.DiscreteQsa;
+import ch.alpine.subare.val.QsaInterface;
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;

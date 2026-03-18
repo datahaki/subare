@@ -5,12 +5,12 @@ import java.awt.Dimension;
 import java.util.List;
 import java.util.Objects;
 
-import ch.alpine.subare.api.mod.DiscreteModel;
-import ch.alpine.subare.util.DiscreteQsa;
+import ch.alpine.subare.mod.DiscreteModel;
 import ch.alpine.subare.util.DiscreteUtils;
-import ch.alpine.subare.util.DiscreteValueFunctions;
-import ch.alpine.subare.util.DiscreteVs;
 import ch.alpine.subare.util.Loss;
+import ch.alpine.subare.val.DiscreteQsa;
+import ch.alpine.subare.val.DiscreteValueFunctions;
+import ch.alpine.subare.val.DiscreteVs;
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Array;

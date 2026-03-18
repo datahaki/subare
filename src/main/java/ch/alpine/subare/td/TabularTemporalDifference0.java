@@ -2,10 +2,10 @@
 package ch.alpine.subare.td;
 
 import ch.alpine.subare.api.StepRecord;
-import ch.alpine.subare.api.pol.StateActionCounter;
-import ch.alpine.subare.api.pol.StepDigest;
-import ch.alpine.subare.api.val.VsInterface;
+import ch.alpine.subare.pol.StateActionCounter;
+import ch.alpine.subare.pol.StepDigest;
 import ch.alpine.subare.rate.LearningRate;
+import ch.alpine.subare.val.VsInterface;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.sca.Clips;

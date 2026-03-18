@@ -3,16 +3,16 @@ package ch.alpine.subare.td;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.api.pol.PolicyBase;
-import ch.alpine.subare.api.pol.PolicyType;
-import ch.alpine.subare.api.pol.StateActionCounter;
+import ch.alpine.subare.pol.PolicyBase;
+import ch.alpine.subare.pol.PolicyType;
+import ch.alpine.subare.pol.StateActionCounter;
 import ch.alpine.subare.rate.DefaultLearningRate;
 import ch.alpine.subare.rate.LearningRate;
-import ch.alpine.subare.util.DiscreteQsa;
 import ch.alpine.subare.util.DiscreteStateActionCounter;
 import ch.alpine.subare.util.ExploringStarts;
 import ch.alpine.subare.util.SimpleTestModel;
 import ch.alpine.subare.util.SimpleTestModels;
+import ch.alpine.subare.val.DiscreteQsa;
 import ch.alpine.tensor.RealScalar;
 
 class PrioritizedSweepingTest {

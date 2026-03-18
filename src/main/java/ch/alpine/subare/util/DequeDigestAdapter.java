@@ -5,7 +5,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 import ch.alpine.subare.api.StepRecord;
-import ch.alpine.subare.api.pol.DequeDigest;
+import ch.alpine.subare.pol.DequeDigest;
 
 public abstract class DequeDigestAdapter implements DequeDigest {
   @Override // from StepDigest

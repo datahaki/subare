@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import ch.alpine.subare.api.StepRecord;
-import ch.alpine.subare.api.mod.TabularModel;
 import ch.alpine.subare.math.Index;
+import ch.alpine.subare.mod.TabularModel;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 

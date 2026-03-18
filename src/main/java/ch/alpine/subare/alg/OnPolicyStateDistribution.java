@@ -1,9 +1,9 @@
 // code by jph
 package ch.alpine.subare.alg;
 
-import ch.alpine.subare.api.mod.StandardModel;
-import ch.alpine.subare.api.pol.Policy;
-import ch.alpine.subare.util.DiscreteVs;
+import ch.alpine.subare.mod.StandardModel;
+import ch.alpine.subare.pol.Policy;
+import ch.alpine.subare.val.DiscreteVs;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

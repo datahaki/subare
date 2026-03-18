@@ -1,9 +1,9 @@
 // code by jph and fluric
 package ch.alpine.subare.td;
 
-import ch.alpine.subare.api.mod.DiscreteModel;
-import ch.alpine.subare.api.pol.PolicyExt;
-import ch.alpine.subare.api.pol.PolicyWrap;
+import ch.alpine.subare.mod.DiscreteModel;
+import ch.alpine.subare.pol.PolicyExt;
+import ch.alpine.subare.pol.PolicyWrap;
 import ch.alpine.subare.util.StateAction;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;

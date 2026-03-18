@@ -2,15 +2,15 @@
 package ch.alpine.subare.alg;
 
 import ch.alpine.subare.api.StepRecord;
-import ch.alpine.subare.api.mod.DiscreteModel;
-import ch.alpine.subare.api.pol.StateActionCounter;
-import ch.alpine.subare.api.pol.StateActionCounterSupplier;
-import ch.alpine.subare.api.pol.StepDigest;
-import ch.alpine.subare.api.val.QsaInterface;
+import ch.alpine.subare.mod.DiscreteModel;
+import ch.alpine.subare.pol.StateActionCounter;
+import ch.alpine.subare.pol.StateActionCounterSupplier;
+import ch.alpine.subare.pol.StepDigest;
 import ch.alpine.subare.rate.LearningRate;
-import ch.alpine.subare.util.DiscreteQsa;
 import ch.alpine.subare.util.DiscreteStateActionCounter;
 import ch.alpine.subare.util.StateAction;
+import ch.alpine.subare.val.DiscreteQsa;
+import ch.alpine.subare.val.QsaInterface;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

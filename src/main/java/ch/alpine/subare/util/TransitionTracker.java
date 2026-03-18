@@ -5,8 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import ch.alpine.subare.api.StepRecord;
-import ch.alpine.subare.api.pol.StepDigest;
 import ch.alpine.subare.math.AverageTracker;
+import ch.alpine.subare.pol.StepDigest;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

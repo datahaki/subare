@@ -7,19 +7,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
-import ch.alpine.subare.api.mod.MonteCarloInterface;
-import ch.alpine.subare.api.pol.PolicyBase;
-import ch.alpine.subare.api.pol.PolicyType;
-import ch.alpine.subare.api.pol.StateActionCounter;
+import ch.alpine.subare.mod.MonteCarloInterface;
+import ch.alpine.subare.pol.PolicyBase;
+import ch.alpine.subare.pol.PolicyType;
+import ch.alpine.subare.pol.StateActionCounter;
 import ch.alpine.subare.rate.ConstantLearningRate;
 import ch.alpine.subare.rate.DefaultLearningRate;
 import ch.alpine.subare.rate.LearningRate;
-import ch.alpine.subare.util.DiscreteQsa;
 import ch.alpine.subare.util.DiscreteStateActionCounter;
 import ch.alpine.subare.util.ExploringStarts;
 import ch.alpine.subare.util.SimpleTestModel;
 import ch.alpine.subare.util.SimpleTestModels;
 import ch.alpine.subare.util.StateAction;
+import ch.alpine.subare.val.DiscreteQsa;
 import ch.alpine.tensor.RealScalar;
 
 class SarsaTest {

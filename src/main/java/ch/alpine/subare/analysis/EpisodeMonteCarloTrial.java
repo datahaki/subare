@@ -2,12 +2,12 @@
 package ch.alpine.subare.analysis;
 
 import ch.alpine.subare.api.StepRecord;
-import ch.alpine.subare.api.mod.MonteCarloInterface;
-import ch.alpine.subare.api.pol.PolicyBase;
-import ch.alpine.subare.api.val.QsaInterface;
 import ch.alpine.subare.mc.MonteCarloExploringStarts;
-import ch.alpine.subare.util.DiscreteQsa;
+import ch.alpine.subare.mod.MonteCarloInterface;
+import ch.alpine.subare.pol.PolicyBase;
 import ch.alpine.subare.util.ExploringStarts;
+import ch.alpine.subare.val.DiscreteQsa;
+import ch.alpine.subare.val.QsaInterface;
 
 /* package */ class EpisodeMonteCarloTrial implements MonteCarloTrial {
   private final MonteCarloInterface monteCarloInterface;

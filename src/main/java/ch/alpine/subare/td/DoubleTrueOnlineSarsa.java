@@ -1,19 +1,19 @@
 // code by fluric
 package ch.alpine.subare.td;
 
-import ch.alpine.subare.api.FeatureMapper;
 import ch.alpine.subare.api.StepRecord;
-import ch.alpine.subare.api.mod.MonteCarloInterface;
-import ch.alpine.subare.api.pol.PolicyBase;
-import ch.alpine.subare.api.pol.PolicyExt;
-import ch.alpine.subare.api.pol.StateActionCounter;
-import ch.alpine.subare.api.val.QsaInterface;
 import ch.alpine.subare.math.Coinflip;
+import ch.alpine.subare.mod.MonteCarloInterface;
+import ch.alpine.subare.pol.PolicyBase;
+import ch.alpine.subare.pol.PolicyExt;
+import ch.alpine.subare.pol.StateActionCounter;
 import ch.alpine.subare.rate.LearningRate;
-import ch.alpine.subare.util.FeatureQsaAdapter;
 import ch.alpine.subare.util.FeatureWeight;
 import ch.alpine.subare.util.StateAction;
 import ch.alpine.subare.util.StateActionCounterUtil;
+import ch.alpine.subare.val.FeatureMapper;
+import ch.alpine.subare.val.FeatureQsaAdapter;
+import ch.alpine.subare.val.QsaInterface;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

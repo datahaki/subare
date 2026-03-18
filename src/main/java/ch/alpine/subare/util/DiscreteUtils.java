@@ -4,11 +4,13 @@ package ch.alpine.subare.util;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 
-import ch.alpine.subare.api.mod.DiscreteModel;
-import ch.alpine.subare.api.mod.StandardModel;
-import ch.alpine.subare.api.val.QsaInterface;
-import ch.alpine.subare.api.val.VsInterface;
 import ch.alpine.subare.math.Index;
+import ch.alpine.subare.mod.DiscreteModel;
+import ch.alpine.subare.mod.StandardModel;
+import ch.alpine.subare.val.DiscreteQsa;
+import ch.alpine.subare.val.DiscreteVs;
+import ch.alpine.subare.val.QsaInterface;
+import ch.alpine.subare.val.VsInterface;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;

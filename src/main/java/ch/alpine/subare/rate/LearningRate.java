@@ -2,7 +2,7 @@
 package ch.alpine.subare.rate;
 
 import ch.alpine.subare.api.StepRecord;
-import ch.alpine.subare.api.pol.StateActionCounter;
+import ch.alpine.subare.pol.StateActionCounter;
 import ch.alpine.tensor.Scalar;
 
 @FunctionalInterface

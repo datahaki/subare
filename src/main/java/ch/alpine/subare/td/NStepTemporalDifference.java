@@ -5,10 +5,10 @@ import java.util.Deque;
 
 import ch.alpine.subare.api.DiscountFunction;
 import ch.alpine.subare.api.StepRecord;
-import ch.alpine.subare.api.pol.StateActionCounter;
-import ch.alpine.subare.api.val.VsInterface;
+import ch.alpine.subare.pol.StateActionCounter;
 import ch.alpine.subare.rate.LearningRate;
 import ch.alpine.subare.util.DequeDigestAdapter;
+import ch.alpine.subare.val.VsInterface;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 

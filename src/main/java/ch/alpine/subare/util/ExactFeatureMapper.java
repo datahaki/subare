@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import ch.alpine.subare.api.FeatureMapper;
-import ch.alpine.subare.api.mod.MonteCarloInterface;
+import ch.alpine.subare.mod.MonteCarloInterface;
+import ch.alpine.subare.val.FeatureMapper;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.UnitVector;

@@ -3,18 +3,18 @@ package ch.alpine.subare.analysis;
 
 import java.util.List;
 
-import ch.alpine.subare.api.mod.MonteCarloInterface;
-import ch.alpine.subare.api.pol.PolicyBase;
-import ch.alpine.subare.api.pol.PolicyType;
-import ch.alpine.subare.api.pol.StateActionCounter;
-import ch.alpine.subare.api.val.QsaInterface;
+import ch.alpine.subare.mod.MonteCarloInterface;
+import ch.alpine.subare.pol.EGreedyPolicy;
+import ch.alpine.subare.pol.PolicyBase;
+import ch.alpine.subare.pol.PolicyType;
+import ch.alpine.subare.pol.StateActionCounter;
 import ch.alpine.subare.rate.ConstantLearningRate;
 import ch.alpine.subare.rate.DecayedExplorationRate;
 import ch.alpine.subare.td.SarsaType;
-import ch.alpine.subare.util.DiscreteQsa;
 import ch.alpine.subare.util.DiscreteStateActionCounter;
-import ch.alpine.subare.util.EGreedyPolicy;
 import ch.alpine.subare.util.LinearExplorationRate;
+import ch.alpine.subare.val.DiscreteQsa;
+import ch.alpine.subare.val.QsaInterface;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;

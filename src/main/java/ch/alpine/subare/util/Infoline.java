@@ -1,7 +1,9 @@
 // code by jph
 package ch.alpine.subare.util;
 
-import ch.alpine.subare.api.mod.DiscreteModel;
+import ch.alpine.subare.mod.DiscreteModel;
+import ch.alpine.subare.val.DiscreteQsa;
+import ch.alpine.subare.val.DiscreteValueFunctions;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

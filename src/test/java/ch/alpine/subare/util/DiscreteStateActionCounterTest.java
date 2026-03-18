@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.junit.jupiter.api.Test;
 
 import ch.alpine.subare.api.StepRecord;
-import ch.alpine.subare.api.pol.StateActionCounter;
+import ch.alpine.subare.pol.StateActionCounter;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensors;
 

@@ -1,10 +1,10 @@
 // code by fluric
 package ch.alpine.subare.analysis;
 
-import ch.alpine.subare.api.mod.DiscreteModel;
-import ch.alpine.subare.util.DiscreteQsa;
-import ch.alpine.subare.util.DiscreteValueFunctions;
+import ch.alpine.subare.mod.DiscreteModel;
 import ch.alpine.subare.util.Loss;
+import ch.alpine.subare.val.DiscreteQsa;
+import ch.alpine.subare.val.DiscreteValueFunctions;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.nrm.Vector2Norm;
 import ch.alpine.tensor.nrm.Vector2NormSquared;

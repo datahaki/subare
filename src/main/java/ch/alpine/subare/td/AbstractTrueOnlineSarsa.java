@@ -1,13 +1,13 @@
 // code by jph, fluric
 package ch.alpine.subare.td;
 
-import ch.alpine.subare.api.FeatureMapper;
-import ch.alpine.subare.api.mod.MonteCarloInterface;
-import ch.alpine.subare.api.pol.StateActionCounterSupplier;
-import ch.alpine.subare.api.pol.TrueOnlineInterface;
+import ch.alpine.subare.mod.MonteCarloInterface;
+import ch.alpine.subare.pol.StateActionCounterSupplier;
+import ch.alpine.subare.pol.TrueOnlineInterface;
 import ch.alpine.subare.rate.LearningRate;
-import ch.alpine.subare.util.DiscreteQsa;
 import ch.alpine.subare.util.StateAction;
+import ch.alpine.subare.val.DiscreteQsa;
+import ch.alpine.subare.val.FeatureMapper;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.sca.Clips;

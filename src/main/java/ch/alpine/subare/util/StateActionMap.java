@@ -5,11 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import ch.alpine.subare.mod.SampleModel;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Throw;
 
-/** for deterministic {@link SampleModel} to precompute and store the effective actions */
+/** for deterministic SampleModel to precompute and store the effective actions */
 public class StateActionMap {
   private final Map<Tensor, Tensor> map;
 

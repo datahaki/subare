@@ -49,7 +49,8 @@ class CNNDemo2Test {
       // BACKWARD PASS (Updates weights automatically)
       conv.backward(outputGradients, learningRate);
       Tensor back2 = relu.back(outGrad.multiply(RealScalar.of(learningRate)));
-      Tensor back = conv1dLayer.back(back2);
+      // Tensor back =
+      conv1dLayer.back(back2);
       conv1dLayer.update();
       // PRINT PROGRESS every 20 epochs
       if (epoch % 20 == 0) {

@@ -25,7 +25,8 @@ class MaxPooling1DLayerTest {
     maxPooling1D.forward(input);
     Tensor maxInd1 = Tensors.vectorInt(maxPooling1D.lastMaxIndices);
     MaxPooling1DLayer mp1dl = new MaxPooling1DLayer(k);
-    Tensor forward = mp1dl.forward(Tensors.vectorDouble(input));
+    // Tensor forward =
+    mp1dl.forward(Tensors.vectorDouble(input));
     Tensor maxInd2 = Tensors.vectorInt(mp1dl.lastMaxIndices);
     assertEquals(maxInd1, maxInd2);
     // ---

@@ -48,7 +48,8 @@ public class NetTrain {
     while (Scalars.lessThan(timing.seconds(), timeout) && epoch < maxEpoch) {
       Tensor ds = Tensors.reserve(xdata.length());
       for (int i = 0; i < xdata.length(); i++) {
-        Tensor y = netChain.forward(xdata.get(i));
+        // Tensor y =
+        netChain.forward(xdata.get(i));
         Tensor d = netChain.error(ydata.get(i)).multiply(learningRate);
         // IO.println("error: "+d);
         ds.append(d);

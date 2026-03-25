@@ -10,7 +10,7 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 
-/* package */ class OriginalSarsaEvaluation extends AbstractSarsaEvaluation {
+class OriginalSarsaEvaluation extends AbstractSarsaEvaluation {
   public OriginalSarsaEvaluation(DiscreteModel discreteModel) {
     super(discreteModel);
   }

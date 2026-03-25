@@ -24,7 +24,7 @@ public class DecayedExplorationRate implements ExplorationRate {
   /** lookup table to speed up computation */
   private final Tensor MEMO = Tensors.vector(1.0); // index == 0 => learning rate == 1
 
-  /* package */ DecayedExplorationRate(Scalar factor, Scalar exponent) {
+  DecayedExplorationRate(Scalar factor, Scalar exponent) {
     this.factor = Sign.requirePositiveOrZero(factor);
     this.exponent = exponent;
   }

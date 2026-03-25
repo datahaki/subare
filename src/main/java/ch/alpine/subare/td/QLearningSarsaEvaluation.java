@@ -14,7 +14,7 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.red.Max;
 
-/* package */ class QLearningSarsaEvaluation implements SarsaEvaluation {
+class QLearningSarsaEvaluation implements SarsaEvaluation {
   private final DiscreteModel discreteModel;
 
   public QLearningSarsaEvaluation(DiscreteModel discreteModel) {

@@ -27,7 +27,7 @@ import ch.alpine.tensor.sca.pow.Power;
  * in the Gambler problem the following values seem to work well
  * OriginalSarsa factor == 1.3, and exponent == 0.51
  * QLearning factor == 0.2, and exponent == 0.55 */
-/* package */ abstract class DecayedLearningRate implements LearningRate {
+abstract class DecayedLearningRate implements LearningRate {
   private final Scalar factor;
   private final Scalar exponent;
   /** lookup table to speed up computation */

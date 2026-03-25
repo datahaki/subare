@@ -7,7 +7,7 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Throw;
 
-/* package */ enum StaticHelper {
+enum StaticHelper {
   ;
   // test that probabilities add up to 1
   static void assertConsistent(Tensor keys, ActionValueInterface actionValueInterface) {

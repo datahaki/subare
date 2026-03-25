@@ -9,7 +9,7 @@ import ch.alpine.subare.api.StepRecord;
 import ch.alpine.subare.util.StateAction;
 import ch.alpine.tensor.Tensor;
 
-/* package */ class StepSet {
+class StepSet {
   private final Map<Tensor, StepRecord> map = new HashMap<>();
 
   void register(StepRecord stepRecord) {

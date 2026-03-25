@@ -14,7 +14,7 @@ import ch.alpine.tensor.Tensor;
 /** tracks rewards and statistics of next states for a fixed (state, action) pair
  * 
  * utility class for {@link ActionValueStatistics} */
-/* package */ class TransitionTracker implements StepDigest {
+class TransitionTracker implements StepDigest {
   private final AverageTracker average = new AverageTracker();
   private final Map<Tensor, Integer> map = new LinkedHashMap<>();
   private long total = 0;

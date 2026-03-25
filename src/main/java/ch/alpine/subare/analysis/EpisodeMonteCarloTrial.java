@@ -9,7 +9,7 @@ import ch.alpine.subare.util.ExploringStarts;
 import ch.alpine.subare.val.DiscreteQsa;
 import ch.alpine.subare.val.QsaInterface;
 
-/* package */ class EpisodeMonteCarloTrial implements MonteCarloTrial {
+class EpisodeMonteCarloTrial implements MonteCarloTrial {
   private final MonteCarloInterface monteCarloInterface;
   private final MonteCarloExploringStarts mces;
   private final PolicyBase policy;

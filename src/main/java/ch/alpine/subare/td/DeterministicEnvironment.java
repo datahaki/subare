@@ -13,7 +13,7 @@ import ch.alpine.tensor.Tensors;
 
 /** utility class to implement "Model" for deterministic environments
  * in Tabular Dyna-Q p.172 */
-/* package */ class DeterministicEnvironment implements StepDigest {
+class DeterministicEnvironment implements StepDigest {
   private final Map<Tensor, StepRecord> map = new HashMap<>();
   private final Tensor keys = Tensors.empty();
 

@@ -12,7 +12,7 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 
 /** only suitable for models with all states as start states */
-/* package */ class TabularStepBatch {
+class TabularStepBatch {
   private final TabularModel tabularModel;
   private final List<Tensor> list;
   private int index = 0;

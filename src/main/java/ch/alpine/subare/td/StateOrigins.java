@@ -11,7 +11,7 @@ import ch.alpine.subare.pol.StepDigest;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Throw;
 
-/* package */ class StateOrigins implements StepDigest {
+class StateOrigins implements StepDigest {
   private final Map<Tensor, StepSet> map = new HashMap<>();
 
   /** @param state

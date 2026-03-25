@@ -5,7 +5,7 @@ import ch.alpine.subare.epi.EpisodeInterface;
 import ch.alpine.subare.mod.MonteCarloInterface;
 import ch.alpine.subare.pol.Policy;
 
-/* package */ abstract class AbstractExploringStarts {
+abstract class AbstractExploringStarts {
   private final MonteCarloInterface monteCarloInterface;
   private int batchIndex = -1; // incremented from constructor
   private Policy policy; // must be private

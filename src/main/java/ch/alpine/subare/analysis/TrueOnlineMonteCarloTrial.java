@@ -20,7 +20,7 @@ import ch.alpine.subare.val.QsaInterface;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 
-/* package */ class TrueOnlineMonteCarloTrial implements MonteCarloTrial {
+class TrueOnlineMonteCarloTrial implements MonteCarloTrial {
   // TODO SUBARE make configurable
   private static final Scalar ALPHA = RealScalar.of(0.05);
   private static final Scalar LAMBDA = RealScalar.of(0.3);

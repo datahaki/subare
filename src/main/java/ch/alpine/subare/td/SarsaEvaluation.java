@@ -5,7 +5,7 @@ import ch.alpine.subare.pol.PolicyExt;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 
-/* package */ interface SarsaEvaluation {
+interface SarsaEvaluation {
   Scalar evaluate(Tensor state, PolicyExt policy);
 
   /** The action probabilities are chosen according to policy1 and then added up by the qsa of policy2

@@ -21,7 +21,7 @@ import ch.alpine.subare.val.QsaInterface;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 
-/* package */ class DoubleTrueOnlineMonteCarloTrial implements MonteCarloTrial, StateActionCounterSupplier {
+class DoubleTrueOnlineMonteCarloTrial implements MonteCarloTrial, StateActionCounterSupplier {
   private static final Scalar ALPHA = RealScalar.of(0.05);
   private static final Scalar LAMBDA = RealScalar.of(0.3);
 

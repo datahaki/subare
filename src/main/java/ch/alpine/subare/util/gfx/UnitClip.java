@@ -9,7 +9,7 @@ import ch.alpine.tensor.sca.Clips;
 
 /** clips scalars to interval [0, 1] excluding scalars that do not satisfy {@link FiniteScalarQ}
  * such as {@link DoubleScalar#POSITIVE_INFINITY} and {@link DoubleScalar#INDETERMINATE} */
-/* package */ enum UnitClip implements ScalarUnaryOperator {
+enum UnitClip implements ScalarUnaryOperator {
   FUNCTION;
 
   @Override

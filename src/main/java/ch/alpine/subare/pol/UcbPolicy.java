@@ -17,12 +17,12 @@ import ch.alpine.tensor.pdf.d.CategoricalDistribution;
 
 /** upper confidence bound is greedy except that it encourages
  * exploration if an action has not been encountered often relative to other actions */
-/* package */ class UcbPolicy extends PolicyBase {
-  /* package */ UcbPolicy(DiscreteModel discreteModel, QsaInterface qsa, StateActionCounter sac) {
+class UcbPolicy extends PolicyBase {
+  UcbPolicy(DiscreteModel discreteModel, QsaInterface qsa, StateActionCounter sac) {
     super(discreteModel, qsa, sac);
   }
 
-  /* package */ UcbPolicy(StandardModel standardModel, VsInterface vs, StateActionCounter sac) {
+  UcbPolicy(StandardModel standardModel, VsInterface vs, StateActionCounter sac) {
     super(standardModel, vs, sac);
   }
 

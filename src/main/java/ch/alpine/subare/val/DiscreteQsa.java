@@ -60,8 +60,7 @@ public class DiscreteQsa implements QsaInterface, DiscreteValueFunction, Seriali
     if (alpha.equals(RealScalar.ONE))
       values.set(value, i);
     else
-      // TODO use
-      // ScalarBinaryAverage.INSTANCE
+      // TODO SUBARE use LinearBinaryAverage.INSTANCE
       values.set(v_old -> v_old.add(value.subtract(v_old).multiply(alpha)), i);
   }
 

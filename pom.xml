@@ -8,13 +8,16 @@
 	<version>0.4.4</version>
 	<packaging>jar</packaging>
 
-	<name>subare</name>
-	<url>https://github.com/datahaki/subare</url>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<github.global.server>github</github.global.server>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.compiler.release>26</maven.compiler.release>
 	</properties>
+
+	<!-- Project metadata -->
+	<name>subare</name>
+	<description>math library for Java</description>
+	<url>https://github.com/datahaki/subare</url>
 
 	<dependencies>
 		<dependency>
@@ -52,7 +55,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.15.0</version>
 				<configuration>
-					<release>25</release>
+					<release>26</release>
 				</configuration>
 			</plugin>
 			<plugin>

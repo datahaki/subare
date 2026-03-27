@@ -7,6 +7,7 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Throw;
 import ch.alpine.tensor.mat.Tolerance;
+import ch.alpine.tensor.sca.N;
 import ch.alpine.tensor.sca.Sign;
 
 enum StaticHelper {
@@ -23,7 +24,7 @@ enum StaticHelper {
         .map(Sign::requirePositiveOrZero) //
         .reduce(Scalar::add) //
         .orElseThrow();
-    if (!Tolerance.CHOP.isClose(norm, RealScalar.ONE)) {
+    if (!Tolerance.CHOP.isClose(N.DOUBLE.apply(norm), RealScalar.ONE)) {
       IO.println("state =" + state);
       IO.println("action=" + action);
       actionValueInterface.transitions(state, action).forEach(next -> {

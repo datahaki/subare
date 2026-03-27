@@ -42,7 +42,6 @@ public enum StateActionRasters {
       }
     // Clip.UNIT.apply(scalar)
     // System.out.println(Pretty.of(tensor));
-    // System.exit(0);
     return tensor;
   }
 
@@ -66,7 +65,6 @@ public enum StateActionRasters {
     Tensor tensor = _render1(stateActionRaster, qsa);
     tensor = uo.apply(tensor);
     // System.out.println(Pretty.of(tensor));
-    // System.exit(0);
     return tensor.maps(cdg);
   }
 

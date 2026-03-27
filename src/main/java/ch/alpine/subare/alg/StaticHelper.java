@@ -6,6 +6,8 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Throw;
+import ch.alpine.tensor.mat.Tolerance;
+import ch.alpine.tensor.sca.Sign;
 
 enum StaticHelper {
   ;
@@ -18,16 +20,16 @@ enum StaticHelper {
   private static void _isConsistent(ActionValueInterface actionValueInterface, Tensor state, Tensor action) {
     Scalar norm = actionValueInterface.transitions(state, action).stream() //
         .map(next -> actionValueInterface.transitionProbability(state, action, next)) //
+        .map(Sign::requirePositiveOrZero) //
         .reduce(Scalar::add) //
         .orElseThrow();
-    if (!norm.equals(RealScalar.ONE)) {
+    if (!Tolerance.CHOP.isClose(norm, RealScalar.ONE)) {
       IO.println("state =" + state);
       IO.println("action=" + action);
       actionValueInterface.transitions(state, action).forEach(next -> {
         Scalar prob = actionValueInterface.transitionProbability(state, action, next);
         IO.println(next + " " + prob);
       });
-      System.exit(0);
       throw new Throw(norm, state, action); // probabilities have to sum up to 1
     }
   }

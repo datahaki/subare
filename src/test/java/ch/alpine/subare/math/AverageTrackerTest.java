@@ -43,6 +43,7 @@ class AverageTrackerTest {
     AverageTracker avg = new AverageTracker();
     vec.stream().map(Scalar.class::cast).forEach(avg::digest);
     assertEquals(avg.Get(), Mean.of(vec));
+    avg.toString();
   }
 
   @Test

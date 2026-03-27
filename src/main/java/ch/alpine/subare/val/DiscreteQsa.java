@@ -15,6 +15,7 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.ext.Integers;
+import ch.alpine.tensor.itp.LinearBinaryAverage;
 import ch.alpine.tensor.red.Max;
 import ch.alpine.tensor.red.Min;
 
@@ -56,12 +57,9 @@ public class DiscreteQsa implements QsaInterface, DiscreteValueFunction, Seriali
   @Override // from QsaInterface
   public void blend(Tensor state, Tensor action, Scalar value, Scalar alpha) {
     int i = index.of(StateAction.key(state, action));
-    // the condition permits "Infinity" as initial qsa value, or NaN
-    if (alpha.equals(RealScalar.ONE))
-      values.set(value, i);
-    else
-      // TODO SUBARE use LinearBinaryAverage.INSTANCE
-      values.set(v_old -> v_old.add(value.subtract(v_old).multiply(alpha)), i);
+    // the function has to permits "Infinity", or NaN as initial qsa value
+    // and return value for alpha == 1
+    values.set(v_old -> LinearBinaryAverage.INSTANCE.split(v_old, value, alpha), i);
   }
 
   @Override // from QsaInterface

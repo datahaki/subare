@@ -20,8 +20,8 @@ import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.alg.Join;
 import ch.alpine.tensor.alg.Rescale;
-import ch.alpine.tensor.img.ColorDataGradient;
-import ch.alpine.tensor.img.ColorDataGradients;
+import ch.alpine.tensor.col.ColorDataGradient;
+import ch.alpine.tensor.col.ColorDataGradients;
 import ch.alpine.tensor.sca.Clips;
 
 // TODO SUBARE all non-terminal function should be package visibility

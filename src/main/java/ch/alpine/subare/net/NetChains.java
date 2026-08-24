@@ -28,7 +28,7 @@ public enum NetChains {
     Distribution distribution = NormalDistribution.of(0.0, 0.1);
     return NetChain.of( //
         LinearLayer.of(distribution, ThreadLocalRandom.current(), hidden, d_in), //
-        ElementwiseLayer.relu(), //
+        ElementwiseLayer.gelu(), //
         LinearLayer.of(distribution, ThreadLocalRandom.current(), dout, hidden), //
         new SoftArgMax());
   }

@@ -8,6 +8,7 @@ import ch.alpine.tensor.red.Entrywise;
 import ch.alpine.tensor.sca.Ramp;
 import ch.alpine.tensor.sca.UnitStep;
 import ch.alpine.tensor.sca.exp.DLogisticSigmoid;
+import ch.alpine.tensor.sca.exp.Gelu;
 import ch.alpine.tensor.sca.exp.LogisticSigmoid;
 import ch.alpine.tensor.sca.tri.Tanh;
 
@@ -39,6 +40,20 @@ public abstract class ElementwiseLayer implements Layer {
       @Override
       public Tensor back(Tensor gradOutput) {
         return Entrywise.mul().apply(gradOutput, inputCache.maps(UnitStep.FUNCTION));
+      }
+
+      @Override
+      public String toString() {
+        return MathematicaFormat.concise("ReLuLayer");
+      }
+    };
+  }
+
+  public static Layer gelu() {
+    return new ElementwiseLayer(Gelu.FUNCTION) {
+      @Override
+      public Tensor back(Tensor gradOutput) {
+        return Entrywise.mul().apply(gradOutput, inputCache.maps(Gelu::dx));
       }
 
       @Override

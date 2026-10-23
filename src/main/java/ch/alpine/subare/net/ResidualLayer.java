@@ -1,3 +1,4 @@
+// code by jph
 package ch.alpine.subare.net;
 
 import ch.alpine.tensor.Tensor;

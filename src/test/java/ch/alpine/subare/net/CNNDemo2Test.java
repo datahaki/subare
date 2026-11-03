@@ -27,7 +27,7 @@ class CNNDemo2Test {
     int kernelSize = input.length - target.length + 1;
     Conv1D conv = new Conv1D(kernelSize);
     Conv1DLayer conv1dLayer = Conv1DLayer.of(NormalDistribution.of(0, 0.1), new Random(), kernelSize);
-    Layer relu = ElementwiseLayer.relu();
+    NetLayer relu = ElementwiseLayer.relu();
     Scalar totalLoss2 = RealScalar.ONE;
     for (int epoch = 0; epoch <= 100; epoch++) {
       // FORWARD PASS

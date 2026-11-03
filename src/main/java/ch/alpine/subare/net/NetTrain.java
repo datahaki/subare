@@ -3,6 +3,7 @@ package ch.alpine.subare.net;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
@@ -27,13 +28,13 @@ public class NetTrain {
   public final TableBuilder tparam = new TableBuilder();
   // TODO check terminology
   public final TableBuilder tloss = new TableBuilder();
-  private final NetChain netChain;
+  private final NetLayer netLayer;
   private final Tensor xdata;
   private final Tensor ydata;
 
-  public NetTrain(NetChain netChain, Tensor xdata, Tensor ydata) {
+  public NetTrain(NetLayer netLayer, Tensor xdata, Tensor ydata) {
+    this.netLayer = Objects.requireNonNull(netLayer);
     Integers.requireEquals(xdata.length(), ydata.length());
-    this.netChain = netChain;
     this.xdata = xdata;
     this.ydata = ydata;
   }
@@ -49,16 +50,16 @@ public class NetTrain {
       Tensor ds = Tensors.reserve(xdata.length());
       for (int i = 0; i < xdata.length(); i++) {
         // Tensor y =
-        netChain.forward(xdata.get(i));
-        Tensor d = netChain.error(ydata.get(i)).multiply(learningRate);
+        netLayer.forward(xdata.get(i));
+        Tensor d = netLayer.error(ydata.get(i)).multiply(learningRate);
         // IO.println("error: "+d);
         ds.append(d);
-        netChain.back(d);
-        netChain.update();
+        netLayer.back(d);
+        netLayer.update();
       }
       if (epoch % skip == 0) {
         tloss.appendRow(RealScalar.of(epoch), ds);
-        tparam.appendRow(RealScalar.of(epoch), netChain.parameters());
+        tparam.appendRow(RealScalar.of(epoch), Tensor.of(netLayer.parameters()));
         final int fi = epoch;
         list.forEach(ntl -> ntl.epoch(fi));
       }
@@ -70,7 +71,7 @@ public class NetTrain {
     Tensor errors = Tensors.reserve(xdata.length());
     for (int sample = 0; sample < xdata.length(); ++sample) {
       Tensor x = xdata.get(sample);
-      Tensor y = netChain.forward(x);
+      Tensor y = netLayer.forward(x);
       Tensor e = ydata.get(sample).subtract(y);
       errors.append(e);
     }

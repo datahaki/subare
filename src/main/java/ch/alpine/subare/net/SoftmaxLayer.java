@@ -8,7 +8,7 @@ import ch.alpine.tensor.red.Entrywise;
 
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/SoftmaxLayer.html">SoftmaxLayer</a> */
-public class SoftmaxLayer implements Layer {
+public class SoftmaxLayer implements NetLayer {
   Tensor lastOutput;
 
   @Override

@@ -33,6 +33,15 @@ public enum NetChains {
         new SoftArgMax());
   }
 
+  public static NetChain feedForward(int d_in, int hidden, int dout) {
+    Distribution distribution = NormalDistribution.of(0.0, 0.1);
+    return NetChain.of( //
+        LinearLayer.of(distribution, ThreadLocalRandom.current(), hidden, d_in), //
+        ElementwiseLayer.gelu(), //
+        LinearLayer.of(distribution, ThreadLocalRandom.current(), dout, hidden), //
+        new SoftArgMax());
+  }
+
   public static NetChain linTanhLin(int d_in, int hidden, int dout) {
     return NetChain.of( //
         LinearLayer.xavier(hidden, d_in), //

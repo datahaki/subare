@@ -4,7 +4,7 @@ package ch.alpine.subare.net;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 
-public record NormalizationLayer(Tensor mean, Scalar std) implements Layer {
+public record NormalizationLayer(Tensor mean, Scalar std) implements NetLayer {
   @Override
   public Tensor forward(Tensor x) {
     return x.subtract(mean).divide(std);

@@ -9,7 +9,7 @@ import ch.alpine.tensor.alg.UnitVector;
 import ch.alpine.tensor.ext.ArgMax;
 import ch.alpine.tensor.nrm.SoftmaxVector;
 
-public class SoftArgMax implements Layer {
+public class SoftArgMax implements NetLayer {
   Tensor interCache;
 
   @Override

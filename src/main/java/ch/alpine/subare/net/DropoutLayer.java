@@ -12,7 +12,7 @@ import ch.alpine.tensor.pdf.d.BernoulliDistribution;
 import ch.alpine.tensor.red.Times;
 import ch.alpine.tensor.red.Total;
 
-public class DropoutLayer implements Layer {
+public class DropoutLayer implements NetLayer {
   public boolean training = true;
   private Scalar maintain = Rational.HALF;
   private Distribution distribution;

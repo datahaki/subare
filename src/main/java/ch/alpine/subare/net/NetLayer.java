@@ -1,11 +1,22 @@
 // code by jph
 package ch.alpine.subare.net;
 
-import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.Tensors;
+import java.util.random.RandomGenerator;
+import java.util.stream.Stream;
 
-public interface Layer {
-  /** Forward pass
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+
+public interface NetLayer {
+  default void initialize(RandomGenerator randomGenerator) {
+    // TODO ponder about design
+  }
+
+  default Stream<Scalar> parameters() {
+    return Stream.empty();
+  }
+
+  /** forward pass
    * 
    * @param x
    * @return */
@@ -23,8 +34,4 @@ public interface Layer {
   void update();
 
   Tensor error(Tensor y);
-
-  default Tensor parameters() {
-    return Tensors.empty();
-  }
 }

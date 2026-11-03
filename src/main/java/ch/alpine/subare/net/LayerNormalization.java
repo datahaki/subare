@@ -10,7 +10,7 @@ import ch.alpine.tensor.red.Mean;
 import ch.alpine.tensor.red.Variance;
 import ch.alpine.tensor.sca.pow.Sqrt;
 
-public class LayerNormalization implements Layer {
+public class LayerNormalization implements NetLayer {
   private static final Scalar EPS = RealScalar.of(1e-5);
   // trainable params
   private Tensor gamma;

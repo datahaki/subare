@@ -3,7 +3,7 @@ package ch.alpine.subare.net;
 
 import ch.alpine.tensor.Tensor;
 
-public class ResidualLayer implements Layer {
+public class ResidualLayer implements NetLayer {
   private final NetChain netChain;
 
   public ResidualLayer(NetChain netChain) {
@@ -27,6 +27,6 @@ public class ResidualLayer implements Layer {
 
   @Override
   public Tensor error(Tensor y) {
-    return netChain.error(y);
+    return netChain.error(y); // FIXME !?
   }
 }

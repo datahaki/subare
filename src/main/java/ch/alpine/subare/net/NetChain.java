@@ -2,44 +2,52 @@
 package ch.alpine.subare.net;
 
 import java.util.List;
+import java.util.random.RandomGenerator;
+import java.util.stream.Stream;
 
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.alg.Flatten;
 import ch.alpine.tensor.ext.MergeIllegal;
 import ch.alpine.tensor.sca.Sign;
 
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/NetChain.html">NetChain</a> */
-public record NetChain(List<Layer> list) {
-  public static NetChain of(Layer... layers) {
+public record NetChain(List<NetLayer> list) implements NetLayer {
+  public static NetChain of(NetLayer... layers) {
     return new NetChain(List.of(layers));
   }
 
-  public static NetChain of(List<Layer> layers) {
-    return new NetChain(layers.stream().toList());
+  @Override
+  public void initialize(RandomGenerator randomGenerator) {
+    list.forEach(netLayer -> netLayer.initialize(randomGenerator));
   }
 
+  @Override
+  public Stream<Scalar> parameters() {
+    return list.stream().flatMap(NetLayer::parameters);
+  }
+
+  @Override
   public Tensor forward(Tensor x0) {
     return list.stream().reduce(x0, (x, layer) -> layer.forward(x), MergeIllegal.operator());
   }
 
+  @Override
   public Tensor back(Tensor grad0) {
     return list.reversed().stream().reduce(grad0, (grad, layer) -> layer.back(grad), MergeIllegal.operator());
   }
 
+  @Override
   public void update() {
-    list.forEach(Layer::update);
+    list.forEach(NetLayer::update);
   }
 
-  public Tensor parameters() {
-    return Tensor.of(list.stream().map(Layer::parameters).flatMap(tensor -> Flatten.stream(tensor, -1)));
-  }
-
+  @Override
   public Tensor error(Tensor tensor) {
     return list.getLast().error(tensor);
   }
 
+  // TODO probably obsolete
   public void setL2(Scalar l2) {
     Sign.requirePositiveOrZero(l2);
     list.stream() //

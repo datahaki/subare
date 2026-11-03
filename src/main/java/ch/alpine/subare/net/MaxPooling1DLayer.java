@@ -8,7 +8,7 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.io.MathematicaFormat;
 
-public class MaxPooling1DLayer implements Layer {
+public class MaxPooling1DLayer implements NetLayer {
   final int poolSize;
   int[] lastMaxIndices;
 

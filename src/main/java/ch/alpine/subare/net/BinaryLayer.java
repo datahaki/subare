@@ -5,7 +5,7 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.red.Entrywise;
 import ch.alpine.tensor.sca.exp.DLogisticSigmoid;
 
-public class BinaryLayer implements Layer {
+public class BinaryLayer implements NetLayer {
   Tensor x;
 
   @Override

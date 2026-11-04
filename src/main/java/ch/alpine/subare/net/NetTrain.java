@@ -17,13 +17,6 @@ import ch.alpine.tensor.qty.Timing;
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/NetTrain.html">NetTrain</a> */
 public class NetTrain {
-  /** @param netChain
-   * @param xdata input
-   * @param ydata output
-   * @param learningRate
-   * @param consumer
-   * @param timeout
-   * @param maxEpoch */
   private final List<NetTrainListener> list = new LinkedList<>();
   public final TableBuilder tparam = new TableBuilder();
   // TODO check terminology
@@ -32,6 +25,9 @@ public class NetTrain {
   private final Tensor xdata;
   private final Tensor ydata;
 
+  /** @param netChain
+   * @param xdata input
+   * @param ydata output */
   public NetTrain(NetLayer netLayer, Tensor xdata, Tensor ydata) {
     this.netLayer = Objects.requireNonNull(netLayer);
     Integers.requireEquals(xdata.length(), ydata.length());

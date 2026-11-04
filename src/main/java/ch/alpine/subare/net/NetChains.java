@@ -5,8 +5,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.c.NormalDistribution;
-import ch.alpine.tensor.pdf.c.UniformDistribution;
-import ch.alpine.tensor.sca.Clips;
 
 public enum NetChains {
   ;
@@ -14,45 +12,42 @@ public enum NetChains {
    * @param hiddenSize
    * @param OUTPUT_SIZE
    * @return */
-  public static NetChain binary(int INPUT_SIZE, int hiddenSize, int OUTPUT_SIZE) {
-    Distribution distribution = UniformDistribution.of(Clips.absolute(0.5));
+  public static NetLayer binary(int INPUT_SIZE, int hiddenSize, int OUTPUT_SIZE) {
     return NetChain.of( //
-        LinearLayer.of(distribution, ThreadLocalRandom.current(), hiddenSize, INPUT_SIZE), //
+        new LinearLayer(hiddenSize, INPUT_SIZE), //
         ElementwiseLayer.logSig(), //
-        LinearLayer.of(distribution, ThreadLocalRandom.current(), OUTPUT_SIZE, hiddenSize), //
+        new LinearLayer(OUTPUT_SIZE, hiddenSize), //
         ElementwiseLayer.logSig(), //
         new BinaryLayer());
   }
 
-  public static NetChain argMaxMLP(int d_in, int hidden, int dout) {
-    Distribution distribution = NormalDistribution.of(0.0, 0.1);
+  public static NetLayer argMaxMLP(int d_in, int hidden, int dout) {
     return NetChain.of( //
-        LinearLayer.of(distribution, ThreadLocalRandom.current(), hidden, d_in), //
+        new LinearLayer(hidden, d_in), //
         ElementwiseLayer.gelu(), //
-        LinearLayer.of(distribution, ThreadLocalRandom.current(), dout, hidden), //
+        new LinearLayer(dout, hidden), //
         new SoftArgMax());
   }
 
-  public static NetChain feedForward(int d_in, int hidden, int dout) {
-    Distribution distribution = NormalDistribution.of(0.0, 0.1);
+  public static NetLayer feedForward(int d_in, int hidden, int dout) {
     return NetChain.of( //
-        LinearLayer.of(distribution, ThreadLocalRandom.current(), hidden, d_in), //
+        new LinearLayer(hidden, d_in), //
         ElementwiseLayer.gelu(), //
-        LinearLayer.of(distribution, ThreadLocalRandom.current(), dout, hidden), //
+        new LinearLayer(dout, hidden), //
         new SoftArgMax());
   }
 
-  public static NetChain linTanhLin(int d_in, int hidden, int dout) {
+  public static NetLayer linTanhLin(int d_in, int hidden, int dout) {
     return NetChain.of( //
-        LinearLayer.xavier(hidden, d_in), //
+        new LinearLayer(hidden, d_in), //
         ElementwiseLayer.tanh(), //
-        LinearLayer.xavier(dout, hidden));
+        new LinearLayer(dout, hidden));
   }
 
-  public static NetChain cnnRelu(int kernelSize) {
+  public static NetLayer cnnRelu(int kernelSize) {
     Distribution distribution = NormalDistribution.of(0, 0.1);
     return NetChain.of( //
-        Conv1DLayer.of(distribution, ThreadLocalRandom.current(), kernelSize), // , //
+        Conv1DLayer.of(distribution, ThreadLocalRandom.current(), kernelSize), //
         ElementwiseLayer.relu());
   }
 }

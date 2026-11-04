@@ -13,7 +13,7 @@ import ch.alpine.tensor.sca.Sign;
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/NetChain.html">NetChain</a> */
 public record NetChain(List<NetLayer> list) implements NetLayer {
-  public static NetChain of(NetLayer... layers) {
+  public static NetLayer of(NetLayer... layers) {
     return new NetChain(List.of(layers));
   }
 

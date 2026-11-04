@@ -2,31 +2,38 @@
 package ch.alpine.subare.net;
 
 import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.io.MathematicaFormat;
 
 public class ResidualLayer implements NetLayer {
-  private final NetChain netChain;
+  private final NetLayer netLayer;
+  private Tensor outputCache;
 
-  public ResidualLayer(NetChain netChain) {
-    this.netChain = netChain;
+  public ResidualLayer(NetLayer netLayer) {
+    this.netLayer = netLayer;
   }
 
   @Override
   public Tensor forward(Tensor x) {
-    return netChain.forward(x).add(x);
+    return outputCache = netLayer.forward(x).add(x);
   }
 
   @Override
   public Tensor back(Tensor gradOutput) {
-    return netChain.back(gradOutput).add(gradOutput);
+    return netLayer.back(gradOutput).add(gradOutput);
   }
 
   @Override
   public void update() {
-    netChain.update();
+    netLayer.update();
   }
 
   @Override
   public Tensor error(Tensor y) {
-    return netChain.error(y); // FIXME !?
+    return y.subtract(outputCache);
+  }
+
+  @Override
+  public String toString() {
+    return MathematicaFormat.concise("ResidualLayer", netLayer);
   }
 }

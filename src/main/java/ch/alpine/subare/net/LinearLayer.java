@@ -1,16 +1,18 @@
 // code by jph
 package ch.alpine.subare.net;
 
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.List;
 import java.util.random.RandomGenerator;
 import java.util.stream.Stream;
 
+import ch.alpine.tensor.DoubleScalar;
+import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.Unprotect;
 import ch.alpine.tensor.alg.Array;
+import ch.alpine.tensor.alg.ConstantArray;
 import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.alg.Flatten;
 import ch.alpine.tensor.io.MathematicaFormat;
@@ -23,40 +25,27 @@ import ch.alpine.tensor.sca.Sign;
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/LinearLayer.html">LinearLayer</a> */
 public class LinearLayer implements NetLayer {
-  public static LinearLayer of(Distribution d, RandomGenerator randomGenerator, int post, int ante) {
-    LinearLayer linearLayer = new LinearLayer();
-    linearLayer.W = RandomVariate.of(d, randomGenerator, post, ante);
-    linearLayer.b = Array.zeros(post);
-    return linearLayer;
-  }
-
-  public static NetLayer xavier(RandomGenerator randomGenerator, int post, int ante) {
-    Distribution distribution = NormalDistribution.of(RealScalar.ZERO, RealScalar.of(ante).reciprocal());
-    LinearLayer linearLayer = new LinearLayer();
-    linearLayer.W = RandomVariate.of(distribution, randomGenerator, post, ante);
-    linearLayer.b = Array.zeros(post);
-    return linearLayer;
-  }
-
-  public static NetLayer xavier(int post, int ante) {
-    return xavier(ThreadLocalRandom.current(), post, ante);
-  }
-
   public Tensor W;
   public Tensor b;
   // TODO probably obsolete
   public Scalar l2 = RealScalar.ZERO;
   /** input cache */
-  Tensor inputCache;
-  Tensor outputCache;
-  Tensor gW;
-  Tensor gb;
+  private Tensor inputCache;
+  private Tensor outputCache;
+  private Tensor gW;
+  private Tensor gb;
+
+  public LinearLayer(int d_out, int d_in) {
+    W = ConstantArray.of(DoubleScalar.INDETERMINATE, d_out, d_in);
+    b = ConstantArray.of(DoubleScalar.INDETERMINATE, d_out);
+  }
 
   @Override
   public void initialize(RandomGenerator randomGenerator) {
-    int ante = Unprotect.dimension1(W);
-    Distribution distribution = NormalDistribution.of(RealScalar.ZERO, RealScalar.of(ante).reciprocal());
-    W = RandomVariate.of(distribution, randomGenerator, Dimensions.of(W));
+    List<Integer> dims = Dimensions.of(W);
+    Distribution distribution = NormalDistribution.of(RealScalar.ZERO, Rational.of(2, dims.get(1)));
+    W = RandomVariate.of(distribution, randomGenerator, dims);
+    b = Array.zeros(dims.get(0));
   }
 
   @Override

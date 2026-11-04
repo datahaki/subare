@@ -58,7 +58,7 @@ public abstract class ElementwiseLayer implements NetLayer {
 
       @Override
       public String toString() {
-        return MathematicaFormat.concise("ReLuLayer");
+        return MathematicaFormat.concise("GeLuLayer");
       }
     };
   }
@@ -99,16 +99,16 @@ public abstract class ElementwiseLayer implements NetLayer {
   }
 
   @Override
-  public Tensor forward(Tensor input) {
+  public final Tensor forward(Tensor input) {
     return outputCache = ((inputCache = input).maps(f));
   }
 
   @Override
-  public void update() {
+  public final void update() {
   }
 
   @Override
-  public Tensor error(Tensor y) {
+  public final Tensor error(Tensor y) {
     return y.subtract(outputCache);
   }
 }

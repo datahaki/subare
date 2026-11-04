@@ -1,6 +1,8 @@
 // code by jph
 package ch.alpine.subare.net;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -23,7 +25,7 @@ import ch.alpine.tensor.qty.Quantity;
 class LinearLayerTest {
   @Test
   void test() {
-    LinearLayer linearLayer = new LinearLayer();
+    LinearLayer linearLayer = new LinearLayer(1, 1);
     linearLayer.W = DiagonalMatrix.full(Tensors.vector(3));
     linearLayer.b = Tensors.vector(5);
     JetScalar js = JetScalar.of(RealScalar.of(4), 2);
@@ -44,17 +46,16 @@ class LinearLayerTest {
     Distribution distribution = NormalDistribution.standard();
     TensorUnaryOperator tuo;
     {
-      LinearLayer linearLayer = new LinearLayer();
-      linearLayer.W = RandomVariate.of(distribution, d_out, d_in);
-      linearLayer.b = RandomVariate.of(distribution, d_out);
-      NetChain netChain = NetChain.of(linearLayer);
-      tuo = netChain::forward;
+      NetLayer netLayer = NetChain.of(new LinearLayer(d_out, d_in));
+      netLayer.initialize(ThreadLocalRandom.current());
+      tuo = netLayer::forward;
     }
     Tensor xdata = RandomVariate.of(distribution, samples, d_in);
     Tensor ydata = tuo.slash(xdata);
     // ---
-    NetChain netChain = NetChain.of(LinearLayer.xavier(d_out, d_in));
-    NetTrain netTrain = new NetTrain(netChain, xdata, ydata);
+    NetLayer netLayer = NetChain.of(new LinearLayer(d_out, d_in));
+    netLayer.initialize(ThreadLocalRandom.current());
+    NetTrain netTrain = new NetTrain(netLayer, xdata, ydata);
     netTrain.run(learningRate, Quantity.of(1, "s"), 100, 1);
     TableBuilder tloss = netTrain.tloss;
     int n = tloss.getRowCount();

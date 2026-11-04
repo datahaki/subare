@@ -1,6 +1,9 @@
 // code by jph
 package ch.alpine.subare.net;
 
+import java.io.Serializable;
+import java.util.random.RandomGenerator;
+
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
@@ -9,8 +12,13 @@ import ch.alpine.tensor.alg.UnitVector;
 import ch.alpine.tensor.ext.ArgMax;
 import ch.alpine.tensor.nrm.SoftmaxVector;
 
-public class SoftArgMax implements NetLayer {
+public class SoftArgMax implements NetLayer, Serializable {
   Tensor interCache;
+
+  @Override
+  public void initialize(RandomGenerator randomGenerator) {
+    interCache = null;
+  }
 
   @Override
   public Scalar forward(Tensor x) {
@@ -20,10 +28,6 @@ public class SoftArgMax implements NetLayer {
   @Override
   public Tensor back(Tensor d) {
     return d;
-  }
-
-  @Override
-  public void update() {
   }
 
   @Override

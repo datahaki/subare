@@ -1,6 +1,7 @@
 // code by jph
 package ch.alpine.subare.net;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.random.RandomGenerator;
 import java.util.stream.Stream;
@@ -12,7 +13,7 @@ import ch.alpine.tensor.sca.Sign;
 
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/NetChain.html">NetChain</a> */
-public record NetChain(List<NetLayer> list) implements NetLayer {
+public record NetChain(List<NetLayer> list) implements NetLayer, Serializable {
   public static NetLayer of(NetLayer... layers) {
     return new NetChain(List.of(layers));
   }

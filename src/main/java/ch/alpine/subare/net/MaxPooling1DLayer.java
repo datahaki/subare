@@ -49,11 +49,6 @@ public class MaxPooling1DLayer implements NetLayer {
   }
 
   @Override
-  public void update() {
-    // nothing to do
-  }
-
-  @Override
   public Tensor error(Tensor y) {
     throw new IllegalStateException();
   }

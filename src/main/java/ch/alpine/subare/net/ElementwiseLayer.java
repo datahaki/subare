@@ -1,6 +1,9 @@
 // code by jph
 package ch.alpine.subare.net;
 
+import java.io.Serializable;
+import java.util.random.RandomGenerator;
+
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.api.ScalarUnaryOperator;
 import ch.alpine.tensor.io.MathematicaFormat;
@@ -14,7 +17,7 @@ import ch.alpine.tensor.sca.tri.Tanh;
 
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/ElementwiseLayer.html">ElementwiseLayer</a> */
-public abstract class ElementwiseLayer implements NetLayer {
+public abstract class ElementwiseLayer implements NetLayer, Serializable {
   public static NetLayer logSig() {
     return new ElementwiseLayer(LogisticSigmoid.FUNCTION) {
       @Override
@@ -99,12 +102,14 @@ public abstract class ElementwiseLayer implements NetLayer {
   }
 
   @Override
-  public final Tensor forward(Tensor input) {
-    return outputCache = ((inputCache = input).maps(f));
+  public void initialize(RandomGenerator randomGenerator) {
+    inputCache = null;
+    outputCache = null;
   }
 
   @Override
-  public final void update() {
+  public final Tensor forward(Tensor input) {
+    return outputCache = ((inputCache = input).maps(f));
   }
 
   @Override

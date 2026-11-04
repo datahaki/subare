@@ -1,15 +1,34 @@
 // code by jph
 package ch.alpine.subare.net;
 
+import java.io.Serializable;
+import java.util.random.RandomGenerator;
+import java.util.stream.Stream;
+
+import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.io.MathematicaFormat;
 
-public class ResidualLayer implements NetLayer {
+/** Residual layers help solve a problem called the vanishing gradient problem
+ * and make it easier to train very deep neural networks.
+ * 
+ * Their main benefits are:
+ * Better gradient flow: Gradients can travel through shortcut connections.
+ * Easier training: Deep networks become easier to optimize.
+ * Preserving information: The original input is not lost as it passes through layers.
+ * Deeper networks: They allow neural networks to have many more layers. */
+public class ResidualLayer implements NetLayer, Serializable {
   private final NetLayer netLayer;
   private Tensor outputCache;
 
   public ResidualLayer(NetLayer netLayer) {
     this.netLayer = netLayer;
+  }
+
+  @Override
+  public void initialize(RandomGenerator randomGenerator) {
+    netLayer.initialize(randomGenerator);
+    outputCache = null;
   }
 
   @Override
@@ -30,6 +49,11 @@ public class ResidualLayer implements NetLayer {
   @Override
   public Tensor error(Tensor y) {
     return y.subtract(outputCache);
+  }
+
+  @Override
+  public Stream<Scalar> parameters() {
+    return netLayer.parameters();
   }
 
   @Override

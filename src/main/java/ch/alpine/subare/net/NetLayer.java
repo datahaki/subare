@@ -9,11 +9,14 @@ import ch.alpine.tensor.Tensor;
 
 public interface NetLayer {
   default void initialize(RandomGenerator randomGenerator) {
-    // TODO ponder about design
   }
 
   default Stream<Scalar> parameters() {
     return Stream.empty();
+  }
+
+  /** Update parameters (no-op for layers without params) */
+  default void update() {
   }
 
   /** forward pass
@@ -29,9 +32,6 @@ public interface NetLayer {
    * @param gradOutput
    * @return */
   Tensor back(Tensor gradOutput);
-
-  /** Update parameters (no-op for layers without params) */
-  void update();
 
   Tensor error(Tensor y);
 }

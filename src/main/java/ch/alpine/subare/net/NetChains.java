@@ -33,8 +33,7 @@ public enum NetChains {
     return NetChain.of( //
         new LinearLayer(hidden, d_in), //
         ElementwiseLayer.gelu(), //
-        new LinearLayer(dout, hidden), //
-        new SoftArgMax());
+        new LinearLayer(dout, hidden));
   }
 
   public static NetLayer linTanhLin(int d_in, int hidden, int dout) {

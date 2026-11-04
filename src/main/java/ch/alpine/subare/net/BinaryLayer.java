@@ -19,10 +19,6 @@ public class BinaryLayer implements NetLayer {
   }
 
   @Override
-  public void update() {
-  }
-
-  @Override
   public Tensor error(Tensor y) {
     // y should be either 0 or 1
     return y.subtract(x);

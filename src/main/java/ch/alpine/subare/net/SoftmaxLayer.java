@@ -23,10 +23,6 @@ public class SoftmaxLayer implements NetLayer {
   }
 
   @Override
-  public void update() {
-  }
-
-  @Override
   public Tensor error(Tensor y) {
     throw new IllegalStateException();
   }

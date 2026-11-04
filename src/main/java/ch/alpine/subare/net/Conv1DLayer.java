@@ -2,6 +2,7 @@
 // code by jph
 package ch.alpine.subare.net;
 
+import java.io.Serializable;
 import java.util.random.RandomGenerator;
 import java.util.stream.Stream;
 
@@ -15,7 +16,7 @@ import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.red.Total;
 
-public class Conv1DLayer implements NetLayer {
+public class Conv1DLayer implements NetLayer, Serializable {
   public static Conv1DLayer of(Distribution d, RandomGenerator randomGenerator, int kernelSize) {
     Conv1DLayer conv1dLayer = new Conv1DLayer();
     conv1dLayer.w = RandomVariate.of(d, randomGenerator, kernelSize);
@@ -50,6 +51,7 @@ public class Conv1DLayer implements NetLayer {
 
   @Override
   public Tensor error(Tensor y) {
+    // TODO why *2 !!?!?!
     return y.subtract(outputCache).multiply(RealScalar.TWO);
   }
 

@@ -42,11 +42,6 @@ public class DropoutLayer implements NetLayer {
   }
 
   @Override
-  public void update() {
-    // ---
-  }
-
-  @Override
   public Tensor error(Tensor y) {
     return null;
   }

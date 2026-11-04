@@ -1,6 +1,7 @@
 // code by jph
 package ch.alpine.subare.net;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.random.RandomGenerator;
 import java.util.stream.Stream;
@@ -24,7 +25,7 @@ import ch.alpine.tensor.sca.Sign;
 
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/LinearLayer.html">LinearLayer</a> */
-public class LinearLayer implements NetLayer {
+public class LinearLayer implements NetLayer, Serializable {
   public Tensor W;
   public Tensor b;
   // TODO probably obsolete
@@ -60,7 +61,7 @@ public class LinearLayer implements NetLayer {
     if (Scalars.nonZero(l2))
       gW = gW.subtract(W.multiply(l2));
     gb = gradOutput;
-    return gradOutput.dot(W); // gradInput
+    return gradOutput.dot(W); // vector of length d_in
   }
 
   @Override
@@ -71,7 +72,7 @@ public class LinearLayer implements NetLayer {
 
   @Override
   public Tensor error(Tensor y) {
-    return y.subtract(outputCache);
+    return y.subtract(outputCache); // vector of length d_out
   }
 
   @Override

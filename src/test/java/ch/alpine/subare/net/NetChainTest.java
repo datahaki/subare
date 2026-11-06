@@ -12,7 +12,7 @@ class NetChainTest {
   @Test
   void testSerial() throws ClassNotFoundException, IOException {
     NetLayer netLayer = NetChain.of( //
-        new ResidualLayer(NetChains.feedForward(3, 10, 3)), //
+        new ResidualLayer(NetChains.sequence(() -> ElementwiseLayer.gelu(), 3, 10, 3)), //
         new SoftArgMax());
     netLayer.initialize(ThreadLocalRandom.current());
     Serialization.copy(netLayer);

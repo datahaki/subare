@@ -18,7 +18,7 @@ class ScalarILayerTest {
     int hidden = 10;
     NetLayer netLayer = NetChain.of( //
         new ScalarILayer(), //
-        NetChains.feedForward(1, hidden, 1), //
+        NetChains.sequence(() -> ElementwiseLayer.gelu(), 1, hidden, 1), //
         new ScalarOLayer() //
     );
     netLayer.initialize(ThreadLocalRandom.current());

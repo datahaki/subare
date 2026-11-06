@@ -19,6 +19,9 @@ public interface NetLayer {
   default void update() {
   }
 
+  default void training() {
+  }
+
   /** forward pass
    * 
    * @param x

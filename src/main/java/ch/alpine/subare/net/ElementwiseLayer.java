@@ -91,6 +91,7 @@ public abstract class ElementwiseLayer implements NetLayer, Serializable {
       }
     };
   }
+  // TODO Leaky ReLU like relu but witn alpha * x for negative
 
   private final ScalarUnaryOperator f;
   /** output cache */

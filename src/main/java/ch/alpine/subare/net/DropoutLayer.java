@@ -2,6 +2,8 @@
 // adapted by jph
 package ch.alpine.subare.net;
 
+import java.io.Serializable;
+
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -12,7 +14,7 @@ import ch.alpine.tensor.pdf.d.BernoulliDistribution;
 import ch.alpine.tensor.red.Times;
 import ch.alpine.tensor.red.Total;
 
-public class DropoutLayer implements NetLayer {
+public class DropoutLayer implements NetLayer, Serializable {
   public boolean training = true;
   private Scalar maintain = Rational.HALF;
   private Distribution distribution;

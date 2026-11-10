@@ -17,18 +17,18 @@ public enum NetChains {
    * @return */
   public static NetLayer binary(int INPUT_SIZE, int hiddenSize, int OUTPUT_SIZE) {
     return NetChain.of( //
-        new LinearLayer(hiddenSize, INPUT_SIZE), //
+        new LinearLayer(INPUT_SIZE, hiddenSize), //
         ElementwiseLayer.logSig(), //
-        new LinearLayer(OUTPUT_SIZE, hiddenSize), //
+        new LinearLayer(hiddenSize, OUTPUT_SIZE), //
         ElementwiseLayer.logSig(), //
         new BinaryLayer());
   }
 
   public static NetLayer argMaxMLP(int d_in, int hidden, int dout) {
     return NetChain.of( //
-        new LinearLayer(hidden, d_in), //
+        new LinearLayer(d_in, hidden), //
         ElementwiseLayer.gelu(), //
-        new LinearLayer(dout, hidden), //
+        new LinearLayer(hidden, dout), //
         new SoftArgMax());
   }
 
@@ -44,7 +44,7 @@ public enum NetChains {
     for (int i = 0; i < dims.length - 1; ++i) {
       if (0 < i)
         list.add(supplier.get());
-      list.add(new LinearLayer(dims[i + 1], dims[i]));
+      list.add(new LinearLayer(dims[i], dims[i + 1]));
     }
     return new NetChain(list);
   }

@@ -9,21 +9,21 @@ import ch.alpine.tensor.red.Entrywise;
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/SoftmaxLayer.html">SoftmaxLayer</a> */
 public class SoftmaxLayer implements NetLayer {
-  Tensor lastOutput;
+  Tensor outputCache;
 
   @Override
   public Tensor forward(Tensor x) {
-    return lastOutput = SoftmaxVector.of(x);
+    return outputCache = SoftmaxVector.of(x);
   }
 
   @Override
   public Tensor back(Tensor gradOutput) {
-    Scalar dot = (Scalar) gradOutput.dot(lastOutput);
-    return Entrywise.mul().apply(lastOutput, gradOutput.maps(s -> s.subtract(dot)));
+    Scalar dot = (Scalar) gradOutput.dot(outputCache);
+    return Entrywise.mul().apply(outputCache, gradOutput.maps(s -> s.subtract(dot)));
   }
 
   @Override
   public Tensor error(Tensor y) {
-    throw new IllegalStateException();
+    return y.subtract(outputCache); // vector of length d_out
   }
 }

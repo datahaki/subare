@@ -16,11 +16,14 @@ import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.ConstantArray;
 import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.alg.Flatten;
+import ch.alpine.tensor.alg.Transpose;
+import ch.alpine.tensor.alg.VectorQ;
 import ch.alpine.tensor.io.MathematicaFormat;
 import ch.alpine.tensor.lie.TensorProduct;
 import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.pdf.c.NormalDistribution;
+import ch.alpine.tensor.red.Total;
 import ch.alpine.tensor.sca.Sign;
 
 /** inspired by
@@ -36,7 +39,7 @@ public class LinearLayer implements NetLayer, Serializable {
   private Tensor gW;
   private Tensor gb;
 
-  public LinearLayer(int d_out, int d_in) {
+  public LinearLayer(int d_in, int d_out) {
     W = ConstantArray.of(DoubleScalar.INDETERMINATE, d_out, d_in);
     b = ConstantArray.of(DoubleScalar.INDETERMINATE, d_out);
   }
@@ -51,17 +54,35 @@ public class LinearLayer implements NetLayer, Serializable {
 
   @Override
   public Tensor forward(Tensor x) {
-    return outputCache = W.dot(inputCache = x).add(b);
+    inputCache = x;
+    Tensor result = null;
+    if (VectorQ.of(x)) {
+      result = W.dot(x).add(b);
+    } else {
+      result = Tensor.of(x.dot(Transpose.of(W)).stream().map(b::add));
+    }
+    return outputCache = result;
   }
 
   @Override
   public Tensor back(Tensor gradOutput) {
-    gW = TensorProduct.of(gradOutput, inputCache);
+    Tensor gradInput = null;
+    if (VectorQ.of(gradOutput)) {
+      gW = TensorProduct.of(gradOutput, inputCache);
+      gb = gradOutput;
+      gradInput = gradOutput.dot(W); // vector of length d_in
+    } else {
+      // IO.println("---");
+      { // requires gradOutput to be prescaled with 1/N !!!
+        gW = Transpose.of(gradOutput).dot(inputCache);
+        gb = Total.of(gradOutput);
+      }
+      gradInput = gradOutput.dot(W);
+    }
     Sign.requirePositiveOrZero(l2);
     if (Scalars.nonZero(l2))
       gW = gW.subtract(W.multiply(l2));
-    gb = gradOutput;
-    return gradOutput.dot(W); // vector of length d_in
+    return gradInput;
   }
 
   @Override

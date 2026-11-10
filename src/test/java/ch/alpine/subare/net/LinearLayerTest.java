@@ -26,6 +26,7 @@ import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.pdf.c.NormalDistribution;
 import ch.alpine.tensor.qty.Quantity;
+import ch.alpine.tensor.sca.exp.Exp;
 
 class LinearLayerTest {
   @Test
@@ -45,12 +46,12 @@ class LinearLayerTest {
   @ParameterizedTest
   @ValueSource(ints = { 5, 10, 20 })
   void testTraining(int d_out) {
-    Integer d_in = 10;
+    Integer d_in = 8;
     Integer samples = 30;
     Scalar learningRate = RealScalar.of(0.05);
     Distribution distribution = NormalDistribution.standard();
     TensorUnaryOperator tuo;
-    NetLayer netLayer = NetChain.of(new LinearLayer(d_out, d_in));
+    NetLayer netLayer = NetChain.of(new LinearLayer(d_in, d_out));
     netLayer.initialize(ThreadLocalRandom.current());
     tuo = netLayer::forward;
     Tensor xdata = RandomVariate.of(distribution, samples, d_in);
@@ -63,7 +64,31 @@ class LinearLayerTest {
     int n = tloss.getRowCount();
     Tensor row = tloss.getRow(n - 1);
     Tensor loss = Drop.head(row, 1);
-    Tolerance.CHOP.requireAllZero(loss);
+    Tolerance.CHOP.requireAllZero(loss.maps(Exp.FUNCTION));
+  }
+
+  @ParameterizedTest
+  @ValueSource(ints = { 5, 10, 20 })
+  void testTrainingBatch(int d_out) {
+    Integer d_in = 8;
+    Integer samples = 30;
+    Scalar learningRate = RealScalar.of(0.05);
+    Distribution distribution = NormalDistribution.standard();
+    TensorUnaryOperator tuo;
+    NetLayer netLayer = NetChain.of(new LinearLayer(d_in, d_out));
+    netLayer.initialize(ThreadLocalRandom.current());
+    tuo = netLayer::forward;
+    Tensor xdata = RandomVariate.of(distribution, samples, d_in);
+    Tensor ydata = tuo.slash(xdata);
+    // ---
+    netLayer.initialize(ThreadLocalRandom.current());
+    NetTrain netTrain = new NetTrain(netLayer, xdata, ydata);
+    netTrain.runAsBatches(learningRate, 1, 100, Quantity.of(1, "s"));
+    TableBuilder tloss = netTrain.tloss;
+    int n = tloss.getRowCount();
+    Tensor row = tloss.getRow(n - 1);
+    Tensor loss = Drop.head(row, 1);
+    Tolerance.CHOP.requireAllZero(loss.maps(Exp.FUNCTION));
   }
 
   @Test
@@ -79,7 +104,7 @@ class LinearLayerTest {
 
   @Test
   void testGrad23() {
-    LinearLayer linearLayer = new LinearLayer(3, 2);
+    LinearLayer linearLayer = new LinearLayer(2, 3);
     linearLayer.initialize(ThreadLocalRandom.current());
     Tensor y = linearLayer.forward(Tensors.vector(0.1, 0.2));
     assertEquals(Dimensions.of(y), List.of(3));

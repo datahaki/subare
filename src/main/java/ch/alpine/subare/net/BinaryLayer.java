@@ -16,13 +16,13 @@ public class BinaryLayer implements NetLayer, Serializable {
   }
 
   @Override
-  public Tensor back(Tensor d) {
-    return Entrywise.mul().apply(d, inputCache.maps(DLogisticSigmoid.NESTED));
+  public NetError error(Tensor target) {
+    // y should be either 0 or 1
+    return MSELoss.of(inputCache, target);
   }
 
   @Override
-  public Tensor error(Tensor y) {
-    // y should be either 0 or 1
-    return y.subtract(inputCache);
+  public Tensor back(Tensor d) {
+    return Entrywise.mul().apply(d, inputCache.maps(DLogisticSigmoid.NESTED));
   }
 }

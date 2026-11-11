@@ -49,11 +49,6 @@ public class MaxPooling1DLayer implements NetLayer {
   }
 
   @Override
-  public Tensor error(Tensor y) {
-    throw new IllegalStateException();
-  }
-
-  @Override
   public String toString() {
     return MathematicaFormat.concise("MaxPooling1D", poolSize);
   }

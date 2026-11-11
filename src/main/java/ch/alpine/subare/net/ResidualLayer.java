@@ -42,13 +42,8 @@ public class ResidualLayer implements NetLayer, Serializable {
   }
 
   @Override
-  public void update() {
-    netLayer.update();
-  }
-
-  @Override
-  public Tensor error(Tensor y) {
-    return y.subtract(outputCache);
+  public void update(Scalar lr) {
+    netLayer.update(lr);
   }
 
   @Override

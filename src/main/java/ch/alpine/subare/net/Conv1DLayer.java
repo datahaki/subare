@@ -37,6 +37,11 @@ public class Conv1DLayer implements NetLayer, Serializable {
   }
 
   @Override
+  public NetError error(Tensor target) {
+    return MSELoss.of(outputCache, target);
+  }
+
+  @Override
   public Tensor back(Tensor gradOutput) {
     gW = dW(gradOutput, inputCache);
     gb = Total.ofVector(gradOutput);
@@ -44,15 +49,9 @@ public class Conv1DLayer implements NetLayer, Serializable {
   }
 
   @Override
-  public void update() {
-    w = w.add(gW);
-    b = b.add(gb);
-  }
-
-  @Override
-  public Tensor error(Tensor y) {
-    // TODO why *2 !!?!?!
-    return y.subtract(outputCache).multiply(RealScalar.TWO);
+  public void update(Scalar lr) {
+    w = w.subtract(gW.multiply(lr));
+    b = b.subtract(gb.multiply(lr));
   }
 
   @Override

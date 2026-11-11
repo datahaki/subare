@@ -30,22 +30,24 @@ public record NetChain(List<NetLayer> list) implements NetLayer, Serializable {
 
   @Override
   public Tensor forward(Tensor x0) {
-    return list.stream().reduce(x0, (x, layer) -> layer.forward(x), MergeIllegal.operator());
+    return list.stream() //
+        .reduce(x0, (x, layer) -> layer.forward(x), MergeIllegal.operator());
   }
 
   @Override
   public Tensor back(Tensor grad0) {
-    return list.reversed().stream().reduce(grad0, (grad, layer) -> layer.back(grad), MergeIllegal.operator());
+    return list.reversed().stream() //
+        .reduce(grad0, (grad, layer) -> layer.back(grad), MergeIllegal.operator());
   }
 
   @Override
-  public void update() {
-    list.forEach(NetLayer::update);
+  public void update(Scalar lr) {
+    list.forEach(netLayer -> netLayer.update(lr));
   }
 
   @Override
-  public Tensor error(Tensor tensor) {
-    return list.getLast().error(tensor);
+  public NetError error(Tensor target) {
+    return list.getLast().error(target);
   }
 
   // TODO probably obsolete

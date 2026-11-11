@@ -5,11 +5,7 @@ import java.io.Serializable;
 import java.util.random.RandomGenerator;
 
 import ch.alpine.tensor.RealScalar;
-import ch.alpine.tensor.Scalar;
-import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.Unprotect;
-import ch.alpine.tensor.alg.UnitVector;
 import ch.alpine.tensor.alg.VectorQ;
 import ch.alpine.tensor.ext.ArgMax;
 import ch.alpine.tensor.nrm.SoftmaxVector;
@@ -38,19 +34,7 @@ public class SoftArgMax implements NetLayer, Serializable {
   }
 
   @Override
-  public Tensor error(Tensor y) {
-    Tensor target;
-    if (y instanceof Scalar) {
-      int k = Scalars.intValueExact((Scalar) y);
-      // TODO not efficient to build unit vector explicitly
-      target = UnitVector.of(interCache.length(), k); // one-hot target
-    } else {
-      int cc = Unprotect.dimension1Hint(interCache);
-      target = Tensor.of(y.stream() //
-          .map(Scalar.class::cast) //
-          .mapToInt(Scalars::intValueExact) //
-          .mapToObj(k -> UnitVector.of(cc, k)));
-    }
-    return target.subtract(interCache);
+  public NetError error(Tensor target) {
+    return CrossEntropyLoss.of(interCache, target);
   }
 }

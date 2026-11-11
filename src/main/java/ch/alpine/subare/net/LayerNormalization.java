@@ -50,13 +50,7 @@ public class LayerNormalization implements NetLayer {
   }
 
   @Override
-  public void update() {
+  public void update(Scalar lr) {
     // FIXME
-  }
-
-  @Override
-  public Tensor error(Tensor y) {
-    // TODO Auto-generated method stub
-    return null;
   }
 }

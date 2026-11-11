@@ -47,7 +47,7 @@ public abstract class ElementwiseLayer implements NetLayer, Serializable {
 
       @Override
       public String toString() {
-        return MathematicaFormat.concise("ReLuLayer");
+        return MathematicaFormat.concise("ReLULayer");
       }
     };
   }
@@ -61,7 +61,7 @@ public abstract class ElementwiseLayer implements NetLayer, Serializable {
 
       @Override
       public String toString() {
-        return MathematicaFormat.concise("GeLuLayer");
+        return MathematicaFormat.concise("GeLULayer");
       }
     };
   }
@@ -111,10 +111,5 @@ public abstract class ElementwiseLayer implements NetLayer, Serializable {
   @Override
   public final Tensor forward(Tensor input) {
     return outputCache = ((inputCache = input).maps(f));
-  }
-
-  @Override
-  public final Tensor error(Tensor y) {
-    return y.subtract(outputCache);
   }
 }

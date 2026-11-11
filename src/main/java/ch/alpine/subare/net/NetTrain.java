@@ -5,25 +5,20 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.IntStream;
 
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
-import ch.alpine.tensor.alg.Flatten;
 import ch.alpine.tensor.alg.Partition;
 import ch.alpine.tensor.api.TensorUnaryOperator;
 import ch.alpine.tensor.ext.Integers;
 import ch.alpine.tensor.io.TableBuilder;
-import ch.alpine.tensor.nrm.NormalizeTotal;
-import ch.alpine.tensor.nrm.Vector2NormSquared;
 import ch.alpine.tensor.num.RandomPermutation;
 import ch.alpine.tensor.pdf.Permute;
 import ch.alpine.tensor.qty.Timing;
-import ch.alpine.tensor.red.Mean;
-import ch.alpine.tensor.sca.AbsSquared;
+import ch.alpine.tensor.red.Total;
 import ch.alpine.tensor.sca.exp.Log;
 
 /** inspired by
@@ -50,78 +45,56 @@ public class NetTrain {
     list.add(runnable);
   }
 
-  public void run(Scalar learningRate, Scalar timeout, int maxEpoch, int skip) {
-    int epoch = 0;
-    Timing timing = Timing.started();
-    final int n = xdata.length();
-    // 6. Repeat until the loss becomes sufficiently small.
-    while (Scalars.lessThan(timing.seconds(), timeout) && epoch < maxEpoch) {
-      Tensor lossv = Tensors.reserve(n);
-      int[] index = RandomPermutation.of(n, ThreadLocalRandom.current());
-      for (int c = 0; c < n; c++) {
-        int i = index[c];
-        // TODO in would be more desirable to have error = (ypred-ydata)^2
-        // 1. Forward propagation: The network generates a prediction.
-        netLayer.forward(xdata.get(i));
-        // 2. Calculate error: Compare the prediction with the actual output.
-        Tensor error = netLayer.error(ydata.get(i));
-        // 4. Backpropagation: Calculate gradients of the loss with respect to network weights.
-        // TODO grad base on error !
-        netLayer.back(error.multiply(learningRate));
-        // 5. Weight update: The optimizer adjusts weights to reduce the loss.
-        netLayer.update();
-        // ---
-        // 3. Calculate loss: Apply a loss function to quantify the error.
-        Scalar loss = Flatten.scalars(error).map(AbsSquared.FUNCTION).reduce(Scalar::add).orElseThrow();
-        lossv.append(loss);
-      }
-      if (epoch % skip == 0) {
-        // TODO plot as LOG instead of compute LOG here
-        Scalar loss = Log.FUNCTION.apply(Mean.ofVector(lossv));
-        tloss.appendRow(RealScalar.of(epoch), loss);
-        tparam.appendRow(RealScalar.of(epoch), Tensor.of(netLayer.parameters()));
-        final int fi = epoch;
-        list.forEach(ntl -> ntl.epoch(fi));
-      }
-      ++epoch;
-    }
-  }
-
+  /** Epoch: One complete pass through the entire training dataset. An
+   * epoch consists of ⌈N /B⌉ iterations (or steps), where N is
+   * total dataset size.
+   * 
+   * @param learningRate A scalar hyperparameter that scales the magnitude of the
+   * weight update during optimization (W ← W − η ⋅ ∇W L).
+   * 
+   * @param batch_size The number of independent samples processed together in
+   * a single forward and backward pass. Enables parallel matrix
+   * operations on hardware (GPUs/CPUs).
+   * 
+   * @param maxEpoch
+   * @param timeout */
   public void runAsBatches(Scalar learningRate, int batch_size, int maxEpoch, Scalar timeout) {
     int epoch = 0;
     Timing timing = Timing.started();
     final int n = xdata.length();
     // 6. Repeat until the loss becomes sufficiently small.
-    while (Scalars.lessThan(timing.seconds(), timeout) && epoch < maxEpoch) {
-      Tensor lossv = Tensors.reserve(n);
+    while (Scalars.lessThan(timing.seconds(), timeout) && epoch <= maxEpoch) {
+      // 0. Shuffle dataset indices at the beginning of every epoch
+      // (Crucial for preventing the model from memorizing batch order)
       int[] index = RandomPermutation.of(n, ThreadLocalRandom.current());
       TensorUnaryOperator tuo = Permute.of(index);
-      Tensor batchX = Partition.of(tuo.apply(xdata), batch_size);
-      Tensor batchY = Partition.of(tuo.apply(ydata), batch_size);
+      Tensor batchX = Partition.gather(tuo.apply(xdata), batch_size);
+      Tensor batchY = Partition.gather(tuo.apply(ydata), batch_size);
+      Tensor lossv = Tensors.reserve(batchX.length()); // to compute epoch_loss
       for (int i = 0; i < batchX.length(); ++i) {
-        // TODO in would be more desirable to have error = (ypred-ydata)^2
+        Tensor x = batchX.get(i);
+        int samples = x.length();
         // 1. Forward propagation: The network generates a prediction.
-        netLayer.forward(batchX.get(i));
+        Tensor prediction = netLayer.forward(x);
         // 2. Calculate error: Compare the prediction with the actual output.
-        Tensor error = netLayer.error(batchY.get(i));
+        Tensor target = batchY.get(i);
+        NetError netError = netLayer.error(target);
         // 3. Calculate loss: Apply a loss function to quantify the error.
-        Tensor relat = Tensor.of(error.stream().map(Vector2NormSquared::of));
-        Scalar loss = Mean.ofVector(relat);
-        lossv.append(loss);
-        Tensor weights = NormalizeTotal.FUNCTION.apply(relat);
-        // Flatten.scalars(error).map(AbsSquared.FUNCTION).reduce(Scalar::add).orElseThrow();
+        /** Loss:
+         * A scalar value computed by a loss function (e.g., Mean
+         * Squared Error, Cross-Entropy) that aggregates the errors
+         * across a sample or batch. It quantifies overall model
+         * performance and serves as the objective function to
+         * minimize. */
+        lossv.append(netError.loss().multiply(RealScalar.of(samples)));
         // 4. Backpropagation: Calculate gradients of the loss with respect to network weights.
-        // TODO grad base on error !
-        Tensor gradOutput = Tensor.of(IntStream.range(0, batch_size) //
-            .mapToObj(k -> error.get(k).multiply(weights.Get(k))));
-        netLayer.back(gradOutput.multiply(learningRate)); // .multiply(Rational.of(1, batch_size))
+        netLayer.back(netError.gradOutput());
         // 5. Weight update: The optimizer adjusts weights to reduce the loss.
-        netLayer.update();
-        // ---
+        netLayer.update(learningRate);
       }
       {
         // TODO plot as LOG instead of compute LOG here
-        Scalar loss = Log.FUNCTION.apply(Mean.ofVector(lossv));
+        Scalar loss = Log.FUNCTION.apply(Total.ofVector(lossv).divide(RealScalar.of(xdata.length())));
         tloss.appendRow(RealScalar.of(epoch), loss);
         tparam.appendRow(RealScalar.of(epoch), Tensor.of(netLayer.parameters()));
         final int fi = epoch;
@@ -131,15 +104,8 @@ public class NetTrain {
     }
   }
 
-  @Deprecated
-  public Tensor error() {
-    Tensor errors = Tensors.reserve(xdata.length());
-    for (int sample = 0; sample < xdata.length(); ++sample) {
-      Tensor x = xdata.get(sample);
-      Tensor y = netLayer.forward(x);
-      Tensor e = ydata.get(sample).subtract(y);
-      errors.append(e);
-    }
-    return errors;
+  /** @return log of loss value at final training step */
+  public Scalar log_loss() {
+    return tloss.getRow(tloss.getRowCount() - 1).Get(1);
   }
 }

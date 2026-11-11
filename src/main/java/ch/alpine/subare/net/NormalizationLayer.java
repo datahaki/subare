@@ -14,9 +14,4 @@ public record NormalizationLayer(Tensor mean, Scalar std) implements NetLayer {
   public Tensor back(Tensor gradOutput) {
     return gradOutput.divide(std);
   }
-
-  @Override
-  public Tensor error(Tensor y) {
-    throw new IllegalStateException();
-  }
 }

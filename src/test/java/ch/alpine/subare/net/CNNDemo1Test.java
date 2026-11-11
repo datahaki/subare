@@ -48,8 +48,8 @@ class CNNDemo1Test {
       // BACKWARD PASS (Updates weights automatically)
       conv.backward(outputGradients, learningRate);
       // Tensor back =
-      conv1dLayer.back(outGrad.multiply(RealScalar.of(learningRate)));
-      conv1dLayer.update();
+      conv1dLayer.back(outGrad);
+      conv1dLayer.update(RealScalar.of(learningRate));
       // PRINT PROGRESS every 20 epochs
       if (epoch % 20 == 0) {
         System.out.printf("Epoch %d | Loss: %.4f | Pred: %s\n", epoch, totalLoss, Arrays.toString(pred1));

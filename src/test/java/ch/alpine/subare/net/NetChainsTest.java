@@ -27,4 +27,11 @@ class NetChainsTest {
     Tensor tensor = netLayer.forward(Tensors.vector(2, 3));
     assertEquals(tensor.length(), 1);
   }
+
+  @Test
+  void testTrainable() {
+    int[] dims = new int[] { 1, 7, 1 };
+    NetLayer netLayer = NetChains.sequence(() -> ElementwiseLayer.gelu(), dims);
+    NetTrainableQ.check(netLayer, dims[0]);
+  }
 }

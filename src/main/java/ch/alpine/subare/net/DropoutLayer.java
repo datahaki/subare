@@ -42,9 +42,4 @@ public class DropoutLayer implements NetLayer, Serializable {
         ? Times.of(gradOutput, mask)
         : gradOutput;
   }
-
-  @Override
-  public Tensor error(Tensor y) {
-    return null;
-  }
 }

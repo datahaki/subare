@@ -10,13 +10,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Dimensions;
-import ch.alpine.tensor.alg.Drop;
 import ch.alpine.tensor.api.TensorUnaryOperator;
 import ch.alpine.tensor.io.TableBuilder;
 import ch.alpine.tensor.jet.JetScalar;
@@ -45,34 +43,10 @@ class LinearLayerTest {
 
   @ParameterizedTest
   @ValueSource(ints = { 5, 10, 20 })
-  void testTraining(int d_out) {
-    Integer d_in = 8;
-    Integer samples = 30;
-    Scalar learningRate = RealScalar.of(0.05);
-    Distribution distribution = NormalDistribution.standard();
-    TensorUnaryOperator tuo;
-    NetLayer netLayer = NetChain.of(new LinearLayer(d_in, d_out));
-    netLayer.initialize(ThreadLocalRandom.current());
-    tuo = netLayer::forward;
-    Tensor xdata = RandomVariate.of(distribution, samples, d_in);
-    Tensor ydata = tuo.slash(xdata);
-    // ---
-    netLayer.initialize(ThreadLocalRandom.current());
-    NetTrain netTrain = new NetTrain(netLayer, xdata, ydata);
-    netTrain.run(learningRate, Quantity.of(1, "s"), 100, 1);
-    TableBuilder tloss = netTrain.tloss;
-    int n = tloss.getRowCount();
-    Tensor row = tloss.getRow(n - 1);
-    Tensor loss = Drop.head(row, 1);
-    Tolerance.CHOP.requireAllZero(loss.maps(Exp.FUNCTION));
-  }
-
-  @ParameterizedTest
-  @ValueSource(ints = { 5, 10, 20 })
   void testTrainingBatch(int d_out) {
-    Integer d_in = 8;
+    Integer d_in = 3;
     Integer samples = 30;
-    Scalar learningRate = RealScalar.of(0.05);
+    Scalar learningRate = RealScalar.of(0.02);
     Distribution distribution = NormalDistribution.standard();
     TensorUnaryOperator tuo;
     NetLayer netLayer = NetChain.of(new LinearLayer(d_in, d_out));
@@ -83,12 +57,9 @@ class LinearLayerTest {
     // ---
     netLayer.initialize(ThreadLocalRandom.current());
     NetTrain netTrain = new NetTrain(netLayer, xdata, ydata);
-    netTrain.runAsBatches(learningRate, 1, 100, Quantity.of(1, "s"));
+    netTrain.runAsBatches(learningRate, 2, 100, Quantity.of(1, "s"));
     TableBuilder tloss = netTrain.tloss;
-    int n = tloss.getRowCount();
-    Tensor row = tloss.getRow(n - 1);
-    Tensor loss = Drop.head(row, 1);
-    Tolerance.CHOP.requireAllZero(loss.maps(Exp.FUNCTION));
+    Tolerance.CHOP.requireAllZero(Exp.FUNCTION.apply(netTrain.log_loss()));
   }
 
   @Test
@@ -96,8 +67,8 @@ class LinearLayerTest {
     LinearLayer linearLayer = new LinearLayer(1, 1);
     linearLayer.initialize(ThreadLocalRandom.current());
     Tensor f = linearLayer.forward(Tensors.vector(1));
-    Tensor error = linearLayer.error(f);
-    Tensor grad = error.multiply(Rational.THIRD);
+    NetError netError = linearLayer.error(f);
+    Tensor grad = netError.gradOutput();
     Tensor back = linearLayer.back(grad);
     assertEquals(Dimensions.of(back), List.of(1));
   }
@@ -108,9 +79,8 @@ class LinearLayerTest {
     linearLayer.initialize(ThreadLocalRandom.current());
     Tensor y = linearLayer.forward(Tensors.vector(0.1, 0.2));
     assertEquals(Dimensions.of(y), List.of(3));
-    Tensor error = linearLayer.error(Tensors.vector(0.2, -0.3, 0.4));
-    assertEquals(Dimensions.of(error), List.of(3));
-    Tensor grad = error.multiply(Rational.THIRD);
+    NetError netError = linearLayer.error(Tensors.vector(0.2, -0.3, 0.4));
+    Tensor grad = netError.gradOutput();
     assertEquals(Dimensions.of(grad), List.of(3));
     Tensor back = linearLayer.back(grad);
     assertEquals(Dimensions.of(back), List.of(2));

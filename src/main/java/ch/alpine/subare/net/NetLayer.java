@@ -15,10 +15,6 @@ public interface NetLayer {
     return Stream.empty();
   }
 
-  /** Update parameters (no-op for layers without params) */
-  default void update() {
-  }
-
   default void training() {
   }
 
@@ -28,6 +24,16 @@ public interface NetLayer {
    * @return */
   Tensor forward(Tensor x);
 
+  /** ErrorThe element-wise or raw difference between a model's
+   * prediction and the ground truth target (e.g., error = y - target ).
+   * It is vector-valued or tensor-valued per sample.
+   * 
+   * @param target
+   * @return */
+  default NetError error(Tensor target) {
+    throw new UnsupportedOperationException();
+  }
+
   /** Backward pass
    * gradOutput = dL/da
    * returns dL/dinput
@@ -36,5 +42,7 @@ public interface NetLayer {
    * @return */
   Tensor back(Tensor gradOutput);
 
-  Tensor error(Tensor y);
+  /** Update parameters (no-op for layers without params) */
+  default void update(Scalar lr) {
+  }
 }

@@ -48,10 +48,10 @@ class CNNDemo2Test {
       totalLoss2 = Vector2NormSquared.of(pred2.subtract(targ2));
       // BACKWARD PASS (Updates weights automatically)
       conv.backward(outputGradients, learningRate);
-      Tensor back2 = relu.back(outGrad.multiply(RealScalar.of(learningRate)));
+      Tensor back2 = relu.back(outGrad);
       // Tensor back =
       conv1dLayer.back(back2);
-      conv1dLayer.update();
+      conv1dLayer.update(RealScalar.of(learningRate));
       // PRINT PROGRESS every 20 epochs
       if (epoch % 20 == 0) {
         System.out.printf("Epoch %d | Loss: %.4f | Pred: %s\n", epoch, totalLoss, Arrays.toString(pred1));

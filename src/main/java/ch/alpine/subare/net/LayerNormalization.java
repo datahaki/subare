@@ -1,6 +1,7 @@
 // code by jph
 package ch.alpine.subare.net;
 
+import ch.alpine.subare.net.lay.NetLayer;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -49,8 +50,8 @@ public class LayerNormalization implements NetLayer {
     return null;
   }
 
-  @Override
-  public void update(Scalar lr) {
-    // FIXME
-  }
+//  @Override
+//  public void update(Scalar lr) {
+//    // FIXME
+//  }
 }

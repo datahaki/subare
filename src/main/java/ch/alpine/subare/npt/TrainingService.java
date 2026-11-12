@@ -6,7 +6,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import ch.alpine.subare.net.NetTrain;
+import ch.alpine.subare.net.run.NetTrain;
 
 public class TrainingService {
   private final ExecutorService executor = Executors.newSingleThreadExecutor();

@@ -1,0 +1,23 @@
+package ch.alpine.subare.net.run;
+
+import java.util.stream.Stream;
+
+import ch.alpine.subare.net.lay.LinearLayer;
+import ch.alpine.subare.net.lay.NetLayer;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.alg.Flatten;
+
+public record NetExtract(NetLayer netLayer) {
+  public Stream<Scalar> all() {
+    return netLayer.stream().flatMap(this::extract);
+  }
+
+  private Stream<Scalar> extract(NetLayer netLayer) {
+    if (netLayer instanceof LinearLayer linearLayer) {
+      return Stream.concat( //
+          Flatten.scalars(linearLayer.W), //
+          Flatten.scalars(linearLayer.b));
+    }
+    return Stream.empty();
+  }
+}

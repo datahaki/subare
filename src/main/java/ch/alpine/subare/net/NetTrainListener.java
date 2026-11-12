@@ -1,6 +1,7 @@
 // code by jph
 package ch.alpine.subare.net;
 
+@FunctionalInterface
 public interface NetTrainListener {
-  void epoch(int epoch);
+  boolean epoch(NetTrain netTrain, int epoch);
 }

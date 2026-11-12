@@ -22,7 +22,8 @@ public enum NetTrainableQ {
     netLayer.initialize(ThreadLocalRandom.current());
     Tensor Y = netLayer.forward(X);
     netLayer.initialize(ThreadLocalRandom.current());
-    NetTrain netTrain = new NetTrain(netLayer, X, Y);
+    TrainingData trainingData = new TrainingData(X, Y);
+    NetTrain netTrain = new NetTrain(netLayer, trainingData);
     netTrain.runAsBatches(RealScalar.of(0.1), batch_size, 1000, Quantity.of(2, "s"));
     Scalar loss = netTrain.log_loss();
     boolean lessThan = Scalars.lessThan(loss, RealScalar.of(-4));

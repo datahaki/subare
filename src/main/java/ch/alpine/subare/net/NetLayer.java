@@ -8,13 +8,16 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 
 public interface NetLayer {
+  // TODO API not in here
   default void initialize(RandomGenerator randomGenerator) {
   }
 
+  // TODO API not in here
   default Stream<Scalar> parameters() {
     return Stream.empty();
   }
 
+  // TODO API not in here
   default void training() {
   }
 
@@ -34,15 +37,12 @@ public interface NetLayer {
     throw new UnsupportedOperationException();
   }
 
-  /** Backward pass
-   * gradOutput = dL/da
-   * returns dL/dinput
-   * 
-   * @param gradOutput
+  /** @param gradOutput
    * @return */
   Tensor back(Tensor gradOutput);
 
   /** Update parameters (no-op for layers without params) */
+  // TODO API not in here
   default void update(Scalar lr) {
   }
 }

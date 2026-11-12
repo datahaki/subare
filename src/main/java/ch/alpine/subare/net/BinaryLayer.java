@@ -4,25 +4,23 @@ package ch.alpine.subare.net;
 import java.io.Serializable;
 
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.red.Entrywise;
-import ch.alpine.tensor.sca.exp.DLogisticSigmoid;
 
+/** LogisticSigmoid */
 public class BinaryLayer implements NetLayer, Serializable {
-  Tensor inputCache;
+  Tensor outputCache;
 
   @Override
   public Tensor forward(Tensor x) {
-    return this.inputCache = x;
+    return this.outputCache = x;
   }
 
   @Override
   public NetError error(Tensor target) {
-    // y should be either 0 or 1
-    return MSELoss.of(inputCache, target);
+    return MSELoss.of(outputCache, target);
   }
 
   @Override
-  public Tensor back(Tensor d) {
-    return Entrywise.mul().apply(d, inputCache.maps(DLogisticSigmoid.NESTED));
+  public Tensor back(Tensor gradOutput) {
+    return gradOutput;
   }
 }

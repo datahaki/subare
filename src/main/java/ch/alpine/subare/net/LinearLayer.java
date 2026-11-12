@@ -40,6 +40,7 @@ public class LinearLayer implements NetLayer, Serializable {
   private Tensor inputCache;
   /** Dimensions: d_out, or batch_size x d_out */
   private Tensor outputCache;
+  // For each parameter, the optimizer maintains its own velocity.
   /** Dimensions: d_in x d_out */
   private Tensor gW;
   /** Dimensions: d_out */

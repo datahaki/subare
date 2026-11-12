@@ -54,9 +54,10 @@ class LinearLayerTest {
     tuo = netLayer::forward;
     Tensor xdata = RandomVariate.of(distribution, samples, d_in);
     Tensor ydata = tuo.slash(xdata);
+    TrainingData trainingData = new TrainingData(xdata, ydata);
     // ---
     netLayer.initialize(ThreadLocalRandom.current());
-    NetTrain netTrain = new NetTrain(netLayer, xdata, ydata);
+    NetTrain netTrain = new NetTrain(netLayer, trainingData);
     netTrain.runAsBatches(learningRate, 2, 100, Quantity.of(1, "s"));
     TableBuilder tloss = netTrain.tloss;
     Tolerance.CHOP.requireAllZero(Exp.FUNCTION.apply(netTrain.log_loss()));

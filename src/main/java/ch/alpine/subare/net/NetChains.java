@@ -11,35 +11,11 @@ import ch.alpine.tensor.pdf.c.NormalDistribution;
 
 public enum NetChains {
   ;
-  /** @param INPUT_SIZE
-   * @param hiddenSize
-   * @param OUTPUT_SIZE
-   * @return */
-  public static NetLayer binary(int INPUT_SIZE, int hiddenSize, int OUTPUT_SIZE) {
-    return NetChain.of( //
-        new LinearLayer(INPUT_SIZE, hiddenSize), //
-        ElementwiseLayer.logSig(), //
-        new LinearLayer(hiddenSize, OUTPUT_SIZE), //
-        ElementwiseLayer.logSig(), //
-        new BinaryLayer());
-  }
-
-  public static NetLayer argMaxMLP(int d_in, int hidden, int dout) {
-    return NetChain.of( //
-        new LinearLayer(d_in, hidden), //
-        ElementwiseLayer.gelu(), //
-        new LinearLayer(hidden, dout), //
-        new SoftArgMax());
-  }
-
-  public static NetLayer cnnRelu(int kernelSize) {
-    Distribution distribution = NormalDistribution.of(0, 0.1);
-    return NetChain.of( //
-        Conv1DLayer.of(distribution, ThreadLocalRandom.current(), kernelSize), //
-        ElementwiseLayer.relu());
-  }
-
-  public static NetLayer sequence(Supplier<NetLayer> supplier, int... dims) {
+  /** @param supplier
+   * @param dims
+   * @return sequence of linear layers dims[0] -> dim[1] -> dim[last]
+   * with in-between netLayers provided by supplier */
+  public static NetLayer linear(Supplier<NetLayer> supplier, int... dims) {
     List<NetLayer> list = new ArrayList<>();
     for (int i = 0; i < dims.length - 1; ++i) {
       if (0 < i)
@@ -47,5 +23,32 @@ public enum NetChains {
       list.add(new LinearLayer(dims[i], dims[i + 1]));
     }
     return new NetChain(list);
+  }
+
+  /** the output of netLayer is a vector of length n
+   * where n corresponds to the number of labels for classification
+   * 
+   * @param netLayer
+   * @return layer that outputs vector of length 1 with integer value as entry */
+  public static NetLayer argMax(NetLayer netLayer) {
+    return NetChain.of(netLayer, //
+        SoftmaxLayer.INSTANCE, //
+        new ArgMaxLayer());
+  }
+
+  /** @param netLayer
+   * @return */
+  // TODO rename to sigmoid !?
+  public static NetLayer binary(NetLayer netLayer) {
+    return NetChain.of(netLayer, //
+        ElementwiseLayer.logSig(), //
+        new BinaryLayer());
+  }
+
+  public static NetLayer cnnRelu(int kernelSize) {
+    Distribution distribution = NormalDistribution.of(0, 0.1);
+    return NetChain.of( //
+        Conv1DLayer.of(distribution, ThreadLocalRandom.current(), kernelSize), //
+        ElementwiseLayer.relu());
   }
 }

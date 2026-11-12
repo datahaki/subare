@@ -1,17 +1,12 @@
 // code by jph
 package ch.alpine.subare.net;
 
-import java.util.random.RandomGenerator;
 import java.util.stream.Stream;
 
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 
 public interface NetLayer {
-  // TODO API not in here
-  default void initialize(RandomGenerator randomGenerator) {
-  }
-
   // TODO API not in here
   default Stream<Scalar> parameters() {
     return Stream.empty();
@@ -44,5 +39,9 @@ public interface NetLayer {
   /** Update parameters (no-op for layers without params) */
   // TODO API not in here
   default void update(Scalar lr) {
+  }
+
+  default Stream<NetLayer> stream() {
+    return Stream.of(this);
   }
 }

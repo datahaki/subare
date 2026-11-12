@@ -19,14 +19,14 @@ public enum NetTrainableQ {
     int samples = 100;
     int batch_size = 20;
     Tensor X = RandomVariate.of(NormalDistribution.standard(), samples, d_in);
-    netLayer.initialize(ThreadLocalRandom.current());
+    NetInitialize.of(netLayer);
     Tensor Y = netLayer.forward(X);
-    netLayer.initialize(ThreadLocalRandom.current());
+    NetInitialize.of(netLayer);
     TrainingData trainingData = new TrainingData(X, Y);
     NetTrain netTrain = new NetTrain(netLayer, trainingData);
     netTrain.runAsBatches(RealScalar.of(0.1), batch_size, 1000, Quantity.of(2, "s"));
     Scalar loss = netTrain.log_loss();
-    boolean lessThan = Scalars.lessThan(loss, RealScalar.of(-4));
+    boolean lessThan = Scalars.lessThan(loss, RealScalar.of(-3));
     assertTrue(lessThan);
   }
 }

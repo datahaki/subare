@@ -10,7 +10,6 @@ import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
-import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.ConstantArray;
@@ -25,7 +24,6 @@ import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.pdf.c.NormalDistribution;
 import ch.alpine.tensor.red.Total;
-import ch.alpine.tensor.sca.Sign;
 
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/LinearLayer.html">LinearLayer</a> */
@@ -34,24 +32,21 @@ public class LinearLayer implements NetLayer, Serializable {
   public Tensor W;
   /** Dimensions: d_out */
   public Tensor b;
-  // TODO probably obsolete
-  public Scalar l2 = RealScalar.ZERO;
   /** Dimensions: d_in, or batch_size x d_in */
   private Tensor inputCache;
   /** Dimensions: d_out, or batch_size x d_out */
   private Tensor outputCache;
   // For each parameter, the optimizer maintains its own velocity.
   /** Dimensions: d_in x d_out */
-  private Tensor gW;
+  public Tensor gW;
   /** Dimensions: d_out */
-  private Tensor gb;
+  public Tensor gb;
 
   public LinearLayer(int d_in, int d_out) {
     W = ConstantArray.of(DoubleScalar.INDETERMINATE, d_in, d_out);
     b = ConstantArray.of(DoubleScalar.INDETERMINATE, d_out);
   }
 
-  @Override
   public void initialize(RandomGenerator randomGenerator) {
     List<Integer> dims = Dimensions.of(W);
     int d_in = dims.get(0);
@@ -74,28 +69,25 @@ public class LinearLayer implements NetLayer, Serializable {
   @Override
   public Tensor back(Tensor gradOutput) {
     // Dimensions[gradOutput] = batch_size x d_out
-    Tensor gradInput = null;
     if (VectorQ.of(gradOutput)) {
       gW = TensorProduct.of(inputCache, gradOutput);
       gb = gradOutput;
-      gradInput = W.dot(gradOutput); // vector of length d_in
-    } else {
-      /** requires gradOutput to be prescaled with 1/batch_size
-       * 
-       * Note: If your loss function divides by batch_size (mean reduction),
-       * grad_output already contains the 1/B factor, so this matrix product
-       * automatically yields the mean gradient for the batch. */
-      // Dimensions[gW] = d_in x d_out
-      gW = TransposeMatrixDot.of(inputCache, gradOutput);
-      // Dimensions[gb] = d_out
-      gb = Total.of(gradOutput);
-      // Dimensions[gradInput] = batch_size x d_in
-      gradInput = MatrixDotTranspose.of(gradOutput, W);
+      return W.dot(gradOutput); // vector of length d_in
     }
-    Sign.requirePositiveOrZero(l2);
-    if (Scalars.nonZero(l2))
-      gW = gW.subtract(W.multiply(l2));
-    return gradInput;
+    /** requires gradOutput to be prescaled with 1/batch_size
+     * 
+     * Note: If your loss function divides by batch_size (mean reduction),
+     * grad_output already contains the 1/B factor, so this matrix product
+     * automatically yields the mean gradient for the batch. */
+    // Dimensions[gW] = d_in x d_out
+    gW = TransposeMatrixDot.of(inputCache, gradOutput);
+    // Dimensions[gb] = d_out
+    gb = Total.of(gradOutput);
+    // Dimensions[gradInput] = batch_size x d_in
+    return MatrixDotTranspose.of(gradOutput, W);
+    // Sign.requirePositiveOrZero(l2);
+    // if (Scalars.nonZero(l2))
+    // gW = gW.subtract(W.multiply(l2));
   }
 
   @Override
@@ -116,6 +108,6 @@ public class LinearLayer implements NetLayer, Serializable {
 
   @Override
   public String toString() {
-    return MathematicaFormat.concise("LinearLayer", W, b, l2);
+    return MathematicaFormat.concise("LinearLayer", W, b);
   }
 }

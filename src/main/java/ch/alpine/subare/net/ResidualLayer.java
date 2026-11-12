@@ -2,7 +2,6 @@
 package ch.alpine.subare.net;
 
 import java.io.Serializable;
-import java.util.random.RandomGenerator;
 import java.util.stream.Stream;
 
 import ch.alpine.tensor.Scalar;
@@ -26,12 +25,6 @@ public class ResidualLayer implements NetLayer, Serializable {
   }
 
   @Override
-  public void initialize(RandomGenerator randomGenerator) {
-    netLayer.initialize(randomGenerator);
-    outputCache = null;
-  }
-
-  @Override
   public Tensor forward(Tensor x) {
     return outputCache = netLayer.forward(x).add(x);
   }
@@ -49,6 +42,11 @@ public class ResidualLayer implements NetLayer, Serializable {
   @Override
   public Stream<Scalar> parameters() {
     return netLayer.parameters();
+  }
+
+  @Override
+  public Stream<NetLayer> stream() {
+    return netLayer.stream();
   }
 
   @Override

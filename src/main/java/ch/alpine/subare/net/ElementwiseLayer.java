@@ -2,7 +2,6 @@
 package ch.alpine.subare.net;
 
 import java.io.Serializable;
-import java.util.random.RandomGenerator;
 
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.api.ScalarUnaryOperator;
@@ -100,12 +99,6 @@ public abstract class ElementwiseLayer implements NetLayer, Serializable {
 
   public ElementwiseLayer(ScalarUnaryOperator f) {
     this.f = f;
-  }
-
-  @Override
-  public void initialize(RandomGenerator randomGenerator) {
-    inputCache = null;
-    outputCache = null;
   }
 
   @Override

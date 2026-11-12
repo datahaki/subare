@@ -50,13 +50,13 @@ class LinearLayerTest {
     Distribution distribution = NormalDistribution.standard();
     TensorUnaryOperator tuo;
     NetLayer netLayer = NetChain.of(new LinearLayer(d_in, d_out));
-    netLayer.initialize(ThreadLocalRandom.current());
+    NetInitialize.of(netLayer);
     tuo = netLayer::forward;
     Tensor xdata = RandomVariate.of(distribution, samples, d_in);
     Tensor ydata = tuo.slash(xdata);
     TrainingData trainingData = new TrainingData(xdata, ydata);
     // ---
-    netLayer.initialize(ThreadLocalRandom.current());
+    NetInitialize.of(netLayer);
     NetTrain netTrain = new NetTrain(netLayer, trainingData);
     netTrain.runAsBatches(learningRate, 2, 100, Quantity.of(1, "s"));
     TableBuilder tloss = netTrain.tloss;

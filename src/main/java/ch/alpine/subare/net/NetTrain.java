@@ -98,7 +98,7 @@ public class NetTrain implements Serializable {
         boolean cont = list.stream() //
             .map(ntl -> ntl.epoch(this, fi)) //
             .reduce(Boolean::logicalAnd) //
-            .orElseThrow();
+            .orElse(true);
         if (!cont)
           break;
       }

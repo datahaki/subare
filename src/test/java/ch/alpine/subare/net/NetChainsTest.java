@@ -17,7 +17,7 @@ class NetChainsTest {
   void test() throws ClassNotFoundException, IOException {
     NetLayer netLayer = NetChains.linear(() -> ElementwiseLayer.gelu(), 2, 13, 7, 3);
     Serialization.copy(netLayer);
-    netLayer.initialize(ThreadLocalRandom.current());
+    NetInitialize.of(netLayer);
     Tensor tensor = netLayer.forward(Tensors.vector(2, 3));
     assertEquals(tensor.length(), 3);
   }
@@ -33,7 +33,7 @@ class NetChainsTest {
   void testDyn() {
     int[] dims = new int[] { 2, 3, 4, 2, 3, 1 };
     NetLayer netLayer = NetChains.linear(() -> ElementwiseLayer.gelu(), dims);
-    netLayer.initialize(ThreadLocalRandom.current());
+    NetInitialize.of(netLayer);
     Tensor tensor = netLayer.forward(Tensors.vector(2, 3));
     assertEquals(tensor.length(), 1);
   }
@@ -43,5 +43,13 @@ class NetChainsTest {
     int[] dims = new int[] { 1, 7, 1 };
     NetLayer netLayer = NetChains.linear(() -> ElementwiseLayer.gelu(), dims);
     NetTrainableQ.check(netLayer, dims[0]);
+  }
+
+  @Test
+  void testSome() throws ClassNotFoundException, IOException {
+    NetLayer netLayer = NetChains.argMax(NetChains.linear(() -> ElementwiseLayer.gelu(), 2, 7, 3));
+    NetInitialize.of(netLayer);
+    Serialization.copy(netLayer);
+    netLayer.stream().forEach(IO::println);
   }
 }

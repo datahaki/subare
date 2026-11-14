@@ -11,7 +11,6 @@ import ch.alpine.subare.net.TrainingData;
 import ch.alpine.subare.net.lay.LinearLayer;
 import ch.alpine.subare.net.opt.NetOptimizer;
 import ch.alpine.subare.net.opt.NetSimpleGradientDescent;
-import ch.alpine.subare.net.run.NetTrain;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
@@ -31,7 +30,7 @@ class NetTrainTest {
     Tensor xdata = Range.of(-3, 3 + 1).maps(Tensors::of);
     Tensor ydata = xdata.maps(polynomial);
     linearLayer.initialize(ThreadLocalRandom.current());
-    NetOptimizer netOptimize = new NetSimpleGradientDescent(linearLayer,RealScalar.of(0.02));
+    NetOptimizer netOptimize = new NetSimpleGradientDescent(linearLayer, RealScalar.of(0.02));
     NetTrain netTrain = new NetTrain(linearLayer, netOptimize);
     TrainingData trainingData = new TrainingData(xdata, ydata);
     netTrain.runAsBatches(trainingData, 3, 1000, Quantity.of(1, "s"));

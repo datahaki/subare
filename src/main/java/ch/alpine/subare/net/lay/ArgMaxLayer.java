@@ -4,7 +4,7 @@ package ch.alpine.subare.net.lay;
 import java.io.Serializable;
 
 import ch.alpine.subare.net.err.CrossEntropyLoss;
-import ch.alpine.subare.net.err.NetError;
+import ch.alpine.subare.net.err.NetLoss;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.VectorQ;
@@ -24,7 +24,7 @@ public class ArgMaxLayer implements NetLayer, Serializable {
 
   /** @param target */
   @Override
-  public NetError error(Tensor target) {
+  public NetLoss error(Tensor target) {
     return CrossEntropyLoss.of(inputCache, target);
   }
 

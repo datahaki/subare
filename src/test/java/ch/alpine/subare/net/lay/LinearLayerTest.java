@@ -11,10 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import ch.alpine.subare.net.TrainingData;
-import ch.alpine.subare.net.err.NetError;
-import ch.alpine.subare.net.lay.LinearLayer;
-import ch.alpine.subare.net.lay.NetChain;
-import ch.alpine.subare.net.lay.NetLayer;
+import ch.alpine.subare.net.err.NetLoss;
 import ch.alpine.subare.net.opt.NetOptimizer;
 import ch.alpine.subare.net.opt.NetSimpleGradientDescent;
 import ch.alpine.subare.net.run.NetInitialize;
@@ -66,7 +63,7 @@ class LinearLayerTest {
     TrainingData trainingData = new TrainingData(xdata, ydata);
     // ---
     NetInitialize.of(netLayer);
-    NetOptimizer netOptimize = new NetSimpleGradientDescent(netLayer,learningRate);
+    NetOptimizer netOptimize = new NetSimpleGradientDescent(netLayer, learningRate);
     NetTrain netTrain = new NetTrain(netLayer, netOptimize);
     netTrain.runAsBatches(trainingData, 2, 100, Quantity.of(1, "s"));
     TableBuilder tloss = netTrain.tloss;
@@ -78,7 +75,7 @@ class LinearLayerTest {
     LinearLayer linearLayer = new LinearLayer(1, 1);
     linearLayer.initialize(ThreadLocalRandom.current());
     Tensor f = linearLayer.forward(Tensors.vector(1));
-    NetError netError = linearLayer.error(f);
+    NetLoss netError = linearLayer.error(f);
     Tensor grad = netError.gradOutput();
     Tensor back = linearLayer.back(grad);
     assertEquals(Dimensions.of(back), List.of(1));
@@ -90,7 +87,7 @@ class LinearLayerTest {
     linearLayer.initialize(ThreadLocalRandom.current());
     Tensor y = linearLayer.forward(Tensors.vector(0.1, 0.2));
     assertEquals(Dimensions.of(y), List.of(3));
-    NetError netError = linearLayer.error(Tensors.vector(0.2, -0.3, 0.4));
+    NetLoss netError = linearLayer.error(Tensors.vector(0.2, -0.3, 0.4));
     Tensor grad = netError.gradOutput();
     assertEquals(Dimensions.of(grad), List.of(3));
     Tensor back = linearLayer.back(grad);

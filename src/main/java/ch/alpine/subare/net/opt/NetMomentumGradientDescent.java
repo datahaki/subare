@@ -1,3 +1,4 @@
+// code by jph
 package ch.alpine.subare.net.opt;
 
 import java.util.IdentityHashMap;
@@ -43,12 +44,18 @@ public class NetMomentumGradientDescent implements NetOptimizer {
     for (Entry<NetLayer, Updater> entry : map.entrySet()) {
       NetLayer netLayer = entry.getKey();
       if (netLayer instanceof LinearLayer linearLayer) {
+        //
         LLUpdater llUpdater = (LLUpdater) entry.getValue();
-        llUpdater.vW = llUpdater.vW.multiply(beta).add(linearLayer.gW);
-        linearLayer.W = linearLayer.W.subtract(llUpdater.vW.multiply(eta));
-        // ---
-        llUpdater.vb = llUpdater.vb.multiply(beta).add(linearLayer.gb);
-        linearLayer.b = linearLayer.b.subtract(llUpdater.vb.multiply(eta));
+        {
+          Tensor gW = linearLayer.gradientW();
+          llUpdater.vW = llUpdater.vW.multiply(beta).add(gW);
+          linearLayer.W = linearLayer.W.subtract(llUpdater.vW.multiply(eta));
+        } // ---
+        {
+          Tensor gb = linearLayer.gb;
+          llUpdater.vb = llUpdater.vb.multiply(beta).add(gb);
+          linearLayer.b = linearLayer.b.subtract(llUpdater.vb.multiply(eta));
+        }
       }
     }
   }

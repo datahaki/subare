@@ -1,14 +1,10 @@
 // code by jph
 package ch.alpine.subare.net.lay;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import ch.alpine.subare.net.err.NetError;
-import ch.alpine.subare.net.lay.ElementwiseLayer;
-import ch.alpine.subare.net.lay.NetLayer;
+import ch.alpine.subare.net.err.NetLoss;
 import ch.alpine.subare.net.run.NetInitialize;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
@@ -28,7 +24,7 @@ class ArgMaxLayerTest {
     Tensor tensor = netLayer.forward(Tensors.vector(2, 3));
     VectorQ.requireLength(tensor, 1);
     ExactTensorQ.require(tensor);
-    NetError netError = netLayer.error(Tensors.vector(1));
+    NetLoss netError = netLayer.error(Tensors.vector(1));
     Tensor gradOutput = netError.gradOutput();
     VectorQ.requireLength(gradOutput, labels);
   }
@@ -44,7 +40,7 @@ class ArgMaxLayerTest {
     MatrixQ.requireSize(Y, batch_size, 1);
     ExactTensorQ.require(Y);
     Tensor T = RandomVariate.of(BernoulliDistribution.of(.3), batch_size, 1);
-    NetError netError = netLayer.error(T);
+    NetLoss netError = netLayer.error(T);
     Tensor gradOutput = netError.gradOutput();
     MatrixQ.requireSize(gradOutput, batch_size, labels);
   }

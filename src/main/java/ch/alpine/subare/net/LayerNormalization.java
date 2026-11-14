@@ -49,9 +49,8 @@ public class LayerNormalization implements NetLayer {
     // return gradInput;
     return null;
   }
-
-//  @Override
-//  public void update(Scalar lr) {
-//    // FIXME
-//  }
+  // @Override
+  // public void update(Scalar lr) {
+  // // FIXME
+  // }
 }

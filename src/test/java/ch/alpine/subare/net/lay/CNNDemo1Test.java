@@ -6,7 +6,6 @@ import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.net.lay.Conv1DLayer;
 import ch.alpine.subare.net.opt.NetOptimizer;
 import ch.alpine.subare.net.opt.NetSimpleGradientDescent;
 import ch.alpine.tensor.RealScalar;
@@ -32,7 +31,6 @@ class CNNDemo1Test {
     Conv1D conv = new Conv1D(kernelSize);
     Conv1DLayer conv1dLayer = Conv1DLayer.of(NormalDistribution.of(0, 0.1), new Random(), kernelSize);
     Scalar totalLoss2 = RealScalar.ONE;
-
     NetOptimizer netOptimizer = new NetSimpleGradientDescent(conv1dLayer, RealScalar.of(learningRate));
     for (int epoch = 0; epoch <= 100; epoch++) {
       // FORWARD PASS

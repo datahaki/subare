@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 import ch.alpine.subare.net.TrainingData;
-import ch.alpine.subare.net.err.NetError;
+import ch.alpine.subare.net.err.NetLoss;
 import ch.alpine.subare.net.lay.NetLayer;
 import ch.alpine.subare.net.opt.NetOptimizer;
 import ch.alpine.tensor.RealScalar;
@@ -31,6 +31,7 @@ public class NetTrain implements Serializable {
   public final NetLayer netLayer;
   public final NetOptimizer netOptimizer;
   public final TableBuilder tloss = new TableBuilder();
+  public final TableBuilder rloss = new TableBuilder();
 
   /** @param netChain
    * @param trainingData output */
@@ -79,7 +80,7 @@ public class NetTrain implements Serializable {
         // 2. Calculate error: Compare the prediction with the actual output.
         Tensor target = batchY.get(i);
         // IO.println("T="+Dimensions.of(target));
-        NetError netError = netLayer.error(target);
+        NetLoss netError = netLayer.error(target);
         // 3. Calculate loss: Apply a loss function to quantify the error.
         /** Loss:
          * A scalar value computed by a loss function (e.g., Mean
@@ -95,9 +96,16 @@ public class NetTrain implements Serializable {
       }
       {
         // TODO plot as LOG instead of compute LOG here
-        Scalar loss = Log.FUNCTION.apply(Total.ofVector(lossv).divide(RealScalar.of(xdata.length())));
-        int count = tloss.getRowCount();
-        tloss.appendRow(RealScalar.of(count), loss);
+        {
+          int count = tloss.getRowCount();
+          Scalar loss = Log.FUNCTION.apply(Total.ofVector(lossv).divide(RealScalar.of(xdata.length())));
+          tloss.appendRow(RealScalar.of(count), loss);
+        }
+        {
+          int count = tloss.getRowCount();
+          Scalar loss = Log.FUNCTION.apply(new NetExtract(netLayer).reg_loss());
+          rloss.appendRow(RealScalar.of(count), loss);
+        }
         final int fi = epoch;
         boolean cont = list.stream() //
             .map(ntl -> ntl.epoch(this, fi)) //
@@ -130,7 +138,7 @@ public class NetTrain implements Serializable {
       // 2. Calculate error: Compare the prediction with the actual output.
       Tensor target = batchY.get(i);
       // IO.println("T="+Dimensions.of(target));
-      NetError netError = netLayer.error(target);
+      NetLoss netError = netLayer.error(target);
       // 3. Calculate loss: Apply a loss function to quantify the error.
       /** Loss:
        * A scalar value computed by a loss function (e.g., Mean

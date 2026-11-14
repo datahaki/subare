@@ -3,8 +3,6 @@ package ch.alpine.subare.net.lay;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.net.lay.ElementwiseLayer;
-import ch.alpine.subare.net.lay.NetLayer;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;

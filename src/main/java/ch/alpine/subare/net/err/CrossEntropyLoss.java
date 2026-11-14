@@ -1,6 +1,7 @@
 // code by jph
 package ch.alpine.subare.net.err;
 
+import java.io.Serializable;
 import java.util.stream.IntStream;
 
 import ch.alpine.tensor.Rational;
@@ -16,7 +17,8 @@ import ch.alpine.tensor.red.Max;
 import ch.alpine.tensor.red.Mean;
 import ch.alpine.tensor.sca.exp.Log;
 
-public record CrossEntropyLoss(Scalar loss, Tensor gradOutput) implements NetError {
+/** Loss == Cross Entropy divided by batch_size */
+public record CrossEntropyLoss(Scalar loss, Tensor gradOutput) implements NetLoss, Serializable {
   static final ScalarUnaryOperator MAX = Max.function(RealScalar.of(1e-15));
 
   /** @param interCache probabilities
@@ -24,7 +26,7 @@ public record CrossEntropyLoss(Scalar loss, Tensor gradOutput) implements NetErr
    * vector of length 1, or matrix of dimensions n x 1
    * of integer values between 0 and interCache.length
    * @return */
-  public static NetError of(Tensor interCache, Tensor target) {
+  public static NetLoss of(Tensor interCache, Tensor target) {
     Tensor onehot;
     Scalar loss;
     if (VectorQ.of(interCache)) {

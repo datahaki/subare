@@ -3,7 +3,7 @@ package ch.alpine.subare.net.lay;
 
 import java.util.stream.Stream;
 
-import ch.alpine.subare.net.err.NetError;
+import ch.alpine.subare.net.err.NetLoss;
 import ch.alpine.tensor.Tensor;
 
 public interface NetLayer {
@@ -19,7 +19,7 @@ public interface NetLayer {
    * 
    * @param target
    * @return */
-  default NetError error(Tensor target) {
+  default NetLoss error(Tensor target) {
     throw new UnsupportedOperationException();
   }
 

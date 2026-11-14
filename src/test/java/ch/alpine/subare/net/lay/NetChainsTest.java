@@ -4,12 +4,9 @@ package ch.alpine.subare.net.lay;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
-import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.net.lay.ElementwiseLayer;
-import ch.alpine.subare.net.lay.NetLayer;
 import ch.alpine.subare.net.run.NetInitialize;
 import ch.alpine.subare.net.run.NetTrainableQ;
 import ch.alpine.tensor.Tensor;

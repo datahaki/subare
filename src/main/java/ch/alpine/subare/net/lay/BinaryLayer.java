@@ -3,8 +3,8 @@ package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
 
-import ch.alpine.subare.net.err.MSELoss;
-import ch.alpine.subare.net.err.NetError;
+import ch.alpine.subare.net.err.NetLoss;
+import ch.alpine.subare.net.err.SquaredErrorLoss;
 import ch.alpine.tensor.Tensor;
 
 /** LogisticSigmoid */
@@ -17,8 +17,8 @@ public class BinaryLayer implements NetLayer, Serializable {
   }
 
   @Override
-  public NetError error(Tensor target) {
-    return MSELoss.of(outputCache, target);
+  public NetLoss error(Tensor target) {
+    return SquaredErrorLoss.of(outputCache, target);
   }
 
   @Override

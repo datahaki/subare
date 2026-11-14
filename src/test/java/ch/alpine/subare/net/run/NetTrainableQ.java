@@ -7,8 +7,6 @@ import ch.alpine.subare.net.TrainingData;
 import ch.alpine.subare.net.lay.NetLayer;
 import ch.alpine.subare.net.opt.NetOptimizer;
 import ch.alpine.subare.net.opt.NetSimpleGradientDescent;
-import ch.alpine.subare.net.run.NetInitialize;
-import ch.alpine.subare.net.run.NetTrain;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
@@ -26,7 +24,7 @@ public enum NetTrainableQ {
     NetInitialize.of(netLayer);
     Tensor Y = netLayer.forward(X);
     NetInitialize.of(netLayer);
-    NetOptimizer netOptimize = new NetSimpleGradientDescent(netLayer,RealScalar.of(0.1));
+    NetOptimizer netOptimize = new NetSimpleGradientDescent(netLayer, RealScalar.of(0.1));
     NetTrain netTrain = new NetTrain(netLayer, netOptimize);
     TrainingData trainingData = new TrainingData(X, Y);
     netTrain.runAsBatches(trainingData, batch_size, 1000, Quantity.of(2, "s"));

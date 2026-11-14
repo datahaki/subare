@@ -4,10 +4,11 @@ package ch.alpine.subare.net.lay;
 import java.io.Serializable;
 import java.util.List;
 import java.util.random.RandomGenerator;
-import java.util.stream.Stream;
 
-import ch.alpine.subare.net.err.MSELoss;
-import ch.alpine.subare.net.err.NetError;
+import ch.alpine.subare.net.err.NetLoss;
+import ch.alpine.subare.net.err.SquaredErrorLoss;
+import ch.alpine.subare.net.reg.L1Regularizer;
+import ch.alpine.subare.net.reg.NetRegularizer;
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
@@ -16,7 +17,6 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.ConstantArray;
 import ch.alpine.tensor.alg.Dimensions;
-import ch.alpine.tensor.alg.Flatten;
 import ch.alpine.tensor.alg.VectorQ;
 import ch.alpine.tensor.io.MathematicaFormat;
 import ch.alpine.tensor.lie.TensorProduct;
@@ -30,6 +30,7 @@ import ch.alpine.tensor.red.Total;
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/LinearLayer.html">LinearLayer</a> */
 public class LinearLayer implements NetLayer, Serializable {
+  public NetRegularizer netRegularizer = new L1Regularizer(RealScalar.of(0.001));
   /** Dimensions: d_in x d_out */
   public Tensor W;
   /** Dimensions: d_out */
@@ -92,9 +93,17 @@ public class LinearLayer implements NetLayer, Serializable {
     // gW = gW.subtract(W.multiply(l2));
   }
 
+  public Scalar reg_loss() {
+    return netRegularizer.penalty(W);
+  }
+
+  public Tensor gradientW() {
+    return gW.add(netRegularizer.gradient(W));
+  }
+
   @Override
-  public NetError error(Tensor target) {
-    return MSELoss.of(outputCache, target); // vector of length d_out
+  public NetLoss error(Tensor target) {
+    return SquaredErrorLoss.of(outputCache, target); // vector of length d_out
   }
 
   @Override

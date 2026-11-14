@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Stream;
 
-import ch.alpine.subare.net.err.NetError;
+import ch.alpine.subare.net.err.NetLoss;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.ext.MergeIllegal;
 
@@ -29,7 +29,7 @@ public record NetChain(List<NetLayer> list) implements NetLayer, Serializable {
   }
 
   @Override
-  public NetError error(Tensor target) {
+  public NetLoss error(Tensor target) {
     return list.getLast().error(target);
   }
   // // TODO probably obsolete

@@ -16,6 +16,11 @@ public interface NetRegularizer {
     public Tensor gradient(Tensor weights) {
       return weights.maps(Scalar::zero);
     }
+
+    @Override
+    public String toString() {
+      return "NoReg";
+    };
   };
 
   Scalar penalty(Tensor weights);

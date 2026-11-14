@@ -108,6 +108,6 @@ public class LinearLayer implements NetLayer, Serializable {
 
   @Override
   public String toString() {
-    return MathematicaFormat.concise("LinearLayer", W, b);
+    return MathematicaFormat.concise("LinearLayer", W, b, netRegularizer);
   }
 }

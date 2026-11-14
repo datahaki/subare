@@ -55,7 +55,7 @@ public class DiscreteStateActionCounter implements StateActionCounter, Serializa
 
   public Scalar getLogarithmicStateActionCount(Tensor state, Tensor action) {
     Tensor key = StateAction.key(state, action);
-    // TODO SUBARE inconsistent LOGARITHMIC[0] == log[0+1] != -Infty
+    // TODO inconsistent LOGARITHMIC[0] == log[0+1] != -Infty
     return stateActionMap.containsKey(key) //
         ? LOGARITHMIC.apply(RealScalar.of(stateActionMap.get(key)))
         : DoubleScalar.NEGATIVE_INFINITY;

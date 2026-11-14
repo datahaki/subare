@@ -31,7 +31,6 @@ public class NetTrain implements Serializable {
   public final NetLayer netLayer;
   public final NetOptimizer netOptimizer;
   public final TableBuilder tloss = new TableBuilder();
-  public final TableBuilder rloss = new TableBuilder();
 
   /** @param netChain
    * @param trainingData output */
@@ -98,13 +97,9 @@ public class NetTrain implements Serializable {
         // TODO plot as LOG instead of compute LOG here
         {
           int count = tloss.getRowCount();
-          Scalar loss = Log.FUNCTION.apply(Total.ofVector(lossv).divide(RealScalar.of(xdata.length())));
-          tloss.appendRow(RealScalar.of(count), loss);
-        }
-        {
-          int count = tloss.getRowCount();
-          Scalar loss = Log.FUNCTION.apply(new NetExtract(netLayer).reg_loss());
-          rloss.appendRow(RealScalar.of(count), loss);
+          Scalar loss1 = Log.FUNCTION.apply(Total.ofVector(lossv).divide(RealScalar.of(xdata.length())));
+          Scalar loss2 = Log.FUNCTION.apply(new NetExtract(netLayer).reg_loss());
+          tloss.appendRow(RealScalar.of(count), loss1,loss2);
         }
         final int fi = epoch;
         boolean cont = list.stream() //

@@ -19,17 +19,17 @@ import ch.alpine.tensor.pdf.d.DiscreteUniformDistribution;
 
 /** p.33 */
 public class EGreedyPolicy extends PolicyBase {
-  // TODO SUBARE make explorationRate final
+  // TODO make explorationRate final
   private ExplorationRate explorationRate;
 
   public EGreedyPolicy(DiscreteModel discreteModel, QsaInterface qsa, StateActionCounter sac) {
     super(discreteModel, qsa, sac);
-    explorationRate = ConstantExplorationRate.of(0.1); // TODO SUBARE magic const
+    explorationRate = ConstantExplorationRate.of(0.1); // TODO magic const
   }
 
   public EGreedyPolicy(StandardModel standardModel, VsInterface vs, StateActionCounter sac) {
     super(standardModel, vs, sac);
-    explorationRate = ConstantExplorationRate.of(0.1); // TODO SUBARE magic const
+    explorationRate = ConstantExplorationRate.of(0.1); // TODO magic const
   }
 
   public void setExplorationRate(ExplorationRate explorationRate) {
@@ -51,7 +51,7 @@ public class EGreedyPolicy extends PolicyBase {
     final int optimalCount = bestActions.length();
     final int nonOptimalCount = discreteModel.actions(state).length() - optimalCount;
     Scalar epsilon = explorationRate.epsilon(state, sac);
-    // TODO SUBARE check logic
+    // TODO check logic
     if (nonOptimalCount == 0) {
       return DiscreteUniformDistribution.forArray(bestActions.length());
       // Tensor pdf = Tensors.vector(v -> Rational.of(1, optimalCount), bestActions.length());

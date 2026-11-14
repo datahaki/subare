@@ -57,7 +57,7 @@ class TrueOnlineSarsaTest {
       ExploringStarts.batch(monteCarloInterface, policy, trueOnlineSarsa);
     }
     DiscreteUtils.print(trueOnlineSarsa.qsa());
-    // TODO SUBARE doesn't work
+    // TODO doesn't work
     // SimpleTestModels._checkClose(qsa);
   }
 }

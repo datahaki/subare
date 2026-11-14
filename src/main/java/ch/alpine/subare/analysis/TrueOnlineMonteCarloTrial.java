@@ -21,7 +21,7 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 
 class TrueOnlineMonteCarloTrial implements MonteCarloTrial {
-  // TODO SUBARE make configurable
+  // TODO make configurable
   private static final Scalar ALPHA = RealScalar.of(0.05);
   private static final Scalar LAMBDA = RealScalar.of(0.3);
 

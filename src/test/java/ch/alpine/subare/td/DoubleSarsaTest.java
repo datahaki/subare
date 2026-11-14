@@ -36,7 +36,7 @@ class DoubleSarsaTest {
     DoubleSarsa doubleSarsa = sarsaType.doubleSarsa(monteCarloInterface, learningRate, qsa1, qsa2, sac1, sac2, policy1, policy2);
     ExploringStarts.batch(monteCarloInterface, policy, 2, doubleSarsa); // nstep > 1 required
     // DiscreteUtils.print(doubleSarsa.qsa());
-    // TODO SUBARE investigate why this results in numeric precision
+    // TODO investigate why this results in numeric precision
     SimpleTestModels._checkExactNumeric(doubleSarsa.qsa());
   }
 

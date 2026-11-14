@@ -7,6 +7,7 @@ import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Flatten;
+import ch.alpine.tensor.io.MathematicaFormat;
 import ch.alpine.tensor.sca.AbsSquared;
 
 public record L2Regularizer(Scalar lambda) implements NetRegularizer, Serializable {
@@ -23,5 +24,10 @@ public record L2Regularizer(Scalar lambda) implements NetRegularizer, Serializab
   @Override
   public Tensor gradient(Tensor weights) {
     return weights.multiply(lambda);
+  }
+
+  @Override
+  public String toString() {
+    return MathematicaFormat.concise("L2", lambda);
   }
 }

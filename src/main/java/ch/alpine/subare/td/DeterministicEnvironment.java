@@ -36,7 +36,7 @@ class DeterministicEnvironment implements StepDigest {
       map.put(key, stepRecord);
       keys.append(key); // after updating the map, for conservative size
     } else {
-      // TODO SUBARE can verify that stored step is identical to provided step
+      // TODO can verify that stored step is identical to provided step
     }
   }
 

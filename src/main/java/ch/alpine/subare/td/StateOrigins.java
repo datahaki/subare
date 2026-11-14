@@ -18,7 +18,7 @@ class StateOrigins implements StepDigest {
    * @return step interfaces with nextState == state */
   Collection<StepRecord> values(Tensor state) {
     if (map.containsKey(state)) {
-      // TODO SUBARE this is a preliminary check only during development
+      // TODO this is a preliminary check only during development
       Collection<StepRecord> collection = map.get(state).values();
       for (StepRecord stepRecord : collection)
         if (!stepRecord.nextState().equals(state))
@@ -30,7 +30,7 @@ class StateOrigins implements StepDigest {
 
   @Override
   public void digest(StepRecord stepRecord) {
-    // TODO SUBARE code redundant to StepSet
+    // TODO code redundant to StepSet
     map.computeIfAbsent(stepRecord.nextState(), _ -> new StepSet()).register(stepRecord);
   }
 }

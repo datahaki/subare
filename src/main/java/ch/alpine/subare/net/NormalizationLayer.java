@@ -12,7 +12,17 @@ public record NormalizationLayer(Tensor mean, Scalar std) implements NetLayer {
   }
 
   @Override
+  public Tensor forwardBatch(Tensor x) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
   public Tensor back(Tensor gradOutput) {
     return gradOutput.divide(std);
+  }
+
+  @Override
+  public Tensor backBatch(Tensor gradOutput) {
+    throw new UnsupportedOperationException();
   }
 }

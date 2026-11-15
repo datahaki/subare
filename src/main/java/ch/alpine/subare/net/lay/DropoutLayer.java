@@ -25,15 +25,20 @@ public class DropoutLayer implements NetLayer, Serializable {
   }
 
   @Override
-  public Tensor forward(Tensor input) {
+  public Tensor forward(Tensor x) {
     if (!training)
-      return input; // no dropout at inference
-    int n = input.length();
+      return x; // no dropout at inference
+    int n = x.length();
     Tensor temp = RandomVariate.of(distribution, n);
     int sum = Total.ofVector(temp).number().intValue();
     mask = temp.multiply(Rational.of(n, sum));
     Integers.requireEquals(n, Total.ofVector(mask).number().intValue());
-    return Times.of(input, mask);
+    return Times.of(x, mask);
+  }
+
+  @Override
+  public Tensor forwardBatch(Tensor x) {
+    throw new UnsupportedOperationException();
   }
 
   @Override
@@ -41,5 +46,10 @@ public class DropoutLayer implements NetLayer, Serializable {
     return training //
         ? Times.of(gradOutput, mask)
         : gradOutput;
+  }
+
+  @Override
+  public Tensor backBatch(Tensor gradOutput) {
+    throw new UnsupportedOperationException();
   }
 }

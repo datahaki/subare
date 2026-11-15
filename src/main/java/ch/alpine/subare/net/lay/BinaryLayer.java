@@ -9,11 +9,16 @@ import ch.alpine.tensor.Tensor;
 
 /** LogisticSigmoid */
 public class BinaryLayer implements NetLayer, Serializable {
-  Tensor outputCache;
+  transient Tensor outputCache;
 
   @Override
   public Tensor forward(Tensor x) {
-    return this.outputCache = x;
+    return outputCache = x;
+  }
+
+  @Override
+  public Tensor forwardBatch(Tensor X) {
+    return outputCache = X;
   }
 
   @Override
@@ -23,6 +28,11 @@ public class BinaryLayer implements NetLayer, Serializable {
 
   @Override
   public Tensor back(Tensor gradOutput) {
+    return gradOutput;
+  }
+
+  @Override
+  public Tensor backBatch(Tensor gradOutput) {
     return gradOutput;
   }
 }

@@ -30,20 +30,21 @@ import ch.alpine.tensor.red.Total;
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/LinearLayer.html">LinearLayer</a> */
 public class LinearLayer implements NetLayer, Serializable {
-  public NetRegularizer netRegularizer = new L1Regularizer(RealScalar.of(0.001));
   /** Dimensions: d_in x d_out */
   public Tensor W;
   /** Dimensions: d_out */
   public Tensor b;
+  // ---
+  public NetRegularizer netRegularizer = new L1Regularizer(RealScalar.of(0.001));
   /** Dimensions: d_in, or batch_size x d_in */
-  private Tensor inputCache;
+  private transient Tensor inputCache;
   /** Dimensions: d_out, or batch_size x d_out */
-  private Tensor outputCache;
+  private transient Tensor outputCache;
   // For each parameter, the optimizer maintains its own velocity.
   /** Dimensions: d_in x d_out */
-  public Tensor gW;
+  public transient Tensor gW;
   /** Dimensions: d_out */
-  public Tensor gb;
+  public transient Tensor gb;
 
   public LinearLayer(int d_in, int d_out) {
     W = ConstantArray.of(DoubleScalar.INDETERMINATE, d_in, d_out);
@@ -61,22 +62,29 @@ public class LinearLayer implements NetLayer, Serializable {
 
   @Override
   public Tensor forward(Tensor x) {
-    inputCache = x;
-    return outputCache = VectorQ.of(x) //
-        ? x.dot(W).add(b)
-        : Tensor.of(x.dot(W).stream().map(b::add)); // Dimensions: batch_size x d_out
+    inputCache = VectorQ.require(x);
+    return outputCache = x.dot(W).add(b);
+  }
+
+  @Override
+  public Tensor forwardBatch(Tensor X) {
+    inputCache = X;
+    // Dimensions: batch_size x d_out
+    return outputCache = Tensor.of(X.dot(W).stream().map(b::add));
   }
 
   /** Backward pass: computes gradients with respect to weights, bias, and i[...]
    * - grad_output shape: (batch_size, out_features) -> dL/dY */
   @Override
   public Tensor back(Tensor gradOutput) {
-    // Dimensions[gradOutput] = batch_size x d_out
-    if (VectorQ.of(gradOutput)) {
-      gW = TensorProduct.of(inputCache, gradOutput);
-      gb = gradOutput;
-      return W.dot(gradOutput); // vector of length d_in
-    }
+    VectorQ.require(gradOutput);
+    gW = TensorProduct.of(inputCache, gradOutput);
+    gb = gradOutput;
+    return W.dot(gradOutput); // vector of length d_in
+  }
+
+  @Override
+  public Tensor backBatch(Tensor gradOutput) {
     /** requires gradOutput to be prescaled with 1/batch_size
      * 
      * Note: If your loss function divides by batch_size (mean reduction),
@@ -88,9 +96,6 @@ public class LinearLayer implements NetLayer, Serializable {
     gb = Total.of(gradOutput);
     // Dimensions[gradInput] = batch_size x d_in
     return MatrixDotTranspose.of(gradOutput, W);
-    // Sign.requirePositiveOrZero(l2);
-    // if (Scalars.nonZero(l2))
-    // gW = gW.subtract(W.multiply(l2));
   }
 
   public Scalar reg_loss() {

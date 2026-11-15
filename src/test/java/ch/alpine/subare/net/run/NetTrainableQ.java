@@ -22,7 +22,7 @@ public enum NetTrainableQ {
     int batch_size = 20;
     Tensor X = RandomVariate.of(NormalDistribution.standard(), samples, d_in);
     NetInitialize.of(netLayer);
-    Tensor Y = netLayer.forward(X);
+    Tensor Y = netLayer.forwardBatch(X);
     NetInitialize.of(netLayer);
     NetOptimizer netOptimize = new NetSimpleGradientDescent(netLayer, RealScalar.of(0.1));
     NetTrain netTrain = new NetTrain(netLayer, netOptimize);

@@ -38,6 +38,11 @@ public class MaxPooling1DLayer implements NetLayer {
   }
 
   @Override
+  public Tensor forwardBatch(Tensor x) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
   public Tensor back(Tensor outputGradient) {
     int inputLength = outputGradient.length() * poolSize;
     Tensor inputGradient = Array.zeros(inputLength);
@@ -46,6 +51,11 @@ public class MaxPooling1DLayer implements NetLayer {
       inputGradient.set(outputGradient.Get(i), lastMaxIndices[i]);
     }
     return inputGradient;
+  }
+
+  @Override
+  public Tensor backBatch(Tensor gradOutput) {
+    throw new UnsupportedOperationException();
   }
 
   @Override

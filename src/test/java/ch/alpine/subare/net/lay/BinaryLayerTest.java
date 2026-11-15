@@ -41,7 +41,7 @@ class BinaryLayerTest {
     NetLayer netLayer = NetChains.binary(NetChains.linear(() -> ElementwiseLayer.gelu(), 2, 8, 1));
     NetInitialize.of(netLayer);
     Tensor X = RandomVariate.of(NormalDistribution.standard(), batch_size, 2);
-    Tensor Y = netLayer.forward(X);
+    Tensor Y = netLayer.forwardBatch(X);
     MatrixQ.requireSize(Y, batch_size, 1);
     Tensor T = RandomVariate.of(BernoulliDistribution.of(.3), batch_size, 1);
     NetLoss netError = netLayer.error(T);

@@ -17,7 +17,6 @@ import ch.alpine.tensor.io.MathematicaFormat;
  * Deeper networks: They allow neural networks to have many more layers. */
 public class ResidualLayer implements NetLayer, Serializable {
   private final NetLayer netLayer;
-  private Tensor outputCache;
 
   public ResidualLayer(NetLayer netLayer) {
     this.netLayer = netLayer;
@@ -25,12 +24,22 @@ public class ResidualLayer implements NetLayer, Serializable {
 
   @Override
   public Tensor forward(Tensor x) {
-    return outputCache = netLayer.forward(x).add(x);
+    return netLayer.forward(x).add(x);
+  }
+
+  @Override
+  public Tensor forwardBatch(Tensor X) {
+    return netLayer.forwardBatch(X).add(X);
   }
 
   @Override
   public Tensor back(Tensor gradOutput) {
     return netLayer.back(gradOutput).add(gradOutput);
+  }
+
+  @Override
+  public Tensor backBatch(Tensor gradOutput) {
+    return netLayer.backBatch(gradOutput).add(gradOutput);
   }
 
   @Override

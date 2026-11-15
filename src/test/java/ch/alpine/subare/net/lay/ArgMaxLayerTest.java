@@ -36,7 +36,7 @@ class ArgMaxLayerTest {
     NetInitialize.of(netLayer);
     int batch_size = 5;
     Tensor X = RandomVariate.of(NormalDistribution.standard(), batch_size, 2);
-    Tensor Y = netLayer.forward(X);
+    Tensor Y = netLayer.forwardBatch(X);
     MatrixQ.requireSize(Y, batch_size, 1);
     ExactTensorQ.require(Y);
     Tensor T = RandomVariate.of(BernoulliDistribution.of(.3), batch_size, 1);

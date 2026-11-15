@@ -38,6 +38,11 @@ public class Conv1DLayer implements NetLayer, Serializable {
   }
 
   @Override
+  public Tensor forwardBatch(Tensor x) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
   public NetLoss error(Tensor target) {
     return SquaredErrorLoss.of(outputCache, target);
   }
@@ -47,6 +52,11 @@ public class Conv1DLayer implements NetLayer, Serializable {
     gW = dW(gradOutput, inputCache);
     gb = Total.ofVector(gradOutput);
     return convsame(gradOutput, w);
+  }
+
+  @Override
+  public Tensor backBatch(Tensor gradOutput) {
+    throw new UnsupportedOperationException();
   }
   // @Override
   // public void update(Scalar lr) {

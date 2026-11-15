@@ -20,6 +20,20 @@ public record NetChain(List<NetLayer> list) implements NetLayer, Serializable {
   public Tensor forward(Tensor x0) {
     return list.stream() //
         .reduce(x0, (x, layer) -> layer.forward(x), MergeIllegal.operator());
+    // .gather(Gatherers.fold(() -> x0, (x, netLayer) -> netLayer.forward(x))) //
+    // .findFirst() //
+    // .orElseThrow();
+  }
+
+  @Override
+  public Tensor forwardBatch(Tensor X0) {
+    return list.stream() //
+        .reduce(X0, (X, layer) -> layer.forwardBatch(X), MergeIllegal.operator());
+  }
+
+  @Override
+  public NetLoss error(Tensor target) {
+    return list.getLast().error(target);
   }
 
   @Override
@@ -29,8 +43,9 @@ public record NetChain(List<NetLayer> list) implements NetLayer, Serializable {
   }
 
   @Override
-  public NetLoss error(Tensor target) {
-    return list.getLast().error(target);
+  public Tensor backBatch(Tensor grad0) {
+    return list.reversed().stream() //
+        .reduce(grad0, (grad, layer) -> layer.backBatch(grad), MergeIllegal.operator());
   }
   // // TODO probably obsolete
   // public void setL2(Scalar l2) {

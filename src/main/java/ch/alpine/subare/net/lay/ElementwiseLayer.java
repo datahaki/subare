@@ -94,15 +94,25 @@ public abstract class ElementwiseLayer implements NetLayer, Serializable {
 
   private final ScalarUnaryOperator f;
   /** output cache */
-  Tensor inputCache;
-  Tensor outputCache;
+  transient Tensor inputCache;
+  transient Tensor outputCache;
 
   public ElementwiseLayer(ScalarUnaryOperator f) {
     this.f = f;
   }
 
   @Override
-  public final Tensor forward(Tensor input) {
-    return outputCache = ((inputCache = input).maps(f));
+  public final Tensor forward(Tensor x) {
+    return outputCache = ((inputCache = x).maps(f));
+  }
+
+  @Override
+  public final Tensor forwardBatch(Tensor X) {
+    return outputCache = ((inputCache = X).maps(f));
+  }
+
+  @Override
+  public final Tensor backBatch(Tensor gradOutput) {
+    return back(gradOutput);
   }
 }

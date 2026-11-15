@@ -12,14 +12,19 @@ import ch.alpine.tensor.ext.ArgMax;
 
 /** maps vector of probabilities to the ArgMax */
 public class ArgMaxLayer implements NetLayer, Serializable {
-  private Tensor inputCache;
+  private transient Tensor inputCache;
 
   @Override
   public Tensor forward(Tensor x) {
-    inputCache = x;
-    return VectorQ.of(x) //
-        ? Tensors.vector(ArgMax.of(x))
-        : Tensor.of(x.stream().map(row -> Tensors.vector(ArgMax.of(row))));
+    inputCache = VectorQ.require(x);
+    return Tensors.vector(ArgMax.of(x));
+  }
+
+  @Override
+  public Tensor forwardBatch(Tensor X) {
+    inputCache = X;
+    return Tensor.of(X.stream() //
+        .map(x -> Tensors.vector(ArgMax.of(x))));
   }
 
   /** @param target */
@@ -30,6 +35,11 @@ public class ArgMaxLayer implements NetLayer, Serializable {
 
   @Override
   public Tensor back(Tensor gradOutput) {
+    return gradOutput;
+  }
+
+  @Override
+  public Tensor backBatch(Tensor gradOutput) {
     return gradOutput;
   }
 }

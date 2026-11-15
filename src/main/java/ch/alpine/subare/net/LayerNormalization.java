@@ -40,6 +40,11 @@ public class LayerNormalization implements NetLayer {
   }
 
   @Override
+  public Tensor forwardBatch(Tensor x) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
   public Tensor back(Tensor gradOutput) {
     dGamma = dGamma.add( //
         Entrywise.mul().apply(gradOutput, normalized));
@@ -49,8 +54,13 @@ public class LayerNormalization implements NetLayer {
     // return gradInput;
     return null;
   }
+
   // @Override
   // public void update(Scalar lr) {
   // // FIXME
   // }
+  @Override
+  public Tensor backBatch(Tensor gradOutput) {
+    throw new UnsupportedOperationException();
+  }
 }

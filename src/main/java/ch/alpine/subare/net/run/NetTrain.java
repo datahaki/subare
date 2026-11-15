@@ -74,7 +74,7 @@ public class NetTrain implements Serializable {
         Tensor x = batchX.get(i);
         int samples = x.length();
         // 1. Forward propagation: The network generates a prediction.
-        Tensor prediction = netLayer.forward(x);
+        Tensor prediction = netLayer.forwardBatch(x);
         DeterminateTensorQ.require(prediction);
         // 2. Calculate error: Compare the prediction with the actual output.
         Tensor target = batchY.get(i);
@@ -89,7 +89,7 @@ public class NetTrain implements Serializable {
          * minimize. */
         lossv.append(netError.loss().multiply(RealScalar.of(samples)));
         // 4. Backpropagation: Calculate gradients of the loss with respect to network weights.
-        netLayer.back(netError.gradOutput());
+        netLayer.backBatch(netError.gradOutput());
         // 5. Weight update: The optimizer adjusts weights to reduce the loss.
         netOptimizer.update();
       }
@@ -99,7 +99,7 @@ public class NetTrain implements Serializable {
           int count = tloss.getRowCount();
           Scalar loss1 = Log.FUNCTION.apply(Total.ofVector(lossv).divide(RealScalar.of(xdata.length())));
           Scalar loss2 = Log.FUNCTION.apply(new NetExtract(netLayer).reg_loss());
-          tloss.appendRow(RealScalar.of(count), loss1,loss2);
+          tloss.appendRow(RealScalar.of(count), loss1, loss2);
         }
         final int fi = epoch;
         boolean cont = list.stream() //

@@ -2,7 +2,6 @@
 package ch.alpine.subare.net.lay;
 
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.alg.VectorQ;
 import ch.alpine.tensor.nrm.SoftmaxVector;
 
 /** inspired by
@@ -12,13 +11,21 @@ public enum SoftmaxLayer implements NetLayer {
 
   @Override
   public Tensor forward(Tensor x) {
-    return VectorQ.of(x) //
-        ? SoftmaxVector.of(x)
-        : Tensor.of(x.stream().map(SoftmaxVector::of));
+    return SoftmaxVector.of(x);
+  }
+
+  @Override
+  public Tensor forwardBatch(Tensor X) {
+    return Tensor.of(X.stream().map(SoftmaxVector::of));
   }
 
   @Override
   public Tensor back(Tensor gradOutput) {
+    return gradOutput;
+  }
+
+  @Override
+  public Tensor backBatch(Tensor gradOutput) {
     return gradOutput;
   }
 }

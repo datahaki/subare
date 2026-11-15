@@ -57,7 +57,7 @@ class LinearLayerTest {
     TensorUnaryOperator tuo;
     NetLayer netLayer = NetChain.of(new LinearLayer(d_in, d_out));
     NetInitialize.of(netLayer);
-    tuo = netLayer::forward;
+    tuo = netLayer::forwardBatch;
     Tensor xdata = RandomVariate.of(distribution, samples, d_in);
     Tensor ydata = tuo.slash(xdata);
     TrainingData trainingData = new TrainingData(xdata, ydata);

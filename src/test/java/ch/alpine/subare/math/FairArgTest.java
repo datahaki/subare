@@ -4,7 +4,6 @@ package ch.alpine.subare.math;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -20,7 +19,7 @@ import ch.alpine.tensor.ext.Serialization;
 
 class FairArgTest {
   @Test
-  void testMaxIsFair() throws ClassNotFoundException, IOException {
+  void testMaxIsFair() {
     Tensor d = Tensors.vectorDouble(3, .3, 3, .6, 3);
     Set<Integer> set = new HashSet<>();
     FairArg fairArg = Serialization.copy(FairArg.max(d));

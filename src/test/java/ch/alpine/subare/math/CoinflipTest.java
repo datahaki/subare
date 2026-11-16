@@ -4,8 +4,6 @@ package ch.alpine.subare.math;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.io.IOException;
-
 import org.junit.jupiter.api.Test;
 
 import ch.alpine.tensor.Rational;
@@ -42,7 +40,7 @@ class CoinflipTest {
   }
 
   @Test
-  void testSerial() throws ClassNotFoundException, IOException {
+  void testSerial() {
     Serialization.copy(Coinflip.of(Rational.of(3, 5)));
   }
 

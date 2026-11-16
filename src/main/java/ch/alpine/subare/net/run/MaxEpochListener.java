@@ -1,3 +1,4 @@
+// code by jph
 package ch.alpine.subare.net.run;
 
 public record MaxEpochListener(int max_epochs) implements NetTrainListener {

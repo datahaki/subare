@@ -3,8 +3,6 @@ package ch.alpine.subare.net.lay;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.IOException;
-
 import org.junit.jupiter.api.Test;
 
 import ch.alpine.subare.net.run.NetInitialize;
@@ -15,7 +13,7 @@ import ch.alpine.tensor.ext.Serialization;
 
 class NetChainsTest {
   @Test
-  void test() throws ClassNotFoundException, IOException {
+  void test() {
     NetLayer netLayer = NetChains.linear(() -> ElementwiseLayer.gelu(), 2, 13, 7, 3);
     Serialization.copy(netLayer);
     NetInitialize.of(netLayer);
@@ -24,7 +22,7 @@ class NetChainsTest {
   }
 
   @Test
-  void testSer() throws ClassNotFoundException, IOException {
+  void testSer() {
     NetLayer netLayer = NetChains.linear(() -> ElementwiseLayer.gelu(), 2, 13, 7, 3);
     NetLayer nl2 = NetChains.argMax(netLayer);
     Serialization.copy(nl2);
@@ -47,7 +45,7 @@ class NetChainsTest {
   }
 
   @Test
-  void testSome() throws ClassNotFoundException, IOException {
+  void testSome() {
     NetLayer netLayer = NetChains.argMax(NetChains.linear(() -> ElementwiseLayer.gelu(), 2, 7, 3));
     NetInitialize.of(netLayer);
     Serialization.copy(netLayer);

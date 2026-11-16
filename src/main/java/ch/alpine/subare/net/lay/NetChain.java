@@ -18,16 +18,13 @@ public record NetChain(List<NetLayer> list) implements NetLayer, Serializable {
 
   @Override
   public Tensor forward(Tensor x0) {
-    return list.stream() //
+    return list.stream() // fold
         .reduce(x0, (x, layer) -> layer.forward(x), MergeIllegal.operator());
-    // .gather(Gatherers.fold(() -> x0, (x, netLayer) -> netLayer.forward(x))) //
-    // .findFirst() //
-    // .orElseThrow();
   }
 
   @Override
   public Tensor forwardBatch(Tensor X0) {
-    return list.stream() //
+    return list.stream() // fold
         .reduce(X0, (X, layer) -> layer.forwardBatch(X), MergeIllegal.operator());
   }
 
@@ -38,13 +35,13 @@ public record NetChain(List<NetLayer> list) implements NetLayer, Serializable {
 
   @Override
   public Tensor back(Tensor grad0) {
-    return list.reversed().stream() //
+    return list.reversed().stream() // fold
         .reduce(grad0, (grad, layer) -> layer.back(grad), MergeIllegal.operator());
   }
 
   @Override
   public Tensor backBatch(Tensor grad0) {
-    return list.reversed().stream() //
+    return list.reversed().stream() // fold
         .reduce(grad0, (grad, layer) -> layer.backBatch(grad), MergeIllegal.operator());
   }
   // // TODO probably obsolete

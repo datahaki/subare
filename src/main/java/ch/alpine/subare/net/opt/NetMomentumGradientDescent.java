@@ -21,8 +21,8 @@ public class NetMomentumGradientDescent implements NetOptimizer {
 
     public LLUpdater(LinearLayer linearLayer) {
       this.linearLayer = linearLayer;
-      vW = linearLayer.W.maps(Scalar::zero);
-      vb = linearLayer.b.maps(Scalar::zero);
+      vW = linearLayer.W().maps(Scalar::zero);
+      vb = linearLayer.b().maps(Scalar::zero);
     }
   }
 
@@ -46,16 +46,19 @@ public class NetMomentumGradientDescent implements NetOptimizer {
       if (netLayer instanceof LinearLayer linearLayer) {
         //
         LLUpdater llUpdater = (LLUpdater) entry.getValue();
+        Tensor nW;
         {
           Tensor gW = linearLayer.gradientW();
           llUpdater.vW = llUpdater.vW.multiply(beta).add(gW);
-          linearLayer.W = linearLayer.W.subtract(llUpdater.vW.multiply(eta));
+          nW = linearLayer.W().subtract(llUpdater.vW.multiply(eta));
         } // ---
+        Tensor nb;
         {
           Tensor gb = linearLayer.gb;
           llUpdater.vb = llUpdater.vb.multiply(beta).add(gb);
-          linearLayer.b = linearLayer.b.subtract(llUpdater.vb.multiply(eta));
+          nb = linearLayer.b().subtract(llUpdater.vb.multiply(eta));
         }
+        linearLayer.setParam(nW, nb);
       }
     }
   }

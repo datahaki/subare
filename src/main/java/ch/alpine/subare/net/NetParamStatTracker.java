@@ -11,7 +11,7 @@ import ch.alpine.tensor.red.ScalarSummaryStatistics;
 
 public class NetParamStatTracker implements NetTrainListener {
   public static final String[] LABELS = { "count", "min", "max", "mean", "stddev" };
-  public final TableBuilder tparam = new TableBuilder();
+  private final TableBuilder tparam = new TableBuilder();
 
   @Override
   public boolean epoch(NetTrain netTrain) {
@@ -23,5 +23,9 @@ public class NetParamStatTracker implements NetTrainListener {
         scalarSummaryStatistics.getMean(), //
         scalarSummaryStatistics.getStandardDeviation()));
     return true;
+  }
+
+  public TableBuilder getTableCopy() { // TODO misnomer
+    return tparam;
   }
 }

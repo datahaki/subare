@@ -17,8 +17,8 @@ public record NetExtract(NetLayer netLayer) {
   private Stream<Scalar> extract(NetLayer netLayer) {
     if (netLayer instanceof LinearLayer linearLayer) {
       return Stream.concat( //
-          Flatten.scalars(linearLayer.W), //
-          Flatten.scalars(linearLayer.b));
+          Flatten.scalars(linearLayer.W()), //
+          Flatten.scalars(linearLayer.b()));
     }
     return Stream.empty();
   }

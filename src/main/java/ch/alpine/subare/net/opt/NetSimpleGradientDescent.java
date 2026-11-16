@@ -8,6 +8,7 @@ import java.util.List;
 import ch.alpine.subare.net.lay.LinearLayer;
 import ch.alpine.subare.net.lay.NetLayer;
 import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
 
 /** simple gradient descent */
 public class NetSimpleGradientDescent implements NetOptimizer, Serializable {
@@ -25,8 +26,9 @@ public class NetSimpleGradientDescent implements NetOptimizer, Serializable {
   @Override
   public void update() {
     for (LinearLayer ll : linearLayers) {
-      ll.W = ll.W.add(ll.gW.multiply(eta.negate()));
-      ll.b = ll.b.add(ll.gb.multiply(eta.negate()));
+      Tensor nW = ll.W().add(ll.gW.multiply(eta.negate()));
+      Tensor nb = ll.b().add(ll.gb.multiply(eta.negate()));
+      ll.setParam(nW, nb);
     }
   }
 }

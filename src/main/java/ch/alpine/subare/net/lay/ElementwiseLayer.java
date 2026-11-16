@@ -2,8 +2,10 @@
 package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.api.ScalarUnaryOperator;
 import ch.alpine.tensor.io.MathematicaFormat;
 import ch.alpine.tensor.red.Entrywise;
@@ -17,7 +19,7 @@ import ch.alpine.tensor.sca.tri.Tanh;
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/ElementwiseLayer.html">ElementwiseLayer</a> */
 public abstract class ElementwiseLayer implements NetLayer, Serializable {
-  public static NetLayer logSig() {
+  public static NetLayer sigmoid() {
     return new ElementwiseLayer(LogisticSigmoid.FUNCTION) {
       @Override
       public Tensor back(Tensor gradOutput) {
@@ -25,42 +27,8 @@ public abstract class ElementwiseLayer implements NetLayer, Serializable {
       }
 
       @Override
-      public String toString() {
-        return MathematicaFormat.concise("LogisticSigmoidLayer");
-      }
-    };
-  }
-
-  /** ReLU:
-   * gradInput[i] = (inputCache[i] > 0) ? gradOutput[i] : 0.0;
-   * No shrinkage for positive inputs
-   * Can “kill” neurons for negative inputs
-   * 
-   * @return */
-  public static NetLayer relu() {
-    return new ElementwiseLayer(Ramp.FUNCTION) {
-      @Override
-      public Tensor back(Tensor gradOutput) {
-        return Entrywise.mul().apply(gradOutput, inputCache.maps(UnitStep.FUNCTION));
-      }
-
-      @Override
-      public String toString() {
-        return MathematicaFormat.concise("ReLULayer");
-      }
-    };
-  }
-
-  public static NetLayer gelu() {
-    return new ElementwiseLayer(Gelu.FUNCTION) {
-      @Override
-      public Tensor back(Tensor gradOutput) {
-        return Entrywise.mul().apply(gradOutput, inputCache.maps(Gelu::dx));
-      }
-
-      @Override
-      public String toString() {
-        return MathematicaFormat.concise("GeLULayer");
+      public String title() {
+        return "LogisticSigmoidLayer";
       }
     };
   }
@@ -85,8 +53,42 @@ public abstract class ElementwiseLayer implements NetLayer, Serializable {
       }
 
       @Override
-      public String toString() {
+      public String title() {
         return MathematicaFormat.concise("TanhLayer");
+      }
+    };
+  }
+
+  /** ReLU:
+   * gradInput[i] = (inputCache[i] > 0) ? gradOutput[i] : 0.0;
+   * No shrinkage for positive inputs
+   * Can “kill” neurons for negative inputs
+   * 
+   * @return */
+  public static NetLayer relu() {
+    return new ElementwiseLayer(Ramp.FUNCTION) {
+      @Override
+      public Tensor back(Tensor gradOutput) {
+        return Entrywise.mul().apply(gradOutput, inputCache.maps(UnitStep.FUNCTION));
+      }
+
+      @Override
+      public String title() {
+        return "ReLULayer";
+      }
+    };
+  }
+
+  public static NetLayer gelu() {
+    return new ElementwiseLayer(Gelu.FUNCTION) {
+      @Override
+      public Tensor back(Tensor gradOutput) {
+        return Entrywise.mul().apply(gradOutput, inputCache.maps(Gelu::dx));
+      }
+
+      @Override
+      public String title() {
+        return "GeLULayer";
       }
     };
   }
@@ -114,5 +116,12 @@ public abstract class ElementwiseLayer implements NetLayer, Serializable {
   @Override
   public final Tensor backBatch(Tensor gradOutput) {
     return back(gradOutput);
+  }
+
+  protected abstract String title();
+
+  @Override
+  public final String toString() {
+    return MathematicaFormat.concise(title(), Objects.isNull(inputCache) ? "" : Dimensions.of(inputCache));
   }
 }

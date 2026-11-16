@@ -14,7 +14,8 @@ public class NetParamStatTracker implements NetTrainListener {
   public final TableBuilder tparam = new TableBuilder();
 
   @Override
-  public boolean epoch(NetTrain netTrain, int epoch) {
+  public boolean epoch(NetTrain netTrain) {
+    int epoch = netTrain.getTotalEpochs();
     ScalarSummaryStatistics scalarSummaryStatistics = new NetExtract(netTrain.netLayer).all().collect(ScalarSummaryStatistics.collector());
     tparam.appendRow(RealScalar.of(epoch), Tensors.of( //
         scalarSummaryStatistics.getMin(), //

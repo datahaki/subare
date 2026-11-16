@@ -41,7 +41,7 @@ public enum NetChains {
   // TODO rename to sigmoid !?
   public static NetLayer binary(NetLayer netLayer) {
     return NetChain.of(netLayer, //
-        ElementwiseLayer.logSig(), //
+        ElementwiseLayer.sigmoid(), //
         new BinaryLayer());
   }
 

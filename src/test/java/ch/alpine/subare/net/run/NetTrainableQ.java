@@ -13,7 +13,6 @@ import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.pdf.c.NormalDistribution;
-import ch.alpine.tensor.qty.Quantity;
 
 public enum NetTrainableQ {
   ;
@@ -27,7 +26,8 @@ public enum NetTrainableQ {
     NetOptimizer netOptimize = new NetSimpleGradientDescent(netLayer, RealScalar.of(0.1));
     NetTrain netTrain = new NetTrain(netLayer, netOptimize);
     TrainingData trainingData = new TrainingData(X, Y);
-    netTrain.runAsBatches(trainingData, batch_size, 1000, Quantity.of(2, "s"));
+    netTrain.setMaxEpochs(1000);
+    netTrain.runAsBatches(trainingData, batch_size);
     Scalar loss = netTrain.log_loss();
     boolean lessThan = Scalars.lessThan(loss, RealScalar.of(-3));
     assertTrue(lessThan);

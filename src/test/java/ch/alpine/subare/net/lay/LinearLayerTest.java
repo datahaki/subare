@@ -29,7 +29,6 @@ import ch.alpine.tensor.mat.Tolerance;
 import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.pdf.c.NormalDistribution;
-import ch.alpine.tensor.qty.Quantity;
 import ch.alpine.tensor.sca.exp.Exp;
 
 class LinearLayerTest {
@@ -65,7 +64,8 @@ class LinearLayerTest {
     NetInitialize.of(netLayer);
     NetOptimizer netOptimize = new NetSimpleGradientDescent(netLayer, learningRate);
     NetTrain netTrain = new NetTrain(netLayer, netOptimize);
-    netTrain.runAsBatches(trainingData, 2, 100, Quantity.of(1, "s"));
+    netTrain.setMaxEpochs(100);
+    netTrain.runAsBatches(trainingData, 2);
     TableBuilder tloss = netTrain.tloss;
     Tolerance.CHOP.requireAllZero(Exp.FUNCTION.apply(netTrain.log_loss()));
   }

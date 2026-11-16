@@ -1,6 +1,7 @@
 // code by jph
 package ch.alpine.subare.net.run;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -18,7 +19,6 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Range;
 import ch.alpine.tensor.alg.Subdivide;
-import ch.alpine.tensor.qty.Quantity;
 import ch.alpine.tensor.sca.Chop;
 import ch.alpine.tensor.sca.ply.Polynomial;
 
@@ -33,11 +33,13 @@ class NetTrainTest {
     NetOptimizer netOptimize = new NetSimpleGradientDescent(linearLayer, RealScalar.of(0.02));
     NetTrain netTrain = new NetTrain(linearLayer, netOptimize);
     TrainingData trainingData = new TrainingData(xdata, ydata);
-    netTrain.runAsBatches(trainingData, 3, 1000, Quantity.of(1, "s"));
+    netTrain.setMaxEpochs(1000);
+    netTrain.runAsBatches(trainingData, 3);
     Chop._10.requireClose(linearLayer.W, Tensors.fromString("{{0.5}}"));
     Chop._10.requireClose(linearLayer.b, Tensors.fromString("{1}"));
     Scalar log_loss = netTrain.log_loss();
     assertTrue(Scalars.lessThan(log_loss, RealScalar.of(-20)));
+    assertEquals(netTrain.tloss.getRowCount(), 1000);
   }
 
   @Test
@@ -50,7 +52,8 @@ class NetTrainTest {
     NetOptimizer netOptimize = new NetSimpleGradientDescent(linearLayer, RealScalar.of(0.02));
     NetTrain netTrain = new NetTrain(linearLayer, netOptimize);
     TrainingData trainingData = new TrainingData(xdata, ydata);
-    netTrain.runAsBatches(trainingData, 10, 1000, Quantity.of(1, "s"));
+    netTrain.setMaxEpochs(1000);
+    netTrain.runAsBatches(trainingData, 10);
     Chop._10.requireClose(linearLayer.W, Tensors.fromString("{{0.5}}"));
     Chop._10.requireClose(linearLayer.b, Tensors.fromString("{1}"));
     Scalar log_loss = netTrain.log_loss();

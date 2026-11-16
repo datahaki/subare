@@ -12,7 +12,8 @@ public class NetParamTracker implements NetTrainListener {
   public final TableBuilder tparam = new TableBuilder();
 
   @Override
-  public boolean epoch(NetTrain netTrain, int epoch) {
+  public boolean epoch(NetTrain netTrain) {
+    int epoch = netTrain.getTotalEpochs();
     tparam.appendRow(RealScalar.of(epoch), Tensor.of(new NetExtract(netTrain.netLayer).all()));
     return true;
   }

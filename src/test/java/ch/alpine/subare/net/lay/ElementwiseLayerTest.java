@@ -11,7 +11,7 @@ import ch.alpine.tensor.jet.JetScalar;
 class ElementwiseLayerTest {
   @Test
   void test() {
-    NetLayer layer = ElementwiseLayer.logSig();
+    NetLayer layer = ElementwiseLayer.sigmoid();
     JetScalar js = JetScalar.of(RealScalar.of(1), 2);
     Tensor x = Tensors.of(js);
     IO.println(x);

@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ch.alpine.subare.net.lay.LinearLayer;
+import ch.alpine.subare.net.lay.LinearLayer.AffineTuple;
 import ch.alpine.subare.net.lay.NetLayer;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -26,8 +27,9 @@ public class NetSimpleGradientDescent implements NetOptimizer, Serializable {
   @Override
   public void update() {
     for (LinearLayer ll : linearLayers) {
-      Tensor nW = ll.W().add(ll.gW.multiply(eta.negate()));
-      Tensor nb = ll.b().add(ll.gb.multiply(eta.negate()));
+      AffineTuple affineTuple = ll.Wb();
+      Tensor nW = affineTuple.W().add(ll.gW.multiply(eta.negate()));
+      Tensor nb = affineTuple.b().add(ll.gb.multiply(eta.negate()));
       ll.setParam(nW, nb);
     }
   }

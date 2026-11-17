@@ -4,6 +4,7 @@ package ch.alpine.subare.net.run;
 import java.util.stream.Stream;
 
 import ch.alpine.subare.net.lay.LinearLayer;
+import ch.alpine.subare.net.lay.LinearLayer.AffineTuple;
 import ch.alpine.subare.net.lay.NetLayer;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
@@ -16,9 +17,10 @@ public record NetExtract(NetLayer netLayer) {
 
   private Stream<Scalar> extract(NetLayer netLayer) {
     if (netLayer instanceof LinearLayer linearLayer) {
+      AffineTuple affineTuple = linearLayer.Wb();
       return Stream.concat( //
-          Flatten.scalars(linearLayer.W()), //
-          Flatten.scalars(linearLayer.b()));
+          Flatten.scalars(affineTuple.W()), //
+          Flatten.scalars(affineTuple.b()));
     }
     return Stream.empty();
   }

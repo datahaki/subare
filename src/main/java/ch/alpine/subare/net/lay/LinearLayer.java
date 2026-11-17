@@ -30,6 +30,9 @@ import ch.alpine.tensor.red.Total;
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/LinearLayer.html">LinearLayer</a> */
 public class LinearLayer implements NetLayer, Serializable {
+  public record AffineTuple(Tensor W, Tensor b) implements Serializable {
+  }
+
   /** Dimensions: d_in x d_out */
   private Tensor W;
   /** Dimensions: d_out */
@@ -41,12 +44,8 @@ public class LinearLayer implements NetLayer, Serializable {
   }
 
   // TODO get W and b simultaneously
-  public synchronized Tensor W() {
-    return W;
-  }
-
-  public synchronized Tensor b() {
-    return b;
+  public synchronized AffineTuple Wb() {
+    return new AffineTuple(W, b);
   }
 
   // ---

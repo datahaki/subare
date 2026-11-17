@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import ch.alpine.subare.net.lay.LinearLayer;
+import ch.alpine.subare.net.lay.LinearLayer.AffineTuple;
 import ch.alpine.subare.net.lay.NetLayer;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -21,8 +22,9 @@ public class NetMomentumGradientDescent implements NetOptimizer {
 
     public LLUpdater(LinearLayer linearLayer) {
       this.linearLayer = linearLayer;
-      vW = linearLayer.W().maps(Scalar::zero);
-      vb = linearLayer.b().maps(Scalar::zero);
+      AffineTuple affineTuple = linearLayer.Wb();
+      vW = affineTuple.W().maps(Scalar::zero);
+      vb = affineTuple.b().maps(Scalar::zero);
     }
   }
 
@@ -44,19 +46,20 @@ public class NetMomentumGradientDescent implements NetOptimizer {
     for (Entry<NetLayer, Updater> entry : map.entrySet()) {
       NetLayer netLayer = entry.getKey();
       if (netLayer instanceof LinearLayer linearLayer) {
+        AffineTuple affineTuple = linearLayer.Wb();
         //
         LLUpdater llUpdater = (LLUpdater) entry.getValue();
         Tensor nW;
         {
           Tensor gW = linearLayer.gradientW();
           llUpdater.vW = llUpdater.vW.multiply(beta).add(gW);
-          nW = linearLayer.W().subtract(llUpdater.vW.multiply(eta));
+          nW = affineTuple.W().subtract(llUpdater.vW.multiply(eta));
         } // ---
         Tensor nb;
         {
           Tensor gb = linearLayer.gb;
           llUpdater.vb = llUpdater.vb.multiply(beta).add(gb);
-          nb = linearLayer.b().subtract(llUpdater.vb.multiply(eta));
+          nb = affineTuple.b().subtract(llUpdater.vb.multiply(eta));
         }
         linearLayer.setParam(nW, nb);
       }

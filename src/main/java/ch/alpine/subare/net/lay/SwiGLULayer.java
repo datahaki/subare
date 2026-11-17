@@ -1,3 +1,4 @@
+// code by jph
 package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
@@ -5,7 +6,6 @@ import java.io.Serializable;
 import ch.alpine.tensor.Tensor;
 
 public class SwiGLULayer implements NetLayer, Serializable {
-
   @Override
   public Tensor forward(Tensor x) {
     // TODO Auto-generated method stub

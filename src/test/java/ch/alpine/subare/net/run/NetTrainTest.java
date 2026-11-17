@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import ch.alpine.subare.net.TrainingData;
 import ch.alpine.subare.net.lay.LinearLayer;
+import ch.alpine.subare.net.lay.LinearLayer.AffineTuple;
 import ch.alpine.subare.net.opt.NetOptimizer;
 import ch.alpine.subare.net.opt.NetSimpleGradientDescent;
 import ch.alpine.tensor.RealScalar;
@@ -35,8 +36,9 @@ class NetTrainTest {
     TrainingData trainingData = new TrainingData(xdata, ydata);
     netTrain.setMaxEpochs(1000);
     netTrain.runAsBatches(trainingData, 3);
-    Chop._10.requireClose(linearLayer.W(), Tensors.fromString("{{0.5}}"));
-    Chop._10.requireClose(linearLayer.b(), Tensors.fromString("{1}"));
+    AffineTuple affineTuple = linearLayer.Wb();
+    Chop._10.requireClose(affineTuple.W(), Tensors.fromString("{{0.5}}"));
+    Chop._10.requireClose(affineTuple.b(), Tensors.fromString("{1}"));
     Scalar log_loss = netTrain.log_loss();
     assertTrue(Scalars.lessThan(log_loss, RealScalar.of(-20)));
     assertEquals(netTrain.tloss.getRowCount(), 1000);
@@ -54,8 +56,9 @@ class NetTrainTest {
     TrainingData trainingData = new TrainingData(xdata, ydata);
     netTrain.setMaxEpochs(1000);
     netTrain.runAsBatches(trainingData, 10);
-    Chop._10.requireClose(linearLayer.W(), Tensors.fromString("{{0.5}}"));
-    Chop._10.requireClose(linearLayer.b(), Tensors.fromString("{1}"));
+    AffineTuple affineTuple = linearLayer.Wb();
+    Chop._10.requireClose(affineTuple.W(), Tensors.fromString("{{0.5}}"));
+    Chop._10.requireClose(affineTuple.b(), Tensors.fromString("{1}"));
     Scalar log_loss = netTrain.log_loss();
     assertTrue(Scalars.lessThan(log_loss, RealScalar.of(-20)));
   }

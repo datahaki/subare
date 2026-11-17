@@ -10,14 +10,14 @@ import ch.alpine.tensor.io.TableBuilder;
 import ch.alpine.tensor.red.ScalarSummaryStatistics;
 
 public class NetParamStatTracker implements NetTrainListener {
-  public static final String[] LABELS = { "count", "min", "max", "mean", "stddev" };
-  private final TableBuilder tparam = new TableBuilder();
+  public static final String[] LABELS = { "min", "max", "mean", "stddev" };
+  private final TableBuilder tableBuilder = new TableBuilder();
 
   @Override
   public boolean epoch(NetTrain netTrain) {
     int epoch = netTrain.getTotalEpochs();
     ScalarSummaryStatistics scalarSummaryStatistics = new NetExtract(netTrain.netLayer).all().collect(ScalarSummaryStatistics.collector());
-    tparam.appendRow(RealScalar.of(epoch), Tensors.of( //
+    tableBuilder.appendRow(RealScalar.of(epoch), Tensors.of( //
         scalarSummaryStatistics.getMin(), //
         scalarSummaryStatistics.getMax(), //
         scalarSummaryStatistics.getMean(), //
@@ -25,7 +25,7 @@ public class NetParamStatTracker implements NetTrainListener {
     return true;
   }
 
-  public TableBuilder getTableCopy() { // TODO misnomer
-    return tparam;
+  public TableBuilder tableBuilder() {
+    return tableBuilder;
   }
 }

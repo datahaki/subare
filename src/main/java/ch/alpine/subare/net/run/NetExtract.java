@@ -24,6 +24,7 @@ public record NetExtract(NetLayer netLayer) {
   }
 
   private Stream<Scalar> reg_loss(NetLayer netLayer) {
+    // TODO add functions to ParametricLayer!
     if (netLayer instanceof LinearLayer linearLayer)
       return Stream.of(linearLayer.reg_loss());
     return Stream.empty();

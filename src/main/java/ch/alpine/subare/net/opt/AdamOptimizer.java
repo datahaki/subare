@@ -43,9 +43,9 @@ class AdamOptimizer implements NetOptimizer, Serializable {
       Tensor m_h = m.divide(RealScalar.ONE.subtract(beta1_t));
       beta2_t = beta2_t.multiply(beta2);
       Tensor v_h = v.divide(RealScalar.ONE.subtract(beta2_t));
-      Tensor delta = Entrywise.div().apply(m_h, v_h.maps(SUO)).multiply(eta.negate());
+      Tensor delta = Entrywise.div().apply(m_h, v_h.maps(SUO));
       // ---
-      parametricLayer.increment(delta);
+      parametricLayer.increment(delta, eta);
     }
   }
 

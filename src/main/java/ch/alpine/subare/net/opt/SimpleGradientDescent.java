@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import ch.alpine.subare.net.lay.NetLayer;
 import ch.alpine.subare.net.lay.ParametricLayer;
 import ch.alpine.tensor.Scalar;
-import ch.alpine.tensor.Tensor;
 
 /** simple gradient descent */
 class SimpleGradientDescent implements NetOptimizer, Serializable {
@@ -25,8 +24,7 @@ class SimpleGradientDescent implements NetOptimizer, Serializable {
   }
 
   private void update(ParametricLayer linearLayer) {
-    Tensor g = linearLayer.gradient();
-    linearLayer.increment(g.multiply(eta.negate()));
+    linearLayer.increment(linearLayer.gradient(), eta);
   }
 
   @Override

@@ -12,7 +12,7 @@ import ch.alpine.tensor.Tensor;
 public interface ParametricLayer extends NetLayer {
   Tensor gradient();
 
-  void increment(Tensor delta);
+  void increment(Tensor delta, Scalar eta);
 
   Tensor gradientWithoutDecay();
 

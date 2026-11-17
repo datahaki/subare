@@ -51,6 +51,7 @@ public class NetTrain implements Serializable {
    * @param max_epochs
    * @param timeout */
   public void runAsBatches(TrainingData trainingData, int batch_size) {
+    // TODO in epoch == 0 use learning rate 0 so that optimizers can tune in
     Tensor xdata = trainingData.xdata();
     Tensor ydata = trainingData.ydata();
     final int n = xdata.length();

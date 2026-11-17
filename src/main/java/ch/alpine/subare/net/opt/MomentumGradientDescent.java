@@ -24,7 +24,7 @@ class MomentumGradientDescent implements NetOptimizer, Serializable {
     public void update() {
       Tensor g = parametricLayer.gradient();
       v = Objects.isNull(v) ? g : v.multiply(beta).add(g);
-      parametricLayer.increment(v.multiply(eta.negate()));
+      parametricLayer.increment(v, eta);
     }
   }
 

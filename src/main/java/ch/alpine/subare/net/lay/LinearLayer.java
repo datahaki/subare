@@ -68,9 +68,10 @@ public class LinearLayer implements ParametricLayer, Serializable {
   }
 
   @Override // from ParametricLayer
-  public synchronized void increment(Tensor delta) {
-    W = W.add(delta.get(0));
-    b = b.add(delta.get(1));
+  public synchronized void increment(Tensor delta, Scalar eta) {
+    Scalar eta_negate = eta.negate();
+    W = W.add(delta.get(0).multiply(eta_negate));
+    b = b.add(delta.get(1).multiply(eta_negate));
   }
 
   @Override
@@ -80,9 +81,10 @@ public class LinearLayer implements ParametricLayer, Serializable {
 
   @Override
   public synchronized void incrementWithoutDecay(Tensor delta, Scalar eta) {
-    Tensor dW = netRegularizer.gradient(W, eta.negate());
-    W = W.add(delta.get(0)).add(dW);
-    b = b.add(delta.get(1));
+    Scalar eta_negate = eta.negate();
+    Tensor dW = netRegularizer.gradient(W);
+    W = W.add(delta.get(0).add(dW).multiply(eta_negate));
+    b = b.add(delta.get(1).multiply(eta_negate));
   }
 
   public void initialize(RandomGenerator randomGenerator) {

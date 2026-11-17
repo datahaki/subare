@@ -20,8 +20,8 @@ public record L1Regularizer(Scalar lambda) implements NetRegularizer, Serializab
   }
 
   @Override
-  public Tensor gradient(Tensor weights, Scalar eta) {
-    return weights.maps(Sign.FUNCTION).multiply(lambda.multiply(eta));
+  public Tensor gradient(Tensor weights) {
+    return weights.maps(Sign.FUNCTION).multiply(lambda);
   }
 
   @Override

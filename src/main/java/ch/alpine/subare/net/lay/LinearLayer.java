@@ -14,6 +14,7 @@ import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Unprotect;
 import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.ConstantArray;
 import ch.alpine.tensor.alg.Dimensions;
@@ -30,9 +31,6 @@ import ch.alpine.tensor.red.Total;
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/LinearLayer.html">LinearLayer</a> */
 public class LinearLayer implements NetLayer, Serializable {
-  public record AffineTuple(Tensor W, Tensor b) implements Serializable {
-  }
-
   /** Dimensions: d_in x d_out */
   private Tensor W;
   /** Dimensions: d_out */
@@ -54,13 +52,13 @@ public class LinearLayer implements NetLayer, Serializable {
     b = ConstantArray.of(DoubleScalar.INDETERMINATE, d_out);
   }
 
-  public synchronized void setWb(Tensor W, Tensor b) {
-    this.W = W;
-    this.b = b;
+  public synchronized void setWb(Tensor Wb) {
+    this.W = Wb.get(0);
+    this.b = Wb.get(1);
   }
 
-  public synchronized AffineTuple getWb() {
-    return new AffineTuple(W, b);
+  public synchronized Tensor getWb() {
+    return Unprotect.byRef(W, b);
   }
 
   public void initialize(RandomGenerator randomGenerator) {
@@ -68,9 +66,8 @@ public class LinearLayer implements NetLayer, Serializable {
     int d_in = dims.get(0);
     int d_out = dims.get(1);
     Distribution distribution = NormalDistribution.of(RealScalar.ZERO, Rational.of(2, d_in));
-    setWb( //
-        RandomVariate.of(distribution, randomGenerator, dims), //
-        Array.zeros(d_out));
+    W = RandomVariate.of(distribution, randomGenerator, dims);
+    b = Array.zeros(d_out);
   }
 
   @Override
@@ -115,12 +112,10 @@ public class LinearLayer implements NetLayer, Serializable {
     return netRegularizer.penalty(W);
   }
 
-  public Tensor gradient_W() {
-    return gW.add(netRegularizer.gradient(W));
-  }
-
-  public Tensor gradient_b() {
-    return gb;
+  public Tensor gradient() {
+    return Unprotect.byRef( //
+        gW.add(netRegularizer.gradient(W)), //
+        gb);
   }
 
   @Override

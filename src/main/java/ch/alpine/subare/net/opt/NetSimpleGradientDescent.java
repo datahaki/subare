@@ -8,9 +8,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import ch.alpine.subare.net.lay.LinearLayer;
-import ch.alpine.subare.net.lay.LinearLayer.AffineTuple;
 import ch.alpine.subare.net.lay.NetLayer;
 import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
 
 /** simple gradient descent */
 public class NetSimpleGradientDescent implements NetOptimizer, Serializable {
@@ -27,10 +27,8 @@ public class NetSimpleGradientDescent implements NetOptimizer, Serializable {
 
     @Override
     public void update(Scalar eta) {
-      AffineTuple affineTuple = linearLayer.getWb();
-      linearLayer.setWb( //
-          affineTuple.W().add(linearLayer.gradient_W().multiply(eta.negate())), //
-          affineTuple.b().add(linearLayer.gradient_b().multiply(eta.negate())));
+      Tensor g = linearLayer.gradient();
+      linearLayer.setWb(linearLayer.getWb().add(g.multiply(eta.negate())));
     }
   }
 

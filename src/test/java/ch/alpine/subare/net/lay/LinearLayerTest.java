@@ -35,7 +35,7 @@ class LinearLayerTest {
   @Test
   void test() {
     LinearLayer linearLayer = new LinearLayer(1, 1);
-    linearLayer.setWb(DiagonalMatrix.full(Tensors.vector(3)), Tensors.vector(5));
+    linearLayer.setWb(Tensors.of(DiagonalMatrix.full(Tensors.vector(3)), Tensors.vector(5)));
     JetScalar js = JetScalar.of(RealScalar.of(4), 2);
     // IO.println(js);
     Tensor x = Tensors.of(js);

@@ -5,11 +5,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-import ch.alpine.subare.net.lay.LinearLayer;
 import ch.alpine.subare.net.lay.NetLayer;
+import ch.alpine.subare.net.lay.ParametricLayer;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -18,28 +17,25 @@ import ch.alpine.tensor.itp.LinearBinaryAverage;
 import ch.alpine.tensor.red.Entrywise;
 import ch.alpine.tensor.sca.pow.Sqrt;
 
+/** Adaptive Moment Estimation */
 public class AdamOptimizer implements NetOptimizer, Serializable {
-  private static interface Updater {
-    void update(Scalar beta1, Scalar beta2, Scalar eta);
-  }
-
-  private static class LLUpdater implements Updater {
-    static final Scalar EPS = RealScalar.of(1E-8);
-    static final ScalarUnaryOperator SUO = s -> Sqrt.FUNCTION.apply(s).add(EPS);
-    private final LinearLayer linearLayer;
+  private static class Updater {
+    private static final Scalar EPS = RealScalar.of(1E-8);
+    private static final ScalarUnaryOperator SUO = s -> Sqrt.FUNCTION.apply(s).add(EPS);
+    private final ParametricLayer linearLayer;
     // velocity
     Tensor m;
     Tensor v;
     Scalar beta1_t = RealScalar.ONE;
     Scalar beta2_t = RealScalar.ONE;
 
-    public LLUpdater(LinearLayer linearLayer) {
+    public Updater(ParametricLayer linearLayer) {
       this.linearLayer = linearLayer;
     }
 
-    @Override
     public void update(Scalar eta, Scalar beta1, Scalar beta2) {
       Tensor g = linearLayer.gradient();
+      // ---
       m = Objects.isNull(m) ? g : LinearBinaryAverage.INSTANCE.split(g, m, beta1);
       Tensor q = Entrywise.mul().apply(g, g);
       v = Objects.isNull(v) ? q : LinearBinaryAverage.INSTANCE.split(q, v, beta2);
@@ -47,27 +43,23 @@ public class AdamOptimizer implements NetOptimizer, Serializable {
       Tensor m_h = m.divide(RealScalar.ONE.subtract(beta1_t));
       beta2_t = beta2_t.multiply(beta2);
       Tensor v_h = v.divide(RealScalar.ONE.subtract(beta2_t));
-      Tensor r = Entrywise.div().apply(m_h, v_h.maps(SUO)).multiply(eta.negate());
-      Tensor Wb = linearLayer.getWb();
-      linearLayer.setWb(Wb.add(r));
+      Tensor delta = Entrywise.div().apply(m_h, v_h.maps(SUO)).multiply(eta.negate());
+      // ---
+      linearLayer.increment(delta);
     }
   }
 
-  private static Optional<Updater> buildMap(NetLayer netLayer) {
-    if (netLayer instanceof LinearLayer linearLayer)
-      return Optional.of(new LLUpdater(linearLayer));
-    return Optional.empty();
-  }
-
+  // ---
+  private final List<Updater> list;
   private final Scalar eta;
   private final Scalar beta1;
   private final Scalar beta2;
-  private final List<Updater> list;
 
   public AdamOptimizer(NetLayer netLayer, Scalar eta, Scalar beta1, Scalar beta2) {
     list = netLayer.stream() //
-        .map(AdamOptimizer::buildMap) //
-        .flatMap(Optional::stream) //
+        .filter(ParametricLayer.class::isInstance) //
+        .map(ParametricLayer.class::cast) //
+        .map(Updater::new) //
         .collect(Collectors.toCollection(ArrayList::new));
     this.eta = eta;
     this.beta1 = beta1;

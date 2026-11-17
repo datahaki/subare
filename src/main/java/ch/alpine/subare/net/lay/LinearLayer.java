@@ -19,6 +19,7 @@ import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.ConstantArray;
 import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.alg.VectorQ;
+import ch.alpine.tensor.ext.PackageTestAccess;
 import ch.alpine.tensor.io.MathematicaFormat;
 import ch.alpine.tensor.lie.TensorProduct;
 import ch.alpine.tensor.mat.MatrixDotTranspose;
@@ -30,11 +31,13 @@ import ch.alpine.tensor.red.Total;
 
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/LinearLayer.html">LinearLayer</a> */
-public class LinearLayer implements NetLayer, Serializable {
+public class LinearLayer implements ParametricLayer, Serializable {
   /** Dimensions: d_in x d_out */
-  private Tensor W;
+  @PackageTestAccess
+  Tensor W;
   /** Dimensions: d_out */
-  private Tensor b;
+  @PackageTestAccess
+  Tensor b;
   // ---
   public NetRegularizer netRegularizer = new L2Regularizer(RealScalar.of(0.001));
   /** Dimensions: d_in, or batch_size x d_in */
@@ -52,13 +55,22 @@ public class LinearLayer implements NetLayer, Serializable {
     b = ConstantArray.of(DoubleScalar.INDETERMINATE, d_out);
   }
 
-  public synchronized void setWb(Tensor Wb) {
-    this.W = Wb.get(0);
-    this.b = Wb.get(1);
-  }
-
+  @Override // from ParametricLayer
   public synchronized Tensor getWb() {
     return Unprotect.byRef(W, b);
+  }
+
+  @Override // from ParametricLayer
+  public Tensor gradient() {
+    return Unprotect.byRef( //
+        gW.add(netRegularizer.gradient(W)), //
+        gb);
+  }
+
+  @Override // from ParametricLayer
+  public synchronized void increment(Tensor delta) {
+    W = W.add(delta.get(0));
+    b = b.add(delta.get(1));
   }
 
   public void initialize(RandomGenerator randomGenerator) {
@@ -110,12 +122,6 @@ public class LinearLayer implements NetLayer, Serializable {
 
   public Scalar reg_loss() {
     return netRegularizer.penalty(W);
-  }
-
-  public Tensor gradient() {
-    return Unprotect.byRef( //
-        gW.add(netRegularizer.gradient(W)), //
-        gb);
   }
 
   @Override

@@ -5,19 +5,18 @@ import java.util.stream.Stream;
 
 import ch.alpine.subare.net.lay.LinearLayer;
 import ch.alpine.subare.net.lay.NetLayer;
+import ch.alpine.subare.net.lay.ParametricLayer;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.alg.Flatten;
 
 public record NetExtract(NetLayer netLayer) {
   public Stream<Scalar> all() {
-    return netLayer.stream().flatMap(this::extract);
-  }
-
-  private Stream<Scalar> extract(NetLayer netLayer) {
-    if (netLayer instanceof LinearLayer linearLayer)
-      return Flatten.scalars(linearLayer.getWb());
-    return Stream.empty();
+    return netLayer.stream() //
+        .filter(ParametricLayer.class::isInstance) //
+        .map(ParametricLayer.class::cast) //
+        .map(ParametricLayer::getWb) //
+        .flatMap(Flatten::scalars);
   }
 
   public Scalar reg_loss() {

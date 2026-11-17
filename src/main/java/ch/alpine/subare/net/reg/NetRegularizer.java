@@ -13,7 +13,7 @@ public interface NetRegularizer {
     }
 
     @Override
-    public Tensor gradient(Tensor weights) {
+    public Tensor gradient(Tensor weights, Scalar eta) {
       return weights.maps(Scalar::zero);
     }
 
@@ -25,5 +25,9 @@ public interface NetRegularizer {
 
   Scalar penalty(Tensor weights);
 
-  Tensor gradient(Tensor weights);
+  Tensor gradient(Tensor weights, Scalar eta);
+
+  default Tensor gradient(Tensor weights) {
+    return gradient(weights, RealScalar.ONE);
+  }
 }

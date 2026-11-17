@@ -1,5 +1,6 @@
 package ch.alpine.subare.net.lay;
 
+import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 
 /** Parametric Layers:
@@ -13,5 +14,10 @@ public interface ParametricLayer extends NetLayer {
 
   void increment(Tensor delta);
 
-  Tensor getWb();
+  Tensor gradientWithoutDecay();
+
+  void incrementWithoutDecay(Tensor delta, Scalar eta);
+
+  /** @return */
+  Tensor parameters();
 }

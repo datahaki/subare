@@ -13,7 +13,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import ch.alpine.subare.net.TrainingData;
 import ch.alpine.subare.net.err.NetLoss;
 import ch.alpine.subare.net.opt.NetOptimizer;
-import ch.alpine.subare.net.opt.NetSimpleGradientDescent;
+import ch.alpine.subare.net.opt.NetOptimizers;
 import ch.alpine.subare.net.run.NetInitialize;
 import ch.alpine.subare.net.run.NetTrain;
 import ch.alpine.tensor.RealScalar;
@@ -57,7 +57,7 @@ class LinearLayerTest {
     TrainingData trainingData = new TrainingData(xdata, ydata);
     // ---
     NetInitialize.of(netLayer);
-    NetOptimizer netOptimize = new NetSimpleGradientDescent(netLayer, learningRate);
+    NetOptimizer netOptimize = NetOptimizers.SIMPLE.create(netLayer, learningRate);
     NetTrain netTrain = new NetTrain(netLayer, netOptimize);
     netTrain.setMaxEpochs(100);
     netTrain.runAsBatches(trainingData, 2);

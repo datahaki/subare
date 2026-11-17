@@ -18,23 +18,23 @@ import ch.alpine.tensor.red.Entrywise;
 import ch.alpine.tensor.sca.pow.Sqrt;
 
 /** Adaptive Moment Estimation */
-public class AdamOptimizer implements NetOptimizer, Serializable {
-  private static class Updater {
+class AdamOptimizer implements NetOptimizer, Serializable {
+  private class Updater {
     private static final Scalar EPS = RealScalar.of(1E-8);
     private static final ScalarUnaryOperator SUO = s -> Sqrt.FUNCTION.apply(s).add(EPS);
-    private final ParametricLayer linearLayer;
+    private final ParametricLayer parametricLayer;
     // velocity
     Tensor m;
     Tensor v;
     Scalar beta1_t = RealScalar.ONE;
     Scalar beta2_t = RealScalar.ONE;
 
-    public Updater(ParametricLayer linearLayer) {
-      this.linearLayer = linearLayer;
+    public Updater(ParametricLayer parametricLayer) {
+      this.parametricLayer = parametricLayer;
     }
 
-    public void update(Scalar eta, Scalar beta1, Scalar beta2) {
-      Tensor g = linearLayer.gradient();
+    public void update() {
+      Tensor g = parametricLayer.gradient();
       // ---
       m = Objects.isNull(m) ? g : LinearBinaryAverage.INSTANCE.split(g, m, beta1);
       Tensor q = Entrywise.mul().apply(g, g);
@@ -45,11 +45,10 @@ public class AdamOptimizer implements NetOptimizer, Serializable {
       Tensor v_h = v.divide(RealScalar.ONE.subtract(beta2_t));
       Tensor delta = Entrywise.div().apply(m_h, v_h.maps(SUO)).multiply(eta.negate());
       // ---
-      linearLayer.increment(delta);
+      parametricLayer.increment(delta);
     }
   }
 
-  // ---
   private final List<Updater> list;
   private final Scalar eta;
   private final Scalar beta1;
@@ -68,6 +67,6 @@ public class AdamOptimizer implements NetOptimizer, Serializable {
 
   @Override
   public void update() {
-    list.forEach(updater -> updater.update(eta, beta1, beta2));
+    list.forEach(Updater::update);
   }
 }

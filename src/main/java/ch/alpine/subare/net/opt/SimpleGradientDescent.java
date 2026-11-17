@@ -12,11 +12,11 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 
 /** simple gradient descent */
-public class NetSimpleGradientDescent implements NetOptimizer, Serializable {
+class SimpleGradientDescent implements NetOptimizer, Serializable {
   private final List<ParametricLayer> list;
   private final Scalar eta;
 
-  public NetSimpleGradientDescent(NetLayer netLayer, Scalar eta) {
+  public SimpleGradientDescent(NetLayer netLayer, Scalar eta) {
     list = netLayer.stream() //
         .filter(ParametricLayer.class::isInstance) //
         .map(ParametricLayer.class::cast) //

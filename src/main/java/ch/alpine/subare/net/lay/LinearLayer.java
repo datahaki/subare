@@ -56,7 +56,7 @@ public class LinearLayer implements ParametricLayer, Serializable {
   }
 
   @Override // from ParametricLayer
-  public synchronized Tensor getWb() {
+  public synchronized Tensor parameters() {
     return Unprotect.byRef(W, b);
   }
 
@@ -70,6 +70,18 @@ public class LinearLayer implements ParametricLayer, Serializable {
   @Override // from ParametricLayer
   public synchronized void increment(Tensor delta) {
     W = W.add(delta.get(0));
+    b = b.add(delta.get(1));
+  }
+
+  @Override
+  public Tensor gradientWithoutDecay() {
+    return Unprotect.byRef(gW, gb);
+  }
+
+  @Override
+  public synchronized void incrementWithoutDecay(Tensor delta, Scalar eta) {
+    Tensor dW = netRegularizer.gradient(W, eta.negate());
+    W = W.add(delta.get(0)).add(dW);
     b = b.add(delta.get(1));
   }
 

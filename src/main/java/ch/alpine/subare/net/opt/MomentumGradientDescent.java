@@ -12,8 +12,8 @@ import ch.alpine.subare.net.lay.ParametricLayer;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 
-public class NetMomentumGradientDescent implements NetOptimizer, Serializable {
-  private static class Updater {
+class MomentumGradientDescent implements NetOptimizer, Serializable {
+  private class Updater {
     private final ParametricLayer parametricLayer;
     private Tensor v = null;
 
@@ -21,7 +21,7 @@ public class NetMomentumGradientDescent implements NetOptimizer, Serializable {
       this.parametricLayer = parametricLayer;
     }
 
-    public void update(Scalar eta, Scalar beta) {
+    public void update() {
       Tensor g = parametricLayer.gradient();
       v = Objects.isNull(v) ? g : v.multiply(beta).add(g);
       parametricLayer.increment(v.multiply(eta.negate()));
@@ -32,7 +32,7 @@ public class NetMomentumGradientDescent implements NetOptimizer, Serializable {
   private final Scalar eta;
   private final List<Updater> list;
 
-  public NetMomentumGradientDescent(NetLayer netLayer, Scalar eta, Scalar beta) {
+  public MomentumGradientDescent(NetLayer netLayer, Scalar eta, Scalar beta) {
     list = netLayer.stream() //
         .filter(ParametricLayer.class::isInstance) //
         .map(ParametricLayer.class::cast) //
@@ -44,6 +44,6 @@ public class NetMomentumGradientDescent implements NetOptimizer, Serializable {
 
   @Override
   public void update() {
-    list.forEach(updater -> updater.update(eta, beta));
+    list.forEach(Updater::update);
   }
 }

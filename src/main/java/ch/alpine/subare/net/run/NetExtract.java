@@ -15,7 +15,7 @@ public record NetExtract(NetLayer netLayer) {
     return netLayer.stream() //
         .filter(ParametricLayer.class::isInstance) //
         .map(ParametricLayer.class::cast) //
-        .map(ParametricLayer::getWb) //
+        .map(ParametricLayer::parameters) //
         .flatMap(Flatten::scalars);
   }
 

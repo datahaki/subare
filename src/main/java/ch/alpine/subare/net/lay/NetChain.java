@@ -44,17 +44,9 @@ public record NetChain(List<NetLayer> list) implements NetLayer, Serializable {
     return list.reversed().stream() // fold
         .reduce(grad0, (grad, layer) -> layer.backBatch(grad), MergeIllegal.operator());
   }
-  // // TODO probably obsolete
-  // public void setL2(Scalar l2) {
-  // Sign.requirePositiveOrZero(l2);
-  // list.stream() //
-  // .filter(linearLayer -> linearLayer instanceof LinearLayer) //
-  // .map(LinearLayer.class::cast) //
-  // .forEach(linearLayer -> linearLayer.l2 = l2);
-  // }
 
   @Override
   public Stream<NetLayer> stream() {
-    return list.stream().flatMap(l -> l.stream());
+    return list.stream().flatMap(NetLayer::stream);
   }
 }

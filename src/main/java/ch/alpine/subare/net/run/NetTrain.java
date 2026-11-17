@@ -26,8 +26,8 @@ import ch.alpine.tensor.sca.exp.Log;
  * <a href="https://reference.wolfram.com/language/ref/NetTrain.html">NetTrain</a> */
 public class NetTrain implements Serializable {
   private final transient List<NetTrainListener> list = new LinkedList<>();
-  public final NetLayer netLayer;
-  public final NetOptimizer netOptimizer;
+  private final NetLayer netLayer;
+  private final NetOptimizer netOptimizer;
   public final TableBuilder tloss = new TableBuilder();
 
   /** @param netChain
@@ -54,6 +54,11 @@ public class NetTrain implements Serializable {
     Tensor xdata = trainingData.xdata();
     Tensor ydata = trainingData.ydata();
     final int n = xdata.length();
+    {
+      int rem = n % batch_size;
+      if (rem != 0)
+        System.err.println("warning batch_size: " + rem + " != " + batch_size);
+    }
     // 6. Repeat until the loss becomes sufficiently small.
     boolean allMatch = true;
     while (allMatch) {
@@ -115,5 +120,10 @@ public class NetTrain implements Serializable {
 
   public void setMaxEpochs(int max_epochs) {
     addListener(new MaxEpochListener(max_epochs));
+  }
+
+  /** @return */
+  public NetLayer netLayer() {
+    return netLayer;
   }
 }

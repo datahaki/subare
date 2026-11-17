@@ -9,7 +9,6 @@ import ch.alpine.subare.net.lay.LinearLayer;
 import ch.alpine.subare.net.lay.LinearLayer.AffineTuple;
 import ch.alpine.subare.net.lay.NetLayer;
 import ch.alpine.tensor.Scalar;
-import ch.alpine.tensor.Tensor;
 
 /** simple gradient descent */
 public class NetSimpleGradientDescent implements NetOptimizer, Serializable {
@@ -26,11 +25,11 @@ public class NetSimpleGradientDescent implements NetOptimizer, Serializable {
 
   @Override
   public void update() {
-    for (LinearLayer ll : linearLayers) {
-      AffineTuple affineTuple = ll.Wb();
-      Tensor nW = affineTuple.W().add(ll.gW.multiply(eta.negate()));
-      Tensor nb = affineTuple.b().add(ll.gb.multiply(eta.negate()));
-      ll.setParam(nW, nb);
+    for (LinearLayer linearLayer : linearLayers) {
+      AffineTuple affineTuple = linearLayer.Wb();
+      linearLayer.setParam( //
+          affineTuple.W().add(linearLayer.gW.multiply(eta.negate())), //
+          affineTuple.b().add(linearLayer.gb.multiply(eta.negate())));
     }
   }
 }

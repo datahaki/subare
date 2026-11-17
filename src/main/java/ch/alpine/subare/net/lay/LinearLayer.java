@@ -43,7 +43,6 @@ public class LinearLayer implements NetLayer, Serializable {
     this.b = b;
   }
 
-  // TODO get W and b simultaneously
   public synchronized AffineTuple Wb() {
     return new AffineTuple(W, b);
   }

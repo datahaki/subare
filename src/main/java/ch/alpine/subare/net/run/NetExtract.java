@@ -17,7 +17,7 @@ public record NetExtract(NetLayer netLayer) {
 
   private Stream<Scalar> extract(NetLayer netLayer) {
     if (netLayer instanceof LinearLayer linearLayer) {
-      AffineTuple affineTuple = linearLayer.Wb();
+      AffineTuple affineTuple = linearLayer.getWb();
       return Stream.concat( //
           Flatten.scalars(affineTuple.W()), //
           Flatten.scalars(affineTuple.b()));

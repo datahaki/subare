@@ -37,16 +37,6 @@ public class LinearLayer implements NetLayer, Serializable {
   private Tensor W;
   /** Dimensions: d_out */
   private Tensor b;
-
-  public synchronized void setParam(Tensor W, Tensor b) {
-    this.W = W;
-    this.b = b;
-  }
-
-  public synchronized AffineTuple Wb() {
-    return new AffineTuple(W, b);
-  }
-
   // ---
   public NetRegularizer netRegularizer = new L2Regularizer(RealScalar.of(0.001));
   /** Dimensions: d_in, or batch_size x d_in */
@@ -55,13 +45,22 @@ public class LinearLayer implements NetLayer, Serializable {
   private transient Tensor outputCache;
   // For each parameter, the optimizer maintains its own velocity.
   /** Dimensions: d_in x d_out */
-  public transient Tensor gW;
+  private transient Tensor gW;
   /** Dimensions: d_out */
-  public transient Tensor gb;
+  private transient Tensor gb;
 
   public LinearLayer(int d_in, int d_out) {
     W = ConstantArray.of(DoubleScalar.INDETERMINATE, d_in, d_out);
     b = ConstantArray.of(DoubleScalar.INDETERMINATE, d_out);
+  }
+
+  public synchronized void setWb(Tensor W, Tensor b) {
+    this.W = W;
+    this.b = b;
+  }
+
+  public synchronized AffineTuple getWb() {
+    return new AffineTuple(W, b);
   }
 
   public void initialize(RandomGenerator randomGenerator) {
@@ -69,8 +68,9 @@ public class LinearLayer implements NetLayer, Serializable {
     int d_in = dims.get(0);
     int d_out = dims.get(1);
     Distribution distribution = NormalDistribution.of(RealScalar.ZERO, Rational.of(2, d_in));
-    W = RandomVariate.of(distribution, randomGenerator, dims);
-    b = Array.zeros(d_out);
+    setWb( //
+        RandomVariate.of(distribution, randomGenerator, dims), //
+        Array.zeros(d_out));
   }
 
   @Override
@@ -89,7 +89,7 @@ public class LinearLayer implements NetLayer, Serializable {
   /** Backward pass: computes gradients with respect to weights, bias, and i[...]
    * - grad_output shape: (batch_size, out_features) -> dL/dY */
   @Override
-  public synchronized Tensor back(Tensor gradOutput) {
+  public Tensor back(Tensor gradOutput) {
     VectorQ.require(gradOutput);
     gW = TensorProduct.of(inputCache, gradOutput);
     gb = gradOutput;
@@ -97,7 +97,7 @@ public class LinearLayer implements NetLayer, Serializable {
   }
 
   @Override
-  public synchronized Tensor backBatch(Tensor gradOutput) {
+  public Tensor backBatch(Tensor gradOutput) {
     /** requires gradOutput to be prescaled with 1/batch_size
      * 
      * Note: If your loss function divides by batch_size (mean reduction),
@@ -111,16 +111,20 @@ public class LinearLayer implements NetLayer, Serializable {
     return MatrixDotTranspose.of(gradOutput, W);
   }
 
-  public synchronized Scalar reg_loss() {
+  public Scalar reg_loss() {
     return netRegularizer.penalty(W);
   }
 
-  public synchronized Tensor gradientW() {
+  public Tensor gradient_W() {
     return gW.add(netRegularizer.gradient(W));
   }
 
+  public Tensor gradient_b() {
+    return gb;
+  }
+
   @Override
-  public synchronized NetLoss error(Tensor target) {
+  public NetLoss error(Tensor target) {
     return SquaredErrorLoss.of(outputCache, target); // vector of length d_out
   }
 

@@ -36,7 +36,7 @@ class NetTrainTest {
     TrainingData trainingData = new TrainingData(xdata, ydata);
     netTrain.setMaxEpochs(1000);
     netTrain.runAsBatches(trainingData, 3);
-    AffineTuple affineTuple = linearLayer.Wb();
+    AffineTuple affineTuple = linearLayer.getWb();
     Chop._10.requireClose(affineTuple.W(), Tensors.fromString("{{0.5}}"));
     Chop._10.requireClose(affineTuple.b(), Tensors.fromString("{1}"));
     Scalar log_loss = netTrain.log_loss();
@@ -56,7 +56,7 @@ class NetTrainTest {
     TrainingData trainingData = new TrainingData(xdata, ydata);
     netTrain.setMaxEpochs(1000);
     netTrain.runAsBatches(trainingData, 10);
-    AffineTuple affineTuple = linearLayer.Wb();
+    AffineTuple affineTuple = linearLayer.getWb();
     Chop._10.requireClose(affineTuple.W(), Tensors.fromString("{{0.5}}"));
     Chop._10.requireClose(affineTuple.b(), Tensors.fromString("{1}"));
     Scalar log_loss = netTrain.log_loss();

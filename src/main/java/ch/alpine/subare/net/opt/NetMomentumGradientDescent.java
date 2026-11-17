@@ -26,39 +26,20 @@ public class NetMomentumGradientDescent implements NetOptimizer, Serializable {
 
     public LLUpdater(LinearLayer linearLayer) {
       this.linearLayer = linearLayer;
-      AffineTuple affineTuple = linearLayer.Wb();
+      AffineTuple affineTuple = linearLayer.getWb();
       vW = affineTuple.W().maps(Scalar::zero);
       vb = affineTuple.b().maps(Scalar::zero);
     }
 
     @Override
     public void update(Scalar beta, Scalar eta) {
-      AffineTuple affineTuple = linearLayer.Wb();
-      //
-      Tensor nW;
-      {
-        Tensor gW = linearLayer.gradientW();
-        vW = vW.multiply(beta).add(gW);
-        nW = affineTuple.W().subtract(vW.multiply(eta));
-      } // ---
-      Tensor nb;
-      {
-        Tensor gb = linearLayer.gb;
-        vb = vb.multiply(beta).add(gb);
-        nb = affineTuple.b().subtract(vb.multiply(eta));
-      }
-      linearLayer.setParam(nW, nb);
+      AffineTuple affineTuple = linearLayer.getWb();
+      vW = vW.multiply(beta).add(linearLayer.gradient_W());
+      vb = vb.multiply(beta).add(linearLayer.gradient_b());
+      linearLayer.setWb( //
+          affineTuple.W().subtract(vW.multiply(eta)), //
+          affineTuple.b().subtract(vb.multiply(eta)));
     }
-  }
-
-  private final List<Updater> list;
-  private final Scalar beta;
-  private final Scalar eta;
-
-  public NetMomentumGradientDescent(NetLayer netLayer, Scalar beta, Scalar eta) {
-    list = netLayer.stream().flatMap(l -> buildMap(l).stream()).collect(Collectors.toCollection(ArrayList::new));
-    this.beta = beta;
-    this.eta = eta;
   }
 
   private static Optional<Updater> buildMap(NetLayer netLayer) {
@@ -67,8 +48,21 @@ public class NetMomentumGradientDescent implements NetOptimizer, Serializable {
     return Optional.empty();
   }
 
+  private final Scalar beta;
+  private final Scalar eta;
+  private final List<Updater> list;
+
+  public NetMomentumGradientDescent(NetLayer netLayer, Scalar beta, Scalar eta) {
+    list = netLayer.stream() //
+        .map(NetMomentumGradientDescent::buildMap) //
+        .flatMap(Optional::stream) //
+        .collect(Collectors.toCollection(ArrayList::new));
+    this.beta = beta;
+    this.eta = eta;
+  }
+
   @Override
   public void update() {
-    list.forEach(u -> u.update(beta, eta));
+    list.forEach(updater -> updater.update(beta, eta));
   }
 }

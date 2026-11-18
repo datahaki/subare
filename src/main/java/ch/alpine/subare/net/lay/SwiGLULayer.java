@@ -3,6 +3,7 @@ package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
 
+import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.tensor.Tensor;
 
 public class SwiGLULayer implements NetLayer, Serializable {

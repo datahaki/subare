@@ -8,9 +8,11 @@ import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 
+import ch.alpine.subare.net.NetExtract;
+import ch.alpine.subare.net.NetInitialize;
+import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.subare.net.lay.ElementwiseLayer;
 import ch.alpine.subare.net.lay.NetChains;
-import ch.alpine.subare.net.lay.NetLayer;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;

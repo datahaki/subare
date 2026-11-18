@@ -6,16 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ch.alpine.subare.net.lay.NetLayer;
-import ch.alpine.subare.net.lay.ParametricLayer;
+import ch.alpine.subare.net.api.NetLayer;
+import ch.alpine.subare.net.api.NetOptimizer;
+import ch.alpine.subare.net.api.ParametricLayer;
 import ch.alpine.tensor.Scalar;
 
 /** simple gradient descent */
-class SimpleGradientDescent implements NetOptimizer, Serializable {
+class GradientDescentOptimizer implements NetOptimizer, Serializable {
   private final List<ParametricLayer> list;
   private final Scalar eta;
 
-  public SimpleGradientDescent(NetLayer netLayer, Scalar eta) {
+  public GradientDescentOptimizer(NetLayer netLayer, Scalar eta) {
     list = netLayer.stream() //
         .filter(ParametricLayer.class::isInstance) //
         .map(ParametricLayer.class::cast) //
@@ -30,5 +31,10 @@ class SimpleGradientDescent implements NetOptimizer, Serializable {
   @Override
   public void update() {
     list.forEach(updater -> update(updater));
+  }
+
+  @Override
+  public boolean weightDecay() {
+    return true;
   }
 }

@@ -5,7 +5,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Stream;
 
-import ch.alpine.subare.net.err.NetLoss;
+import ch.alpine.subare.net.api.NetLayer;
+import ch.alpine.subare.net.api.NetLoss;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.ext.MergeIllegal;
 

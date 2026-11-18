@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import ch.alpine.subare.net.lay.NetLayer;
-import ch.alpine.subare.net.lay.ParametricLayer;
+import ch.alpine.subare.net.api.NetLayer;
+import ch.alpine.subare.net.api.NetOptimizer;
+import ch.alpine.subare.net.api.ParametricLayer;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -44,7 +45,7 @@ class AdamOptimizer implements NetOptimizer, Serializable {
       Tensor v_h = v.divide(RealScalar.ONE.subtract(beta2_t));
       Tensor delta = Entrywise.div().apply(m_h, v_h.maps(SUO));
       // ---
-      parametricLayer.increment(weightDecay, delta, eta);
+      parametricLayer.increment(weightDecay, delta, initialized ? eta : eta.zero());
     }
   }
 
@@ -53,14 +54,15 @@ class AdamOptimizer implements NetOptimizer, Serializable {
   private final Scalar eta;
   private final Scalar beta1;
   private final Scalar beta2;
+  private boolean initialized = false;
 
-  public AdamOptimizer(NetLayer netLayer, boolean withDecay, Scalar eta, Scalar beta1, Scalar beta2) {
+  public AdamOptimizer(NetLayer netLayer, boolean weightDecay, Scalar eta, Scalar beta1, Scalar beta2) {
     list = netLayer.stream() //
         .filter(ParametricLayer.class::isInstance) //
         .map(ParametricLayer.class::cast) //
         .map(Updater::new) //
         .collect(Collectors.toCollection(ArrayList::new));
-    this.weightDecay = withDecay;
+    this.weightDecay = weightDecay;
     this.eta = eta;
     this.beta1 = beta1;
     this.beta2 = beta2;
@@ -69,5 +71,11 @@ class AdamOptimizer implements NetOptimizer, Serializable {
   @Override
   public void update() {
     list.forEach(Updater::update);
+    initialized = true;
+  }
+
+  @Override
+  public boolean weightDecay() {
+    return weightDecay;
   }
 }

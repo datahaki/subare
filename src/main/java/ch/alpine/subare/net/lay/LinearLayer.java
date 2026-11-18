@@ -5,10 +5,11 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.random.RandomGenerator;
 
-import ch.alpine.subare.net.err.NetLoss;
+import ch.alpine.subare.net.api.NetLoss;
+import ch.alpine.subare.net.api.NetRegularization;
+import ch.alpine.subare.net.api.ParametricLayer;
 import ch.alpine.subare.net.err.SquaredErrorLoss;
-import ch.alpine.subare.net.reg.L2Regularizer;
-import ch.alpine.subare.net.reg.NetRegularizer;
+import ch.alpine.subare.net.reg.L2Regularization;
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
@@ -39,7 +40,7 @@ public class LinearLayer implements ParametricLayer, Serializable {
   @PackageTestAccess
   Tensor b;
   // ---
-  public NetRegularizer netRegularizer = new L2Regularizer(RealScalar.of(0.001));
+  public NetRegularization netRegularizer = new L2Regularization(RealScalar.of(0.001));
   /** Dimensions: d_in, or batch_size x d_in */
   private transient Tensor inputCache;
   /** Dimensions: d_out, or batch_size x d_out */
@@ -70,28 +71,24 @@ public class LinearLayer implements ParametricLayer, Serializable {
     return Unprotect.byRef(W, b);
   }
 
-  @Override
-  public Scalar reg_loss() {
-    return netRegularizer.penalty(W);
-  }
-
   @Override // from ParametricLayer
   public Tensor gradient(boolean weightDecay) {
     return Unprotect.byRef( //
-        weightDecay ? gW.add(netRegularizer.gradient(W)) : gW, //
+        gW.add(netRegularizer.gradient(weightDecay, W)), //
         gb);
   }
 
   @Override // from ParametricLayer
   public synchronized void increment(boolean weightDecay, Tensor delta, Scalar eta) {
     Scalar eta_negate = eta.negate();
-    if (weightDecay) {
-      W = W.add(delta.get(0).multiply(eta_negate));
-    } else {
-      Tensor dW = netRegularizer.gradient(W);
-      W = W.add(delta.get(0).add(dW).multiply(eta_negate));
-    }
+    Tensor dW = delta.get(0).add(netRegularizer.gradient(weightDecay, W));
+    W = W.add(dW.multiply(eta_negate));
     b = b.add(delta.get(1).multiply(eta_negate));
+  }
+
+  @Override
+  public Scalar reg_loss(boolean weightDecay) {
+    return netRegularizer.penalty(weightDecay, W);
   }
 
   @Override

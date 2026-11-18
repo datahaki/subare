@@ -7,12 +7,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import ch.alpine.subare.net.lay.NetLayer;
-import ch.alpine.subare.net.lay.ParametricLayer;
+import ch.alpine.subare.net.api.NetLayer;
+import ch.alpine.subare.net.api.NetOptimizer;
+import ch.alpine.subare.net.api.ParametricLayer;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 
-class MomentumGradientDescent implements NetOptimizer, Serializable {
+class MomentumOptimizer implements NetOptimizer, Serializable {
   private class Updater {
     private final ParametricLayer parametricLayer;
     private Tensor v = null;
@@ -24,7 +25,7 @@ class MomentumGradientDescent implements NetOptimizer, Serializable {
     public void update() {
       Tensor g = parametricLayer.gradient(weightDecay);
       v = Objects.isNull(v) ? g : v.multiply(beta).add(g);
-      parametricLayer.increment(weightDecay, v, eta);
+      parametricLayer.increment(weightDecay, v, initialized ? eta : eta.zero());
     }
   }
 
@@ -32,8 +33,9 @@ class MomentumGradientDescent implements NetOptimizer, Serializable {
   private final boolean weightDecay;
   private final Scalar beta;
   private final Scalar eta;
+  private boolean initialized = false;
 
-  public MomentumGradientDescent(NetLayer netLayer, boolean weightDecay, Scalar eta, Scalar beta) {
+  public MomentumOptimizer(NetLayer netLayer, boolean weightDecay, Scalar eta, Scalar beta) {
     list = netLayer.stream() //
         .filter(ParametricLayer.class::isInstance) //
         .map(ParametricLayer.class::cast) //
@@ -47,5 +49,11 @@ class MomentumGradientDescent implements NetOptimizer, Serializable {
   @Override
   public void update() {
     list.forEach(Updater::update);
+    initialized = true;
+  }
+
+  @Override
+  public boolean weightDecay() {
+    return weightDecay;
   }
 }

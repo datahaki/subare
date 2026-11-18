@@ -4,6 +4,7 @@ package ch.alpine.subare.net.lay;
 import java.io.Serializable;
 import java.util.Objects;
 
+import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.api.ScalarUnaryOperator;

@@ -3,8 +3,9 @@ package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
 
+import ch.alpine.subare.net.api.NetLayer;
+import ch.alpine.subare.net.api.NetLoss;
 import ch.alpine.subare.net.err.CrossEntropyLoss;
-import ch.alpine.subare.net.err.NetLoss;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.VectorQ;

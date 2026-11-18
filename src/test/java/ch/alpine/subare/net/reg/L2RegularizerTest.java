@@ -10,7 +10,7 @@ import ch.alpine.tensor.RealScalar;
 class L2RegularizerTest {
   @Test
   void test() {
-    L2Regularizer l2Regularizer = new L2Regularizer(RealScalar.of(0.25));
+    L2Regularization l2Regularizer = new L2Regularization(RealScalar.of(0.25));
     assertEquals(l2Regularizer.toString(), "L2[0.25]");
   }
 }

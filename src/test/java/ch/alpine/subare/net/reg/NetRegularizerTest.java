@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class NetRegularizerTest {
   @Test
   void test() {
-    String string = NetRegularizer.NONE.toString();
+    String string = NoWeightDecay.INSTANCE.toString();
     assertEquals(string, "NoReg");
   }
 }

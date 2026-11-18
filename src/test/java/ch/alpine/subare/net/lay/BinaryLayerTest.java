@@ -5,8 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import ch.alpine.subare.net.err.NetLoss;
-import ch.alpine.subare.net.run.NetInitialize;
+import ch.alpine.subare.net.NetInitialize;
+import ch.alpine.subare.net.api.NetLayer;
+import ch.alpine.subare.net.api.NetLoss;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.VectorQ;

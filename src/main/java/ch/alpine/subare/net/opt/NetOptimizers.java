@@ -1,25 +1,27 @@
+// code by jph
 package ch.alpine.subare.net.opt;
 
-import ch.alpine.subare.net.lay.NetLayer;
+import ch.alpine.subare.net.api.NetLayer;
+import ch.alpine.subare.net.api.NetOptimizer;
 import ch.alpine.tensor.Scalar;
 
 public enum NetOptimizers {
   SIMPLE {
     @Override
     public NetOptimizer create(NetLayer netLayer, Scalar eta, Scalar... scalar) {
-      return new SimpleGradientDescent(netLayer, eta);
+      return new GradientDescentOptimizer(netLayer, eta);
     }
   },
   MOMENT {
     @Override
     public NetOptimizer create(NetLayer netLayer, Scalar eta, Scalar... scalar) {
-      return new MomentumGradientDescent(netLayer, true, eta, scalar[0]);
+      return new MomentumOptimizer(netLayer, true, eta, scalar[0]);
     }
   },
   MOMENT_W {
     @Override
     public NetOptimizer create(NetLayer netLayer, Scalar eta, Scalar... scalar) {
-      return new MomentumGradientDescent(netLayer, false, eta, scalar[0]);
+      return new MomentumOptimizer(netLayer, false, eta, scalar[0]);
     }
   },
   ADAM {

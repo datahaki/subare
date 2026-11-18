@@ -1,7 +1,6 @@
 // code by jph
 package ch.alpine.subare.net;
 
-import ch.alpine.subare.net.run.NetExtract;
 import ch.alpine.subare.net.run.NetTrain;
 import ch.alpine.subare.net.run.NetTrainListener;
 import ch.alpine.tensor.RealScalar;

@@ -1,6 +1,7 @@
 // code by jph
 package ch.alpine.subare.net.lay;
 
+import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;

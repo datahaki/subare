@@ -1,11 +1,11 @@
 // code by jph
-package ch.alpine.subare.net.run;
+package ch.alpine.subare.net;
 
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.random.RandomGenerator;
 
-import ch.alpine.subare.net.lay.NetLayer;
-import ch.alpine.subare.net.lay.ParametricLayer;
+import ch.alpine.subare.net.api.NetLayer;
+import ch.alpine.subare.net.api.ParametricLayer;
 
 public enum NetInitialize {
   ;

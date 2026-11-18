@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
 
+import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.c.NormalDistribution;
 

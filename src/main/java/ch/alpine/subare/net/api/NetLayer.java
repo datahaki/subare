@@ -1,9 +1,8 @@
 // code by jph
-package ch.alpine.subare.net.lay;
+package ch.alpine.subare.net.api;
 
 import java.util.stream.Stream;
 
-import ch.alpine.subare.net.err.NetLoss;
 import ch.alpine.tensor.Tensor;
 
 public interface NetLayer {

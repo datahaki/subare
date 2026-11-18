@@ -9,8 +9,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.junit.jupiter.api.Test;
 
 import ch.alpine.subare.net.TrainingData;
+import ch.alpine.subare.net.api.NetOptimizer;
 import ch.alpine.subare.net.lay.LinearLayer;
-import ch.alpine.subare.net.opt.NetOptimizer;
 import ch.alpine.subare.net.opt.NetOptimizers;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;

@@ -3,6 +3,8 @@ package ch.alpine.subare.net.lay;
 
 import java.util.function.Supplier;
 
+import ch.alpine.subare.net.api.NetLayer;
+
 public enum ElementwiseLayers {
   /** When to Use Sigmoid
    * 

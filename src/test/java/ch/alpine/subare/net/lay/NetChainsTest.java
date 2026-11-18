@@ -5,7 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.net.run.NetInitialize;
+import ch.alpine.subare.net.NetInitialize;
+import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.subare.net.run.NetTrainableQ;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;

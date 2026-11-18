@@ -6,10 +6,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+import ch.alpine.subare.net.NetExtract;
 import ch.alpine.subare.net.TrainingData;
-import ch.alpine.subare.net.err.NetLoss;
-import ch.alpine.subare.net.lay.NetLayer;
-import ch.alpine.subare.net.opt.NetOptimizer;
+import ch.alpine.subare.net.api.NetLayer;
+import ch.alpine.subare.net.api.NetLoss;
+import ch.alpine.subare.net.api.NetOptimizer;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -19,6 +20,7 @@ import ch.alpine.tensor.api.TensorUnaryOperator;
 import ch.alpine.tensor.chq.DeterminateTensorQ;
 import ch.alpine.tensor.io.TableBuilder;
 import ch.alpine.tensor.pdf.Permute;
+import ch.alpine.tensor.red.Max;
 import ch.alpine.tensor.red.Total;
 import ch.alpine.tensor.sca.exp.Log;
 
@@ -29,6 +31,7 @@ public class NetTrain implements Serializable {
   private final NetLayer netLayer;
   private final NetOptimizer netOptimizer;
   public final TableBuilder tloss = new TableBuilder();
+  private static final Scalar EPS = RealScalar.of(1E-12);
 
   /** @param netChain
    * @param trainingData output */
@@ -95,8 +98,8 @@ public class NetTrain implements Serializable {
       {
         int epoch = tloss.getRowCount();
         Scalar loss1 = Total.ofVector(lossv).divide(RealScalar.of(n));
-        Scalar loss2 = new NetExtract(netLayer).reg_loss();
-        tloss.appendRow(RealScalar.of(epoch), loss1, loss2);
+        Scalar loss2 = new NetExtract(netLayer).reg_loss(netOptimizer.weightDecay());
+        tloss.appendRow(RealScalar.of(epoch), loss1, Max.of(loss2, EPS));
       }
       allMatch &= list.stream() //
           .map(ntl -> ntl.epoch(this)) //

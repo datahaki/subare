@@ -1,4 +1,5 @@
-package ch.alpine.subare.net.lay;
+// code by jph
+package ch.alpine.subare.net.api;
 
 import java.util.random.RandomGenerator;
 
@@ -17,17 +18,17 @@ public interface ParametricLayer extends NetLayer {
   /** @return */
   Tensor parameters();
 
-  /** @return contribution to loss by weight regularization */
-  Scalar reg_loss();
-
-  /** @param weightDecay whether to include the gradient from the weight regularization
-   * in the gradient descent
+  /** @param weightDecay whether to include the gradient from the L2 (!) regularization,
+   * i.e. "weight decay", in the gradient descent
    * @return */
   Tensor gradient(boolean weightDecay);
 
-  /** @param weightDecay whether the gradient from the weight regularization was considered
+  /** @param weightDecay whether the gradient from the L2 (!) regularization was considered
    * in the gradient descent
    * @param delta
    * @param eta */
   void increment(boolean weightDecay, Tensor delta, Scalar eta);
+
+  /** @return contribution to loss by weight regularization */
+  Scalar reg_loss(boolean weightDecay);
 }

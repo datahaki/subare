@@ -1,10 +1,10 @@
 // code by jph
-package ch.alpine.subare.net.run;
+package ch.alpine.subare.net;
 
 import java.util.stream.Stream;
 
-import ch.alpine.subare.net.lay.NetLayer;
-import ch.alpine.subare.net.lay.ParametricLayer;
+import ch.alpine.subare.net.api.NetLayer;
+import ch.alpine.subare.net.api.ParametricLayer;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.alg.Flatten;
@@ -18,11 +18,12 @@ public record NetExtract(NetLayer netLayer) {
         .flatMap(Flatten::scalars);
   }
 
-  public Scalar reg_loss() {
+  public Scalar reg_loss(boolean weightDecay) {
     return netLayer.stream() //
         .filter(ParametricLayer.class::isInstance) //
         .map(ParametricLayer.class::cast) //
-        .map(ParametricLayer::reg_loss) //
-        .reduce(Scalar::add).orElse(RealScalar.ZERO);
+        .map(p -> p.reg_loss(weightDecay)) //
+        .reduce(Scalar::add) //
+        .orElse(RealScalar.ZERO);
   }
 }

@@ -17,12 +17,17 @@ class ElasticRegularization implements NetRegularization, Serializable {
   }
 
   @Override
-  public Scalar penalty(boolean weightDecay, Tensor weights) {
-    return l1Regularization.penalty(weightDecay, weights).add(l2Regularization.penalty(weightDecay, weights));
+  public Scalar penalty(boolean decayInLoss, Tensor weights) {
+    return l1Regularization.penalty(decayInLoss, weights).add(l2Regularization.penalty(decayInLoss, weights));
   }
 
   @Override
-  public Tensor gradient(boolean weightDecay, Tensor weights) {
-    return l1Regularization.gradient(weightDecay, weights).add(l2Regularization.gradient(weightDecay, weights));
+  public Tensor gradient(boolean decayInLoss, Tensor weights) {
+    return l1Regularization.gradient(decayInLoss, weights).add(l2Regularization.gradient(decayInLoss, weights));
+  }
+
+  @Override
+  public Tensor sneakDecay(boolean decayInLoss, Tensor weights) {
+    return l1Regularization.sneakDecay(decayInLoss, weights).add(l2Regularization.sneakDecay(decayInLoss, weights));
   }
 }

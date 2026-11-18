@@ -13,14 +13,15 @@ import ch.alpine.tensor.io.MathematicaFormat;
 import ch.alpine.tensor.sca.AbsSquared;
 import ch.alpine.tensor.sca.Sign;
 
+/** possibly in gradient */
 public record L2Regularization(Scalar lambda) implements NetRegularization, Serializable {
   public L2Regularization {
     Sign.requirePositiveOrZero(lambda);
   }
 
   @Override
-  public Scalar penalty(boolean weightDecay, Tensor weights) {
-    return weightDecay //
+  public Scalar penalty(boolean decayInLoss, Tensor weights) {
+    return decayInLoss //
         ? Flatten.scalars(weights) //
             .map(AbsSquared.FUNCTION) //
             .reduce(Scalar::add) //
@@ -31,10 +32,17 @@ public record L2Regularization(Scalar lambda) implements NetRegularization, Seri
   }
 
   @Override
-  public Tensor gradient(boolean weightDecay, Tensor weights) {
-    return weightDecay //
+  public Tensor gradient(boolean decayInLoss, Tensor weights) {
+    return decayInLoss //
         ? weights.multiply(lambda)
         : weights.maps(Scalar::zero);
+  }
+
+  @Override
+  public Tensor sneakDecay(boolean decayInLoss, Tensor weights) {
+    return decayInLoss //
+        ? weights.maps(Scalar::zero)
+        : weights.multiply(lambda);
   }
 
   @Override

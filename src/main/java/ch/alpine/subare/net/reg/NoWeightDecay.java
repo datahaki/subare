@@ -1,3 +1,4 @@
+// code by jph
 package ch.alpine.subare.net.reg;
 
 import ch.alpine.subare.net.api.NetRegularization;
@@ -9,12 +10,17 @@ public enum NoWeightDecay implements NetRegularization {
   INSTANCE;
 
   @Override
-  public Scalar penalty(boolean weightDecay, Tensor weights) {
+  public Scalar penalty(boolean decayInLoss, Tensor weights) {
     return RealScalar.ZERO;
   }
 
   @Override
-  public Tensor gradient(boolean weightDecay, Tensor weights) {
+  public Tensor gradient(boolean decayInLoss, Tensor weights) {
+    return weights.maps(Scalar::zero);
+  }
+
+  @Override
+  public Tensor sneakDecay(boolean decayInLoss, Tensor weights) {
     return weights.maps(Scalar::zero);
   }
 }

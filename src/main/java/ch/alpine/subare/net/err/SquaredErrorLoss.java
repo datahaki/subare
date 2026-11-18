@@ -19,7 +19,7 @@ public record SquaredErrorLoss(Scalar loss, Tensor gradOutput) implements NetLos
 
   private static NetLoss of(Tensor error) {
     if (VectorQ.of(error)) {
-      Tensor gradOutput = error.add(error);
+      Tensor gradOutput = error.add(error); // this is where *2 is
       return new SquaredErrorLoss( //
           Vector2NormSquared.of(error), //
           gradOutput);

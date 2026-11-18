@@ -11,22 +11,29 @@ import ch.alpine.tensor.io.MathematicaFormat;
 import ch.alpine.tensor.sca.Abs;
 import ch.alpine.tensor.sca.Sign;
 
+/** always in gradient */
 public record L1Regularization(Scalar lambda) implements NetRegularization, Serializable {
   public L1Regularization {
     Sign.requirePositiveOrZero(lambda);
   }
 
-  @Override
-  public Scalar penalty(boolean weightDecay, Tensor weights) {
+  @Override // always part of loss
+  public Scalar penalty(boolean decayInLoss, Tensor weights) {
     return Flatten.scalars(weights) //
         .map(Abs.FUNCTION) //
         .reduce(Scalar::add) //
-        .orElseThrow().multiply(lambda);
+        .orElseThrow() //
+        .multiply(lambda);
   }
 
-  @Override
-  public Tensor gradient(boolean weightDecay, Tensor weights) {
+  @Override // always part of gradient
+  public Tensor gradient(boolean decayInLoss, Tensor weights) {
     return weights.maps(Sign.FUNCTION).multiply(lambda);
+  }
+
+  @Override // never sneak past gradient
+  public Tensor sneakDecay(boolean decayInLoss, Tensor weights) {
+    return weights.maps(Scalar::zero);
   }
 
   @Override

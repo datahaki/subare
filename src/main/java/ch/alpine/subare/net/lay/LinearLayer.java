@@ -72,16 +72,21 @@ public class LinearLayer implements ParametricLayer, Serializable {
   }
 
   @Override // from ParametricLayer
-  public Tensor gradient(boolean weightDecay) {
+  public Tensor gradient(boolean decayInLoss) {
     return Unprotect.byRef( //
-        gW.add(netRegularizer.gradient(weightDecay, W)), //
+        gW.add(netRegularizer.gradient(decayInLoss, W)), //
         gb);
   }
 
   @Override // from ParametricLayer
-  public synchronized void increment(boolean weightDecay, Tensor delta, Scalar eta) {
+  public synchronized void increment(boolean decayInLoss, Tensor delta, Scalar eta) {
     Scalar eta_negate = eta.negate();
-    Tensor dW = delta.get(0).add(netRegularizer.gradient(weightDecay, W));
+    // several cases:
+    // if decayInLoss == true and L1Regularization is used: only 0 is added
+    // if decayInLoss == true and L2Regularization is used: only 0 is added
+    // if decayInLoss = false and L1Regularization is used: only 0 is added
+    // if decayInLoss = false and L2Regularization is used: weight decay is added
+    Tensor dW = delta.get(0).add(netRegularizer.sneakDecay(decayInLoss, W));
     W = W.add(dW.multiply(eta_negate));
     b = b.add(delta.get(1).multiply(eta_negate));
   }

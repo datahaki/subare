@@ -3,7 +3,6 @@ package ch.alpine.subare.net.run;
 
 import java.util.stream.Stream;
 
-import ch.alpine.subare.net.lay.LinearLayer;
 import ch.alpine.subare.net.lay.NetLayer;
 import ch.alpine.subare.net.lay.ParametricLayer;
 import ch.alpine.tensor.RealScalar;
@@ -20,13 +19,10 @@ public record NetExtract(NetLayer netLayer) {
   }
 
   public Scalar reg_loss() {
-    return netLayer.stream().flatMap(this::reg_loss).reduce(Scalar::add).orElse(RealScalar.ZERO);
-  }
-
-  private Stream<Scalar> reg_loss(NetLayer netLayer) {
-    // TODO add functions to ParametricLayer!
-    if (netLayer instanceof LinearLayer linearLayer)
-      return Stream.of(linearLayer.reg_loss());
-    return Stream.empty();
+    return netLayer.stream() //
+        .filter(ParametricLayer.class::isInstance) //
+        .map(ParametricLayer.class::cast) //
+        .map(ParametricLayer::reg_loss) //
+        .reduce(Scalar::add).orElse(RealScalar.ZERO);
   }
 }

@@ -23,7 +23,6 @@ class AdamOptimizer implements NetOptimizer, Serializable {
     private static final Scalar EPS = RealScalar.of(1E-8);
     private static final ScalarUnaryOperator SUO = s -> Sqrt.FUNCTION.apply(s).add(EPS);
     private final ParametricLayer parametricLayer;
-    // velocity
     Tensor m;
     Tensor v;
     Scalar beta1_t = RealScalar.ONE;
@@ -34,7 +33,7 @@ class AdamOptimizer implements NetOptimizer, Serializable {
     }
 
     public void update() {
-      Tensor g = parametricLayer.gradient();
+      Tensor g = parametricLayer.gradient(weightDecay);
       // ---
       m = Objects.isNull(m) ? g : LinearBinaryAverage.INSTANCE.split(g, m, beta1);
       Tensor q = Entrywise.mul().apply(g, g);
@@ -45,21 +44,23 @@ class AdamOptimizer implements NetOptimizer, Serializable {
       Tensor v_h = v.divide(RealScalar.ONE.subtract(beta2_t));
       Tensor delta = Entrywise.div().apply(m_h, v_h.maps(SUO));
       // ---
-      parametricLayer.increment(delta, eta);
+      parametricLayer.increment(weightDecay, delta, eta);
     }
   }
 
   private final List<Updater> list;
+  private final boolean weightDecay;
   private final Scalar eta;
   private final Scalar beta1;
   private final Scalar beta2;
 
-  public AdamOptimizer(NetLayer netLayer, Scalar eta, Scalar beta1, Scalar beta2) {
+  public AdamOptimizer(NetLayer netLayer, boolean withDecay, Scalar eta, Scalar beta1, Scalar beta2) {
     list = netLayer.stream() //
         .filter(ParametricLayer.class::isInstance) //
         .map(ParametricLayer.class::cast) //
         .map(Updater::new) //
         .collect(Collectors.toCollection(ArrayList::new));
+    this.weightDecay = withDecay;
     this.eta = eta;
     this.beta1 = beta1;
     this.beta2 = beta2;

@@ -24,7 +24,7 @@ class SimpleGradientDescent implements NetOptimizer, Serializable {
   }
 
   private void update(ParametricLayer linearLayer) {
-    linearLayer.increment(linearLayer.gradient(), eta);
+    linearLayer.increment(true, linearLayer.gradient(true), eta);
   }
 
   @Override

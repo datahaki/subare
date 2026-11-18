@@ -22,22 +22,24 @@ class MomentumGradientDescent implements NetOptimizer, Serializable {
     }
 
     public void update() {
-      Tensor g = parametricLayer.gradient();
+      Tensor g = parametricLayer.gradient(weightDecay);
       v = Objects.isNull(v) ? g : v.multiply(beta).add(g);
-      parametricLayer.increment(v, eta);
+      parametricLayer.increment(weightDecay, v, eta);
     }
   }
 
+  private final List<Updater> list;
+  private final boolean weightDecay;
   private final Scalar beta;
   private final Scalar eta;
-  private final List<Updater> list;
 
-  public MomentumGradientDescent(NetLayer netLayer, Scalar eta, Scalar beta) {
+  public MomentumGradientDescent(NetLayer netLayer, boolean weightDecay, Scalar eta, Scalar beta) {
     list = netLayer.stream() //
         .filter(ParametricLayer.class::isInstance) //
         .map(ParametricLayer.class::cast) //
         .map(Updater::new) //
         .collect(Collectors.toCollection(ArrayList::new));
+    this.weightDecay = weightDecay;
     this.eta = eta;
     this.beta = beta;
   }

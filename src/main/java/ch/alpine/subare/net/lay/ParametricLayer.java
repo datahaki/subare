@@ -1,5 +1,7 @@
 package ch.alpine.subare.net.lay;
 
+import java.util.random.RandomGenerator;
+
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 
@@ -10,14 +12,22 @@ import ch.alpine.tensor.Tensor;
  * Layers whose parameters receive gradients during backpropagation and are updated
  * by the optimizer. */
 public interface ParametricLayer extends NetLayer {
-  Tensor gradient();
-
-  void increment(Tensor delta, Scalar eta);
-
-  Tensor gradientWithoutDecay();
-
-  void incrementWithoutDecay(Tensor delta, Scalar eta);
+  void initialize(RandomGenerator randomGenerator);
 
   /** @return */
   Tensor parameters();
+
+  /** @return contribution to loss by weight regularization */
+  Scalar reg_loss();
+
+  /** @param weightDecay whether to include the gradient from the weight regularization
+   * in the gradient descent
+   * @return */
+  Tensor gradient(boolean weightDecay);
+
+  /** @param weightDecay whether the gradient from the weight regularization was considered
+   * in the gradient descent
+   * @param delta
+   * @param eta */
+  void increment(boolean weightDecay, Tensor delta, Scalar eta);
 }

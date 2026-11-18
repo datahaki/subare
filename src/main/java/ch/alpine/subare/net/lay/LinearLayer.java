@@ -55,38 +55,7 @@ public class LinearLayer implements ParametricLayer, Serializable {
     b = ConstantArray.of(DoubleScalar.INDETERMINATE, d_out);
   }
 
-  @Override // from ParametricLayer
-  public synchronized Tensor parameters() {
-    return Unprotect.byRef(W, b);
-  }
-
-  @Override // from ParametricLayer
-  public Tensor gradient() {
-    return Unprotect.byRef( //
-        gW.add(netRegularizer.gradient(W)), //
-        gb);
-  }
-
-  @Override // from ParametricLayer
-  public synchronized void increment(Tensor delta, Scalar eta) {
-    Scalar eta_negate = eta.negate();
-    W = W.add(delta.get(0).multiply(eta_negate));
-    b = b.add(delta.get(1).multiply(eta_negate));
-  }
-
   @Override
-  public Tensor gradientWithoutDecay() {
-    return Unprotect.byRef(gW, gb);
-  }
-
-  @Override
-  public synchronized void incrementWithoutDecay(Tensor delta, Scalar eta) {
-    Scalar eta_negate = eta.negate();
-    Tensor dW = netRegularizer.gradient(W);
-    W = W.add(delta.get(0).add(dW).multiply(eta_negate));
-    b = b.add(delta.get(1).multiply(eta_negate));
-  }
-
   public void initialize(RandomGenerator randomGenerator) {
     List<Integer> dims = Dimensions.of(W);
     int d_in = dims.get(0);
@@ -94,6 +63,35 @@ public class LinearLayer implements ParametricLayer, Serializable {
     Distribution distribution = NormalDistribution.of(RealScalar.ZERO, Rational.of(2, d_in));
     W = RandomVariate.of(distribution, randomGenerator, dims);
     b = Array.zeros(d_out);
+  }
+
+  @Override // from ParametricLayer
+  public synchronized Tensor parameters() {
+    return Unprotect.byRef(W, b);
+  }
+
+  @Override
+  public Scalar reg_loss() {
+    return netRegularizer.penalty(W);
+  }
+
+  @Override // from ParametricLayer
+  public Tensor gradient(boolean weightDecay) {
+    return Unprotect.byRef( //
+        weightDecay ? gW.add(netRegularizer.gradient(W)) : gW, //
+        gb);
+  }
+
+  @Override // from ParametricLayer
+  public synchronized void increment(boolean weightDecay, Tensor delta, Scalar eta) {
+    Scalar eta_negate = eta.negate();
+    if (weightDecay) {
+      W = W.add(delta.get(0).multiply(eta_negate));
+    } else {
+      Tensor dW = netRegularizer.gradient(W);
+      W = W.add(delta.get(0).add(dW).multiply(eta_negate));
+    }
+    b = b.add(delta.get(1).multiply(eta_negate));
   }
 
   @Override
@@ -132,10 +130,6 @@ public class LinearLayer implements ParametricLayer, Serializable {
     gb = Total.of(gradOutput);
     // Dimensions[gradInput] = batch_size x d_in
     return MatrixDotTranspose.of(gradOutput, W);
-  }
-
-  public Scalar reg_loss() {
-    return netRegularizer.penalty(W);
   }
 
   @Override

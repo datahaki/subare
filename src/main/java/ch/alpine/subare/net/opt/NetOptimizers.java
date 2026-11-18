@@ -13,21 +13,27 @@ public enum NetOptimizers {
   MOMENT {
     @Override
     public NetOptimizer create(NetLayer netLayer, Scalar eta, Scalar... scalar) {
-      return new MomentumGradientDescent(netLayer, eta, scalar[0]);
+      return new MomentumGradientDescent(netLayer, true, eta, scalar[0]);
+    }
+  },
+  MOMENT_W {
+    @Override
+    public NetOptimizer create(NetLayer netLayer, Scalar eta, Scalar... scalar) {
+      return new MomentumGradientDescent(netLayer, false, eta, scalar[0]);
     }
   },
   ADAM {
     @Override
     public NetOptimizer create(NetLayer netLayer, Scalar eta, Scalar... scalar) {
-      return new AdamOptimizer(netLayer, eta, scalar[0], scalar[1]);
+      return new AdamOptimizer(netLayer, true, eta, scalar[0], scalar[1]);
     }
   },
   ADAM_W {
     @Override
     public NetOptimizer create(NetLayer netLayer, Scalar eta, Scalar... scalar) {
-      return new AdamWOptimizer(netLayer, eta, scalar[0], scalar[1]);
+      return new AdamOptimizer(netLayer, false, eta, scalar[0], scalar[1]);
     }
-  },;
+  };
 
   public abstract NetOptimizer create(NetLayer netLayer, Scalar eta, Scalar... scalar);
 }

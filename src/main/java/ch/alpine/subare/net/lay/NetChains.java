@@ -37,9 +37,11 @@ public enum NetChains {
         new ArgMaxLayer());
   }
 
-  /** @param netLayer
+  /** intended for binary classification tasks
+   * even though network layer does not round output to integer values (!)
+   * 
+   * @param netLayer with final layer that returns a vector of length 1
    * @return */
-  // TODO rename to sigmoid !?
   public static NetLayer binary(NetLayer netLayer) {
     return NetChain.of(netLayer, //
         ElementwiseLayer.sigmoid(), //
@@ -51,5 +53,14 @@ public enum NetChains {
     return NetChain.of( //
         Conv1DLayer.of(distribution, ThreadLocalRandom.current(), kernelSize), //
         ElementwiseLayer.relu());
+  }
+
+  /** @param v
+   * @param d
+   * @param netLayer that takes as input a vector of length s*d where s is
+   * the sequence length, and outputs vector of length 1
+   * @return */
+  public static NetLayer embedding(int v, int d, NetLayer netLayer) {
+    return binary(NetChain.of(new EmbeddingLayer(v, d), netLayer));
   }
 }

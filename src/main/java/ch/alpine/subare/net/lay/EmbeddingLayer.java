@@ -26,7 +26,9 @@ import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.pdf.c.NormalDistribution;
 
-/** Backpropagation stops at the embedding layer!
+/** Embeds integers between 0 and v-1 into a continuous vector space of dimension d.
+ * 
+ * Backpropagation stops at the embedding layer!
  * 
  * inspired by
  * <a href="https://reference.wolfram.com/language/ref/EmbeddingLayer.html">EmbeddingLayer</a> */
@@ -104,14 +106,14 @@ public class EmbeddingLayer implements ParametricLayer, Serializable {
   }
 
   @Override
-  public Tensor gradient(boolean weightDecay) {
-    return gW.add(netRegularizer.gradient(weightDecay, W));
+  public Tensor gradient(boolean decayInLoss) {
+    return gW.add(netRegularizer.gradient(decayInLoss, W));
   }
 
   @Override
-  public void increment(boolean weightDecay, Tensor delta, Scalar eta) {
+  public void increment(boolean decayInLoss, Tensor delta, Scalar eta) {
     Scalar eta_negate = eta.negate();
-    Tensor dW = delta.add(netRegularizer.gradient(weightDecay, W));
+    Tensor dW = delta.add(netRegularizer.sneakDecay(decayInLoss, W));
     W = W.add(dW.multiply(eta_negate));
   }
 

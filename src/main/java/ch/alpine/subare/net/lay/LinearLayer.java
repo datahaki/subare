@@ -67,7 +67,7 @@ public class LinearLayer implements ParametricLayer, Serializable {
   }
 
   @Override // from ParametricLayer
-  public synchronized Tensor parameters() {
+  public Tensor parameters() {
     return Unprotect.byRef(W, b);
   }
 
@@ -79,13 +79,13 @@ public class LinearLayer implements ParametricLayer, Serializable {
   }
 
   @Override // from ParametricLayer
-  public synchronized void increment(boolean decayInLoss, Tensor delta, Scalar eta) {
-    Scalar eta_negate = eta.negate();
+  public void increment(boolean decayInLoss, Tensor delta, Scalar eta) {
     // several cases:
     // if decayInLoss == true and L1Regularization is used: only 0 is added
     // if decayInLoss == true and L2Regularization is used: only 0 is added
     // if decayInLoss = false and L1Regularization is used: only 0 is added
     // if decayInLoss = false and L2Regularization is used: weight decay is added
+    Scalar eta_negate = eta.negate();
     Tensor dW = delta.get(0).add(netRegularizer.sneakDecay(decayInLoss, W));
     W = W.add(dW.multiply(eta_negate));
     b = b.add(delta.get(1).multiply(eta_negate));
@@ -97,13 +97,13 @@ public class LinearLayer implements ParametricLayer, Serializable {
   }
 
   @Override
-  public synchronized Tensor forward(Tensor x) {
+  public Tensor forward(Tensor x) {
     inputCache = VectorQ.require(x);
     return outputCache = x.dot(W).add(b);
   }
 
   @Override
-  public synchronized Tensor forwardBatch(Tensor X) {
+  public Tensor forwardBatch(Tensor X) {
     inputCache = X;
     // Dimensions: batch_size x d_out
     return outputCache = Tensor.of(X.dot(W).stream().map(b::add));

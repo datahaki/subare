@@ -5,9 +5,9 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 
 public interface NetRegularization {
-  Scalar penalty(boolean weightDecay, Tensor weights);
+  Scalar penalty(boolean decayInLoss, Tensor weights);
 
-  Tensor gradient(boolean weightDecay, Tensor weights);
+  Tensor gradient(boolean decayInLoss, Tensor weights);
 
-  Tensor sneakDecay(boolean weightDecay, Tensor weights);
+  Tensor sneakDecay(boolean decayInLoss, Tensor weights);
 }

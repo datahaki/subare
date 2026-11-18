@@ -18,17 +18,17 @@ public interface ParametricLayer extends NetLayer {
   /** @return */
   Tensor parameters();
 
-  /** @param weightDecay whether to include the gradient from the L2 (!) regularization,
+  /** @param decayInLoss whether to include the gradient from the L2 (!) regularization,
    * i.e. "weight decay", in the gradient descent
    * @return */
-  Tensor gradient(boolean weightDecay);
+  Tensor gradient(boolean decayInLoss);
 
-  /** @param weightDecay whether the gradient from the L2 (!) regularization was considered
+  /** @param decayInLoss whether the gradient from the L2 (!) regularization was considered
    * in the gradient descent
    * @param delta
    * @param eta */
-  void increment(boolean weightDecay, Tensor delta, Scalar eta);
+  void increment(boolean decayInLoss, Tensor delta, Scalar eta);
 
   /** @return contribution to loss by weight regularization */
-  Scalar reg_loss(boolean weightDecay);
+  Scalar reg_loss(boolean decayInLoss);
 }

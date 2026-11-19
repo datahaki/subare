@@ -14,14 +14,13 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.alg.ArrayReshape;
 import ch.alpine.tensor.alg.ConstantArray;
 import ch.alpine.tensor.alg.Dimensions;
-import ch.alpine.tensor.alg.Flatten;
 import ch.alpine.tensor.alg.VectorQ;
 import ch.alpine.tensor.ext.Int;
 import ch.alpine.tensor.ext.Integers;
 import ch.alpine.tensor.ext.PackageTestAccess;
+import ch.alpine.tensor.io.MathematicaFormat;
 import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.pdf.c.NormalDistribution;
@@ -36,7 +35,7 @@ public class EmbeddingLayer implements ParametricLayer, Serializable {
   @PackageTestAccess
   Tensor W;
   // ---
-  public NetRegularization netRegularizer = new L2Regularization(RealScalar.of(0.001));
+  public NetRegularization netRegularization = new L2Regularization(RealScalar.of(0.001));
   /** Dimensions: d_in, or batch_size x d_in */
   private transient Tensor inputCache;
   /** Dimensions: d_in x d_out */
@@ -54,10 +53,10 @@ public class EmbeddingLayer implements ParametricLayer, Serializable {
   public Tensor forward(Tensor x) {
     inputCache = VectorQ.require(x);
     // returns dimensions: [x.length() * d]
-    return Flatten.of(Tensor.of(x.stream() //
+    return Tensor.of(x.stream() //
         .map(Scalar.class::cast) //
         .mapToInt(Scalars::intValueExact) //
-        .mapToObj(W::get)), 1);
+        .mapToObj(W::get));
   }
 
   @Override
@@ -75,11 +74,9 @@ public class EmbeddingLayer implements ParametricLayer, Serializable {
   }
 
   private static void contrib(Tensor gW, Tensor gradOutput, Tensor inputCache) {
-    VectorQ.require(gradOutput);
-    int S = inputCache.length();
-    Tensor gY = ArrayReshape.of(gradOutput, S, gradOutput.length() / S);
     Int myI = new Int();
-    gY.stream().forEach(row -> gW.set(row::add, inputCache.Get(myI.getAndIncrement()).number().intValue()));
+    gradOutput.stream() //
+        .forEach(row -> gW.set(row::add, inputCache.Get(myI.getAndIncrement()).number().intValue()));
   }
 
   @Override
@@ -107,18 +104,23 @@ public class EmbeddingLayer implements ParametricLayer, Serializable {
 
   @Override
   public Tensor gradient(boolean decayInLoss) {
-    return gW.add(netRegularizer.gradient(decayInLoss, W));
+    return gW.add(netRegularization.gradient(decayInLoss, W));
   }
 
   @Override
   public void increment(boolean decayInLoss, Tensor delta, Scalar eta) {
     Scalar eta_negate = eta.negate();
-    Tensor dW = delta.add(netRegularizer.sneakDecay(decayInLoss, W));
+    Tensor dW = delta.add(netRegularization.sneakDecay(decayInLoss, W));
     W = W.add(dW.multiply(eta_negate));
   }
 
   @Override
   public Scalar reg_loss(boolean weightDecay) {
-    return netRegularizer.penalty(weightDecay, W);
+    return netRegularization.penalty(weightDecay, W);
+  }
+
+  @Override
+  public String toString() {
+    return MathematicaFormat.concise("EmbeddingLayer", W, netRegularization);
   }
 }

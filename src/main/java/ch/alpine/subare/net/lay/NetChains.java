@@ -32,7 +32,7 @@ public enum NetChains {
    * @param netLayer
    * @return layer that outputs vector of length 1 with integer value as entry */
   public static NetLayer argMax(NetLayer netLayer) {
-    return NetChain.of(netLayer, //
+    return NetChain.join(netLayer, //
         SoftmaxLayer.INSTANCE, //
         new ArgMaxLayer());
   }
@@ -43,14 +43,14 @@ public enum NetChains {
    * @param netLayer with final layer that returns a vector of length 1
    * @return */
   public static NetLayer binary(NetLayer netLayer) {
-    return NetChain.of(netLayer, //
+    return NetChain.join(netLayer, //
         ElementwiseLayer.sigmoid(), //
         new BinaryLayer());
   }
 
   public static NetLayer cnnRelu(int kernelSize) {
     Distribution distribution = NormalDistribution.of(0, 0.1);
-    return NetChain.of( //
+    return NetChain.join( //
         Conv1DLayer.of(distribution, ThreadLocalRandom.current(), kernelSize), //
         ElementwiseLayer.relu());
   }
@@ -61,6 +61,6 @@ public enum NetChains {
    * the sequence length, and outputs vector of length 1
    * @return */
   public static NetLayer embedding(int v, int d, NetLayer netLayer) {
-    return binary(NetChain.of(new EmbeddingLayer(v, d), netLayer));
+    return NetChain.join(new EmbeddingLayer(v, d), new FlattenLayer(), netLayer);
   }
 }

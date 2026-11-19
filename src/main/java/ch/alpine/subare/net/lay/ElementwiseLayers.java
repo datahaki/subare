@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 
 import ch.alpine.subare.net.api.NetLayer;
 
-public enum ElementwiseLayers {
+public enum ElementwiseLayers implements Supplier<NetLayer> {
   /** When to Use Sigmoid
    * 
    * The defining characteristic of Sigmoid is that its output is strictly bounded
@@ -23,8 +23,8 @@ public enum ElementwiseLayers {
    * act as a proportional filter. */
   SIGMOID {
     @Override
-    public Supplier<NetLayer> supplier() {
-      return () -> ElementwiseLayer.sigmoid();
+    public NetLayer get() {
+      return ElementwiseLayer.sigmoid();
     }
   },
   /** When to Use Tanh
@@ -50,8 +50,8 @@ public enum ElementwiseLayers {
    * well with normalized image datasets. */
   TANH {
     @Override
-    public Supplier<NetLayer> supplier() {
-      return () -> ElementwiseLayer.tanh();
+    public NetLayer get() {
+      return ElementwiseLayer.tanh();
     }
   },
   /** When to Choose ReLU
@@ -74,8 +74,8 @@ public enum ElementwiseLayers {
    * problem is rarely severe enough to justify the overhead of GELU. */
   RELU {
     @Override
-    public Supplier<NetLayer> supplier() {
-      return () -> ElementwiseLayer.relu();
+    public NetLayer get() {
+      return ElementwiseLayer.relu();
     }
   },
   /** When to Choose GELU
@@ -95,10 +95,8 @@ public enum ElementwiseLayers {
    * converges faster and reaches lower loss than ReLU. */
   GELU {
     @Override
-    public Supplier<NetLayer> supplier() {
-      return () -> ElementwiseLayer.gelu();
+    public NetLayer get() {
+      return ElementwiseLayer.gelu();
     }
   };
-
-  public abstract Supplier<NetLayer> supplier();
 }

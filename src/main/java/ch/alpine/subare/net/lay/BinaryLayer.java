@@ -7,6 +7,7 @@ import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.subare.net.api.NetLoss;
 import ch.alpine.subare.net.err.SquaredErrorLoss;
 import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.io.MathematicaFormat;
 
 /** LogisticSigmoid */
 public class BinaryLayer implements NetLayer, Serializable {
@@ -35,5 +36,10 @@ public class BinaryLayer implements NetLayer, Serializable {
   @Override
   public Tensor backBatch(Tensor gradOutput) {
     return gradOutput;
+  }
+
+  @Override
+  public String toString() {
+    return MathematicaFormat.concise("BinaryLayer");
   }
 }

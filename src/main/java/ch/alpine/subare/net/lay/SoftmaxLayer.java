@@ -3,6 +3,7 @@ package ch.alpine.subare.net.lay;
 
 import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.io.MathematicaFormat;
 import ch.alpine.tensor.nrm.SoftmaxVector;
 
 /** inspired by
@@ -28,5 +29,10 @@ public enum SoftmaxLayer implements NetLayer {
   @Override
   public Tensor backBatch(Tensor gradOutput) {
     return gradOutput;
+  }
+
+  @Override
+  public String toString() {
+    return MathematicaFormat.concise("SoftmaxLayer");
   }
 }

@@ -13,8 +13,19 @@ import ch.alpine.tensor.ext.MergeIllegal;
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/NetChain.html">NetChain</a> */
 public record NetChain(List<NetLayer> list) implements NetLayer, Serializable {
-  public static NetLayer of(NetLayer... layers) {
-    return new NetChain(List.of(layers));
+  /** join all given net layers in the order given.
+   * if any of the given net layers are instances of NetChain
+   * the sequence of that net chain are brought down onto the first level
+   * of the resulting net chain
+   * 
+   * @param netLayers
+   * @return */
+  public static NetLayer join(NetLayer... netLayers) {
+    return new NetChain(Stream.of(netLayers) //
+        .flatMap(netLayer -> netLayer instanceof NetChain netChain //
+            ? netChain.list().stream()
+            : Stream.of(netLayer))
+        .toList());
   }
 
   @Override
@@ -48,6 +59,6 @@ public record NetChain(List<NetLayer> list) implements NetLayer, Serializable {
 
   @Override
   public Stream<NetLayer> stream() {
-    return list.stream().flatMap(NetLayer::stream);
+    return list.stream();
   }
 }

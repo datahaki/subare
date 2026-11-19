@@ -6,6 +6,7 @@ import java.io.Serializable;
 import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.tensor.Tensor;
 
+// TODO UNFINISHED UNTESTED WORK IN PROGRESS !!!
 public class SwiGLULayer implements NetLayer, Serializable {
   @Override
   public Tensor forward(Tensor x) {

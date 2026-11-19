@@ -16,6 +16,7 @@ import ch.alpine.tensor.io.MathematicaFormat;
  * Easier training: Deep networks become easier to optimize.
  * Preserving information: The original input is not lost as it passes through layers.
  * Deeper networks: They allow neural networks to have many more layers. */
+// TODO UNFINISHED UNTESTED WORK IN PROGRESS !!!
 public class ResidualLayer implements NetLayer, Serializable {
   private final NetLayer netLayer;
 
@@ -45,6 +46,7 @@ public class ResidualLayer implements NetLayer, Serializable {
 
   @Override
   public Stream<NetLayer> stream() {
+    // FIXME this does not make sense
     return netLayer.stream();
   }
 

@@ -13,6 +13,7 @@ import ch.alpine.tensor.nrm.Vector2NormSquared;
 import ch.alpine.tensor.red.Entrywise;
 import ch.alpine.tensor.sca.pow.Sqrt;
 
+// TODO UNFINISHED UNTESTED WORK IN PROGRESS !!!
 public class RMSLayer implements NetLayer, Serializable {
   private static final Scalar EPS = RealScalar.of(1E-6);
   public Tensor gamma = null;

@@ -18,6 +18,7 @@ import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.red.Total;
 
+// TODO UNFINISHED UNTESTED WORK IN PROGRESS !!!
 public class Conv1DLayer implements NetLayer, Serializable {
   public static Conv1DLayer of(Distribution d, RandomGenerator randomGenerator, int kernelSize) {
     Conv1DLayer conv1dLayer = new Conv1DLayer();

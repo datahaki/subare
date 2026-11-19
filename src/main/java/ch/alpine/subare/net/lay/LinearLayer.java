@@ -40,7 +40,7 @@ public class LinearLayer implements ParametricLayer, Serializable {
   @PackageTestAccess
   Tensor b;
   // ---
-  public NetRegularization netRegularizer = new L2Regularization(RealScalar.of(0.001));
+  public NetRegularization netRegularization = new L2Regularization(RealScalar.of(0.001));
   /** Dimensions: d_in, or batch_size x d_in */
   private transient Tensor inputCache;
   /** Dimensions: d_out, or batch_size x d_out */
@@ -54,46 +54,6 @@ public class LinearLayer implements ParametricLayer, Serializable {
   public LinearLayer(int d_in, int d_out) {
     W = ConstantArray.of(DoubleScalar.INDETERMINATE, d_in, d_out);
     b = ConstantArray.of(DoubleScalar.INDETERMINATE, d_out);
-  }
-
-  @Override
-  public void initialize(RandomGenerator randomGenerator) {
-    List<Integer> dims = Dimensions.of(W);
-    int d_in = dims.get(0);
-    int d_out = dims.get(1);
-    Distribution distribution = NormalDistribution.of(RealScalar.ZERO, Rational.of(2, d_in));
-    W = RandomVariate.of(distribution, randomGenerator, dims);
-    b = Array.zeros(d_out);
-  }
-
-  @Override // from ParametricLayer
-  public Tensor parameters() {
-    return Unprotect.byRef(W, b);
-  }
-
-  @Override // from ParametricLayer
-  public Tensor gradient(boolean decayInLoss) {
-    return Unprotect.byRef( //
-        gW.add(netRegularizer.gradient(decayInLoss, W)), //
-        gb);
-  }
-
-  @Override // from ParametricLayer
-  public void increment(boolean decayInLoss, Tensor delta, Scalar eta) {
-    // several cases:
-    // if decayInLoss == true and L1Regularization is used: only 0 is added
-    // if decayInLoss == true and L2Regularization is used: only 0 is added
-    // if decayInLoss = false and L1Regularization is used: only 0 is added
-    // if decayInLoss = false and L2Regularization is used: weight decay is added
-    Scalar eta_negate = eta.negate();
-    Tensor dW = delta.get(0).add(netRegularizer.sneakDecay(decayInLoss, W));
-    W = W.add(dW.multiply(eta_negate));
-    b = b.add(delta.get(1).multiply(eta_negate));
-  }
-
-  @Override
-  public Scalar reg_loss(boolean weightDecay) {
-    return netRegularizer.penalty(weightDecay, W);
   }
 
   @Override
@@ -135,12 +95,52 @@ public class LinearLayer implements ParametricLayer, Serializable {
   }
 
   @Override
+  public void initialize(RandomGenerator randomGenerator) {
+    List<Integer> dims = Dimensions.of(W);
+    int d_in = dims.get(0);
+    int d_out = dims.get(1);
+    Distribution distribution = NormalDistribution.of(RealScalar.ZERO, Rational.of(2, d_in));
+    W = RandomVariate.of(distribution, randomGenerator, dims);
+    b = Array.zeros(d_out);
+  }
+
+  @Override // from ParametricLayer
+  public Tensor parameters() {
+    return Unprotect.byRef(W, b);
+  }
+
+  @Override // from ParametricLayer
+  public Tensor gradient(boolean decayInLoss) {
+    return Unprotect.byRef( //
+        gW.add(netRegularization.gradient(decayInLoss, W)), //
+        gb);
+  }
+
+  @Override // from ParametricLayer
+  public void increment(boolean decayInLoss, Tensor delta, Scalar eta) {
+    // several cases:
+    // if decayInLoss == true and L1Regularization is used: only 0 is added
+    // if decayInLoss == true and L2Regularization is used: only 0 is added
+    // if decayInLoss = false and L1Regularization is used: only 0 is added
+    // if decayInLoss = false and L2Regularization is used: weight decay is added
+    Scalar eta_negate = eta.negate();
+    Tensor dW = delta.get(0).add(netRegularization.sneakDecay(decayInLoss, W));
+    W = W.add(dW.multiply(eta_negate));
+    b = b.add(delta.get(1).multiply(eta_negate));
+  }
+
+  @Override
+  public Scalar reg_loss(boolean weightDecay) {
+    return netRegularization.penalty(weightDecay, W);
+  }
+
+  @Override
   public NetLoss error(Tensor target) {
     return SquaredErrorLoss.of(outputCache, target); // vector of length d_out
   }
 
   @Override
   public String toString() {
-    return MathematicaFormat.concise("LinearLayer", W, b, netRegularizer);
+    return MathematicaFormat.concise("LinearLayer", W, b, netRegularization);
   }
 }

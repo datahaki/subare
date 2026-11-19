@@ -19,7 +19,7 @@ import ch.alpine.tensor.sca.tri.Tanh;
 
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/ElementwiseLayer.html">ElementwiseLayer</a> */
-public abstract class ElementwiseLayer implements NetLayer, Serializable {
+abstract class ElementwiseLayer implements NetLayer, Serializable {
   public static NetLayer sigmoid() {
     return new ElementwiseLayer(LogisticSigmoid.FUNCTION) {
       @Override
@@ -93,7 +93,7 @@ public abstract class ElementwiseLayer implements NetLayer, Serializable {
       }
     };
   }
-  // TODO Leaky ReLU like relu but witn alpha * x for negative
+  // TODO Leaky ReLU like relu but with alpha * x for negative
 
   private final ScalarUnaryOperator f;
   /** output cache */

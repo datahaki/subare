@@ -51,7 +51,7 @@ class LinearLayerTest {
     Integer samples = 30;
     Scalar learningRate = RealScalar.of(0.02);
     Distribution distribution = NormalDistribution.standard();
-    NetLayer netLayer = NetChain.of(new LinearLayer(d_in, d_out));
+    NetLayer netLayer = NetChain.join(new LinearLayer(d_in, d_out));
     NetInitialize.of(netLayer);
     Tensor xdata = RandomVariate.of(distribution, samples, d_in);
     Tensor ydata = netLayer.forwardBatch(xdata);

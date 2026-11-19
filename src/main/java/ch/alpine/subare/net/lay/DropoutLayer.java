@@ -15,6 +15,7 @@ import ch.alpine.tensor.pdf.d.BernoulliDistribution;
 import ch.alpine.tensor.red.Times;
 import ch.alpine.tensor.red.Total;
 
+// TODO UNFINISHED UNTESTED WORK IN PROGRESS !!!
 public class DropoutLayer implements NetLayer, Serializable {
   public boolean training = true;
   private Scalar maintain = Rational.HALF;

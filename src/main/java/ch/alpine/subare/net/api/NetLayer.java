@@ -6,12 +6,12 @@ import java.util.stream.Stream;
 import ch.alpine.tensor.Tensor;
 
 public interface NetLayer {
-  /** forward pass
-   * 
-   * @param x
-   * @return */
+  /** @param x
+   * @return forward of x */
   Tensor forward(Tensor x);
 
+  /** @param X
+   * @return forward of entire batch */
   Tensor forwardBatch(Tensor X);
 
   /** ErrorThe element-wise or raw difference between a model's
@@ -28,8 +28,13 @@ public interface NetLayer {
    * @return */
   Tensor back(Tensor gradOutput);
 
+  /** back propagation of gradient of entire batch
+   * 
+   * @param gradOutput
+   * @return */
   Tensor backBatch(Tensor gradOutput);
 
+  /** @return stream of layers nested inside this net layer */
   default Stream<NetLayer> stream() {
     return Stream.of(this);
   }

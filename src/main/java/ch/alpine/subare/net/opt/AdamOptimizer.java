@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import ch.alpine.subare.net.NetExtract;
 import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.subare.net.api.NetOptimizer;
-import ch.alpine.subare.net.api.ParametricLayer;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -23,13 +23,13 @@ class AdamOptimizer implements NetOptimizer, Serializable {
   private class Updater {
     private static final Scalar EPS = RealScalar.of(1E-8);
     private static final ScalarUnaryOperator SUO = s -> Sqrt.FUNCTION.apply(s).add(EPS);
-    private final ParametricLayer parametricLayer;
+    private final NetLayer parametricLayer;
     Tensor m;
     Tensor v;
     Scalar beta1_t = RealScalar.ONE;
     Scalar beta2_t = RealScalar.ONE;
 
-    public Updater(ParametricLayer parametricLayer) {
+    public Updater(NetLayer parametricLayer) {
       this.parametricLayer = parametricLayer;
     }
 
@@ -57,9 +57,7 @@ class AdamOptimizer implements NetOptimizer, Serializable {
   private boolean initialized = false;
 
   public AdamOptimizer(NetLayer netLayer, boolean weightDecay, Scalar eta, Scalar beta1, Scalar beta2) {
-    list = netLayer.stream() //
-        .filter(ParametricLayer.class::isInstance) //
-        .map(ParametricLayer.class::cast) //
+    list = NetExtract.flatten(netLayer) //
         .map(Updater::new) //
         .collect(Collectors.toCollection(ArrayList::new));
     this.weightDecay = weightDecay;

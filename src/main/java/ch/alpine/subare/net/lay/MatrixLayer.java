@@ -5,9 +5,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.random.RandomGenerator;
 
+import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.subare.net.api.NetLoss;
 import ch.alpine.subare.net.api.NetRegularization;
-import ch.alpine.subare.net.api.ParametricLayer;
 import ch.alpine.subare.net.err.SquaredErrorLoss;
 import ch.alpine.subare.net.reg.L2Regularization;
 import ch.alpine.tensor.DoubleScalar;
@@ -31,7 +31,7 @@ import ch.alpine.tensor.pdf.c.NormalDistribution;
  * 
  * <p>inspired by
  * <a href="https://reference.wolfram.com/language/ref/LinearLayer.html">LinearLayer</a> */
-public class MatrixLayer implements ParametricLayer, Serializable {
+public class MatrixLayer implements NetLayer, Serializable {
   /** Dimensions: d_in x d_out */
   @PackageTestAccess
   Tensor W;

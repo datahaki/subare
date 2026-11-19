@@ -7,13 +7,14 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.io.TableBuilder;
 
+/** ONLY FOR TESTING ON SMALL NETWORKS */
 public class NetParamTracker implements NetTrainListener {
   public final TableBuilder tparam = new TableBuilder();
 
   @Override
   public boolean epoch(NetTrain netTrain) {
     int epoch = netTrain.getTotalEpochs();
-    tparam.appendRow(RealScalar.of(epoch), Tensor.of(new NetExtract(netTrain.netLayer()).all()));
+    tparam.appendRow(RealScalar.of(epoch), Tensor.of(NetExtract.parameters(netTrain.netLayer())));
     return true;
   }
 }

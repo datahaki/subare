@@ -20,18 +20,17 @@ import ch.alpine.tensor.api.TensorUnaryOperator;
 import ch.alpine.tensor.chq.DeterminateTensorQ;
 import ch.alpine.tensor.io.TableBuilder;
 import ch.alpine.tensor.pdf.Permute;
-import ch.alpine.tensor.red.Max;
 import ch.alpine.tensor.red.Total;
 import ch.alpine.tensor.sca.exp.Log;
 
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/NetTrain.html">NetTrain</a> */
 public class NetTrain implements Serializable {
+  public static final String[] LOSS_LABELS = { "data", "regularization" };
   private final transient List<NetTrainListener> list = new LinkedList<>();
   private final NetLayer netLayer;
   private final NetOptimizer netOptimizer;
   public final TableBuilder tloss = new TableBuilder();
-  private static final Scalar EPS = RealScalar.of(1E-12);
 
   /** @param netChain
    * @param trainingData output */
@@ -98,8 +97,8 @@ public class NetTrain implements Serializable {
       {
         int epoch = tloss.getRowCount();
         Scalar loss1 = Total.ofVector(lossv).divide(RealScalar.of(n));
-        Scalar loss2 = new NetExtract(netLayer).reg_loss(netOptimizer.weightDecay());
-        tloss.appendRow(RealScalar.of(epoch), loss1, Max.of(loss2, EPS));
+        Scalar loss2 = NetExtract.reg_loss(netLayer, netOptimizer.weightDecay());
+        tloss.appendRow(RealScalar.of(epoch), loss1, loss2);
       }
       allMatch &= list.stream() //
           .map(ntl -> ntl.epoch(this)) //

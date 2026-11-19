@@ -7,18 +7,18 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import ch.alpine.subare.net.NetExtract;
 import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.subare.net.api.NetOptimizer;
-import ch.alpine.subare.net.api.ParametricLayer;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 
 class MomentumOptimizer implements NetOptimizer, Serializable {
   private class Updater {
-    private final ParametricLayer parametricLayer;
+    private final NetLayer parametricLayer;
     private Tensor v = null;
 
-    public Updater(ParametricLayer parametricLayer) {
+    public Updater(NetLayer parametricLayer) {
       this.parametricLayer = parametricLayer;
     }
 
@@ -36,9 +36,7 @@ class MomentumOptimizer implements NetOptimizer, Serializable {
   private boolean initialized = false;
 
   public MomentumOptimizer(NetLayer netLayer, boolean weightDecay, Scalar eta, Scalar beta) {
-    list = netLayer.stream() //
-        .filter(ParametricLayer.class::isInstance) //
-        .map(ParametricLayer.class::cast) //
+    list = NetExtract.flatten(netLayer) //
         .map(Updater::new) //
         .collect(Collectors.toCollection(ArrayList::new));
     this.weightDecay = weightDecay;

@@ -22,6 +22,7 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Dimensions;
+import ch.alpine.tensor.chq.DeterminateTensorQ;
 import ch.alpine.tensor.io.TableBuilder;
 import ch.alpine.tensor.jet.JetScalar;
 import ch.alpine.tensor.mat.DiagonalMatrix;
@@ -30,6 +31,14 @@ import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.pdf.c.NormalDistribution;
 
 class LinearLayerTest {
+  @Test
+  void testInitialize() {
+    NetLayer ll = new LinearLayer(2, 3);
+    NetInitialize.of(ll);
+    Tensor y = ll.forward(Tensors.vector(10, 10));
+    DeterminateTensorQ.require(y);
+  }
+
   @Test
   void test() {
     LinearLayer linearLayer = new LinearLayer(1, 1);

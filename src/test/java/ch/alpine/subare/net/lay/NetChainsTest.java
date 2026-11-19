@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import ch.alpine.subare.net.NetExtract;
 import ch.alpine.subare.net.NetInitialize;
 import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.subare.net.run.NetTrainableQ;
@@ -50,6 +51,6 @@ class NetChainsTest {
     NetLayer netLayer = NetChains.argMax(NetChains.linear(() -> ElementwiseLayer.gelu(), 2, 7, 3));
     NetInitialize.of(netLayer);
     Serialization.copy(netLayer);
-    netLayer.stream().forEach(IO::println);
+    NetExtract.flatten(netLayer).forEach(IO::println);
   }
 }

@@ -32,7 +32,8 @@ public enum NetChains {
    * @param netLayer
    * @return layer that outputs vector of length 1 with integer value as entry */
   public static NetLayer argMax(NetLayer netLayer) {
-    return NetChain.join(netLayer, //
+    return NetChain.join( //
+        netLayer, //
         SoftmaxLayer.INSTANCE, //
         new ArgMaxLayer());
   }
@@ -43,7 +44,8 @@ public enum NetChains {
    * @param netLayer with final layer that returns a vector of length 1
    * @return */
   public static NetLayer binary(NetLayer netLayer) {
-    return NetChain.join(netLayer, //
+    return NetChain.join( //
+        netLayer, //
         ElementwiseLayer.sigmoid(), //
         new BinaryLayer());
   }
@@ -61,6 +63,9 @@ public enum NetChains {
    * the sequence length, and outputs vector of length 1
    * @return */
   public static NetLayer embedding(int v, int d, NetLayer netLayer) {
-    return NetChain.join(new EmbeddingLayer(v, d), new FlattenLayer(), netLayer);
+    return NetChain.join( //
+        new EmbeddingLayer(v, d), //
+        new FlattenLayer(), //
+        netLayer);
   }
 }

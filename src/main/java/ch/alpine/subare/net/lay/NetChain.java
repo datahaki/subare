@@ -58,7 +58,7 @@ public record NetChain(List<NetLayer> list) implements NetLayer, Serializable {
   }
 
   @Override
-  public Stream<NetLayer> stream() {
+  public Stream<NetLayer> nested() {
     return list.stream();
   }
 }

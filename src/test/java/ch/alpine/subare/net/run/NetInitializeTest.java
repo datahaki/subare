@@ -29,8 +29,8 @@ class NetInitializeTest {
     NetInitialize.of(netLayer2, new Random(3));
     Tensor y2 = netLayer2.forward(x);
     Tolerance.CHOP.requireClose(y1, y2);
-    List<Scalar> l1 = new NetExtract(netLayer1).all().toList();
-    List<Scalar> l2 = new NetExtract(netLayer2).all().toList();
+    List<Scalar> l1 = NetExtract.parameters(netLayer1).toList();
+    List<Scalar> l2 = NetExtract.parameters(netLayer2).toList();
     assertEquals(l1, l2);
   }
 }

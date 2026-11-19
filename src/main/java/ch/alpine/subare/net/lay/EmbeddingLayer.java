@@ -5,8 +5,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.random.RandomGenerator;
 
+import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.subare.net.api.NetRegularization;
-import ch.alpine.subare.net.api.ParametricLayer;
 import ch.alpine.subare.net.reg.L2Regularization;
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.Rational;
@@ -31,7 +31,7 @@ import ch.alpine.tensor.pdf.c.NormalDistribution;
  * 
  * inspired by
  * <a href="https://reference.wolfram.com/language/ref/EmbeddingLayer.html">EmbeddingLayer</a> */
-public class EmbeddingLayer implements ParametricLayer, Serializable {
+public class EmbeddingLayer implements NetLayer, Serializable {
   @PackageTestAccess
   Tensor W;
   // ---

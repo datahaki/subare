@@ -21,7 +21,7 @@ import ch.alpine.tensor.sca.pow.Sqrt;
 /** Adaptive Moment Estimation */
 class AdamOptimizer implements NetOptimizer, Serializable {
   private class Updater {
-    private static final Scalar EPS = RealScalar.of(1E-8);
+    private static final Scalar EPS = RealScalar.of(1E-12);
     private static final ScalarUnaryOperator SUO = s -> Sqrt.FUNCTION.apply(s).add(EPS);
     private final NetLayer netLayer;
     Tensor m;

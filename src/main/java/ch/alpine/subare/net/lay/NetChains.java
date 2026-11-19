@@ -26,6 +26,18 @@ public enum NetChains {
     return new NetChain(list);
   }
 
+  /** @param v
+   * @param d
+   * @param netLayer that takes as input a vector of length s*d where s is
+   * the sequence length, and outputs vector of length 1
+   * @return */
+  public static NetLayer embedding(int v, int d, NetLayer netLayer) {
+    return NetChain.join( //
+        new EmbeddingLayer(v, d), //
+        new FlattenLayer(), //
+        netLayer);
+  }
+
   /** the output of netLayer is a vector of length n
    * where n corresponds to the number of labels for classification
    * 
@@ -55,17 +67,5 @@ public enum NetChains {
     return NetChain.join( //
         Conv1DLayer.of(distribution, ThreadLocalRandom.current(), kernelSize), //
         ElementwiseLayer.relu());
-  }
-
-  /** @param v
-   * @param d
-   * @param netLayer that takes as input a vector of length s*d where s is
-   * the sequence length, and outputs vector of length 1
-   * @return */
-  public static NetLayer embedding(int v, int d, NetLayer netLayer) {
-    return NetChain.join( //
-        new EmbeddingLayer(v, d), //
-        new FlattenLayer(), //
-        netLayer);
   }
 }

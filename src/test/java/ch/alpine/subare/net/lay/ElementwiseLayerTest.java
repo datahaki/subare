@@ -1,24 +1,25 @@
 // code by jph
 package ch.alpine.subare.net.lay;
 
-import org.junit.jupiter.api.Test;
-
 import ch.alpine.subare.net.api.NetLayer;
-import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.jet.JetScalar;
+import ch.alpine.tensor.mat.Tolerance;
+import ch.alpine.tensor.pdf.RandomVariate;
+import ch.alpine.tensor.pdf.c.NormalDistribution;
 
 class ElementwiseLayerTest {
-  @Test
-  void test() {
-    NetLayer layer = ElementwiseLayer.sigmoid();
-    JetScalar js = JetScalar.of(RealScalar.of(1), 2);
-    Tensor x = Tensors.of(js);
-    IO.println(x);
-    Tensor y = layer.forward(x);
-    IO.println(y);
-    Tensor z = layer.back(y);
-    IO.println(z);
+  static void check(NetLayer netLayer) {
+    Tensor xx = RandomVariate.of(NormalDistribution.standard(), 2);
+    Scalar y_bar = RandomVariate.of(NormalDistribution.standard());
+    // ---
+    JetScalar y = (JetScalar) netLayer.forward(JetScalar.of(xx));
+    Scalar z = (Scalar) netLayer.back(y_bar);
+    Scalar r1 = y.vector().Get(1).multiply(y_bar);
+    Scalar r2 = z.multiply(xx.Get(1));
+    if (r2 instanceof JetScalar js)
+      r2 = js.vector().Get(0);
+    Tolerance.CHOP.requireClose(r1, r2);
   }
 }

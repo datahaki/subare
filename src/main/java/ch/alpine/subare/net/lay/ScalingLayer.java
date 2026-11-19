@@ -1,0 +1,25 @@
+// code by jph
+package ch.alpine.subare.net.lay;
+
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.io.MathematicaFormat;
+
+public class ScalingLayer extends ElementwiseLayer {
+  private final Scalar scalar;
+
+  public ScalingLayer(Scalar scalar) {
+    super(scalar::multiply);
+    this.scalar = scalar;
+  }
+
+  @Override
+  public Tensor back(Tensor gradOutput) {
+    return gradOutput.multiply(scalar);
+  }
+
+  @Override
+  protected String title() {
+    return MathematicaFormat.concise("ScalingLayer", scalar);
+  }
+}

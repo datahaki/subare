@@ -26,7 +26,7 @@ public class RMSLayer implements NetLayer, Serializable {
       gamma = x.maps(Scalar::one);
     int d = Numel.of(x);
     rmsx = Sqrt.FUNCTION.apply(Vector2NormSquared.of(x).divide(RealScalar.of(d)).add(EPS));
-    IO.println(rmsx);
+//    IO.println(rmsx);
     xhat = x.divide(rmsx);
     return Entrywise.mul().apply(xhat, gamma);
   }

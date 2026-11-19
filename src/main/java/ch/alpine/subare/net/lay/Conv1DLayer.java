@@ -75,7 +75,6 @@ public class Conv1DLayer implements NetLayer, Serializable {
         Scalar s = x.Get(i + j).multiply(dY.Get(i));
         weightsGradient.set(s::add, j);
       }
-    // IO.println(dY);
     return weightsGradient;
   }
 

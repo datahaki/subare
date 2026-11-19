@@ -5,6 +5,7 @@ import ch.alpine.subare.net.run.NetTrain;
 import ch.alpine.subare.net.run.NetTrainListener;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Flatten;
 import ch.alpine.tensor.io.TableBuilder;
 import ch.alpine.tensor.red.ScalarSummaryStatistics;
 
@@ -16,7 +17,7 @@ public class NetParamStatTracker implements NetTrainListener {
   public boolean epoch(NetTrain netTrain) {
     int epoch = netTrain.getTotalEpochs();
     ScalarSummaryStatistics scalarSummaryStatistics = //
-        NetExtract.parameters(netTrain.netLayer()) //
+        Flatten.scalars(netTrain.netLayer().parameters()) //
             .collect(ScalarSummaryStatistics.collector());
     tableBuilder.appendRow(RealScalar.of(epoch), Tensors.of( //
         scalarSummaryStatistics.getMin(), //

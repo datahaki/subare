@@ -1,7 +1,11 @@
+// code by jph
 package ch.alpine.subare.net.lay;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import ch.alpine.subare.net.NetExtract;
 import ch.alpine.subare.net.NetInitialize;
 import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.tensor.Tensor;
@@ -16,5 +20,17 @@ class ResidualLayerTest {
     NetInitialize.of(residualLayer);
     Tensor y = residualLayer.forward(Tensors.vector(10, 10));
     DeterminateTensorQ.require(y);
+  }
+
+  @Test
+  void testNested() {
+    NetLayer netLayer = NetChains.argMax( //
+        new ResidualLayer(NetChains.linear(ElementwiseLayers.GELU, 2, 7, 3)));
+    NetInitialize.of(netLayer);
+    IO.println(netLayer);
+    List<NetLayer> list = NetExtract.flatten(netLayer).toList();
+    for (NetLayer nl : list) {
+      IO.println(nl);
+    }
   }
 }

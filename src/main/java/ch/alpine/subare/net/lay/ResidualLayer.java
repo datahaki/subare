@@ -3,7 +3,9 @@ package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
 import java.util.random.RandomGenerator;
+import java.util.stream.Stream;
 
+import ch.alpine.subare.net.NetExtract;
 import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -46,6 +48,11 @@ public class ResidualLayer implements NetLayer, Serializable {
   }
 
   @Override
+  public Stream<NetLayer> nested() {
+    return NetExtract.flatten(netLayer);
+  }
+
+  @Override
   public void initialize(RandomGenerator randomGenerator) {
     netLayer.initialize(randomGenerator);
   }
@@ -61,7 +68,7 @@ public class ResidualLayer implements NetLayer, Serializable {
    * @return */
   @Override
   public Tensor gradient(boolean decayInLoss) {
-    return netLayer.gradient(decayInLoss);
+    throw new UnsupportedOperationException();
   }
 
   /** @param decayInLoss whether the gradient from the L2 (!) regularization was considered
@@ -70,7 +77,7 @@ public class ResidualLayer implements NetLayer, Serializable {
    * @param eta */
   @Override
   public void increment(boolean decayInLoss, Tensor delta, Scalar eta) {
-    netLayer.increment(decayInLoss, delta, eta);
+    throw new UnsupportedOperationException();
   }
 
   /** @return contribution to loss by weight regularization */

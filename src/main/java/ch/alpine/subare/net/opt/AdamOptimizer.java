@@ -23,18 +23,18 @@ class AdamOptimizer implements NetOptimizer, Serializable {
   private class Updater {
     private static final Scalar EPS = RealScalar.of(1E-8);
     private static final ScalarUnaryOperator SUO = s -> Sqrt.FUNCTION.apply(s).add(EPS);
-    private final NetLayer parametricLayer;
+    private final NetLayer netLayer;
     Tensor m;
     Tensor v;
     Scalar beta1_t = RealScalar.ONE;
     Scalar beta2_t = RealScalar.ONE;
 
-    public Updater(NetLayer parametricLayer) {
-      this.parametricLayer = parametricLayer;
+    public Updater(NetLayer netLayer) {
+      this.netLayer = netLayer;
     }
 
     public void update() {
-      Tensor g = parametricLayer.gradient(weightDecay);
+      Tensor g = netLayer.gradient(weightDecay);
       // ---
       m = Objects.isNull(m) ? g : LinearBinaryAverage.INSTANCE.split(g, m, beta1);
       Tensor q = Entrywise.mul().apply(g, g);
@@ -45,7 +45,7 @@ class AdamOptimizer implements NetOptimizer, Serializable {
       Tensor v_h = v.divide(RealScalar.ONE.subtract(beta2_t));
       Tensor delta = Entrywise.div().apply(m_h, v_h.maps(SUO));
       // ---
-      parametricLayer.increment(weightDecay, delta, initialized ? eta : eta.zero());
+      netLayer.increment(weightDecay, delta, initialized ? eta : eta.zero());
     }
   }
 

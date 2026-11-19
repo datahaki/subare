@@ -6,7 +6,7 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 
-public enum NoWeightDecay implements NetRegularization {
+public enum NoRegularization implements NetRegularization {
   INSTANCE;
 
   @Override
@@ -22,5 +22,10 @@ public enum NoWeightDecay implements NetRegularization {
   @Override
   public Tensor sneakDecay(boolean decayInLoss, Tensor weights) {
     return weights.maps(Scalar::zero);
+  }
+
+  @Override
+  public String toString() {
+    return "NoReg";
   }
 }

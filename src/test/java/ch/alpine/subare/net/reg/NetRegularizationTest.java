@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-class NetRegularizerTest {
+class NetRegularizationTest {
   @Test
   void test() {
-    String string = NoWeightDecay.INSTANCE.toString();
+    String string = NoRegularization.INSTANCE.toString();
     assertEquals(string, "NoReg");
   }
 }

@@ -20,7 +20,7 @@ class EmbeddingLayerTest {
     EmbeddingLayer embeddingLayer = new EmbeddingLayer(3, 4);
     NetInitialize.of(embeddingLayer);
     Tensor y = embeddingLayer.forward(Tensors.vector(0, 1, 2, 1, 0));
-    assertEquals(Dimensions.of(y), List.of(5 * 4));
+    assertEquals(Dimensions.of(y), List.of(5, 4));
     embeddingLayer.back(y);
   }
 
@@ -29,7 +29,7 @@ class EmbeddingLayerTest {
     EmbeddingLayer embeddingLayer = new EmbeddingLayer(3, 4);
     NetInitialize.of(embeddingLayer);
     Tensor y = embeddingLayer.forward(Tensors.vector(0, 2, 2, 2, 0));
-    assertEquals(Dimensions.of(y), List.of(5 * 4));
+    assertEquals(Dimensions.of(y), List.of(5, 4));
     Tensor back = embeddingLayer.back(y);
     // assertEquals(back.get(1), Array.zeros(4));
   }
@@ -40,7 +40,7 @@ class EmbeddingLayerTest {
     NetInitialize.of(embeddingLayer);
     Tensor X = RandomVariate.of(DiscreteUniformDistribution.forArray(3), 10, 5);
     Tensor Y = embeddingLayer.forwardBatch(X);
-    assertEquals(Dimensions.of(Y), List.of(10, 5 * 4));
+    assertEquals(Dimensions.of(Y), List.of(10, 5, 4));
     Tensor back = embeddingLayer.backBatch(Y);
     // assertEquals(back.get(1), Array.zeros(4));
     // IO.println(Dimensions.of(back));

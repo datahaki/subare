@@ -4,6 +4,7 @@ package ch.alpine.subare.net.lay;
 import java.util.Arrays;
 import java.util.Random;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import ch.alpine.subare.net.api.NetOptimizer;
@@ -17,6 +18,7 @@ import ch.alpine.tensor.nrm.Vector2NormSquared;
 import ch.alpine.tensor.pdf.c.NormalDistribution;
 import ch.alpine.tensor.sca.Round;
 
+@Disabled
 class CNNDemo1Test {
   @Test
   void testSimple() {

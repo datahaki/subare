@@ -57,7 +57,7 @@ public class RMSLayer implements NetLayer, Serializable {
   public Tensor backBatch(Tensor gradOutput) {
     gG = Total.of(Entrywise.mul().apply(gradOutput, xhat));
     Tensor U = Tensors.reserve(gradOutput.length());
-    // TODO possibly improve code below?
+    // TODO possibly improve code below
     for (int i = 0; i < gradOutput.length(); ++i) {
       Tensor u = Entrywise.mul().apply(gradOutput.get(i), gamma);
       U.append(u.subtract(xhat.get(i).multiply((Scalar) u.dot(xhat.get(i)).divide(d()))).divide(rmsx.Get(i)));

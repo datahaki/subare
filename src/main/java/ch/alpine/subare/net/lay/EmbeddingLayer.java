@@ -25,7 +25,7 @@ import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.pdf.c.NormalDistribution;
 
-/** Embeds integers between 0 and v-1 into a continuous vector space of dimension d.
+/** Embeds integers between 0 and (v-1) into a continuous vector space of dimension d.
  * 
  * Backpropagation stops at the embedding layer!
  * 

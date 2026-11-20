@@ -26,7 +26,9 @@ public enum NetChains {
     return new NetChain(list);
   }
 
-  /** @param v
+  /** Careful: applies flatten after embedding!
+   * 
+   * @param v
    * @param d
    * @param netLayer that takes as input a vector of length s*d where s is
    * the sequence length, and outputs vector of length 1

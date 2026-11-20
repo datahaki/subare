@@ -19,7 +19,7 @@ import ch.alpine.tensor.pdf.d.BernoulliDistribution;
 class BinaryLayerTest {
   @Test
   void test() {
-    NetLayer netLayer = NetChains.binary(NetChains.linear(() -> ElementwiseLayer.gelu(), 2, 5, 1));
+    NetLayer netLayer = NetChains.binary(NetChains.linear(ElementwiseLayers.GELU, 2, 5, 1));
     NetInitialize.of(netLayer);
     Tensor tensor = netLayer.forward(Tensors.vector(2, 3));
     VectorQ.requireLength(tensor, 1);
@@ -27,7 +27,7 @@ class BinaryLayerTest {
 
   @Test
   void testVector() {
-    NetLayer netLayer = NetChains.binary(NetChains.linear(() -> ElementwiseLayer.gelu(), 2, 8, 1));
+    NetLayer netLayer = NetChains.binary(NetChains.linear(ElementwiseLayers.GELU, 2, 8, 1));
     NetInitialize.of(netLayer);
     Tensor tensor = netLayer.forward(Tensors.vector(2, 3));
     VectorQ.requireLength(tensor, 1);
@@ -39,7 +39,7 @@ class BinaryLayerTest {
   @ParameterizedTest
   @ValueSource(ints = { 2, 3, 5, 10 })
   void testMatrix(int batch_size) {
-    NetLayer netLayer = NetChains.binary(NetChains.linear(() -> ElementwiseLayer.gelu(), 2, 8, 1));
+    NetLayer netLayer = NetChains.binary(NetChains.linear(ElementwiseLayers.GELU, 2, 8, 1));
     NetInitialize.of(netLayer);
     Tensor X = RandomVariate.of(NormalDistribution.standard(), batch_size, 2);
     Tensor Y = netLayer.forwardBatch(X);

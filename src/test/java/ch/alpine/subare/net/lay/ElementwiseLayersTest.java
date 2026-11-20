@@ -22,5 +22,6 @@ class ElementwiseLayersTest {
   void testJet(ElementwiseLayers elementwiseLayers) {
     NetLayer netLayer = elementwiseLayers.get();
     ElementwiseLayerTest.check(netLayer);
+    ElementwiseLayerTest.batch(netLayer);
   }
 }

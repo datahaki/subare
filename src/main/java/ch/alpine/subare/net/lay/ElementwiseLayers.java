@@ -4,6 +4,16 @@ package ch.alpine.subare.net.lay;
 import java.util.function.Supplier;
 
 import ch.alpine.subare.net.api.NetLayer;
+import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.api.ScalarUnaryOperator;
+import ch.alpine.tensor.io.MathematicaFormat;
+import ch.alpine.tensor.sca.Ramp;
+import ch.alpine.tensor.sca.UnitStep;
+import ch.alpine.tensor.sca.exp.DLogisticSigmoid;
+import ch.alpine.tensor.sca.exp.Gelu;
+import ch.alpine.tensor.sca.exp.LogisticSigmoid;
+import ch.alpine.tensor.sca.tri.Tanh;
 
 public enum ElementwiseLayers implements Supplier<NetLayer> {
   /** When to Use Sigmoid
@@ -24,7 +34,22 @@ public enum ElementwiseLayers implements Supplier<NetLayer> {
   SIGMOID {
     @Override
     public NetLayer get() {
-      return ElementwiseLayer.sigmoid();
+      return new SimpleElementwiseLayer() {
+        @Override
+        public Scalar func(Scalar x) {
+          return LogisticSigmoid.FUNCTION.apply(x);
+        }
+
+        @Override
+        public Tensor _back() {
+          return outputCache.maps(DLogisticSigmoid.NESTED);
+        }
+
+        @Override
+        public String title() {
+          return "LogisticSigmoidLayer";
+        }
+      };
     }
   },
   /** When to Use Tanh
@@ -47,11 +72,30 @@ public enum ElementwiseLayers implements Supplier<NetLayer> {
    * Generative Adversarial Networks (GANs):
    * Use case: The generator network in some GAN architectures uses Tanh as its final
    * activation function to map pixel values to a $[-1, 1]$ range, which often aligns
-   * well with normalized image datasets. */
+   * well with normalized image datasets.
+   * 
+   * Tanh behaves best when input∼N(0,1) */
   TANH {
     @Override
     public NetLayer get() {
-      return ElementwiseLayer.tanh();
+      return new SimpleElementwiseLayer() {
+        private final ScalarUnaryOperator df = z -> z.one().subtract(z.multiply(z));
+
+        @Override
+        public Scalar func(Scalar x) {
+          return Tanh.FUNCTION.apply(x);
+        }
+
+        @Override
+        public Tensor _back() {
+          return outputCache.maps(df);
+        }
+
+        @Override
+        public String title() {
+          return MathematicaFormat.concise("TanhLayer");
+        }
+      };
     }
   },
   /** When to Choose ReLU
@@ -71,11 +115,44 @@ public enum ElementwiseLayers implements Supplier<NetLayer> {
    * compression and faster matrix multiplications.
    * 
    * Shallow Networks: In networks with fewer than 5–10 layers, the "dying ReLU"
-   * problem is rarely severe enough to justify the overhead of GELU. */
+   * problem is rarely severe enough to justify the overhead of GELU.
+   * 
+   * No shrinkage for positive inputs. Can “kill” neurons for negative inputs */
   RELU {
     @Override
     public NetLayer get() {
-      return ElementwiseLayer.relu();
+      return new SimpleElementwiseLayer() {
+        @Override
+        public Scalar func(Scalar x) {
+          return Ramp.FUNCTION.apply(x);
+        }
+
+        @Override
+        public Tensor _back() {
+          return inputCache.maps(UnitStep.FUNCTION);
+        }
+
+        @Override
+        public String title() {
+          return "ReLULayer";
+        }
+      };
+    }
+  },
+  /** Choose SiLU when:
+   * 
+   * You want smooth gradients: SiLU is differentiable everywhere, including at zero.
+   * This avoids the sharp transition of ReLU.
+   * You want to preserve small negative values: Unlike ReLU, SiLU allows negative
+   * inputs to produce small negative outputs.
+   * You are building deep neural networks: SiLU can work well in deeper architectures
+   * where smooth activation functions are beneficial.
+   * You are implementing modern architectures: SiLU is commonly used in CNNs and
+   * Transformer-related architectures. */
+  SILU {
+    @Override
+    public NetLayer get() {
+      return new SiluLayer();
     }
   },
   /** When to Choose GELU
@@ -96,7 +173,22 @@ public enum ElementwiseLayers implements Supplier<NetLayer> {
   GELU {
     @Override
     public NetLayer get() {
-      return ElementwiseLayer.gelu();
+      return new SimpleElementwiseLayer() {
+        @Override
+        public Scalar func(Scalar x) {
+          return Gelu.FUNCTION.apply(x);
+        }
+
+        @Override
+        public Tensor _back() {
+          return inputCache.maps(Gelu::dx);
+        }
+
+        @Override
+        public String title() {
+          return "GeLULayer";
+        }
+      };
     }
   };
 }

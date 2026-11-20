@@ -22,4 +22,17 @@ class ElementwiseLayerTest {
       r2 = js.vector().Get(0);
     Tolerance.CHOP.requireClose(r1, r2);
   }
+
+  static void batch(NetLayer netLayer) {
+    Tensor xx = RandomVariate.of(NormalDistribution.standard(), 2);
+    Scalar y_bar = RandomVariate.of(NormalDistribution.standard());
+    // ---
+    JetScalar y = (JetScalar) netLayer.forwardBatch(JetScalar.of(xx));
+    Scalar z = (Scalar) netLayer.backBatch(y_bar);
+    Scalar r1 = y.vector().Get(1).multiply(y_bar);
+    Scalar r2 = z.multiply(xx.Get(1));
+    if (r2 instanceof JetScalar js)
+      r2 = js.vector().Get(0);
+    Tolerance.CHOP.requireClose(r1, r2);
+  }
 }

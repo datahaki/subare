@@ -58,7 +58,7 @@ public enum NetChains {
   public static NetLayer binary(NetLayer netLayer) {
     return NetChain.join( //
         netLayer, //
-        ElementwiseLayer.sigmoid(), //
+        ElementwiseLayers.SIGMOID.get(), //
         new BinaryLayer());
   }
 
@@ -66,6 +66,6 @@ public enum NetChains {
     Distribution distribution = NormalDistribution.of(0, 0.1);
     return NetChain.join( //
         Conv1DLayer.of(distribution, ThreadLocalRandom.current(), kernelSize), //
-        ElementwiseLayer.relu());
+        ElementwiseLayers.RELU.get());
   }
 }

@@ -4,6 +4,7 @@ package ch.alpine.subare.net.lay;
 import java.util.function.Supplier;
 
 import ch.alpine.subare.net.api.NetLayer;
+import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.api.ScalarUnaryOperator;
@@ -41,7 +42,7 @@ public enum ElementwiseLayers implements Supplier<NetLayer> {
         }
 
         @Override
-        public Tensor _back() {
+        public Tensor back() {
           return outputCache.maps(DLogisticSigmoid.NESTED);
         }
 
@@ -87,7 +88,7 @@ public enum ElementwiseLayers implements Supplier<NetLayer> {
         }
 
         @Override
-        public Tensor _back() {
+        public Tensor back() {
           return outputCache.maps(df);
         }
 
@@ -128,7 +129,7 @@ public enum ElementwiseLayers implements Supplier<NetLayer> {
         }
 
         @Override
-        public Tensor _back() {
+        public Tensor back() {
           return inputCache.maps(UnitStep.FUNCTION);
         }
 
@@ -137,6 +138,12 @@ public enum ElementwiseLayers implements Supplier<NetLayer> {
           return "ReLULayer";
         }
       };
+    }
+  },
+  LEAKY {
+    @Override
+    public NetLayer get() {
+      return LeakyReLU.of(RealScalar.of(0.01));
     }
   },
   /** Choose SiLU when:
@@ -180,7 +187,7 @@ public enum ElementwiseLayers implements Supplier<NetLayer> {
         }
 
         @Override
-        public Tensor _back() {
+        public Tensor back() {
           return inputCache.maps(Gelu::dx);
         }
 

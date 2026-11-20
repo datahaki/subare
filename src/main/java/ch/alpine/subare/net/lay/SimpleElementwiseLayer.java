@@ -7,12 +7,7 @@ import ch.alpine.tensor.red.Entrywise;
 
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/ElementwiseLayer.html">ElementwiseLayer</a> */
-abstract class SimpleElementwiseLayer extends ElementwiseLayer {
-  // TODO Leaky ReLU like relu but with alpha * x for negative
-  /** output cache */
-  transient Tensor inputCache;
-  transient Tensor outputCache;
-
+public abstract class SimpleElementwiseLayer extends ElementwiseLayer {
   public abstract Scalar func(Scalar x);
 
   @Override
@@ -20,10 +15,11 @@ abstract class SimpleElementwiseLayer extends ElementwiseLayer {
     return outputCache = ((inputCache = x).maps(this::func));
   }
 
-  public abstract Tensor _back();
+  /** @return */
+  protected abstract Tensor back();
 
   @Override
   public Tensor back(Tensor gradOutput) {
-    return Entrywise.mul().apply(gradOutput, _back());
+    return Entrywise.mul().apply(gradOutput, back());
   }
 }

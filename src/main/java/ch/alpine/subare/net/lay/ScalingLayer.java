@@ -5,7 +5,7 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.io.MathematicaFormat;
 
-public class ScalingLayer extends SimpleElementwiseLayer {
+public class ScalingLayer extends ElementwiseLayer {
   private final Scalar scalar;
 
   public ScalingLayer(Scalar scalar) {
@@ -13,7 +13,7 @@ public class ScalingLayer extends SimpleElementwiseLayer {
   }
 
   @Override
-  public Scalar func(Scalar x) {
+  public Tensor forward(Tensor x) {
     return x.multiply(scalar);
   }
 
@@ -25,10 +25,5 @@ public class ScalingLayer extends SimpleElementwiseLayer {
   @Override
   protected String title() {
     return MathematicaFormat.concise("ScalingLayer", scalar);
-  }
-
-  @Override
-  public Tensor _back() {
-    throw new UnsupportedOperationException();
   }
 }

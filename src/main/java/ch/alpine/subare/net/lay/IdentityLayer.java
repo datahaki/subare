@@ -1,3 +1,4 @@
+// code by jph
 package ch.alpine.subare.net.lay;
 
 import ch.alpine.subare.net.api.NetLayer;

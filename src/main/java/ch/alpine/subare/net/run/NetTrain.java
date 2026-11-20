@@ -128,4 +128,8 @@ public class NetTrain implements Serializable {
   public NetLayer netLayer() {
     return netLayer;
   }
+
+  public NetOptimizer netOptimizer() {
+    return netOptimizer;
+  }
 }

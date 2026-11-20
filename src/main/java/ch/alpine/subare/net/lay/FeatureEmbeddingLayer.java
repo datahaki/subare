@@ -1,3 +1,4 @@
+// code by jph
 package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
@@ -55,7 +56,7 @@ public class FeatureEmbeddingLayer implements NetLayer, Serializable {
 
   @Override
   public Tensor back(Tensor gradOutput) {
-    gW = new ArrayList<>();
+    gW = new ArrayList<>(list.size());
     int beg = 0;
     for (NetFeature netStack : list) {
       Tensor g = gradOutput.block(List.of(beg), List.of(netStack.d_out));
@@ -66,7 +67,7 @@ public class FeatureEmbeddingLayer implements NetLayer, Serializable {
 
   @Override
   public Tensor backBatch(Tensor gradOutput) {
-    gW = new ArrayList<>();
+    gW = new ArrayList<>(list.size());
     int beg = 0;
     for (NetFeature netStack : list) {
       Tensor G = gradOutput.block(List.of(0, beg), List.of(gradOutput.length(), netStack.d_out));

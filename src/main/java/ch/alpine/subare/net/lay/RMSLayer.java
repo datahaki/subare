@@ -10,6 +10,7 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.VectorQ;
 import ch.alpine.tensor.io.MathematicaFormat;
 import ch.alpine.tensor.nrm.Vector2NormSquared;
 import ch.alpine.tensor.red.Entrywise;
@@ -38,7 +39,7 @@ public class RMSLayer implements NetLayer, Serializable {
   @Override
   public Tensor forwardBatch(Tensor X) {
     if (Objects.isNull(gamma))
-      gamma = X.get(0).maps(Scalar::one);
+      gamma = VectorQ.require(X.get(0)).maps(Scalar::one);
     rmsx = Slash.of(X, RMSLayer::rms);
     xhat = Times.of(rmsx.maps(Scalar::reciprocal), X);
     return Tensor.of(xhat.stream().map(row -> Entrywise.mul().apply(row, gamma)));

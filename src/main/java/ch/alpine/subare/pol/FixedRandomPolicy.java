@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import ch.alpine.subare.mod.DiscreteModel;
 import ch.alpine.subare.util.StateAction;
 import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.num.Boole;
 import ch.alpine.tensor.pdf.Distribution;
@@ -31,8 +32,7 @@ public class FixedRandomPolicy implements Policy {
 
   @Override // from Policy
   public Distribution getDistribution(Tensor state) {
-    Tensor pdf = Tensor.of(discreteModel.actions(state).stream() //
-        .map(action -> probability(state, action)));
+    Tensor pdf = Slash.of(discreteModel.actions(state), action -> probability(state, action));
     return CategoricalDistribution.fromUnscaledPDF(pdf);
   }
 }

@@ -6,6 +6,7 @@ import java.io.Serializable;
 import ch.alpine.subare.net.api.NetLoss;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.VectorQ;
 import ch.alpine.tensor.nrm.Vector2NormSquared;
@@ -25,7 +26,7 @@ public record SquaredErrorLoss(Scalar loss, Tensor gradOutput) implements NetLos
           gradOutput);
     }
     // mean loss
-    Scalar loss = Mean.ofVector(Tensor.of(error.stream().map(Vector2NormSquared::of)));
+    Scalar loss = Mean.ofVector(Slash.of(error, Vector2NormSquared::of));
     int batch_size = error.length();
     Tensor gradOutput = error.multiply(Rational.of(2, batch_size));
     return new SquaredErrorLoss(loss, gradOutput);

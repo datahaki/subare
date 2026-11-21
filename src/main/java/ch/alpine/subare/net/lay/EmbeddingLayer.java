@@ -57,7 +57,7 @@ public class EmbeddingLayer implements NetLayer, Serializable {
     return Tensor.of(x.stream() //
         .map(Scalar.class::cast) //
         .mapToInt(Scalars::intValueExact) //
-        .mapToObj(W::get));
+        .mapToObj(W::get), x.length());
   }
 
   @Override

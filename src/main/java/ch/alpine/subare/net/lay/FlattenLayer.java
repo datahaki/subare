@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import ch.alpine.subare.net.api.NetLayer;
+import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.ArrayReshape;
 import ch.alpine.tensor.alg.Dimensions;
@@ -25,7 +26,7 @@ public class FlattenLayer implements NetLayer, Serializable {
   @Override
   public Tensor forwardBatch(Tensor X) {
     list = Dimensions.of(X);
-    return Tensor.of(X.stream().map(Flatten::of));
+    return Slash.of(X, Flatten::of);
   }
 
   @Override

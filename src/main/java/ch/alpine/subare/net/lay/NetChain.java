@@ -74,8 +74,7 @@ public record NetChain(List<NetLayer> list) implements NetLayer, Serializable {
   /** @return */
   @Override
   public Tensor parameters() {
-    return Tensor.of(list.stream() //
-        .map(NetLayer::parameters));
+    return Tensor.of(list.stream().map(NetLayer::parameters), list.size());
   }
 
   /** @param decayInLoss whether to include the gradient from the L2 (!) regularization,

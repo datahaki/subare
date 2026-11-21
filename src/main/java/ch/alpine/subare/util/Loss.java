@@ -7,6 +7,7 @@ import ch.alpine.subare.val.DiscreteQsa;
 import ch.alpine.subare.val.DiscreteVs;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.nrm.Vector1Norm;
 import ch.alpine.tensor.red.Max;
@@ -34,7 +35,7 @@ public enum Loss {
           .map(action -> ref.value(state, action)) //
           .reduce(Max::of).orElseThrow();
       // ---
-      FairArg fairArg = FairArg.max(Tensor.of(actions.stream().map(action -> qsa.value(state, action))));
+      FairArg fairArg = FairArg.max(Slash.of(actions, action -> qsa.value(state, action)));
       Scalar weight = Rational.of(1, fairArg.optionsCount());
       for (int index : fairArg.options()) {
         Tensor action = actions.get(index);

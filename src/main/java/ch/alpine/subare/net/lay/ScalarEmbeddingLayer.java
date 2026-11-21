@@ -13,10 +13,10 @@ import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.ConstantArray;
 import ch.alpine.tensor.alg.Dimensions;
-import ch.alpine.tensor.alg.VectorQ;
 import ch.alpine.tensor.ext.Int;
 import ch.alpine.tensor.ext.Integers;
 import ch.alpine.tensor.ext.PackageTestAccess;
@@ -52,7 +52,8 @@ public class ScalarEmbeddingLayer implements NetLayer, Serializable {
 
   @Override
   public Tensor forward(Tensor x) {
-    inputCache = VectorQ.requireLength(x, 1);
+    Integers.requireEquals(x.length(), 1);
+    inputCache = x;
     // returns dimensions: [x.length() * d]
     int index = Scalars.intValueExact(x.Get(0));
     return W.get(index);
@@ -60,7 +61,7 @@ public class ScalarEmbeddingLayer implements NetLayer, Serializable {
 
   @Override
   public Tensor forwardBatch(Tensor X) {
-    Tensor Y = Tensor.of(X.stream().map(this::forward));
+    Tensor Y = Slash.of(X, this::forward);
     inputCache = X; // override
     return Y;
   }

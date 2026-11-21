@@ -5,6 +5,7 @@ import java.util.random.RandomGenerator;
 
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Unprotect;
 import ch.alpine.tensor.alg.ConstantArray;
@@ -34,7 +35,7 @@ public class LinearLayer extends MatrixLayer {
 
   @Override
   public Tensor forwardBatch(Tensor X) {
-    return outputCache = Tensor.of(super.forwardBatch(X).stream().map(b::add));
+    return outputCache = Slash.of(super.forwardBatch(X), b::add);
   }
 
   /** Backward pass: computes gradients with respect to weights, bias, and i[...]

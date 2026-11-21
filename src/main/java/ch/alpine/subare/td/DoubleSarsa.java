@@ -93,7 +93,7 @@ public class DoubleSarsa extends DequeDigestAdapter implements DiscreteQsaSuppli
     PolicyExt Policy1 = flip ? policy2 : policy1;
     PolicyExt Policy2 = flip ? policy1 : policy2;
     // ---
-    Tensor rewards = Tensor.of(deque.stream().map(StepRecord::reward));
+    Tensor rewards = Tensor.of(deque.stream().map(StepRecord::reward), deque.size());
     Tensor nextState = deque.getLast().nextState();
     Scalar expectedReward = sarsaEvaluation.crossEvaluate(nextState, Policy1, Policy2);
     rewards.append(expectedReward);

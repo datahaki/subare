@@ -12,6 +12,7 @@ import ch.alpine.subare.val.DiscreteVs;
 import ch.alpine.subare.val.QsaInterface;
 import ch.alpine.subare.val.VsInterface;
 import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.api.ScalarUnaryOperator;
@@ -40,10 +41,9 @@ public enum DiscreteUtils {
   public static DiscreteVs reduce( //
       DiscreteModel discreteModel, QsaInterface qsa, BinaryOperator<Scalar> binaryOperator) {
     return DiscreteVs.build(discreteModel.states(), //
-        Tensor.of(discreteModel.states().stream() //
-            .map(state -> discreteModel.actions(state).stream() //
-                .map(action -> qsa.value(state, action)) //
-                .reduce(binaryOperator).orElseThrow()))); // <- assumes greedy policy
+        Slash.of(discreteModel.states(), state -> discreteModel.actions(state).stream() //
+            .map(action -> qsa.value(state, action)) //
+            .reduce(binaryOperator).orElseThrow())); // <- assumes greedy policy
   }
 
   /** compute state value function v(s) based on given action-value function q(s, a)

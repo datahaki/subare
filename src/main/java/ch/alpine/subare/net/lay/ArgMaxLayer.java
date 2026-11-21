@@ -6,6 +6,7 @@ import java.io.Serializable;
 import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.subare.net.api.NetLoss;
 import ch.alpine.subare.net.err.CrossEntropyLoss;
+import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.VectorQ;
@@ -17,15 +18,14 @@ public class ArgMaxLayer implements NetLayer, Serializable {
 
   @Override
   public Tensor forward(Tensor x) {
-    inputCache = VectorQ.require(x);
+    inputCache = VectorQ.require(x); // TODO VectorQ check is obsolete
     return Tensors.vector(ArgMax.of(x));
   }
 
   @Override
   public Tensor forwardBatch(Tensor X) {
     inputCache = X;
-    return Tensor.of(X.stream() //
-        .map(x -> Tensors.vector(ArgMax.of(x))));
+    return Slash.of(X, x -> Tensors.vector(ArgMax.of(x))); // ideally call this::forward
   }
 
   /** @param target */

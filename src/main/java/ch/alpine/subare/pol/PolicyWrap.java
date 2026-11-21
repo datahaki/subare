@@ -4,6 +4,7 @@ package ch.alpine.subare.pol;
 import ch.alpine.subare.mod.DiscreteModel;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.mat.Tolerance;
 import ch.alpine.tensor.pdf.Distribution;
@@ -17,7 +18,7 @@ public record PolicyWrap(Policy policy) {
    * @param actions non-empty subset of all possible actions from given state
    * @return */
   public Tensor next(Tensor state, Tensor actions) {
-    Tensor pdf = Tensor.of(actions.stream().map(action -> policy.probability(state, action)));
+    Tensor pdf = Slash.of(actions, action -> policy.probability(state, action));
     Tolerance.CHOP.requireClose(Total.ofVector(pdf), RealScalar.ONE);
     Distribution distribution = CategoricalDistribution.fromUnscaledPDF(pdf);
     return actions.get(Scalars.intValueExact(RandomVariate.of(distribution)));

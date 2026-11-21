@@ -10,6 +10,7 @@ import ch.alpine.subare.pol.StepDigest;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Unprotect;
 
 /** tracks rewards and statistics of next states for a fixed (state, action) pair
  * 
@@ -37,7 +38,7 @@ class TransitionTracker implements StepDigest {
   }
 
   public Tensor transitions() {
-    return Tensor.of(map.keySet().stream());
+    return Unprotect.collect(map.keySet());
   }
 
   public Scalar transitionProbability(Tensor next) {

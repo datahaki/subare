@@ -32,7 +32,7 @@ public class NStepTemporalDifference extends DequeDigestAdapter {
   @Override
   public void digest(Deque<StepRecord> deque) {
     StepRecord last = deque.getLast();
-    Tensor rewards = Tensor.of(deque.stream().map(StepRecord::reward));
+    Tensor rewards = Tensor.of(deque.stream().map(StepRecord::reward), deque.size());
     rewards.append(vs.value(last.nextState()));
     // ---
     final StepRecord stepRecord = deque.getFirst(); // first step in queue

@@ -7,6 +7,7 @@ import java.util.Objects;
 import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.io.MathematicaFormat;
@@ -38,7 +39,7 @@ public class RMSLayer implements NetLayer, Serializable {
   public Tensor forwardBatch(Tensor X) {
     if (Objects.isNull(gamma))
       gamma = X.get(0).maps(Scalar::one);
-    rmsx = Tensor.of(X.stream().map(RMSLayer::rms));
+    rmsx = Slash.of(X, RMSLayer::rms);
     xhat = Times.of(rmsx.maps(Scalar::reciprocal), X);
     return Tensor.of(xhat.stream().map(row -> Entrywise.mul().apply(row, gamma)));
   }

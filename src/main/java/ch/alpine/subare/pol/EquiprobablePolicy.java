@@ -9,6 +9,7 @@ import ch.alpine.subare.math.Index;
 import ch.alpine.subare.mod.DiscreteModel;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Throw;
 import ch.alpine.tensor.pdf.Distribution;
@@ -45,8 +46,7 @@ public class EquiprobablePolicy implements Policy {
 
   @Override
   public Distribution getDistribution(Tensor state) {
-    Tensor pdf = Tensor.of(discreteModel.actions(state).stream() //
-        .map(action -> probability(state, action)));
+    Tensor pdf = Slash.of(discreteModel.actions(state), action -> probability(state, action));
     return CategoricalDistribution.fromUnscaledPDF(pdf);
   }
 }

@@ -12,6 +12,7 @@ import ch.alpine.subare.val.VsInterface;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.d.CategoricalDistribution;
@@ -39,7 +40,7 @@ public class EGreedyPolicy extends PolicyBase {
   @Override
   public Tensor getBestActions(Tensor state) {
     Tensor actions = discreteModel.actions(state);
-    Tensor va = Tensor.of(actions.stream().map(action -> qsa.value(state, action)));
+    Tensor va = Slash.of(actions, action -> qsa.value(state, action));
     FairArg fairArgMax = FairArg.max(va);
     return Tensor.of(fairArgMax.options().stream().map(actions::get));
   }

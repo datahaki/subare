@@ -64,7 +64,7 @@ public class Sarsa extends DequeDigestAdapter implements DiscreteQsaSupplier, St
 
   @Override // from DequeDigest
   public final void digest(Deque<StepRecord> deque) {
-    Tensor rewards = Tensor.of(deque.stream().map(StepRecord::reward));
+    Tensor rewards = Tensor.of(deque.stream().map(StepRecord::reward), deque.size());
     Tensor nextState = deque.getLast().nextState();
     // ---
     // for terminal state in queue, "=last.next"

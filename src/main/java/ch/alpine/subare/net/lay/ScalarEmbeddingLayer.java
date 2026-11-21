@@ -31,6 +31,7 @@ import ch.alpine.tensor.pdf.c.NormalDistribution;
  * 
  * inspired by
  * <a href="https://reference.wolfram.com/language/ref/EmbeddingLayer.html">EmbeddingLayer</a> */
+// TODO misnomer
 public class ScalarEmbeddingLayer implements NetLayer, Serializable {
   @PackageTestAccess
   Tensor W;

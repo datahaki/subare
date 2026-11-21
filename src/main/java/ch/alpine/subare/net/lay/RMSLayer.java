@@ -19,6 +19,7 @@ import ch.alpine.tensor.sca.pow.Sqrt;
 public class RMSLayer implements NetLayer, Serializable {
   private static final Scalar EPS = RealScalar.of(1E-12);
   // ---
+  // TODO not public
   public Tensor gamma = null;
   private transient Tensor rmsx; // scalar (or vector for batches)
   private transient Tensor xhat; // vector (or matrix for batches)
@@ -63,6 +64,11 @@ public class RMSLayer implements NetLayer, Serializable {
       U.append(u.subtract(xhat.get(i).multiply((Scalar) u.dot(xhat.get(i)).divide(d()))).divide(rmsx.Get(i)));
     }
     return U;
+  }
+
+  @Override
+  public Tensor parameters() {
+    return gamma;
   }
 
   @Override

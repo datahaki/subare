@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.VectorQ;
 import ch.alpine.tensor.io.MathematicaFormat;
@@ -20,8 +21,9 @@ public class OneHotLayer implements NetLayer, Serializable {
   private final Tensor[] id;
 
   public OneHotLayer(int v) {
-    id = IdentityMatrix.of(v).stream() //
-        .map(Tensor::unmodifiable).toArray(Tensor[]::new);
+    id = IdentityMatrix.stream(v) //
+        .map(Tensor::unmodifiable) //
+        .toArray(Tensor[]::new);
   }
 
   @Override
@@ -33,7 +35,7 @@ public class OneHotLayer implements NetLayer, Serializable {
 
   @Override
   public Tensor forwardBatch(Tensor X) {
-    return Tensor.of(X.stream().map(x -> id[Scalars.intValueExact(x.Get(0))]));
+    return Slash.of(X, this::forward);
   }
 
   @Override

@@ -13,6 +13,7 @@ import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
+import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.ConstantArray;
 import ch.alpine.tensor.alg.Dimensions;
@@ -61,7 +62,7 @@ public class EmbeddingLayer implements NetLayer, Serializable {
 
   @Override
   public Tensor forwardBatch(Tensor X) {
-    Tensor Y = Tensor.of(X.stream().map(this::forward));
+    Tensor Y = Slash.of(X, this::forward);
     inputCache = X; // override
     return Y;
   }

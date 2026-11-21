@@ -8,6 +8,7 @@ import ch.alpine.subare.net.api.NetLayer;
 public enum NetInitialize {
   ;
   public static void of(NetLayer netLayer) {
-    netLayer.initialize(ThreadLocalRandom.current());
+    NetExtract.flatten(netLayer) //
+        .forEach(layer -> layer.initialize(ThreadLocalRandom.current()));
   }
 }

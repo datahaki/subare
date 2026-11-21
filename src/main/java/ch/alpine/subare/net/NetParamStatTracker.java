@@ -1,6 +1,7 @@
 // code by jph
 package ch.alpine.subare.net;
 
+import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.subare.net.run.NetTrain;
 import ch.alpine.subare.net.run.NetTrainListener;
 import ch.alpine.tensor.RealScalar;
@@ -16,9 +17,10 @@ public class NetParamStatTracker implements NetTrainListener {
   @Override
   public boolean epoch(NetTrain netTrain) {
     int epoch = netTrain.getTotalEpochs();
-    ScalarSummaryStatistics scalarSummaryStatistics = //
-        Flatten.scalars(netTrain.netLayer().parameters()) //
-            .collect(ScalarSummaryStatistics.collector());
+    ScalarSummaryStatistics scalarSummaryStatistics = NetExtract.flatten(netTrain.netLayer()) //
+        .map(NetLayer::parameters) //
+        .flatMap(Flatten::scalars) //
+        .collect(ScalarSummaryStatistics.collector());
     tableBuilder.appendRow(RealScalar.of(epoch), Tensors.of( //
         scalarSummaryStatistics.getMin(), //
         scalarSummaryStatistics.getMax(), //

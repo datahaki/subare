@@ -1,14 +1,15 @@
 // code by jph
 package ch.alpine.subare.net.api;
 
+import java.util.List;
 import java.util.random.RandomGenerator;
-import java.util.stream.Stream;
 
 import ch.alpine.subare.net.opt.NetOptimizers;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.Throw;
 
 public interface NetLayer {
   /** @param x
@@ -39,9 +40,17 @@ public interface NetLayer {
    * @return */
   Tensor backBatch(Tensor gradOutput);
 
-  /** @return stream of layers nested inside this net layer */
-  default Stream<NetLayer> nested() {
-    return Stream.empty();
+  /** visits all members
+   * useful for pointwise operations such as
+   * {@link #initialize(RandomGenerator)}
+   * {@link #parameters()}
+   * {@link #gradient(boolean)}
+   * {@link #increment(boolean, Tensor, Scalar)}
+   * {@link #reg_loss(boolean)}
+   * 
+   * @return all net layers directly harbored by this instance */
+  default List<NetLayer> nested() {
+    return List.of();
   }
 
   /** Parametric Layers:
@@ -71,6 +80,7 @@ public interface NetLayer {
    * @param delta
    * @param eta */
   default void increment(boolean decayInLoss, Tensor delta, Scalar eta) {
+    Throw.unless(Tensors.isEmpty(delta));
   }
 
   /** note:

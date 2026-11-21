@@ -3,16 +3,13 @@ package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.random.RandomGenerator;
 import java.util.stream.Stream;
 
 import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.subare.net.api.NetLoss;
-import ch.alpine.subare.net.api.NetOptimizer;
-import ch.alpine.subare.net.opt.NetOptimizers;
-import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.ext.MergeIllegal;
+import ch.alpine.tensor.io.MathematicaFormat;
 
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/NetChain.html">NetChain</a> */
@@ -62,49 +59,12 @@ public record NetChain(List<NetLayer> list) implements NetLayer, Serializable {
   }
 
   @Override
-  public Stream<NetLayer> nested() {
-    return list.stream();
+  public List<NetLayer> nested() {
+    return list;
   }
 
   @Override
-  public void initialize(RandomGenerator randomGenerator) {
-    list.forEach(l -> l.initialize(randomGenerator));
-  }
-
-  /** @return */
-  @Override
-  public Tensor parameters() {
-    return Tensor.of(list.stream().map(NetLayer::parameters), list.size());
-  }
-
-  /** @param decayInLoss whether to include the gradient from the L2 (!) regularization,
-   * i.e. "weight decay", in the gradient descent
-   * @return */
-  @Override
-  public Tensor gradient(boolean decayInLoss) {
-    throw new UnsupportedOperationException();
-  }
-
-  /** @param decayInLoss whether the gradient from the L2 (!) regularization was considered
-   * in the gradient descent
-   * @param delta
-   * @param eta */
-  @Override
-  public void increment(boolean decayInLoss, Tensor delta, Scalar eta) {
-    throw new UnsupportedOperationException();
-  }
-
-  /** note:
-   * for certain {@link NetOptimizer} the weight decay does not
-   * show in the loss function
-   * 
-   * @return contribution to loss by weight regularization
-   * @see NetOptimizers */
-  @Override
-  public Scalar reg_loss(boolean decayInLoss) {
-    return list.stream() //
-        .map(l -> l.reg_loss(decayInLoss)) //
-        .reduce(Scalar::add) //
-        .orElseThrow();
+  public final String toString() {
+    return MathematicaFormat.concise("NetChain", list.size());
   }
 }

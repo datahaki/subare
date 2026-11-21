@@ -5,14 +5,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.random.RandomGenerator;
 
 import ch.alpine.subare.net.api.NetLayer;
-import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Join;
 import ch.alpine.tensor.alg.VectorQ;
-import ch.alpine.tensor.ext.Int;
 import ch.alpine.tensor.io.MathematicaFormat;
 
 public class FeatureEmbeddingLayer implements NetLayer, Serializable {
@@ -77,34 +74,12 @@ public class FeatureEmbeddingLayer implements NetLayer, Serializable {
   }
 
   @Override
-  public void initialize(RandomGenerator randomGenerator) {
-    list.stream() //
-        .map(NetFeature::netLayer) //
-        .forEach(netLayer -> netLayer.initialize(randomGenerator));
-  }
-
-  @Override
-  public Tensor parameters() {
-    return Tensor.of(list.stream() //
-        .map(NetFeature::netLayer) //
-        .map(NetLayer::parameters));
-  }
-
-  @Override
-  public Tensor gradient(boolean decayInLoss) {
-    return Tensor.of(list.stream().map(netFeature -> netFeature.netLayer().gradient(decayInLoss)), list.size());
-  }
-
-  @Override
-  public void increment(boolean decayInLoss, Tensor delta, Scalar eta) {
-    Int myI = new Int();
-    delta.stream().forEach(d -> {
-      list.get(myI.getAndIncrement()).netLayer().increment(decayInLoss, d, eta);
-    });
+  public List<NetLayer> nested() {
+    return list.stream().map(NetFeature::netLayer).toList();
   }
 
   @Override
   public String toString() {
-    return MathematicaFormat.concise("FeatureEmbeddingLayer", list);
+    return MathematicaFormat.concise("FeatureEmbeddingLayer", list.size());
   }
 }

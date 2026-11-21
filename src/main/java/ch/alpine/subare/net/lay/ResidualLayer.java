@@ -2,12 +2,9 @@
 package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
-import java.util.random.RandomGenerator;
-import java.util.stream.Stream;
+import java.util.List;
 
-import ch.alpine.subare.net.NetExtract;
 import ch.alpine.subare.net.api.NetLayer;
-import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.io.MathematicaFormat;
 
@@ -19,7 +16,6 @@ import ch.alpine.tensor.io.MathematicaFormat;
  * Easier training: Deep networks become easier to optimize.
  * Preserving information: The original input is not lost as it passes through layers.
  * Deeper networks: They allow neural networks to have many more layers. */
-// TODO UNFINISHED UNTESTED WORK IN PROGRESS !!!
 public class ResidualLayer implements NetLayer, Serializable {
   private final NetLayer netLayer;
 
@@ -48,46 +44,12 @@ public class ResidualLayer implements NetLayer, Serializable {
   }
 
   @Override
-  public Stream<NetLayer> nested() {
-    return NetExtract.flatten(netLayer);
-  }
-
-  @Override
-  public void initialize(RandomGenerator randomGenerator) {
-    netLayer.initialize(randomGenerator);
-  }
-
-  /** @return */
-  @Override
-  public Tensor parameters() {
-    return netLayer.parameters();
-  }
-
-  /** @param decayInLoss whether to include the gradient from the L2 (!) regularization,
-   * i.e. "weight decay", in the gradient descent
-   * @return */
-  @Override
-  public Tensor gradient(boolean decayInLoss) {
-    throw new UnsupportedOperationException();
-  }
-
-  /** @param decayInLoss whether the gradient from the L2 (!) regularization was considered
-   * in the gradient descent
-   * @param delta
-   * @param eta */
-  @Override
-  public void increment(boolean decayInLoss, Tensor delta, Scalar eta) {
-    throw new UnsupportedOperationException();
-  }
-
-  /** @return contribution to loss by weight regularization */
-  @Override
-  public Scalar reg_loss(boolean decayInLoss) {
-    return netLayer.reg_loss(decayInLoss);
+  public List<NetLayer> nested() {
+    return List.of(netLayer);
   }
 
   @Override
   public String toString() {
-    return MathematicaFormat.concise("ResidualLayer", netLayer);
+    return MathematicaFormat.concise("ResidualLayer");
   }
 }

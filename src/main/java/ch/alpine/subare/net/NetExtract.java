@@ -17,10 +17,9 @@ import ch.alpine.tensor.alg.Transpose;
 public enum NetExtract {
   ;
   public static Stream<NetLayer> flatten(NetLayer netLayer) {
-    List<NetLayer> list = netLayer.nested().toList();
-    if (list.isEmpty())
-      return Stream.of(netLayer);
-    return netLayer.nested().flatMap(l -> flatten(l));
+    return Stream.concat( //
+        Stream.of(netLayer), //
+        netLayer.nested().stream().flatMap(layer -> flatten(layer)));
   }
 
   public static List<Tensor> parameters(NetLayer netLayer) {

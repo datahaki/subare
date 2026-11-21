@@ -84,6 +84,13 @@ public class FeatureEmbeddingLayer implements NetLayer, Serializable {
   }
 
   @Override
+  public Tensor parameters() {
+    return Tensor.of(list.stream() //
+        .map(NetFeature::netLayer) //
+        .map(NetLayer::parameters));
+  }
+
+  @Override
   public Tensor gradient(boolean decayInLoss) {
     return Tensor.of(list.stream().map(netFeature -> netFeature.netLayer().gradient(decayInLoss)), list.size());
   }

@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.Unprotect;
 import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.alg.Join;
@@ -24,7 +24,7 @@ public enum NetExtract {
 
   public static List<Tensor> parameters(NetLayer netLayer) {
     List<Tensor> list = new LinkedList<>();
-    build(list, netLayer.parameters());
+    build(list, Tensor.of(flatten(netLayer).map(NetLayer::parameters)));
     return list;
   }
 
@@ -37,7 +37,8 @@ public enum NetExtract {
       }
       List<Integer> dims = dimensions.list();
       if (dimensions.rank() == 1 && 0 < dims.get(0)) {
-        list.add(tensor.maps(Tensors::of));
+        // promote vector to row matrix
+        list.add(Unprotect.byRef(tensor));
         return;
       }
     } else
@@ -47,18 +48,31 @@ public enum NetExtract {
   public static Tensor parametersAsMatrix(NetLayer netLayer) {
     List<Tensor> list = parameters(netLayer).stream().map(m -> {
       List<Integer> dims = Dimensions.of(m);
-      return dims.get(0) < dims.get(1) ? Transpose.of(m) : m;
+      return dims.get(0) > dims.get(1) ? Transpose.of(m) : m;
     }).toList();
     List<Dimensions> dims = list.stream().map(Dimensions::new).toList();
-    int max = dims.stream().mapToInt(d -> d.list().get(0)).max().orElse(0);
+    int max = dims.stream().mapToInt(d -> d.list().get(1)).max().orElse(0);
     List<Tensor> result = new ArrayList<>();
     for (int i = 0; i < list.size(); ++i) {
       Tensor mat = list.get(i);
       List<Integer> loc = dims.get(i).list();
-      int act = loc.get(0);
+      int act = loc.get(1);
       int dif = max - act;
-      result.add(0 < dif ? Join.of(mat, Array.zeros(dif, loc.get(1))) : mat);
+      result.add(0 < dif ? Join.of(1, mat, Array.zeros(loc.get(0), dif)) : mat);
     }
-    return Join.of(1, result);
+    return Join.of(0, result);
+  }
+
+  public static List<String> toString(NetLayer netLayer) {
+    List<String> list = new LinkedList<>();
+    recur(list, 0, netLayer);
+    return list;
+  }
+
+  private static void recur(List<String> list, int level, NetLayer netLayer) {
+    String indent = "| ".repeat(level);
+    list.add(indent + netLayer);
+    for (NetLayer layer : netLayer.nested())
+      recur(list, level + 1, layer);
   }
 }

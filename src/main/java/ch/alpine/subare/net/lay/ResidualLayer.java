@@ -6,7 +6,6 @@ import java.util.List;
 
 import ch.alpine.subare.net.api.NetLayer;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.io.MathematicaFormat;
 
 /** Residual layers help solve a problem called the vanishing gradient problem
  * and make it easier to train very deep neural networks.
@@ -50,6 +49,6 @@ public class ResidualLayer implements NetLayer, Serializable {
 
   @Override
   public String toString() {
-    return MathematicaFormat.concise("ResidualLayer");
+    return "ResidualLayer";
   }
 }

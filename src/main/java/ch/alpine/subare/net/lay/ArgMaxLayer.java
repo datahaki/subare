@@ -43,4 +43,9 @@ public class ArgMaxLayer implements NetLayer, Serializable {
   public Tensor backBatch(Tensor gradOutput) {
     return gradOutput;
   }
+
+  @Override
+  public String toString() {
+    return "ArgMaxLayer";
+  }
 }

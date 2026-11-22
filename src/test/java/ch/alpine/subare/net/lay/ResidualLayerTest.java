@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import ch.alpine.subare.net.NetChains;
 import ch.alpine.subare.net.NetLayer;
 import ch.alpine.subare.net.NetLayers;
 import ch.alpine.subare.net.TrainableNetLayer;

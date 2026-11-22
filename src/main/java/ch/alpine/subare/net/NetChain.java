@@ -1,13 +1,10 @@
 // code by jph
-package ch.alpine.subare.net.lay;
+package ch.alpine.subare.net;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Stream;
 
-import ch.alpine.subare.net.NetLayer;
-import ch.alpine.subare.net.NetLoss;
-import ch.alpine.subare.net.NetOutput;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.ext.MergeIllegal;
 import ch.alpine.tensor.io.MathematicaFormat;

@@ -117,6 +117,6 @@ public class ScalarEmbeddingLayer implements TrainableNetLayer, Serializable {
 
   @Override
   public String toString() {
-    return MathematicaFormat.concise("EmbeddingLayer", W, netRegularization);
+    return MathematicaFormat.concise("ScalarEmbeddingLayer", Dimensions.of(W), netRegularization);
   }
 }

@@ -3,19 +3,28 @@
 package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
+import java.util.random.RandomGenerator;
 
 import ch.alpine.subare.net.NetLayer;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Dimensions;
+import ch.alpine.tensor.ext.PackageTestAccess;
 import ch.alpine.tensor.io.MathematicaFormat;
 import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.RandomVariate;
-import ch.alpine.tensor.pdf.d.BernoulliDistribution;
 import ch.alpine.tensor.red.Entrywise;
 
+/** inverted dropout */
 public class DropoutLayer implements NetLayer, Serializable {
+  static record DropoutDistribution(double p, Scalar factor) implements Distribution, Serializable {
+    @Override
+    public Scalar randomVariate(RandomGenerator randomGenerator) {
+      return randomGenerator.nextDouble() < p ? factor.zero() : factor;
+    }
+  }
+
   public static NetLayer of(Scalar p) {
     return new DropoutLayer(p);
   }
@@ -24,18 +33,20 @@ public class DropoutLayer implements NetLayer, Serializable {
     return of(RealScalar.of(p));
   }
 
+  @PackageTestAccess
+  static Distribution distribution(Scalar p) {
+    return new DropoutDistribution(p.number().doubleValue(), RealScalar.ONE.subtract(p).reciprocal());
+  }
+
   // ---
   private final Scalar p;
   private final Distribution distribution;
   private transient Tensor mask;
-  private final Scalar factor;
-  public boolean useDropout = true;
+  private transient boolean enabled = false;
 
   private DropoutLayer(Scalar p) {
     this.p = p;
-    Scalar _1_p = RealScalar.ONE.subtract(p);
-    distribution = BernoulliDistribution.of(_1_p);
-    factor = _1_p.reciprocal();
+    distribution = distribution(p);
   }
 
   @Override
@@ -45,12 +56,9 @@ public class DropoutLayer implements NetLayer, Serializable {
 
   @Override
   public Tensor forwardBatch(Tensor X) {
-    if (useDropout) {
-      // TODO multiplication is wasteful here!
-      mask = RandomVariate.of(distribution, Dimensions.of(X)).multiply(factor);
-      return Entrywise.mul().apply(mask, X);
-    }
-    return X; // no dropout at inference
+    return enabled //
+        ? Entrywise.mul().apply(mask = RandomVariate.of(distribution, Dimensions.of(X)), X)
+        : X; // no dropout at inference
   }
 
   @Override
@@ -60,13 +68,21 @@ public class DropoutLayer implements NetLayer, Serializable {
 
   @Override
   public Tensor backBatch(Tensor gradOutput) {
-    return useDropout //
+    return enabled //
         ? Entrywise.mul().apply(mask, gradOutput)
         : gradOutput;
   }
 
+  public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
+  }
+
+  public boolean isEnabled() {
+    return enabled;
+  }
+
   @Override
   public String toString() {
-    return MathematicaFormat.concise("DropoutLayer", p);
+    return MathematicaFormat.concise("DropoutLayer", p, enabled);
   }
 }

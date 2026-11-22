@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+import ch.alpine.subare.net.DropoutLayers;
 import ch.alpine.subare.net.NetLayer;
 import ch.alpine.subare.net.NetLayers;
 import ch.alpine.subare.net.NetLoss;
@@ -51,6 +52,7 @@ public class NetTrain {
    * @param max_epochs
    * @param timeout */
   public void runAsBatches(TrainingData trainingData, int batch_size) {
+    DropoutLayers.setEnabled(netLayer, true);
     // TODO in epoch == 0 use learning rate 0 so that optimizers can tune in
     Tensor xdata = trainingData.xdata();
     Tensor ydata = trainingData.ydata();
@@ -103,6 +105,7 @@ public class NetTrain {
           .reduce(Boolean::logicalAnd) //
           .orElseThrow();
     }
+    DropoutLayers.setEnabled(netLayer, false);
   }
 
   public int getTotalEpochs() {

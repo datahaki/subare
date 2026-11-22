@@ -24,31 +24,34 @@ import ch.alpine.tensor.api.ScalarUnaryOperator;
  */
 public enum NetLayers {
   ;
-  public static void initialize(NetLayer netLayer) {
-    initialize(netLayer, ThreadLocalRandom.current());
-  }
-
-  public static void initialize(NetLayer netLayer, RandomGenerator randomGenerator) {
-    trainableLayers(netLayer) //
-        .forEach(layer -> layer.initialize(randomGenerator));
-  }
-
+  /** @param netLayer
+   * @return */
   public static Stream<TrainableNetLayer> trainableLayers(NetLayer netLayer) {
-    return flatten(netLayer) //
+    return NetExtract.flatten(netLayer) //
         .filter(TrainableNetLayer.class::isInstance) //
         .map(TrainableNetLayer.class::cast);
   }
 
-  private static Stream<NetLayer> flatten(NetLayer netLayer) {
-    return Stream.concat( //
-        Stream.of(netLayer), //
-        netLayer.nested().flatMap(layer -> flatten(layer)));
+  /** @param netLayer
+   * @param randomGenerator */
+  public static void initialize(NetLayer netLayer, RandomGenerator randomGenerator) {
+    trainableLayers(netLayer).forEach(layer -> layer.initialize(randomGenerator));
   }
 
+  /** @param netLayer */
+  public static void initialize(NetLayer netLayer) {
+    initialize(netLayer, ThreadLocalRandom.current());
+  }
+
+  /** @param netLayer
+   * @return */
   public static Stream<Tensor> parameters(NetLayer netLayer) {
     return trainableLayers(netLayer).map(TrainableNetLayer::parameters);
   }
 
+  /** @param netLayer
+   * @param weightDecay
+   * @return */
   public static Scalar reg_loss(NetLayer netLayer, boolean weightDecay) {
     return trainableLayers(netLayer) //
         .map(layer -> layer.reg_loss(weightDecay)) //
@@ -56,11 +59,17 @@ public enum NetLayers {
         .orElse(RealScalar.ZERO);
   }
 
+  /** @param netLayer
+   * @return matrix */
   public static Tensor parametersAsMatrix(NetLayer netLayer) {
-    List<Tensor> list = parameters_(netLayer).stream().map(m -> {
-      List<Integer> dims = Dimensions.of(m);
-      return dims.get(0) > dims.get(1) ? Transpose.of(m) : m;
-    }).toList();
+    List<Tensor> list2 = new LinkedList<>();
+    build(list2, Tensor.of(parameters(netLayer)));
+    List<Tensor> list = list2 //
+        .stream() //
+        .map(m -> {
+          List<Integer> dims = Dimensions.of(m);
+          return dims.get(0) > dims.get(1) ? Transpose.of(m) : m;
+        }).toList();
     List<Dimensions> dims = list.stream().map(Dimensions::new).toList();
     int max = dims.stream().mapToInt(d -> d.list().get(1)).max().orElse(0);
     List<Tensor> result = new ArrayList<>();
@@ -72,12 +81,6 @@ public enum NetLayers {
       result.add(0 < dif ? Join.of(1, mat, Array.zeros(loc.get(0), dif)) : mat);
     }
     return Join.of(0, result);
-  }
-
-  private static List<Tensor> parameters_(NetLayer netLayer) {
-    List<Tensor> list = new LinkedList<>();
-    build(list, Tensor.of(trainableLayers(netLayer).map(TrainableNetLayer::parameters)));
-    return list;
   }
 
   private static void build(List<Tensor> list, Tensor tensor) {
@@ -97,6 +100,8 @@ public enum NetLayers {
       tensor.forEach(element -> build(list, element));
   }
 
+  /** @param netLayer
+   * @return */
   public static List<String> toString(NetLayer netLayer) {
     List<String> list = new LinkedList<>();
     recur(list, 0, netLayer);

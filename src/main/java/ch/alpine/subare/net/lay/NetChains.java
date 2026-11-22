@@ -27,7 +27,7 @@ public enum NetChains {
     return new NetChain(list);
   }
 
-  public static NetLayer linear(Supplier<NetLayer> supplier, Scalar p, int... dims) {
+  public static NetLayer linearWith(Supplier<NetLayer> supplier, Scalar p, int... dims) {
     List<NetLayer> list = new ArrayList<>();
     for (int i = 0; i < dims.length - 1; ++i) {
       if (0 < i) {

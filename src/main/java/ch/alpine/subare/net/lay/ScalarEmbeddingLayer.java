@@ -80,7 +80,7 @@ public class ScalarEmbeddingLayer implements TrainableNetLayer, Serializable {
     int n = gradOutput.length();
     Integers.requireEquals(n, inputCache.length());
     Int myI = new Int();
-    gradOutput.stream() //gradient
+    gradOutput.stream() // gradient
         .forEach(row -> gW.set(row::add, inputCache.Get(myI.getAndIncrement(), 0).number().intValue()));
     return null;
   }

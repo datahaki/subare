@@ -1,7 +1,6 @@
 // code by jph
 package ch.alpine.subare.net.run;
 
-import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -24,7 +23,7 @@ import ch.alpine.tensor.sca.exp.Log;
 
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/NetTrain.html">NetTrain</a> */
-public class NetTrain implements Serializable {
+public class NetTrain {
   public static final String[] LOSS_LABELS = { "data", "regularization" };
   private final transient List<NetTrainListener> list = new LinkedList<>();
   private final NetLayer netLayer;

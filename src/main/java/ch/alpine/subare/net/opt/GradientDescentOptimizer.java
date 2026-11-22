@@ -1,38 +1,19 @@
 // code by jph
 package ch.alpine.subare.net.opt;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import ch.alpine.subare.net.NetOptimizable;
 import ch.alpine.subare.net.NetLayer;
-import ch.alpine.subare.net.NetLayers;
+import ch.alpine.subare.net.NetOptimizable;
 import ch.alpine.tensor.Scalar;
 
 /** simple gradient descent */
-class GradientDescentOptimizer implements NetOptimizer, Serializable {
-  private final List<NetOptimizable> list;
-  private final Scalar eta;
-
+class GradientDescentOptimizer extends AbstractNetOptimizer {
   public GradientDescentOptimizer(NetLayer netLayer, Scalar eta) {
-    list = NetLayers.trainableLayers(netLayer) //
-        .collect(Collectors.toCollection(ArrayList::new));
-    this.eta = eta;
-  }
-
-  private void update(NetOptimizable linearLayer) {
-    linearLayer.step(true, linearLayer.gradient(true), eta);
+    super(netLayer, true, eta);
   }
 
   @Override
-  public void update() {
-    list.forEach(updater -> update(updater));
-  }
-
-  @Override
-  public boolean weightDecay() {
-    return true;
+  Runnable create(NetOptimizable netOptimizable) {
+    // TODO eta() should not never be zero here!
+    return () -> netOptimizable.step(weightDecay, netOptimizable.gradient(weightDecay), eta());
   }
 }

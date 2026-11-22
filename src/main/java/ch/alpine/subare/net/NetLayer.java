@@ -48,5 +48,4 @@ public interface NetLayer {
   default Stream<NetLayer> nested() {
     return Stream.empty();
   }
-
 }

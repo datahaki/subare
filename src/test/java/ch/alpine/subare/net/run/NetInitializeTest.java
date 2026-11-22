@@ -23,10 +23,9 @@ class NetInitializeTest {
     NetLayers.initialize(netLayer1, new Random(3));
     Tensor y1 = netLayer1.forward(x);
     NetLayer netLayer2 = NetChains.argMax(NetChains.linear(ElementwiseLayers.GELU, 2, 4, 5, 3));
-    NetLayers.initialize(netLayer2,new Random(3));
+    NetLayers.initialize(netLayer2, new Random(3));
     Tensor y2 = netLayer2.forward(x);
     Tolerance.CHOP.requireClose(y1, y2);
-    
     Tensor l1 = Tensor.of(NetLayers.parameters(netLayer1));
     Tensor l2 = Tensor.of(NetLayers.parameters(netLayer2));
     assertEquals(l1, l2);

@@ -1,6 +1,9 @@
 // code by jph
 package ch.alpine.subare.net.lay;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -11,6 +14,7 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.VectorQ;
 import ch.alpine.tensor.chq.ExactTensorQ;
+import ch.alpine.tensor.mat.HilbertMatrix;
 import ch.alpine.tensor.mat.MatrixQ;
 import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.pdf.c.NormalDistribution;
@@ -44,5 +48,11 @@ class ArgMaxLayerTest {
     NetLoss netError = netLayer.error(T);
     Tensor gradOutput = netError.gradOutput();
     MatrixQ.requireSize(gradOutput, batch_size, labels);
+  }
+
+  @Test
+  void testNonVector() {
+    ArgMaxLayer argMaxLayer = new ArgMaxLayer();
+    assertThrows(Exception.class, () -> argMaxLayer.forward(HilbertMatrix.of(2, 3)));
   }
 }

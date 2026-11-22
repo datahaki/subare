@@ -13,7 +13,7 @@ class NetOptimizersTest {
   @ParameterizedTest
   @EnumSource
   void test(NetOptimizers netOptimizers) {
-    MatrixLayer matrixLayer = new MatrixLayer(1, 0);
+    MatrixLayer matrixLayer = new MatrixLayer(1, 2);
     Tensor y = matrixLayer.forward(Tensors.vector(1));
     matrixLayer.back(y);
     NetOptimizer netOptimizer = netOptimizers.create(matrixLayer, RealScalar.of(0.003), RealScalar.of(0.9), RealScalar.of(0.99));

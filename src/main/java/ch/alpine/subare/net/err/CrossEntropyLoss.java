@@ -10,11 +10,10 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.Tensors;
-import ch.alpine.tensor.Unprotect;
-import ch.alpine.tensor.alg.UnitVector;
 import ch.alpine.tensor.alg.VectorQ;
 import ch.alpine.tensor.api.ScalarUnaryOperator;
+import ch.alpine.tensor.ext.Int;
+import ch.alpine.tensor.ext.Integers;
 import ch.alpine.tensor.red.Max;
 import ch.alpine.tensor.red.Mean;
 import ch.alpine.tensor.sca.Sign;
@@ -30,29 +29,25 @@ public record CrossEntropyLoss(Scalar loss, Tensor gradOutput) implements NetLos
    * of integer values between 0 and interCache.length
    * @return */
   public static NetLoss of(Tensor interCache, Tensor target) {
-    Tensor onehot;
-    Scalar loss;
     if (VectorQ.of(interCache)) {
       VectorQ.requireLength(target, 1);
       int k = Scalars.intValueExact(target.Get(0));
-      loss = safeLog(interCache.Get(k)).negate();
-      // TODO not efficient to build unit vector explicitly
-      int cc = interCache.length();
-      onehot = UnitVector.of(cc, k); // one-hot target
-      Tensor error = interCache.subtract(onehot);
+      Scalar loss = safeLog(interCache.Get(k)).negate();
+      Tensor error = interCache.copy();
+      error.set(RealScalar.ONE.negate()::add, k);
       return new CrossEntropyLoss(loss, error);
     }
+    Integers.requireEquals(interCache.length(), target.length());
     int batch_size = target.length();
     int[] index = target.stream() //
         .mapToInt(v -> Scalars.intValueExact(v.Get(0))) //
         .toArray();
-    // TODO use sparse array for fun!
-    int cc = Unprotect.dimension1Hint(interCache);
-    onehot = Tensors.vector(i -> UnitVector.of(cc, index[i]), batch_size);
-    loss = (Scalar) Mean.of(IntStream.range(0, batch_size) //
+    Scalar loss = (Scalar) Mean.of(IntStream.range(0, batch_size) //
         .mapToObj(i -> interCache.Get(i, index[i])) //
         .map(CrossEntropyLoss::safeLog)).negate();
-    Tensor error = interCache.subtract(onehot);
+    Tensor error = interCache.copy();
+    Int myI = new Int();
+    error.stream().forEach(row -> row.set(RealScalar.ONE.negate()::add, index[myI.getAndIncrement()]));
     Tensor gradOutput = error.multiply(Rational.of(1, batch_size));
     return new CrossEntropyLoss(loss, gradOutput);
   }

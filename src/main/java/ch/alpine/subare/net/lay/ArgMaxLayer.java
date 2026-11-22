@@ -9,23 +9,26 @@ import ch.alpine.subare.net.err.CrossEntropyLoss;
 import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
-import ch.alpine.tensor.alg.VectorQ;
+import ch.alpine.tensor.api.TensorUnaryOperator;
 import ch.alpine.tensor.ext.ArgMax;
 
 /** maps vector of probabilities to the ArgMax */
 public class ArgMaxLayer implements NetLayer, Serializable {
+  private static final TensorUnaryOperator FORWARD = x -> Tensors.vector(ArgMax.of(x));
   private transient Tensor inputCache;
 
+  /** {@inheritDoc}
+   * 
+   * @param x required to be a vector
+   * @return vector of length 1 with entry as non-negative integer */
   @Override
   public Tensor forward(Tensor x) {
-    inputCache = VectorQ.require(x); // TODO VectorQ check is obsolete
-    return Tensors.vector(ArgMax.of(x));
+    return FORWARD.apply(inputCache = x);
   }
 
   @Override
   public Tensor forwardBatch(Tensor X) {
-    inputCache = X;
-    return Slash.of(X, x -> Tensors.vector(ArgMax.of(x))); // ideally call this::forward
+    return Slash.of(inputCache = X, FORWARD);
   }
 
   /** @param target */

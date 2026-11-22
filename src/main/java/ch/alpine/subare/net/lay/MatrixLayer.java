@@ -18,6 +18,7 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.ConstantArray;
 import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.alg.VectorQ;
+import ch.alpine.tensor.ext.Integers;
 import ch.alpine.tensor.ext.PackageTestAccess;
 import ch.alpine.tensor.io.MathematicaFormat;
 import ch.alpine.tensor.lie.TensorProduct;
@@ -26,6 +27,7 @@ import ch.alpine.tensor.mat.TransposeMatrixDot;
 import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.pdf.c.NormalDistribution;
+import ch.alpine.tensor.sca.pow.Sqrt;
 
 /** this is a linear layer without bias
  * 
@@ -48,6 +50,8 @@ public class MatrixLayer implements TrainableNetLayer, Serializable {
   private transient Tensor gW;
 
   public MatrixLayer(int d_in, int d_out) {
+    Integers.requirePositive(d_in);
+    Integers.requirePositive(d_out);
     W = ConstantArray.of(DoubleScalar.INDETERMINATE, d_in, d_out);
   }
 
@@ -64,8 +68,6 @@ public class MatrixLayer implements TrainableNetLayer, Serializable {
     return outputCache = X.dot(W);
   }
 
-  /** Backward pass: computes gradients with respect to weights, bias, and i[...]
-   * - grad_output shape: (batch_size, out_features) -> dL/dY */
   @Override
   public Tensor back(Tensor gradOutput) {
     VectorQ.require(gradOutput);
@@ -90,7 +92,10 @@ public class MatrixLayer implements TrainableNetLayer, Serializable {
   public void initialize(RandomGenerator randomGenerator) {
     List<Integer> dims = Dimensions.of(W);
     int d_in = dims.get(0);
-    Distribution distribution = NormalDistribution.of(RealScalar.ZERO, Rational.of(2, d_in));
+    // Xavier / Glorot use sqrt(1/d_in)
+    // Kaiming / He
+    Scalar sigma = Sqrt.FUNCTION.apply(Rational.of(2, d_in));
+    Distribution distribution = NormalDistribution.of(RealScalar.ZERO, sigma);
     W = RandomVariate.of(distribution, randomGenerator, dims);
   }
 

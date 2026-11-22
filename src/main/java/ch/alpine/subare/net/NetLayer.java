@@ -7,6 +7,12 @@ import java.util.stream.Stream;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 
+/** Inference is running a trained model in production (or on new live/unseen
+ * inputs) to generate predictions or outputs for real tasks.
+ * 
+ * Evaluation is running a trained model on a held-out benchmark or test
+ * dataset to measure how well it generalizes and calculate metrics (such
+ * as accuracy, precision, recall, F1, or loss) before or during deployment. */
 public interface NetLayer {
   /** @param x
    * @return forward of x */

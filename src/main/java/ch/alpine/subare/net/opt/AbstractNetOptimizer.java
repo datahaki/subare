@@ -38,6 +38,6 @@ abstract class AbstractNetOptimizer implements NetOptimizer {
   }
 
   Scalar eta() {
-    return 0 < count ? eta : eta.zero();
+    return eta;
   }
 }

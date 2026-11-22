@@ -2,6 +2,8 @@
 package ch.alpine.subare.net.lay;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -13,6 +15,8 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.ext.Serialization;
 import ch.alpine.tensor.mat.Tolerance;
 import ch.alpine.tensor.nrm.FrobeniusNorm;
 import ch.alpine.tensor.pdf.Distribution;
@@ -57,5 +61,23 @@ class DropoutLayerTest {
     DropoutLayers.setEnabled(dropoutLayer, true);
     Tensor Z = dropoutLayer.forwardBatch(X);
     Tolerance.CHOP.requireClose(X, Z);
+  }
+
+  @Test
+  void testBackWithNullMaskAfterDisableOrDeserialization() {
+    DropoutLayer layer = (DropoutLayer) DropoutLayer.of(0.3);
+    layer.setEnabled(true);
+    DropoutLayer copy = Serialization.copy(layer);
+    assertFalse(copy.isEnabled());
+    Tensor grad = Tensors.vector(1.0, 2.0);
+    assertEquals(copy.back(grad), grad);
+  }
+
+  @Test
+  void testInvalidProbabilities() {
+    assertThrows(Exception.class, () -> DropoutLayer.of(-0.1));
+    assertThrows(Exception.class, () -> DropoutLayer.of(1.0));
+    assertThrows(Exception.class, () -> DropoutLayer.of(1.5));
+    assertThrows(Exception.class, () -> DropoutLayer.of((Number) null));
   }
 }

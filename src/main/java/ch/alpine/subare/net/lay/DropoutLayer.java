@@ -1,5 +1,4 @@
-// code by chatgpt
-// adapted by jph
+// code by jph
 package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
@@ -8,13 +7,16 @@ import java.util.random.RandomGenerator;
 import ch.alpine.subare.net.NetLayer;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Throw;
 import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.ext.PackageTestAccess;
 import ch.alpine.tensor.io.MathematicaFormat;
 import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.red.Entrywise;
+import ch.alpine.tensor.sca.Clips;
 
 /** inverted dropout */
 public class DropoutLayer implements NetLayer, Serializable {
@@ -42,9 +44,12 @@ public class DropoutLayer implements NetLayer, Serializable {
   private final Scalar p;
   private final Distribution distribution;
   private transient Tensor mask;
+  /** intended as training will enable dropout */
   private transient boolean enabled = false;
 
   private DropoutLayer(Scalar p) {
+    Clips.unit().requireInside(p);
+    Throw.unless(Scalars.lessThan(p, p.one()));
     this.p = p;
     distribution = distribution(p);
   }

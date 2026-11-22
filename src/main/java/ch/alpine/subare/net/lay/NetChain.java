@@ -7,13 +7,14 @@ import java.util.stream.Stream;
 
 import ch.alpine.subare.net.NetLayer;
 import ch.alpine.subare.net.NetLoss;
+import ch.alpine.subare.net.NetOutput;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.ext.MergeIllegal;
 import ch.alpine.tensor.io.MathematicaFormat;
 
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/NetChain.html">NetChain</a> */
-public record NetChain(List<NetLayer> list) implements NetLayer, Serializable {
+public record NetChain(List<NetLayer> list) implements NetLayer, NetOutput, Serializable {
   /** join all given net layers in the order given.
    * if any of the given net layers are instances of NetChain
    * the sequence of that net chain are brought down onto the first level
@@ -43,7 +44,7 @@ public record NetChain(List<NetLayer> list) implements NetLayer, Serializable {
 
   @Override
   public NetLoss error(Tensor target) {
-    return list.getLast().error(target);
+    return ((NetOutput) list.getLast()).error(target);
   }
 
   @Override

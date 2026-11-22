@@ -118,4 +118,8 @@ public enum NetLayers {
   public static ScalarUnaryOperator asSUO11(NetLayer netLayer) {
     return s -> netLayer.forward(Tensors.of(s)).Get(0);
   }
+
+  public static NetOutput output(NetLayer netLayer) {
+    return (NetOutput) NetExtract.flatten(netLayer).toList().getLast(); // TODO
+  }
 }

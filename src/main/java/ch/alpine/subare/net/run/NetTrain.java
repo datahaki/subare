@@ -9,6 +9,7 @@ import ch.alpine.subare.net.DropoutLayers;
 import ch.alpine.subare.net.NetLayer;
 import ch.alpine.subare.net.NetLayers;
 import ch.alpine.subare.net.NetLoss;
+import ch.alpine.subare.net.NetOutput;
 import ch.alpine.subare.net.opt.NetOptimizer;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
@@ -64,6 +65,7 @@ public class NetTrain {
     }
     // 6. Repeat until the loss becomes sufficiently small.
     boolean allMatch = true;
+    NetOutput netOutput = NetLayers.output(netLayer);
     while (allMatch) {
       // 0. Shuffle dataset indices at the beginning of every epoch
       // (Crucial for preventing the model from memorizing batch order)
@@ -80,7 +82,7 @@ public class NetTrain {
         // 2. Calculate error: Compare the prediction with the actual output.
         Tensor target = batchY.get(i);
         // IO.println("T="+Dimensions.of(target));
-        NetLoss netError = netLayer.error(target);
+        NetLoss netError = netOutput.error(target);
         // 3. Calculate loss: Apply a loss function to quantify the error.
         /** Loss:
          * A scalar value computed by a loss function (e.g., Mean

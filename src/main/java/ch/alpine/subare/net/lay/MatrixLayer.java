@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.random.RandomGenerator;
 
 import ch.alpine.subare.net.NetLoss;
+import ch.alpine.subare.net.NetOutput;
 import ch.alpine.subare.net.TrainableNetLayer;
 import ch.alpine.subare.net.err.SquaredErrorLoss;
 import ch.alpine.subare.net.reg.L2Regularization;
@@ -33,7 +34,7 @@ import ch.alpine.tensor.sca.pow.Sqrt;
  * 
  * <p>inspired by
  * <a href="https://reference.wolfram.com/language/ref/LinearLayer.html">LinearLayer</a> */
-public class MatrixLayer implements TrainableNetLayer, Serializable {
+public class MatrixLayer implements TrainableNetLayer, NetOutput, Serializable {
   /** Dimensions: d_in x d_out */
   @PackageTestAccess
   Tensor W;

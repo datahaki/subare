@@ -7,6 +7,7 @@ import java.util.random.RandomGenerator;
 
 import ch.alpine.subare.net.NetLayer;
 import ch.alpine.subare.net.NetLoss;
+import ch.alpine.subare.net.NetOutput;
 import ch.alpine.subare.net.err.SquaredErrorLoss;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
@@ -19,7 +20,7 @@ import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.red.Total;
 
 // TODO UNFINISHED UNTESTED WORK IN PROGRESS !!!
-public class Conv1DLayer implements NetLayer, Serializable {
+public class Conv1DLayer implements NetLayer, NetOutput, Serializable {
   public static Conv1DLayer of(Distribution d, RandomGenerator randomGenerator, int kernelSize) {
     Conv1DLayer conv1dLayer = new Conv1DLayer();
     conv1dLayer.w = RandomVariate.of(d, randomGenerator, kernelSize);

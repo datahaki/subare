@@ -22,16 +22,6 @@ public interface NetLayer {
    * @return forward of entire batch */
   Tensor forwardBatch(Tensor X);
 
-  /** ErrorThe element-wise or raw difference between a model's
-   * prediction and the ground truth target (e.g., error = y - target ).
-   * It is vector-valued or tensor-valued per sample.
-   * 
-   * @param target
-   * @return */
-  default NetLoss error(Tensor target) {
-    throw new UnsupportedOperationException();
-  }
-
   /** @param gradOutput
    * @return */
   Tensor back(Tensor gradOutput);

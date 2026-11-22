@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import ch.alpine.subare.net.NetLayer;
 import ch.alpine.subare.net.NetLayers;
 import ch.alpine.subare.net.NetLoss;
+import ch.alpine.subare.net.NetOutput;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.VectorQ;
@@ -31,7 +32,8 @@ class BinaryLayerTest {
     NetLayers.initialize(netLayer);
     Tensor tensor = netLayer.forward(Tensors.vector(2, 3));
     VectorQ.requireLength(tensor, 1);
-    NetLoss netError = netLayer.error(Tensors.vector(1));
+    NetOutput netOutput = NetLayers.output(netLayer);
+    NetLoss netError = netOutput.error(Tensors.vector(1));
     Tensor gradOutput = netError.gradOutput();
     VectorQ.requireLength(gradOutput, 1);
   }
@@ -45,7 +47,8 @@ class BinaryLayerTest {
     Tensor Y = netLayer.forwardBatch(X);
     MatrixQ.requireSize(Y, batch_size, 1);
     Tensor T = RandomVariate.of(BernoulliDistribution.of(.3), batch_size, 1);
-    NetLoss netError = netLayer.error(T);
+    NetOutput netOutput = NetLayers.output(netLayer);
+    NetLoss netError = netOutput.error(T);
     Tensor gradOutput = netError.gradOutput();
     MatrixQ.requireSize(gradOutput, batch_size, 1);
   }

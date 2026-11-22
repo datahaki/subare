@@ -7,15 +7,15 @@ import ch.alpine.subare.net.NetLayer;
 import ch.alpine.subare.net.NetLoss;
 import ch.alpine.subare.net.NetOutput;
 import ch.alpine.subare.net.err.CrossEntropyLoss;
+import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.api.TensorUnaryOperator;
 import ch.alpine.tensor.ext.ArgMax;
 
 /** maps vector of probabilities to the ArgMax */
 public class ArgMaxLayer implements NetLayer, NetOutput, Serializable {
-  private static final TensorUnaryOperator FORWARD = x -> Tensors.vector(ArgMax.of(x));
+  private static final TensorUnaryOperator FORWARD = x -> RealScalar.of(ArgMax.of(x));
   private transient Tensor inputCache;
 
   /** {@inheritDoc}

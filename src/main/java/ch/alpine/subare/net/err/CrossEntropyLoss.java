@@ -30,8 +30,7 @@ public record CrossEntropyLoss(Scalar loss, Tensor gradOutput) implements NetLos
    * @return */
   public static NetLoss of(Tensor interCache, Tensor target) {
     if (VectorQ.of(interCache)) {
-      VectorQ.requireLength(target, 1);
-      int k = Scalars.intValueExact(target.Get(0));
+      int k = Scalars.intValueExact((Scalar) target);
       Scalar loss = safeLog(interCache.Get(k)).negate();
       Tensor error = interCache.copy();
       error.set(RealScalar.ONE.negate()::add, k);
@@ -40,14 +39,16 @@ public record CrossEntropyLoss(Scalar loss, Tensor gradOutput) implements NetLos
     Integers.requireEquals(interCache.length(), target.length());
     int batch_size = target.length();
     int[] index = target.stream() //
-        .mapToInt(v -> Scalars.intValueExact(v.Get(0))) //
+        .map(Scalar.class::cast) //
+        .mapToInt(Scalars::intValueExact) //
         .toArray();
     Scalar loss = (Scalar) Mean.of(IntStream.range(0, batch_size) //
         .mapToObj(i -> interCache.Get(i, index[i])) //
         .map(CrossEntropyLoss::safeLog)).negate();
     Tensor error = interCache.copy();
     Int myI = new Int();
-    error.stream().forEach(row -> row.set(RealScalar.ONE.negate()::add, index[myI.getAndIncrement()]));
+    error.stream() //
+        .forEach(row -> row.set(RealScalar.ONE.negate()::add, index[myI.getAndIncrement()]));
     Tensor gradOutput = error.multiply(Rational.of(1, batch_size));
     return new CrossEntropyLoss(loss, gradOutput);
   }

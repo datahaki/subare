@@ -7,15 +7,16 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
 
 import ch.alpine.subare.net.lay.ArgMaxLayer;
-import ch.alpine.subare.net.lay.BinaryLayer;
 import ch.alpine.subare.net.lay.Conv1DLayer;
 import ch.alpine.subare.net.lay.DropoutLayer;
 import ch.alpine.subare.net.lay.ElementwiseLayers;
 import ch.alpine.subare.net.lay.EmbeddingLayer;
 import ch.alpine.subare.net.lay.FlattenLayer;
 import ch.alpine.subare.net.lay.LinearLayer;
+import ch.alpine.subare.net.lay.ScalarLayer;
 import ch.alpine.subare.net.lay.SoftmaxLayer;
 import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.c.NormalDistribution;
 
@@ -40,7 +41,8 @@ public enum NetChains {
     for (int i = 0; i < dims.length - 1; ++i) {
       if (0 < i) {
         list.add(supplier.get());
-        list.add(DropoutLayer.of(0.2));
+        if (Scalars.nonZero(p))
+          list.add(DropoutLayer.of(p));
       }
       list.add(new LinearLayer(dims[i], dims[i + 1]));
     }
@@ -73,6 +75,12 @@ public enum NetChains {
         new ArgMaxLayer());
   }
 
+  public static NetLayer scalar(NetLayer netLayer) {
+    return NetChain.join( //
+        netLayer, //
+        new ScalarLayer());
+  }
+
   /** intended for binary classification tasks
    * even though network layer does not round output to integer values (!)
    * 
@@ -82,7 +90,7 @@ public enum NetChains {
     return NetChain.join( //
         netLayer, //
         ElementwiseLayers.SIGMOID.get(), //
-        new BinaryLayer());
+        new ScalarLayer());
   }
 
   public static NetLayer cnnRelu(int kernelSize) {

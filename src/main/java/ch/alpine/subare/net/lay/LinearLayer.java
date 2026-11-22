@@ -9,6 +9,7 @@ import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Unprotect;
 import ch.alpine.tensor.alg.ConstantArray;
+import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.ext.PackageTestAccess;
 import ch.alpine.tensor.io.MathematicaFormat;
 import ch.alpine.tensor.red.Total;
@@ -77,6 +78,6 @@ public class LinearLayer extends MatrixLayer {
 
   @Override
   public String toString() {
-    return MathematicaFormat.concise("LinearLayer", W, b, netRegularization);
+    return MathematicaFormat.concise("LinearLayer", Dimensions.of(W), Dimensions.of(b), netRegularization);
   }
 }

@@ -54,7 +54,7 @@ public class NetTrain {
    * @param timeout */
   public void runAsBatches(TrainingData trainingData, int batch_size) {
     DropoutLayers.setEnabled(netLayer, true);
-    // TODO in epoch == 0 use learning rate 0 so that optimizers can tune in
+    // NetLayers.toString(netLayer).forEach(IO::println);
     Tensor xdata = trainingData.xdata();
     Tensor ydata = trainingData.ydata();
     final int n = xdata.length();

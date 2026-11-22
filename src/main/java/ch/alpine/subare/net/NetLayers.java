@@ -19,9 +19,6 @@ import ch.alpine.tensor.alg.Join;
 import ch.alpine.tensor.alg.Transpose;
 import ch.alpine.tensor.api.ScalarUnaryOperator;
 
-/**
- * 
- */
 public enum NetLayers {
   ;
   /** @param netLayer
@@ -120,6 +117,7 @@ public enum NetLayers {
   }
 
   public static NetOutput output(NetLayer netLayer) {
-    return (NetOutput) NetExtract.flatten(netLayer).toList().getLast(); // TODO
+    // TODO clumsy!
+    return (NetOutput) NetExtract.flatten(netLayer).toList().getLast();
   }
 }

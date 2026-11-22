@@ -135,6 +135,6 @@ public class MatrixLayer implements TrainableNetLayer, NetOutput, Serializable {
   @Override
   public String toString() {
     // "LinearLayer" is intentional
-    return MathematicaFormat.concise("LinearLayer", W, netRegularization);
+    return MathematicaFormat.concise("LinearLayer", Dimensions.of(W), netRegularization);
   }
 }

@@ -4,7 +4,6 @@ package ch.alpine.subare.net.opt;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
-import ch.alpine.subare.net.api.NetOptimizer;
 import ch.alpine.subare.net.lay.MatrixLayer;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensor;

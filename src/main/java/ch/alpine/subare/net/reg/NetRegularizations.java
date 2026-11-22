@@ -1,7 +1,6 @@
 // code by jph
 package ch.alpine.subare.net.reg;
 
-import ch.alpine.subare.net.api.NetRegularization;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 

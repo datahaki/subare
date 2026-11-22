@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.net.NetExtract;
-import ch.alpine.subare.net.NetInitialize;
-import ch.alpine.subare.net.api.NetLayer;
+import ch.alpine.subare.net.NetLayer;
+import ch.alpine.subare.net.NetLayers;
+import ch.alpine.subare.net.TrainableNetLayer;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.chq.DeterminateTensorQ;
@@ -17,7 +17,7 @@ class ResidualLayerTest {
   void testInitialize() {
     NetLayer ll = new LinearLayer(2, 2);
     ResidualLayer residualLayer = new ResidualLayer(ll);
-    NetInitialize.of(residualLayer);
+    NetLayers.initialize(residualLayer);
     Tensor y = residualLayer.forward(Tensors.vector(10, 10));
     DeterminateTensorQ.require(y);
   }
@@ -26,10 +26,10 @@ class ResidualLayerTest {
   void testNested() {
     NetLayer netLayer = NetChains.argMax( //
         new ResidualLayer(NetChains.linear(ElementwiseLayers.GELU, 2, 7, 3)));
-    NetInitialize.of(netLayer);
+    NetLayers.initialize(netLayer);
     IO.println(netLayer);
-    List<NetLayer> list = NetExtract.flatten(netLayer).toList();
-    for (NetLayer nl : list) {
+    List<TrainableNetLayer> list = NetLayers.trainableLayers(netLayer).toList();
+    for (TrainableNetLayer nl : list) {
       IO.println(nl);
     }
   }

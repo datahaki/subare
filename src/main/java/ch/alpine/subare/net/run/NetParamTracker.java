@@ -1,9 +1,9 @@
 // code by jph
-package ch.alpine.subare.net;
+package ch.alpine.subare.net.run;
 
-import ch.alpine.subare.net.run.NetTrain;
-import ch.alpine.subare.net.run.NetTrainListener;
+import ch.alpine.subare.net.NetLayers;
 import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.io.TableBuilder;
 
 /** ONLY FOR TESTING ON SMALL NETWORKS */
@@ -13,7 +13,7 @@ public class NetParamTracker implements NetTrainListener {
   @Override
   public boolean epoch(NetTrain netTrain) {
     int epoch = netTrain.getTotalEpochs();
-    tparam.appendRow(RealScalar.of(epoch), netTrain.netLayer().parameters());
+    tparam.appendRow(RealScalar.of(epoch), Tensor.of(NetLayers.parameters(netTrain.netLayer())));
     return true;
   }
 }

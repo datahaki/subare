@@ -7,25 +7,26 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import ch.alpine.subare.net.NetExtract;
-import ch.alpine.subare.net.api.NetLayer;
-import ch.alpine.subare.net.api.NetOptimizer;
+import ch.alpine.subare.net.NetOptimizable;
+import ch.alpine.subare.net.NetLayer;
+import ch.alpine.subare.net.NetLayers;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 
+// TODO refactor so that Adam and Moment have a common base class! 
 class MomentumOptimizer implements NetOptimizer, Serializable {
   private class Updater {
-    private final NetLayer parametricLayer;
+    private final NetOptimizable parametricLayer;
     private Tensor v = null;
 
-    public Updater(NetLayer parametricLayer) {
+    public Updater(NetOptimizable parametricLayer) {
       this.parametricLayer = parametricLayer;
     }
 
     public void update() {
       Tensor g = parametricLayer.gradient(weightDecay);
       v = Objects.isNull(v) ? g : v.multiply(beta).add(g);
-      parametricLayer.increment(weightDecay, v, initialized ? eta : eta.zero());
+      parametricLayer.step(weightDecay, v, initialized ? eta : eta.zero());
     }
   }
 
@@ -36,7 +37,7 @@ class MomentumOptimizer implements NetOptimizer, Serializable {
   private boolean initialized = false;
 
   public MomentumOptimizer(NetLayer netLayer, boolean weightDecay, Scalar eta, Scalar beta) {
-    list = NetExtract.flatten(netLayer) //
+    list = NetLayers.trainableLayers(netLayer) //
         .map(Updater::new) //
         .collect(Collectors.toCollection(ArrayList::new));
     this.weightDecay = weightDecay;

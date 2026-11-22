@@ -5,9 +5,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.random.RandomGenerator;
 
-import ch.alpine.subare.net.api.NetLayer;
-import ch.alpine.subare.net.api.NetRegularization;
+import ch.alpine.subare.net.TrainableNetLayer;
 import ch.alpine.subare.net.reg.L2Regularization;
+import ch.alpine.subare.net.reg.NetRegularization;
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
@@ -32,7 +32,7 @@ import ch.alpine.tensor.pdf.c.NormalDistribution;
  * 
  * inspired by
  * <a href="https://reference.wolfram.com/language/ref/EmbeddingLayer.html">EmbeddingLayer</a> */
-public class EmbeddingLayer implements NetLayer, Serializable {
+public class EmbeddingLayer implements TrainableNetLayer, Serializable {
   @PackageTestAccess
   Tensor W;
   // ---
@@ -109,7 +109,7 @@ public class EmbeddingLayer implements NetLayer, Serializable {
   }
 
   @Override
-  public void increment(boolean decayInLoss, Tensor delta, Scalar eta) {
+  public void step(boolean decayInLoss, Tensor delta, Scalar eta) {
     Scalar eta_negate = eta.negate();
     Tensor dW = delta.add(netRegularization.sneakDecay(decayInLoss, W));
     W = W.add(dW.multiply(eta_negate));

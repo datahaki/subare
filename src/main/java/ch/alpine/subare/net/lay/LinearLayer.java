@@ -70,8 +70,8 @@ public class LinearLayer extends MatrixLayer {
   }
 
   @Override // from ParametricLayer
-  public void increment(boolean decayInLoss, Tensor delta, Scalar eta) {
-    super.increment(decayInLoss, delta.get(0), eta);
+  public void step(boolean decayInLoss, Tensor delta, Scalar eta) {
+    super.step(decayInLoss, delta.get(0), eta);
     b = b.add(delta.get(1).multiply(eta.negate()));
   }
 

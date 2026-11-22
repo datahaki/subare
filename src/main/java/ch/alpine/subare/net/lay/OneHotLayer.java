@@ -3,7 +3,7 @@ package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
 
-import ch.alpine.subare.net.api.NetLayer;
+import ch.alpine.subare.net.NetLayer;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;

@@ -4,9 +4,9 @@ package ch.alpine.subare.net.lay;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import ch.alpine.subare.net.NetInitialize;
-import ch.alpine.subare.net.api.NetLayer;
-import ch.alpine.subare.net.api.NetLoss;
+import ch.alpine.subare.net.NetLayer;
+import ch.alpine.subare.net.NetLayers;
+import ch.alpine.subare.net.NetLoss;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.VectorQ;
@@ -21,7 +21,7 @@ class ArgMaxLayerTest {
   @ValueSource(ints = { 2, 3, 5, 10 })
   void testVector(int labels) {
     NetLayer netLayer = NetChains.argMax(NetChains.linear(ElementwiseLayers.GELU, 2, 8, labels));
-    NetInitialize.of(netLayer);
+    NetLayers.initialize(netLayer);
     Tensor tensor = netLayer.forward(Tensors.vector(2, 3));
     VectorQ.requireLength(tensor, 1);
     ExactTensorQ.require(tensor);
@@ -34,7 +34,7 @@ class ArgMaxLayerTest {
   @ValueSource(ints = { 2, 3, 5, 10 })
   void testMatrix(int labels) {
     NetLayer netLayer = NetChains.argMax(NetChains.linear(ElementwiseLayers.GELU, 2, 8, labels));
-    NetInitialize.of(netLayer);
+    NetLayers.initialize(netLayer);
     int batch_size = 5;
     Tensor X = RandomVariate.of(NormalDistribution.standard(), batch_size, 2);
     Tensor Y = netLayer.forwardBatch(X);

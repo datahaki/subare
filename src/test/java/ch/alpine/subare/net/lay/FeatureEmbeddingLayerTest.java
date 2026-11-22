@@ -3,8 +3,8 @@ package ch.alpine.subare.net.lay;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.net.NetInitialize;
-import ch.alpine.subare.net.api.NetLayer;
+import ch.alpine.subare.net.NetLayer;
+import ch.alpine.subare.net.NetLayers;
 import ch.alpine.subare.net.lay.FeatureEmbeddingLayer.NetFeature;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
@@ -18,7 +18,7 @@ class FeatureEmbeddingLayerTest {
         new NetFeature(1, 1, IdentityLayer.INSTANCE), //
         new NetFeature(1, 2, new ScalarEmbeddingLayer(5, 2)), //
         new NetFeature(2, 2, IdentityLayer.INSTANCE));
-    NetInitialize.of(netLayer);
+    NetLayers.initialize(netLayer);
     {
       Tensor y = netLayer.forward(Tensors.vector(0.2, 4, 0.1, 0.3));
       VectorQ.requireLength(y, 5);

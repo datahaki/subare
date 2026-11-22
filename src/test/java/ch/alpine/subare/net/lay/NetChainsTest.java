@@ -5,9 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.net.NetExtract;
-import ch.alpine.subare.net.NetInitialize;
-import ch.alpine.subare.net.api.NetLayer;
+import ch.alpine.subare.net.NetLayer;
+import ch.alpine.subare.net.NetLayers;
 import ch.alpine.subare.net.run.NetTrainableQ;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
@@ -18,7 +17,7 @@ class NetChainsTest {
   void test() {
     NetLayer netLayer = NetChains.linear(ElementwiseLayers.GELU, 2, 13, 7, 3);
     Serialization.copy(netLayer);
-    NetInitialize.of(netLayer);
+    NetLayers.initialize(netLayer);
     Tensor tensor = netLayer.forward(Tensors.vector(2, 3));
     assertEquals(tensor.length(), 3);
   }
@@ -34,7 +33,7 @@ class NetChainsTest {
   void testDyn() {
     int[] dims = new int[] { 2, 3, 4, 2, 3, 1 };
     NetLayer netLayer = NetChains.linear(ElementwiseLayers.GELU, dims);
-    NetInitialize.of(netLayer);
+    NetLayers.initialize(netLayer);
     Tensor tensor = netLayer.forward(Tensors.vector(2, 3));
     assertEquals(tensor.length(), 1);
   }
@@ -49,8 +48,8 @@ class NetChainsTest {
   @Test
   void testSome() {
     NetLayer netLayer = NetChains.argMax(NetChains.linear(ElementwiseLayers.GELU, 2, 7, 3));
-    NetInitialize.of(netLayer);
+    NetLayers.initialize(netLayer);
     Serialization.copy(netLayer);
-    NetExtract.flatten(netLayer).forEach(IO::println);
+    NetLayers.trainableLayers(netLayer).forEach(IO::println);
   }
 }

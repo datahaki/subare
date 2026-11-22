@@ -3,10 +3,9 @@ package ch.alpine.subare.net.run;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import ch.alpine.subare.net.NetInitialize;
-import ch.alpine.subare.net.TrainingData;
-import ch.alpine.subare.net.api.NetLayer;
-import ch.alpine.subare.net.api.NetOptimizer;
+import ch.alpine.subare.net.NetLayer;
+import ch.alpine.subare.net.NetLayers;
+import ch.alpine.subare.net.opt.NetOptimizer;
 import ch.alpine.subare.net.opt.NetOptimizers;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
@@ -21,9 +20,9 @@ public enum NetTrainableQ {
     int samples = 100;
     int batch_size = 20;
     Tensor X = RandomVariate.of(NormalDistribution.standard(), samples, d_in);
-    NetInitialize.of(netLayer);
+    NetLayers.initialize(netLayer);
     Tensor Y = netLayer.forwardBatch(X);
-    NetInitialize.of(netLayer);
+    NetLayers.initialize(netLayer);
     NetOptimizer netOptimize = NetOptimizers.SIMPLE.create(netLayer, RealScalar.of(0.1));
     NetTrain netTrain = new NetTrain(netLayer, netOptimize);
     TrainingData trainingData = new TrainingData(X, Y);

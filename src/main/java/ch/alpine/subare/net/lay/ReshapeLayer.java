@@ -3,7 +3,7 @@ package ch.alpine.subare.net.lay;
 
 import java.util.List;
 
-import ch.alpine.subare.net.api.NetLayer;
+import ch.alpine.subare.net.NetLayer;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.ArrayReshape;
 

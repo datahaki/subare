@@ -5,11 +5,11 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.random.RandomGenerator;
 
-import ch.alpine.subare.net.api.NetLayer;
-import ch.alpine.subare.net.api.NetLoss;
-import ch.alpine.subare.net.api.NetRegularization;
+import ch.alpine.subare.net.NetLoss;
+import ch.alpine.subare.net.TrainableNetLayer;
 import ch.alpine.subare.net.err.SquaredErrorLoss;
 import ch.alpine.subare.net.reg.L2Regularization;
+import ch.alpine.subare.net.reg.NetRegularization;
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
@@ -31,7 +31,7 @@ import ch.alpine.tensor.pdf.c.NormalDistribution;
  * 
  * <p>inspired by
  * <a href="https://reference.wolfram.com/language/ref/LinearLayer.html">LinearLayer</a> */
-public class MatrixLayer implements NetLayer, Serializable {
+public class MatrixLayer implements TrainableNetLayer, Serializable {
   /** Dimensions: d_in x d_out */
   @PackageTestAccess
   Tensor W;
@@ -105,7 +105,7 @@ public class MatrixLayer implements NetLayer, Serializable {
   }
 
   @Override // from ParametricLayer
-  public void increment(boolean decayInLoss, Tensor delta, Scalar eta) {
+  public void step(boolean decayInLoss, Tensor delta, Scalar eta) {
     // several cases:
     // if decayInLoss == true and L1Regularization is used: only 0 is added
     // if decayInLoss == true and L2Regularization is used: only 0 is added

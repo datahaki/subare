@@ -1,5 +1,5 @@
 // code by jph
-package ch.alpine.subare.net.api;
+package ch.alpine.subare.net.reg;
 
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

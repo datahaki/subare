@@ -10,13 +10,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import ch.alpine.subare.net.NetInitialize;
-import ch.alpine.subare.net.TrainingData;
-import ch.alpine.subare.net.api.NetLayer;
-import ch.alpine.subare.net.api.NetLoss;
-import ch.alpine.subare.net.api.NetOptimizer;
+import ch.alpine.subare.net.NetLayer;
+import ch.alpine.subare.net.NetLayers;
+import ch.alpine.subare.net.NetLoss;
+import ch.alpine.subare.net.opt.NetOptimizer;
 import ch.alpine.subare.net.opt.NetOptimizers;
 import ch.alpine.subare.net.run.NetTrain;
+import ch.alpine.subare.net.run.TrainingData;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -34,7 +34,7 @@ class LinearLayerTest {
   @Test
   void testInitialize() {
     NetLayer ll = new LinearLayer(2, 3);
-    NetInitialize.of(ll);
+    NetLayers.initialize(ll);
     Tensor y = ll.forward(Tensors.vector(10, 10));
     DeterminateTensorQ.require(y);
   }
@@ -61,12 +61,12 @@ class LinearLayerTest {
     Scalar learningRate = RealScalar.of(0.02);
     Distribution distribution = NormalDistribution.standard();
     NetLayer netLayer = NetChain.join(new LinearLayer(d_in, d_out));
-    NetInitialize.of(netLayer);
+    NetLayers.initialize(netLayer);
     Tensor xdata = RandomVariate.of(distribution, samples, d_in);
     Tensor ydata = netLayer.forwardBatch(xdata);
     TrainingData trainingData = new TrainingData(xdata, ydata);
     // ---
-    NetInitialize.of(netLayer);
+    NetLayers.initialize(netLayer);
     NetOptimizer netOptimize = NetOptimizers.SIMPLE.create(netLayer, learningRate);
     NetTrain netTrain = new NetTrain(netLayer, netOptimize);
     netTrain.setMaxEpochs(100);

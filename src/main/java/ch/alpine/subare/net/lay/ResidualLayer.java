@@ -2,9 +2,9 @@
 package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.stream.Stream;
 
-import ch.alpine.subare.net.api.NetLayer;
+import ch.alpine.subare.net.NetLayer;
 import ch.alpine.tensor.Tensor;
 
 /** Residual layers help solve a problem called the vanishing gradient problem
@@ -43,8 +43,8 @@ public class ResidualLayer implements NetLayer, Serializable {
   }
 
   @Override
-  public List<NetLayer> nested() {
-    return List.of(netLayer);
+  public Stream<NetLayer> nested() {
+    return Stream.of(netLayer);
   }
 
   @Override

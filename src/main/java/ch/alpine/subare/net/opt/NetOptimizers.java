@@ -1,8 +1,7 @@
 // code by jph
 package ch.alpine.subare.net.opt;
 
-import ch.alpine.subare.net.api.NetLayer;
-import ch.alpine.subare.net.api.NetOptimizer;
+import ch.alpine.subare.net.NetLayer;
 import ch.alpine.tensor.Scalar;
 
 public enum NetOptimizers {

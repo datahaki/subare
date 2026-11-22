@@ -7,7 +7,7 @@ import java.util.Random;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.net.api.NetOptimizer;
+import ch.alpine.subare.net.opt.NetOptimizer;
 import ch.alpine.subare.net.opt.NetOptimizers;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;

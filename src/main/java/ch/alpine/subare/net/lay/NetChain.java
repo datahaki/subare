@@ -5,8 +5,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Stream;
 
-import ch.alpine.subare.net.api.NetLayer;
-import ch.alpine.subare.net.api.NetLoss;
+import ch.alpine.subare.net.NetLayer;
+import ch.alpine.subare.net.NetLoss;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.ext.MergeIllegal;
 import ch.alpine.tensor.io.MathematicaFormat;
@@ -59,8 +59,8 @@ public record NetChain(List<NetLayer> list) implements NetLayer, Serializable {
   }
 
   @Override
-  public List<NetLayer> nested() {
-    return list;
+  public Stream<NetLayer> nested() {
+    return list.stream();
   }
 
   @Override

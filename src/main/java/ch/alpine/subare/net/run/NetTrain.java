@@ -6,11 +6,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-import ch.alpine.subare.net.NetExtract;
-import ch.alpine.subare.net.TrainingData;
-import ch.alpine.subare.net.api.NetLayer;
-import ch.alpine.subare.net.api.NetLoss;
-import ch.alpine.subare.net.api.NetOptimizer;
+import ch.alpine.subare.net.NetLayer;
+import ch.alpine.subare.net.NetLayers;
+import ch.alpine.subare.net.NetLoss;
+import ch.alpine.subare.net.opt.NetOptimizer;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -97,10 +96,7 @@ public class NetTrain implements Serializable {
       {
         int epoch = tloss.getRowCount();
         Scalar loss1 = Total.ofVector(lossv).divide(RealScalar.of(n));
-        Scalar loss2 = NetExtract.flatten(netLayer) //
-            .map(layer -> layer.reg_loss(netOptimizer.weightDecay())) //
-            .reduce(Scalar::add) //
-            .orElse(RealScalar.ZERO);
+        Scalar loss2 = NetLayers.reg_loss(netLayer, netOptimizer.weightDecay());
         tloss.appendRow(RealScalar.of(epoch), loss1, loss2);
       }
       allMatch &= list.stream() //

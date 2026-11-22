@@ -13,7 +13,7 @@ import ch.alpine.tensor.alg.Dimensions;
 class NetExtractTest {
   @Test
   void test() {
-    List<Tensor> list = NetExtract.parameters(new LinearLayer(3, 4));
+    List<Tensor> list = NetLayers.parameters(new LinearLayer(3, 4)).toList();
     assertEquals(Dimensions.of(list.get(0)), List.of(3, 4));
     assertEquals(Dimensions.of(list.get(1)), List.of(4, 1));
   }

@@ -1,5 +1,5 @@
 // code by jph
-package ch.alpine.subare.net;
+package ch.alpine.subare.net.run;
 
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.ext.Integers;

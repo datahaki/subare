@@ -5,8 +5,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
-import ch.alpine.subare.net.api.NetLayer;
+import ch.alpine.subare.net.NetLayer;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Join;
 import ch.alpine.tensor.alg.VectorQ;
@@ -74,8 +75,8 @@ public class FeatureEmbeddingLayer implements NetLayer, Serializable {
   }
 
   @Override
-  public List<NetLayer> nested() {
-    return list.stream().map(NetFeature::netLayer).toList();
+  public Stream<NetLayer> nested() {
+    return list.stream().map(NetFeature::netLayer);
   }
 
   @Override

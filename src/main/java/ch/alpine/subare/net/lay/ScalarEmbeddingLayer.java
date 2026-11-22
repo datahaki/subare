@@ -5,9 +5,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.random.RandomGenerator;
 
-import ch.alpine.subare.net.api.NetLayer;
-import ch.alpine.subare.net.api.NetRegularization;
+import ch.alpine.subare.net.TrainableNetLayer;
 import ch.alpine.subare.net.reg.L2Regularization;
+import ch.alpine.subare.net.reg.NetRegularization;
 import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
@@ -32,7 +32,7 @@ import ch.alpine.tensor.pdf.c.NormalDistribution;
  * inspired by
  * <a href="https://reference.wolfram.com/language/ref/EmbeddingLayer.html">EmbeddingLayer</a> */
 // TODO misnomer
-public class ScalarEmbeddingLayer implements NetLayer, Serializable {
+public class ScalarEmbeddingLayer implements TrainableNetLayer, Serializable {
   @PackageTestAccess
   Tensor W;
   // ---
@@ -80,7 +80,7 @@ public class ScalarEmbeddingLayer implements NetLayer, Serializable {
     int n = gradOutput.length();
     Integers.requireEquals(n, inputCache.length());
     Int myI = new Int();
-    gradOutput.stream() //
+    gradOutput.stream() //gradient
         .forEach(row -> gW.set(row::add, inputCache.Get(myI.getAndIncrement(), 0).number().intValue()));
     return null;
   }
@@ -104,7 +104,7 @@ public class ScalarEmbeddingLayer implements NetLayer, Serializable {
   }
 
   @Override
-  public void increment(boolean decayInLoss, Tensor delta, Scalar eta) {
+  public void step(boolean decayInLoss, Tensor delta, Scalar eta) {
     Scalar eta_negate = eta.negate();
     Tensor dW = delta.add(netRegularization.sneakDecay(decayInLoss, W));
     W = W.add(dW.multiply(eta_negate));

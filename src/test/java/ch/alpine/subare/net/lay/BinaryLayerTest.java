@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import ch.alpine.subare.net.NetInitialize;
-import ch.alpine.subare.net.api.NetLayer;
-import ch.alpine.subare.net.api.NetLoss;
+import ch.alpine.subare.net.NetLayer;
+import ch.alpine.subare.net.NetLayers;
+import ch.alpine.subare.net.NetLoss;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.VectorQ;
@@ -20,7 +20,7 @@ class BinaryLayerTest {
   @Test
   void test() {
     NetLayer netLayer = NetChains.binary(NetChains.linear(ElementwiseLayers.GELU, 2, 5, 1));
-    NetInitialize.of(netLayer);
+    NetLayers.initialize(netLayer);
     Tensor tensor = netLayer.forward(Tensors.vector(2, 3));
     VectorQ.requireLength(tensor, 1);
   }
@@ -28,7 +28,7 @@ class BinaryLayerTest {
   @Test
   void testVector() {
     NetLayer netLayer = NetChains.binary(NetChains.linear(ElementwiseLayers.GELU, 2, 8, 1));
-    NetInitialize.of(netLayer);
+    NetLayers.initialize(netLayer);
     Tensor tensor = netLayer.forward(Tensors.vector(2, 3));
     VectorQ.requireLength(tensor, 1);
     NetLoss netError = netLayer.error(Tensors.vector(1));
@@ -40,7 +40,7 @@ class BinaryLayerTest {
   @ValueSource(ints = { 2, 3, 5, 10 })
   void testMatrix(int batch_size) {
     NetLayer netLayer = NetChains.binary(NetChains.linear(ElementwiseLayers.GELU, 2, 8, 1));
-    NetInitialize.of(netLayer);
+    NetLayers.initialize(netLayer);
     Tensor X = RandomVariate.of(NormalDistribution.standard(), batch_size, 2);
     Tensor Y = netLayer.forwardBatch(X);
     MatrixQ.requireSize(Y, batch_size, 1);

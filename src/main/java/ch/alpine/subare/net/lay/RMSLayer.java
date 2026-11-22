@@ -3,8 +3,9 @@ package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.random.RandomGenerator;
 
-import ch.alpine.subare.net.api.NetLayer;
+import ch.alpine.subare.net.TrainableNetLayer;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Slash;
@@ -18,7 +19,7 @@ import ch.alpine.tensor.red.Times;
 import ch.alpine.tensor.red.Total;
 import ch.alpine.tensor.sca.pow.Sqrt;
 
-public class RMSLayer implements NetLayer, Serializable {
+public class RMSLayer implements TrainableNetLayer, Serializable {
   private static final Scalar EPS = RealScalar.of(1E-12);
   // ---
   // TODO not public
@@ -69,6 +70,11 @@ public class RMSLayer implements NetLayer, Serializable {
   }
 
   @Override
+  public void initialize(RandomGenerator randomGenerator) {
+    // gamma is all ones
+  }
+
+  @Override
   public Tensor parameters() {
     return gamma;
   }
@@ -79,7 +85,7 @@ public class RMSLayer implements NetLayer, Serializable {
   }
 
   @Override
-  public void increment(boolean decayInLoss, Tensor delta, Scalar eta) {
+  public void step(boolean decayInLoss, Tensor delta, Scalar eta) {
     gamma = gamma.add(delta.multiply(eta.negate()));
   }
 

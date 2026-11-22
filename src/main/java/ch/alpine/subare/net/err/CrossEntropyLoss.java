@@ -4,7 +4,7 @@ package ch.alpine.subare.net.err;
 import java.io.Serializable;
 import java.util.stream.IntStream;
 
-import ch.alpine.subare.net.api.NetLoss;
+import ch.alpine.subare.net.NetLoss;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;

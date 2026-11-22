@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.net.lay;
 
-import ch.alpine.subare.net.api.NetLayer;
+import ch.alpine.subare.net.NetLayer;
 import ch.alpine.tensor.Tensor;
 
 public enum IdentityLayer implements NetLayer {

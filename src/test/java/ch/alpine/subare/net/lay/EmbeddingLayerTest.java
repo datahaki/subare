@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.net.NetInitialize;
+import ch.alpine.subare.net.NetLayers;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Dimensions;
@@ -18,7 +18,7 @@ class EmbeddingLayerTest {
   @Test
   void test() {
     EmbeddingLayer embeddingLayer = new EmbeddingLayer(3, 4);
-    NetInitialize.of(embeddingLayer);
+    NetLayers.initialize(embeddingLayer);
     Tensor y = embeddingLayer.forward(Tensors.vector(0, 1, 2, 1, 0));
     assertEquals(Dimensions.of(y), List.of(5, 4));
     embeddingLayer.back(y);
@@ -27,7 +27,7 @@ class EmbeddingLayerTest {
   @Test
   void testZero() {
     EmbeddingLayer embeddingLayer = new EmbeddingLayer(3, 4);
-    NetInitialize.of(embeddingLayer);
+    NetLayers.initialize(embeddingLayer);
     Tensor y = embeddingLayer.forward(Tensors.vector(0, 2, 2, 2, 0));
     assertEquals(Dimensions.of(y), List.of(5, 4));
     Tensor back = embeddingLayer.back(y);
@@ -37,7 +37,7 @@ class EmbeddingLayerTest {
   @Test
   void testBatch() {
     EmbeddingLayer embeddingLayer = new EmbeddingLayer(3, 4);
-    NetInitialize.of(embeddingLayer);
+    NetLayers.initialize(embeddingLayer);
     Tensor X = RandomVariate.of(DiscreteUniformDistribution.forArray(3), 10, 5);
     Tensor Y = embeddingLayer.forwardBatch(X);
     assertEquals(Dimensions.of(Y), List.of(10, 5, 4));

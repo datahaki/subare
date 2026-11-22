@@ -1,5 +1,5 @@
 // code by jph
-package ch.alpine.subare.net.api;
+package ch.alpine.subare.net.opt;
 
 public interface NetOptimizer {
   void update();

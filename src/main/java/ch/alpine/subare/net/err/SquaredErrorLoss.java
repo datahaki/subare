@@ -28,4 +28,9 @@ public enum SquaredErrorLoss implements LossFunction {
         FrobeniusNorm.of(error).divide(RealScalar.of(batch_size)), //
         error.multiply(Rational.of(2, batch_size)));
   }
+  
+  @Override
+  public String toString() {
+    return "SquaredErrorLoss";
+  }
 }

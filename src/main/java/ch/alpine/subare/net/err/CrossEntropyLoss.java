@@ -58,4 +58,9 @@ public enum CrossEntropyLoss implements LossFunction {
   public static Scalar safeLog(Scalar value) {
     return Log.FUNCTION.apply(MAX.apply(Sign.requirePositiveOrZero(value)));
   }
+
+  @Override
+  public String toString() {
+    return "CrossEntropyLoss";
+  }
 }

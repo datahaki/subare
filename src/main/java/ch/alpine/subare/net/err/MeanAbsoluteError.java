@@ -27,4 +27,9 @@ public enum MeanAbsoluteError implements LossFunction {
   public NetLoss computeBatch(Tensor prediction, Tensor target) {
     return compute(prediction, target);
   }
+
+  @Override
+  public String toString() {
+    return "MeanAbsoluteError";
+  }
 }

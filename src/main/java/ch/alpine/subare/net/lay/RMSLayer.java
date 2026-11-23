@@ -10,9 +10,8 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.VectorQ;
-import ch.alpine.tensor.io.MathematicaFormat;
+import ch.alpine.tensor.ext.Int;
 import ch.alpine.tensor.nrm.Vector2NormSquared;
 import ch.alpine.tensor.red.Entrywise;
 import ch.alpine.tensor.red.Times;
@@ -22,8 +21,7 @@ import ch.alpine.tensor.sca.pow.Sqrt;
 public class RMSLayer implements TrainableNetLayer, Serializable {
   private static final Scalar EPS = RealScalar.of(1E-12);
   // ---
-  // TODO not public
-  public Tensor gamma = null;
+  private Tensor gamma = null;
   private transient Tensor rmsx; // scalar (or vector for batches)
   private transient Tensor xhat; // vector (or matrix for batches)
   private transient Tensor gG; // vector with same length as gamma
@@ -43,7 +41,7 @@ public class RMSLayer implements TrainableNetLayer, Serializable {
       gamma = VectorQ.require(X.get(0)).maps(Scalar::one);
     rmsx = Slash.of(X, RMSLayer::rms);
     xhat = Times.of(rmsx.maps(Scalar::reciprocal), X);
-    return Tensor.of(xhat.stream().map(row -> Entrywise.mul().apply(row, gamma)));
+    return Slash.of(xhat, Entrywise.mul().operator(gamma));
   }
 
   private static Scalar rms(Tensor x) {
@@ -53,20 +51,22 @@ public class RMSLayer implements TrainableNetLayer, Serializable {
   @Override
   public Tensor back(Tensor gradOutput) {
     gG = Entrywise.mul().apply(gradOutput, xhat);
+    Scalar d = d();
     Tensor u = Entrywise.mul().apply(gradOutput, gamma);
-    return u.subtract(xhat.multiply((Scalar) u.dot(xhat).divide(d()))).divide((Scalar) rmsx);
+    return u.subtract(xhat.multiply((Scalar) u.dot(xhat).divide(d))).divide((Scalar) rmsx);
   }
 
   @Override
   public Tensor backBatch(Tensor gradOutput) {
     gG = Total.of(Entrywise.mul().apply(gradOutput, xhat));
-    Tensor U = Tensors.reserve(gradOutput.length());
-    // TODO possibly improve code below
-    for (int i = 0; i < gradOutput.length(); ++i) {
-      Tensor u = Entrywise.mul().apply(gradOutput.get(i), gamma);
-      U.append(u.subtract(xhat.get(i).multiply((Scalar) u.dot(xhat.get(i)).divide(d()))).divide(rmsx.Get(i)));
-    }
-    return U;
+    Scalar d = d();
+    Int myI = new Int();
+    return Slash.of(gradOutput, grad -> {
+      Tensor u = Entrywise.mul().apply(grad, gamma);
+      int i = myI.getAndIncrement();
+      Tensor xhati = xhat.get(i);
+      return u.subtract(xhati.multiply((Scalar) u.dot(xhati).divide(d))).divide(rmsx.Get(i));
+    });
   }
 
   @Override
@@ -95,6 +95,6 @@ public class RMSLayer implements TrainableNetLayer, Serializable {
 
   @Override
   public String toString() {
-    return MathematicaFormat.concise("RMSLayer", gamma);
+    return "RMSLayer";
   }
 }

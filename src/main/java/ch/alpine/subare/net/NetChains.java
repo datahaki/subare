@@ -78,6 +78,9 @@ public enum NetChains {
    * @param netLayer with final layer that returns a vector of length 1
    * @return */
   public static NetLayer binary(NetLayer netLayer) {
-    return NetChain.join(netLayer, ElementwiseLayers.SIGMOID.get(), ScalarLayer.INSTANCE);
+    return NetChain.join( //
+        netLayer, //
+        ElementwiseLayers.SIGMOID.get(), //
+        ScalarLayer.INSTANCE);
   }
 }

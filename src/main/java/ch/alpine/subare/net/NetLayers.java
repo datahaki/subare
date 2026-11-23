@@ -117,7 +117,8 @@ public enum NetLayers {
   }
 
   public static NetOutput output(NetLayer netLayer) {
-    // TODO clumsy!
-    return (NetOutput) NetExtract.flatten(netLayer).toList().getLast();
+    return (NetOutput) NetExtract.flatten(netLayer) //
+        .reduce((_, second) -> second) //
+        .orElseThrow();
   }
 }

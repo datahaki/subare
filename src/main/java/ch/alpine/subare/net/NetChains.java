@@ -36,15 +36,15 @@ public enum NetChains {
     return new NetChain(list);
   }
 
-  public static NetLayer linearWith(Supplier<NetLayer> supplier, Scalar p, int... dims) {
+  public static NetLayer linearWith(List<Integer> dims, Supplier<NetLayer> supplier, Scalar p) {
     List<NetLayer> list = new ArrayList<>();
-    for (int i = 0; i < dims.length - 1; ++i) {
+    for (int i = 0; i < dims.size() - 1; ++i) {
       if (0 < i) {
         list.add(supplier.get());
         if (Scalars.nonZero(p))
           list.add(DropoutLayer.of(p));
       }
-      list.add(new LinearLayer(dims[i], dims[i + 1]));
+      list.add(new LinearLayer(dims.get(i), dims.get(i + 1)));
     }
     return new NetChain(list);
   }

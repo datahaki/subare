@@ -8,6 +8,7 @@ import java.util.random.RandomGenerator;
 import ch.alpine.subare.net.NetLoss;
 import ch.alpine.subare.net.NetOutput;
 import ch.alpine.subare.net.TrainableNetLayer;
+import ch.alpine.subare.net.err.SquaredErrorBatchLoss;
 import ch.alpine.subare.net.err.SquaredErrorLoss;
 import ch.alpine.subare.net.reg.L2Regularization;
 import ch.alpine.subare.net.reg.NetRegularization;
@@ -129,7 +130,12 @@ public class MatrixLayer implements TrainableNetLayer, NetOutput, Serializable {
 
   @Override
   public final NetLoss error(Tensor target) {
-    return SquaredErrorLoss.of(outputCache, target); // vector of length d_out
+    return SquaredErrorLoss.of(outputCache, target);
+  }
+
+  @Override
+  public NetLoss errorBatch(Tensor target) {
+    return SquaredErrorBatchLoss.of(outputCache, target);
   }
 
   @Override

@@ -82,7 +82,7 @@ public class NetTrain {
         // 2. Calculate error: Compare the prediction with the actual output.
         Tensor target = batchY.get(i);
         // IO.println("T="+Dimensions.of(target));
-        NetLoss netError = netOutput.error(target);
+        NetLoss netError = netOutput.errorBatch(target);
         // 3. Calculate loss: Apply a loss function to quantify the error.
         /** Loss:
          * A scalar value computed by a loss function (e.g., Mean

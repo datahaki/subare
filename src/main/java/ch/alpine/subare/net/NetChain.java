@@ -45,6 +45,11 @@ public record NetChain(List<NetLayer> list) implements NetLayer, NetOutput, Seri
   }
 
   @Override
+  public NetLoss errorBatch(Tensor target) {
+    return ((NetOutput) list.getLast()).errorBatch(target);
+  }
+
+  @Override
   public Tensor back(Tensor grad0) {
     return list.reversed().stream() // fold
         .reduce(grad0, (grad, layer) -> layer.back(grad), MergeIllegal.operator());

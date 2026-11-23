@@ -8,6 +8,7 @@ import java.util.random.RandomGenerator;
 import ch.alpine.subare.net.NetLayer;
 import ch.alpine.subare.net.NetLoss;
 import ch.alpine.subare.net.NetOutput;
+import ch.alpine.subare.net.err.SquaredErrorBatchLoss;
 import ch.alpine.subare.net.err.SquaredErrorLoss;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
@@ -48,6 +49,11 @@ public class Conv1DLayer implements NetLayer, NetOutput, Serializable {
   @Override
   public NetLoss error(Tensor target) {
     return SquaredErrorLoss.of(outputCache, target);
+  }
+
+  @Override
+  public NetLoss errorBatch(Tensor target) {
+    return SquaredErrorBatchLoss.of(outputCache, target);
   }
 
   @Override

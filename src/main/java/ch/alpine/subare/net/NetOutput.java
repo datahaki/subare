@@ -11,4 +11,6 @@ public interface NetOutput {
    * @param target
    * @return */
   NetLoss error(Tensor target);
+
+  NetLoss errorBatch(Tensor target);
 }

@@ -6,6 +6,7 @@ import java.io.Serializable;
 import ch.alpine.subare.net.NetLayer;
 import ch.alpine.subare.net.NetLoss;
 import ch.alpine.subare.net.NetOutput;
+import ch.alpine.subare.net.err.CrossEntropyBatchLoss;
 import ch.alpine.subare.net.err.CrossEntropyLoss;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Slash;
@@ -36,6 +37,11 @@ public class ArgMaxLayer implements NetLayer, NetOutput, Serializable {
   @Override
   public NetLoss error(Tensor target) {
     return CrossEntropyLoss.of(inputCache, target);
+  }
+
+  @Override
+  public NetLoss errorBatch(Tensor target) {
+    return CrossEntropyBatchLoss.of(inputCache, target);
   }
 
   @Override

@@ -68,10 +68,6 @@ public enum NetChains {
         ElementwiseLayers.RELU.get());
   }
 
-  public static NetLayer scalar(NetLayer netLayer) {
-    return NetChain.join(netLayer, ScalarLayer.INSTANCE);
-  }
-
   /** intended for binary classification tasks
    * even though network layer does not round output to integer values (!)
    * 
@@ -81,6 +77,6 @@ public enum NetChains {
     return NetChain.join( //
         netLayer, //
         ElementwiseLayers.SIGMOID.get(), //
-        ScalarLayer.INSTANCE);
+        ScalarLayer.VectorToScalar);
   }
 }

@@ -15,31 +15,37 @@ import ch.alpine.tensor.alg.VectorQ;
  * the output for {@link #forward(Tensor)} is of
  * type {@link Scalar} */
 public enum ScalarLayer implements NetLayer {
-  INSTANCE;
+  VectorToScalar {
+    @Override
+    public Tensor forward(Tensor x) {
+      VectorQ.requireLength(x, 1);
+      return x.Get(0);
+    }
+
+    @Override
+    public Tensor back(Tensor gradOutput) {
+      return Tensors.of(gradOutput);
+    }
+  },
+  ScalarToVector {
+    @Override
+    public Tensor forward(Tensor x) {
+      return Tensors.of(x);
+    }
+
+    @Override
+    public Tensor back(Tensor gradOutput) {
+      return gradOutput.Get(0);
+    }
+  };
 
   @Override
-  public Tensor forward(Tensor x) {
-    VectorQ.requireLength(x, 1);
-    return x.Get(0);
+  public final Tensor forwardBatch(Tensor X) {
+    return Slash.of(X, this::forward);
   }
 
   @Override
-  public Tensor forwardBatch(Tensor X) {
-    return Slash.of(X, v -> v.Get(0));
-  }
-
-  @Override
-  public Tensor back(Tensor gradOutput) {
-    return Tensors.of(gradOutput);
-  }
-
-  @Override
-  public Tensor backBatch(Tensor gradOutput) {
-    return gradOutput.maps(Tensors::of);
-  }
-
-  @Override
-  public String toString() {
-    return "ScalarLayer";
+  public final Tensor backBatch(Tensor gradOutput) {
+    return Slash.of(gradOutput, this::back);
   }
 }

@@ -1,7 +1,6 @@
 // code by jph
 package ch.alpine.subare.net;
 
-import ch.alpine.subare.net.err.SquaredErrorLoss;
 import ch.alpine.subare.net.lay.ArgMaxLayer;
 import ch.alpine.subare.net.lay.SoftmaxLayer;
 
@@ -20,9 +19,5 @@ public enum NetModels {
             SoftmaxLayer.INSTANCE, //
             argMaxLayer), //
         argMaxLayer);
-  }
-
-  public static NetModel squaredErrorLoss(NetLayer netLayer) {
-    return new NetModel(netLayer, SquaredErrorLoss.INSTANCE);
   }
 }

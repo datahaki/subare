@@ -1,19 +1,14 @@
 // code by jph
 package ch.alpine.subare.net.lay;
 
+import java.util.List;
+
 import ch.alpine.subare.net.NetLayer;
-import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.Unprotect;
 import ch.alpine.tensor.alg.VectorQ;
 
-/** typically last layer in network following
- * ElementwiseLayers.SIGMOID.get()
- * used for binary decision tasks, i.e. true or false
- * 
- * the output for {@link #forward(Tensor)} is of
- * type {@link Scalar} */
 public enum ScalarLayer implements NetLayer {
   VectorToScalar {
     @Override
@@ -24,13 +19,13 @@ public enum ScalarLayer implements NetLayer {
 
     @Override
     public Tensor back(Tensor gradOutput) {
-      return Tensors.of(gradOutput);
+      return Unprotect.using(List.of(gradOutput));
     }
   },
   ScalarToVector {
     @Override
     public Tensor forward(Tensor x) {
-      return Tensors.of(x);
+      return Unprotect.using(List.of(x));
     }
 
     @Override

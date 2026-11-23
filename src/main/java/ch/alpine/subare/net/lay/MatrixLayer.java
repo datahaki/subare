@@ -123,15 +123,6 @@ public class MatrixLayer implements TrainableNetLayer, Serializable {
   public final Scalar reg_loss(boolean weightDecay) {
     return netRegularization.penalty(weightDecay, W);
   }
-  // @Override
-  // public final NetLoss error(Tensor target) {
-  // return SquaredErrorLoss.compute(outputCache, target);
-  // }
-  //
-  // @Override
-  // public NetLoss errorBatch(Tensor target) {
-  // return SquaredErrorLoss.computeBatch(outputCache, target);
-  // }
 
   @Override
   public String toString() {

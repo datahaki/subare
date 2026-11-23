@@ -3,9 +3,9 @@ package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
 
+import ch.alpine.subare.net.LossFunction;
 import ch.alpine.subare.net.NetLayer;
 import ch.alpine.subare.net.NetLoss;
-import ch.alpine.subare.net.NetOutput;
 import ch.alpine.subare.net.err.SquaredErrorLoss;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Slash;
@@ -19,7 +19,7 @@ import ch.alpine.tensor.alg.VectorQ;
  * 
  * the output for {@link #forward(Tensor)} is of
  * type {@link Scalar} */
-public class ScalarLayer implements NetLayer, NetOutput, Serializable {
+public class ScalarLayer implements NetLayer, LossFunction, Serializable {
   transient Tensor inputCache;
 
   @Override
@@ -36,14 +36,14 @@ public class ScalarLayer implements NetLayer, NetOutput, Serializable {
   }
 
   @Override
-  public NetLoss error(Tensor target) {
+  public NetLoss compute(Tensor prediction, Tensor target) {
     Scalar scalar = (Scalar) target;
-    return SquaredErrorLoss.compute(inputCache, Tensors.of(scalar));
+    return SquaredErrorLoss.INSTANCE.compute(inputCache, Tensors.of(scalar));
   }
 
   @Override
-  public NetLoss errorBatch(Tensor target) {
-    return SquaredErrorLoss.computeBatch(inputCache, Slash.of(target, Tensors::of));
+  public NetLoss computeBatch(Tensor prediction, Tensor target) {
+    return SquaredErrorLoss.INSTANCE.computeBatch(inputCache, Slash.of(target, Tensors::of));
   }
 
   @Override

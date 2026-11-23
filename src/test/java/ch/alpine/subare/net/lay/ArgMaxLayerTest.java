@@ -8,11 +8,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import ch.alpine.subare.net.LossFunction;
 import ch.alpine.subare.net.NetChains;
 import ch.alpine.subare.net.NetLayer;
 import ch.alpine.subare.net.NetLayers;
 import ch.alpine.subare.net.NetLoss;
-import ch.alpine.subare.net.NetOutput;
+import ch.alpine.subare.net.NetModel;
+import ch.alpine.subare.net.NetModels;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
@@ -29,13 +31,14 @@ class ArgMaxLayerTest {
   @ParameterizedTest
   @ValueSource(ints = { 2, 3, 5, 10 })
   void testVector(int labels) {
-    NetLayer netLayer = NetChains.argMax(NetChains.linear(ElementwiseLayers.GELU, 2, 8, labels));
+    NetModel netModel = NetModels.argMax(NetChains.linear(ElementwiseLayers.GELU, 2, 8, labels));
+    NetLayer netLayer = netModel.netLayer();
+    LossFunction lossFunction = netModel.lossFunction();
     NetLayers.initialize(netLayer);
     Tensor tensor = netLayer.forward(Tensors.vector(2, 3));
     assertInstanceOf(Scalar.class, tensor);
     ExactTensorQ.require(tensor);
-    NetOutput netOutput = NetLayers.output(netLayer);
-    NetLoss netError = netOutput.error(RealScalar.ONE);
+    NetLoss netError = lossFunction.compute(tensor, RealScalar.ONE);
     Tensor gradOutput = netError.gradOutput();
     VectorQ.requireLength(gradOutput, labels);
   }
@@ -43,8 +46,9 @@ class ArgMaxLayerTest {
   @ParameterizedTest
   @ValueSource(ints = { 2, 3, 5, 10 })
   void testMatrix(int labels) {
-    NetLayer netLayer = NetChains.argMax(NetChains.linear(ElementwiseLayers.GELU, 2, 8, labels));
-    NetOutput output = NetLayers.output(netLayer);
+    NetModel netModel = NetModels.argMax(NetChains.linear(ElementwiseLayers.GELU, 2, 8, labels));
+    NetLayer netLayer = netModel.netLayer();
+    LossFunction lossFunction = netModel.lossFunction();
     NetLayers.initialize(netLayer);
     int batch_size = 5;
     Tensor X = RandomVariate.of(NormalDistribution.standard(), batch_size, 2);
@@ -52,7 +56,7 @@ class ArgMaxLayerTest {
     VectorQ.requireLength(Y, batch_size);
     ExactTensorQ.require(Y);
     Tensor T = RandomVariate.of(BernoulliDistribution.of(.3), batch_size);
-    NetLoss netError = output.errorBatch(T);
+    NetLoss netError = lossFunction.computeBatch(Y, T);
     Tensor gradOutput = netError.gradOutput();
     MatrixQ.requireSize(gradOutput, batch_size, labels);
   }

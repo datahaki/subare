@@ -11,7 +11,7 @@ import ch.alpine.tensor.io.MathematicaFormat;
 
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/NetChain.html">NetChain</a> */
-public record NetChain(List<NetLayer> list) implements NetLayer, NetOutput, Serializable {
+public record NetChain(List<NetLayer> list) implements NetLayer, Serializable {
   /** join all given net layers in the order given.
    * if any of the given net layers are instances of NetChain
    * the sequence of that net chain are brought down onto the first level
@@ -37,16 +37,6 @@ public record NetChain(List<NetLayer> list) implements NetLayer, NetOutput, Seri
   public Tensor forwardBatch(Tensor X0) {
     return list.stream() // fold
         .reduce(X0, (X, layer) -> layer.forwardBatch(X), MergeIllegal.operator());
-  }
-
-  @Override
-  public NetLoss error(Tensor target) {
-    return ((NetOutput) list.getLast()).error(target);
-  }
-
-  @Override
-  public NetLoss errorBatch(Tensor target) {
-    return ((NetOutput) list.getLast()).errorBatch(target);
   }
 
   @Override

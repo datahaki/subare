@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.Objects;
 
 import ch.alpine.subare.net.DropoutLayers;
+import ch.alpine.subare.net.LossFunction;
 import ch.alpine.subare.net.NetLayer;
 import ch.alpine.subare.net.NetLayers;
 import ch.alpine.subare.net.NetLoss;
-import ch.alpine.subare.net.NetOutput;
+import ch.alpine.subare.net.NetModel;
 import ch.alpine.subare.net.opt.NetOptimizer;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
@@ -28,14 +29,14 @@ import ch.alpine.tensor.sca.exp.Log;
 public class NetTrain {
   public static final String[] LOSS_LABELS = { "data", "regularization" };
   private final transient List<NetTrainListener> list = new LinkedList<>();
-  private final NetLayer netLayer;
+  private final NetModel netModel;
   private final NetOptimizer netOptimizer;
   public final TableBuilder tloss = new TableBuilder();
 
   /** @param netChain
    * @param trainingData output */
-  public NetTrain(NetLayer netLayer, NetOptimizer netOptimizer) {
-    this.netLayer = Objects.requireNonNull(netLayer);
+  public NetTrain(NetModel netModel, NetOptimizer netOptimizer) {
+    this.netModel = Objects.requireNonNull(netModel);
     this.netOptimizer = Objects.requireNonNull(netOptimizer);
   }
 
@@ -53,6 +54,8 @@ public class NetTrain {
    * @param max_epochs
    * @param timeout */
   public void runAsBatches(TrainingData trainingData, int batch_size) {
+    NetLayer netLayer = netModel.netLayer();
+    LossFunction lossFunction = netModel.lossFunction();
     DropoutLayers.setEnabled(netLayer, true);
     // NetLayers.toString(netLayer).forEach(IO::println);
     Tensor xdata = trainingData.xdata();
@@ -65,7 +68,6 @@ public class NetTrain {
     }
     // 6. Repeat until the loss becomes sufficiently small.
     boolean allMatch = true;
-    NetOutput netOutput = NetLayers.output(netLayer);
     while (allMatch) {
       // 0. Shuffle dataset indices at the beginning of every epoch
       // (Crucial for preventing the model from memorizing batch order)
@@ -82,7 +84,7 @@ public class NetTrain {
         // 2. Calculate error: Compare the prediction with the actual output.
         Tensor target = batchY.get(i);
         // IO.println("T="+Dimensions.of(target));
-        NetLoss netError = netOutput.errorBatch(target);
+        NetLoss netError = lossFunction.computeBatch(prediction, target);
         // 3. Calculate loss: Apply a loss function to quantify the error.
         /** Loss:
          * A scalar value computed by a loss function (e.g., Mean
@@ -129,8 +131,8 @@ public class NetTrain {
   }
 
   /** @return */
-  public NetLayer netLayer() {
-    return netLayer;
+  public NetModel netModel() {
+    return netModel;
   }
 
   public NetOptimizer netOptimizer() {

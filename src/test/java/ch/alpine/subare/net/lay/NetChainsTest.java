@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import ch.alpine.subare.net.NetChains;
 import ch.alpine.subare.net.NetLayer;
 import ch.alpine.subare.net.NetLayers;
+import ch.alpine.subare.net.NetModel;
+import ch.alpine.subare.net.NetModels;
 import ch.alpine.subare.net.run.NetTrainableQ;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
@@ -26,7 +28,7 @@ class NetChainsTest {
   @Test
   void testSer() {
     NetLayer netLayer = NetChains.linear(ElementwiseLayers.GELU, 2, 13, 7, 3);
-    NetLayer nl2 = NetChains.argMax(netLayer);
+    NetModel nl2 = NetModels.argMax(netLayer);
     Serialization.copy(nl2);
   }
 
@@ -48,7 +50,8 @@ class NetChainsTest {
 
   @Test
   void testSome() {
-    NetLayer netLayer = NetChains.argMax(NetChains.linear(ElementwiseLayers.GELU, 2, 7, 3));
+    NetModel netModel = NetModels.argMax(NetChains.linear(ElementwiseLayers.GELU, 2, 7, 3));
+    NetLayer netLayer = netModel.netLayer();
     NetLayers.initialize(netLayer);
     Serialization.copy(netLayer);
     NetLayers.trainableLayers(netLayer).forEach(IO::println);

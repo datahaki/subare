@@ -6,15 +6,12 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
 
-import ch.alpine.subare.net.lay.ArgMaxLayer;
 import ch.alpine.subare.net.lay.Conv1DLayer;
 import ch.alpine.subare.net.lay.DropoutLayer;
 import ch.alpine.subare.net.lay.ElementwiseLayers;
 import ch.alpine.subare.net.lay.EmbeddingLayer;
 import ch.alpine.subare.net.lay.FlattenLayer;
 import ch.alpine.subare.net.lay.LinearLayer;
-import ch.alpine.subare.net.lay.ScalarLayer;
-import ch.alpine.subare.net.lay.SoftmaxLayer;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.pdf.Distribution;
@@ -61,36 +58,6 @@ public enum NetChains {
         new EmbeddingLayer(v, d), //
         new FlattenLayer(), //
         netLayer);
-  }
-
-  /** the output of netLayer is a vector of length n
-   * where n corresponds to the number of labels for classification
-   * 
-   * @param netLayer
-   * @return layer that outputs vector of length 1 with integer value as entry */
-  public static NetLayer argMax(NetLayer netLayer) {
-    return NetChain.join( //
-        netLayer, //
-        SoftmaxLayer.INSTANCE, //
-        new ArgMaxLayer());
-  }
-
-  public static NetLayer scalar(NetLayer netLayer) {
-    return NetChain.join( //
-        netLayer, //
-        new ScalarLayer());
-  }
-
-  /** intended for binary classification tasks
-   * even though network layer does not round output to integer values (!)
-   * 
-   * @param netLayer with final layer that returns a vector of length 1
-   * @return */
-  public static NetLayer binary(NetLayer netLayer) {
-    return NetChain.join( //
-        netLayer, //
-        ElementwiseLayers.SIGMOID.get(), //
-        new ScalarLayer());
   }
 
   public static NetLayer cnnRelu(int kernelSize) {

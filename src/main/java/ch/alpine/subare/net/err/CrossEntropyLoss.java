@@ -1,9 +1,9 @@
 // code by jph
 package ch.alpine.subare.net.err;
 
-import java.io.Serializable;
 import java.util.List;
 
+import ch.alpine.subare.net.LossFunction;
 import ch.alpine.subare.net.NetLoss;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
@@ -18,8 +18,9 @@ import ch.alpine.tensor.red.Mean;
 import ch.alpine.tensor.sca.Sign;
 import ch.alpine.tensor.sca.exp.Log;
 
-/** Loss == Cross Entropy divided by batch_size */
-public record CrossEntropyLoss(Scalar loss, Tensor gradOutput) implements NetLoss, Serializable {
+public enum CrossEntropyLoss implements LossFunction {
+  INSTANCE;
+
   static final ScalarUnaryOperator MAX = Max.function(RealScalar.of(1e-15));
 
   /** @param prediction non-negative probabilities
@@ -27,18 +28,20 @@ public record CrossEntropyLoss(Scalar loss, Tensor gradOutput) implements NetLos
    * vector of length 1, or matrix of dimensions n x 1
    * of integer values between 0 and interCache.length
    * @return */
-  public static NetLoss compute(Tensor prediction, Tensor target) {
+  @Override
+  public NetLoss compute(Tensor prediction, Tensor target) {
     int k = Scalars.intValueExact((Scalar) target);
     Scalar loss = safeLog(prediction.Get(k)).negate();
     Tensor gradOutput = prediction.copy();
     gradOutput.set(RealScalar.ONE.negate()::add, k);
-    return new CrossEntropyLoss(loss, gradOutput);
+    return new NetLoss(loss, gradOutput);
   }
 
   /** @param prediction matrix where rows are non-negative probabilities
    * @param target vector of integers
    * @return */
-  public static NetLoss computeBatch(Tensor prediction, Tensor target) {
+  @Override
+  public NetLoss computeBatch(Tensor prediction, Tensor target) {
     int batch_size = Integers.requireEquals(prediction.length(), target.length());
     Int myI = new Int();
     List<NetLoss> list = prediction.stream() //
@@ -49,7 +52,7 @@ public record CrossEntropyLoss(Scalar loss, Tensor gradOutput) implements NetLos
     Tensor gradOutput = Tensor.of(list.stream() //
         .map(NetLoss::gradOutput) //
         .map(grad -> grad.multiply(factor)), batch_size);
-    return new CrossEntropyLoss(loss, gradOutput);
+    return new NetLoss(loss, gradOutput);
   }
 
   public static Scalar safeLog(Scalar value) {

@@ -15,9 +15,10 @@ public class NetParamStatTracker implements NetTrainListener {
   @Override
   public boolean epoch(NetTrain netTrain) {
     int epoch = netTrain.getTotalEpochs();
-    ScalarSummaryStatistics scalarSummaryStatistics = NetLayers.parameters(netTrain.netLayer()) //
-        .flatMap(Flatten::scalars) //
-        .collect(ScalarSummaryStatistics.collector());
+    ScalarSummaryStatistics scalarSummaryStatistics = //
+        NetLayers.parameters(netTrain.netModel().netLayer()) //
+            .flatMap(Flatten::scalars) //
+            .collect(ScalarSummaryStatistics.collector());
     tableBuilder.appendRow(RealScalar.of(epoch), Tensors.of( //
         scalarSummaryStatistics.getMin(), //
         scalarSummaryStatistics.getMax(), //

@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import ch.alpine.subare.net.NetChains;
 import ch.alpine.subare.net.NetLayer;
 import ch.alpine.subare.net.NetLayers;
+import ch.alpine.subare.net.NetModel;
+import ch.alpine.subare.net.NetModels;
 import ch.alpine.subare.net.TrainableNetLayer;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
@@ -25,8 +27,9 @@ class ResidualLayerTest {
 
   @Test
   void testNested() {
-    NetLayer netLayer = NetChains.argMax( //
+    NetModel netModel = NetModels.argMax( //
         new ResidualLayer(NetChains.linear(ElementwiseLayers.GELU, 2, 7, 3)));
+    NetLayer netLayer = netModel.netLayer();
     NetLayers.initialize(netLayer);
     IO.println(netLayer);
     List<TrainableNetLayer> list = NetLayers.trainableLayers(netLayer).toList();

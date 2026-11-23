@@ -3,9 +3,9 @@ package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
 
+import ch.alpine.subare.net.LossFunction;
 import ch.alpine.subare.net.NetLayer;
 import ch.alpine.subare.net.NetLoss;
-import ch.alpine.subare.net.NetOutput;
 import ch.alpine.subare.net.err.CrossEntropyLoss;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Slash;
@@ -14,7 +14,7 @@ import ch.alpine.tensor.api.TensorUnaryOperator;
 import ch.alpine.tensor.ext.ArgMax;
 
 /** maps vector of probabilities to the ArgMax */
-public class ArgMaxLayer implements NetLayer, NetOutput, Serializable {
+public class ArgMaxLayer implements NetLayer, LossFunction, Serializable {
   private static final TensorUnaryOperator FORWARD = x -> RealScalar.of(ArgMax.of(x));
   private transient Tensor inputCache;
 
@@ -32,15 +32,14 @@ public class ArgMaxLayer implements NetLayer, NetOutput, Serializable {
     return Slash.of(inputCache = X, FORWARD);
   }
 
-  /** @param target */
   @Override
-  public NetLoss error(Tensor target) {
-    return CrossEntropyLoss.compute(inputCache, target);
+  public NetLoss compute(Tensor prediction, Tensor target) {
+    return CrossEntropyLoss.INSTANCE.compute(inputCache, target);
   }
 
   @Override
-  public NetLoss errorBatch(Tensor target) {
-    return CrossEntropyLoss.computeBatch(inputCache, target);
+  public NetLoss computeBatch(Tensor prediction, Tensor target) {
+    return CrossEntropyLoss.INSTANCE.computeBatch(inputCache, target);
   }
 
   @Override

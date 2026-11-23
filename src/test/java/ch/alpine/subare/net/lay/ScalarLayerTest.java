@@ -54,7 +54,7 @@ class ScalarLayerTest {
     VectorQ.requireLength(Y, batch_size);
     Tensor T = RandomVariate.of(BernoulliDistribution.of(.3), batch_size);
     NetOutput netOutput = NetLayers.output(netLayer);
-    NetLoss netError = netOutput.error(T);
+    NetLoss netError = netOutput.errorBatch(T);
     Tensor gradOutput = netError.gradOutput();
     MatrixQ.requireSize(gradOutput, batch_size, 1);
   }

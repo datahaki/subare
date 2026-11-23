@@ -6,7 +6,6 @@ import java.io.Serializable;
 import ch.alpine.subare.net.NetLayer;
 import ch.alpine.subare.net.NetLoss;
 import ch.alpine.subare.net.NetOutput;
-import ch.alpine.subare.net.err.SquaredErrorBatchLoss;
 import ch.alpine.subare.net.err.SquaredErrorLoss;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Slash;
@@ -39,12 +38,12 @@ public class ScalarLayer implements NetLayer, NetOutput, Serializable {
   @Override
   public NetLoss error(Tensor target) {
     Scalar scalar = (Scalar) target;
-    return SquaredErrorLoss.of(inputCache, Tensors.of(scalar));
+    return SquaredErrorLoss.compute(inputCache, Tensors.of(scalar));
   }
 
   @Override
   public NetLoss errorBatch(Tensor target) {
-    return SquaredErrorBatchLoss.of(inputCache, Slash.of(target, Tensors::of));
+    return SquaredErrorLoss.computeBatch(inputCache, Slash.of(target, Tensors::of));
   }
 
   @Override

@@ -1,6 +1,7 @@
 // code by jph
 package ch.alpine.subare.net.lay;
 
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,8 @@ import ch.alpine.subare.net.NetLayer;
 import ch.alpine.subare.net.NetLayers;
 import ch.alpine.subare.net.NetLoss;
 import ch.alpine.subare.net.NetOutput;
+import ch.alpine.tensor.RealScalar;
+import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.VectorQ;
@@ -29,10 +32,10 @@ class ArgMaxLayerTest {
     NetLayer netLayer = NetChains.argMax(NetChains.linear(ElementwiseLayers.GELU, 2, 8, labels));
     NetLayers.initialize(netLayer);
     Tensor tensor = netLayer.forward(Tensors.vector(2, 3));
-    VectorQ.requireLength(tensor, 1);
+    assertInstanceOf(Scalar.class, tensor);
     ExactTensorQ.require(tensor);
     NetOutput netOutput = NetLayers.output(netLayer);
-    NetLoss netError = netOutput.error(Tensors.vector(1));
+    NetLoss netError = netOutput.error(RealScalar.ONE);
     Tensor gradOutput = netError.gradOutput();
     VectorQ.requireLength(gradOutput, labels);
   }
@@ -41,15 +44,15 @@ class ArgMaxLayerTest {
   @ValueSource(ints = { 2, 3, 5, 10 })
   void testMatrix(int labels) {
     NetLayer netLayer = NetChains.argMax(NetChains.linear(ElementwiseLayers.GELU, 2, 8, labels));
+    NetOutput output = NetLayers.output(netLayer);
     NetLayers.initialize(netLayer);
     int batch_size = 5;
     Tensor X = RandomVariate.of(NormalDistribution.standard(), batch_size, 2);
     Tensor Y = netLayer.forwardBatch(X);
-    MatrixQ.requireSize(Y, batch_size, 1);
+    VectorQ.requireLength(Y, batch_size);
     ExactTensorQ.require(Y);
-    Tensor T = RandomVariate.of(BernoulliDistribution.of(.3), batch_size, 1);
-    NetOutput output = NetLayers.output(netLayer);
-    NetLoss netError = output.error(T);
+    Tensor T = RandomVariate.of(BernoulliDistribution.of(.3), batch_size);
+    NetLoss netError = output.errorBatch(T);
     Tensor gradOutput = netError.gradOutput();
     MatrixQ.requireSize(gradOutput, batch_size, labels);
   }

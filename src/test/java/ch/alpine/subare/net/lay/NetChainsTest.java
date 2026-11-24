@@ -28,7 +28,7 @@ class NetChainsTest {
   @Test
   void testSer() {
     NetLayer netLayer = NetChains.linear(ElementwiseLayers.GELU, 2, 13, 7, 3);
-    NetModel nl2 = NetModels.argMax(netLayer);
+    NetModel nl2 = NetModels.softmax_argMax(netLayer);
     Serialization.copy(nl2);
   }
 
@@ -50,7 +50,7 @@ class NetChainsTest {
 
   @Test
   void testSome() {
-    NetModel netModel = NetModels.argMax(NetChains.linear(ElementwiseLayers.GELU, 2, 7, 3));
+    NetModel netModel = NetModels.softmax_argMax(NetChains.linear(ElementwiseLayers.GELU, 2, 7, 3));
     NetLayer netLayer = netModel.netLayer();
     NetLayers.initialize(netLayer);
     Serialization.copy(netLayer);

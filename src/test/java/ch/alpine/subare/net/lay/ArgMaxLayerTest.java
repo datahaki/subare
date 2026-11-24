@@ -31,7 +31,7 @@ class ArgMaxLayerTest {
   @ParameterizedTest
   @ValueSource(ints = { 2, 3, 5, 10 })
   void testVector(int labels) {
-    NetModel netModel = NetModels.argMax(NetChains.linear(ElementwiseLayers.GELU, 2, 8, labels));
+    NetModel netModel = NetModels.softmax_argMax(NetChains.linear(ElementwiseLayers.GELU, 2, 8, labels));
     NetLayer netLayer = netModel.netLayer();
     LossFunction lossFunction = netModel.lossFunction();
     NetLayers.initialize(netLayer);
@@ -46,7 +46,7 @@ class ArgMaxLayerTest {
   @ParameterizedTest
   @ValueSource(ints = { 2, 3, 5, 10 })
   void testMatrix(int labels) {
-    NetModel netModel = NetModels.argMax(NetChains.linear(ElementwiseLayers.GELU, 2, 8, labels));
+    NetModel netModel = NetModels.softmax_argMax(NetChains.linear(ElementwiseLayers.GELU, 2, 8, labels));
     NetLayer netLayer = netModel.netLayer();
     LossFunction lossFunction = netModel.lossFunction();
     NetLayers.initialize(netLayer);

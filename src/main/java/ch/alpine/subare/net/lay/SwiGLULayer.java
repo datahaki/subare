@@ -67,24 +67,20 @@ public class SwiGLULayer implements TrainableNetLayer, Serializable {
     W_out = ConstantArray.of(DoubleScalar.INDETERMINATE, d_hidden, d_out);
   }
 
-  private Tensor forwardCommon(Tensor input) {
-    inputCache = input;
-    gateCache = input.dot(W_gate);
-    valCache = input.dot(W_val);
-    sigGateCache = gateCache.maps(LogisticSigmoid.FUNCTION);
-    swishGateCache = Entrywise.mul().apply(gateCache, sigGateCache);
-    hiddenCache = Entrywise.mul().apply(swishGateCache, valCache);
-    return hiddenCache.dot(W_out);
-  }
-
   @Override
   public Tensor forward(Tensor x) {
-    return forwardCommon(VectorQ.require(x));
+    return forwardBatch(VectorQ.require(x));
   }
 
   @Override
   public Tensor forwardBatch(Tensor X) {
-    return forwardCommon(X);
+    inputCache = X;
+    gateCache = X.dot(W_gate);
+    valCache = X.dot(W_val);
+    sigGateCache = gateCache.maps(LogisticSigmoid.FUNCTION);
+    swishGateCache = Entrywise.mul().apply(gateCache, sigGateCache);
+    hiddenCache = Entrywise.mul().apply(swishGateCache, valCache);
+    return hiddenCache.dot(W_out);
   }
 
   private Tensor swishBackward(Tensor gradSwish) {

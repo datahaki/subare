@@ -27,7 +27,7 @@ class ResidualLayerTest {
 
   @Test
   void testNested() {
-    NetModel netModel = NetModels.argMax( //
+    NetModel netModel = NetModels.softmax_argMax( //
         new ResidualLayer(NetChains.linear(ElementwiseLayers.GELU, 2, 7, 3)));
     NetLayer netLayer = netModel.netLayer();
     NetLayers.initialize(netLayer);

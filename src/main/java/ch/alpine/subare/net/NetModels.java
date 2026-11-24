@@ -13,7 +13,7 @@ public enum NetModels {
    * 
    * @param netLayer
    * @return layer that outputs vector of length 1 with integer value as entry */
-  public static NetModel argMax(NetLayer netLayer) {
+  public static NetModel softmax_argMax(NetLayer netLayer) {
     ArgMaxLayer argMaxLayer = new ArgMaxLayer();
     return new NetModel( //
         NetChain.join( //
@@ -22,6 +22,14 @@ public enum NetModels {
             argMaxLayer), //
         argMaxLayer.crossEntropyLoss());
   }
+  // public static NetModel argMax(NetLayer netLayer) {
+  // ArgMaxLayer argMaxLayer = new ArgMaxLayer();
+  // return new NetModel( //
+  // NetChain.join( //
+  // netLayer, //
+  // argMaxLayer), //
+  // argMaxLayer.crossEntropyLoss());
+  // }
 
   /** @param netLayer
    * @return */

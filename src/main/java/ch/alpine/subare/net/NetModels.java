@@ -1,6 +1,8 @@
 // code by jph
 package ch.alpine.subare.net;
 
+import java.util.List;
+
 import ch.alpine.subare.net.lay.ArgMaxLayer;
 import ch.alpine.subare.net.lay.SoftmaxLayer;
 
@@ -18,6 +20,14 @@ public enum NetModels {
             netLayer, //
             SoftmaxLayer.INSTANCE, //
             argMaxLayer), //
-        argMaxLayer);
+        argMaxLayer.crossEntropyLoss());
+  }
+
+  /** @param netLayer
+   * @return */
+  public static List<String> toString(NetModel netModel) {
+    List<String> list = NetLayers.toString(netModel.netLayer());
+    list.add(netModel.lossFunction().toString());
+    return list;
   }
 }

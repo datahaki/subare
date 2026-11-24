@@ -2,7 +2,6 @@
 package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.random.RandomGenerator;
 
@@ -83,12 +82,7 @@ public class SwiGLULayer implements TrainableNetLayer, Serializable {
     return hiddenCache.dot(W_out);
   }
 
-  private Tensor swishBackward(Tensor gradSwish) {
-    // d/dg [g * sigmoid(g)] = sigmoid(g) * (1 + g * (1 - sigmoid(g)))
-    Tensor oneMinusSig = sigGateCache.maps(s -> RealScalar.ONE.subtract(s));
-    Tensor inner = Entrywise.mul().apply(gateCache, oneMinusSig).maps(RealScalar.ONE::add);
-    Tensor swishDeriv = Entrywise.mul().apply(sigGateCache, inner);
-    return Entrywise.mul().apply(gradSwish, swishDeriv);
+  private record GateAndValGrads(Tensor gradGate, Tensor gradVal) {
   }
 
   @Override
@@ -96,24 +90,35 @@ public class SwiGLULayer implements TrainableNetLayer, Serializable {
     VectorQ.require(gradOutput);
     gW_out = TensorProduct.of(hiddenCache, gradOutput);
     Tensor gradHidden = W_out.dot(gradOutput);
-    Tensor gradVal = Entrywise.mul().apply(gradHidden, swishGateCache);
-    Tensor gradSwish = Entrywise.mul().apply(gradHidden, valCache);
-    Tensor gradGate = swishBackward(gradSwish);
-    gW_gate = TensorProduct.of(inputCache, gradGate);
-    gW_val = TensorProduct.of(inputCache, gradVal);
-    return W_gate.dot(gradGate).add(W_val.dot(gradVal));
+    GateAndValGrads grads = gateAndValGrads(gradHidden);
+    gW_gate = TensorProduct.of(inputCache, grads.gradGate());
+    gW_val = TensorProduct.of(inputCache, grads.gradVal());
+    return W_gate.dot(grads.gradGate()).add(W_val.dot(grads.gradVal()));
   }
 
   @Override
   public Tensor backBatch(Tensor gradOutput) {
     gW_out = TransposeMatrixDot.of(hiddenCache, gradOutput);
     Tensor gradHidden = MatrixDotTranspose.of(gradOutput, W_out);
+    GateAndValGrads grads = gateAndValGrads(gradHidden);
+    gW_gate = TransposeMatrixDot.of(inputCache, grads.gradGate());
+    gW_val = TransposeMatrixDot.of(inputCache, grads.gradVal());
+    return MatrixDotTranspose.of(grads.gradGate(), W_gate).add(MatrixDotTranspose.of(grads.gradVal(), W_val));
+  }
+
+  private GateAndValGrads gateAndValGrads(Tensor gradHidden) {
     Tensor gradVal = Entrywise.mul().apply(gradHidden, swishGateCache);
     Tensor gradSwish = Entrywise.mul().apply(gradHidden, valCache);
     Tensor gradGate = swishBackward(gradSwish);
-    gW_gate = TransposeMatrixDot.of(inputCache, gradGate);
-    gW_val = TransposeMatrixDot.of(inputCache, gradVal);
-    return MatrixDotTranspose.of(gradGate, W_gate).add(MatrixDotTranspose.of(gradVal, W_val));
+    return new GateAndValGrads(gradGate, gradVal);
+  }
+
+  private Tensor swishBackward(Tensor gradSwish) {
+    // d/dg [g * sigmoid(g)] = sigmoid(g) * (1 + g * (1 - sigmoid(g)))
+    Tensor oneMinusSig = sigGateCache.maps(s -> RealScalar.ONE.subtract(s));
+    Tensor inner = Entrywise.mul().apply(gateCache, oneMinusSig).maps(RealScalar.ONE::add);
+    Tensor swishDeriv = Entrywise.mul().apply(sigGateCache, inner);
+    return Entrywise.mul().apply(gradSwish, swishDeriv);
   }
 
   private static Tensor sampleNormal(RandomGenerator randomGenerator, List<Integer> dims) {
@@ -150,10 +155,11 @@ public class SwiGLULayer implements TrainableNetLayer, Serializable {
 
   @Override // from ParametricLayer
   public void step(boolean decayInLoss, Tensor delta, Scalar eta) {
+    Tensor[] deltas = delta.stream().toArray(Tensor[]::new);
     Scalar etaNegate = eta.negate();
-    W_gate = applyWeightStep(W_gate, delta.get(0), etaNegate, decayInLoss);
-    W_val = applyWeightStep(W_val, delta.get(1), etaNegate, decayInLoss);
-    W_out = applyWeightStep(W_out, delta.get(2), etaNegate, decayInLoss);
+    W_gate = applyWeightStep(W_gate, deltas[0], etaNegate, decayInLoss);
+    W_val = applyWeightStep(W_val, deltas[1], etaNegate, decayInLoss);
+    W_out = applyWeightStep(W_out, deltas[2], etaNegate, decayInLoss);
   }
 
   @Override
@@ -165,12 +171,12 @@ public class SwiGLULayer implements TrainableNetLayer, Serializable {
 
   @Override
   public String toString() {
-    List<Integer> dims = new LinkedList<>();
-    dims.add(W_gate.length());
-    dims.addAll(Dimensions.of(W_out));
+    List<Integer> list = Dimensions.of(W_out);
     return MathematicaFormat.concise( //
         "SwiGLULayer", //
-        dims, //
+        W_gate.length(), //
+        list.get(0), //
+        list.get(1), //
         netRegularization);
   }
 }

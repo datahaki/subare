@@ -6,6 +6,7 @@ import java.io.Serializable;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Flatten;
 import ch.alpine.tensor.io.MathematicaFormat;
@@ -14,6 +15,12 @@ import ch.alpine.tensor.sca.Sign;
 
 /** possibly in gradient */
 public record L2Regularization(Scalar lambda) implements NetRegularization, Serializable {
+  public static NetRegularization of(Scalar lambda) {
+    if (Scalars.isZero(lambda))
+      return NoRegularization.INSTANCE;
+    return new L2Regularization(lambda);
+  }
+
   public L2Regularization {
     Sign.requirePositiveOrZero(lambda);
   }

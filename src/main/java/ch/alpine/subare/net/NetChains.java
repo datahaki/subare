@@ -76,7 +76,7 @@ public enum NetChains {
   public static NetLayer binary(NetLayer netLayer) {
     return NetChain.join( //
         netLayer, //
-        ElementwiseLayers.SIGMOID.get(), //
-        ScalarLayer.VectorToScalar);
+        ScalarLayer.VectorToScalar, //
+        ElementwiseLayers.SIGMOID.get());
   }
 }

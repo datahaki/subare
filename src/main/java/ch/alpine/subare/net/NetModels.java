@@ -3,7 +3,9 @@ package ch.alpine.subare.net;
 
 import java.util.List;
 
+import ch.alpine.subare.net.err.BinaryCrossEntropy;
 import ch.alpine.subare.net.lay.ArgMaxLayer;
+import ch.alpine.subare.net.lay.ScalarLayer;
 import ch.alpine.subare.net.lay.SoftmaxLayer;
 
 public enum NetModels {
@@ -19,17 +21,17 @@ public enum NetModels {
         NetChain.join( //
             netLayer, //
             SoftmaxLayer.INSTANCE, //
-            argMaxLayer), //
+            argMaxLayer), // maps vector to scalar
         argMaxLayer.crossEntropyLoss());
   }
-  // public static NetModel argMax(NetLayer netLayer) {
-  // ArgMaxLayer argMaxLayer = new ArgMaxLayer();
-  // return new NetModel( //
-  // NetChain.join( //
-  // netLayer, //
-  // argMaxLayer), //
-  // argMaxLayer.crossEntropyLoss());
-  // }
+
+  public static NetModel logits(NetLayer netLayer) {
+    return new NetModel( //
+        NetChain.join( //
+            netLayer, //
+            ScalarLayer.VectorToScalar), //
+        BinaryCrossEntropy.INSTANCE);
+  }
 
   /** @param netLayer
    * @return */

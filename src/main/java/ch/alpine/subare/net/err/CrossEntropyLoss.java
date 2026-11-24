@@ -6,6 +6,7 @@ import java.util.List;
 
 import ch.alpine.subare.net.LossFunction;
 import ch.alpine.subare.net.NetLoss;
+import ch.alpine.subare.net.lay.ArgMaxLayer;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
@@ -22,22 +23,20 @@ import ch.alpine.tensor.sca.exp.Log;
 public abstract class CrossEntropyLoss implements LossFunction, Serializable {
   static final ScalarUnaryOperator MAX = Max.function(RealScalar.of(1e-15));
 
-  /** @param prediction non-negative probabilities
-   * @param target is a scalar
-   * vector of length 1, or matrix of dimensions n x 1
-   * of integer values between 0 and interCache.length
+  /** @param _p is discarded, probabilities() will be queried instead
+   * @param target is a scalar of integer value between 0, 1, 2, and "number of classes"
    * @return */
   @Override
   public NetLoss compute(Tensor _p, Tensor target) {
-    return _compute(inputCache(), target);
+    return _compute(probabilities(), (Scalar) target);
   }
 
-  /** @param prediction matrix where rows are non-negative probabilities
+  /** @param _p is discarded, probabilities() will be queried instead
    * @param target vector of integers
    * @return */
   @Override
   public NetLoss computeBatch(Tensor _p, Tensor target) {
-    Tensor prediction = inputCache();
+    Tensor prediction = probabilities();
     int batch_size = Integers.requireEquals(prediction.length(), target.length());
     Int myI = new Int();
     List<NetLoss> list = prediction.stream() //
@@ -51,12 +50,13 @@ public abstract class CrossEntropyLoss implements LossFunction, Serializable {
     return new NetLoss(loss, gradOutput);
   }
 
-  protected abstract Tensor inputCache();
+  /** @return logits provided by {@link ArgMaxLayer} */
+  protected abstract Tensor probabilities();
 
-  private static NetLoss _compute(Tensor prediction, Tensor target) {
-    int k = Scalars.intValueExact((Scalar) target);
-    Scalar loss = safeLog(prediction.Get(k)).negate();
-    Tensor gradOutput = prediction.copy();
+  private static NetLoss _compute(Tensor logits, Scalar target) {
+    int k = Scalars.intValueExact(target);
+    Scalar loss = safeLog(logits.Get(k)).negate();
+    Tensor gradOutput = logits.copy();
     gradOutput.set(RealScalar.ONE.negate()::add, k);
     return new NetLoss(loss, gradOutput);
   }

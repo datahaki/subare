@@ -11,13 +11,13 @@ public enum SoftmaxLayer implements NetLayer {
   INSTANCE;
 
   @Override
-  public Tensor forward(Tensor x) {
-    return SoftmaxVector.of(x);
+  public Tensor forward(Tensor logits) {
+    return SoftmaxVector.of(logits);
   }
 
   @Override
-  public Tensor forwardBatch(Tensor X) {
-    return Tensor.of(X.stream().map(SoftmaxVector::of));
+  public Tensor forwardBatch(Tensor logits) {
+    return Tensor.of(logits.stream().map(SoftmaxVector::of));
   }
 
   @Override

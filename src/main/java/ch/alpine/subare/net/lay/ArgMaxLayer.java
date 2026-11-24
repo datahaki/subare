@@ -15,7 +15,7 @@ import ch.alpine.tensor.ext.ArgMax;
 /** maps vector of probabilities to the ArgMax */
 public class ArgMaxLayer implements NetLayer, Serializable {
   private static final TensorUnaryOperator FORWARD = x -> RealScalar.of(ArgMax.of(x));
-  private transient Tensor inputCache;
+  private transient Tensor probabilities;
 
   /** {@inheritDoc}
    * 
@@ -23,19 +23,19 @@ public class ArgMaxLayer implements NetLayer, Serializable {
    * @return vector of length 1 with entry as non-negative integer */
   @Override
   public Tensor forward(Tensor x) {
-    return FORWARD.apply(inputCache = x);
+    return FORWARD.apply(probabilities = x);
   }
 
   @Override
   public Tensor forwardBatch(Tensor X) {
-    return Slash.of(inputCache = X, FORWARD);
+    return Slash.of(probabilities = X, FORWARD);
   }
 
   public LossFunction crossEntropyLoss() {
     return new CrossEntropyLoss() {
       @Override
-      protected Tensor inputCache() {
-        return inputCache;
+      protected Tensor probabilities() {
+        return probabilities;
       }
     };
   }

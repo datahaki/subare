@@ -36,7 +36,7 @@ public class Flatten1Layer implements NetLayer, Serializable {
 
   @Override
   public Tensor backBatch(Tensor gradOutput) {
-    return Slash.of(gradOutput, s -> TakeList.of(s, lengths));
+    return Slash.of(gradOutput, this::back);
   }
 
   private void update(Tensor x) {

@@ -16,10 +16,10 @@ class ElementwiseLayerTest {
     // ---
     JetScalar y = (JetScalar) netLayer.forward(JetScalar.of(xx));
     Scalar z = (Scalar) netLayer.back(y_bar);
-    Scalar r1 = y.vector().Get(1).multiply(y_bar);
+    Scalar r1 = y.jet().Get(1).multiply(y_bar);
     Scalar r2 = z.multiply(xx.Get(1));
     if (r2 instanceof JetScalar js)
-      r2 = js.vector().Get(0);
+      r2 = js.jet().Get(0);
     Tolerance.CHOP.requireClose(r1, r2);
   }
 
@@ -29,10 +29,10 @@ class ElementwiseLayerTest {
     // ---
     JetScalar y = (JetScalar) netLayer.forwardBatch(JetScalar.of(xx));
     Scalar z = (Scalar) netLayer.backBatch(y_bar);
-    Scalar r1 = y.vector().Get(1).multiply(y_bar);
+    Scalar r1 = y.jet().Get(1).multiply(y_bar);
     Scalar r2 = z.multiply(xx.Get(1));
     if (r2 instanceof JetScalar js)
-      r2 = js.vector().Get(0);
+      r2 = js.jet().Get(0);
     Tolerance.CHOP.requireClose(r1, r2);
   }
 }

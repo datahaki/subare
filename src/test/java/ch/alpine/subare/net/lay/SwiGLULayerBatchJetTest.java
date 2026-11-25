@@ -28,7 +28,7 @@ class SwiGLULayerBatchJetTest {
   }
 
   private static double d1(Scalar s) {
-    return ((JetScalar) s).vector().Get(1).number().doubleValue();
+    return ((JetScalar) s).jet().Get(1).number().doubleValue();
   }
 
   /** Converts a Tensor of RealScalars into a matching Tensor of JetScalars with d1 = 0. */

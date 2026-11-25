@@ -36,7 +36,7 @@ class LinearLayerTest {
     LinearLayer linearLayer = new LinearLayer(1, 1);
     linearLayer.W = DiagonalMatrix.full(Tensors.vector(3));
     linearLayer.b = Tensors.vector(5);
-    JetScalar js = JetScalar.of(RealScalar.of(4), 2);
+    JetScalar js = JetScalar.identity(RealScalar.of(4), 2);
     // IO.println(js);
     Tensor x = Tensors.of(js);
     Tensor y = linearLayer.forward(x);

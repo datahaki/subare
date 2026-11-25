@@ -7,6 +7,8 @@ import ch.alpine.subare.net.NetLayer;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.VectorQ;
 import ch.alpine.tensor.io.MathematicaFormat;
 import ch.alpine.tensor.mat.IdentityMatrix;
@@ -40,12 +42,12 @@ public class OneHotLayer implements NetLayer, Serializable {
 
   @Override
   public Tensor back(Tensor gradOutput) {
-    return null;
+    return Tensors.unmodifiableEmpty();
   }
 
   @Override
   public Tensor backBatch(Tensor gradOutput) {
-    return null;
+    return Array.zeros(gradOutput.length(), 0);
   }
 
   @Override

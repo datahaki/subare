@@ -12,7 +12,6 @@ import ch.alpine.subare.net.lay.ElementwiseLayers;
 import ch.alpine.subare.net.lay.EmbeddingLayer;
 import ch.alpine.subare.net.lay.FlattenLayer;
 import ch.alpine.subare.net.lay.LinearLayer;
-import ch.alpine.subare.net.lay.ScalarLayer;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.pdf.Distribution;
@@ -66,18 +65,5 @@ public enum NetChains {
     return NetChain.join( //
         Conv1DLayer.of(distribution, ThreadLocalRandom.current(), kernelSize), //
         ElementwiseLayers.RELU.get());
-  }
-
-  /** intended for binary classification tasks
-   * even though network layer does not round output to integer values (!)
-   * 
-   * @param netLayer with final layer that returns a vector of length 1
-   * @return */
-  @Deprecated
-  public static NetLayer binary(NetLayer netLayer) {
-    return NetChain.join( //
-        netLayer, //
-        ScalarLayer.VectorToScalar, //
-        ElementwiseLayers.SIGMOID.get());
   }
 }

@@ -15,6 +15,8 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.ConstantArray;
 import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.ext.Int;
@@ -71,7 +73,7 @@ public class ScalarEmbeddingLayer implements TrainableNetLayer, Serializable {
     int index = Scalars.intValueExact(inputCache.Get(0));
     gW = W.maps(Scalar::zero);
     gW.set(gradOutput::add, index); // TODO simplify later
-    return null;
+    return Tensors.unmodifiableEmpty();
   }
 
   @Override
@@ -82,7 +84,7 @@ public class ScalarEmbeddingLayer implements TrainableNetLayer, Serializable {
     Int myI = new Int();
     gradOutput.stream() // gradient
         .forEach(row -> gW.set(row::add, inputCache.Get(myI.getAndIncrement(), 0).number().intValue()));
-    return null;
+    return Array.zeros(gradOutput.length(), 0);
   }
 
   @Override

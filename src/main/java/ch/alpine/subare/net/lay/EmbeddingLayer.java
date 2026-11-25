@@ -15,6 +15,8 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.ConstantArray;
 import ch.alpine.tensor.alg.Dimensions;
 import ch.alpine.tensor.alg.VectorQ;
@@ -71,7 +73,7 @@ public class EmbeddingLayer implements TrainableNetLayer, Serializable {
   public Tensor back(Tensor gradOutput) {
     gW = W.maps(Scalar::zero);
     contrib(gW, gradOutput, inputCache);
-    return null;
+    return Tensors.unmodifiableEmpty();
   }
 
   private static void contrib(Tensor gW, Tensor gradOutput, Tensor inputCache) {
@@ -87,7 +89,7 @@ public class EmbeddingLayer implements TrainableNetLayer, Serializable {
     Integers.requireEquals(n, inputCache.length());
     for (int i = 0; i < n; ++i)
       contrib(gW, gradOutput.get(i), inputCache.get(i));
-    return null;
+    return Array.zeros(gradOutput.length(), 0);
   }
 
   @Override

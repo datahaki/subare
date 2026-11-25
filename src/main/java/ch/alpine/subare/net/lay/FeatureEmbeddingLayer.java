@@ -18,8 +18,8 @@ import ch.alpine.tensor.io.MathematicaFormat;
 public class FeatureEmbeddingLayer implements NetLayer, Serializable {
   public static record FeatureSlice(int d_in, int d_out, NetLayer netLayer) implements Serializable {
     public FeatureSlice {
-      Integers.requirePositive(d_in);
-      Integers.requirePositive(d_out);
+      Integers.requirePositiveOrZero(d_in);
+      Integers.requirePositiveOrZero(d_out);
       Objects.requireNonNull(netLayer);
     }
   }
@@ -32,11 +32,16 @@ public class FeatureEmbeddingLayer implements NetLayer, Serializable {
     return of(Arrays.asList(featureSlices));
   }
 
+  // ---
   private final List<FeatureSlice> list;
   private transient List<Tensor> gW;
+  private final int all_in;
+  private final int all_out;
 
   private FeatureEmbeddingLayer(List<FeatureSlice> list) {
     this.list = list;
+    all_in = list.stream().mapToInt(fS -> fS.d_in).sum();
+    all_out = list.stream().mapToInt(fS -> fS.d_out).sum();
   }
 
   @Override
@@ -49,17 +54,20 @@ public class FeatureEmbeddingLayer implements NetLayer, Serializable {
       outs.add(y);
       beg += featureSlice.d_in;
     }
-    return Tensor.of(outs.stream().flatMap(Tensor::stream));
+    Integers.requireEquals(beg, all_in);
+    return Tensor.of(outs.stream().flatMap(Tensor::stream), all_out);
   }
 
   @Override
   public Tensor forwardBatch(Tensor X) {
+    int batch_size = X.length();
     int beg = 0;
     List<Tensor> outs = new ArrayList<>(list.size());
     for (FeatureSlice featureSlice : list) {
-      outs.add(featureSlice.netLayer.forwardBatch(X.block(List.of(0, beg), List.of(X.length(), featureSlice.d_in))));
+      outs.add(featureSlice.netLayer.forwardBatch(X.block(List.of(0, beg), List.of(batch_size, featureSlice.d_in))));
       beg += featureSlice.d_in;
     }
+    Integers.requireEquals(beg, all_in);
     return Join.of(1, outs);
   }
 
@@ -72,19 +80,22 @@ public class FeatureEmbeddingLayer implements NetLayer, Serializable {
       gW.add(featureSlice.netLayer().back(g));
       beg += featureSlice.d_out;
     }
-    return null;
+    Integers.requireEquals(beg, all_out);
+    return Join.of(0, gW);
   }
 
   @Override
   public Tensor backBatch(Tensor gradOutput) {
+    int batch_size = gradOutput.length();
     gW = new ArrayList<>(list.size());
     int beg = 0;
     for (FeatureSlice featureSlice : list) {
-      Tensor G = gradOutput.block(List.of(0, beg), List.of(gradOutput.length(), featureSlice.d_out));
+      Tensor G = gradOutput.block(List.of(0, beg), List.of(batch_size, featureSlice.d_out));
       gW.add(featureSlice.netLayer().backBatch(G));
       beg += featureSlice.d_out;
     }
-    return null;
+    Integers.requireEquals(beg, all_out);
+    return Join.of(1, gW);
   }
 
   @Override
@@ -94,6 +105,6 @@ public class FeatureEmbeddingLayer implements NetLayer, Serializable {
 
   @Override
   public String toString() {
-    return MathematicaFormat.concise("FeatureEmbeddingLayer", list.size());
+    return MathematicaFormat.concise("FeatureEmbeddingLayer", all_in, all_out);
   }
 }

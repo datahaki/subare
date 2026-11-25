@@ -4,7 +4,6 @@ package ch.alpine.subare.net.lay;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
-import ch.alpine.subare.net.NetLayer;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.num.Pi;
 

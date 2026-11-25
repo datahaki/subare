@@ -1,5 +1,5 @@
 // code by jph
-package ch.alpine.subare.net;
+package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
 import java.util.List;

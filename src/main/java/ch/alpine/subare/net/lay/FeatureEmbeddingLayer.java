@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-import ch.alpine.subare.net.NetLayer;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.alg.Join;
 import ch.alpine.tensor.alg.VectorQ;

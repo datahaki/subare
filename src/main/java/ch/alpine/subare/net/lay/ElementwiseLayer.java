@@ -3,7 +3,6 @@ package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
 
-import ch.alpine.subare.net.NetLayer;
 import ch.alpine.tensor.Tensor;
 
 /** inspired by

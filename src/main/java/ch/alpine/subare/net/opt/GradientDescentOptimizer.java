@@ -1,8 +1,7 @@
 // code by jph
 package ch.alpine.subare.net.opt;
 
-import ch.alpine.subare.net.NetLayer;
-import ch.alpine.subare.net.NetOptimizable;
+import ch.alpine.subare.net.lay.NetLayer;
 import ch.alpine.tensor.Scalar;
 
 /** simple gradient descent */

@@ -4,7 +4,6 @@ package ch.alpine.subare.net.lay;
 import java.io.Serializable;
 import java.util.stream.Stream;
 
-import ch.alpine.subare.net.NetLayer;
 import ch.alpine.tensor.Tensor;
 
 /** Residual layers help solve a problem called the vanishing gradient problem

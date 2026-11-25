@@ -8,13 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import ch.alpine.subare.net.LossFunction;
-import ch.alpine.subare.net.NetChains;
-import ch.alpine.subare.net.NetLayer;
-import ch.alpine.subare.net.NetLayers;
-import ch.alpine.subare.net.NetLoss;
-import ch.alpine.subare.net.NetModel;
-import ch.alpine.subare.net.NetModels;
+import ch.alpine.subare.net.los.LossFunction;
+import ch.alpine.subare.net.los.NetLoss;
+import ch.alpine.subare.net.mod.NetModel;
+import ch.alpine.subare.net.mod.NetModels;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

@@ -1,10 +1,8 @@
 // code by jph
-package ch.alpine.subare.net.err;
+package ch.alpine.subare.net.los;
 
 import java.io.Serializable;
 
-import ch.alpine.subare.net.LossFunction;
-import ch.alpine.subare.net.NetLoss;
 import ch.alpine.tensor.Tensor;
 
 public abstract class AbstractBinaryCrossEntropy implements LossFunction, Serializable {

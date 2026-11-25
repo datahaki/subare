@@ -13,8 +13,6 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.net.NetLayer;
-import ch.alpine.subare.net.NetLayers;
 import ch.alpine.subare.net.lay.FeatureEmbeddingLayer.FeatureSlice;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;

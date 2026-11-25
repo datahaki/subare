@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.random.RandomGenerator;
 
-import ch.alpine.subare.net.TrainableNetLayer;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Slash;

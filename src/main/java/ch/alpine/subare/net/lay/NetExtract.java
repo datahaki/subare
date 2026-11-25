@@ -1,5 +1,5 @@
 // code by jph
-package ch.alpine.subare.net;
+package ch.alpine.subare.net.lay;
 
 import java.util.stream.Stream;
 

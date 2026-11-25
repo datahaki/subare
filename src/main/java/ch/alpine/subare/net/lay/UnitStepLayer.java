@@ -3,9 +3,8 @@ package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
 
-import ch.alpine.subare.net.LossFunction;
-import ch.alpine.subare.net.NetLayer;
-import ch.alpine.subare.net.err.AbstractBinaryCrossEntropy;
+import ch.alpine.subare.net.los.AbstractBinaryCrossEntropy;
+import ch.alpine.subare.net.los.LossFunction;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.sca.UnitStep;
 

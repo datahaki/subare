@@ -1,9 +1,12 @@
 // code by jph
-package ch.alpine.subare.net;
+package ch.alpine.subare.net.mod;
 
 import java.util.List;
 
 import ch.alpine.subare.net.lay.ArgMaxLayer;
+import ch.alpine.subare.net.lay.NetChain;
+import ch.alpine.subare.net.lay.NetLayer;
+import ch.alpine.subare.net.lay.NetLayers;
 import ch.alpine.subare.net.lay.ScalarLayer;
 import ch.alpine.subare.net.lay.SigmoidLayer;
 import ch.alpine.subare.net.lay.SoftmaxLayer;

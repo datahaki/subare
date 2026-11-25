@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ch.alpine.subare.net.NetLayer;
-import ch.alpine.subare.net.NetLayers;
-import ch.alpine.subare.net.NetOptimizable;
+import ch.alpine.subare.net.lay.NetLayer;
+import ch.alpine.subare.net.lay.NetLayers;
 import ch.alpine.tensor.Scalar;
 
 abstract class AbstractNetOptimizer implements NetOptimizer {

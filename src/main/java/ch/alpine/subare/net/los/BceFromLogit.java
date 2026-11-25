@@ -1,5 +1,5 @@
 // adapted from gemini
-package ch.alpine.subare.net.err;
+package ch.alpine.subare.net.los;
 
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;

@@ -5,12 +5,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-import ch.alpine.subare.net.DropoutLayers;
-import ch.alpine.subare.net.LossFunction;
-import ch.alpine.subare.net.NetLayer;
-import ch.alpine.subare.net.NetLayers;
-import ch.alpine.subare.net.NetLoss;
-import ch.alpine.subare.net.NetModel;
+import ch.alpine.subare.net.lay.DropoutLayers;
+import ch.alpine.subare.net.lay.NetLayer;
+import ch.alpine.subare.net.lay.NetLayers;
+import ch.alpine.subare.net.los.LossFunction;
+import ch.alpine.subare.net.los.NetLoss;
+import ch.alpine.subare.net.mod.NetModel;
 import ch.alpine.subare.net.opt.NetOptimizer;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;

@@ -3,8 +3,7 @@ package ch.alpine.subare.net.opt;
 
 import java.util.Objects;
 
-import ch.alpine.subare.net.NetLayer;
-import ch.alpine.subare.net.NetOptimizable;
+import ch.alpine.subare.net.lay.NetLayer;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

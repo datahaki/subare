@@ -9,7 +9,6 @@ import java.util.random.RandomGeneratorFactory;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.net.NetLayers;
 import ch.alpine.subare.net.opt.NetOptimizer;
 import ch.alpine.subare.net.opt.NetOptimizers;
 import ch.alpine.subare.net.reg.L2Regularization;

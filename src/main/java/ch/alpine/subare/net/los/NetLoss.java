@@ -1,5 +1,5 @@
 // code by jph
-package ch.alpine.subare.net;
+package ch.alpine.subare.net.los;
 
 import java.io.Serializable;
 

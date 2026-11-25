@@ -1,7 +1,7 @@
 // code by jph
 package ch.alpine.subare.net.run;
 
-import ch.alpine.subare.net.NetLayers;
+import ch.alpine.subare.net.lay.NetLayers;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.io.TableBuilder;

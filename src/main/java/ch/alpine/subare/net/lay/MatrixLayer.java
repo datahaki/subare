@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.random.RandomGenerator;
 
-import ch.alpine.subare.net.TrainableNetLayer;
 import ch.alpine.subare.net.reg.L2Regularization;
 import ch.alpine.subare.net.reg.NetRegularization;
 import ch.alpine.tensor.DoubleScalar;

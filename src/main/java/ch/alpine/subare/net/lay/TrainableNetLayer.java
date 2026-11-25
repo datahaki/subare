@@ -1,8 +1,9 @@
 // code by jph
-package ch.alpine.subare.net;
+package ch.alpine.subare.net.lay;
 
 import java.util.random.RandomGenerator;
 
+import ch.alpine.subare.net.opt.NetOptimizable;
 import ch.alpine.subare.net.opt.NetOptimizer;
 import ch.alpine.subare.net.opt.NetOptimizers;
 import ch.alpine.tensor.RealScalar;

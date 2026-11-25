@@ -1,11 +1,9 @@
 // code by gemini
-package ch.alpine.subare.net.err;
+package ch.alpine.subare.net.los;
 
 import java.io.Serializable;
 import java.util.List;
 
-import ch.alpine.subare.net.LossFunction;
-import ch.alpine.subare.net.NetLoss;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

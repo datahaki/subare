@@ -5,7 +5,6 @@ package ch.alpine.subare.net.lay;
 import java.io.Serializable;
 import java.util.random.RandomGenerator;
 
-import ch.alpine.subare.net.NetLayer;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

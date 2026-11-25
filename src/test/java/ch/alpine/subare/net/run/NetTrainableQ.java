@@ -1,8 +1,8 @@
 // code by jph
 package ch.alpine.subare.net.run;
 
-import ch.alpine.subare.net.NetLayer;
-import ch.alpine.subare.net.NetLayers;
+import ch.alpine.subare.net.lay.NetLayer;
+import ch.alpine.subare.net.lay.NetLayers;
 import ch.alpine.subare.net.opt.NetOptimizer;
 import ch.alpine.subare.net.opt.NetOptimizers;
 import ch.alpine.tensor.RealScalar;

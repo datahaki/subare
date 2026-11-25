@@ -1,8 +1,6 @@
 // code by gemini
-package ch.alpine.subare.net.err;
+package ch.alpine.subare.net.los;
 
-import ch.alpine.subare.net.LossFunction;
-import ch.alpine.subare.net.NetLoss;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;

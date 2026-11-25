@@ -2,9 +2,8 @@ package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
 
-import ch.alpine.subare.net.LossFunction;
-import ch.alpine.subare.net.NetLayer;
-import ch.alpine.subare.net.err.AbstractProbBinaryCrossEntropy;
+import ch.alpine.subare.net.los.AbstractProbBinaryCrossEntropy;
+import ch.alpine.subare.net.los.LossFunction;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.red.Entrywise;

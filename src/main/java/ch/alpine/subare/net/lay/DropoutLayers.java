@@ -1,7 +1,5 @@
 // code by jph
-package ch.alpine.subare.net;
-
-import ch.alpine.subare.net.lay.DropoutLayer;
+package ch.alpine.subare.net.lay;
 
 public enum DropoutLayers {
   ;

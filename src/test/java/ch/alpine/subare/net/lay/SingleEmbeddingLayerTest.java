@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.net.NetLayers;
 import ch.alpine.tensor.Tensors;
 
 class SingleEmbeddingLayerTest {

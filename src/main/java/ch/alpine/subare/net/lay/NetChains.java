@@ -1,17 +1,11 @@
 // code by jph
-package ch.alpine.subare.net;
+package ch.alpine.subare.net.lay;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
 
-import ch.alpine.subare.net.lay.Conv1DLayer;
-import ch.alpine.subare.net.lay.DropoutLayer;
-import ch.alpine.subare.net.lay.ElementwiseLayers;
-import ch.alpine.subare.net.lay.EmbeddingLayer;
-import ch.alpine.subare.net.lay.FlattenLayer;
-import ch.alpine.subare.net.lay.LinearLayer;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.pdf.Distribution;

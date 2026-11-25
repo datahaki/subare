@@ -12,7 +12,7 @@ public abstract class SimpleElementwiseLayer extends ElementwiseLayer {
 
   @Override
   public final Tensor forward(Tensor x) {
-    return outputCache = ((logits = x).maps(this::func));
+    return outputCache = ((inputCache = x).maps(this::func));
   }
 
   /** @return */

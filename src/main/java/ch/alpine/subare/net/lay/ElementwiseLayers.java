@@ -131,7 +131,7 @@ public enum ElementwiseLayers implements Supplier<NetLayer> {
 
         @Override
         public Tensor back() {
-          return logits.maps(UnitStep.FUNCTION);
+          return inputCache.maps(UnitStep.FUNCTION);
         }
 
         @Override
@@ -189,7 +189,7 @@ public enum ElementwiseLayers implements Supplier<NetLayer> {
 
         @Override
         public Tensor back() {
-          return logits.maps(Gelu::dx);
+          return inputCache.maps(Gelu::dx);
         }
 
         @Override

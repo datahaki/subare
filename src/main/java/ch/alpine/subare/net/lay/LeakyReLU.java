@@ -28,7 +28,7 @@ public class LeakyReLU extends SimpleElementwiseLayer {
 
   @Override
   protected Tensor back() {
-    return logits.maps(x -> Sign.isPositive(x) //
+    return inputCache.maps(x -> Sign.isPositive(x) //
         ? alpha.one()
         : alpha);
   }

@@ -1,3 +1,4 @@
+// code by jph
 package ch.alpine.subare.net.err;
 
 import java.io.Serializable;

@@ -73,6 +73,7 @@ public enum NetChains {
    * 
    * @param netLayer with final layer that returns a vector of length 1
    * @return */
+  @Deprecated
   public static NetLayer binary(NetLayer netLayer) {
     return NetChain.join( //
         netLayer, //

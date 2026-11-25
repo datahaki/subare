@@ -11,14 +11,14 @@ class SiluLayer extends ElementwiseLayer {
 
   @Override
   public Tensor forward(Tensor x) {
-    sig_cache = (logits = x).maps(LogisticSigmoid.FUNCTION);
+    sig_cache = (inputCache = x).maps(LogisticSigmoid.FUNCTION);
     return Entrywise.mul().apply(x, sig_cache);
   }
 
   @Override
   public Tensor back(Tensor gradOutput) {
     Tensor diff = sig_cache.maps(s -> RealScalar.ONE.subtract(s));
-    Tensor step = Entrywise.mul().apply(logits, diff).maps(RealScalar.ONE::add);
+    Tensor step = Entrywise.mul().apply(inputCache, diff).maps(RealScalar.ONE::add);
     return Entrywise.mul().apply(gradOutput, Entrywise.mul().apply(sig_cache, step));
   }
 

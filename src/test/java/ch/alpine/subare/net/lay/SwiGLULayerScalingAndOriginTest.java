@@ -1,3 +1,4 @@
+// code by gemini
 package ch.alpine.subare.net.lay;
 
 import java.util.random.RandomGenerator;

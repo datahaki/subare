@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 import ch.alpine.subare.net.LossFunction;
 import ch.alpine.subare.net.NetLayer;
-import ch.alpine.subare.net.err.CrossEntropyLoss;
+import ch.alpine.subare.net.err.AbstractBinaryCrossEntropy;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.sca.UnitStep;
 
@@ -24,11 +24,10 @@ public class UnitStepLayer implements NetLayer, Serializable {
     return (logits = X).maps(UnitStep.FUNCTION);
   }
 
-  // FIXME
-  public LossFunction crossEntropyLoss() {
-    return new CrossEntropyLoss() {
+  public LossFunction lossFunction() {
+    return new AbstractBinaryCrossEntropy() {
       @Override
-      protected Tensor probabilities() {
+      protected Tensor logits() {
         return logits;
       }
     };

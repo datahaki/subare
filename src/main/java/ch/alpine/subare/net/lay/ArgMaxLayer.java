@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 import ch.alpine.subare.net.LossFunction;
 import ch.alpine.subare.net.NetLayer;
-import ch.alpine.subare.net.err.CrossEntropyLoss;
+import ch.alpine.subare.net.err.AbstractCrossEntropyLoss;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
@@ -32,7 +32,7 @@ public class ArgMaxLayer implements NetLayer, Serializable {
   }
 
   public LossFunction crossEntropyLoss() {
-    return new CrossEntropyLoss() {
+    return new AbstractCrossEntropyLoss() {
       @Override
       protected Tensor probabilities() {
         return probabilities;

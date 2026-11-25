@@ -3,10 +3,10 @@ package ch.alpine.subare.net;
 
 import java.util.List;
 
-import ch.alpine.subare.net.err.BinaryCrossEntropy;
 import ch.alpine.subare.net.lay.ArgMaxLayer;
 import ch.alpine.subare.net.lay.ScalarLayer;
 import ch.alpine.subare.net.lay.SoftmaxLayer;
+import ch.alpine.subare.net.lay.UnitStepLayer;
 
 public enum NetModels {
   ;
@@ -26,11 +26,13 @@ public enum NetModels {
   }
 
   public static NetModel logits(NetLayer netLayer) {
+    UnitStepLayer unitStepLayer = new UnitStepLayer();
     return new NetModel( //
         NetChain.join( //
             netLayer, //
-            ScalarLayer.VectorToScalar), //
-        BinaryCrossEntropy.SCALAR);
+            ScalarLayer.VectorToScalar, //
+            unitStepLayer), //
+        unitStepLayer.lossFunction());
   }
 
   /** @param netLayer

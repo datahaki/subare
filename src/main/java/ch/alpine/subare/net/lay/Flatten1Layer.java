@@ -1,27 +1,32 @@
+// code by jph
 package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
 
 import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.alg.Join;
+import ch.alpine.tensor.alg.Flatten;
 import ch.alpine.tensor.alg.TakeList;
 import ch.alpine.tensor.ext.Integers;
 import ch.alpine.tensor.io.MathematicaFormat;
 
-public class Join0Layer implements NetLayer, Serializable {
+public class Flatten1Layer implements NetLayer, Serializable {
   private int[] lengths = null;
 
   @Override
   public Tensor forward(Tensor x) {
     update(x);
-    return Join.of(0, x);
+    return _forward(x);
   }
 
   @Override
   public Tensor forwardBatch(Tensor X) {
     update(X.get(0));
-    return Join.of(1, X);
+    return Slash.of(X, Flatten1Layer::_forward);
+  }
+
+  public static Tensor _forward(Tensor x) {
+    return Flatten.of(x, 1);
   }
 
   @Override
@@ -43,6 +48,6 @@ public class Join0Layer implements NetLayer, Serializable {
 
   @Override
   public String toString() {
-    return MathematicaFormat.concise("Join0Layer");
+    return MathematicaFormat.concise("Flatten1Layer", lengths == null ? null : Integers.asList(lengths));
   }
 }

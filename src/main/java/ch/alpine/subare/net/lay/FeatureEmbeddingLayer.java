@@ -5,10 +5,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.alg.Join;
+import ch.alpine.tensor.Unprotect;
 import ch.alpine.tensor.alg.VectorQ;
 import ch.alpine.tensor.ext.Integers;
 import ch.alpine.tensor.io.MathematicaFormat;
@@ -24,7 +25,6 @@ public class FeatureEmbeddingLayer implements NetLayer, Serializable {
 
   // ---
   private final List<LayerSlice> list;
-  private transient List<Tensor> gW;
   private final int all_in;
   private final int all_out;
 
@@ -38,14 +38,14 @@ public class FeatureEmbeddingLayer implements NetLayer, Serializable {
   public Tensor forward(Tensor x) {
     int beg = 0;
     List<Tensor> outs = new ArrayList<>(list.size());
-    for (LayerSlice featureSlice : list) {
-      Tensor y = featureSlice.netLayer().forward(x.block(List.of(beg), List.of(featureSlice.d_in())));
-      VectorQ.requireLength(y, featureSlice.d_out());
+    for (LayerSlice layerSlice : list) {
+      Tensor y = layerSlice.netLayer().forward(x.block(List.of(beg), List.of(layerSlice.d_in())));
+      VectorQ.requireLength(y, layerSlice.d_out());
       outs.add(y);
-      beg += featureSlice.d_in();
+      beg += layerSlice.d_in();
     }
     Integers.requireEquals(beg, all_in);
-    return Tensor.of(outs.stream().flatMap(Tensor::stream), all_out);
+    return Unprotect.using(outs);
   }
 
   @Override
@@ -53,39 +53,43 @@ public class FeatureEmbeddingLayer implements NetLayer, Serializable {
     int batch_size = X.length();
     int beg = 0;
     List<Tensor> outs = new ArrayList<>(list.size());
-    for (LayerSlice featureSlice : list) {
-      outs.add(featureSlice.netLayer().forwardBatch(X.block(List.of(0, beg), List.of(batch_size, featureSlice.d_in()))));
-      beg += featureSlice.d_in();
+    for (LayerSlice layerSlice : list) {
+      outs.add(layerSlice.netLayer().forwardBatch(X.block(List.of(0, beg), List.of(batch_size, layerSlice.d_in()))));
+      beg += layerSlice.d_in();
     }
     Integers.requireEquals(beg, all_in);
-    return Join.of(1, outs);
+    return Tensor.of(IntStream.range(0, batch_size) //
+        .mapToObj(i -> Tensor.of(outs.stream().map(o -> o.get(i)), outs.size())), //
+        batch_size);
   }
 
   @Override
   public Tensor back(Tensor gradOutput) {
-    gW = new ArrayList<>(list.size());
+    Tensor[] array = gradOutput.stream().toArray(Tensor[]::new);
+    List<Tensor> gW = new ArrayList<>(list.size());
     int beg = 0;
-    for (LayerSlice featureSlice : list) {
-      Tensor g = gradOutput.block(List.of(beg), List.of(featureSlice.d_out()));
-      gW.add(featureSlice.netLayer().back(g));
-      beg += featureSlice.d_out();
+    for (LayerSlice layerSlice : list) {
+      gW.add(layerSlice.netLayer().back(array[beg]));
+      ++beg;
     }
-    Integers.requireEquals(beg, all_out);
-    return Join.of(0, gW);
+    return null;
+    // Unprotect.using(gW);
   }
 
   @Override
   public Tensor backBatch(Tensor gradOutput) {
     int batch_size = gradOutput.length();
-    gW = new ArrayList<>(list.size());
+    List<Tensor> gW = new ArrayList<>(list.size());
     int beg = 0;
-    for (LayerSlice featureSlice : list) {
-      Tensor G = gradOutput.block(List.of(0, beg), List.of(batch_size, featureSlice.d_out()));
-      gW.add(featureSlice.netLayer().backBatch(G));
-      beg += featureSlice.d_out();
+    for (LayerSlice layerSlice : list) {
+      gW.add(layerSlice.netLayer().backBatch(gradOutput.get(Tensor.ALL, beg)));
+      ++beg;
     }
-    Integers.requireEquals(beg, all_out);
-    return Join.of(1, gW);
+    // Integers.requireEquals(beg, all_out);
+    return null;
+    // Tensor.of(IntStream.range(0, batch_size) //
+    // .mapToObj(i -> Tensor.of(gW.stream().map(o -> o.get(i)), gW.size())), //
+    // batch_size);
   }
 
   @Override

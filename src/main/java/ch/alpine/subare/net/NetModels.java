@@ -30,7 +30,7 @@ public enum NetModels {
         NetChain.join( //
             netLayer, //
             ScalarLayer.VectorToScalar), //
-        BinaryCrossEntropy.INSTANCE);
+        BinaryCrossEntropy.SCALAR);
   }
 
   /** @param netLayer

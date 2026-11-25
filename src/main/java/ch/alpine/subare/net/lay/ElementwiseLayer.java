@@ -10,6 +10,7 @@ import ch.alpine.tensor.Tensor;
  * <a href="https://reference.wolfram.com/language/ref/ElementwiseLayer.html">ElementwiseLayer</a> */
 public abstract class ElementwiseLayer implements NetLayer, Serializable {
   /** output cache */
+  // TODO misnomer: should be called inputCache!
   protected transient Tensor logits;
   protected transient Tensor outputCache;
 

@@ -8,7 +8,10 @@ import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.nrm.FrobeniusNorm;
 
-/** Loss == Squared Error divided by batch_size */
+/** MeanAbsoluteError accepts network output of arbitrary structure
+ * 
+ * for a batch, the loss
+ * Loss == Squared Error divided by batch_size */
 public enum SquaredErrorLoss implements LossFunction {
   INSTANCE;
 

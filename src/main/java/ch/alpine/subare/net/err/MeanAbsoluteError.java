@@ -12,6 +12,7 @@ import ch.alpine.tensor.red.Mean;
 import ch.alpine.tensor.sca.Abs;
 import ch.alpine.tensor.sca.Sign;
 
+/** MeanAbsoluteError accepts network output of arbitrary structure */
 public enum MeanAbsoluteError implements LossFunction {
   INSTANCE;
 
@@ -25,6 +26,7 @@ public enum MeanAbsoluteError implements LossFunction {
 
   @Override
   public NetLoss computeBatch(Tensor prediction, Tensor target) {
+    // intenional
     return compute(prediction, target);
   }
 

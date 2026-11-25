@@ -11,7 +11,6 @@ import ch.alpine.tensor.api.ScalarUnaryOperator;
 import ch.alpine.tensor.io.MathematicaFormat;
 import ch.alpine.tensor.sca.Ramp;
 import ch.alpine.tensor.sca.UnitStep;
-import ch.alpine.tensor.sca.exp.DLogisticSigmoid;
 import ch.alpine.tensor.sca.exp.Gelu;
 import ch.alpine.tensor.sca.exp.LogisticSigmoid;
 import ch.alpine.tensor.sca.tri.Tanh;
@@ -33,6 +32,8 @@ public enum ElementwiseLayers implements Supplier<NetLayer> {
    * "block everything," $1$ means "let everything through," and values in between
    * act as a proportional filter. */
   SIGMOID {
+    private static final ScalarUnaryOperator NESTED = y -> y.multiply(RealScalar.ONE.subtract(y));
+
     @Override
     public NetLayer get() {
       return new SimpleElementwiseLayer() {
@@ -43,7 +44,7 @@ public enum ElementwiseLayers implements Supplier<NetLayer> {
 
         @Override
         public Tensor back() {
-          return outputCache.maps(DLogisticSigmoid.NESTED);
+          return outputCache.maps(NESTED);
         }
 
         @Override

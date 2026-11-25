@@ -13,7 +13,6 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
-import ch.alpine.subare.net.lay.FeatureEmbeddingLayer.FeatureSlice;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.VectorQ;
@@ -24,9 +23,9 @@ class FeatureEmbeddingLayerTest {
   @Test
   void test() {
     NetLayer netLayer = FeatureEmbeddingLayer.of( //
-        new FeatureSlice(1, 1, IdentityLayer.INSTANCE), //
-        new FeatureSlice(1, 2, new ScalarEmbeddingLayer(5, 2)), //
-        new FeatureSlice(2, 2, IdentityLayer.INSTANCE));
+        new LayerSlice(1, 1, IdentityLayer.INSTANCE), //
+        new LayerSlice(1, 2, new ScalarEmbeddingLayer(5, 2)), //
+        new LayerSlice(2, 2, IdentityLayer.INSTANCE));
     NetLayers.initialize(netLayer);
     {
       Tensor y = netLayer.forward(Tensors.vector(0.2, 4, 0.1, 0.3));
@@ -82,7 +81,7 @@ class FeatureEmbeddingLayerTest {
   void testForwardAndBackSliceOffsets() {
     var first = new RecordingLayer();
     var second = new RecordingLayer();
-    NetLayer layer = FeatureEmbeddingLayer.of(new FeatureSlice(2, 2, first), new FeatureSlice(3, 3, second));
+    NetLayer layer = FeatureEmbeddingLayer.of(new LayerSlice(2, 2, first), new LayerSlice(3, 3, second));
     Tensor input = Tensors.vector(10, 20, 30, 40, 50);
     Tensor out = layer.forward(input);
     assertEquals(out, Tensors.vector(10, 20, 30, 40, 50));
@@ -98,7 +97,7 @@ class FeatureEmbeddingLayerTest {
   void testBatchForwardAndBackSliceOffsets() {
     var first = new RecordingLayer();
     var second = new RecordingLayer();
-    NetLayer layer = FeatureEmbeddingLayer.of(new FeatureSlice(2, 2, first), new FeatureSlice(1, 1, second));
+    NetLayer layer = FeatureEmbeddingLayer.of(new LayerSlice(2, 2, first), new LayerSlice(1, 1, second));
     Tensor batch = Tensors.fromString("{{1, 2, 3}, {4, 5, 6}}");
     Tensor out = layer.forwardBatch(batch);
     assertEquals(out, batch);
@@ -113,18 +112,18 @@ class FeatureEmbeddingLayerTest {
   @Test
   void testDefensiveCopyAndValidation() {
     var rec = new RecordingLayer();
-    List<FeatureSlice> mutable = new ArrayList<>(List.of(new FeatureSlice(2, 2, rec)));
+    List<LayerSlice> mutable = new ArrayList<>(List.of(new LayerSlice(2, 2, rec)));
     NetLayer layer = FeatureEmbeddingLayer.of(mutable);
     assertEquals(layer.nested().count(), 1);
-    assertThrows(IllegalArgumentException.class, () -> new FeatureSlice(-1, 2, rec));
-    assertThrows(IllegalArgumentException.class, () -> new FeatureSlice(2, -1, rec));
-    assertThrows(NullPointerException.class, () -> new FeatureSlice(2, 2, null));
+    assertThrows(IllegalArgumentException.class, () -> new LayerSlice(-1, 2, rec));
+    assertThrows(IllegalArgumentException.class, () -> new LayerSlice(2, -1, rec));
+    assertThrows(NullPointerException.class, () -> new LayerSlice(2, 2, null));
   }
 
   @Test
   void testSerialization() {
     var rec = new RecordingLayer();
-    NetLayer layer = FeatureEmbeddingLayer.of(new FeatureSlice(2, 2, rec));
+    NetLayer layer = FeatureEmbeddingLayer.of(new LayerSlice(2, 2, rec));
     NetLayer copy = Serialization.copy(layer);
     assertEquals(copy.toString(), layer.toString());
   }

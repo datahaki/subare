@@ -23,11 +23,4 @@ public abstract class ElementwiseLayer implements NetLayer, Serializable {
   public final Tensor backBatch(Tensor gradOutput) {
     return back(gradOutput);
   }
-
-  protected abstract String title();
-
-  @Override
-  public final String toString() {
-    return title();
-  }
 }

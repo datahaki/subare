@@ -26,13 +26,12 @@ import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.pdf.c.NormalDistribution;
 
-/** Embeds integers between 0 and (v-1) into a continuous vector space of dimension d.
+/** embeds an integer between 0 and (v-1) to a continuous vector space of dimension d
  * 
- * Backpropagation stops at the embedding layer!
+ * backpropagation gives an empty vector
  * 
- * inspired by
+ * <p>inspired by
  * <a href="https://reference.wolfram.com/language/ref/EmbeddingLayer.html">EmbeddingLayer</a> */
-// TODO misnomer
 public class EmbeddingLayer implements TrainableNetLayer, Serializable {
   @PackageTestAccess
   Tensor W;

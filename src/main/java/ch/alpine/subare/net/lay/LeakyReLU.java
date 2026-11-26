@@ -33,7 +33,7 @@ public class LeakyReLU extends SimpleElementwiseLayer {
   }
 
   @Override
-  protected String title() {
+  public String toString() {
     return MathematicaFormat.concise("LeakyReLU", alpha);
   }
 }

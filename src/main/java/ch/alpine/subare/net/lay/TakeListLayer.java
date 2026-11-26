@@ -11,6 +11,7 @@ import ch.alpine.tensor.alg.TakeList;
 import ch.alpine.tensor.ext.Integers;
 import ch.alpine.tensor.io.MathematicaFormat;
 
+/** @see Flatten1Layer */
 public class TakeListLayer implements NetLayer, Serializable {
   private final int[] lengths;
 

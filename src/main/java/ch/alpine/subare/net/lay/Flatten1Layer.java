@@ -10,7 +10,9 @@ import ch.alpine.tensor.alg.TakeList;
 import ch.alpine.tensor.ext.Integers;
 import ch.alpine.tensor.io.MathematicaFormat;
 
-/** inspired by
+/** @see TakeListLayer
+ * 
+ * <p>inspired by
  * <a href="https://reference.wolfram.com/language/ref/FlattenLayer.html">FlattenLayer</a> */
 public class Flatten1Layer implements NetLayer, Serializable {
   private int[] lengths = null;

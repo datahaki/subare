@@ -23,7 +23,7 @@ class SiluLayer extends ElementwiseLayer {
   }
 
   @Override
-  protected String title() {
+  public String toString() {
     return "SiLU";
   }
 }

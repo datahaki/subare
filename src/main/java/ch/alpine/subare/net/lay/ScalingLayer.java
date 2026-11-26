@@ -23,7 +23,7 @@ public class ScalingLayer extends ElementwiseLayer {
   }
 
   @Override
-  protected String title() {
+  public String toString() {
     return MathematicaFormat.concise("ScalingLayer", scalar);
   }
 }

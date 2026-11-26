@@ -47,7 +47,7 @@ public enum ElementwiseLayers implements Supplier<NetLayer> {
         }
 
         @Override
-        public String title() {
+        public String toString() {
           return "LogisticSigmoidLayer";
         }
       };
@@ -93,7 +93,7 @@ public enum ElementwiseLayers implements Supplier<NetLayer> {
         }
 
         @Override
-        public String title() {
+        public String toString() {
           return MathematicaFormat.concise("TanhLayer");
         }
       };
@@ -134,7 +134,7 @@ public enum ElementwiseLayers implements Supplier<NetLayer> {
         }
 
         @Override
-        public String title() {
+        public String toString() {
           return "ReLULayer";
         }
       };
@@ -192,7 +192,7 @@ public enum ElementwiseLayers implements Supplier<NetLayer> {
         }
 
         @Override
-        public String title() {
+        public String toString() {
           return "GeLULayer";
         }
       };

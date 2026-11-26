@@ -43,20 +43,6 @@ public enum NetChains {
     return new NetChain(list);
   }
 
-  /** Careful: applies flatten after embedding!
-   * 
-   * @param v
-   * @param d
-   * @param netLayer that takes as input a vector of length s*d where s is
-   * the sequence length, and outputs vector of length 1
-   * @return */
-  public static NetLayer embedding(int v, int d, NetLayer netLayer) {
-    return NetChain.join( //
-        new EmbeddingLayer(v, d), //
-        new FlattenLayer(), //
-        netLayer);
-  }
-
   public static NetLayer cnnRelu(int kernelSize) {
     Distribution distribution = NormalDistribution.of(0, 0.1);
     return NetChain.join( //

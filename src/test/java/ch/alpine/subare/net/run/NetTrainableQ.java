@@ -19,7 +19,7 @@ public enum NetTrainableQ {
     NetLayers.initialize(netLayer);
     Tensor Y = netLayer.forwardBatch(X);
     NetLayers.initialize(netLayer);
-    NetOptimizer netOptimize = NetOptimizers.SIMPLE.create(netLayer, RealScalar.of(0.1));
+    NetOptimizer netOptimize = NetOptimizers.SIMPLE.with(RealScalar.of(0.1)).apply(netLayer);
     // NetTrain netTrain = new NetTrain(netLayer, netOptimize);
     // TrainingData trainingData = new TrainingData(X, Y);
     // netTrain.setMaxEpochs(1000);

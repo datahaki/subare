@@ -33,7 +33,7 @@ class CNNDemo1Test {
     Conv1D conv = new Conv1D(kernelSize);
     Conv1DLayer conv1dLayer = Conv1DLayer.of(NormalDistribution.of(0, 0.1), new Random(), kernelSize);
     Scalar totalLoss2 = RealScalar.ONE;
-    NetOptimizer netOptimizer = NetOptimizers.SIMPLE.create(conv1dLayer, RealScalar.of(learningRate));
+    NetOptimizer netOptimizer = NetOptimizers.SIMPLE.with(RealScalar.of(learningRate)).apply(conv1dLayer);
     for (int epoch = 0; epoch <= 100; epoch++) {
       // FORWARD PASS
       double[] pred1 = conv.forward(input);

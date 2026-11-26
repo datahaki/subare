@@ -40,7 +40,7 @@ class SwiGLULayerTest {
       Tensor z = swiGLULayer.back(Tensors.vector(1, 2, 3, 2, 0, -1));
       VectorQ.requireLength(z, 3);
     }
-    NetOptimizer netOptimizer = NetOptimizers.ADAM_W.create(swiGLULayer, RealScalar.of(0.03), RealScalar.of(0.9), RealScalar.of(0.99));
+    NetOptimizer netOptimizer = NetOptimizers.ADAM_W.with(RealScalar.of(0.03), RealScalar.of(0.9), RealScalar.of(0.99)).apply(swiGLULayer);
     {
       Tensor Y = swiGLULayer.forwardBatch(HilbertMatrix.of(10, 3));
       Tensor Z = swiGLULayer.backBatch(Y);

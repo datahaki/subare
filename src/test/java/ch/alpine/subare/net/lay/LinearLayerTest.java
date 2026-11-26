@@ -56,7 +56,7 @@ class LinearLayerTest {
     TrainingData trainingData = new TrainingData(xdata, ydata);
     // ---
     NetLayers.initialize(netLayer);
-    NetOptimizer netOptimize = NetOptimizers.SIMPLE.create(netLayer, learningRate);
+    NetOptimizer netOptimize = NetOptimizers.SIMPLE.with(learningRate).apply(netLayer);
     // NetTrain netTrain = new NetTrain(netLayer, netOptimize);
     // netTrain.setMaxEpochs(100);
     // netTrain.runAsBatches(trainingData, 2);

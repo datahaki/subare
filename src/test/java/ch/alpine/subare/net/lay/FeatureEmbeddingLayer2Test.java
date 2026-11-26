@@ -10,26 +10,27 @@ import ch.alpine.tensor.Tensors;
 class FeatureEmbeddingLayer2Test {
   @Test
   void test() {
-    NetLayer embed = FeatureEmbeddingLayer.of( //
+    NetLayer netLayer = FeatureEmbeddingLayer.of( //
         IdentityLayer.INSTANCE, //
         new ScalarEmbeddingLayer(5, 2), //
         IdentityLayer.INSTANCE);
-    NetLayer netLayer = NetChain.join(new TakeListLayer(1, 1, 2), embed);
     NetLayers.initialize(netLayer);
+    Tensor x = Tensors.fromString("{0.2, 4, {0.1, 0.3}}");
     {
-      Tensor y = netLayer.forward(Tensors.vector(0.2, 4, 0.1, 0.3));
+      Tensor y = netLayer.forward(x);
       assertEquals(y.length(), 3);
       Tensor z = netLayer.back(y);
     }
+    Tensor x2 = Tensors.fromString("{0.1, 4, {0.1, 0.3}}");
     {
       Tensor X = Tensors.of( //
-          Tensors.vector(0.2, 4, 0.1, 0.3), //
-          Tensors.vector(0.2, 4, 0.1, 0.3), //
-          Tensors.vector(0.2, 4, 0.1, 0.3), //
-          Tensors.vector(0.2, 4, 0.1, 0.3), //
-          Tensors.vector(0.2, 4, 0.1, 0.3), //
-          Tensors.vector(0.2, 4, 0.1, 0.3), //
-          Tensors.vector(0.1, 0, 0.4, 1.3));
+          x, //
+          x, //
+          x, //
+          x, //
+          x, //
+          x, //
+          x2);
       Tensor Y = netLayer.forwardBatch(X);
       Tensor g = netLayer.backBatch(Y);
     }

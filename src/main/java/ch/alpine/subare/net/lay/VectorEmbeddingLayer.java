@@ -15,9 +15,9 @@ import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
-import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.ConstantArray;
 import ch.alpine.tensor.alg.Dimensions;
+import ch.alpine.tensor.alg.VectorQ;
 import ch.alpine.tensor.ext.Int;
 import ch.alpine.tensor.ext.Integers;
 import ch.alpine.tensor.ext.PackageTestAccess;
@@ -32,8 +32,7 @@ import ch.alpine.tensor.pdf.c.NormalDistribution;
  * 
  * inspired by
  * <a href="https://reference.wolfram.com/language/ref/EmbeddingLayer.html">EmbeddingLayer</a> */
-// TODO misnomer
-public class ScalarEmbeddingLayer implements TrainableNetLayer, Serializable {
+public class VectorEmbeddingLayer implements TrainableNetLayer, Serializable {
   @PackageTestAccess
   Tensor W;
   // ---
@@ -45,7 +44,7 @@ public class ScalarEmbeddingLayer implements TrainableNetLayer, Serializable {
 
   /** @param v vocabulary size (total number of unique tokens)
    * @param d embedding dimension */
-  public ScalarEmbeddingLayer(int v, int d) {
+  public VectorEmbeddingLayer(int v, int d) {
     Integers.requirePositive(v);
     Integers.requirePositive(d);
     W = ConstantArray.of(DoubleScalar.INDETERMINATE, v, d);
@@ -53,10 +52,12 @@ public class ScalarEmbeddingLayer implements TrainableNetLayer, Serializable {
 
   @Override
   public Tensor forward(Tensor x) {
-    inputCache = x;
+    inputCache = VectorQ.require(x);
     // returns dimensions: [x.length() * d]
-    int index = Scalars.intValueExact((Scalar) x);
-    return W.get(index);
+    return Tensor.of(x.stream() //
+        .map(Scalar.class::cast) //
+        .mapToInt(Scalars::intValueExact) //
+        .mapToObj(W::get), x.length());
   }
 
   @Override
@@ -68,10 +69,15 @@ public class ScalarEmbeddingLayer implements TrainableNetLayer, Serializable {
 
   @Override
   public Tensor back(Tensor gradOutput) {
-    int index = Scalars.intValueExact((Scalar) inputCache);
     gW = W.maps(Scalar::zero);
-    gW.set(gradOutput::add, index); // TODO simplify later
+    contrib(gW, gradOutput, inputCache);
     return Tensors.unmodifiableEmpty();
+  }
+
+  private static void contrib(Tensor gW, Tensor gradOutput, Tensor inputCache) {
+    Int myI = new Int();
+    gradOutput.stream() //
+        .forEach(row -> gW.set(row::add, inputCache.Get(myI.getAndIncrement()).number().intValue()));
   }
 
   @Override
@@ -79,10 +85,9 @@ public class ScalarEmbeddingLayer implements TrainableNetLayer, Serializable {
     gW = W.maps(Scalar::zero);
     int n = gradOutput.length();
     Integers.requireEquals(n, inputCache.length());
-    Int myI = new Int();
-    gradOutput.stream() // gradient
-        .forEach(row -> gW.set(row::add, inputCache.Get(myI.getAndIncrement()).number().intValue()));
-    return Array.zeros(gradOutput.length(), 0);
+    for (int i = 0; i < n; ++i)
+      contrib(gW, gradOutput.get(i), inputCache.get(i));
+    return ConstantArray.of(Tensors.empty(), gradOutput.length());
   }
 
   @Override
@@ -117,6 +122,6 @@ public class ScalarEmbeddingLayer implements TrainableNetLayer, Serializable {
 
   @Override
   public String toString() {
-    return MathematicaFormat.concise("ScalarEmbeddingLayer", Dimensions.of(W), netRegularization);
+    return MathematicaFormat.concise("EmbeddingLayer", Dimensions.of(W), netRegularization);
   }
 }

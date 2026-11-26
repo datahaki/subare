@@ -2,6 +2,7 @@
 package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -12,6 +13,10 @@ import ch.alpine.tensor.io.MathematicaFormat;
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/NetChain.html">NetChain</a> */
 public record NetChain(List<NetLayer> list) implements NetLayer, Serializable {
+  public NetChain(NetLayer... netLayers) {
+    this(Arrays.asList(netLayers));
+  }
+
   /** join all given net layers in the order given.
    * if any of the given net layers are instances of NetChain
    * the sequence of that net chain are brought down onto the first level

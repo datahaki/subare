@@ -9,8 +9,11 @@ import ch.alpine.subare.net.lay.NetChain;
 import ch.alpine.subare.net.lay.NetLayer;
 import ch.alpine.subare.net.lay.NetLayers;
 import ch.alpine.subare.net.lay.SigmoidLayer;
+import ch.alpine.subare.net.lay.SlicedLayer;
 import ch.alpine.subare.net.lay.SoftmaxLayer;
 import ch.alpine.subare.net.lay.UnitStepLayer;
+import ch.alpine.subare.net.los.CombinedLoss;
+import ch.alpine.subare.net.los.LossFunction;
 
 public enum NetModels {
   ;
@@ -59,5 +62,13 @@ public enum NetModels {
     List<String> list = NetLayers.toString(netModel.netLayer());
     list.add(netModel.lossFunction().toString());
     return list;
+  }
+
+  public static NetModel output(NetLayer prefix, List<NetModel> list) {
+    NetLayer netLayer = NetChain.join( //
+        prefix, //
+        SlicedLayer.of(list.stream().map(NetModel::netLayer).toList()));
+    LossFunction lossFunction = new CombinedLoss(list.stream().map(NetModel::lossFunction).toList());
+    return new NetModel(netLayer, lossFunction);
   }
 }

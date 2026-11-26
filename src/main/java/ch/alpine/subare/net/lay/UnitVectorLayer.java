@@ -15,11 +15,11 @@ import ch.alpine.tensor.mat.IdentityMatrix;
 /** Embeds an integer between 0 and (v-1) as a unit vector
  * 
  * inspired by
- * <a href="https://reference.wolfram.com/language/ref/EmbeddingLayer.html">EmbeddingLayer</a> */
-public class OneHotLayer implements NetLayer, Serializable {
+ * <a href="https://reference.wolfram.com/language/ref/UnitVectorLayer.html">UnitVectorLayer</a> */
+public class UnitVectorLayer implements NetLayer, Serializable {
   private final Tensor[] id;
 
-  public OneHotLayer(int v) {
+  public UnitVectorLayer(int v) {
     id = IdentityMatrix.stream(v) //
         .map(Tensor::unmodifiable) //
         .toArray(Tensor[]::new);
@@ -47,6 +47,6 @@ public class OneHotLayer implements NetLayer, Serializable {
 
   @Override
   public String toString() {
-    return MathematicaFormat.concise("OneHotLayer", id.length);
+    return MathematicaFormat.concise("UnitVectorLayer", id.length);
   }
 }

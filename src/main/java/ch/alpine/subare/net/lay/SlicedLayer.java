@@ -12,9 +12,9 @@ import ch.alpine.tensor.Unprotect;
 import ch.alpine.tensor.alg.Transpose;
 import ch.alpine.tensor.io.MathematicaFormat;
 
-public class FeatureEmbeddingLayer implements NetLayer, Serializable {
+public class SlicedLayer implements NetLayer, Serializable {
   public static NetLayer of(List<NetLayer> list) {
-    return new FeatureEmbeddingLayer(list);
+    return new SlicedLayer(list);
   }
 
   public static NetLayer of(NetLayer... featureSlices) {
@@ -24,7 +24,7 @@ public class FeatureEmbeddingLayer implements NetLayer, Serializable {
   // ---
   private final List<NetLayer> list;
 
-  private FeatureEmbeddingLayer(List<NetLayer> list) {
+  private SlicedLayer(List<NetLayer> list) {
     this.list = list;
   }
 
@@ -80,6 +80,6 @@ public class FeatureEmbeddingLayer implements NetLayer, Serializable {
 
   @Override
   public String toString() {
-    return MathematicaFormat.concise("FeatureEmbeddingLayer", list.size());
+    return MathematicaFormat.concise("SplitLayer", list.size());
   }
 }

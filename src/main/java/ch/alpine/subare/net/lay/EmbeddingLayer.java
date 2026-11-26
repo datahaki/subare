@@ -15,9 +15,9 @@ import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
+import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.ConstantArray;
 import ch.alpine.tensor.alg.Dimensions;
-import ch.alpine.tensor.alg.VectorQ;
 import ch.alpine.tensor.ext.Int;
 import ch.alpine.tensor.ext.Integers;
 import ch.alpine.tensor.ext.PackageTestAccess;
@@ -32,6 +32,7 @@ import ch.alpine.tensor.pdf.c.NormalDistribution;
  * 
  * inspired by
  * <a href="https://reference.wolfram.com/language/ref/EmbeddingLayer.html">EmbeddingLayer</a> */
+// TODO misnomer
 public class EmbeddingLayer implements TrainableNetLayer, Serializable {
   @PackageTestAccess
   Tensor W;
@@ -52,12 +53,10 @@ public class EmbeddingLayer implements TrainableNetLayer, Serializable {
 
   @Override
   public Tensor forward(Tensor x) {
-    inputCache = VectorQ.require(x);
+    inputCache = x;
     // returns dimensions: [x.length() * d]
-    return Tensor.of(x.stream() //
-        .map(Scalar.class::cast) //
-        .mapToInt(Scalars::intValueExact) //
-        .mapToObj(W::get), x.length());
+    int index = Scalars.intValueExact((Scalar) x);
+    return W.get(index);
   }
 
   @Override
@@ -69,15 +68,10 @@ public class EmbeddingLayer implements TrainableNetLayer, Serializable {
 
   @Override
   public Tensor back(Tensor gradOutput) {
+    int index = Scalars.intValueExact((Scalar) inputCache);
     gW = W.maps(Scalar::zero);
-    contrib(gW, gradOutput, inputCache);
+    gW.set(gradOutput::add, index); // TODO simplify later
     return Tensors.unmodifiableEmpty();
-  }
-
-  private static void contrib(Tensor gW, Tensor gradOutput, Tensor inputCache) {
-    Int myI = new Int();
-    gradOutput.stream() //
-        .forEach(row -> gW.set(row::add, inputCache.Get(myI.getAndIncrement()).number().intValue()));
   }
 
   @Override
@@ -85,9 +79,10 @@ public class EmbeddingLayer implements TrainableNetLayer, Serializable {
     gW = W.maps(Scalar::zero);
     int n = gradOutput.length();
     Integers.requireEquals(n, inputCache.length());
-    for (int i = 0; i < n; ++i)
-      contrib(gW, gradOutput.get(i), inputCache.get(i));
-    return ConstantArray.of(Tensors.empty(), gradOutput.length());
+    Int myI = new Int();
+    gradOutput.stream() // gradient
+        .forEach(row -> gW.set(row::add, inputCache.Get(myI.getAndIncrement()).number().intValue()));
+    return Array.zeros(gradOutput.length(), 0);
   }
 
   @Override
@@ -122,6 +117,6 @@ public class EmbeddingLayer implements TrainableNetLayer, Serializable {
 
   @Override
   public String toString() {
-    return MathematicaFormat.concise("EmbeddingLayer", Dimensions.of(W), netRegularization);
+    return MathematicaFormat.concise("ScalarEmbeddingLayer", Dimensions.of(W), netRegularization);
   }
 }

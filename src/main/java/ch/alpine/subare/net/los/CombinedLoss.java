@@ -5,9 +5,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.alpine.tensor.RealScalar;
-import ch.alpine.tensor.Scalar;
+import ch.alpine.subare.net.los.NetLossCollectors.AccumulatedNetLoss;
 import ch.alpine.tensor.Tensor;
+import ch.alpine.tensor.ext.Integers;
+import ch.alpine.tensor.io.MathematicaFormat;
 
 public class CombinedLoss implements LossFunction, Serializable {
   private final List<LossFunction> list;
@@ -18,6 +19,7 @@ public class CombinedLoss implements LossFunction, Serializable {
 
   @Override
   public NetLoss compute(Tensor prediction, Tensor target) {
+    Integers.requireEquals(list.size(), prediction.length());
     int index = 0;
     List<NetLoss> netLoss = new ArrayList<>(list.size());
     for (LossFunction lossFunction : list) {
@@ -26,17 +28,33 @@ public class CombinedLoss implements LossFunction, Serializable {
           target.get(index)));
       ++index;
     }
-    return new NetLoss( //
-        netLoss.stream() //
-            .map(NetLoss::loss) //
-            .reduce(Scalar::add) //
-            .orElse(RealScalar.ZERO), //
-        Tensor.of(netLoss.stream().map(NetLoss::gradOutput), netLoss.size()));
+    AccumulatedNetLoss result = netLoss.stream().collect(NetLossCollectors.toAccumulated());
+    // Tensor grad = Tensor.of(netLoss.stream().map(NetLoss::gradOutput), netLoss.size());
+    // Tolerance.CHOP.requireClose(here, grad);
+    return new NetLoss(result.loss(), result.compile());
   }
 
   @Override
   public NetLoss computeBatch(Tensor prediction, Tensor target) {
-    // TODO Auto-generated method stub
-    return null;
+    Integers.requireEquals(list.size(), prediction.get(0).length());
+    int index = 0;
+    List<NetLoss> netLoss = new ArrayList<>(list.size());
+    for (LossFunction lossFunction : list) {
+      netLoss.add(lossFunction.computeBatch( //
+          prediction.get(Tensor.ALL, index), //
+          target.get(Tensor.ALL, index)));
+      ++index;
+    }
+    AccumulatedNetLoss result = netLoss.stream().collect(NetLossCollectors.toAccumulated());
+    // Tensor grad = Transpose.of(Tensor.of(netLoss.stream().map(NetLoss::gradOutput), netLoss.size()));
+    // Tolerance.CHOP.requireClose(here, grad);
+    return new NetLoss( //
+        result.loss(), //
+        result.compileBatch());
+  }
+
+  @Override
+  public String toString() {
+    return MathematicaFormat.concise("CombinedLoss", list);
   }
 }

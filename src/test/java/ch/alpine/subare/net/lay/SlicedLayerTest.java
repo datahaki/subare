@@ -13,12 +13,12 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.ext.Serialization;
 
-class FeatureEmbeddingLayerTest {
+class SlicedLayerTest {
   @Test
   void test() {
-    NetLayer netLayer = FeatureEmbeddingLayer.of( //
+    NetLayer netLayer = SlicedLayer.of( //
         IdentityLayer.INSTANCE, //
-        new ScalarEmbeddingLayer(5, 2), //
+        new EmbeddingLayer(5, 2), //
         IdentityLayer.INSTANCE);
     NetLayers.initialize(netLayer);
     Tensor x = Tensors.fromString("{0.2, 4, {0.1, 0.3}}");
@@ -83,7 +83,7 @@ class FeatureEmbeddingLayerTest {
     var second = new RecordingLayer();
     NetLayer layer = NetChain.join( //
         new TakeListLayer(2, 3), //
-        FeatureEmbeddingLayer.of(first, second), //
+        SlicedLayer.of(first, second), //
         new Flatten1Layer());
     Tensor input = Tensors.vector(10, 20, 30, 40, 50);
     Tensor out = layer.forward(input);
@@ -101,7 +101,7 @@ class FeatureEmbeddingLayerTest {
     var second = new RecordingLayer();
     NetLayer layer = NetChain.join( //
         new TakeListLayer(2, 1), //
-        FeatureEmbeddingLayer.of(first, second), //
+        SlicedLayer.of(first, second), //
         new Flatten1Layer());
     Tensor batch = Tensors.fromString("{{1, 2, 3}, {4, 5, 6}}");
     Tensor out = layer.forwardBatch(batch);
@@ -126,7 +126,7 @@ class FeatureEmbeddingLayerTest {
   @Test
   void testSerialization() {
     var rec = new RecordingLayer();
-    NetLayer layer = FeatureEmbeddingLayer.of(rec);
+    NetLayer layer = SlicedLayer.of(rec);
     NetLayer copy = Serialization.copy(layer);
     assertEquals(copy.toString(), layer.toString());
   }

@@ -11,6 +11,6 @@ public enum NetRegularizations {
     boolean z2 = Scalars.isZero(l2);
     if (!z1 && !z2)
       return new ElasticRegularization(l1, l2);
-    return null;
+    return null; // FIXME
   }
 }

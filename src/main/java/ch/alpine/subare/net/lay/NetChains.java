@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
 
+import ch.alpine.subare.net.reg.NetRegularization;
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Scalars;
 import ch.alpine.tensor.pdf.Distribution;
@@ -27,15 +28,17 @@ public enum NetChains {
     return new NetChain(list);
   }
 
-  public static NetLayer linearWith(List<Integer> dims, Supplier<NetLayer> supplier, Scalar p) {
+  public static NetLayer linearWith(List<Integer> dims, Supplier<NetLayer> supplier, NetRegularization netRegularization, Scalar dropout_p) {
     List<NetLayer> list = new ArrayList<>();
     for (int i = 0; i < dims.size() - 1; ++i) {
       if (0 < i) {
         list.add(supplier.get());
-        if (Scalars.nonZero(p))
-          list.add(DropoutLayer.of(p));
+        if (Scalars.nonZero(dropout_p))
+          list.add(DropoutLayer.of(dropout_p));
       }
-      list.add(new LinearLayer(dims.get(i), dims.get(i + 1)));
+      LinearLayer linearLayer = new LinearLayer(dims.get(i), dims.get(i + 1));
+      linearLayer.netRegularization = netRegularization;
+      list.add(linearLayer);
     }
     return new NetChain(list);
   }

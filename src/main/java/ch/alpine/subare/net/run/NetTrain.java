@@ -22,7 +22,6 @@ import ch.alpine.tensor.chq.DeterminateTensorQ;
 import ch.alpine.tensor.io.TableBuilder;
 import ch.alpine.tensor.pdf.Permute;
 import ch.alpine.tensor.red.Total;
-import ch.alpine.tensor.sca.exp.Log;
 
 /** inspired by
  * <a href="https://reference.wolfram.com/language/ref/NetTrain.html">NetTrain</a> */
@@ -118,12 +117,6 @@ public class NetTrain {
 
   public void addListener(NetTrainListener runnable) {
     list.add(runnable);
-  }
-
-  /** @return log of loss value at final training step */
-  @Deprecated
-  public Scalar log_loss() {
-    return Log.FUNCTION.apply(tloss.getRow(tloss.getRowCount() - 1).Get(1));
   }
 
   public void setMaxEpochs(int max_epochs) {

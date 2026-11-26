@@ -53,10 +53,9 @@ public class ScalarEmbeddingLayer implements TrainableNetLayer, Serializable {
 
   @Override
   public Tensor forward(Tensor x) {
-    Integers.requireEquals(x.length(), 1);
     inputCache = x;
     // returns dimensions: [x.length() * d]
-    int index = Scalars.intValueExact(x.Get(0));
+    int index = Scalars.intValueExact((Scalar) x);
     return W.get(index);
   }
 
@@ -69,7 +68,7 @@ public class ScalarEmbeddingLayer implements TrainableNetLayer, Serializable {
 
   @Override
   public Tensor back(Tensor gradOutput) {
-    int index = Scalars.intValueExact(inputCache.Get(0));
+    int index = Scalars.intValueExact((Scalar) inputCache);
     gW = W.maps(Scalar::zero);
     gW.set(gradOutput::add, index); // TODO simplify later
     return Tensors.unmodifiableEmpty();
@@ -82,7 +81,7 @@ public class ScalarEmbeddingLayer implements TrainableNetLayer, Serializable {
     Integers.requireEquals(n, inputCache.length());
     Int myI = new Int();
     gradOutput.stream() // gradient
-        .forEach(row -> gW.set(row::add, inputCache.Get(myI.getAndIncrement(), 0).number().intValue()));
+        .forEach(row -> gW.set(row::add, inputCache.Get(myI.getAndIncrement()).number().intValue()));
     return Array.zeros(gradOutput.length(), 0);
   }
 

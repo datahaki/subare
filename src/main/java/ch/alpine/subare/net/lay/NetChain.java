@@ -20,7 +20,11 @@ public record NetChain(List<NetLayer> list) implements NetLayer, Serializable {
    * @param netLayers
    * @return */
   public static NetLayer join(NetLayer... netLayers) {
-    return new NetChain(Stream.of(netLayers) //
+    return join(Stream.of(netLayers));
+  }
+
+  public static NetLayer join(Stream<NetLayer> stream) {
+    return new NetChain(stream //
         .flatMap(netLayer -> netLayer instanceof NetChain netChain //
             ? netChain.list().stream()
             : Stream.of(netLayer))

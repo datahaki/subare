@@ -14,16 +14,16 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.Flatten;
-import ch.alpine.tensor.jet.JetScalar;
+import ch.alpine.tensor.jet.Jet;
 import ch.alpine.tensor.sca.exp.LogisticSigmoid;
 
 class SwiGLULayerJetTest {
   private static Scalar jetOf(double value, double d1) {
-    return JetScalar.of(Tensors.vector(value, d1));
+    return Jet.of(Tensors.vector(value, d1));
   }
 
   private static double d1(Scalar s) {
-    return ((JetScalar) s).jet().Get(1).number().doubleValue();
+    return ((Jet) s).derivative(1).number().doubleValue();
   }
 
   /** Evaluates SwiGLU forward pass on a [1, 5, 1] layer for arbitrary Scalar elements. */

@@ -3,7 +3,7 @@ package ch.alpine.subare.net.lay;
 
 import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
-import ch.alpine.tensor.jet.JetScalar;
+import ch.alpine.tensor.jet.Jet;
 import ch.alpine.tensor.mat.Tolerance;
 import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.pdf.c.NormalDistribution;
@@ -13,12 +13,12 @@ class ElementwiseLayerTest {
     Tensor xx = RandomVariate.of(NormalDistribution.standard(), 2);
     Scalar y_bar = RandomVariate.of(NormalDistribution.standard());
     // ---
-    JetScalar y = (JetScalar) netLayer.forward(JetScalar.of(xx));
+    Jet y = (Jet) netLayer.forward(Jet.of(xx));
     Scalar z = (Scalar) netLayer.back(y_bar);
-    Scalar r1 = y.jet().Get(1).multiply(y_bar);
+    Scalar r1 = y.derivative(1).multiply(y_bar);
     Scalar r2 = z.multiply(xx.Get(1));
-    if (r2 instanceof JetScalar js)
-      r2 = js.jet().Get(0);
+    if (r2 instanceof Jet js)
+      r2 = js.derivative(0);
     Tolerance.CHOP.requireClose(r1, r2);
   }
 
@@ -26,12 +26,12 @@ class ElementwiseLayerTest {
     Tensor xx = RandomVariate.of(NormalDistribution.standard(), 2);
     Scalar y_bar = RandomVariate.of(NormalDistribution.standard());
     // ---
-    JetScalar y = (JetScalar) netLayer.forwardBatch(JetScalar.of(xx));
+    Jet y = (Jet) netLayer.forwardBatch(Jet.of(xx));
     Scalar z = (Scalar) netLayer.backBatch(y_bar);
-    Scalar r1 = y.jet().Get(1).multiply(y_bar);
+    Scalar r1 = y.derivative(1).multiply(y_bar);
     Scalar r2 = z.multiply(xx.Get(1));
-    if (r2 instanceof JetScalar js)
-      r2 = js.jet().Get(0);
+    if (r2 instanceof Jet js)
+      r2 = js.derivative(0);
     Tolerance.CHOP.requireClose(r1, r2);
   }
 }

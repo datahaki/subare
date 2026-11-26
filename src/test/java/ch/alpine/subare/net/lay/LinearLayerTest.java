@@ -13,7 +13,7 @@ import ch.alpine.tensor.Scalar;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.chq.DeterminateTensorQ;
-import ch.alpine.tensor.jet.JetScalar;
+import ch.alpine.tensor.jet.Jet;
 import ch.alpine.tensor.mat.DiagonalMatrix;
 import ch.alpine.tensor.pdf.Distribution;
 import ch.alpine.tensor.pdf.RandomVariate;
@@ -33,7 +33,7 @@ class LinearLayerTest {
     LinearLayer linearLayer = new LinearLayer(1, 1);
     linearLayer.W = DiagonalMatrix.full(Tensors.vector(3));
     linearLayer.b = Tensors.vector(5);
-    JetScalar js = JetScalar.identity(RealScalar.of(4), 2);
+    Jet js = Jet.identity(RealScalar.of(4), 2);
     // IO.println(js);
     Tensor x = Tensors.of(js);
     Tensor y = linearLayer.forward(x);

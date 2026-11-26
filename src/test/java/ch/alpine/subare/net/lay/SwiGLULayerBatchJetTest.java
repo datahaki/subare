@@ -15,7 +15,7 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.Array;
 import ch.alpine.tensor.alg.Flatten;
-import ch.alpine.tensor.jet.JetScalar;
+import ch.alpine.tensor.jet.Jet;
 import ch.alpine.tensor.sca.exp.LogisticSigmoid;
 
 class SwiGLULayerBatchJetTest {
@@ -25,11 +25,11 @@ class SwiGLULayerBatchJetTest {
   private static final int BATCH = 2;
 
   private static Scalar jetOf(double value, double d1) {
-    return JetScalar.of(Tensors.vector(value, d1));
+    return Jet.of(Tensors.vector(value, d1));
   }
 
   private static double d1(Scalar s) {
-    return ((JetScalar) s).jet().Get(1).number().doubleValue();
+    return ((Jet) s).derivative(1).number().doubleValue();
   }
 
   /** Converts a Tensor of RealScalars into a matching Tensor of JetScalars with d1 = 0. */

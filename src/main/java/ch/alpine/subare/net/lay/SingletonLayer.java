@@ -8,8 +8,7 @@ import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Unprotect;
 import ch.alpine.tensor.alg.VectorQ;
 
-// TODO misnomer
-public enum ScalarLayer implements NetLayer {
+public enum SingletonLayer implements NetLayer {
   VectorToScalar {
     @Override
     public Tensor forward(Tensor x) {

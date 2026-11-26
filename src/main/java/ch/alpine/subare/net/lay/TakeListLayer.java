@@ -1,6 +1,8 @@
+// code by jph
 package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
+import java.util.stream.IntStream;
 
 import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
@@ -14,6 +16,7 @@ public class TakeListLayer implements NetLayer, Serializable {
 
   public TakeListLayer(int... lengths) {
     this.lengths = lengths;
+    IntStream.of(lengths).forEach(Integers::requirePositiveOrZero);
   }
 
   @Override

@@ -48,7 +48,7 @@ public enum ElementwiseLayers implements Supplier<NetLayer> {
 
         @Override
         public String toString() {
-          return "LogisticSigmoidLayer";
+          return "LogisticSigmoid";
         }
       };
     }
@@ -94,7 +94,7 @@ public enum ElementwiseLayers implements Supplier<NetLayer> {
 
         @Override
         public String toString() {
-          return MathematicaFormat.concise("TanhLayer");
+          return MathematicaFormat.concise("Tanh");
         }
       };
     }
@@ -135,7 +135,7 @@ public enum ElementwiseLayers implements Supplier<NetLayer> {
 
         @Override
         public String toString() {
-          return "ReLULayer";
+          return "ReLU";
         }
       };
     }
@@ -188,12 +188,12 @@ public enum ElementwiseLayers implements Supplier<NetLayer> {
 
         @Override
         public Tensor back() {
-          return inputCache.maps(Gelu::dx);
+          return inputCache.maps(Gelu.DERIVATIVE);
         }
 
         @Override
         public String toString() {
-          return "GeLULayer";
+          return "GeLU";
         }
       };
     }

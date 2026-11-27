@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import ch.alpine.tensor.RealScalar;
 
-class L2RegularizerTest {
+class L2RegularizationTest {
   @Test
   void test() {
     L2Regularization l2Regularizer = new L2Regularization(RealScalar.of(0.25));

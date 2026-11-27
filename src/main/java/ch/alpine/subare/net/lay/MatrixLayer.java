@@ -8,6 +8,7 @@ import java.util.random.RandomGenerator;
 import ch.alpine.subare.net.reg.L2Regularization;
 import ch.alpine.subare.net.reg.NetRegularization;
 import ch.alpine.tensor.DoubleScalar;
+import ch.alpine.tensor.Parallelize;
 import ch.alpine.tensor.Rational;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
@@ -62,7 +63,8 @@ public class MatrixLayer implements TrainableNetLayer, Serializable {
   public Tensor forwardBatch(Tensor X) {
     inputCache = X;
     // Dimensions: batch_size x d_out
-    return outputCache = X.dot(W);
+    return outputCache = Parallelize.dot(X, W);
+    // return outputCache = X.dot(W);
   }
 
   @Override

@@ -60,6 +60,10 @@ public class NetTrain {
     Tensor xdata = trainingData.xdata();
     Tensor ydata = trainingData.ydata();
     final int n = xdata.length();
+    if (n == 0) {
+      System.err.println("trainingData is empty");
+      return;
+    }
     {
       int rem = n % batch_size;
       if (rem != 0)

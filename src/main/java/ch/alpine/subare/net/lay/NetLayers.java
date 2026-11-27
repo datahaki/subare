@@ -55,11 +55,15 @@ public enum NetLayers {
         .orElse(RealScalar.ZERO);
   }
 
+  public static Tensor parametersAsMatrix(NetLayer netLayer) {
+    return parametersAsMatrix(Tensor.of(parameters(netLayer)));
+  }
+
   /** @param netLayer
    * @return matrix */
-  public static Tensor parametersAsMatrix(NetLayer netLayer) {
+  public static Tensor parametersAsMatrix(Tensor tensor) {
     List<Tensor> list = new LinkedList<>();
-    build(list, Tensor.of(parameters(netLayer)));
+    build(list, tensor);
     List<Dimensions> dims = list.stream() //
         .map(Dimensions::new) //
         .toList();

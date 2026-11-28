@@ -4,7 +4,6 @@ package ch.alpine.subare.net.lay;
 import java.io.Serializable;
 import java.util.List;
 import java.util.random.RandomGenerator;
-import java.util.stream.IntStream;
 
 import ch.alpine.subare.net.reg.NetRegularization;
 import ch.alpine.subare.net.reg.NoRegularization;
@@ -12,6 +11,7 @@ import ch.alpine.tensor.DoubleScalar;
 import ch.alpine.tensor.Parallelize;
 import ch.alpine.tensor.RealScalar;
 import ch.alpine.tensor.Scalar;
+import ch.alpine.tensor.Slash;
 import ch.alpine.tensor.Tensor;
 import ch.alpine.tensor.Tensors;
 import ch.alpine.tensor.alg.ConstantArray;
@@ -67,7 +67,7 @@ public class TrainableFourierLayer implements TrainableNetLayer, Serializable {
   public Tensor forwardBatch(Tensor X) {
     inputCache = X;
     phaseCache = Parallelize.dot(X, B);
-    return Tensor.of(phaseCache.stream().map(row -> Flatten.of(row.maps(AngleVector::of))), phaseCache.length());
+    return Slash.of(phaseCache, row -> Flatten.of(row.maps(AngleVector::of)));
   }
 
   @Override
@@ -80,7 +80,7 @@ public class TrainableFourierLayer implements TrainableNetLayer, Serializable {
 
   @Override
   public Tensor backBatch(Tensor gradOutput) {
-    Tensor deltas = Tensor.of(IntStream.range(0, gradOutput.length()).mapToObj(b -> phaseDelta(phaseCache.get(b), gradOutput.get(b))));
+    Tensor deltas = Slash.of(TrainableFourierLayer::phaseDelta, phaseCache, gradOutput);
     gB = TransposeMatrixDot.of(inputCache, deltas);
     return MatrixDotTranspose.of(deltas, B);
   }
@@ -91,6 +91,7 @@ public class TrainableFourierLayer implements TrainableNetLayer, Serializable {
       Scalar p = phase.Get(k);
       Scalar gCos = gradOut.Get(2 * k);
       Scalar gSin = gradOut.Get(2 * k + 1);
+      // dot product of D.AngleVector (phase shift *90) and 2-excerpt from gradOutput
       return Sin.FUNCTION.apply(p).negate().multiply(gCos).add(Cos.FUNCTION.apply(p).multiply(gSin));
     }, numFreq);
   }

@@ -21,6 +21,8 @@ import ch.alpine.tensor.api.TensorUnaryOperator;
 import ch.alpine.tensor.chq.DeterminateTensorQ;
 import ch.alpine.tensor.io.TableBuilder;
 import ch.alpine.tensor.pdf.Permute;
+import ch.alpine.tensor.qty.Timing;
+import ch.alpine.tensor.red.MeanSummaryStatistics;
 import ch.alpine.tensor.red.Total;
 
 /** inspired by
@@ -30,6 +32,7 @@ public class NetTrain {
   private final transient List<NetTrainListener> list = new LinkedList<>();
   private final NetModel netModel;
   private final NetOptimizer netOptimizer;
+  private final MeanSummaryStatistics mss = new MeanSummaryStatistics();
   public final TableBuilder tloss = new TableBuilder();
 
   /** @param netChain
@@ -72,11 +75,12 @@ public class NetTrain {
     // 6. Repeat until the loss becomes sufficiently small.
     boolean allMatch = true;
     while (allMatch) {
+      Timing timing = Timing.started();
       // 0. Shuffle dataset indices at the beginning of every epoch
       // (Crucial for preventing the model from memorizing batch order)
-      TensorUnaryOperator tuo = Permute.range(n);
-      Tensor batchX = Partition.gather(tuo.apply(xdata), batch_size);
-      Tensor batchY = Partition.gather(tuo.apply(ydata), batch_size);
+      TensorUnaryOperator permute = Permute.range(n);
+      Tensor batchX = Partition.gather(permute.apply(xdata), batch_size);
+      Tensor batchY = Partition.gather(permute.apply(ydata), batch_size);
       Tensor lossv = Tensors.reserve(batchX.length()); // to compute epoch_loss
       for (int i = 0; i < batchX.length(); ++i) {
         Tensor x = batchX.get(i);
@@ -101,12 +105,14 @@ public class NetTrain {
         // 5. Weight update: The optimizer adjusts weights to reduce the loss.
         netOptimizer.update();
       }
-      {
-        int epoch = tloss.getRowCount();
-        Scalar loss1 = Total.ofVector(lossv).divide(RealScalar.of(n));
-        Scalar loss2 = NetLayers.reg_loss(netLayer, netOptimizer.weightDecay());
-        tloss.appendRow(RealScalar.of(epoch), loss1, loss2);
+      int epoch = tloss.getRowCount();
+      Scalar loss1 = Total.ofVector(lossv).divide(RealScalar.of(n));
+      Scalar loss2 = NetLayers.reg_loss(netLayer, netOptimizer.weightDecay());
+      if (0 < epoch) {
+        mss.accept(timing.seconds());
+        IO.println("mean=" + mss.getMean().orElseThrow());
       }
+      tloss.appendRow(RealScalar.of(epoch), loss1, loss2);
       allMatch &= list.stream() //
           .map(ntl -> ntl.epoch(this)) //
           .reduce(Boolean::logicalAnd) //

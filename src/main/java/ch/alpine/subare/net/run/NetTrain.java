@@ -3,6 +3,7 @@ package ch.alpine.subare.net.run;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import ch.alpine.subare.net.lay.DropoutLayers;
 import ch.alpine.subare.net.lay.NetLayer;
@@ -29,6 +30,7 @@ import ch.alpine.tensor.red.Total;
  * <a href="https://reference.wolfram.com/language/ref/NetTrain.html">NetTrain</a> */
 public class NetTrain {
   public static final String[] LOSS_LABELS = { "data", "regularization" };
+  private static final int TIMING_START = 3;
   private final transient List<NetTrainListener> list = new LinkedList<>();
   private final NetModel netModel;
   private final NetOptimizer netOptimizer;
@@ -67,10 +69,10 @@ public class NetTrain {
       System.err.println("trainingData is empty");
       return;
     }
-    {
+    if (batch_size < n) {
       int rem = n % batch_size;
       if (rem != 0)
-        System.err.println("warning batch_size: " + rem + " != " + batch_size);
+        System.err.println("warning batch_size: " + rem + " != " + batch_size + " total=" + n);
     }
     // 6. Repeat until the loss becomes sufficiently small.
     boolean allMatch = true;
@@ -108,10 +110,8 @@ public class NetTrain {
       int epoch = tloss.getRowCount();
       Scalar loss1 = Total.ofVector(lossv).divide(RealScalar.of(n));
       Scalar loss2 = NetLayers.reg_loss(netLayer, netOptimizer.weightDecay());
-      if (0 < epoch) {
+      if (TIMING_START <= epoch)
         mss.accept(timing.seconds());
-        IO.println("mean=" + mss.getMean().orElseThrow());
-      }
       tloss.appendRow(RealScalar.of(epoch), loss1, loss2);
       allMatch &= list.stream() //
           .map(ntl -> ntl.epoch(this)) //
@@ -123,6 +123,10 @@ public class NetTrain {
 
   public int getTotalEpochs() {
     return tloss.getRowCount();
+  }
+
+  public Optional<Scalar> getEpochAverage() {
+    return mss.getMean().map(Scalar.class::cast);
   }
 
   public void addListener(NetTrainListener runnable) {

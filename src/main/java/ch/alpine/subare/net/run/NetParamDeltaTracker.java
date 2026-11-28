@@ -26,9 +26,8 @@ public class NetParamDeltaTracker implements NetTrainListener {
   }
 
   public synchronized Optional<Tensor> getDelta2nd() {
-    if (1 < deltas.size()) {
-      return Optional.ofNullable(deltas.get(1).subtract(deltas.get(0)));
-    }
-    return Optional.empty();
+    return 1 < deltas.size() //
+        ? Optional.ofNullable(deltas.get(1).subtract(deltas.get(0)))
+        : Optional.empty();
   }
 }

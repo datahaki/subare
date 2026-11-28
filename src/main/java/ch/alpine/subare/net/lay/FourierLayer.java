@@ -2,7 +2,6 @@
 package ch.alpine.subare.net.lay;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.random.RandomGenerator;
 
 import ch.alpine.subare.net.reg.NetRegularization;
@@ -28,10 +27,11 @@ import ch.alpine.tensor.mat.TransposeMatrixDot;
 import ch.alpine.tensor.num.Pi;
 import ch.alpine.tensor.pdf.RandomVariate;
 import ch.alpine.tensor.pdf.c.NormalDistribution;
+import ch.alpine.tensor.sca.Sign;
 import ch.alpine.tensor.sca.tri.Cos;
 import ch.alpine.tensor.sca.tri.Sin;
 
-public class TrainableFourierLayer implements TrainableNetLayer, Serializable {
+public class FourierLayer implements TrainableNetLayer, Serializable {
   private static final Scalar ETA_SCALE = RealScalar.of(0.07);
   /** Dimensions: d_in x numFreq */
   @PackageTestAccess
@@ -43,17 +43,19 @@ public class TrainableFourierLayer implements TrainableNetLayer, Serializable {
   private transient Tensor phaseCache;
   private transient Tensor gB;
 
-  public TrainableFourierLayer(int d_in, int numFreq, Scalar sigma) {
+  public FourierLayer(int d_in, int numFreq, Scalar sigma) {
     Integers.requirePositive(d_in);
     Integers.requirePositive(numFreq);
-    this.sigma = sigma;
+    this.sigma = Sign.requirePositive(sigma);
     B = ConstantArray.of(DoubleScalar.INDETERMINATE, d_in, numFreq);
   }
 
   @Override
   public void initialize(RandomGenerator randomGenerator) {
-    List<Integer> dims = Dimensions.of(B);
-    B = RandomVariate.of(NormalDistribution.of(sigma.zero(), sigma), randomGenerator, dims).multiply(Pi.TWO);
+    B = RandomVariate.of( //
+        NormalDistribution.of(sigma.zero(), sigma), //
+        randomGenerator, //
+        Dimensions.of(B)).multiply(Pi.TWO);
   }
 
   @Override
@@ -80,7 +82,7 @@ public class TrainableFourierLayer implements TrainableNetLayer, Serializable {
 
   @Override
   public Tensor backBatch(Tensor gradOutput) {
-    Tensor deltas = Slash.of(TrainableFourierLayer::phaseDelta, phaseCache, gradOutput);
+    Tensor deltas = Slash.of(FourierLayer::phaseDelta, phaseCache, gradOutput);
     gB = TransposeMatrixDot.of(inputCache, deltas);
     return MatrixDotTranspose.of(deltas, B);
   }

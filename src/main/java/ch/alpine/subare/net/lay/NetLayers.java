@@ -40,7 +40,7 @@ public enum NetLayers {
   }
 
   /** @param netLayer
-   * @return */
+   * @return stream of parameters per trainable layer */
   public static Stream<Tensor> parameters(NetLayer netLayer) {
     return trainableLayers(netLayer).map(TrainableNetLayer::parameters);
   }
